@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.2">
-<title>DBIs and Handles</title>
+<title>Arguments and Parameters</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -411,27 +411,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article">
 <div id="header">
-<h1>DBIs and Handles</h1>
+<h1>Arguments and Parameters</h1>
 </div>
 <div id="content">
-<div class="paragraph">
-<p>A DBI object is the main entry point into the <strong>jdbi</strong> library.
-It is roughly analogous to a
-<a href="https://docs.oracle.com/javase/8/docs/api/javax/sql/DataSource.html">javax.sql.DataSource</a>
-combined with configuration for the various <strong>jdbi</strong> APIs.</p>
-</div>
-<div class="paragraph">
-<p>The DBI itself, once configured, is threadsafe and does not own any database resources.
-Generally, an application will configure a single or small number of singleton
-DBIs.  In a more limited scope (such as a HTTP request, or event callback), you then
-request a <strong>Handle</strong> object from your <strong>DBI</strong>.  This <strong>Handle</strong> represents an active database
-<a href="https://docs.oracle.com/javase/8/docs/api/java/sql/Connection.html">java.sql.Connection</a>
-and inheirts <strong>DBI</strong>'s configuration at the time of creation.</p>
-</div>
+
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-05-01 18:15:37 -07:00
+Last updated 2016-05-01 14:08:31 -07:00
 </div>
 </div>
 </body>
