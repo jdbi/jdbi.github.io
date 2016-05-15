@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.3">
-<title>jdbi3 documentation</title>
+<title>DBIs and Handles</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -510,73 +510,47 @@ table.CodeRay td.code>pre{padding:0}
 </head>
 <body class="article">
 <div id="header">
-<h1>jdbi3 documentation</h1>
+<h1>DBIs and Handles</h1>
 </div>
 <div id="content">
 <div class="paragraph">
-<p><strong>jdbi</strong> is a thin wrapper around the Java database
-API, JDBC.  It provides helpful abstractions around
-accessing your database tables in a way that respects
-the relational model.</p>
+<p>A DBI object is the main entry point into the <strong>jdbi</strong> library.
+It is roughly analogous to a
+<a href="https://docs.oracle.com/javase/8/docs/api/javax/sql/DataSource.html">javax.sql.DataSource</a>
+combined with configuration for the various <strong>jdbi</strong> APIs.</p>
 </div>
 <div class="paragraph">
-<p>Unlike an ORM, <strong>jdbi</strong> does not pretend to seamlessly
-convert your Java object model into the relational
-model&#8201;&#8212;&#8201;instead, it provides easy mapping between
-SQL <em>you</em> write and simple tabular data structures.</p>
+<p>A configured DBI is threadsafe and does not own any database resources.
+An application should configure a single or small number of shared
+DBI instances.  In a more limited scope (such as a HTTP request, or event callback), you then
+request a <strong>Handle</strong> object from your <strong>DBI</strong>.  This <strong>Handle</strong> represents an active database
+<a href="https://docs.oracle.com/javase/8/docs/api/java/sql/Connection.html">java.sql.Connection</a>
+and inheirts <strong>DBI</strong>'s configuration at the time of creation.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">public</span> <span class="type">void</span> helloJdbi() {
-        DBI dbi;
-    }</code></pre>
+<pre class="CodeRay highlight"><code data-lang="java">DBI userDatabase = DBI.create(<span class="string"><span class="delimiter">&quot;</span><span class="content">jdbc:postgresql://localhost</span><span class="delimiter">&quot;</span></span>);
+<span class="directive">final</span> Optional&lt;MyUser&gt; foundUser = userDatabase.withHandle(h -&gt;
+    h.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT * FROM user WHERE id=:id</span><span class="delimiter">&quot;</span></span>)
+        .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">3</span>)
+        .map(MyUser.class)
+        .findFirst()
+);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>jdbi3</strong> is an update which sports a cleaned up API,
-a stronger resource ownership model, and leverages
-the power of the new Java 8 APIs.</p>
+<p><strong>Handle</strong> provides a fluent query and update API that can map <a href="arguments.html">arguments</a>
+and <a href="results.html">result sets</a> to and from regular Java objects.
+You may register mappings for arguments
+<a href="arguments.html#argument-factory">manually</a> or use
+<a href="arguments.html#bean-argument">Java Bean conventions</a>.</p>
 </div>
 <div class="paragraph">
-<p>Read about the core APIs:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="core.html">DBI and Handle</a></p>
-</li>
-<li>
-<p><a href="arguments.html">Arguments and Binding</a></p>
-</li>
-<li>
-<p><a href="results.html">[results]</a></p>
-</li>
-<li>
-<p><a href="mapping.html">Result Mapping</a></p>
-</li>
-<li>
-<p><a href="sqlobject.html">SQLObject</a></p>
-</li>
-<li>
-<p><a href="spring.html">Spring Integration</a></p>
-</li>
-</ul>
-</div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Warning</div>
-</td>
-<td class="content">
-<strong>jdbi3</strong> is currently under active development.
-<a href="http://www.jdbi.org">jdbi2</a> is still the stable release.
-<strong>jdbi3</strong> should generously be considered alpha quality.
-We love feedback and early testing, but be prepared to
-find a few bugs!
-</td>
-</tr>
-</table>
+<p>For result sets you can map
+<a href="results.html#row-mapper">one row at a time</a>,
+<a href="results.html#column-mapper">by the type of each column</a>, as
+<a href="results.html#bean-mapper">beans</a>, or invoking
+<a href="results.html#constructor-mapper">annotated constructors</a>.</p>
 </div>
 </div>
 <div id="footer">
