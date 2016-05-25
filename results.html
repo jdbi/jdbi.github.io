@@ -535,30 +535,30 @@ presenting the results to you in a container such as a <strong>List</strong>, <s
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">public</span> <span class="directive">static</span> <span class="type">class</span> <span class="class">User</span> {
-        <span class="directive">final</span> <span class="type">int</span> id;
-        <span class="directive">final</span> <span class="predefined-type">String</span> name;
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="directive">static</span> <span class="type">class</span> <span class="class">User</span> {
+    <span class="directive">final</span> <span class="type">int</span> id;
+    <span class="directive">final</span> <span class="predefined-type">String</span> name;
 
-        <span class="directive">public</span> User(<span class="type">int</span> id, <span class="predefined-type">String</span> name) {
-            <span class="local-variable">this</span>.id = id;
-            <span class="local-variable">this</span>.name = name;
-        }
+    <span class="directive">public</span> User(<span class="type">int</span> id, <span class="predefined-type">String</span> name) {
+        <span class="local-variable">this</span>.id = id;
+        <span class="local-variable">this</span>.name = name;
     }
+}
 
-    <span class="annotation">@Test</span>
-    <span class="directive">public</span> <span class="type">void</span> testFindUser() {
-        h.registerRowMapper(ConstructorMapper.factoryFor(User.class));
-        User u = findUserById(<span class="integer">2</span>).orElseThrow(() -&gt; <span class="keyword">new</span> <span class="exception">AssertionError</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">No user found</span><span class="delimiter">&quot;</span></span>));
-        assertEquals(<span class="integer">2</span>, u.id);
-        assertEquals(<span class="string"><span class="delimiter">&quot;</span><span class="content">Bob</span><span class="delimiter">&quot;</span></span>, u.name);
-    }
+<span class="annotation">@Test</span>
+<span class="directive">public</span> <span class="type">void</span> testFindUser() {
+    h.registerRowMapper(ConstructorMapper.factoryFor(User.class));
+    User u = findUserById(<span class="integer">2</span>).orElseThrow(() -&gt; <span class="keyword">new</span> <span class="exception">AssertionError</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">No user found</span><span class="delimiter">&quot;</span></span>));
+    assertEquals(<span class="integer">2</span>, u.id);
+    assertEquals(<span class="string"><span class="delimiter">&quot;</span><span class="content">Bob</span><span class="delimiter">&quot;</span></span>, u.name);
+}
 
-    <span class="directive">public</span> Optional&lt;User&gt; findUserById(<span class="type">long</span> id) {
-        <span class="keyword">return</span> h.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT * FROM user WHERE id=:id</span><span class="delimiter">&quot;</span></span>)
-            .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, id)
-            .mapTo(User.class)
-            .findFirst();
-    }</code></pre>
+<span class="directive">public</span> Optional&lt;User&gt; findUserById(<span class="type">long</span> id) {
+    <span class="keyword">return</span> h.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT * FROM user WHERE id=:id</span><span class="delimiter">&quot;</span></span>)
+        .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, id)
+        .mapTo(User.class)
+        .findFirst();
+}</code></pre>
 </div>
 </div>
 </div>
@@ -590,7 +590,7 @@ presenting the results to you in a container such as a <strong>List</strong>, <s
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-05-25 10:44:25 PDT
+Last updated 2016-05-25 10:51:39 PDT
 </div>
 </div>
 </body>
