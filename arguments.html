@@ -547,8 +547,9 @@ The <strong>Argument</strong> class wraps a single value into a binding.</p>
     }
 
     <span class="annotation">@Override</span>
-    <span class="directive">public</span> <span class="type">void</span> apply(<span class="type">int</span> position, <span class="predefined-type">PreparedStatement</span> statement, StatementContext ctx) <span class="directive">throws</span> <span class="exception">SQLException</span> { <b class="conum">(1)</b>
-        statement.setString(position, uuid.toString());
+    <span class="directive">public</span> <span class="type">void</span> apply(<span class="type">int</span> position, <span class="predefined-type">PreparedStatement</span> statement, StatementContext ctx)
+    <span class="directive">throws</span> <span class="exception">SQLException</span> {
+        statement.setString(position, uuid.toString()); <b class="conum">(1)</b>
     }
 }
 
@@ -566,7 +567,7 @@ The <strong>Argument</strong> class wraps a single value into a binding.</p>
 <ol>
 <li>
 <p>Since Argument usually directly calls into JDBC directly,
-you are given the <strong>one-based index</strong> on this call.</p>
+it is given the <strong>one-based index</strong> when it is applied.</p>
 </li>
 </ol>
 </div>
@@ -607,7 +608,7 @@ the type to *Argument*s.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-05-25 12:51:28 PDT
+Last updated 2016-05-25 12:54:38 PDT
 </div>
 </div>
 </body>
