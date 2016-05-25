@@ -530,8 +530,8 @@ value, the column mappers are consulted.</p>
 </div>
 <div class="paragraph">
 <p><strong>jdbi</strong> handles the tedium of iterating over the rows in the ResultSet and
-presenting the results to you in a container such as a <strong>List</strong>, <strong>Stream</strong>, or
-<strong>Iterator</strong>.</p>
+presenting the results to you in a container such as a <strong>List</strong>, <strong>Stream</strong>,
+<strong>Optional</strong>, or <strong>Iterator</strong>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -545,18 +545,25 @@ presenting the results to you in a container such as a <strong>List</strong>, <s
     }
 }
 
+<span class="annotation">@Before</span>
+<span class="directive">public</span> <span class="type">void</span> setUp() <span class="directive">throws</span> <span class="exception">Exception</span> {
+    handle.execute(<span class="string"><span class="delimiter">&quot;</span><span class="content">CREATE TABLE user (id INTEGER PRIMARY KEY AUTO_INCREMENT, name VARCHAR)</span><span class="delimiter">&quot;</span></span>);
+    <span class="keyword">for</span> (<span class="predefined-type">String</span> name : <span class="predefined-type">Arrays</span>.asList(<span class="string"><span class="delimiter">&quot;</span><span class="content">Alice</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Bob</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Charlie</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Data</span><span class="delimiter">&quot;</span></span>)) {
+        handle.execute(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO user(name) VALUES (?)</span><span class="delimiter">&quot;</span></span>, name);
+    }
+}
+
 <span class="annotation">@Test</span>
-<span class="directive">public</span> <span class="type">void</span> testFindUser() {
-    h.registerRowMapper(ConstructorMapper.factoryFor(User.class));
+<span class="directive">public</span> <span class="type">void</span> findBob() {
     User u = findUserById(<span class="integer">2</span>).orElseThrow(() -&gt; <span class="keyword">new</span> <span class="exception">AssertionError</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">No user found</span><span class="delimiter">&quot;</span></span>));
     assertEquals(<span class="integer">2</span>, u.id);
     assertEquals(<span class="string"><span class="delimiter">&quot;</span><span class="content">Bob</span><span class="delimiter">&quot;</span></span>, u.name);
 }
 
 <span class="directive">public</span> Optional&lt;User&gt; findUserById(<span class="type">long</span> id) {
-    <span class="keyword">return</span> h.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT * FROM user WHERE id=:id</span><span class="delimiter">&quot;</span></span>)
+    <span class="keyword">return</span> handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT * FROM user WHERE id=:id</span><span class="delimiter">&quot;</span></span>)
         .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, id)
-        .mapTo(User.class)
+        .map((rs, ctx) -&gt; <span class="keyword">new</span> User(rs.getInt(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>), rs.getString(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>)))
         .findFirst();
 }</code></pre>
 </div>
@@ -566,7 +573,66 @@ presenting the results to you in a container such as a <strong>List</strong>, <s
 <div class="sect1">
 <h2 id="_row_mapper">Row Mapper</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>The above example introduces a row mapper.  As you might assume, the row mapper
+is called once for every row found as <strong>jdbi</strong> iterates through the result set.</p>
+</div>
+<div class="paragraph">
+<p>Row mappers are either directly registered to handle a specific query, or
+can be driven by the return type:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">static</span> <span class="directive">final</span> <span class="predefined-type">String</span> SELECT_ALL_USERS = <span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT * FROM user ORDER BY id ASC</span><span class="delimiter">&quot;</span></span>;
 
+<span class="directive">static</span> <span class="directive">final</span> <span class="type">class</span> <span class="class">UserMapper</span> <span class="directive">implements</span> <span class="predefined-type">RowMapper</span>&lt;User&gt; {
+    <span class="directive">static</span> <span class="directive">final</span> UserMapper INSTANCE = <span class="keyword">new</span> UserMapper();
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> User map(<span class="predefined-type">ResultSet</span> r, StatementContext ctx) <span class="directive">throws</span> <span class="exception">SQLException</span> {
+        <span class="keyword">return</span> <span class="keyword">new</span> User(r.getInt(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>), r.getString(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>));
+    }
+}
+
+<span class="annotation">@Test</span>
+<span class="directive">public</span> <span class="type">void</span> rowMapper() {
+    <span class="predefined-type">List</span>&lt;User&gt; users = handle.createQuery(SELECT_ALL_USERS)
+        .map(<span class="keyword">new</span> UserMapper())
+        .list();
+
+    assertEquals(<span class="integer">4</span>, users.size());
+    assertEquals(<span class="string"><span class="delimiter">&quot;</span><span class="content">Data</span><span class="delimiter">&quot;</span></span>, users.get(<span class="integer">3</span>).name);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This <strong>RowMapper</strong> is equivalent to the lambda mapper above but more explicit.
+We also introduce the <strong>Query.list()</strong> method which collects all rows into a
+<strong>List&lt;T&gt;</strong> object.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Test</span>
+<span class="directive">public</span> <span class="type">void</span> rowMapperFactory() {
+    handle.registerRowMapper(<span class="keyword">new</span> RowMapperFactory() {
+        <span class="annotation">@Override</span>
+        <span class="directive">public</span> Optional&lt;<span class="predefined-type">RowMapper</span>&lt;?&gt;&gt; build(<span class="predefined-type">Type</span> type, StatementContext ctx) {
+            <span class="keyword">return</span> type == User.class ? Optional.of(UserMapper.INSTANCE) : Optional.empty();
+        }
+    });
+
+    <span class="keyword">try</span> (Stream&lt;User&gt; s = handle.createQuery(SELECT_ALL_USERS)
+        .mapTo(User.class)
+        .stream())
+    {
+        assertEquals(<span class="string"><span class="delimiter">&quot;</span><span class="content">Charlie</span><span class="delimiter">&quot;</span></span>, s.filter(u -&gt; u.id &gt; <span class="integer">2</span>)
+            .map(u -&gt; u.name)
+            .findFirst()
+            .get());
+    }
+}</code></pre>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -590,7 +656,7 @@ presenting the results to you in a container such as a <strong>List</strong>, <s
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-05-25 10:51:39 PDT
+Last updated 2016-05-25 11:11:37 PDT
 </div>
 </div>
 </body>
