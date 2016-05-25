@@ -586,8 +586,6 @@ can be driven by the return type:</p>
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">static</span> <span class="directive">final</span> <span class="predefined-type">String</span> SELECT_ALL_USERS = <span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT * FROM user ORDER BY id ASC</span><span class="delimiter">&quot;</span></span>;
 
 <span class="directive">static</span> <span class="directive">final</span> <span class="type">class</span> <span class="class">UserMapper</span> <span class="directive">implements</span> <span class="predefined-type">RowMapper</span>&lt;User&gt; {
-    <span class="directive">static</span> <span class="directive">final</span> UserMapper INSTANCE = <span class="keyword">new</span> UserMapper();
-
     <span class="annotation">@Override</span>
     <span class="directive">public</span> User map(<span class="predefined-type">ResultSet</span> r, StatementContext ctx) <span class="directive">throws</span> <span class="exception">SQLException</span> {
         <span class="keyword">return</span> <span class="keyword">new</span> User(r.getInt(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>), r.getString(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>));
@@ -618,7 +616,7 @@ We also introduce the <strong>Query.list()</strong> method which collects all ro
         <span class="annotation">@Override</span>
         <span class="directive">public</span> Optional&lt;<span class="predefined-type">RowMapper</span>&lt;?&gt;&gt; build(<span class="predefined-type">Type</span> type, StatementContext ctx) {
             <span class="keyword">return</span> type == User.class ?
-                    Optional.of(UserMapper.INSTANCE) :
+                    Optional.of(<span class="keyword">new</span> UserMapper()) :
                         Optional.empty();
         }
     });
@@ -705,16 +703,18 @@ by row:</p>
     }
 }
 
+<span class="directive">static</span> <span class="type">class</span> <span class="class">UserNameColumnMapperFactory</span> <span class="directive">implements</span> ColumnMapperFactory {
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> Optional&lt;ColumnMapper&lt;?&gt;&gt; build(<span class="predefined-type">Type</span> type, StatementContext ctx) {
+        <span class="keyword">return</span> type == UserName.class ?
+                Optional.of((rs, index, cx) -&gt; <span class="keyword">new</span> UserName(rs.getString(index))) :
+                    Optional.empty();
+    }
+}
+
 <span class="annotation">@Test</span>
 <span class="directive">public</span> <span class="type">void</span> columnMapper() {
-    handle.registerColumnMapper(<span class="keyword">new</span> ColumnMapperFactory() {
-        <span class="annotation">@Override</span>
-        <span class="directive">public</span> Optional&lt;ColumnMapper&lt;?&gt;&gt; build(<span class="predefined-type">Type</span> type, StatementContext ctx) {
-            <span class="keyword">return</span> type == UserName.class ?
-                    Optional.of((rs, index, cx) -&gt; <span class="keyword">new</span> UserName(rs.getString(index))) :
-                        Optional.empty();
-        }
-    });
+    handle.registerColumnMapper(<span class="keyword">new</span> UserNameColumnMapperFactory());
     handle.registerRowMapper(ConstructorMapper.factoryFor(NamedUser.class));
 
     NamedUser bob = handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT id, name FROM user WHERE name = :name</span><span class="delimiter">&quot;</span></span>)
@@ -742,8 +742,8 @@ uses the column mapper to fill in the constructor parameter.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="directive">static</span> <span class="type">class</span> <span class="class">UserBean</span> {
-    <span class="type">int</span> id;
-    <span class="predefined-type">String</span> name;
+    <span class="directive">private</span> <span class="type">int</span> id;
+    <span class="directive">private</span> <span class="predefined-type">String</span> name;
 
     <span class="directive">public</span> <span class="type">int</span> getId() {
         <span class="keyword">return</span> id;
@@ -766,7 +766,7 @@ uses the column mapper to fill in the constructor parameter.</p>
         .mapToBean(UserBean.class)
         .findOnly();
 
-    assertEquals(<span class="string"><span class="delimiter">&quot;</span><span class="content">Charlie</span><span class="delimiter">&quot;</span></span>, charlie.name);
+    assertEquals(<span class="string"><span class="delimiter">&quot;</span><span class="content">Charlie</span><span class="delimiter">&quot;</span></span>, charlie.getName());
 }</code></pre>
 </div>
 </div>
