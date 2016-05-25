@@ -513,11 +513,74 @@ table.CodeRay td.code>pre{padding:0}
 <h1>Arguments and Binding</h1>
 </div>
 <div id="content">
+<div class="paragraph">
+<p>Most non-trivial queries require binding arguments from Java land
+to the statement.  In addition to binding by index (which is zero-based
+in <strong>jdbi</strong>, unlike JDBC&#8217;s bizarre one-indexing scheme), named parameters
+are supported out of the box.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">static</span> <span class="type">class</span> <span class="class">UUIDArgument</span> <span class="directive">implements</span> Argument {
+    <span class="directive">private</span> <span class="predefined-type">UUID</span> uuid;
 
+    <span class="directive">public</span> UUIDArgument(<span class="predefined-type">UUID</span> uuid) {
+        <span class="local-variable">this</span>.uuid = uuid;
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="type">void</span> apply(<span class="type">int</span> position, <span class="predefined-type">PreparedStatement</span> statement, StatementContext ctx) <span class="directive">throws</span> <span class="exception">SQLException</span> {
+        statement.setString(position, uuid.toString());
+    }
+}
+
+<span class="annotation">@Test</span>
+<span class="directive">public</span> <span class="type">void</span> uuidArgument() {
+    <span class="predefined-type">UUID</span> u = <span class="predefined-type">UUID</span>.randomUUID();
+    assertEquals(u.toString(), handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT CAST(:uuid AS VARCHAR)</span><span class="delimiter">&quot;</span></span>)
+        .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">uuid</span><span class="delimiter">&quot;</span></span>, <span class="keyword">new</span> UUIDArgument(u))
+        .mapTo(<span class="predefined-type">String</span>.class)
+        .findOnly());
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here we use an <strong>Argument</strong> to directly bind a UUID.  In this
+particular case, the most obvious approach is to send the UUID
+to the database as a String.  If your JDBC driver supports custom
+types or binary protocols, you can leverage them easily here.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">static</span> <span class="type">class</span> <span class="class">UUIDArgumentFactory</span> <span class="directive">implements</span> ArgumentFactory {
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> Optional&lt;Argument&gt; build(<span class="predefined-type">Type</span> type, <span class="predefined-type">Object</span> value, StatementContext ctx) {
+        <span class="keyword">return</span> type == <span class="predefined-type">UUID</span>.class ?
+                Optional.of(<span class="keyword">new</span> UUIDArgument((<span class="predefined-type">UUID</span>) value)) :
+                    Optional.empty();
+    }
+}
+
+<span class="annotation">@Test</span>
+<span class="directive">public</span> <span class="type">void</span> uuidArgumentFactory() {
+    <span class="predefined-type">UUID</span> u = <span class="predefined-type">UUID</span>.randomUUID();
+    handle.registerArgumentFactory(<span class="keyword">new</span> UUIDArgumentFactory());
+    assertEquals(u.toString(), handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT CAST(:uuid AS VARCHAR)</span><span class="delimiter">&quot;</span></span>)
+        .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">uuid</span><span class="delimiter">&quot;</span></span>, u)
+        .mapTo(<span class="predefined-type">String</span>.class)
+        .findOnly());
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can also register <strong>ArgumentFactory</strong> instances which can inspect
+the type of bindings and determine if they understand how to convert
+the type to *Argument*s.</p>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-05-25 10:20:10 PDT
+Last updated 2016-05-25 12:35:50 PDT
 </div>
 </div>
 </body>
