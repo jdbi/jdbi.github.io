@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.3">
-<title>Untitled</title>
+<title>Results</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -510,13 +510,87 @@ table.CodeRay td.code>pre{padding:0}
 </head>
 <body class="article">
 <div id="header">
+<h1>Results</h1>
 </div>
 <div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>After executing a database query, you need to interpret the results.
+JDBC provides the <strong>ResultSet</strong> class which can do simple mapping to
+Java primitives and built in classes, but the API leaves a lot
+to be desired.  <strong>jdbi</strong> provides more configurable mapping, including
+the ability to register custom mappers for rows and columns.</p>
+</div>
+<div class="paragraph">
+<p>The mapper is selected based on the type that your query is declared to return.
+If a mapper for the entire row is configured, it will directly convert
+each row into a domain object.  Failing that, if the type represents a single
+value, the column mappers are consulted.</p>
+</div>
+<div class="paragraph">
+<p><strong>jdbi</strong> handles the tedium of iterating over the rows in the ResultSet and
+presenting the results to you in a container such as a <strong>List</strong>, <strong>Stream</strong>, or
+<strong>Iterator</strong>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">public</span> <span class="directive">static</span> <span class="type">class</span> <span class="class">User</span> {
+        <span class="directive">final</span> <span class="type">int</span> id;
+        <span class="directive">final</span> <span class="predefined-type">String</span> name;
 
+        <span class="directive">public</span> User(<span class="type">int</span> id, <span class="predefined-type">String</span> name) {
+            <span class="local-variable">this</span>.id = id;
+            <span class="local-variable">this</span>.name = name;
+        }
+    }
+
+    <span class="annotation">@Test</span>
+    <span class="directive">public</span> <span class="type">void</span> testFindUser() {
+        h.registerRowMapper(ConstructorMapper.factoryFor(User.class));
+        User u = findUserById(<span class="integer">2</span>).orElseThrow(() -&gt; <span class="keyword">new</span> <span class="exception">AssertionError</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">No user found</span><span class="delimiter">&quot;</span></span>));
+        assertEquals(<span class="integer">2</span>, u.id);
+        assertEquals(<span class="string"><span class="delimiter">&quot;</span><span class="content">Bob</span><span class="delimiter">&quot;</span></span>, u.name);
+    }
+
+    <span class="directive">public</span> Optional&lt;User&gt; findUserById(<span class="type">long</span> id) {
+        <span class="keyword">return</span> h.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT * FROM user WHERE id=:id</span><span class="delimiter">&quot;</span></span>)
+            .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, id)
+            .mapTo(User.class)
+            .findFirst();
+    }</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_row_mapper">Row Mapper</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_column_mapper">Column Mapper</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_bean_mapper">Bean Mapper</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_constructor_mapper">Constructor Mapper</h2>
+<div class="sectionbody">
+
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-05-20 00:43:42 MDT
+Last updated 2016-05-25 10:44:25 PDT
 </div>
 </div>
 </body>
