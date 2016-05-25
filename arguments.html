@@ -521,6 +521,20 @@ are supported out of the box.</p>
 </div>
 <div class="listingblock">
 <div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">void</span> bindInt() {
+    assertEquals(<span class="integer">3</span>, handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT :id</span><span class="delimiter">&quot;</span></span>)
+        .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">3</span>)
+        .mapTo(<span class="predefined-type">Integer</span>.class)
+        .findOnly()
+        .intValue());
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>All primitive and many core Java types come with predefined bindings.</p>
+</div>
+<div class="listingblock">
+<div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">static</span> <span class="type">class</span> <span class="class">UUIDArgument</span> <span class="directive">implements</span> Argument {
     <span class="directive">private</span> <span class="predefined-type">UUID</span> uuid;
 
@@ -548,7 +562,8 @@ are supported out of the box.</p>
 <p>Here we use an <strong>Argument</strong> to directly bind a UUID.  In this
 particular case, the most obvious approach is to send the UUID
 to the database as a String.  If your JDBC driver supports custom
-types or binary protocols, you can leverage them easily here.</p>
+types directly or efficient binary transfers, you can leverage them
+easily here.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -580,7 +595,7 @@ the type to *Argument*s.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-05-25 12:35:50 PDT
+Last updated 2016-05-25 12:39:54 PDT
 </div>
 </div>
 </body>
