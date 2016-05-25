@@ -617,7 +617,9 @@ We also introduce the <strong>Query.list()</strong> method which collects all ro
     handle.registerRowMapper(<span class="keyword">new</span> RowMapperFactory() {
         <span class="annotation">@Override</span>
         <span class="directive">public</span> Optional&lt;<span class="predefined-type">RowMapper</span>&lt;?&gt;&gt; build(<span class="predefined-type">Type</span> type, StatementContext ctx) {
-            <span class="keyword">return</span> type == User.class ? Optional.of(UserMapper.INSTANCE) : Optional.empty();
+            <span class="keyword">return</span> type == User.class ?
+                    Optional.of(UserMapper.INSTANCE) :
+                        Optional.empty();
         }
     });
 
@@ -633,30 +635,147 @@ We also introduce the <strong>Query.list()</strong> method which collects all ro
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>The Factory is allowed to consider whether it can handle any given <strong>Type</strong>
+and provides the above RowMapper to do the actual work.</p>
 </div>
+<div class="paragraph">
+<p><strong>Stream</strong> integration allows you to use a RowMapper to adapt a ResultSet into
+the new Java 8 Streams framework.  As long as your database supports streaming
+results (for example, PostgreSQL will do it as long as you are in a transaction
+and set a fetch size), the stream will lazily fetch rows from the database as
+necessary.</p>
 </div>
-<div class="sect1">
-<h2 id="_column_mapper">Column Mapper</h2>
-<div class="sectionbody">
-
-</div>
-</div>
-<div class="sect1">
-<h2 id="_bean_mapper">Bean Mapper</h2>
-<div class="sectionbody">
-
 </div>
 </div>
 <div class="sect1">
 <h2 id="_constructor_mapper">Constructor Mapper</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p><strong>jdbi</strong> provides a simple constructor mapper which uses reflection to assign
+columns to constructor parameters by name.  Unfortunately parameter names
+are not enabled by default and require a compiler option, but once you
+have that enabled the result is quite concise:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Test</span>
+<span class="directive">public</span> <span class="type">void</span> constructorMapper() {
+    handle.registerRowMapper(ConstructorMapper.factoryFor(User.class));
+    <span class="predefined-type">Set</span>&lt;User&gt; userSet = handle.createQuery(SELECT_ALL_USERS)
+        .mapTo(User.class)
+        .collect(Collectors.toSet());
 
+    assertEquals(<span class="integer">4</span>, userSet.size());
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The parameter names "id", "name" match the database column names
+and as such no custom mapper code is required at all.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_column_mapper">Column Mapper</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Sometimes you only wish to fetch a single value, or need
+to build a larger object out of multiple individually mappable
+elements.  A column mapper works on a single column instead of
+by row:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="directive">static</span> <span class="type">class</span> <span class="class">UserName</span> {
+    <span class="directive">final</span> <span class="predefined-type">String</span> name;
+
+    <span class="directive">public</span> UserName(<span class="predefined-type">String</span> name) {
+        <span class="local-variable">this</span>.name = name;
+    }
+}
+
+<span class="directive">public</span> <span class="directive">static</span> <span class="type">class</span> <span class="class">NamedUser</span> {
+    <span class="directive">final</span> <span class="type">int</span> id;
+    <span class="directive">final</span> UserName name;
+
+    <span class="directive">public</span> NamedUser(<span class="type">int</span> id, UserName name) {
+        <span class="local-variable">this</span>.id = id;
+        <span class="local-variable">this</span>.name = name;
+    }
+}
+
+<span class="annotation">@Test</span>
+<span class="directive">public</span> <span class="type">void</span> columnMapper() {
+    handle.registerColumnMapper(<span class="keyword">new</span> ColumnMapperFactory() {
+        <span class="annotation">@Override</span>
+        <span class="directive">public</span> Optional&lt;ColumnMapper&lt;?&gt;&gt; build(<span class="predefined-type">Type</span> type, StatementContext ctx) {
+            <span class="keyword">return</span> type == UserName.class ?
+                    Optional.of((rs, index, cx) -&gt; <span class="keyword">new</span> UserName(rs.getString(index))) :
+                        Optional.empty();
+        }
+    });
+    handle.registerRowMapper(ConstructorMapper.factoryFor(NamedUser.class));
+
+    NamedUser bob = handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT id, name FROM user WHERE name = :name</span><span class="delimiter">&quot;</span></span>)
+        .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Bob</span><span class="delimiter">&quot;</span></span>)
+        .mapTo(NamedUser.class)
+        .findOnly();
+
+    assertEquals(<span class="string"><span class="delimiter">&quot;</span><span class="content">Bob</span><span class="delimiter">&quot;</span></span>, bob.name.name);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Notice how the ConstructorMapper, which usually would not know
+what to do with a custom <strong>UserName</strong> object, now automatically
+uses the column mapper to fill in the constructor parameter.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_bean_mapper">Bean Mapper</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We also provide basic support for beans:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="directive">static</span> <span class="type">class</span> <span class="class">UserBean</span> {
+    <span class="type">int</span> id;
+    <span class="predefined-type">String</span> name;
+
+    <span class="directive">public</span> <span class="type">int</span> getId() {
+        <span class="keyword">return</span> id;
+    }
+    <span class="directive">public</span> <span class="type">void</span> setId(<span class="type">int</span> id) {
+        <span class="local-variable">this</span>.id = id;
+    }
+    <span class="directive">public</span> <span class="predefined-type">String</span> getName() {
+        <span class="keyword">return</span> name;
+    }
+    <span class="directive">public</span> <span class="type">void</span> setName(<span class="predefined-type">String</span> name) {
+        <span class="local-variable">this</span>.name = name;
+    }
+}
+
+<span class="annotation">@Test</span>
+<span class="directive">public</span> <span class="type">void</span> beanMapper() {
+    UserBean charlie = handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT id, name FROM user WHERE name = :name</span><span class="delimiter">&quot;</span></span>)
+        .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Charlie</span><span class="delimiter">&quot;</span></span>)
+        .mapToBean(UserBean.class)
+        .findOnly();
+
+    assertEquals(<span class="string"><span class="delimiter">&quot;</span><span class="content">Charlie</span><span class="delimiter">&quot;</span></span>, charlie.name);
+}</code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-05-25 11:11:37 PDT
+Last updated 2016-05-25 11:41:17 PDT
 </div>
 </div>
 </body>
