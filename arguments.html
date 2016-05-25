@@ -519,6 +519,9 @@ to the statement.  In addition to binding by index (which is zero-based
 in <strong>jdbi</strong>, unlike JDBC&#8217;s bizarre one-indexing scheme), named parameters
 are supported out of the box.</p>
 </div>
+<div class="paragraph">
+<p>All primitive and many core Java types come with predefined bindings.</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">void</span> bindInt() {
@@ -531,7 +534,12 @@ are supported out of the box.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>All primitive and many core Java types come with predefined bindings.</p>
+<p>You also have a couple of options to deal with custom types.
+The <strong>Argument</strong> class wraps a single value into a binding.</p>
+</div>
+<div class="paragraph">
+<p>INFO: Since Argument usually directly calls into JDBC directly,
+you are given the <strong>one-based index</strong> on this call.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -595,7 +603,7 @@ the type to *Argument*s.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-05-25 12:39:54 PDT
+Last updated 2016-05-25 12:48:41 PDT
 </div>
 </div>
 </body>
