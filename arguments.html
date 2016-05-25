@@ -537,19 +537,6 @@ are supported out of the box.</p>
 <p>You also have a couple of options to deal with custom types.
 The <strong>Argument</strong> class wraps a single value into a binding.</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-Since Argument usually directly calls into JDBC directly,
-you are given the <strong>one-based index</strong> on this call.
-</td>
-</tr>
-</table>
-</div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">static</span> <span class="type">class</span> <span class="class">UUIDArgument</span> <span class="directive">implements</span> Argument {
@@ -560,7 +547,7 @@ you are given the <strong>one-based index</strong> on this call.
     }
 
     <span class="annotation">@Override</span>
-    <span class="directive">public</span> <span class="type">void</span> apply(<span class="type">int</span> position, <span class="predefined-type">PreparedStatement</span> statement, StatementContext ctx) <span class="directive">throws</span> <span class="exception">SQLException</span> {
+    <span class="directive">public</span> <span class="type">void</span> apply(<span class="type">int</span> position, <span class="predefined-type">PreparedStatement</span> statement, StatementContext ctx) <span class="directive">throws</span> <span class="exception">SQLException</span> { <b class="conum">(1)</b>
         statement.setString(position, uuid.toString());
     }
 }
@@ -574,6 +561,14 @@ you are given the <strong>one-based index</strong> on this call.
         .findOnly());
 }</code></pre>
 </div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>Since Argument usually directly calls into JDBC directly,
+you are given the <strong>one-based index</strong> on this call.</p>
+</li>
+</ol>
 </div>
 <div class="paragraph">
 <p>Here we use an <strong>Argument</strong> to directly bind a UUID.  In this
@@ -612,7 +607,7 @@ the type to *Argument*s.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-05-25 12:49:32 PDT
+Last updated 2016-05-25 12:51:28 PDT
 </div>
 </div>
 </body>
