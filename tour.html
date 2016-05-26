@@ -514,12 +514,12 @@ table.CodeRay td.code>pre{padding:0}
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_dbi">DBI</h2>
+<h2 id="_jdbi">Jdbi</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The <code>DBI</code> object is basically a fancy wrapper around a
+<p>The <code>Jdbi</code> object is basically a fancy wrapper around a
 <code>javax.sql.DataSource</code>. Typically an application will create one
-shared <code>DBI</code> instance application-wide, and set up shared
+shared <code>Jdbi</code> instance application-wide, and set up shared
 configuration there.</p>
 </div>
 <div class="paragraph">
@@ -528,7 +528,7 @@ configuration there.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// H2 in-memory database</span>
-DBI dbi = DBI.create(<span class="string"><span class="delimiter">&quot;</span><span class="content">jdbc:h2:mem:test</span><span class="delimiter">&quot;</span></span>);</code></pre>
+Jdbi dbi = Jdbi.create(<span class="string"><span class="delimiter">&quot;</span><span class="content">jdbc:h2:mem:test</span><span class="delimiter">&quot;</span></span>);</code></pre>
 </div>
 </div>
 </div>
@@ -543,9 +543,9 @@ when you are done with them, or else your app will leak database
 connections.</p>
 </div>
 <div class="paragraph">
-<p>You can call <code>DBI.open()</code> to get a <code>Handle</code> instance, but most
-of the time you should just use the <code>DBI.useHandle</code> or
-<code>DBI.withHandle</code> callback methods, which ensure that the handle
+<p>You can call <code>Jdbi.open()</code> to get a <code>Handle</code> instance, but most
+of the time you should just use the <code>Jdbi.useHandle</code> or
+<code>Jdbi.withHandle</code> callback methods, which ensure that the handle
 is cleaned up, and the connection released before returning to
 the caller. Use <code>withHandle</code> when your database action returns a
 result, or <code>useHandle</code> if no result is returned.</p>
@@ -565,7 +565,7 @@ result, or <code>useHandle</code> if no result is returned.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>If you do use <code>DBI.open()</code>, we recommend doing so in a
+<p>If you do use <code>Jdbi.open()</code>, we recommend doing so in a
 try-with-resources block for safety.</p>
 </div>
 <div class="listingblock">
@@ -605,16 +605,16 @@ using <code>Query.map(RowMapper&lt;T&gt;)</code>:</p>
     }
 }
 
-<span class="predefined-type">List</span>&lt;Something&gt; things = handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from something</span><span class="delimiter">&quot;</span></span>)
-                               .map(<span class="keyword">new</span> SomethingMapper())
-                               .list();
-assertThat(things).extracting(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>)
-                  .contains(tuple(<span class="integer">1</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Alice</span><span class="delimiter">&quot;</span></span>),
-                            tuple(<span class="integer">2</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Bob</span><span class="delimiter">&quot;</span></span>));</code></pre>
+    <span class="predefined-type">List</span>&lt;Something&gt; things = handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from something</span><span class="delimiter">&quot;</span></span>)
+                                   .map(<span class="keyword">new</span> SomethingMapper())
+                                   .list();
+    assertThat(things).extracting(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>)
+                      .contains(tuple(<span class="integer">1</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Alice</span><span class="delimiter">&quot;</span></span>),
+                                tuple(<span class="integer">2</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Bob</span><span class="delimiter">&quot;</span></span>));</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Registering a <code>RowMapper</code> with the <code>Handle</code> or the <code>DBI</code> (before
+<p>Registering a <code>RowMapper</code> with the <code>Handle</code> or the <code>Jdbi</code> (before
 the handle is created) allows you to map to the data type
 without having to specify the mapper type everywhere:</p>
 </div>
@@ -655,7 +655,7 @@ assertThat(thing).extracting(<span class="string"><span class="delimiter">&quot;
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-05-25 12:55:38 PDT
+Last updated 2016-05-25 16:21:48 MDT
 </div>
 </div>
 </body>
