@@ -4,6 +4,8 @@ org.jdbi.v3.extension
 org.jdbi.v3.guava
 org.jdbi.v3.jodatime
 org.jdbi.v3.jpa
+org.jdbi.v3.pg
+org.jdbi.v3.rewriter
 org.jdbi.v3.spi
 org.jdbi.v3.spring
 org.jdbi.v3.sqlobject
