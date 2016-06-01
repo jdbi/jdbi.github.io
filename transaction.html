@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.3">
-<title>Five Minute Tour</title>
+<title>Transactions</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -510,152 +510,166 @@ table.CodeRay td.code>pre{padding:0}
 </head>
 <body class="article">
 <div id="header">
-<h1>Five Minute Tour</h1>
+<h1>Transactions</h1>
 </div>
 <div id="content">
-<div class="sect1">
-<h2 id="_jdbi">Jdbi</h2>
+<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>The <code>Jdbi</code> object is basically a fancy wrapper around a
-<code>javax.sql.DataSource</code>. Typically an application will create one
-shared <code>Jdbi</code> instance application-wide, and set up shared
-configuration there.</p>
-</div>
-<div class="paragraph">
-<p>For now let&#8217;s just use the out-of-the-box configuration:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// H2 in-memory database</span>
-Jdbi dbi = Jdbi.create(<span class="string"><span class="delimiter">&quot;</span><span class="content">jdbc:h2:mem:test</span><span class="delimiter">&quot;</span></span>);</code></pre>
-</div>
+<p><strong>jdbi</strong> provides full support for JDBC transactions.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_handles">Handles</h2>
+<h2 id="_transactions_in_the_fluent_api">Transactions in the Fluent API</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The <code>Handle</code> is likewise a wrapper around a
-<code>java.sql.Connection</code>. Care must be taken to close handles
-when you are done with them, or else your app will leak database
-connections.</p>
+<p><strong>Handle</strong> objects provide two ways to open a transaction&#8201;&#8212;&#8201;<strong>inTransaction</strong> allows
+you to return a result, and <strong>useTransaction</strong> has no return value.</p>
 </div>
 <div class="paragraph">
-<p>You can call <code>Jdbi.open()</code> to get a <code>Handle</code> instance, but most
-of the time you should just use the <code>Jdbi.useHandle</code> or
-<code>Jdbi.withHandle</code> callback methods, which ensure that the handle
-is cleaned up, and the connection released before returning to
-the caller. Use <code>withHandle</code> when your database action returns a
-result, or <code>useHandle</code> if no result is returned.</p>
+<p>Both optionally allow you to specify the transaction isolation level.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">dbi.useHandle(handle -&gt; {
-    handle.execute(<span class="string"><span class="delimiter">&quot;</span><span class="content">create table something (id int primary key, name varchar(100))</span><span class="delimiter">&quot;</span></span>);
-    handle.insert(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into something (id, name) values (?, ?)</span><span class="delimiter">&quot;</span></span>, <span class="integer">1</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Alice</span><span class="delimiter">&quot;</span></span>);
-    handle.insert(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into something (id, name) values (?, ?)</span><span class="delimiter">&quot;</span></span>, <span class="integer">2</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Bob</span><span class="delimiter">&quot;</span></span>);
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> Optional&lt;User&gt; findUserById(<span class="type">long</span> id) {
+    <span class="keyword">return</span> handle.inTransaction((h, status) -&gt;
+        h.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT * FROM users WHERE id=:id</span><span class="delimiter">&quot;</span></span>)
+            .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, id)
+            .mapTo(User.class)
+            .findFirst());
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here, we (probably unnecessarily) guard a simple <em>SELECT</em> statement with a
+transaction.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_transactions_in_sqlobject_api">Transactions in SqlObject API</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Similarly, you may declare transactions with SqlObject annotations:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Test</span>
+<span class="directive">public</span> <span class="type">void</span> sqlObjectTransaction() {
+    assertEquals(<span class="string"><span class="delimiter">&quot;</span><span class="content">Charlie</span><span class="delimiter">&quot;</span></span>, handle.attach(UserDao.class).findUserById(<span class="integer">3</span>).get().name);
+}
 
-    <span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt; names = handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select name from something</span><span class="delimiter">&quot;</span></span>)
-                               .mapTo(<span class="predefined-type">String</span>.class)
-                               .list();
-    assertThat(names).contains(<span class="string"><span class="delimiter">&quot;</span><span class="content">Alice</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Bob</span><span class="delimiter">&quot;</span></span>);
-});</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If you do use <code>Jdbi.open()</code>, we recommend doing so in a
-try-with-resources block for safety.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">try</span> (Handle handle = dbi.open()) {
-    <span class="comment">// do stuff</span>
+<span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
+    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT * FROM users WHERE id=:id</span><span class="delimiter">&quot;</span></span>)
+    <span class="annotation">@Transaction</span>
+    Optional&lt;User&gt; findUserById(<span class="type">int</span> id);
 }</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_row_mappers">Row Mappers</h2>
+<h2 id="_serializable_transactions">Serializable Transactions</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>By default, queries map each row in the result set into a
-<code>Map&lt;String, Object&gt;</code> which maps the column name to the column
-value. You can override this to map to arbitrary row types
-using <code>Query.map(RowMapper&lt;T&gt;)</code>:</p>
+<p>For more advanced queries, sometimes serializable transactions are required.
+<strong>jdbi</strong> includes a transaction runner that is able to retry transactions that
+abort due to serialization failures.  It is important that your transaction
+does not have side effects as it may be executed multiple times.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="directive">final</span> <span class="type">class</span> <span class="class">Something</span> {
-    <span class="directive">final</span> <span class="type">int</span> id;
-    <span class="directive">final</span> <span class="predefined-type">String</span> name;
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">IntListDao</span> {
+    <span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">CREATE TABLE ints (value INTEGER)</span><span class="delimiter">&quot;</span></span>)
+    <span class="type">void</span> create();
 
-    Something(<span class="type">int</span> id, <span class="predefined-type">String</span> name) {
-        <span class="local-variable">this</span>.id = id;
-        <span class="local-variable">this</span>.name = name;
-    }
+    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT sum(value) FROM ints</span><span class="delimiter">&quot;</span></span>)
+    <span class="type">int</span> sum();
+
+    <span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO ints(value) VALUES(:value)</span><span class="delimiter">&quot;</span></span>)
+    <span class="type">void</span> insert(<span class="type">int</span> value);
 }
 
-<span class="directive">public</span> <span class="type">class</span> <span class="class">SomethingMapper</span> <span class="directive">implements</span> <span class="predefined-type">RowMapper</span>&lt;Something&gt; {
+<span class="directive">static</span> <span class="type">class</span> <span class="class">SumAndInsert</span> <span class="directive">implements</span> <span class="predefined-type">Callable</span>&lt;<span class="predefined-type">Integer</span>&gt;, TransactionCallback&lt;<span class="predefined-type">Integer</span>, <span class="exception">Exception</span>&gt; {
+    <span class="directive">private</span> <span class="directive">final</span> Jdbi jdbi;
+    <span class="directive">private</span> <span class="predefined-type">CountDownLatch</span> latch;
+
+    <span class="directive">public</span> SumAndInsert(<span class="predefined-type">CountDownLatch</span> latch, Jdbi jdbi) {
+        <span class="local-variable">this</span>.latch = latch;
+        <span class="local-variable">this</span>.jdbi = jdbi;
+    }
+
     <span class="annotation">@Override</span>
-    <span class="directive">public</span> Something map(<span class="predefined-type">ResultSet</span> r, StatementContext ctx) <span class="directive">throws</span> <span class="exception">SQLException</span> {
-        <span class="keyword">return</span> <span class="keyword">new</span> Something(r.getInt(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>), r.getString(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>));
+    <span class="directive">public</span> <span class="predefined-type">Integer</span> inTransaction(Handle handle, TransactionStatus status) <span class="directive">throws</span> <span class="exception">Exception</span> {
+        IntListDao dao = handle.attach(IntListDao.class);
+        <span class="type">int</span> sum = dao.sum();
+
+        <span class="comment">// First time through, make sure neither transaction writes until both have read</span>
+        latch.countDown();
+        latch.await();
+
+        <span class="comment">// Now do the write.</span>
+        dao.insert(sum);
+        <span class="keyword">return</span> sum;
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="predefined-type">Integer</span> call() <span class="directive">throws</span> <span class="exception">Exception</span> {
+        <span class="comment">// Get a connection and run the transaction</span>
+        <span class="keyword">return</span> jdbi.inTransaction(TransactionIsolationLevel.SERIALIZABLE, <span class="local-variable">this</span>);
     }
 }
 
-    <span class="predefined-type">List</span>&lt;Something&gt; things = handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from something</span><span class="delimiter">&quot;</span></span>)
-                                   .map(<span class="keyword">new</span> SomethingMapper())
-                                   .list();
-    assertThat(things).extracting(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>)
-                      .contains(tuple(<span class="integer">1</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Alice</span><span class="delimiter">&quot;</span></span>),
-                                tuple(<span class="integer">2</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Bob</span><span class="delimiter">&quot;</span></span>));</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Registering a <code>RowMapper</code> with the <code>Handle</code> or the <code>Jdbi</code> (before
-the handle is created) allows you to map to the data type
-without having to specify the mapper type everywhere:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">handle.registerRowMapper(<span class="keyword">new</span> SomethingMapper());
+<span class="annotation">@Test</span>
+<span class="directive">public</span> <span class="type">void</span> serializableTransaction() <span class="directive">throws</span> <span class="exception">Exception</span> {
+    <span class="comment">// Automatically rerun transactions</span>
+    jdbi.setTransactionHandler(<span class="keyword">new</span> SerializableTransactionRunner());
 
-<span class="predefined-type">List</span>&lt;Something&gt; things = handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from something</span><span class="delimiter">&quot;</span></span>)
-                               .mapTo(Something.class)
-                               .list();
-assertThat(things).extracting(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>)
-                  .contains(tuple(<span class="integer">1</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Alice</span><span class="delimiter">&quot;</span></span>),
-                            tuple(<span class="integer">2</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Bob</span><span class="delimiter">&quot;</span></span>));</code></pre>
+    <span class="comment">// Set up some values</span>
+    IntListDao dao = handle.attach(IntListDao.class);
+    dao.create();
+    dao.insert(<span class="integer">10</span>);
+    dao.insert(<span class="integer">20</span>);
+
+    <span class="predefined-type">ExecutorService</span> executor = <span class="predefined-type">Executors</span>.newCachedThreadPool();
+    <span class="predefined-type">CountDownLatch</span> latch = <span class="keyword">new</span> <span class="predefined-type">CountDownLatch</span>(<span class="integer">2</span>);
+
+    <span class="comment">// Both of these would calculate 10 + 20 = 30, but that violates serialization!</span>
+    SumAndInsert txn1 = <span class="keyword">new</span> SumAndInsert(latch, jdbi);
+    SumAndInsert txn2 = <span class="keyword">new</span> SumAndInsert(latch, jdbi);
+
+    <span class="predefined-type">Future</span>&lt;<span class="predefined-type">Integer</span>&gt; result1 = executor.submit(txn1);
+    <span class="predefined-type">Future</span>&lt;<span class="predefined-type">Integer</span>&gt; result2 = executor.submit(txn2);
+
+    <span class="comment">// One of them gets 30, the other gets 10 + 20 + 30 = 60</span>
+    <span class="comment">// This assertion fails under any isolation level below SERIALIZABLE!</span>
+    assertEquals(<span class="integer">30</span> + <span class="integer">60</span>, result1.get() + result2.get());
+
+    executor.shutdown();
+}</code></pre>
 </div>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_named_parameters">Named Parameters</h2>
-<div class="sectionbody">
 <div class="paragraph">
-<p>Out of the box, any time you use a colon-prefixed token like
-<code>:name</code> in a SQL statement, <strong>jdbi</strong> replaces it with the value
-you bind to that name:</p>
+<p>The above test is designed to run two transactions in lock step.
+Each attemptes to read the sum of all rows in the table, and then
+insert a new row with that sum.  We seed the table with the values
+10 and 20.</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">Something thing = handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from something where id = :id</span><span class="delimiter">&quot;</span></span>)
-                        .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">1</span>)
-                        .mapTo(Something.class)
-                        .findOnly();
-assertThat(thing).extracting(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>)
-                 .contains(<span class="integer">1</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Alice</span><span class="delimiter">&quot;</span></span>);</code></pre>
+<div class="paragraph">
+<p>Without serializable isolation, each transaction reads 10 and 20, and
+then inserts 30.  The end result is 10, 20, 30, 30.</p>
 </div>
+<div class="paragraph">
+<p>With serializable isolation, one of the two transactions is forced
+to abort and retry.  On the second go around, it calculates 10 + 20 + 30 = 60.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-05-25 15:57:37 MDT
+Last updated 2016-06-01 16:33:17 MDT
 </div>
 </div>
 </body>
