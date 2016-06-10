@@ -1,5 +1,6 @@
 org.jdbi.v3
 org.jdbi.v3.argument
+org.jdbi.v3.collector
 org.jdbi.v3.exception
 org.jdbi.v3.extension
 org.jdbi.v3.guava
