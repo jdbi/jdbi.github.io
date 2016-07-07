@@ -6,6 +6,7 @@ org.jdbi.v3.extension
 org.jdbi.v3.guava
 org.jdbi.v3.jodatime
 org.jdbi.v3.jpa
+org.jdbi.v3.locator
 org.jdbi.v3.mapper
 org.jdbi.v3.pg
 org.jdbi.v3.rewriter
@@ -14,8 +15,8 @@ org.jdbi.v3.spring
 org.jdbi.v3.sqlobject
 org.jdbi.v3.sqlobject.customizers
 org.jdbi.v3.sqlobject.exceptions
+org.jdbi.v3.sqlobject.locator
 org.jdbi.v3.sqlobject.mixins
-org.jdbi.v3.sqlobject.stringtemplate
 org.jdbi.v3.statement
 org.jdbi.v3.transaction
 org.jdbi.v3.unstable
