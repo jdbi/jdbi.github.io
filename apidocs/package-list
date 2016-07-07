@@ -18,6 +18,7 @@ org.jdbi.v3.sqlobject.exceptions
 org.jdbi.v3.sqlobject.locator
 org.jdbi.v3.sqlobject.mixins
 org.jdbi.v3.statement
+org.jdbi.v3.stringtemplate
 org.jdbi.v3.transaction
 org.jdbi.v3.unstable
 org.jdbi.v3.unstable.oracle
