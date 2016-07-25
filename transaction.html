@@ -567,6 +567,50 @@ transaction.</p>
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>SQL methods with a <code>@Transaction</code> annotation may optionally specify a transaction isolation level:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO USERS (name) VALUES (:name)</span><span class="delimiter">&quot;</span></span>)
+<span class="annotation">@Transaction</span>(TransactionIsolationLevel.READ_COMMITTED)
+<span class="type">void</span> insertUser(<span class="predefined-type">String</span> name);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If a <code>@Transaction</code> method calls another <code>@Transaction</code> method, they must specify the same isolation level, or the
+inner method must not specify anything, in which case the isolation level of the outer method is used.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Transaction</span>(TransactionIsolationLevel.READ_UNCOMMITTED)
+<span class="keyword">default</span> <span class="type">void</span> outerMethodCallsInnerWithSameLevel() {
+    <span class="comment">// this works: isolation levels agree</span>
+    innerMethodSameLevel();
+}
+
+<span class="annotation">@Transaction</span>(TransactionIsolationLevel.READ_UNCOMMITTED)
+<span class="keyword">default</span> <span class="type">void</span> innerMethodSameLevel() {}
+
+<span class="annotation">@Transaction</span>(TransactionIsolationLevel.READ_COMMITTED)
+<span class="keyword">default</span> <span class="type">void</span> outerMethodWithLevelCallsInnerMethodWithNoLevel() {
+    <span class="comment">// this also works: inner method doesn't specify a level, so the outer method controls.</span>
+    innerMethodWithNoLevel();
+}
+
+<span class="annotation">@Transaction</span>
+<span class="keyword">default</span> <span class="type">void</span> innerMethodWithNoLevel() {}
+
+<span class="annotation">@Transaction</span>(TransactionIsolationLevel.REPEATABLE_READ)
+<span class="keyword">default</span> <span class="type">void</span> outerMethodWithOneLevelCallsInnerMethodWithAnotherLevel() <span class="directive">throws</span> TransactionException {
+    <span class="comment">// error! inner method specifies a different isolation level.</span>
+    innerMethodWithADifferentLevel();
+}
+
+<span class="annotation">@Transaction</span>(TransactionIsolationLevel.SERIALIZABLE)
+<span class="keyword">default</span> <span class="type">void</span> innerMethodWithADifferentLevel() {}</code></pre>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -671,7 +715,7 @@ Adding to 30 from the other, we get 30 + 60 = 90 and the assertion succeeds.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-06-22 13:01:19 MDT
+Last updated 2016-07-25 00:10:25 MDT
 </div>
 </div>
 </body>
