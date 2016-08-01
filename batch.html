@@ -529,110 +529,21 @@ Their use is straightforward:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">jdbi.doc</span>;
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">void</span> testSimpleBatch() {
+    Batch batch = handle.createBatch();
 
-<span class="keyword">import</span> <span class="include">static</span> <span class="include">org.junit.Assert.assertArrayEquals</span>;
-<span class="keyword">import</span> <span class="include">static</span> <span class="include">org.junit.Assert.assertEquals</span>;
+    batch.add(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO fruit VALUES(0, 'apple')</span><span class="delimiter">&quot;</span></span>);
+    batch.add(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO fruit VALUES(1, 'banana')</span><span class="delimiter">&quot;</span></span>);
 
-<span class="keyword">import</span> <span class="include">org.jdbi.v3.core.Batch</span>;
-<span class="keyword">import</span> <span class="include">org.jdbi.v3.core.H2DatabaseRule</span>;
-<span class="keyword">import</span> <span class="include">org.jdbi.v3.core.Handle</span>;
-<span class="keyword">import</span> <span class="include">org.jdbi.v3.core.PreparedBatch</span>;
-<span class="keyword">import</span> <span class="include">org.junit.Before</span>;
-<span class="keyword">import</span> <span class="include">org.junit.Rule</span>;
-<span class="keyword">import</span> <span class="include">org.junit.Test</span>;
-
-<span class="directive">public</span> <span class="type">class</span> <span class="class">BatchTest</span> {
-
-    <span class="annotation">@Rule</span>
-    <span class="directive">public</span> H2DatabaseRule db = <span class="keyword">new</span> H2DatabaseRule();
-    <span class="directive">private</span> Handle handle;
-
-    <span class="annotation">@Before</span>
-    <span class="directive">public</span> <span class="type">void</span> getHandle() {
-        handle = db.getSharedHandle();
-        handle.execute(<span class="string"><span class="delimiter">&quot;</span><span class="content">CREATE TABLE fruit (id INT PRIMARY KEY, name VARCHAR)</span><span class="delimiter">&quot;</span></span>);
-    }
-
-    <span class="annotation">@Test</span>
-    <span class="comment">// tag::simpleBatch[]</span>
-    <span class="directive">public</span> <span class="type">void</span> testSimpleBatch() {
-        Batch batch = handle.createBatch();
-
-        batch.add(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO fruit VALUES(0, 'apple')</span><span class="delimiter">&quot;</span></span>);
-        batch.add(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO fruit VALUES(1, 'banana')</span><span class="delimiter">&quot;</span></span>);
-
-        <span class="type">int</span><span class="type">[]</span> rowsModified = batch.execute();
-        assertArrayEquals(<span class="keyword">new</span> <span class="type">int</span><span class="type">[]</span> {<span class="integer">1</span>, <span class="integer">1</span>}, rowsModified);
-        assertEquals(<span class="integer">2</span>, handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT count(1) FROM fruit</span><span class="delimiter">&quot;</span></span>).mapTo(<span class="type">int</span>.class).findOnly().intValue());
-    }
-    <span class="comment">// end::simpleBatch[]</span>
-
-    <span class="annotation">@Test</span>
-    <span class="comment">// tag::preparedBatch[]</span>
-    <span class="directive">public</span> <span class="type">void</span> testPreparedBatch() {
-        PreparedBatch batch = handle.prepareBatch(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO fruit VALUES(:id, :name)</span><span class="delimiter">&quot;</span></span>);
-
-        batch.bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">0</span>);
-        batch.bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">apple</span><span class="delimiter">&quot;</span></span>);
-        batch.add();
-
-        batch.bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">1</span>);
-        batch.bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">banana</span><span class="delimiter">&quot;</span></span>);
-        batch.add();
-
-        <span class="type">int</span><span class="type">[]</span> rowsModified = batch.execute();
-        assertArrayEquals(<span class="keyword">new</span> <span class="type">int</span><span class="type">[]</span> {<span class="integer">1</span>, <span class="integer">1</span>}, rowsModified);
-        assertEquals(<span class="integer">2</span>, handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT count(1) FROM fruit</span><span class="delimiter">&quot;</span></span>).mapTo(<span class="type">int</span>.class).findOnly().intValue());
-    }
-    <span class="comment">// end::simpleBatch[]</span>
+    <span class="type">int</span><span class="type">[]</span> rowsModified = batch.execute();
+    assertArrayEquals(<span class="keyword">new</span> <span class="type">int</span><span class="type">[]</span> {<span class="integer">1</span>, <span class="integer">1</span>}, rowsModified);
+    assertEquals(<span class="integer">2</span>, handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT count(1) FROM fruit</span><span class="delimiter">&quot;</span></span>).mapTo(<span class="type">int</span>.class).findOnly().intValue());
 }</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">jdbi.doc</span>;
-
-<span class="keyword">import</span> <span class="include">static</span> <span class="include">org.junit.Assert.assertArrayEquals</span>;
-<span class="keyword">import</span> <span class="include">static</span> <span class="include">org.junit.Assert.assertEquals</span>;
-
-<span class="keyword">import</span> <span class="include">org.jdbi.v3.core.Batch</span>;
-<span class="keyword">import</span> <span class="include">org.jdbi.v3.core.H2DatabaseRule</span>;
-<span class="keyword">import</span> <span class="include">org.jdbi.v3.core.Handle</span>;
-<span class="keyword">import</span> <span class="include">org.jdbi.v3.core.PreparedBatch</span>;
-<span class="keyword">import</span> <span class="include">org.junit.Before</span>;
-<span class="keyword">import</span> <span class="include">org.junit.Rule</span>;
-<span class="keyword">import</span> <span class="include">org.junit.Test</span>;
-
-<span class="directive">public</span> <span class="type">class</span> <span class="class">BatchTest</span> {
-
-    <span class="annotation">@Rule</span>
-    <span class="directive">public</span> H2DatabaseRule db = <span class="keyword">new</span> H2DatabaseRule();
-    <span class="directive">private</span> Handle handle;
-
-    <span class="annotation">@Before</span>
-    <span class="directive">public</span> <span class="type">void</span> getHandle() {
-        handle = db.getSharedHandle();
-        handle.execute(<span class="string"><span class="delimiter">&quot;</span><span class="content">CREATE TABLE fruit (id INT PRIMARY KEY, name VARCHAR)</span><span class="delimiter">&quot;</span></span>);
-    }
-
-    <span class="annotation">@Test</span>
-    <span class="comment">// tag::simpleBatch[]</span>
-    <span class="directive">public</span> <span class="type">void</span> testSimpleBatch() {
-        Batch batch = handle.createBatch();
-
-        batch.add(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO fruit VALUES(0, 'apple')</span><span class="delimiter">&quot;</span></span>);
-        batch.add(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO fruit VALUES(1, 'banana')</span><span class="delimiter">&quot;</span></span>);
-
-        <span class="type">int</span><span class="type">[]</span> rowsModified = batch.execute();
-        assertArrayEquals(<span class="keyword">new</span> <span class="type">int</span><span class="type">[]</span> {<span class="integer">1</span>, <span class="integer">1</span>}, rowsModified);
-        assertEquals(<span class="integer">2</span>, handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT count(1) FROM fruit</span><span class="delimiter">&quot;</span></span>).mapTo(<span class="type">int</span>.class).findOnly().intValue());
-    }
-    <span class="comment">// end::simpleBatch[]</span>
-
-    <span class="annotation">@Test</span>
-    <span class="comment">// tag::preparedBatch[]</span>
-    <span class="directive">public</span> <span class="type">void</span> testPreparedBatch() {
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">public</span> <span class="type">void</span> testPreparedBatch() {
         PreparedBatch batch = handle.prepareBatch(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO fruit VALUES(:id, :name)</span><span class="delimiter">&quot;</span></span>);
 
         batch.bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">0</span>);
@@ -647,7 +558,6 @@ Their use is straightforward:</p>
         assertArrayEquals(<span class="keyword">new</span> <span class="type">int</span><span class="type">[]</span> {<span class="integer">1</span>, <span class="integer">1</span>}, rowsModified);
         assertEquals(<span class="integer">2</span>, handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT count(1) FROM fruit</span><span class="delimiter">&quot;</span></span>).mapTo(<span class="type">int</span>.class).findOnly().intValue());
     }
-    <span class="comment">// end::simpleBatch[]</span>
 }</code></pre>
 </div>
 </div>
@@ -688,7 +598,7 @@ Suppressed: org.postgresql.util.PSQLException: ERROR: duplicate key value violat
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-08-01 12:43:57 PDT
+Last updated 2016-08-01 12:47:49 PDT
 </div>
 </div>
 </body>
