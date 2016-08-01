@@ -525,7 +525,7 @@ as well as a single statement with many varying bound arguments via
 </div>
 <div class="paragraph">
 <p><strong>jdbi</strong> exposes this functionality through the <strong>Batch</strong> and <strong>PreparedBatch</strong> classes.
-Their use is straightforward:</p>
+Their use is straightforward.  To execute many separate statements as a single batch:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -537,26 +537,79 @@ Their use is straightforward:</p>
 
     <span class="type">int</span><span class="type">[]</span> rowsModified = batch.execute();
     assertArrayEquals(<span class="keyword">new</span> <span class="type">int</span><span class="type">[]</span> {<span class="integer">1</span>, <span class="integer">1</span>}, rowsModified);
-    assertEquals(<span class="integer">2</span>, handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT count(1) FROM fruit</span><span class="delimiter">&quot;</span></span>).mapTo(<span class="type">int</span>.class).findOnly().intValue());
+    assertEquals(<span class="integer">2</span>,
+            handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT count(1) FROM fruit</span><span class="delimiter">&quot;</span></span>)
+            .mapTo(<span class="type">int</span>.class)
+            .findOnly()
+            .intValue());
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>If you have a single statement but want to bind many groups of parameters:</p>
+</div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">public</span> <span class="type">void</span> testPreparedBatch() {
-        PreparedBatch batch = handle.prepareBatch(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO fruit VALUES(:id, :name)</span><span class="delimiter">&quot;</span></span>);
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">void</span> testPreparedBatch() {
+    PreparedBatch batch = handle.prepareBatch(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO fruit VALUES(:id, :name)</span><span class="delimiter">&quot;</span></span>);
 
-        batch.bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">0</span>);
-        batch.bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">apple</span><span class="delimiter">&quot;</span></span>);
-        batch.add();
+    batch.bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">0</span>);
+    batch.bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">apple</span><span class="delimiter">&quot;</span></span>);
+    batch.add();
 
-        batch.bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">1</span>);
-        batch.bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">banana</span><span class="delimiter">&quot;</span></span>);
-        batch.add();
+    batch.bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">1</span>);
+    batch.bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">banana</span><span class="delimiter">&quot;</span></span>);
+    batch.add();
 
-        <span class="type">int</span><span class="type">[]</span> rowsModified = batch.execute();
-        assertArrayEquals(<span class="keyword">new</span> <span class="type">int</span><span class="type">[]</span> {<span class="integer">1</span>, <span class="integer">1</span>}, rowsModified);
-        assertEquals(<span class="integer">2</span>, handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT count(1) FROM fruit</span><span class="delimiter">&quot;</span></span>).mapTo(<span class="type">int</span>.class).findOnly().intValue());
+    <span class="type">int</span><span class="type">[]</span> rowsModified = batch.execute();
+    assertArrayEquals(<span class="keyword">new</span> <span class="type">int</span><span class="type">[]</span> {<span class="integer">1</span>, <span class="integer">1</span>}, rowsModified);
+    assertEquals(<span class="integer">2</span>,
+            handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT count(1) FROM fruit</span><span class="delimiter">&quot;</span></span>)
+            .mapTo(<span class="type">int</span>.class)
+            .findOnly()
+            .intValue());
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We also support SqlObject batch inserts:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">void</span> testSqlObjectBatch() {
+    BasketOfFruit basket = handle.attach(BasketOfFruit.class);
+
+    <span class="type">int</span><span class="type">[]</span> rowsModified = basket.fillBasket(<span class="predefined-type">Arrays</span>.asList(
+            <span class="keyword">new</span> Fruit(<span class="integer">0</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">apple</span><span class="delimiter">&quot;</span></span>),
+            <span class="keyword">new</span> Fruit(<span class="integer">1</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">banana</span><span class="delimiter">&quot;</span></span>)));
+
+    assertArrayEquals(<span class="keyword">new</span> <span class="type">int</span><span class="type">[]</span> {<span class="integer">1</span>, <span class="integer">1</span>}, rowsModified);
+    assertEquals(<span class="integer">2</span>, basket.countFruit());
+}
+
+<span class="directive">public</span> <span class="type">interface</span> <span class="class">BasketOfFruit</span> {
+    <span class="annotation">@SqlBatch</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO fruit VALUES(:id, :name)</span><span class="delimiter">&quot;</span></span>)
+    <span class="type">int</span><span class="type">[]</span> fillBasket(<span class="annotation">@BindBean</span> <span class="predefined-type">Collection</span>&lt;Fruit&gt; fruits);
+
+    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT count(1) FROM fruit</span><span class="delimiter">&quot;</span></span>)
+    <span class="type">int</span> countFruit();
+}
+
+<span class="directive">public</span> <span class="type">class</span> <span class="class">Fruit</span> {
+    <span class="directive">private</span> <span class="directive">final</span> <span class="type">int</span> id;
+    <span class="directive">private</span> <span class="directive">final</span> <span class="predefined-type">String</span> name;
+
+    Fruit(<span class="type">int</span> id, <span class="predefined-type">String</span> name) {
+        <span class="local-variable">this</span>.id = id;
+        <span class="local-variable">this</span>.name = name;
+    }
+
+    <span class="directive">public</span> <span class="type">int</span> getId() {
+        <span class="keyword">return</span> id;
+    }
+
+    <span class="directive">public</span> <span class="predefined-type">String</span> getName() {
+        <span class="keyword">return</span> name;
     }
 }</code></pre>
 </div>
@@ -598,7 +651,7 @@ Suppressed: org.postgresql.util.PSQLException: ERROR: duplicate key value violat
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-08-01 12:47:49 PDT
+Last updated 2016-08-01 12:55:22 PDT
 </div>
 </div>
 </body>
