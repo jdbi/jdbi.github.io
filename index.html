@@ -527,45 +527,33 @@ SQL <em>you</em> write and simple tabular data structures.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">void</span> helloJdbi() {
-    <span class="comment">// H2 in-memory database</span>
-    Jdbi dbi = Jdbi.create(<span class="string"><span class="delimiter">&quot;</span><span class="content">jdbc:h2:mem:test</span><span class="delimiter">&quot;</span></span>);
-    <span class="comment">// Easy scope-based transactions</span>
-    dbi.useTransaction((handle, status) -&gt; {
-        handle.execute(<span class="string"><span class="delimiter">&quot;</span><span class="content">CREATE TABLE user (id INTEGER PRIMARY KEY, name VARCHAR)</span><span class="delimiter">&quot;</span></span>);
-        handle.createStatement(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO user(id, name) VALUES (:id, :name)</span><span class="delimiter">&quot;</span></span>)
-            .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">0</span>)   <span class="comment">// Bind arguments by 0-indexed position</span>
-            .bind(<span class="integer">1</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">You!</span><span class="delimiter">&quot;</span></span>) <span class="comment">// Or by name</span>
-            .execute();
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// H2 in-memory database</span>
+Jdbi dbi = Jdbi.create(<span class="string"><span class="delimiter">&quot;</span><span class="content">jdbc:h2:mem:test</span><span class="delimiter">&quot;</span></span>);
+<span class="comment">// Easy scope-based transactions</span>
+dbi.useTransaction((handle, status) -&gt; {
+    handle.execute(<span class="string"><span class="delimiter">&quot;</span><span class="content">CREATE TABLE user (id INTEGER PRIMARY KEY, name VARCHAR)</span><span class="delimiter">&quot;</span></span>);
+    handle.createStatement(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO user(id, name) VALUES (:id, :name)</span><span class="delimiter">&quot;</span></span>)
+        .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">0</span>)   <span class="comment">// Bind arguments by 0-indexed position</span>
+        .bind(<span class="integer">1</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">You!</span><span class="delimiter">&quot;</span></span>) <span class="comment">// Or by name</span>
+        .execute();
 
-        handle.createStatement(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO user(id, name) VALUES (:id, :name)</span><span class="delimiter">&quot;</span></span>)
-            .bindFromProperties(<span class="keyword">new</span> User(<span class="integer">1</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Me</span><span class="delimiter">&quot;</span></span>)) <span class="comment">// You can also bind custom types</span>
-            .execute();
+    handle.createStatement(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO user(id, name) VALUES (:id, :name)</span><span class="delimiter">&quot;</span></span>)
+        .bindFromProperties(<span class="keyword">new</span> User(<span class="integer">1</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Me</span><span class="delimiter">&quot;</span></span>)) <span class="comment">// You can also bind custom types</span>
+        .execute();
 
-        <span class="comment">// Easy mapping to your types; support for cool Java 8 features like Stream</span>
-        handle.registerRowMapper(ConstructorMapper.factoryFor(User.class));
-        Collector&lt;User, ?, <span class="predefined-type">Map</span>&lt;<span class="predefined-type">Character</span>, <span class="predefined-type">List</span>&lt;User&gt;&gt;&gt; groupByFirstLetter =
-                Collectors.groupingBy(u -&gt; u.getName().charAt(<span class="integer">0</span>));
-        <span class="directive">final</span> <span class="predefined-type">Map</span>&lt;<span class="predefined-type">Character</span>, <span class="predefined-type">List</span>&lt;User&gt;&gt; usersByFirstLetter =
-            handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT * FROM user</span><span class="delimiter">&quot;</span></span>)
-                .mapTo(User.class)
-                .withStream(s -&gt; s.collect(groupByFirstLetter));
-    });
-}
-
-<span class="directive">public</span> <span class="directive">static</span> <span class="type">class</span> <span class="class">User</span> {
-    <span class="directive">final</span> <span class="type">int</span> id;
-    <span class="directive">final</span> <span class="predefined-type">String</span> name;
-    <span class="directive">public</span> User(<span class="type">int</span> id, <span class="predefined-type">String</span> name) { <span class="local-variable">this</span>.id = id; <span class="local-variable">this</span>.name = name; }
-    <span class="directive">public</span> <span class="type">int</span> getId() { <span class="keyword">return</span> id; }
-    <span class="directive">public</span> <span class="predefined-type">String</span> getName() { <span class="keyword">return</span> name; }
-}</code></pre>
+    <span class="comment">// Easy mapping to your types</span>
+    handle.registerRowMapper(ConstructorMapper.factoryFor(User.class));
+    <span class="directive">final</span> <span class="predefined-type">List</span>&lt;User&gt; users =
+        handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT * FROM user</span><span class="delimiter">&quot;</span></span>)
+            .mapTo(User.class)
+            .list();
+});</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p><strong>jdbi</strong> is easy to include in your Java project - with a
-<a href="https://groups.google.com/group/jdbi">Apache 2.0</a> license
-and JARs distributed through
+<a href="https://groups.google.com/group/jdbi">Apache 2.0</a> license,
+no external dependencies, and JARs distributed through
 <a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.jdbi%22">Maven Central</a>,
 you can just include the relevant artifacts in your POM:</p>
 </div>
@@ -582,6 +570,22 @@ you can just include the relevant artifacts in your POM:</p>
 <p><strong>jdbi3</strong> is an update which sports a cleaned up API,
 a stronger resource ownership model, and leverages
 the power of the new Java 8 APIs.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+<strong>jdbi3</strong> is currently under active development.
+<a href="http://www.jdbi.org">jdbi2</a> is still the stable release.
+<strong>jdbi3</strong> should generously be considered alpha quality.
+We love feedback and early testing, but be prepared to
+find a few bugs!
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>Read about the core APIs:</p>
@@ -617,22 +621,6 @@ the power of the new Java 8 APIs.</p>
 </li>
 </ul>
 </div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Warning</div>
-</td>
-<td class="content">
-<strong>jdbi3</strong> is currently under active development.
-<a href="http://www.jdbi.org">jdbi2</a> is still the stable release.
-<strong>jdbi3</strong> should generously be considered alpha quality.
-We love feedback and early testing, but be prepared to
-find a few bugs!
-</td>
-</tr>
-</table>
-</div>
 <div class="paragraph">
 <p><strong>jdbi</strong> uses GitHub for collaboration.  Please check out the
 <a href="https://github.com/jdbi/jdbi">project page</a> for more
@@ -644,7 +632,7 @@ and users sometimes hang out on
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-08-02 12:36:28 PDT
+Last updated 2016-08-02 12:41:43 PDT
 </div>
 </div>
 </body>
