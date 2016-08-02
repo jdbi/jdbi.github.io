@@ -600,17 +600,11 @@ Their use is straightforward.  To execute many separate statements as a single b
     <span class="directive">private</span> <span class="directive">final</span> <span class="predefined-type">String</span> name;
 
     Fruit(<span class="type">int</span> id, <span class="predefined-type">String</span> name) {
-        <span class="local-variable">this</span>.id = id;
-        <span class="local-variable">this</span>.name = name;
+        <span class="local-variable">this</span>.id = id; <span class="local-variable">this</span>.name = name;
     }
 
-    <span class="directive">public</span> <span class="type">int</span> getId() {
-        <span class="keyword">return</span> id;
-    }
-
-    <span class="directive">public</span> <span class="predefined-type">String</span> getName() {
-        <span class="keyword">return</span> name;
-    }
+    <span class="directive">public</span> <span class="type">int</span> getId() { <span class="keyword">return</span> id; }
+    <span class="directive">public</span> <span class="predefined-type">String</span> getName() { <span class="keyword">return</span> name; }
 }</code></pre>
 </div>
 </div>
@@ -651,7 +645,7 @@ Suppressed: org.postgresql.util.PSQLException: ERROR: duplicate key value violat
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-08-01 12:55:22 PDT
+Last updated 2016-08-01 16:35:33 PDT
 </div>
 </div>
 </body>
