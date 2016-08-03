@@ -530,7 +530,7 @@ SQL <em>you</em> write and simple tabular data structures.</p>
 <pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// H2 in-memory database</span>
 Jdbi dbi = Jdbi.create(<span class="string"><span class="delimiter">&quot;</span><span class="content">jdbc:h2:mem:test</span><span class="delimiter">&quot;</span></span>);
 <span class="comment">// Easy scope-based transactions</span>
-dbi.useTransaction((handle, status) -&gt; {
+<span class="predefined-type">List</span>&lt;User&gt; users = dbi.inTransaction((handle, status) -&gt; {
     handle.execute(<span class="string"><span class="delimiter">&quot;</span><span class="content">CREATE TABLE user (id INTEGER PRIMARY KEY, name VARCHAR)</span><span class="delimiter">&quot;</span></span>);
     handle.createStatement(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO user(id, name) VALUES (:id, :name)</span><span class="delimiter">&quot;</span></span>)
         .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">0</span>)   <span class="comment">// Bind arguments by 0-indexed position</span>
@@ -543,15 +543,14 @@ dbi.useTransaction((handle, status) -&gt; {
 
     <span class="comment">// Easy mapping to your types</span>
     handle.registerRowMapper(ConstructorMapper.factoryFor(User.class));
-    <span class="directive">final</span> <span class="predefined-type">List</span>&lt;User&gt; users =
-        handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT * FROM user</span><span class="delimiter">&quot;</span></span>)
-            .mapTo(User.class)
-            .list();
+    <span class="keyword">return</span> handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT * FROM user ORDER BY id</span><span class="delimiter">&quot;</span></span>)
+        .mapTo(User.class)
+        .list();
 });</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>jdbi</strong> is easy to include in your Java project - with a
+<p><strong>jdbi</strong> is easy to include in your Java project - with an
 <a href="https://groups.google.com/group/jdbi">Apache 2.0</a> license,
 no external dependencies, and JARs distributed through
 <a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.jdbi%22">Maven Central</a>,
@@ -608,7 +607,7 @@ find a few bugs!
 <p><a href="transaction.html">Transactions</a></p>
 </li>
 <li>
-<p><a href="sqlobject.html">SQLObject</a></p>
+<p><a href="sqlobject.html">SqlObject</a></p>
 </li>
 <li>
 <p><a href="batch.html">Batch Updates</a></p>
@@ -632,7 +631,7 @@ and users sometimes hang out on
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-08-02 12:41:43 PDT
+Last updated 2016-08-03 15:17:23 PDT
 </div>
 </div>
 </body>
