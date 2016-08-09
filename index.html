@@ -533,8 +533,8 @@ Jdbi dbi = Jdbi.create(<span class="string"><span class="delimiter">&quot;</span
 <span class="predefined-type">List</span>&lt;User&gt; users = dbi.inTransaction((handle, status) -&gt; {
     handle.execute(<span class="string"><span class="delimiter">&quot;</span><span class="content">CREATE TABLE user (id INTEGER PRIMARY KEY, name VARCHAR)</span><span class="delimiter">&quot;</span></span>);
     handle.createStatement(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO user(id, name) VALUES (:id, :name)</span><span class="delimiter">&quot;</span></span>)
-        .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">0</span>)   <span class="comment">// Bind arguments by 0-indexed position</span>
-        .bind(<span class="integer">1</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">You!</span><span class="delimiter">&quot;</span></span>) <span class="comment">// Or by name</span>
+        .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">0</span>)   <span class="comment">// Bind arguments by name</span>
+        .bind(<span class="integer">1</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">You!</span><span class="delimiter">&quot;</span></span>) <span class="comment">// Or by 0-indexed position</span>
         .execute();
 
     handle.createStatement(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO user(id, name) VALUES (:id, :name)</span><span class="delimiter">&quot;</span></span>)
@@ -602,6 +602,13 @@ find a few bugs!
 </li>
 <li>
 <p><a href="results.html">Result Mapping</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="generatedkeys.html">Generated Keys</a></p>
+</li>
+</ul>
+</div>
 </li>
 <li>
 <p><a href="transaction.html">Transactions</a></p>
@@ -631,7 +638,7 @@ and users sometimes hang out on
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-08-03 15:17:23 PDT
+Last updated 2016-08-09 16:13:12 PDT
 </div>
 </div>
 </body>
