@@ -537,7 +537,7 @@ values.</p>
 </div>
 <div class="paragraph">
 <p>Let&#8217;s consider two simple types, User and Article, with a join
-table named Owner.  Guava provides a Multimap class which is very
+table named Author.  Guava provides a Multimap class which is very
 handy for representing joined tables like this.
 Assuming we have mappers already registered:</p>
 </div>
@@ -554,7 +554,7 @@ from the database:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java">Multimap&lt;User, Article&gt; joined = HashMultimap.create();
-db.getSharedHandle().createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT * FROM user NATURAL JOIN author NATURAL JOIN article</span><span class="delimiter">&quot;</span></span>)
+h.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT * FROM user NATURAL JOIN author NATURAL JOIN article</span><span class="delimiter">&quot;</span></span>)
     .map(JoinRowMapper.forTypes(User.class, Article.class))
     .forEach(jr -&gt; joined.put(jr.get(User.class), jr.get(Article.class)));</code></pre>
 </div>
@@ -567,7 +567,7 @@ db.getSharedHandle().createQuery(<span class="string"><span class="delimiter">&q
 </td>
 <td class="content">
 While this approach is easy to read and write, it
-is relatively inefficient for certain patterns of data.
+can be inefficient for certain patterns of data.
 Consider performance requirements when deciding whether
 to use high level mapping or more direct low level access
 with handwritten mappers.
@@ -580,7 +580,7 @@ with handwritten mappers.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-09-01 10:37:43 PDT
+Last updated 2016-09-01 13:45:09 PDT
 </div>
 </div>
 </body>

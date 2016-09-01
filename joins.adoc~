@@ -21,7 +21,7 @@ Assuming we have mappers already registered:
 
 [source,java,indent=0]
 -------------------------------------------
-include::JoinRowMapperTest.java[tags=mapperSetup]
+include::../../../../../../core/src/test/java/org/jdbi/v3/core/mapper/JoinRowMapperTest.java[tags=mapperSetup]
 -------------------------------------------
 
 we can then easily populate a Multimap with the mapping
@@ -29,11 +29,11 @@ from the database:
 
 [source,java,indent=0]
 -------------------------------------------
-include::JoinRowMapperTest.java[tags=multimap]
+include::../../../../../../core/src/test/java/org/jdbi/v3/core/mapper/JoinRowMapperTest.java[tags=multimap]
 -------------------------------------------
 
 NOTE: While this approach is easy to read and write, it
-is relatively inefficient for certain patterns of data.
+can be inefficient for certain patterns of data.
 Consider performance requirements when deciding whether
 to use high level mapping or more direct low level access
 with handwritten mappers.
