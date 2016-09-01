@@ -543,7 +543,82 @@ Assuming we have mappers already registered:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">Unresolved directive in joins.adoc - include::JoinRowMapperTest.java[tags=mapperSetup]</code></pre>
+<pre class="CodeRay highlight"><code data-lang="java">        h.registerRowMapper(ConstructorMapper.factoryFor(User.class));
+        h.registerRowMapper(ConstructorMapper.factoryFor(Article.class));
+    }
+
+    <span class="directive">public</span> <span class="directive">static</span> <span class="type">class</span> <span class="class">User</span>
+    {
+        <span class="type">int</span> uid;
+        <span class="predefined-type">String</span> name;
+
+        <span class="directive">public</span> User(<span class="type">int</span> uid, <span class="predefined-type">String</span> name) { <span class="local-variable">this</span>.uid = uid; <span class="local-variable">this</span>.name = name; }
+        <span class="annotation">@Override</span>
+        <span class="directive">public</span> <span class="type">int</span> hashCode() { <span class="keyword">return</span> uid; }
+        <span class="annotation">@Override</span>
+        <span class="directive">public</span> <span class="type">boolean</span> equals(<span class="predefined-type">Object</span> obj)
+        {
+            User o = (User)obj;
+            <span class="keyword">return</span> uid == o.uid &amp;&amp; name.equals(o.name);
+        }
+    }
+
+    <span class="directive">public</span> <span class="directive">static</span> <span class="type">class</span> <span class="class">Article</span>
+    {
+        <span class="type">int</span> aid;
+        <span class="predefined-type">String</span> title;
+
+        <span class="directive">public</span> Article(<span class="type">int</span> aid, <span class="predefined-type">String</span> title) { <span class="local-variable">this</span>.aid = aid; <span class="local-variable">this</span>.title = title; }
+        <span class="annotation">@Override</span>
+        <span class="directive">public</span> <span class="type">int</span> hashCode() { <span class="keyword">return</span> aid; }
+        <span class="annotation">@Override</span>
+        <span class="directive">public</span> <span class="type">boolean</span> equals(<span class="predefined-type">Object</span> obj)
+        {
+            Article o = (Article)obj;
+            <span class="keyword">return</span> aid == o.aid &amp;&amp; title.equals(o.title);
+        }
+    }
+
+    <span class="annotation">@Test</span>
+    <span class="directive">public</span> <span class="type">void</span> testCartesianProduct() <span class="directive">throws</span> <span class="exception">Exception</span>
+    {
+        Multimap&lt;User, Article&gt; product = HashMultimap.create();
+        db.getSharedHandle().createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT * FROM user, article</span><span class="delimiter">&quot;</span></span>)
+            .map(JoinRowMapper.forTypes(User.class, Article.class))
+            .forEach(jr -&gt; product.put(jr.get(User.class), jr.get(Article.class)));
+
+        Multimap&lt;User, Article&gt; expected = HashMultimap.create();
+        IntStream.rangeClosed(<span class="integer">1</span>, <span class="integer">3</span>).forEach(u -&gt;
+            IntStream.rangeClosed(<span class="integer">1</span>, <span class="integer">3</span>).forEach(a -&gt;
+                expected.put(u(u), a(a))));
+
+        assertThat(product, is(expected));
+    }
+
+    <span class="annotation">@Test</span>
+    <span class="directive">public</span> <span class="type">void</span> testJoin() <span class="directive">throws</span> <span class="exception">Exception</span>
+    {
+        Multimap&lt;User, Article&gt; joined = HashMultimap.create();
+        db.getSharedHandle().createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT * FROM user NATURAL JOIN author NATURAL JOIN article</span><span class="delimiter">&quot;</span></span>)
+            .map(JoinRowMapper.forTypes(User.class, Article.class))
+            .forEach(jr -&gt; joined.put(jr.get(User.class), jr.get(Article.class)));
+
+        Multimap&lt;User, Article&gt; expected = HashMultimap.create();
+        expected.put(u(<span class="integer">1</span>), a(<span class="integer">2</span>));
+        expected.put(u(<span class="integer">3</span>), a(<span class="integer">1</span>));
+        expected.put(u(<span class="integer">3</span>), a(<span class="integer">3</span>));
+
+        assertThat(joined, is(expected));
+    }
+
+    <span class="directive">private</span> <span class="directive">static</span> User u(<span class="type">int</span> uid) {
+        <span class="keyword">return</span> <span class="keyword">new</span> User(uid, <span class="string"><span class="delimiter">&quot;</span><span class="content">u</span><span class="delimiter">&quot;</span></span> + uid);
+    }
+
+    <span class="directive">private</span> <span class="directive">static</span> Article a(<span class="type">int</span> aid) {
+        <span class="keyword">return</span> <span class="keyword">new</span> Article(aid, <span class="string"><span class="delimiter">&quot;</span><span class="content">a</span><span class="delimiter">&quot;</span></span> + aid);
+    }
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -552,15 +627,34 @@ from the database:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">Unresolved directive in joins.adoc - include::JoinRowMapperTest.java[tags=multimap]</code></pre>
+<pre class="CodeRay highlight"><code data-lang="java">Multimap&lt;User, Article&gt; joined = HashMultimap.create();
+db.getSharedHandle().createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT * FROM user NATURAL JOIN author NATURAL JOIN article</span><span class="delimiter">&quot;</span></span>)
+    .map(JoinRowMapper.forTypes(User.class, Article.class))
+    .forEach(jr -&gt; joined.put(jr.get(User.class), jr.get(Article.class)));</code></pre>
 </div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+While this approach is easy to read and write, it
+is relatively inefficient for certain patterns of data.
+Consider performance requirements when deciding whether
+to use high level mapping or more direct low level access
+with handwritten mappers.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-09-01 10:28:04 PDT
+Last updated 2016-09-01 10:37:43 PDT
 </div>
 </div>
 </body>
