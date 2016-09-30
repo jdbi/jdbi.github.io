@@ -15,7 +15,7 @@ type, and presents you with a JoinRow that holds all of the resulting
 values.
 
 Let's consider two simple types, User and Article, with a join
-table named Owner.  Guava provides a Multimap class which is very
+table named Author.  Guava provides a Multimap class which is very
 handy for representing joined tables like this.
 Assuming we have mappers already registered:
 

@@ -1,0 +1,21 @@
+= Statements
+
+*jdbi* provides Fluent builders for various types
+of queries, updates, and batch statements.
+
+== Query
+
+A *Query* is a *Statement* that returns a result set
+from the database.
+
+[source,java,indent=0]
+-------------------------------------------
+include::StatementsTest.java[tags=query]
+-------------------------------------------
+
+Without further configuration, a *Query* returns a
+*Map<String, Object>*.  The keys are column labels,
+and values are *jdbi*'s best guess at a reasonable
+type.
+
+Usually you want <<results#,more control over the returned type>>.
