@@ -536,12 +536,12 @@ Their use is straightforward.  To execute many separate statements as a single b
     batch.add(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO fruit VALUES(1, 'banana')</span><span class="delimiter">&quot;</span></span>);
 
     <span class="type">int</span><span class="type">[]</span> rowsModified = batch.execute();
-    assertArrayEquals(<span class="keyword">new</span> <span class="type">int</span><span class="type">[]</span> {<span class="integer">1</span>, <span class="integer">1</span>}, rowsModified);
-    assertEquals(<span class="integer">2</span>,
-            handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT count(1) FROM fruit</span><span class="delimiter">&quot;</span></span>)
+    assertThat(rowsModified).containsExactly(<span class="integer">1</span>, <span class="integer">1</span>);
+    assertThat(handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT count(1) FROM fruit</span><span class="delimiter">&quot;</span></span>)
             .mapTo(<span class="type">int</span>.class)
             .findOnly()
-            .intValue());
+            .intValue())
+            .isEqualTo(<span class="integer">2</span>);
 }</code></pre>
 </div>
 </div>
@@ -562,12 +562,12 @@ Their use is straightforward.  To execute many separate statements as a single b
     batch.add();
 
     <span class="type">int</span><span class="type">[]</span> rowsModified = batch.execute();
-    assertArrayEquals(<span class="keyword">new</span> <span class="type">int</span><span class="type">[]</span> {<span class="integer">1</span>, <span class="integer">1</span>}, rowsModified);
-    assertEquals(<span class="integer">2</span>,
-            handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT count(1) FROM fruit</span><span class="delimiter">&quot;</span></span>)
+    assertThat(rowsModified).containsExactly(<span class="integer">1</span>, <span class="integer">1</span>);
+    assertThat(handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT count(1) FROM fruit</span><span class="delimiter">&quot;</span></span>)
             .mapTo(<span class="type">int</span>.class)
             .findOnly()
-            .intValue());
+            .intValue())
+            .isEqualTo(<span class="integer">2</span>);
 }</code></pre>
 </div>
 </div>
@@ -583,8 +583,8 @@ Their use is straightforward.  To execute many separate statements as a single b
             <span class="keyword">new</span> Fruit(<span class="integer">0</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">apple</span><span class="delimiter">&quot;</span></span>),
             <span class="keyword">new</span> Fruit(<span class="integer">1</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">banana</span><span class="delimiter">&quot;</span></span>)));
 
-    assertArrayEquals(<span class="keyword">new</span> <span class="type">int</span><span class="type">[]</span> {<span class="integer">1</span>, <span class="integer">1</span>}, rowsModified);
-    assertEquals(<span class="integer">2</span>, basket.countFruit());
+    assertThat(rowsModified).containsExactly(<span class="integer">1</span>, <span class="integer">1</span>);
+    assertThat(basket.countFruit()).isEqualTo(<span class="integer">2</span>);
 }
 
 <span class="directive">public</span> <span class="type">interface</span> <span class="class">BasketOfFruit</span> {

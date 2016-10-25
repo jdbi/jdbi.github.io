@@ -534,10 +534,10 @@ you to return a result, and <strong>useTransaction</strong> has no return value.
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> Optional&lt;User&gt; findUserById(<span class="type">long</span> id) {
     <span class="keyword">return</span> handle.inTransaction((h, status) -&gt;
-        h.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT * FROM users WHERE id=:id</span><span class="delimiter">&quot;</span></span>)
-            .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, id)
-            .mapTo(User.class)
-            .findFirst());
+            h.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT * FROM users WHERE id=:id</span><span class="delimiter">&quot;</span></span>)
+                    .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, id)
+                    .mapTo(User.class)
+                    .findFirst());
 }</code></pre>
 </div>
 </div>
@@ -557,7 +557,7 @@ transaction.</p>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Test</span>
 <span class="directive">public</span> <span class="type">void</span> sqlObjectTransaction() {
-    assertEquals(<span class="string"><span class="delimiter">&quot;</span><span class="content">Charlie</span><span class="delimiter">&quot;</span></span>, handle.attach(UserDao.class).findUserById(<span class="integer">3</span>).get().name);
+    assertThat(handle.attach(UserDao.class).findUserById(<span class="integer">3</span>).map(u -&gt; u.name)).contains(<span class="string"><span class="delimiter">&quot;</span><span class="content">Charlie</span><span class="delimiter">&quot;</span></span>);
 }
 
 <span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
@@ -637,7 +637,7 @@ does not have side effects as it may be executed multiple times.</p>
 
 <span class="directive">static</span> <span class="type">class</span> <span class="class">SumAndInsert</span> <span class="directive">implements</span> <span class="predefined-type">Callable</span>&lt;<span class="predefined-type">Integer</span>&gt;, TransactionCallback&lt;<span class="predefined-type">Integer</span>, <span class="exception">Exception</span>&gt; {
     <span class="directive">private</span> <span class="directive">final</span> Jdbi jdbi;
-    <span class="directive">private</span> <span class="predefined-type">CountDownLatch</span> latch;
+    <span class="directive">private</span> <span class="directive">final</span> <span class="predefined-type">CountDownLatch</span> latch;
 
     <span class="directive">public</span> SumAndInsert(<span class="predefined-type">CountDownLatch</span> latch, Jdbi jdbi) {
         <span class="local-variable">this</span>.latch = latch;
@@ -688,7 +688,7 @@ does not have side effects as it may be executed multiple times.</p>
 
     <span class="comment">// One of them gets 30, the other gets 10 + 20 + 30 = 60</span>
     <span class="comment">// This assertion fails under any isolation level below SERIALIZABLE!</span>
-    assertEquals(<span class="integer">30</span> + <span class="integer">60</span>, result1.get() + result2.get());
+    assertThat(result1.get() + result2.get()).isEqualTo(<span class="integer">30</span> + <span class="integer">60</span>);
 
     executor.shutdown();
 }</code></pre>

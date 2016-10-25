@@ -518,20 +518,24 @@ table.CodeRay td.code>pre{padding:0}
 <div class="paragraph">
 <p>After executing a database query, you need to interpret the results.
 JDBC provides the <strong>ResultSet</strong> class which can do simple mapping to
-Java primitives and built in classes, but the API leaves a lot
-to be desired.  <strong>jdbi</strong> provides more configurable mapping, including
+Java primitives and built in classes, but the API is often cumbersome
+to use.  <strong>jdbi</strong> provides configurable mapping, including
 the ability to register custom mappers for rows and columns.</p>
 </div>
 <div class="paragraph">
-<p>The mapper is selected based on the type that your query is declared to return.
-If a mapper for the entire row is configured, it will directly convert
-each row into a domain object.  Failing that, if the type represents a single
-value, the column mappers are consulted.</p>
+<p>A <strong>RowMapper</strong> converts a row of a <strong>ResultSet</strong> into a result object.</p>
 </div>
 <div class="paragraph">
-<p><strong>jdbi</strong> handles the tedium of iterating over the rows in the ResultSet and
-presenting the results to you in a container such as a <strong>List</strong>, <strong>Stream</strong>,
-<strong>Optional</strong>, or <strong>Iterator</strong>.</p>
+<p>A <strong>ColumnMapper</strong> converts a single column&#8217;s value into a Java object.
+It can be used as a <strong>RowMapper</strong> if there is only one column present,
+or it can be used to build more complex *RowMapper*s.</p>
+</div>
+<div class="paragraph">
+<p>The mapper is selected based on the declared result type of your query.</p>
+</div>
+<div class="paragraph">
+<p><strong>jdbi</strong> iterates over the rows in the ResultSet and presents the mapped results
+to you in a container such as a <strong>List</strong>, <strong>Stream</strong>, <strong>Optional</strong>, or <strong>Iterator</strong>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -556,14 +560,16 @@ presenting the results to you in a container such as a <strong>List</strong>, <s
 <span class="annotation">@Test</span>
 <span class="directive">public</span> <span class="type">void</span> findBob() {
     User u = findUserById(<span class="integer">2</span>).orElseThrow(() -&gt; <span class="keyword">new</span> <span class="exception">AssertionError</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">No user found</span><span class="delimiter">&quot;</span></span>));
-    assertEquals(<span class="integer">2</span>, u.id);
-    assertEquals(<span class="string"><span class="delimiter">&quot;</span><span class="content">Bob</span><span class="delimiter">&quot;</span></span>, u.name);
+    assertThat(u.id).isEqualTo(<span class="integer">2</span>);
+    assertThat(u.name).isEqualTo(<span class="string"><span class="delimiter">&quot;</span><span class="content">Bob</span><span class="delimiter">&quot;</span></span>);
 }
 
 <span class="directive">public</span> Optional&lt;User&gt; findUserById(<span class="type">long</span> id) {
+    <span class="predefined-type">RowMapper</span>&lt;User&gt; userMapper =
+            (rs, ctx) -&gt; <span class="keyword">new</span> User(rs.getInt(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>), rs.getString(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>));
     <span class="keyword">return</span> handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT * FROM user WHERE id=:id</span><span class="delimiter">&quot;</span></span>)
         .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, id)
-        .map((rs, ctx) -&gt; <span class="keyword">new</span> User(rs.getInt(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>), rs.getString(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>)))
+        .map(userMapper)
         .findFirst();
 }</code></pre>
 </div>
@@ -574,12 +580,12 @@ presenting the results to you in a container such as a <strong>List</strong>, <s
 <h2 id="_row_mapper">Row Mapper</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The above example introduces a row mapper.  As you might assume, the row mapper
-is called once for every row found as <strong>jdbi</strong> iterates through the result set.</p>
+<p>The row mapper is called once for every row as <strong>jdbi</strong> iterates
+through the result set.</p>
 </div>
 <div class="paragraph">
-<p>Row mappers are either directly registered to handle a specific query, or
-can be driven by the return type:</p>
+<p>Row mappers are either configured on a fluent query, or
+can be registered to handle a type:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -598,8 +604,8 @@ can be driven by the return type:</p>
         .map(<span class="keyword">new</span> UserMapper())
         .list();
 
-    assertEquals(<span class="integer">4</span>, users.size());
-    assertEquals(<span class="string"><span class="delimiter">&quot;</span><span class="content">Data</span><span class="delimiter">&quot;</span></span>, users.get(<span class="integer">3</span>).name);
+    assertThat(users).hasSize(<span class="integer">4</span>);
+    assertThat(users.get(<span class="integer">3</span>).name).isEqualTo(<span class="string"><span class="delimiter">&quot;</span><span class="content">Data</span><span class="delimiter">&quot;</span></span>);
 }</code></pre>
 </div>
 </div>
@@ -625,10 +631,9 @@ We also introduce the <strong>Query.list()</strong> method which collects all ro
         .mapTo(User.class)
         .stream())
     {
-        assertEquals(<span class="string"><span class="delimiter">&quot;</span><span class="content">Charlie</span><span class="delimiter">&quot;</span></span>, s.filter(u -&gt; u.id &gt; <span class="integer">2</span>)
+        assertThat(s.filter(u -&gt; u.id &gt; <span class="integer">2</span>)
             .map(u -&gt; u.name)
-            .findFirst()
-            .get());
+            .findFirst()).contains(<span class="string"><span class="delimiter">&quot;</span><span class="content">Charlie</span><span class="delimiter">&quot;</span></span>);
     }
 }</code></pre>
 </div>
@@ -659,12 +664,12 @@ have that enabled the result is quite concise:</p>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Test</span>
 <span class="directive">public</span> <span class="type">void</span> constructorMapper() {
-    handle.registerRowMapper(ConstructorMapper.factoryFor(User.class));
+    handle.registerRowMapper(ConstructorMapper.of(User.class));
     <span class="predefined-type">Set</span>&lt;User&gt; userSet = handle.createQuery(SELECT_ALL_USERS)
         .mapTo(User.class)
         .collect(Collectors.toSet());
 
-    assertEquals(<span class="integer">4</span>, userSet.size());
+    assertThat(userSet).hasSize(<span class="integer">4</span>);
 }</code></pre>
 </div>
 </div>
@@ -715,14 +720,14 @@ by row:</p>
 <span class="annotation">@Test</span>
 <span class="directive">public</span> <span class="type">void</span> columnMapper() {
     handle.registerColumnMapper(<span class="keyword">new</span> UserNameColumnMapperFactory());
-    handle.registerRowMapper(ConstructorMapper.factoryFor(NamedUser.class));
+    handle.registerRowMapper(ConstructorMapper.of(NamedUser.class));
 
     NamedUser bob = handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT id, name FROM user WHERE name = :name</span><span class="delimiter">&quot;</span></span>)
         .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Bob</span><span class="delimiter">&quot;</span></span>)
         .mapTo(NamedUser.class)
         .findOnly();
 
-    assertEquals(<span class="string"><span class="delimiter">&quot;</span><span class="content">Bob</span><span class="delimiter">&quot;</span></span>, bob.name.name);
+    assertThat(bob.name.name).isEqualTo(<span class="string"><span class="delimiter">&quot;</span><span class="content">Bob</span><span class="delimiter">&quot;</span></span>);
 }</code></pre>
 </div>
 </div>
@@ -766,7 +771,7 @@ uses the column mapper to fill in the constructor parameter.</p>
         .mapToBean(UserBean.class)
         .findOnly();
 
-    assertEquals(<span class="string"><span class="delimiter">&quot;</span><span class="content">Charlie</span><span class="delimiter">&quot;</span></span>, charlie.getName());
+    assertThat(charlie.getName()).isEqualTo(<span class="string"><span class="delimiter">&quot;</span><span class="content">Charlie</span><span class="delimiter">&quot;</span></span>);
 }</code></pre>
 </div>
 </div>
@@ -782,10 +787,69 @@ and so on.</p>
 </div>
 </div>
 </div>
+<h1 id="_resultbearing" class="sect0">ResultBearing</h1>
+<div class="paragraph">
+<p>The <strong>ResultBearing</strong> interface determines how the statement results
+are gathered and returned to you.  The methods are designed to
+interact well with the new Java 8 <strong>@FunctionalInterface*s and
+*Stream</strong> library.  Given a type T that can be mapped by the registered
+mappers,</p>
+</div>
+<div class="sect1">
+<h2 id="_find_a_single_result">Find a Single Result</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>ResultBearing#findOnly</strong> returns the only row in the result set.  If zero
+or multiple rows are encountered, it will throw <strong>IllegalStateException</strong>.</p>
+</div>
+<div class="paragraph">
+<p><strong>#findFirst</strong> returns an <strong>Optional&lt;T&gt;</strong> with the first row, if any.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_stream">Stream</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>#stream</strong> returns a <strong>Stream&lt;T&gt;</strong>.  You should then process the stream and
+produce a result.  This stream must be closed to release any database
+resources held, so we recommend using a <strong>try-with-resources</strong> block to
+ensure that no resources are leaked.</p>
+</div>
+<div class="paragraph">
+<p><strong>#withStream</strong> and <strong>#useStream</strong> handle closing the stream for you.  You
+provide a <strong>StreamCallback</strong> that produces a result or a <strong>StreamConsumer</strong>
+that produces no result, respectively.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_collections">Collections</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>#list</strong> emits a <strong>List&lt;T&gt;</strong>.  This necessarily buffers all results in memory.</p>
+</div>
+<div class="paragraph">
+<p><strong>#collect</strong> takes a <strong>Collector&lt;T, ? , R&gt;</strong> that builds a resulting collection
+<strong>R&lt;T&gt;</strong>.  The <strong>java.util.stream.Collectors</strong> class has a number of interesting
+*Collector*s to start with.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_reduction">Reduction</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>#reduce</strong> provides a simplified <strong>Stream#reduce</strong>.  Given an identity
+starting value and a <strong>BiFunction&lt;U, T, U&gt;</strong> it will repeatedly combine
+*U*s until only a single remains, and then return that.</p>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-09-14 20:23:20 PDT
+Last updated 2016-10-24 18:46:18 PDT
 </div>
 </div>
 </body>

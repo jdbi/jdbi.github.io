@@ -513,8 +513,6 @@ table.CodeRay td.code>pre{padding:0}
 <h1>SqlObject</h1>
 </div>
 <div id="content">
-<div id="preamble">
-<div class="sectionbody">
 <div class="paragraph">
 <p>The Fluent API is very nice to use for full control over
 the evaluation of your statements, but sometimes a simpler
@@ -524,74 +522,41 @@ declarative approach makes for terse and elegant code.</p>
 <p>With <strong>SqlObject</strong>, you write an interface with annotated
 methods.  <strong>jdbi</strong> then synthesizes an implementation.</p>
 </div>
-<div class="paragraph">
-<p>After attaching a <code>Handle</code> to your</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_joinrowmapper">JoinRowMapper</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The JoinRowMapper takes a set of types to extract from each row.
-It uses the mapping registry to determine how to map each given
-type, and presents you with a JoinRow that holds all of the resulting
-values.</p>
-</div>
-<div class="paragraph">
-<p>Let&#8217;s consider two simple types, User and Article, with a join
-table named Author.  Guava provides a Multimap class which is very
-handy for representing joined tables like this.
-Assuming we have mappers already registered:</p>
-</div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">h.registerRowMapper(ConstructorMapper.factoryFor(User.class));
-h.registerRowMapper(ConstructorMapper.factoryFor(Article.class));</code></pre>
+<pre class="CodeRay highlight"><code data-lang="java"></code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>we can then easily populate a Multimap with the mapping
-from the database:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">Multimap&lt;User, Article&gt; joined = HashMultimap.create();
-h.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT * FROM user NATURAL JOIN author NATURAL JOIN article</span><span class="delimiter">&quot;</span></span>)
-    .map(JoinRowMapper.forTypes(User.class, Article.class))
-    .forEach(jr -&gt; joined.put(jr.get(User.class), jr.get(Article.class)));</code></pre>
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-While this approach is easy to read and write, it
-can be inefficient for certain patterns of data.
-Consider performance requirements when deciding whether
-to use high level mapping or more direct low level access
-with handwritten mappers.
-</td>
-</tr>
-</table>
+<p>Given a type <strong>Something</strong> that has <strong>int id</strong> and <strong>String name</strong>
+properties, we define an interface, <strong>SomethingDao</strong>, that
+provides simple create and read operations for
+a table.</p>
 </div>
 <div class="paragraph">
-<p>You can also use it with SqlObject:</p>
+<p>Annotations at the class and method level control
+the binding of arguments and mapping to results.
+For example, <code>@RegisterRowMapper</code> mirrors
+<code>Handle.registerRowMapper</code>.</p>
+</div>
+<div class="paragraph">
+<p>You produce results as single instances
+or container types like <code>Optional</code> or <code>List</code>,
+same as <code>Query.mapTo</code>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"></code></pre>
 </div>
 </div>
-</div>
+<div class="paragraph">
+<p>There are also <code>@SqlBatch</code> and <code>@SqlCall</code> annotations.
+Check out the Javadoc for more information.</p>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-09-17 10:41:47 PDT
+Last updated 2016-10-24 19:34:19 PDT
 </div>
 </div>
 </body>

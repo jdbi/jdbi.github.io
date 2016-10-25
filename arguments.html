@@ -525,11 +525,11 @@ are supported out of the box.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">void</span> bindInt() {
-    assertEquals(<span class="integer">3</span>, handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT :id</span><span class="delimiter">&quot;</span></span>)
+    assertThat(handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT :id</span><span class="delimiter">&quot;</span></span>)
         .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">3</span>)
         .mapTo(<span class="predefined-type">Integer</span>.class)
         .findOnly()
-        .intValue());
+        .intValue()).isEqualTo(<span class="integer">3</span>);
 }</code></pre>
 </div>
 </div>
@@ -556,10 +556,10 @@ The <strong>Argument</strong> class wraps a single value into a binding.</p>
 <span class="annotation">@Test</span>
 <span class="directive">public</span> <span class="type">void</span> uuidArgument() {
     <span class="predefined-type">UUID</span> u = <span class="predefined-type">UUID</span>.randomUUID();
-    assertEquals(u.toString(), handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT CAST(:uuid AS VARCHAR)</span><span class="delimiter">&quot;</span></span>)
+    assertThat(handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT CAST(:uuid AS VARCHAR)</span><span class="delimiter">&quot;</span></span>)
         .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">uuid</span><span class="delimiter">&quot;</span></span>, <span class="keyword">new</span> UUIDArgument(u))
         .mapTo(<span class="predefined-type">String</span>.class)
-        .findOnly());
+        .findOnly()).isEqualTo(u.toString());
 }</code></pre>
 </div>
 </div>
@@ -593,10 +593,10 @@ easily here.</p>
 <span class="directive">public</span> <span class="type">void</span> uuidArgumentFactory() {
     <span class="predefined-type">UUID</span> u = <span class="predefined-type">UUID</span>.randomUUID();
     handle.registerArgumentFactory(<span class="keyword">new</span> UUIDArgumentFactory());
-    assertEquals(u.toString(), handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT CAST(:uuid AS VARCHAR)</span><span class="delimiter">&quot;</span></span>)
+    assertThat(handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT CAST(:uuid AS VARCHAR)</span><span class="delimiter">&quot;</span></span>)
         .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">uuid</span><span class="delimiter">&quot;</span></span>, u)
         .mapTo(<span class="predefined-type">String</span>.class)
-        .findOnly());
+        .findOnly()).isEqualTo(u.toString());
 }</code></pre>
 </div>
 </div>

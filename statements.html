@@ -516,8 +516,8 @@ table.CodeRay td.code>pre{padding:0}
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong>jdbi</strong> provides Fluent builders for various types
-of queries, updates, and batch statements.</p>
+<p><strong>jdbi</strong> provides fluent builders for various types of queries, updates, and
+batch statements.</p>
 </div>
 </div>
 </div>
@@ -525,46 +525,116 @@ of queries, updates, and batch statements.</p>
 <h2 id="_query">Query</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>A <strong>Query</strong> is a <strong>Statement</strong> that returns a result set
-from the database.</p>
+<p>A <strong>Query</strong> is a <strong>Statement</strong> that returns a result set from the database.</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">List</span>&lt;<span class="predefined-type">Map</span>&lt;<span class="predefined-type">String</span>, <span class="predefined-type">Object</span>&gt;&gt; users =
     handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT id, name FROM user ORDER BY id ASC</span><span class="delimiter">&quot;</span></span>)
         .list();
-assertThat(users, contains(
+
+assertThat(users).containsExactly(
         map(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">1</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Alice</span><span class="delimiter">&quot;</span></span>),
-        map(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">2</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Bob</span><span class="delimiter">&quot;</span></span>)));</code></pre>
+        map(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">2</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Bob</span><span class="delimiter">&quot;</span></span>));</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Without further configuration, a <strong>Query</strong> returns a
-<strong>Map&lt;String, Object&gt;</strong>.  The keys are column labels,
-and values are <strong>jdbi</strong>'s best guess at a reasonable
-type.</p>
+<p>Queries may have <a href="arguments.html">arguments</a> bound by name or by position.</p>
 </div>
 <div class="paragraph">
-<p>Usually you want <a href="results.html">more control over the returned type</a>.</p>
+<p>They also have a <a href="#results">#result type</a>.  The default is <strong>Map&lt;String, Object&gt;</strong>.
+The keys are column labels, and values are <strong>jdbi</strong>'s best guess at a reasonable type.</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-some databases send column labels back with changed case.
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>Declaring a class that closely maps to your database table makes mapping to
+or from database rows simple:</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_update">Update</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Update*s are operations that return an integer number of rows modified,
+such as a database *INSERT</strong>, <strong>UPDATE</strong>, or <strong>DELETE</strong>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="type">int</span> count = handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO user(id, name) VALUES(:id, :name)</span><span class="delimiter">&quot;</span></span>)
+    .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">3</span>)
+    .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Charlie</span><span class="delimiter">&quot;</span></span>)
+    .execute();
+assertThat(count).isEqualTo(<span class="integer">1</span>);</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_script">Script</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A <strong>Script</strong> parses a String into semicolon terminated statements.
+The statements can be executed in a single <strong>Batch</strong> or individually.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="type">int</span><span class="type">[]</span> results = handle.createScript(
+        <span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO user VALUES(3, 'Charlie');</span><span class="delimiter">&quot;</span></span> +
+        <span class="string"><span class="delimiter">&quot;</span><span class="content">UPDATE user SET name='Bobby Tables' WHERE id=2;</span><span class="delimiter">&quot;</span></span>)
+    .execute();
+
+assertThat(results).containsExactly(<span class="integer">1</span>, <span class="integer">1</span>);</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_call">Call</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A <strong>Call</strong> invokes a database stored procedure.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This section needs some help, in particular, how the hell
+does the out parameter mapping above work?</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_batch">Batch</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A <strong>Batch</strong> or <strong>PreparedBatch</strong> sends many rows to the server
+in bulk.  After opening the batch, repeatedly add bound
+parameters or statements, and invoke <strong>add</strong>.</p>
+</div>
+<div class="paragraph">
+<p>The result is a list of modified row count.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">PreparedBatch batch = handle.prepareBatch(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO user(id, name) VALUES(:id, :name)</span><span class="delimiter">&quot;</span></span>);
+<span class="keyword">for</span> (<span class="type">int</span> i = <span class="integer">100</span>; i &lt; <span class="integer">5000</span>; i++)
+{
+    batch.bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, i).bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">User:</span><span class="delimiter">&quot;</span></span> + i).add();
+}
+
+<span class="type">int</span><span class="type">[]</span> expected = <span class="keyword">new</span> <span class="type">int</span>[<span class="integer">4900</span>];
+<span class="predefined-type">Arrays</span>.fill(expected, <span class="integer">1</span>);
+assertThat(batch.execute()).isEqualTo(expected);</code></pre>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-09-29 21:37:15 PDT
+Last updated 2016-10-24 18:46:18 PDT
 </div>
 </div>
 </body>
