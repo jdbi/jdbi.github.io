@@ -524,7 +524,15 @@ methods.  <strong>jdbi</strong> then synthesizes an implementation.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"></code></pre>
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@RegisterRowMapper</span>(SomethingMapper.class)
+<span class="directive">public</span> <span class="type">interface</span> <span class="class">SomethingDao</span>
+{
+    <span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO something (id, name) VALUES (:s.id, :s.name)</span><span class="delimiter">&quot;</span></span>)
+    <span class="type">int</span> insert(<span class="annotation">@BindBean</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">s</span><span class="delimiter">&quot;</span></span>) Something s);
+
+    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT id, name FROM something WHERE id = ?</span><span class="delimiter">&quot;</span></span>)
+    Optional&lt;Something&gt; findSomething(<span class="type">int</span> id);
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -546,7 +554,15 @@ same as <code>Query.mapTo</code>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"></code></pre>
+<pre class="CodeRay highlight"><code data-lang="java">dao.insert(<span class="keyword">new</span> Something(<span class="integer">1</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">apple</span><span class="delimiter">&quot;</span></span>));
+dao.insert(<span class="keyword">new</span> Something(<span class="integer">2</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">bison</span><span class="delimiter">&quot;</span></span>));
+
+assertThat(dao.findSomething(<span class="integer">2</span>))
+    .isPresent()
+    .contains(<span class="keyword">new</span> Something(<span class="integer">2</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">bison</span><span class="delimiter">&quot;</span></span>));
+
+assertThat(dao.findSomething(<span class="integer">3</span>))
+    .isEmpty();</code></pre>
 </div>
 </div>
 <div class="paragraph">
