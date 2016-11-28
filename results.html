@@ -620,7 +620,7 @@ We also introduce the <strong>Query.list()</strong> method which collects all ro
 <span class="directive">public</span> <span class="type">void</span> rowMapperFactory() {
     handle.registerRowMapper(<span class="keyword">new</span> RowMapperFactory() {
         <span class="annotation">@Override</span>
-        <span class="directive">public</span> Optional&lt;<span class="predefined-type">RowMapper</span>&lt;?&gt;&gt; build(<span class="predefined-type">Type</span> type, StatementContext ctx) {
+        <span class="directive">public</span> Optional&lt;<span class="predefined-type">RowMapper</span>&lt;?&gt;&gt; build(<span class="predefined-type">Type</span> type, ConfigRegistry config) {
             <span class="keyword">return</span> type == User.class ?
                     Optional.of(<span class="keyword">new</span> UserMapper()) :
                         Optional.empty();
@@ -710,7 +710,7 @@ by row:</p>
 
 <span class="directive">static</span> <span class="type">class</span> <span class="class">UserNameColumnMapperFactory</span> <span class="directive">implements</span> ColumnMapperFactory {
     <span class="annotation">@Override</span>
-    <span class="directive">public</span> Optional&lt;ColumnMapper&lt;?&gt;&gt; build(<span class="predefined-type">Type</span> type, StatementContext ctx) {
+    <span class="directive">public</span> Optional&lt;ColumnMapper&lt;?&gt;&gt; build(<span class="predefined-type">Type</span> type, ConfigRegistry config) {
         <span class="keyword">return</span> type == UserName.class ?
                 Optional.of((rs, index, cx) -&gt; <span class="keyword">new</span> UserName(rs.getString(index))) :
                     Optional.empty();
@@ -849,7 +849,7 @@ starting value and a <strong>BiFunction&lt;U, T, U&gt;</strong> it will repeated
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-10-24 18:46:18 PDT
+Last updated 2016-10-26 20:06:47 MDT
 </div>
 </div>
 </body>

@@ -513,6 +513,8 @@ table.CodeRay td.code>pre{padding:0}
 <h1>SqlObject</h1>
 </div>
 <div id="content">
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
 <p>The Fluent API is very nice to use for full control over
 the evaluation of your statements, but sometimes a simpler
@@ -570,9 +572,25 @@ assertThat(dao.findSomething(<span class="integer">3</span>))
 Check out the Javadoc for more information.</p>
 </div>
 </div>
+</div>
+<div class="sect1">
+<h2 id="__singlevalue">@SingleValue</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Sometimes when using advanced SQL features like Arrays,
+a container type like <code>int[]</code> or <code>List&lt;Integer&gt;</code> can
+ambiguously mean either "a single SQL int[]" or
+"a ResultSet of int".  Since arrays are not commonly
+used in normalized schema, jdbi assumes that you are collecting
+a ResultSet into a container object.  You can annotate a return
+type as <code>@SingleValue</code> to override this.</p>
+</div>
+</div>
+</div>
+</div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-10-24 19:34:19 PDT
+Last updated 2016-11-26 23:29:36 MST
 </div>
 </div>
 </body>

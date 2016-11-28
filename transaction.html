@@ -533,7 +533,7 @@ you to return a result, and <strong>useTransaction</strong> has no return value.
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> Optional&lt;User&gt; findUserById(<span class="type">long</span> id) {
-    <span class="keyword">return</span> handle.inTransaction((h, status) -&gt;
+    <span class="keyword">return</span> handle.inTransaction(h -&gt;
             h.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT * FROM users WHERE id=:id</span><span class="delimiter">&quot;</span></span>)
                     .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, id)
                     .mapTo(User.class)
@@ -645,7 +645,7 @@ does not have side effects as it may be executed multiple times.</p>
     }
 
     <span class="annotation">@Override</span>
-    <span class="directive">public</span> <span class="predefined-type">Integer</span> inTransaction(Handle handle, TransactionStatus status) <span class="directive">throws</span> <span class="exception">Exception</span> {
+    <span class="directive">public</span> <span class="predefined-type">Integer</span> inTransaction(Handle handle) <span class="directive">throws</span> <span class="exception">Exception</span> {
         IntListDao dao = handle.attach(IntListDao.class);
         <span class="type">int</span> sum = dao.sum();
 
@@ -715,7 +715,7 @@ Adding to 30 from the other, we get 30 + 60 = 90 and the assertion succeeds.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-09-14 20:23:20 PDT
+Last updated 2016-08-18 18:49:19 MDT
 </div>
 </div>
 </body>

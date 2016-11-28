@@ -530,7 +530,7 @@ SQL <em>you</em> write and simple tabular data structures.</p>
 <pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// H2 in-memory database</span>
 Jdbi dbi = Jdbi.create(<span class="string"><span class="delimiter">&quot;</span><span class="content">jdbc:h2:mem:test</span><span class="delimiter">&quot;</span></span>);
 <span class="comment">// Easy scope-based transactions</span>
-<span class="predefined-type">List</span>&lt;User&gt; users = dbi.inTransaction((handle, status) -&gt; {
+<span class="predefined-type">List</span>&lt;User&gt; users = dbi.inTransaction(handle -&gt; {
     handle.execute(<span class="string"><span class="delimiter">&quot;</span><span class="content">CREATE TABLE user (id INTEGER PRIMARY KEY, name VARCHAR)</span><span class="delimiter">&quot;</span></span>);
     handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO user(id, name) VALUES (:id, :name)</span><span class="delimiter">&quot;</span></span>)
         .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">0</span>)   <span class="comment">// Bind arguments by name</span>
@@ -610,6 +610,9 @@ find a few bugs!
 <li>
 <p><a href="joins.html">Join Mapping</a></p>
 </li>
+<li>
+<p><a href="generatedkeys.html">Generated Keys</a></p>
+</li>
 </ul>
 </div>
 </li>
@@ -641,7 +644,7 @@ and users sometimes hang out on
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-10-24 18:52:33 PDT
+Last updated 2016-11-26 23:29:36 MST
 </div>
 </div>
 </body>
