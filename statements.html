@@ -531,6 +531,7 @@ batch statements.</p>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">List</span>&lt;<span class="predefined-type">Map</span>&lt;<span class="predefined-type">String</span>, <span class="predefined-type">Object</span>&gt;&gt; users =
     handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT id, name FROM user ORDER BY id ASC</span><span class="delimiter">&quot;</span></span>)
+        .mapToMap()
         .list();
 
 assertThat(users).containsExactly(
@@ -634,7 +635,7 @@ assertThat(batch.execute()).isEqualTo(expected);</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-10-26 20:06:47 MDT
+Last updated 2016-12-19 20:17:47 MST
 </div>
 </div>
 </body>

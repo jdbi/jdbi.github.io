@@ -708,18 +708,11 @@ by row:</p>
     }
 }
 
-<span class="directive">static</span> <span class="type">class</span> <span class="class">UserNameColumnMapperFactory</span> <span class="directive">implements</span> ColumnMapperFactory {
-    <span class="annotation">@Override</span>
-    <span class="directive">public</span> Optional&lt;ColumnMapper&lt;?&gt;&gt; build(<span class="predefined-type">Type</span> type, ConfigRegistry config) {
-        <span class="keyword">return</span> type == UserName.class ?
-                Optional.of((rs, index, cx) -&gt; <span class="keyword">new</span> UserName(rs.getString(index))) :
-                    Optional.empty();
-    }
-}
+<span class="directive">final</span> ColumnMapperFactory userNameFactory = ColumnMapperFactory.of(UserName.class, (rs, index, cx) -&gt; <span class="keyword">new</span> UserName(rs.getString(index)));
 
 <span class="annotation">@Test</span>
 <span class="directive">public</span> <span class="type">void</span> columnMapper() {
-    handle.registerColumnMapper(<span class="keyword">new</span> UserNameColumnMapperFactory());
+    handle.registerColumnMapper(userNameFactory);
     handle.registerRowMapper(ConstructorMapper.of(NamedUser.class));
 
     NamedUser bob = handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT id, name FROM user WHERE name = :name</span><span class="delimiter">&quot;</span></span>)
@@ -849,7 +842,7 @@ starting value and a <strong>BiFunction&lt;U, T, U&gt;</strong> it will repeated
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-10-26 20:06:47 MDT
+Last updated 2016-12-19 20:17:47 MST
 </div>
 </div>
 </body>
