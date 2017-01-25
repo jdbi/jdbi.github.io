@@ -635,17 +635,17 @@ does not have side effects as it may be executed multiple times.</p>
     <span class="type">void</span> insert(<span class="type">int</span> value);
 }
 
-<span class="directive">static</span> <span class="type">class</span> <span class="class">SumAndInsert</span> <span class="directive">implements</span> <span class="predefined-type">Callable</span>&lt;<span class="predefined-type">Integer</span>&gt;, TransactionCallback&lt;<span class="predefined-type">Integer</span>, <span class="exception">Exception</span>&gt; {
-    <span class="directive">private</span> <span class="directive">final</span> Jdbi jdbi;
+<span class="directive">static</span> <span class="type">class</span> <span class="class">SumAndInsert</span> <span class="directive">implements</span> <span class="predefined-type">Callable</span>&lt;<span class="predefined-type">Integer</span>&gt;, HandleCallback&lt;<span class="predefined-type">Integer</span>, <span class="exception">Exception</span>&gt; {
+    <span class="directive">private</span> <span class="directive">final</span> Jdbi db;
     <span class="directive">private</span> <span class="directive">final</span> <span class="predefined-type">CountDownLatch</span> latch;
 
-    <span class="directive">public</span> SumAndInsert(<span class="predefined-type">CountDownLatch</span> latch, Jdbi jdbi) {
+    <span class="directive">public</span> SumAndInsert(<span class="predefined-type">CountDownLatch</span> latch, Jdbi db) {
         <span class="local-variable">this</span>.latch = latch;
-        <span class="local-variable">this</span>.jdbi = jdbi;
+        <span class="local-variable">this</span>.db = db;
     }
 
     <span class="annotation">@Override</span>
-    <span class="directive">public</span> <span class="predefined-type">Integer</span> inTransaction(Handle handle) <span class="directive">throws</span> <span class="exception">Exception</span> {
+    <span class="directive">public</span> <span class="predefined-type">Integer</span> withHandle(Handle handle) <span class="directive">throws</span> <span class="exception">Exception</span> {
         IntListDao dao = handle.attach(IntListDao.class);
         <span class="type">int</span> sum = dao.sum();
 
@@ -661,14 +661,14 @@ does not have side effects as it may be executed multiple times.</p>
     <span class="annotation">@Override</span>
     <span class="directive">public</span> <span class="predefined-type">Integer</span> call() <span class="directive">throws</span> <span class="exception">Exception</span> {
         <span class="comment">// Get a connection and run the transaction</span>
-        <span class="keyword">return</span> jdbi.inTransaction(TransactionIsolationLevel.SERIALIZABLE, <span class="local-variable">this</span>);
+        <span class="keyword">return</span> db.inTransaction(TransactionIsolationLevel.SERIALIZABLE, <span class="local-variable">this</span>);
     }
 }
 
 <span class="annotation">@Test</span>
 <span class="directive">public</span> <span class="type">void</span> serializableTransaction() <span class="directive">throws</span> <span class="exception">Exception</span> {
     <span class="comment">// Automatically rerun transactions</span>
-    jdbi.setTransactionHandler(<span class="keyword">new</span> SerializableTransactionRunner());
+    db.setTransactionHandler(<span class="keyword">new</span> SerializableTransactionRunner());
 
     <span class="comment">// Set up some values</span>
     IntListDao dao = handle.attach(IntListDao.class);
@@ -680,8 +680,8 @@ does not have side effects as it may be executed multiple times.</p>
     <span class="predefined-type">CountDownLatch</span> latch = <span class="keyword">new</span> <span class="predefined-type">CountDownLatch</span>(<span class="integer">2</span>);
 
     <span class="comment">// Both of these would calculate 10 + 20 = 30, but that violates serialization!</span>
-    SumAndInsert txn1 = <span class="keyword">new</span> SumAndInsert(latch, jdbi);
-    SumAndInsert txn2 = <span class="keyword">new</span> SumAndInsert(latch, jdbi);
+    SumAndInsert txn1 = <span class="keyword">new</span> SumAndInsert(latch, db);
+    SumAndInsert txn2 = <span class="keyword">new</span> SumAndInsert(latch, db);
 
     <span class="predefined-type">Future</span>&lt;<span class="predefined-type">Integer</span>&gt; result1 = executor.submit(txn1);
     <span class="predefined-type">Future</span>&lt;<span class="predefined-type">Integer</span>&gt; result2 = executor.submit(txn2);
@@ -715,7 +715,7 @@ Adding to 30 from the other, we get 30 + 60 = 90 and the assertion succeeds.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-12-19 20:17:47 MST
+Last updated 2017-01-22 21:29:25 MST
 </div>
 </div>
 </body>

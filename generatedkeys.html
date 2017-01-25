@@ -553,8 +553,8 @@ overhead of separately querying after the insert completes.</p>
 
 <span class="annotation">@Before</span>
 <span class="directive">public</span> <span class="type">void</span> setUp() <span class="directive">throws</span> <span class="exception">Exception</span> {
-    dbi.useHandle(h -&gt; h.execute(<span class="string"><span class="delimiter">&quot;</span><span class="content">CREATE TABLE users (id SERIAL PRIMARY KEY, name VARCHAR)</span><span class="delimiter">&quot;</span></span>));
-    dbi.registerRowMapper(ConstructorMapper.of(User.class));
+    db.useHandle(h -&gt; h.execute(<span class="string"><span class="delimiter">&quot;</span><span class="content">CREATE TABLE users (id SERIAL PRIMARY KEY, name VARCHAR)</span><span class="delimiter">&quot;</span></span>));
+    db.registerRowMapper(ConstructorMapper.of(User.class));
 }</code></pre>
 </div>
 </div>
@@ -564,7 +564,7 @@ overhead of separately querying after the insert completes.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">void</span> fluentInsertKeys() {
-    dbi.useHandle(handle -&gt; {
+    db.useHandle(handle -&gt; {
         User data = handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO users (name) VALUES(?)</span><span class="delimiter">&quot;</span></span>)
                 .bind(<span class="integer">0</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Data</span><span class="delimiter">&quot;</span></span>)
                 .executeAndReturnGeneratedKeys()
@@ -583,7 +583,7 @@ overhead of separately querying after the insert completes.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">void</span> sqlObjectBatchKeys() {
-    dbi.useExtension(UserDao.class, dao -&gt; {
+    db.useExtension(UserDao.class, dao -&gt; {
         <span class="predefined-type">List</span>&lt;User&gt; users = dao.createUsers(<span class="string"><span class="delimiter">&quot;</span><span class="content">Alice</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Bob</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Charlie</span><span class="delimiter">&quot;</span></span>);
         assertEquals(<span class="integer">3</span>, users.size());
 
@@ -608,7 +608,7 @@ overhead of separately querying after the insert completes.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-12-19 20:17:47 MST
+Last updated 2017-01-22 21:29:25 MST
 </div>
 </div>
 </body>

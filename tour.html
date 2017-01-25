@@ -528,7 +528,7 @@ configuration there.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// H2 in-memory database</span>
-Jdbi dbi = Jdbi.create(<span class="string"><span class="delimiter">&quot;</span><span class="content">jdbc:h2:mem:test</span><span class="delimiter">&quot;</span></span>);</code></pre>
+Jdbi db = Jdbi.create(<span class="string"><span class="delimiter">&quot;</span><span class="content">jdbc:h2:mem:test</span><span class="delimiter">&quot;</span></span>);</code></pre>
 </div>
 </div>
 </div>
@@ -552,7 +552,7 @@ result, or <code>useHandle</code> if no result is returned.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">dbi.useHandle(handle -&gt; {
+<pre class="CodeRay highlight"><code data-lang="java">db.useHandle(handle -&gt; {
     handle.execute(<span class="string"><span class="delimiter">&quot;</span><span class="content">create table something (id int primary key, name varchar(100))</span><span class="delimiter">&quot;</span></span>);
     handle.insert(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into something (id, name) values (?, ?)</span><span class="delimiter">&quot;</span></span>, <span class="integer">1</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Alice</span><span class="delimiter">&quot;</span></span>);
     handle.insert(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into something (id, name) values (?, ?)</span><span class="delimiter">&quot;</span></span>, <span class="integer">2</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Bob</span><span class="delimiter">&quot;</span></span>);
@@ -570,7 +570,7 @@ try-with-resources block for safety.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">try</span> (Handle handle = dbi.open()) {
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">try</span> (Handle handle = db.open()) {
     <span class="comment">// do stuff</span>
 }</code></pre>
 </div>
@@ -655,7 +655,7 @@ assertThat(thing).extracting(<span class="string"><span class="delimiter">&quot;
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-12-19 20:17:47 MST
+Last updated 2017-01-22 21:29:25 MST
 </div>
 </div>
 </body>
