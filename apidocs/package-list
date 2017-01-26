@@ -17,7 +17,6 @@ org.jdbi.v3.core.vendor
 org.jdbi.v3.guava
 org.jdbi.v3.jodatime2
 org.jdbi.v3.jpa
-org.jdbi.v3.oracle
 org.jdbi.v3.postgres
 org.jdbi.v3.spring4
 org.jdbi.v3.sqlobject
