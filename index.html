@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.3">
-<title>JDBI 3 Developer Guide</title>
+<title>Jdbi 3 Developer Guide</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -511,109 +511,116 @@ table.CodeRay td.code>pre{padding:0}
 </head>
 <body class="book toc2 toc-left">
 <div id="header">
-<h1>JDBI 3 Developer Guide</h1>
+<h1>Jdbi 3 Developer Guide</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
-<ul class="sectlevel0">
-<li><a href="#_introduction_to_jdbi">Introduction to JDBI</a>
 <ul class="sectlevel1">
-<li><a href="#_five_minute_tour">1. Five Minute Tour</a>
+<li><a href="#_introduction_to_jdbi">1. Introduction to Jdbi</a>
 <ul class="sectlevel2">
-<li><a href="#_jdbi">1.1. Jdbi</a></li>
-<li><a href="#_handles">1.2. Handles</a></li>
-<li><a href="#_row_mappers">1.3. Row Mappers</a></li>
-<li><a href="#_named_parameters">1.4. Named Parameters</a></li>
+<li><a href="#_fluent_api">1.1. Fluent API</a></li>
+<li><a href="#_declarative_api">1.2. Declarative API</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li><a href="#_core_jdbi">Core JDBI</a>
-<ul class="sectlevel1">
-<li><a href="#_getting_started">2. Getting Started</a></li>
-<li><a href="#_jdbi_2">3. Jdbi</a></li>
-<li><a href="#_handle">4. Handle</a></li>
-<li><a href="#_statements">5. Statements</a>
+<li><a href="#_setting_up_jdbi">2. Setting Up Jdbi</a></li>
+<li><a href="#_basic_usage">3. Basic Usage</a>
 <ul class="sectlevel2">
-<li><a href="#_query">5.1. Query</a></li>
-<li><a href="#_update">5.2. Update</a></li>
-<li><a href="#_script">5.3. Script</a></li>
-<li><a href="#_call">5.4. Call</a></li>
-<li><a href="#_batch">5.5. Batch</a></li>
+<li><a href="#_jdbi">3.1. Jdbi</a></li>
+<li><a href="#_handle">3.2. Handle</a></li>
+<li><a href="#_parameters">3.3. Parameters</a>
+<ul class="sectlevel3">
+<li><a href="#_positional_parameters">3.3.1. Positional Parameters</a></li>
+<li><a href="#_named_parameters">3.3.2. Named Parameters</a></li>
+<li><a href="#_supported_types">3.3.3. Supported Types</a></li>
+<li><a href="#_binding_parameters">3.3.4. Binding Parameters</a></li>
 </ul>
 </li>
-<li><a href="#_arguments">6. Arguments</a></li>
-<li><a href="#_results">7. Results</a>
+<li><a href="#_sql_objects">3.4. SQL Objects</a>
+<ul class="sectlevel3">
+<li><a href="#_annotated_methods">3.4.1. Annotated Methods</a></li>
+<li><a href="#_default_methods">3.4.2. Default Methods</a></li>
+<li><a href="#_using_your_sql_object_type">3.4.3. Using your SQL Object type</a></li>
+</ul>
+</li>
+<li><a href="#_row_mappers">3.5. Row Mappers</a></li>
+<li><a href="#_statements">3.6. Statements</a>
+<ul class="sectlevel3">
+<li><a href="#_query">3.6.1. Query</a></li>
+<li><a href="#_update">3.6.2. Update</a></li>
+<li><a href="#_script">3.6.3. Script</a></li>
+<li><a href="#_call">3.6.4. Call</a></li>
+<li><a href="#_batch">3.6.5. Batch</a></li>
+</ul>
+</li>
+<li><a href="#_arguments">3.7. Arguments</a></li>
+<li><a href="#_results">3.8. Results</a>
+<ul class="sectlevel3">
+<li><a href="#_row_mapper">3.8.1. Row Mapper</a></li>
+<li><a href="#_column_mapper">3.8.2. Column Mapper</a></li>
+<li><a href="#_bean_mapper">3.8.3. Bean Mapper</a></li>
+<li><a href="#_annotations">3.8.4. Annotations</a></li>
+<li><a href="#_resultbearing">3.8.5. ResultBearing</a></li>
+<li><a href="#_joins">3.8.6. Joins</a></li>
+<li><a href="#_generated_keys">3.8.7. Generated Keys</a></li>
+</ul>
+</li>
+<li><a href="#_transactions">3.9. Transactions</a>
+<ul class="sectlevel3">
+<li><a href="#_transactions_in_the_fluent_api">3.9.1. Transactions in the Fluent API</a></li>
+<li><a href="#_transactions_in_sqlobject_api">3.9.2. Transactions in SqlObject API</a></li>
+<li><a href="#_serializable_transactions">3.9.3. Serializable Transactions</a></li>
+</ul>
+</li>
+<li><a href="#_batch_updates">3.10. Batch Updates</a></li>
+<li><a href="#_exception_rewriting">3.11. Exception Rewriting</a></li>
+</ul>
+</li>
+<li><a href="#_sqlobject">4. SqlObject</a>
 <ul class="sectlevel2">
-<li><a href="#_row_mapper">7.1. Row Mapper</a></li>
-<li><a href="#_column_mapper">7.2. Column Mapper</a></li>
-<li><a href="#_bean_mapper">7.3. Bean Mapper</a></li>
-<li><a href="#_annotations">7.4. Annotations</a></li>
-<li><a href="#_resultbearing">7.5. ResultBearing</a></li>
-<li><a href="#_joins">7.6. Joins</a></li>
-<li><a href="#_generated_keys">7.7. Generated Keys</a></li>
+<li><a href="#__singlevalue">4.1. @SingleValue</a></li>
+<li><a href="#_sql_locators">4.2. Sql Locators</a></li>
 </ul>
 </li>
-<li><a href="#_transactions">8. Transactions</a>
+<li><a href="#_third_party_integration">5. Third Party Integration</a>
 <ul class="sectlevel2">
-<li><a href="#_transactions_in_the_fluent_api">8.1. Transactions in the Fluent API</a></li>
-<li><a href="#_transactions_in_sqlobject_api">8.2. Transactions in SqlObject API</a></li>
-<li><a href="#_serializable_transactions">8.3. Serializable Transactions</a></li>
+<li><a href="#_spring">5.1. Spring</a></li>
+<li><a href="#_google_guava">5.2. Google Guava</a></li>
+<li><a href="#_postgresql">5.3. PostgreSQL</a></li>
+<li><a href="#_oracle">5.4. Oracle</a></li>
+<li><a href="#_kotlin">5.5. Kotlin</a>
+<ul class="sectlevel3">
+<li><a href="#_resultset_mapping">5.5.1. ResultSet mapping</a></li>
+<li><a href="#_sqlobject_2">5.5.2. SqlObject</a></li>
 </ul>
 </li>
-<li><a href="#_batch_updates">9. Batch Updates</a></li>
-<li><a href="#_exception_rewriting">10. Exception Rewriting</a></li>
 </ul>
 </li>
-<li><a href="#_sqlobject">SqlObject</a>
-<ul class="sectlevel1">
-<li><a href="#__singlevalue">11. @SingleValue</a></li>
-<li><a href="#_sql_locators">12. Sql Locators</a></li>
-</ul>
-</li>
-<li><a href="#_third_party_integration">Third Party Integration</a>
-<ul class="sectlevel1">
-<li><a href="#_spring">13. Spring</a></li>
-<li><a href="#_google_guava">14. Google Guava</a></li>
-<li><a href="#_postgresql">15. PostgreSQL</a></li>
-<li><a href="#_oracle">16. Oracle</a></li>
-<li><a href="#_kotlin">17. Kotlin</a>
+<li><a href="#_appendix">6. Appendix</a>
 <ul class="sectlevel2">
-<li><a href="#_resultset_mapping">17.1. ResultSet mapping</a></li>
-<li><a href="#_sqlobject_2">17.2. SqlObject</a></li>
+<li><a href="#_api_reference">6.1. API Reference</a></li>
+<li><a href="#_contributing">6.2. Contributing</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li><a href="#_appendix">Appendix</a>
-<ul class="sectlevel1">
-<li><a href="#_api_reference">18. API Reference</a></li>
-<li><a href="#_contributing">19. Contributing</a></li>
-</ul>
-</li>
+<li><a href="#_leftover_snippets">7. Leftover snippets</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
-<h1 id="_introduction_to_jdbi" class="sect0"><a class="anchor" href="#_introduction_to_jdbi"></a>Introduction to JDBI</h1>
-<div class="openblock partintro">
-<div class="content">
+<div class="sect1">
+<h2 id="_introduction_to_jdbi"><a class="anchor" href="#_introduction_to_jdbi"></a>1. Introduction to Jdbi</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p><strong>JDBI</strong> is a Java library providing convenient, idiomatic access to relational
-data.</p>
+<p>The <strong>Jdbi</strong> library provides convenient, idiomatic access to relational data in Java.</p>
 </div>
 <div class="paragraph">
-<p>JDBI is built on top of JDBC. If your database has a JDBC driver, you can use
-JDBI with it.</p>
+<p>Jdbi is built on top of JDBC. If your database has a JDBC driver, you can use Jdbi with it.</p>
 </div>
 <div class="paragraph">
-<p>JDBI&#8217;s API comes in two flavors:</p>
+<p>Jdbi&#8217;s API comes in two flavors:</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
+<div class="sect2">
+<h3 id="_fluent_api"><a class="anchor" href="#_fluent_api"></a>1.1. Fluent API</h3>
+<div class="paragraph">
 <p>The Core API provides a fluent, imperative interface.</p>
-</li>
-</ul>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -649,12 +656,11 @@ JDBI with it.</p>
 });</code></pre>
 </div>
 </div>
-<div class="ulist">
-<ul>
-<li>
+</div>
+<div class="sect2">
+<h3 id="_declarative_api"><a class="anchor" href="#_declarative_api"></a>1.2. Declarative API</h3>
+<div class="paragraph">
 <p>The SQL Object API sits atop Core, and provides a declarative interface.</p>
-</li>
-</ul>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -680,7 +686,7 @@ JDBI with it.</p>
 <pre class="CodeRay highlight"><code data-lang="java">Jdbi jdbi = Jdbi.create(<span class="string"><span class="delimiter">&quot;</span><span class="content">jdbc:h2:mem:test</span><span class="delimiter">&quot;</span></span>);
 jdbi.installPlugin(<span class="keyword">new</span> SqlObjectPlugin());
 
-<span class="comment">// JDBI implements your interface based on annotations</span>
+<span class="comment">// Jdbi implements your interface based on annotations</span>
 <span class="predefined-type">List</span>&lt;User&gt; users = jdbi.withExtension(UserDao.class, dao -&gt; {
     dao.createTable();
 
@@ -692,39 +698,19 @@ jdbi.installPlugin(<span class="keyword">new</span> SqlObjectPlugin());
 </div>
 </div>
 <div class="paragraph">
-<p>JDBI is easy to include in your Java project - with an
-<a href="https://groups.google.com/group/jdbi">Apache 2.0</a> license,
-few external dependencies, and JARs distributed through
-<a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.jdbi%22">Maven Central</a>,
-you can just include the relevant artifacts in your POM:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
-  <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
-  <span class="tag">&lt;artifactId&gt;</span>jdbi3<span class="tag">&lt;/artifactId&gt;</span>
-  <span class="tag">&lt;version&gt;</span>3.0.0-beta1<span class="tag">&lt;/version&gt;</span>
-<span class="tag">&lt;/dependency&gt;</span>
-
-<span class="tag">&lt;dependency&gt;</span>
-  <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
-  <span class="tag">&lt;artifactId&gt;</span>jdbi3-sqlobject<span class="tag">&lt;/artifactId&gt;</span>
-  <span class="tag">&lt;version&gt;</span>3.0.0-beta1<span class="tag">&lt;/version&gt;</span>
-<span class="tag">&lt;/dependency&gt;</span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>JDBI has a flexible plugin architecture which makes it easy to fold in support
+<p>Jdbi has a flexible plugin architecture which makes it easy to fold in support
 for your favorite libraries (Guava, JodaTime, Spring) or database vendor (Oracle,
 Postgres).</p>
 </div>
 <div class="paragraph">
-<p>JDBI is not an ORM. Bring your own SQL.</p>
+<p>Jdbi is not an ORM. There is no session cache, change tracking, "open session in
+view", or cajoling the library to understand your schema.</p>
 </div>
 <div class="paragraph">
-<p>Unlike an ORM, JDBI does not pretend to seamlessly convert your Java
-object model into the relational model&#8201;&#8212;&#8201;instead, it provides easy mapping
-between SQL <em>you</em> write and simple tabular data structures.</p>
+<p>Instead, Jdbi provides easy mapping between SQL and simple tabular data structures.</p>
+</div>
+<div class="paragraph">
+<p>You bring your own SQL, and Jdbi only runs the commands you tell it to&#8212;&#8203;the way God intended.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -733,8 +719,8 @@ between SQL <em>you</em> write and simple tabular data structures.</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-JDBI 3 is currently in beta. While we are reasonably confident in its
-quality, we recommend thoroughly testing your code with JDBI 3 before using it in
+Jdbi 3 is currently in beta. While we are reasonably confident in its
+quality, we recommend thoroughly testing your code with Jdbi 3 before using it in
 a production environment. <a href="http://www.jdbi.org">jdbi2</a> is still the stable release.
 </td>
 </tr>
@@ -742,71 +728,668 @@ a production environment. <a href="http://www.jdbi.org">jdbi2</a> is still the s
 </div>
 </div>
 </div>
+</div>
 <div class="sect1">
-<h2 id="_five_minute_tour"><a class="anchor" href="#_five_minute_tour"></a>1. Five Minute Tour</h2>
+<h2 id="_setting_up_jdbi"><a class="anchor" href="#_setting_up_jdbi"></a>2. Setting Up Jdbi</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Jdbi is easy to include in your Java project - with an
+<a href="https://www.apache.org/licenses/LICENSE-2.0.html">Apache 2.0</a> license,
+few external dependencies, and JARs distributed through
+<a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.jdbi%22%20AND%20v%3A%223.0.0-beta1%22">Maven Central</a>,
+you can just include the relevant artifacts in your POM:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependencyManagement&gt;</span>
+  <span class="tag">&lt;dependencies&gt;</span>
+    <span class="tag">&lt;dependency&gt;</span>
+      <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
+      <span class="tag">&lt;artifactId&gt;</span>jdbi3-parent<span class="tag">&lt;/artifactId&gt;</span>
+      <span class="tag">&lt;type&gt;</span>pom<span class="tag">&lt;/type&gt;</span>
+      <span class="tag">&lt;version&gt;</span>3.0.0-beta1<span class="tag">&lt;/version&gt;</span>
+      <span class="tag">&lt;scope&gt;</span>import<span class="tag">&lt;/scope&gt;</span>
+  <span class="tag">&lt;/dependency&gt;</span>
+<span class="tag">&lt;/dependencyManagement&gt;</span>
+
+<span class="tag">&lt;dependencies&gt;</span>
+  <span class="comment">&lt;!-- The core library --&gt;</span>
+  <span class="tag">&lt;dependency&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>jdbi3<span class="tag">&lt;/artifactId&gt;</span>
+  <span class="tag">&lt;/dependency&gt;</span>
+
+  <span class="comment">&lt;!-- All other dependencies are optional --&gt;</span>
+
+  <span class="comment">&lt;!-- SQL Object extension -- most people use this --&gt;</span>
+  <span class="tag">&lt;dependency&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>jdbi3-sqlobject<span class="tag">&lt;/artifactId&gt;</span>
+  <span class="tag">&lt;/dependency&gt;</span>
+
+  <span class="comment">&lt;!-- Support Guava Optional and collection types--&gt;</span>
+  <span class="tag">&lt;dependency&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>jdbi3-guava<span class="tag">&lt;/artifactId&gt;</span>
+  <span class="tag">&lt;/dependency&gt;</span>
+
+  <span class="comment">&lt;!-- Support JodaTime v2's DateTime --&gt;</span>
+  <span class="tag">&lt;dependency&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>jdbi3-jodatime2<span class="tag">&lt;/artifactId&gt;</span>
+  <span class="tag">&lt;/dependency&gt;</span>
+
+  <span class="comment">&lt;!-- Minimal support for JPA annotations. --&gt;</span>
+  <span class="tag">&lt;dependency&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>jdbi3-jpa<span class="tag">&lt;/artifactId&gt;</span>
+  <span class="tag">&lt;/dependency&gt;</span>
+
+  <span class="comment">&lt;!-- Automatically map kotlin data classes --&gt;</span>
+  <span class="tag">&lt;dependency&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>jdbi3-kotlin<span class="tag">&lt;/artifactId&gt;</span>
+  <span class="tag">&lt;/dependency&gt;</span>
+
+  <span class="comment">&lt;!-- Support Kotlin default methods, default parameters in SQL Object --&gt;</span>
+  <span class="tag">&lt;dependency&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>jdbi3-kotlin-sqlobject<span class="tag">&lt;/artifactId&gt;</span>
+  <span class="tag">&lt;/dependency&gt;</span>
+
+  <span class="comment">&lt;!-- Support Oracle returning DML statements --&gt;</span>
+  <span class="tag">&lt;dependency&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>jdbi3-oracle12<span class="tag">&lt;/artifactId&gt;</span>
+  <span class="tag">&lt;/dependency&gt;</span>
+
+  <span class="comment">&lt;!-- Adds support for most data types supported by Postgres driver --&gt;</span>
+  <span class="tag">&lt;dependency&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>jdbi3-postgres<span class="tag">&lt;/artifactId&gt;</span>
+  <span class="tag">&lt;/dependency&gt;</span>
+
+  <span class="comment">&lt;!-- A factory bean to set up Jdbi singleton --&gt;</span>
+  <span class="tag">&lt;dependency&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>jdbi3-spring4<span class="tag">&lt;/artifactId&gt;</span>
+  <span class="tag">&lt;/dependency&gt;</span>
+
+  <span class="comment">&lt;!-- Use StringTemplate4 template engine, instead of JDBI's --&gt;</span>
+  <span class="tag">&lt;dependency&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>jdbi3-stringtemplate4<span class="tag">&lt;/artifactId&gt;</span>
+  <span class="tag">&lt;/dependency&gt;</span>
+<span class="tag">&lt;/dependencies&gt;</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_basic_usage"><a class="anchor" href="#_basic_usage"></a>3. Basic Usage</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_jdbi"><a class="anchor" href="#_jdbi"></a>1.1. Jdbi</h3>
+<h3 id="_jdbi"><a class="anchor" href="#_jdbi"></a>3.1. Jdbi</h3>
 <div class="paragraph">
-<p>The <code>Jdbi</code> object is basically a fancy wrapper around a
-<code>javax.sql.DataSource</code>. Typically an application will create one
-shared <code>Jdbi</code> instance application-wide, and set up shared
-configuration there.</p>
+<p>The <code>Jdbi</code> object is the main entry point into the library.</p>
 </div>
 <div class="paragraph">
-<p>For now let&#8217;s just use the out-of-the-box configuration:</p>
+<p>Each <code>Jdbi</code> instance wraps a JDBC
+<a href="https://docs.oracle.com/javase/8/docs/api/javax/sql/DataSource.html">DataSource</a>.
+It is also a repository of configuration for your database session.</p>
+</div>
+<div class="paragraph">
+<p>There are a few ways to open a <code>Jdbi</code> instance. You can use a JDBC url:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// H2 in-memory database</span>
-Jdbi db = Jdbi.create(<span class="string"><span class="delimiter">&quot;</span><span class="content">jdbc:h2:mem:test</span><span class="delimiter">&quot;</span></span>);</code></pre>
+Jdbi jdbi = Jdbi.create(<span class="string"><span class="delimiter">&quot;</span><span class="content">jdbc:h2:mem:test</span><span class="delimiter">&quot;</span></span>);</code></pre>
 </div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_handles"><a class="anchor" href="#_handles"></a>1.2. Handles</h3>
-<div class="paragraph">
-<p>The <code>Handle</code> is likewise a wrapper around a
-<code>java.sql.Connection</code>. Care must be taken to close handles
-when you are done with them, or else your app will leak database
-connections.</p>
 </div>
 <div class="paragraph">
-<p>You can call <code>Jdbi.open()</code> to get a <code>Handle</code> instance, but most
-of the time you should just use the <code>Jdbi.useHandle</code> or
-<code>Jdbi.withHandle</code> callback methods, which ensure that the handle
-is cleaned up, and the connection released before returning to
-the caller. Use <code>withHandle</code> when your database action returns a
-result, or <code>useHandle</code> if no result is returned.</p>
+<p>If you have a <code>DataSource</code> object, you can use that directly:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">db.useHandle(handle -&gt; {
-    handle.execute(<span class="string"><span class="delimiter">&quot;</span><span class="content">create table something (id int primary key, name varchar(100))</span><span class="delimiter">&quot;</span></span>);
-    handle.insert(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into something (id, name) values (?, ?)</span><span class="delimiter">&quot;</span></span>, <span class="integer">1</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Alice</span><span class="delimiter">&quot;</span></span>);
-    handle.insert(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into something (id, name) values (?, ?)</span><span class="delimiter">&quot;</span></span>, <span class="integer">2</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Bob</span><span class="delimiter">&quot;</span></span>);
-
-    <span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt; names = handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select name from something</span><span class="delimiter">&quot;</span></span>)
-                               .mapTo(<span class="predefined-type">String</span>.class)
-                               .list();
-    assertThat(names).contains(<span class="string"><span class="delimiter">&quot;</span><span class="content">Alice</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Bob</span><span class="delimiter">&quot;</span></span>);
-});</code></pre>
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">DataSource</span> ds = ...
+Jdbi jdbi = Jdbi.create(ds);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>If you do use <code>Jdbi.open()</code>, we recommend doing so in a
+<p><code>Jdbi</code> instances are thread-safe and do not own any database resources.</p>
+</div>
+<div class="paragraph">
+<p>Typically an application will create one shared <code>Jdbi</code> instance
+application-wide, and set up any shared configuration there.</p>
+</div>
+<div class="paragraph">
+<p>In a more limited scope (such as an HTTP request, or event callback),
+you would then request a <code>Handle</code> object from your <code>Jdbi</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_handle"><a class="anchor" href="#_handle"></a>3.2. Handle</h3>
+<div class="paragraph">
+<p>Handles are used to prepare and run SQL statements against the database.</p>
+</div>
+<div class="paragraph">
+<p><code>Handle</code> provides access to fluent statement APIs that can bind parameters, and map results to and from regular Java objects.</p>
+</div>
+<div class="paragraph">
+<p><code>Handle</code> represents an active <a href="https://docs.oracle.com/javase/8/docs/api/java/sql/Connection.html">database connection</a>
+and inherits configuration from the <code>Jdbi</code> at the time of creation.</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Because <code>Handle</code> holds an open connection, care must be taken to ensure
+that each handle is closed when you are done with it. Failure to close
+Handles will eventually overwhelm your database with connections, or
+drain your connection pool.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>You can obtain a <code>Handle</code> in three different ways:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>jdbi.open()</code></p>
+</li>
+<li>
+<p><code>jdbi.useHandle(HandleConsumer)</code>, or</p>
+</li>
+<li>
+<p><code>jdbi.withHandle(HandleCallback)</code></p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You may notice the "consumer" vs "callback" naming pattern in a few
+places in Jdbi. Callbacks return a value, whereas Consumers have a
+void return type. Thus, if your operation has a result, use
+<code>withHandle</code> instead of <code>useHandle</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>You can call <code>jdbi.open()</code> to get a <code>Handle</code> instance, but most
+of the time you should just use the <code>Jdbi.useHandle</code> or
+<code>Jdbi.withHandle</code> callback methods, which ensure that the handle
+is cleaned up, and the connection released before returning to
+the caller.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">jdbi.useHandle(handle -&gt; {
+    handle.execute(<span class="string"><span class="delimiter">&quot;</span><span class="content">create table contacts (id int primary key, name varchar(100))</span><span class="delimiter">&quot;</span></span>);
+    handle.execute(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into contacts (id, name) values (?, ?)</span><span class="delimiter">&quot;</span></span>, <span class="integer">1</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Alice</span><span class="delimiter">&quot;</span></span>);
+    handle.execute(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into contacts (id, name) values (?, ?)</span><span class="delimiter">&quot;</span></span>, <span class="integer">2</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Bob</span><span class="delimiter">&quot;</span></span>);
+});
+
+<span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt; names = jdbi.withHandle(handle -&gt;
+    handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select name from contacts</span><span class="delimiter">&quot;</span></span>)
+          .mapTo(<span class="predefined-type">String</span>.class)
+          .list());
+assertThat(names).contains(<span class="string"><span class="delimiter">&quot;</span><span class="content">Alice</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Bob</span><span class="delimiter">&quot;</span></span>);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When using <code>jdbi.open()</code>, we recommend doing so in a
 try-with-resources block for safety.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">try</span> (Handle handle = db.open()) {
-    <span class="comment">// do stuff</span>
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">try</span> (Handle handle = jdbi.open()) {
+    handle.execute(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into contacts (id, name) values (?, ?)</span><span class="delimiter">&quot;</span></span>, <span class="integer">3</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Chuck</span><span class="delimiter">&quot;</span></span>);
 }</code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_row_mappers"><a class="anchor" href="#_row_mappers"></a>1.3. Row Mappers</h3>
+<h3 id="_parameters"><a class="anchor" href="#_parameters"></a>3.3. Parameters</h3>
+<div class="paragraph">
+<p>You have two choices when binding parameters to a SQL statement: positional, or named.</p>
+</div>
+<div class="paragraph">
+<p>Any statement can use either position or named parameters, but they can never be mixed in the same SQL statement.
+In this case, Jdbi can&#8217;t be sure it&#8217;s binding the right parameters, and will throw an exception.</p>
+</div>
+<div class="sect3">
+<h4 id="_positional_parameters"><a class="anchor" href="#_positional_parameters"></a>3.3.1. Positional Parameters</h4>
+<div class="paragraph">
+<p>When you use a <code>?</code> token in a SQL statement, Jdbi replaces it with the value you bind to the corresponding index (0-based):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">Contact thing = handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from contacts where id = ?</span><span class="delimiter">&quot;</span></span>)
+                      .bind(<span class="integer">0</span>, id)
+                      .mapTo(Contact.class)
+                      .findOnly();
+assertThat(thing).extracting(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>)
+                 .contains(<span class="integer">1</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Alice</span><span class="delimiter">&quot;</span></span>);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_named_parameters"><a class="anchor" href="#_named_parameters"></a>3.3.2. Named Parameters</h4>
+<div class="paragraph">
+<p>When you use a colon-prefixed token like <code>:name</code> in a SQL statement, Jdbi replaces it with the value you bind to that name:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">Contact thing = handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from contacts where id = :id</span><span class="delimiter">&quot;</span></span>)
+                      .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">1</span>)
+                      .mapTo(Contact.class)
+                      .findOnly();
+assertThat(thing).extracting(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>)
+                 .contains(<span class="integer">1</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Alice</span><span class="delimiter">&quot;</span></span>);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_supported_types"><a class="anchor" href="#_supported_types"></a>3.3.3. Supported Types</h4>
+<div class="paragraph">
+<p>Out of the box, Jdbi supports the following types as SQL statement parameters:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Primitives: boolean, byte, char, double, float, int, long, short</p>
+</li>
+<li>
+<p>java.lang: Boolean, Byte, Character, Double, Enum (stored as the enum value&#8217;s name), Float, Integer, Long, Short, String</p>
+</li>
+<li>
+<p>java.math: BigDecimal</p>
+</li>
+<li>
+<p>java.net: Inet4Address, Inet6Address, URL, URI</p>
+</li>
+<li>
+<p>java.sql: Blob, Clob, Date, Time, Timestamp</p>
+</li>
+<li>
+<p>java.time: Instant, LocalDate, LocalDateTime, LocalTime, OffsetDateTime, ZonedDateTime</p>
+</li>
+<li>
+<p>java.util: Date, Optional (around any other supported type), UUID</p>
+</li>
+<li>
+<p>java.util.Collection and Java arrays (stored as SQL arrays). Some additional setup may be required depending on the type of array element.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You can also configure Jdbi to support additional parameter types. More on that later.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_binding_parameters"><a class="anchor" href="#_binding_parameters"></a>3.3.4. Binding Parameters</h4>
+<div class="paragraph">
+<p>SQL statement parameters can be bound in a few different ways.</p>
+</div>
+<div class="paragraph">
+<p>You can bind parameters individually:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into contacts (id, name) values (:id, :name)</span><span class="delimiter">&quot;</span></span>)
+      .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">1</span>)
+      .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Alice</span><span class="delimiter">&quot;</span></span>)
+      .execute();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can bind from the entries of a <code>Map</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">Map</span>&lt;<span class="predefined-type">String</span>, <span class="predefined-type">Object</span>&gt; params = <span class="keyword">new</span> <span class="predefined-type">HashMap</span>&lt;&gt;();
+params.put(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">2</span>)
+params.put(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Bob</span><span class="delimiter">&quot;</span></span>);
+
+handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into contacts (id, name) values (:id, :name)</span><span class="delimiter">&quot;</span></span>)
+      .bindMap(contact)
+      .execute();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can bind from properties of a Java Bean:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">Contact contact = Contact();
+contact.setId(<span class="integer">3</span>);
+contact.withName(<span class="string"><span class="delimiter">&quot;</span><span class="content">Cindy</span><span class="delimiter">&quot;</span></span>);
+
+handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into contacts (id, name) values (:id, :name)</span><span class="delimiter">&quot;</span></span>)
+      .bindBean(contact)
+      .execute();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can optionally qualify each bound bean with a prefix.
+This can be handy when binding multiple beans with similar property names:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">Folder folder = <span class="keyword">new</span> Folder(<span class="integer">1</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Important Documents</span><span class="delimiter">&quot;</span></span>);
+<span class="predefined-type">Document</span> document = <span class="keyword">new</span> <span class="predefined-type">Document</span>(<span class="integer">100</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">memo.txt</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Business business business. Numbers.</span><span class="delimiter">&quot;</span></span>);
+
+handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into documents (id, folder_id, name, contents) </span><span class="delimiter">&quot;</span></span> +
+                    <span class="string"><span class="delimiter">&quot;</span><span class="content">values (:d.id, :f.id, :d.name, :d.contents)</span><span class="delimiter">&quot;</span></span>)
+      .bindBean(<span class="string"><span class="delimiter">&quot;</span><span class="content">f</span><span class="delimiter">&quot;</span></span>, folder)
+      .bindBean(<span class="string"><span class="delimiter">&quot;</span><span class="content">d</span><span class="delimiter">&quot;</span></span>, document)
+      .execute()</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_sql_objects"><a class="anchor" href="#_sql_objects"></a>3.4. SQL Objects</h3>
+<div class="paragraph">
+<p>With the SQL Object API, you author an interface with methods for different database operations.
+<strong>Jdbi</strong> can then synthesize an implementation for you.</p>
+</div>
+<div class="sect3">
+<h4 id="_annotated_methods"><a class="anchor" href="#_annotated_methods"></a>3.4.1. Annotated Methods</h4>
+<div class="paragraph">
+<p>Most of the time, your SQL methods will use annotations to declare what they do:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">ContactDao</span> {
+  <span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into contacts (id, name, phone) values (nextval('contact_seq'), :name, :phone)</span><span class="delimiter">&quot;</span></span>)
+  <span class="annotation">@GetGeneratedKeys</span>
+  <span class="type">long</span> insert(<span class="annotation">@BindBean</span> Contact contact);
+
+  <span class="annotation">@SqlBatch</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into contacts (id, name, phone) values (nextval('contact_seq'), :name, :phone)</span><span class="delimiter">&quot;</span></span>)
+  <span class="annotation">@GetGeneratedKeys</span>
+  <span class="type">long</span><span class="type">[]</span> batchInsert(<span class="annotation">@BindBean</span> <span class="predefined-type">Iterable</span>&lt;Contact&gt; contacts);
+
+  <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from contacts where id = :id</span><span class="delimiter">&quot;</span></span>)
+  <span class="annotation">@RegisterBeanMapper</span>(Contact.class)
+  Contact getById(<span class="annotation">@Bind</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>) <span class="type">long</span> contactId);
+
+  <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from contacts</span><span class="delimiter">&quot;</span></span>)
+  <span class="annotation">@RegisterBeanMapper</span>(Contact.class)
+  <span class="predefined-type">List</span>&lt;Contact&gt; list();
+
+  <span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">update contacts set name = :name, phone = :phone where id = :id</span><span class="delimiter">&quot;</span></span>)
+  <span class="type">boolean</span> update(<span class="annotation">@BindBean</span> Contact contact);
+
+  <span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">delete from contacts where id = ?</span><span class="delimiter">&quot;</span></span>)
+  <span class="type">void</span> delete(<span class="type">long</span> id);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s briefly cover what these annotations mean. We&#8217;ll go into great detail later on.</p>
+</div>
+<div class="paragraph">
+<p>Method annotations:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>@SqlUpdate</code> - execute a statement, and return the update count (i.e. the number of rows modified).</p>
+</li>
+<li>
+<p><code>@SqlBatch</code> - execute a statement multiple times, using a series of input parameters. Any array,
+vararg, or iterable parameters are interpreted as sequential inputs to the batch.</p>
+</li>
+<li>
+<p><code>@SqlQuery</code> - execute a statement, and map the result set to the method return type. Query methods
+may return single value types (which returns the first row of the result), or a collection of rows.</p>
+</li>
+<li>
+<p><code>@GetGeneratedKeys</code> - Return the keys generated by the SQL statement, instead of the update count.
+In the above example, this means returning the next value from the <code>contact_seq</code> sequence.
+This annotation modifies the return type of <code>@SqlUpdate</code> or <code>@SqlBatch</code> method.</p>
+</li>
+<li>
+<p><code>@RegisterBeanMapper</code> - Tells Jdbi that result sets can be mapped to the given class
+(<code>Contact.class</code> in this case) by treating column names as bean properties. Any columns in
+<code>snake_case</code> are matched automatically to the equivalent <code>camelCase</code> property names.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Parameter annotations:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>@Bind</code> - Bind the argument to the SQL statement.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>If the SQL statement uses positional parameters, the argument is bound to the index of the
+parameter in the method argument list.</p>
+</li>
+<li>
+<p>If the SQL statement uses named parameters, the argument is bound to the name provided with the
+annotation, e.g. <code>@Bind("id") long contactId</code> binds to <code>id</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>@BindBean</code> - Bind from the JavaBean properties of the argument.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>A parameter without an annotation will be treated as if it were annotated with <code>@Bind</code>.</p>
+</div>
+<div class="sect4">
+<h5 id="_automatic_parameter_naming"><a class="anchor" href="#_automatic_parameter_naming"></a>Automatic parameter naming</h5>
+<div class="paragraph">
+<p>Normally, you need to explicitly provide the name to bind in each <code>@Bind</code> annotation:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from contacts where id = :id</span><span class="delimiter">&quot;</span></span>)
+<span class="directive">public</span> Contact getById(<span class="annotation">@Bind</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>) <span class="type">long</span> id);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>However, if you enable the <code>-parameters</code> compiler flag, <code>javac</code> will write parameter names
+to the compiled class, where Jdbi can access them through reflection. This spares you having to
+repeat parameter names in annotations. Thus:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from contacts where id = :id</span><span class="delimiter">&quot;</span></span>)
+<span class="directive">public</span> Contact getById(<span class="type">long</span> id);</code></pre>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_maven_setup"><a class="anchor" href="#_maven_setup"></a>Maven setup</h6>
+<div class="paragraph">
+<p>Configure the <code>maven-compiler-plugin</code> in your POM:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;plugin&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>maven-compiler-plugin<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;configuration&gt;</span>
+        <span class="tag">&lt;compilerArgs&gt;</span>
+            <span class="tag">&lt;arg&gt;</span>-parameters<span class="tag">&lt;/arg&gt;</span>
+        <span class="tag">&lt;/compilerArgs&gt;</span>
+    <span class="tag">&lt;/configuration&gt;</span>
+<span class="tag">&lt;/plugin&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_intellij_idea_setup"><a class="anchor" href="#_intellij_idea_setup"></a>IntelliJ IDEA setup</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>File &#8594; Settings</p>
+</li>
+<li>
+<p>Build, Execution, Deployment &#8594; Compiler &#8594; Java Compiler</p>
+</li>
+<li>
+<p>Additional command-line parameters: <code>-parameters</code></p>
+</li>
+<li>
+<p>Click Apply, then OK.</p>
+</li>
+<li>
+<p>Build &#8594; Rebuild Project</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_eclipse_setup"><a class="anchor" href="#_eclipse_setup"></a>Eclipse setup</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>Window &#8594; Preferences</p>
+</li>
+<li>
+<p>Java &#8594; Compiler</p>
+</li>
+<li>
+<p>Under "Classfile Generation," check the option "Store information about method parameters (usable via reflection)."</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_default_methods"><a class="anchor" href="#_default_methods"></a>3.4.2. Default Methods</h4>
+<div class="paragraph">
+<p>On the occasion that the built-in annotations don&#8217;t do what you need, you can always "drop down" to the Core API.</p>
+</div>
+<div class="paragraph">
+<p>Jdbi provides a <code>SqlObject</code> mixin interface with a single method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">SqlObject</span> {
+  Handle getHandle();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Make your SQL Object interface extend the <code>SqlObject</code> mixin, then provide your own implementation in a default method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">SplineDao</span> <span class="directive">extends</span> SqlObject {
+  <span class="keyword">default</span> <span class="type">void</span> reticulateSplines(Spline spline) {
+    Handle handle = getHandle();
+    <span class="comment">// do tricky stuff using the Core API.</span>
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Default methods can also be used to group multiple SQL operations into a single method call:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">ContactPhoneDao</span> {
+  <span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into contacts (id, name) values (nextval('contact_id'), :name)</span><span class="delimiter">&quot;</span></span>)
+  <span class="type">long</span> insertContact(<span class="annotation">@BindBean</span> Contact contact);
+
+  <span class="annotation">@SqlBatch</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into phones (contact_id, type, phone) values (:contactId, :type, :phone)</span><span class="delimiter">&quot;</span></span>)
+  <span class="type">void</span> insertPhone(<span class="type">long</span> contactId, <span class="annotation">@BindBean</span> <span class="predefined-type">Iterable</span>&lt;Phone&gt; phones);
+
+  <span class="keyword">default</span> <span class="type">long</span> insertFullContact(Contact contact) {
+    <span class="type">long</span> id = insertContact(contact);
+    insertPhone(id, contact.getPhones());
+    <span class="keyword">return</span> id;
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_using_your_sql_object_type"><a class="anchor" href="#_using_your_sql_object_type"></a>3.4.3. Using your SQL Object type</h4>
+<div class="paragraph">
+<p>Once you&#8217;ve defined your interface, there are a few ways to get an instance of it:</p>
+</div>
+<div class="sect4">
+<h5 id="_attached_to_handle"><a class="anchor" href="#_attached_to_handle"></a>Attached to Handle</h5>
+<div class="paragraph">
+<p>You can get a SQL Object that is attached to an open handle.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">try</span> (Handle handle = jdbi.open()) {
+  ContactPhoneDao dao = handle.attach(ContactPhoneDao.class);
+  dao.insertFullContact(contact);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Attached SQL Objects have the same lifecycle as the handle&#8212;&#8203;when the handle is closed, the SQL Object becomes unusable.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_temporary_sql_objects"><a class="anchor" href="#_temporary_sql_objects"></a>Temporary SQL Objects</h5>
+<div class="paragraph">
+<p>You can also get a temporary SQL Object from the Jdbi object, by passing it a callback (typically a lambda).
+Use <code>Jdbi.withExtension</code> for operations that return a result, or <code>useExtension</code> for operations with no result.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">jdbi.useExtension(ContactPhoneDao.class, dao -&gt; dao.insertFullContact(alice));
+<span class="type">long</span> bobId = jdbi.withExtension(ContactPhoneDao.class, dao -&gt; dao.insertFullContact(bob));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Temporary SQL Objects are only valid inside the callback you pass to the method. The SQL Object (and the associated
+temporary handle) are closed when the callback returns.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_on_demand"><a class="anchor" href="#_on_demand"></a>On-Demand</h5>
+<div class="paragraph">
+<p>On-demand instances have an open-ended lifecycle, as they obtain and releases connections for each method call.
+They are thread-safe, and may be reused across an application. This is handy when you only need to make single
+calls at a time.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">ContactPhoneDao dao = jdbi.onDemand(ContactPhoneDao.class);
+<span class="type">long</span> aliceId = dao.insertFullContact(alice);
+<span class="type">long</span> bobId = dao.insertFullContact(bob);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>There is a performance penalty every time a connection is allocated and released. If you need to make
+successive calls to a SQL Object, consider using one of the above options for
+better performance, instead of on-demand.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_row_mappers"><a class="anchor" href="#_row_mappers"></a>3.5. Row Mappers</h3>
 <div class="paragraph">
 <p>By default, queries map each row in the result set into a
 <code>Map&lt;String, Object&gt;</code> which maps the column name to the column
@@ -815,29 +1398,29 @@ using <code>Query.map(RowMapper&lt;T&gt;)</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="directive">final</span> <span class="type">class</span> <span class="class">Something</span> {
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="directive">final</span> <span class="type">class</span> <span class="class">Contact</span> {
     <span class="directive">final</span> <span class="type">int</span> id;
     <span class="directive">final</span> <span class="predefined-type">String</span> name;
 
-    Something(<span class="type">int</span> id, <span class="predefined-type">String</span> name) {
+    Contact(<span class="type">int</span> id, <span class="predefined-type">String</span> name) {
         <span class="local-variable">this</span>.id = id;
         <span class="local-variable">this</span>.name = name;
     }
 }
 
-<span class="directive">public</span> <span class="type">class</span> <span class="class">SomethingMapper</span> <span class="directive">implements</span> <span class="predefined-type">RowMapper</span>&lt;Something&gt; {
+<span class="directive">public</span> <span class="type">class</span> <span class="class">ContactMapper</span> <span class="directive">implements</span> <span class="predefined-type">RowMapper</span>&lt;Contact&gt; {
     <span class="annotation">@Override</span>
-    <span class="directive">public</span> Something map(<span class="predefined-type">ResultSet</span> r, StatementContext ctx) <span class="directive">throws</span> <span class="exception">SQLException</span> {
-        <span class="keyword">return</span> <span class="keyword">new</span> Something(r.getInt(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>), r.getString(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>));
+    <span class="directive">public</span> Contact map(<span class="predefined-type">ResultSet</span> r, StatementContext ctx) <span class="directive">throws</span> <span class="exception">SQLException</span> {
+        <span class="keyword">return</span> <span class="keyword">new</span> Contact(r.getInt(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>), r.getString(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>));
     }
 }
 
-    <span class="predefined-type">List</span>&lt;Something&gt; things = handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from something</span><span class="delimiter">&quot;</span></span>)
-                                   .map(<span class="keyword">new</span> SomethingMapper())
+    <span class="predefined-type">List</span>&lt;Contact&gt; contacts = handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from contacts</span><span class="delimiter">&quot;</span></span>)
+                                   .map(<span class="keyword">new</span> ContactMapper())
                                    .list();
-    assertThat(things).extracting(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>)
-                      .contains(tuple(<span class="integer">1</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Alice</span><span class="delimiter">&quot;</span></span>),
-                                tuple(<span class="integer">2</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Bob</span><span class="delimiter">&quot;</span></span>));</code></pre>
+    assertThat(contacts).extracting(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>)
+                        .contains(tuple(<span class="integer">1</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Alice</span><span class="delimiter">&quot;</span></span>),
+                                  tuple(<span class="integer">2</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Bob</span><span class="delimiter">&quot;</span></span>));</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -847,105 +1430,25 @@ without having to specify the mapper type everywhere:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">handle.registerRowMapper(<span class="keyword">new</span> SomethingMapper());
+<pre class="CodeRay highlight"><code data-lang="java">handle.registerRowMapper(<span class="keyword">new</span> ContactMapper());
 
-<span class="predefined-type">List</span>&lt;Something&gt; things = handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from something</span><span class="delimiter">&quot;</span></span>)
-                               .mapTo(Something.class)
+<span class="predefined-type">List</span>&lt;Contact&gt; contacts = handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from contacts</span><span class="delimiter">&quot;</span></span>)
+                               .mapTo(Contact.class)
                                .list();
-assertThat(things).extracting(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>)
-                  .contains(tuple(<span class="integer">1</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Alice</span><span class="delimiter">&quot;</span></span>),
-                            tuple(<span class="integer">2</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Bob</span><span class="delimiter">&quot;</span></span>));</code></pre>
+assertThat(contacts).extracting(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>)
+                    .contains(tuple(<span class="integer">1</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Alice</span><span class="delimiter">&quot;</span></span>),
+                              tuple(<span class="integer">2</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Bob</span><span class="delimiter">&quot;</span></span>));</code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_named_parameters"><a class="anchor" href="#_named_parameters"></a>1.4. Named Parameters</h3>
-<div class="paragraph">
-<p>Out of the box, any time you use a colon-prefixed token like
-<code>:name</code> in a SQL statement, <strong>jdbi</strong> replaces it with the value
-you bind to that name:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">Something thing = handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from something where id = :id</span><span class="delimiter">&quot;</span></span>)
-                        .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">1</span>)
-                        .mapTo(Something.class)
-                        .findOnly();
-assertThat(thing).extracting(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>)
-                 .contains(<span class="integer">1</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Alice</span><span class="delimiter">&quot;</span></span>);</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<h1 id="_core_jdbi" class="sect0"><a class="anchor" href="#_core_jdbi"></a>Core JDBI</h1>
-<div class="sect1">
-<h2 id="_getting_started"><a class="anchor" href="#_getting_started"></a>2. Getting Started</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>(adding JDBI dependencies to your project)</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_jdbi_2"><a class="anchor" href="#_jdbi_2"></a>3. Jdbi</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>A <strong>Jdbi</strong> object is the main entry point into the library.
-It is roughly analogous to a
-<a href="https://docs.oracle.com/javase/8/docs/api/javax/sql/DataSource.html">javax.sql.DataSource</a>
-combined with configuration for the various <strong>jdbi</strong> APIs.</p>
-</div>
-<div class="paragraph">
-<p>A configured DBI is threadsafe and does not own any database resources.
-An application should configure a single or small number of shared
-DBI instances.  In a more limited scope (such as a HTTP request, or event callback), you then
-request a <strong>Handle</strong> object from your <strong>DBI</strong>.  This <strong>Handle</strong> represents an active database
-<a href="https://docs.oracle.com/javase/8/docs/api/java/sql/Connection.html">java.sql.Connection</a>
-and inheirts <strong>Jdbi</strong>'s configuration at the time of creation.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">Jdbi userDatabase = Jdbi.create(<span class="string"><span class="delimiter">&quot;</span><span class="content">jdbc:postgresql://localhost</span><span class="delimiter">&quot;</span></span>);
-<span class="directive">final</span> Optional&lt;MyUser&gt; foundUser = userDatabase.withHandle(h -&gt;
-    h.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT * FROM user WHERE id=:id</span><span class="delimiter">&quot;</span></span>)
-        .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">3</span>)
-        .map(MyUser.class)
-        .findFirst()
-);</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_handle"><a class="anchor" href="#_handle"></a>4. Handle</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><strong>Handle</strong> provides a fluent <a href="#">Statement</a> API that can map
-<a href="#">arguments</a> and <a href="#">result sets</a>
-to and from regular Java objects.
-You may register mappings for arguments
-<a href="#argument-factory">manually</a> or use
-<a href="#bean-argument">Java Bean conventions</a>.</p>
-</div>
-<div class="paragraph">
-<p>For result sets you can map
-<a href="#row-mapper">one row at a time</a>,
-<a href="#column-mapper">by the type of each column</a>, as
-<a href="#bean-mapper">beans</a>, or invoking
-<a href="#constructor-mapper">annotated constructors</a>.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_statements"><a class="anchor" href="#_statements"></a>5. Statements</h2>
-<div class="sectionbody">
+<h3 id="_statements"><a class="anchor" href="#_statements"></a>3.6. Statements</h3>
 <div class="paragraph">
 <p><strong>jdbi</strong> provides fluent builders for various types of queries, updates, and
 batch statements.</p>
 </div>
-<div class="sect2">
-<h3 id="_query"><a class="anchor" href="#_query"></a>5.1. Query</h3>
+<div class="sect3">
+<h4 id="_query"><a class="anchor" href="#_query"></a>3.6.1. Query</h4>
 <div class="paragraph">
 <p>A <strong>Query</strong> is a <strong>Statement</strong> that returns a result set from the database.</p>
 </div>
@@ -962,7 +1465,7 @@ assertThat(users).containsExactly(
 </div>
 </div>
 <div class="paragraph">
-<p>Queries may have <a href="#">arguments</a> bound by name or by position.</p>
+<p>Queries may have <a href="arguments.html">arguments</a> bound by name or by position.</p>
 </div>
 <div class="paragraph">
 <p>They also have a <a href="#results">#result type</a>.  The default is <strong>Map&lt;String, Object&gt;</strong>.
@@ -973,8 +1476,8 @@ The keys are column labels, and values are <strong>jdbi</strong>'s best guess at
 or from database rows simple:</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_update"><a class="anchor" href="#_update"></a>5.2. Update</h3>
+<div class="sect3">
+<h4 id="_update"><a class="anchor" href="#_update"></a>3.6.2. Update</h4>
 <div class="paragraph">
 <p><strong>Update*s are operations that return an integer number of rows modified,
 such as a database *INSERT</strong>, <strong>UPDATE</strong>, or <strong>DELETE</strong>.</p>
@@ -989,8 +1492,8 @@ assertThat(count).isEqualTo(<span class="integer">1</span>);</code></pre>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_script"><a class="anchor" href="#_script"></a>5.3. Script</h3>
+<div class="sect3">
+<h4 id="_script"><a class="anchor" href="#_script"></a>3.6.3. Script</h4>
 <div class="paragraph">
 <p>A <strong>Script</strong> parses a String into semicolon terminated statements.
 The statements can be executed in a single <strong>Batch</strong> or individually.</p>
@@ -1006,8 +1509,8 @@ assertThat(results).containsExactly(<span class="integer">1</span>, <span class=
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_call"><a class="anchor" href="#_call"></a>5.4. Call</h3>
+<div class="sect3">
+<h4 id="_call"><a class="anchor" href="#_call"></a>3.6.4. Call</h4>
 <div class="paragraph">
 <p>A <strong>Call</strong> invokes a database stored procedure.</p>
 </div>
@@ -1031,8 +1534,8 @@ assertThat(handle.createCall(<span class="string"><span class="delimiter">&quot;
 does the out parameter mapping above work?</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_batch"><a class="anchor" href="#_batch"></a>5.5. Batch</h3>
+<div class="sect3">
+<h4 id="_batch"><a class="anchor" href="#_batch"></a>3.6.5. Batch</h4>
 <div class="paragraph">
 <p>A <strong>Batch</strong> or <strong>PreparedBatch</strong> sends many rows to the server
 in bulk.  After opening the batch, repeatedly add bound
@@ -1056,10 +1559,8 @@ assertThat(batch.execute()).isEqualTo(expected);</code></pre>
 </div>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_arguments"><a class="anchor" href="#_arguments"></a>6. Arguments</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_arguments"><a class="anchor" href="#_arguments"></a>3.7. Arguments</h3>
 <div class="paragraph">
 <p>Most non-trivial queries require binding arguments from Java land
 to the statement.  In addition to binding by index (which is zero-based
@@ -1154,10 +1655,8 @@ the type of bindings and determine if they understand how to convert
 the type to Arguments.</p>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_results"><a class="anchor" href="#_results"></a>7. Results</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_results"><a class="anchor" href="#_results"></a>3.8. Results</h3>
 <div class="paragraph">
 <p>After executing a database query, you need to interpret the results.
 JDBC provides the <strong>ResultSet</strong> class which can do simple mapping to
@@ -1217,8 +1716,8 @@ to you in a container such as a <strong>List</strong>, <strong>Stream</strong>, 
 }</code></pre>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_row_mapper"><a class="anchor" href="#_row_mapper"></a>7.1. Row Mapper</h3>
+<div class="sect3">
+<h4 id="_row_mapper"><a class="anchor" href="#_row_mapper"></a>3.8.1. Row Mapper</h4>
 <div class="paragraph">
 <p>The row mapper is called once for every row as <strong>jdbi</strong> iterates
 through the result set.</p>
@@ -1289,8 +1788,8 @@ results (for example, PostgreSQL will do it as long as you are in a transaction
 and set a fetch size), the stream will lazily fetch rows from the database as
 necessary.</p>
 </div>
-<div class="sect3">
-<h4 id="_constructor_mapper"><a class="anchor" href="#_constructor_mapper"></a>7.1.1. Constructor Mapper</h4>
+<div class="sect4">
+<h5 id="_constructor_mapper"><a class="anchor" href="#_constructor_mapper"></a>Constructor Mapper</h5>
 <div class="paragraph">
 <p><strong>jdbi</strong> provides a simple constructor mapper which uses reflection to assign
 columns to constructor parameters by name.  Unfortunately parameter names
@@ -1316,8 +1815,8 @@ and as such no custom mapper code is required at all.</p>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_column_mapper"><a class="anchor" href="#_column_mapper"></a>7.2. Column Mapper</h3>
+<div class="sect3">
+<h4 id="_column_mapper"><a class="anchor" href="#_column_mapper"></a>3.8.2. Column Mapper</h4>
 <div class="paragraph">
 <p>Sometimes you only wish to fetch a single value, or need
 to build a larger object out of multiple individually mappable
@@ -1366,8 +1865,8 @@ what to do with a custom <strong>UserName</strong> object, now automatically
 uses the column mapper to fill in the constructor parameter.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_bean_mapper"><a class="anchor" href="#_bean_mapper"></a>7.3. Bean Mapper</h3>
+<div class="sect3">
+<h4 id="_bean_mapper"><a class="anchor" href="#_bean_mapper"></a>3.8.3. Bean Mapper</h4>
 <div class="paragraph">
 <p>We also provide basic support for beans:</p>
 </div>
@@ -1403,16 +1902,16 @@ uses the column mapper to fill in the constructor parameter.</p>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_annotations"><a class="anchor" href="#_annotations"></a>7.4. Annotations</h3>
+<div class="sect3">
+<h4 id="_annotations"><a class="anchor" href="#_annotations"></a>3.8.4. Annotations</h4>
 <div class="paragraph">
 <p>You can register mappers declaratively on SqlObjects using e.g.
 <code>@RegisterRowMapper</code>, <code>@RegisterColumnMapper</code>, <code>@RegisterConstructorMapper</code>,
 and so on.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_resultbearing"><a class="anchor" href="#_resultbearing"></a>7.5. ResultBearing</h3>
+<div class="sect3">
+<h4 id="_resultbearing"><a class="anchor" href="#_resultbearing"></a>3.8.5. ResultBearing</h4>
 <div class="paragraph">
 <p>The <strong>ResultBearing</strong> interface determines how the statement results
 are gathered and returned to you.  The methods are designed to
@@ -1420,8 +1919,8 @@ interact well with the new Java 8 <strong>@FunctionalInterface*s and
 *Stream</strong> library.  Given a type T that can be mapped by the registered
 mappers,</p>
 </div>
-<div class="sect3">
-<h4 id="_find_a_single_result"><a class="anchor" href="#_find_a_single_result"></a>7.5.1. Find a Single Result</h4>
+<div class="sect4">
+<h5 id="_find_a_single_result"><a class="anchor" href="#_find_a_single_result"></a>Find a Single Result</h5>
 <div class="paragraph">
 <p><strong>ResultBearing#findOnly</strong> returns the only row in the result set.  If zero
 or multiple rows are encountered, it will throw <strong>IllegalStateException</strong>.</p>
@@ -1430,8 +1929,8 @@ or multiple rows are encountered, it will throw <strong>IllegalStateException</s
 <p><strong>#findFirst</strong> returns an <strong>Optional&lt;T&gt;</strong> with the first row, if any.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_stream"><a class="anchor" href="#_stream"></a>7.5.2. Stream</h4>
+<div class="sect4">
+<h5 id="_stream"><a class="anchor" href="#_stream"></a>Stream</h5>
 <div class="paragraph">
 <p><strong>#stream</strong> returns a <strong>Stream&lt;T&gt;</strong>.  You should then process the stream and
 produce a result.  This stream must be closed to release any database
@@ -1444,8 +1943,8 @@ provide a <strong>StreamCallback</strong> that produces a result or a <strong>St
 that produces no result, respectively.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_collections"><a class="anchor" href="#_collections"></a>7.5.3. Collections</h4>
+<div class="sect4">
+<h5 id="_collections"><a class="anchor" href="#_collections"></a>Collections</h5>
 <div class="paragraph">
 <p><strong>#list</strong> emits a <strong>List&lt;T&gt;</strong>.  This necessarily buffers all results in memory.</p>
 </div>
@@ -1455,8 +1954,8 @@ that produces no result, respectively.</p>
 *Collector*s to start with.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_reduction"><a class="anchor" href="#_reduction"></a>7.5.4. Reduction</h4>
+<div class="sect4">
+<h5 id="_reduction"><a class="anchor" href="#_reduction"></a>Reduction</h5>
 <div class="paragraph">
 <p><strong>#reduce</strong> provides a simplified <strong>Stream#reduce</strong>.  Given an identity
 starting value and a <strong>BiFunction&lt;U, T, U&gt;</strong> it will repeatedly combine
@@ -1464,8 +1963,8 @@ starting value and a <strong>BiFunction&lt;U, T, U&gt;</strong> it will repeated
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_joins"><a class="anchor" href="#_joins"></a>7.6. Joins</h3>
+<div class="sect3">
+<h4 id="_joins"><a class="anchor" href="#_joins"></a>3.8.6. Joins</h4>
 <div class="paragraph">
 <p>Joining multiple tables together is a very common database
 task.  It is also where the mismatch between the relational
@@ -1475,8 +1974,8 @@ model and Java&#8217;s object model starts to rear its ugly head.</p>
 <p>Here we present a couple of strategies for retrieving
 results from more complicated rows.</p>
 </div>
-<div class="sect3">
-<h4 id="_joinrowmapper"><a class="anchor" href="#_joinrowmapper"></a>7.6.1. JoinRowMapper</h4>
+<div class="sect4">
+<h5 id="_joinrowmapper"><a class="anchor" href="#_joinrowmapper"></a>JoinRowMapper</h5>
 <div class="paragraph">
 <p>The JoinRowMapper takes a set of types to extract from each row.
 It uses the mapping registry to determine how to map each given
@@ -1548,8 +2047,8 @@ with handwritten mappers.
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_generated_keys"><a class="anchor" href="#_generated_keys"></a>7.7. Generated Keys</h3>
+<div class="sect3">
+<h4 id="_generated_keys"><a class="anchor" href="#_generated_keys"></a>3.8.7. Generated Keys</h4>
 <div class="paragraph">
 <p>Inserts and related queries may automatically generate keys.  These keys are
 treated separately from normal results.  Depending on your database and configuration,
@@ -1644,15 +2143,13 @@ overhead of separately querying after the insert completes.</p>
 </div>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_transactions"><a class="anchor" href="#_transactions"></a>8. Transactions</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_transactions"><a class="anchor" href="#_transactions"></a>3.9. Transactions</h3>
 <div class="paragraph">
 <p><strong>jdbi</strong> provides full support for JDBC transactions.</p>
 </div>
-<div class="sect2">
-<h3 id="_transactions_in_the_fluent_api"><a class="anchor" href="#_transactions_in_the_fluent_api"></a>8.1. Transactions in the Fluent API</h3>
+<div class="sect3">
+<h4 id="_transactions_in_the_fluent_api"><a class="anchor" href="#_transactions_in_the_fluent_api"></a>3.9.1. Transactions in the Fluent API</h4>
 <div class="paragraph">
 <p><strong>Handle</strong> objects provide two ways to open a transaction&#8201;&#8212;&#8201;<strong>inTransaction</strong> allows
 you to return a result, and <strong>useTransaction</strong> has no return value.</p>
@@ -1676,8 +2173,8 @@ you to return a result, and <strong>useTransaction</strong> has no return value.
 transaction.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_transactions_in_sqlobject_api"><a class="anchor" href="#_transactions_in_sqlobject_api"></a>8.2. Transactions in SqlObject API</h3>
+<div class="sect3">
+<h4 id="_transactions_in_sqlobject_api"><a class="anchor" href="#_transactions_in_sqlobject_api"></a>3.9.2. Transactions in SqlObject API</h4>
 <div class="paragraph">
 <p>Similarly, you may declare transactions with SqlObject annotations:</p>
 </div>
@@ -1740,8 +2237,8 @@ inner method must not specify anything, in which case the isolation level of the
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_serializable_transactions"><a class="anchor" href="#_serializable_transactions"></a>8.3. Serializable Transactions</h3>
+<div class="sect3">
+<h4 id="_serializable_transactions"><a class="anchor" href="#_serializable_transactions"></a>3.9.3. Serializable Transactions</h4>
 <div class="paragraph">
 <p>For more advanced queries, sometimes serializable transactions are required.
 <strong>jdbi</strong> includes a transaction runner that is able to retry transactions that
@@ -1838,10 +2335,8 @@ Adding to 30 from the other, we get 30 + 60 = 90 and the assertion succeeds.</p>
 </div>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_batch_updates"><a class="anchor" href="#_batch_updates"></a>9. Batch Updates</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_batch_updates"><a class="anchor" href="#_batch_updates"></a>3.10. Batch Updates</h3>
 <div class="paragraph">
 <p>Normally, every statement executed requires a round-trip to the database server.
 When inserting or updating a large number of records, this can add unacceptable
@@ -1931,10 +2426,8 @@ Their use is straightforward.  To execute many separate statements as a single b
 </div>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_exception_rewriting"><a class="anchor" href="#_exception_rewriting"></a>10. Exception Rewriting</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_exception_rewriting"><a class="anchor" href="#_exception_rewriting"></a>3.11. Exception Rewriting</h3>
 <div class="paragraph">
 <p>The JDBC SQLException class is very old and predates more modern exception facilities like
 Throwable&#8217;s suppressed exceptions.  When a batch fails, there may be multiple failures to
@@ -1964,70 +2457,12 @@ Suppressed: org.postgresql.util.PSQLException: ERROR: duplicate key value violat
 </div>
 </div>
 </div>
-<h1 id="_sqlobject" class="sect0"><a class="anchor" href="#_sqlobject"></a>SqlObject</h1>
-<div class="openblock partintro">
-<div class="content">
-<div class="paragraph">
-<p>The Fluent API is very nice to use for full control over
-the evaluation of your statements, but sometimes a simpler
-declarative approach makes for terse and elegant code.</p>
-</div>
-<div class="paragraph">
-<p>With <strong>SqlObject</strong>, you write an interface with annotated
-methods.  <strong>jdbi</strong> then synthesizes an implementation.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@RegisterRowMapper</span>(SomethingMapper.class)
-<span class="directive">public</span> <span class="type">interface</span> <span class="class">SomethingDao</span>
-{
-    <span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO something (id, name) VALUES (:s.id, :s.name)</span><span class="delimiter">&quot;</span></span>)
-    <span class="type">int</span> insert(<span class="annotation">@BindBean</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">s</span><span class="delimiter">&quot;</span></span>) Something s);
-
-    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT id, name FROM something WHERE id = ?</span><span class="delimiter">&quot;</span></span>)
-    Optional&lt;Something&gt; findSomething(<span class="type">int</span> id);
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Given a type <strong>Something</strong> that has <strong>int id</strong> and <strong>String name</strong>
-properties, we define an interface, <strong>SomethingDao</strong>, that
-provides simple create and read operations for
-a table.</p>
-</div>
-<div class="paragraph">
-<p>Annotations at the class and method level control
-the binding of arguments and mapping to results.
-For example, <code>@RegisterRowMapper</code> mirrors
-<code>Handle.registerRowMapper</code>.</p>
-</div>
-<div class="paragraph">
-<p>You produce results as single instances
-or container types like <code>Optional</code> or <code>List</code>,
-same as <code>Query.mapTo</code>.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">dao.insert(<span class="keyword">new</span> Something(<span class="integer">1</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">apple</span><span class="delimiter">&quot;</span></span>));
-dao.insert(<span class="keyword">new</span> Something(<span class="integer">2</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">bison</span><span class="delimiter">&quot;</span></span>));
-
-assertThat(dao.findSomething(<span class="integer">2</span>))
-    .isPresent()
-    .contains(<span class="keyword">new</span> Something(<span class="integer">2</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">bison</span><span class="delimiter">&quot;</span></span>));
-
-assertThat(dao.findSomething(<span class="integer">3</span>))
-    .isEmpty();</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>There are also <code>@SqlBatch</code> and <code>@SqlCall</code> annotations.
-Check out the Javadoc for more information.</p>
-</div>
-</div>
 </div>
 <div class="sect1">
-<h2 id="__singlevalue"><a class="anchor" href="#__singlevalue"></a>11. @SingleValue</h2>
+<h2 id="_sqlobject"><a class="anchor" href="#_sqlobject"></a>4. SqlObject</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="__singlevalue"><a class="anchor" href="#__singlevalue"></a>4.1. @SingleValue</h3>
 <div class="paragraph">
 <p>Sometimes when using advanced SQL features like Arrays,
 a container type like <code>int[]</code> or <code>List&lt;Integer&gt;</code> can
@@ -2038,56 +2473,48 @@ a ResultSet into a container object.  You can annotate a return
 type as <code>@SingleValue</code> to override this.</p>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_sql_locators"><a class="anchor" href="#_sql_locators"></a>12. Sql Locators</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_sql_locators"><a class="anchor" href="#_sql_locators"></a>4.2. Sql Locators</h3>
 <div class="paragraph">
 <p>TODO</p>
 </div>
 </div>
 </div>
-<h1 id="_third_party_integration" class="sect0"><a class="anchor" href="#_third_party_integration"></a>Third Party Integration</h1>
+</div>
 <div class="sect1">
-<h2 id="_spring"><a class="anchor" href="#_spring"></a>13. Spring</h2>
+<h2 id="_third_party_integration"><a class="anchor" href="#_third_party_integration"></a>5. Third Party Integration</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_spring"><a class="anchor" href="#_spring"></a>5.1. Spring</h3>
 <div class="paragraph">
 <p>TODO</p>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_google_guava"><a class="anchor" href="#_google_guava"></a>14. Google Guava</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_google_guava"><a class="anchor" href="#_google_guava"></a>5.2. Google Guava</h3>
 <div class="paragraph">
 <p>TODO</p>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_postgresql"><a class="anchor" href="#_postgresql"></a>15. PostgreSQL</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_postgresql"><a class="anchor" href="#_postgresql"></a>5.3. PostgreSQL</h3>
 <div class="paragraph">
 <p>TODO</p>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_oracle"><a class="anchor" href="#_oracle"></a>16. Oracle</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_oracle"><a class="anchor" href="#_oracle"></a>5.4. Oracle</h3>
 <div class="paragraph">
 <p>TODO</p>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_kotlin"><a class="anchor" href="#_kotlin"></a>17. Kotlin</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_kotlin"><a class="anchor" href="#_kotlin"></a>5.5. Kotlin</h3>
 <div class="paragraph">
 <p><a href="http://kotlinlang.org/">Kotlin</a> support is provided by <strong>jdbi3-kotlin</strong> and <strong>jdbi3-kotlin-sqlobject</strong> modules.</p>
 </div>
-<div class="sect2">
-<h3 id="_resultset_mapping"><a class="anchor" href="#_resultset_mapping"></a>17.1. ResultSet mapping</h3>
+<div class="sect3">
+<h4 id="_resultset_mapping"><a class="anchor" href="#_resultset_mapping"></a>5.5.1. ResultSet mapping</h4>
 <div class="paragraph">
 <p>The <strong>jdbi3-kotlin</strong> plugin adds ResultSet mapping to Kotlin data classes. It supports data classes where all
 fields are present in the constructor as well as classes with writable properties. Any fields not present in the
@@ -2098,7 +2525,7 @@ parameter values in the constructor if the parameter type is not nullable and th
 <p>Result set mapper also supports <code>@ColumnName</code> annotation that allows to specify name for a property or parameter explicitly.</p>
 </div>
 <div class="paragraph">
-<p>If you load all DBI plugins via
+<p>If you load all Jdbi plugins via
 <code>Jdbi.installPlugins()</code> this plugin will be discovered and registered automatically.
 Otherwise, you can attach it using <code>Jdbi.installPlugin(KotlinPlugin())</code>.</p>
 </div>
@@ -2153,8 +2580,8 @@ val things = qry.bind(&quot;id&quot;, brian.id).mapTo&lt;Thing&gt;.list()</code>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_sqlobject_2"><a class="anchor" href="#_sqlobject_2"></a>17.2. SqlObject</h3>
+<div class="sect3">
+<h4 id="_sqlobject_2"><a class="anchor" href="#_sqlobject_2"></a>5.5.2. SqlObject</h4>
 <div class="paragraph">
 <p>The <strong>jdbi3-kotlin-sqlobject</strong> plugin adds automatic parameter binding by name for Kotlin methods in SqlObjects as well as support
 for Kotlin default methods.</p>
@@ -2164,7 +2591,7 @@ for Kotlin default methods.</p>
 (referenced in binding as <code>:paramName.propertyName</code>).  No annotations are needed.</p>
 </div>
 <div class="paragraph">
-<p>If you load all DBI plugins via
+<p>If you load all Jdbi plugins via
 <code>Jdbi.installPlugins()</code> this plugin will be discovered and registered automatically.
 Otherwise, you can attach the plugin via:  <code>Jdbi.installPlugin(KotlinSqlObjectPlugin())</code>.</p>
 </div>
@@ -2204,18 +2631,18 @@ Otherwise, you can attach the plugin via:  <code>Jdbi.installPlugin(KotlinSqlObj
 </div>
 </div>
 </div>
-<h1 id="_appendix" class="sect0"><a class="anchor" href="#_appendix"></a>Appendix</h1>
+</div>
 <div class="sect1">
-<h2 id="_api_reference"><a class="anchor" href="#_api_reference"></a>18. API Reference</h2>
+<h2 id="_appendix"><a class="anchor" href="#_appendix"></a>6. Appendix</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_api_reference"><a class="anchor" href="#_api_reference"></a>6.1. API Reference</h3>
 <div class="paragraph">
 <p><a href="apidocs/index.html">Javadoc</a></p>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_contributing"><a class="anchor" href="#_contributing"></a>19. Contributing</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_contributing"><a class="anchor" href="#_contributing"></a>6.2. Contributing</h3>
 <div class="paragraph">
 <p><strong>jdbi</strong> uses GitHub for collaboration.  Please check out the
 <a href="https://github.com/jdbi/jdbi">project page</a> for more
@@ -2231,9 +2658,62 @@ information.</p>
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_leftover_snippets"><a class="anchor" href="#_leftover_snippets"></a>7. Leftover snippets</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@RegisterRowMapper</span>(SomethingMapper.class)
+<span class="directive">public</span> <span class="type">interface</span> <span class="class">SomethingDao</span>
+{
+    <span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO something (id, name) VALUES (:s.id, :s.name)</span><span class="delimiter">&quot;</span></span>)
+    <span class="type">int</span> insert(<span class="annotation">@BindBean</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">s</span><span class="delimiter">&quot;</span></span>) Something s);
+
+    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT id, name FROM something WHERE id = ?</span><span class="delimiter">&quot;</span></span>)
+    Optional&lt;Something&gt; findSomething(<span class="type">int</span> id);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Given a type <strong>Something</strong> that has <strong>int id</strong> and <strong>String name</strong>
+properties, we define an interface, <strong>SomethingDao</strong>, that
+provides simple create and read operations for
+a table.</p>
+</div>
+<div class="paragraph">
+<p>Annotations at the class and method level control
+the binding of arguments and mapping to results.
+For example, <code>@RegisterRowMapper</code> mirrors
+<code>Handle.registerRowMapper</code>.</p>
+</div>
+<div class="paragraph">
+<p>You produce results as single instances
+or container types like <code>Optional</code> or <code>List</code>,
+same as <code>Query.mapTo</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">dao.insert(<span class="keyword">new</span> Something(<span class="integer">1</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">apple</span><span class="delimiter">&quot;</span></span>));
+dao.insert(<span class="keyword">new</span> Something(<span class="integer">2</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">bison</span><span class="delimiter">&quot;</span></span>));
+
+assertThat(dao.findSomething(<span class="integer">2</span>))
+    .isPresent()
+    .contains(<span class="keyword">new</span> Something(<span class="integer">2</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">bison</span><span class="delimiter">&quot;</span></span>));
+
+assertThat(dao.findSomething(<span class="integer">3</span>))
+    .isEmpty();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>There are also <code>@SqlBatch</code> and <code>@SqlCall</code> annotations.
+Check out the Javadoc for more information.</p>
+</div>
+</div>
+</div>
+</div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-03-07 20:35:02 MST
+Last updated 2017-04-19 00:30:58 MDT
 </div>
 </div>
 </body>
