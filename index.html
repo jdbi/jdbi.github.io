@@ -600,7 +600,6 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#_contributing">6.2. Contributing</a></li>
 </ul>
 </li>
-<li><a href="#_leftover_snippets">7. Leftover snippets</a></li>
 </ul>
 </div>
 </div>
@@ -2658,62 +2657,10 @@ information.</p>
 </div>
 </div>
 </div>
-<div class="sect1">
-<h2 id="_leftover_snippets"><a class="anchor" href="#_leftover_snippets"></a>7. Leftover snippets</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@RegisterRowMapper</span>(SomethingMapper.class)
-<span class="directive">public</span> <span class="type">interface</span> <span class="class">SomethingDao</span>
-{
-    <span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO something (id, name) VALUES (:s.id, :s.name)</span><span class="delimiter">&quot;</span></span>)
-    <span class="type">int</span> insert(<span class="annotation">@BindBean</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">s</span><span class="delimiter">&quot;</span></span>) Something s);
-
-    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT id, name FROM something WHERE id = ?</span><span class="delimiter">&quot;</span></span>)
-    Optional&lt;Something&gt; findSomething(<span class="type">int</span> id);
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Given a type <strong>Something</strong> that has <strong>int id</strong> and <strong>String name</strong>
-properties, we define an interface, <strong>SomethingDao</strong>, that
-provides simple create and read operations for
-a table.</p>
-</div>
-<div class="paragraph">
-<p>Annotations at the class and method level control
-the binding of arguments and mapping to results.
-For example, <code>@RegisterRowMapper</code> mirrors
-<code>Handle.registerRowMapper</code>.</p>
-</div>
-<div class="paragraph">
-<p>You produce results as single instances
-or container types like <code>Optional</code> or <code>List</code>,
-same as <code>Query.mapTo</code>.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">dao.insert(<span class="keyword">new</span> Something(<span class="integer">1</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">apple</span><span class="delimiter">&quot;</span></span>));
-dao.insert(<span class="keyword">new</span> Something(<span class="integer">2</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">bison</span><span class="delimiter">&quot;</span></span>));
-
-assertThat(dao.findSomething(<span class="integer">2</span>))
-    .isPresent()
-    .contains(<span class="keyword">new</span> Something(<span class="integer">2</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">bison</span><span class="delimiter">&quot;</span></span>));
-
-assertThat(dao.findSomething(<span class="integer">3</span>))
-    .isEmpty();</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>There are also <code>@SqlBatch</code> and <code>@SqlCall</code> annotations.
-Check out the Javadoc for more information.</p>
-</div>
-</div>
-</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-04-19 00:30:58 MDT
+Last updated 2017-04-19 00:50:05 MDT
 </div>
 </div>
 </body>
