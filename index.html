@@ -2074,8 +2074,17 @@ type as <code>@SingleValue</code> to override this.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java">Jdbi jdbi = Jdbi.create(<span class="string"><span class="delimiter">&quot;</span><span class="content">jdbc:postgresql://host:port/database</span><span class="delimiter">&quot;</span></span>)
-                .installPlugin(<span class="keyword">new</span> PostgresPlugin())</code></pre>
+                .installPlugin(<span class="keyword">new</span> PostgresPlugin());</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>The plugin configures mappings for the Java 8 <strong>java.time</strong> types like
+<strong>Instant</strong> or <strong>Duration</strong>, <strong>UUID</strong>, typed enums, and <strong>hstore</strong>.</p>
+</div>
+<div class="paragraph">
+<p>See the
+<a href="https://jdbi.github.io/apidocs/org/jdbi/v3/postgres/package-summary.html">javadoc</a>
+for an exhaustive list.</p>
 </div>
 </div>
 </div>
