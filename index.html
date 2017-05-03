@@ -2068,7 +2068,14 @@ type as <code>@SingleValue</code> to override this.</p>
 <h2 id="_postgresql"><a class="anchor" href="#_postgresql"></a>15. PostgreSQL</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>TODO</p>
+<p><strong>jdbi3-postgres</strong> provides enhanced integration with the
+<a href="https://jdbc.postgresql.org/">PostgreSQL JDBC Driver</a>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">Jdbi jdbi = Jdbi.create(<span class="string"><span class="delimiter">&quot;</span><span class="content">jdbc:postgresql://host:port/database</span><span class="delimiter">&quot;</span></span>)
+                .installPlugin(<span class="keyword">new</span> PostgresPlugin())</code></pre>
+</div>
 </div>
 </div>
 </div>
