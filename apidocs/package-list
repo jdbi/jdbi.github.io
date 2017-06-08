@@ -5,6 +5,7 @@ org.jdbi.v3.core.collector
 org.jdbi.v3.core.config
 org.jdbi.v3.core.extension
 org.jdbi.v3.core.generic
+org.jdbi.v3.core.h2
 org.jdbi.v3.core.locator
 org.jdbi.v3.core.mapper
 org.jdbi.v3.core.mapper.reflect
@@ -13,7 +14,6 @@ org.jdbi.v3.core.rewriter
 org.jdbi.v3.core.spi
 org.jdbi.v3.core.statement
 org.jdbi.v3.core.transaction
-org.jdbi.v3.core.vendor
 org.jdbi.v3.guava
 org.jdbi.v3.jodatime2
 org.jdbi.v3.jpa

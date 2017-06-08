@@ -1859,7 +1859,7 @@ and columns.</p>
 <div class="paragraph">
 <p>A <strong>ColumnMapper</strong> converts a single column&#8217;s value into a Java object. It can be
 used as a <strong>RowMapper</strong> if there is only one column present, or it can be used to
-build more complex *RowMapper*s.</p>
+build more complex <strong>RowMapper</strong> types.</p>
 </div>
 <div class="paragraph">
 <p>The mapper is selected based on the declared result type of your query.</p>
@@ -2073,6 +2073,228 @@ to rear its ugly head.</p>
 <div class="paragraph">
 <p>Here we present a couple of strategies for retrieving results from more
 complicated rows.</p>
+</div>
+<div class="paragraph">
+<p>Consider a contact list app as an example. The contact list contains any
+number of contacts. Contacts have a name, and any number of phone numbers.
+Phone numbers have a type (e.g. home, work) and a phone number:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="type">class</span> <span class="class">Contact</span> {
+  <span class="predefined-type">Long</span> id;
+  <span class="predefined-type">String</span> name;
+  <span class="predefined-type">List</span>&lt;Phone&gt; phones = <span class="keyword">new</span> <span class="predefined-type">ArrayList</span>&lt;&gt;();
+
+  <span class="type">void</span> addPhone(Phone phone) {
+    phones.add(phone);
+  }
+}
+
+<span class="type">class</span> <span class="class">Phone</span> {
+  <span class="predefined-type">Long</span> id;
+  <span class="predefined-type">String</span> type;
+  <span class="predefined-type">String</span> phone;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We&#8217;ve left out getters, setters, and access modifiers for brevity.</p>
+</div>
+<div class="paragraph">
+<p>Since we&#8217;ll be reusing the same queries, we&#8217;ll define them as constants now:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>static final String SELECT_ALL = "select contacts.id c_id, name c_name, "
+    + "phones.id p_id, type p_type, phones.phone p_phone "
+    + "from contacts left join phones on contacts.id = phones.contact_id "
+    + "order by c_name, p_type ";
+
+static final String SELECT_ONE = SELECT_ALL + "where phones.id = :id";</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that we&#8217;ve given aliases (e.g. <code>c_id</code>, <code>p_id</code>) to distinguish columns of
+the same name (<code>id</code>) from different tables.</p>
+</div>
+<div class="paragraph">
+<p>Jdbi provides a few different APIs for dealing with joined data.</p>
+</div>
+<div class="sect4">
+<h5 id="_resultbearing_reducerows"><a class="anchor" href="#_resultbearing_reducerows"></a>ResultBearing.reduceRows()</h5>
+<div class="paragraph">
+<p>The
+<a href="./apidocs/org/jdbi/v3/core/result/ResultBearing.html#reduceRows-U-java.util.function.BiFunction-" target="_blank">ResultBearing.reduceRows()</a>
+method accepts an accumulator seed value and a lambda function. For each row in
+the result set, Jdbi calls the lambda with the current accumulator value and a
+<a href="./apidocs/org/jdbi/v3/core/result/RowView.html" target="_blank">RowView</a> over the current row of the
+result set. The value returned for each row becomes the input accumulator
+passed in for the next row. After the last row has been processed,
+<code>reducedRows()</code> returns the last value returned from the lambda.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">List</span>&lt;Contact&gt; contacts = handle.createQuery(SELECT_ALL)
+    .registerRowMapper(BeanMapper.factory(Contact.class, <span class="string"><span class="delimiter">&quot;</span><span class="content">c</span><span class="delimiter">&quot;</span></span>))
+    .registerRowMapper(BeanMapper.factory(Phone.class, <span class="string"><span class="delimiter">&quot;</span><span class="content">p</span><span class="delimiter">&quot;</span></span>)) <i class="conum" data-value="1"></i><b>(1)</b>
+    .reduceRows(<span class="keyword">new</span> <span class="predefined-type">LinkedHashMap</span>&lt;<span class="predefined-type">Long</span>, Contact&gt;(), <i class="conum" data-value="2"></i><b>(2)</b>
+                (acc, rowView) -&gt; {
+      Contact contact = acc.computeIfAbsent( <i class="conum" data-value="3"></i><b>(3)</b>
+          rowView.getColumn(<span class="string"><span class="delimiter">&quot;</span><span class="content">c_id</span><span class="delimiter">&quot;</span></span>, <span class="predefined-type">Long</span>.class),
+          id -&gt; rowView.getRow(Contact.class));
+
+      <span class="keyword">if</span> (rowView.getColumn(<span class="string"><span class="delimiter">&quot;</span><span class="content">p_id</span><span class="delimiter">&quot;</span></span>, <span class="predefined-type">Long</span>.class) != <span class="predefined-constant">null</span>) { <i class="conum" data-value="4"></i><b>(4)</b>
+        contact.addPhone(rowView.getRow(Phone.class));
+      }
+
+      <span class="keyword">return</span> acc; <i class="conum" data-value="5"></i><b>(5)</b>
+    })
+    .values() <i class="conum" data-value="6"></i><b>(6)</b>
+    .stream()
+    .collect(toList()); <i class="conum" data-value="7"></i><b>(7)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Register row mappers for <code>Contact</code> and <code>Phone</code>. Note the <code>"c"</code> and <code>"p"</code>
+arguments used&#8212;&#8203;these are column name prefixes. By registering mappers with
+prefixes, the <code>Contact</code> mapper will only map the <code>c_id</code> and <code>c_name</code>
+columns, whereas the <code>Phone</code> mapper will only map <code>p_id</code>, <code>p_type</code>, and
+<code>p_phone</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Use an empty <a href="https://docs.oracle.com/javase/8/docs/api/java/util/LinkedHashMap.html" target="_blank">LinkedHashMap</a>
+as the accumulator seed, mapped by contact ID. <code>LinkedHashMap</code> is a good
+accumulator when selecting multiple master records, since it has fast
+storage and lookup while preserving insertion order (which helps honor
+<code>ORDER BY</code> clauses). If ordering is unimportant, a <code>HashMap</code> would also
+suffice.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Load the <code>Contact</code> from the accumulator if we already have it; otherwise,
+initialize it through the <code>RowView</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>If <code>p_id</code> column is not null, load the phone number from the current row
+and add it to the current contact.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Return the input map (now sporting an additional contact and/or phone) as
+the accumulator for the next row.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>At this point, all rows have been read into memory, and we don&#8217;t need the
+contact ID keys. So we call <code>Map.values()</code> to get a <code>Collection&lt;Contact&gt;</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>Collect the contacts into a <code>List&lt;Contact&gt;</code>.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>You may be wondering about the <code>getRow()</code> and <code>getColumn()</code> calls to <code>rowView</code>.
+When you call <code>rowView.getRow(SomeType.class)</code>, <code>RowView</code> looks up the
+registered row mapper for <code>SomeType</code>, and uses it to map the current row to a
+<code>SomeType</code> object.</p>
+</div>
+<div class="paragraph">
+<p>Likewise, when you call <code>rowView.getColumn("my_value", MyValueType.class)</code>,
+<code>RowView</code> looks up the registered column mapper for <code>MyValueType</code>, and uses it
+to map the <code>my_value</code> column of the current row to a <code>MyValueType</code> object.</p>
+</div>
+<div class="paragraph">
+<p>Now let&#8217;s do the same thing, but for a single contact:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">Optional&lt;Contact&gt; contact = handle.createQuery(SELECT_ONE)
+    .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, contactId)
+    .registerRowMapper(BeanMapper.factory(Contact.class, <span class="string"><span class="delimiter">&quot;</span><span class="content">c</span><span class="delimiter">&quot;</span></span>))
+    .registerRowMapper(BeanMapper.factory(Phone.class, <span class="string"><span class="delimiter">&quot;</span><span class="content">p</span><span class="delimiter">&quot;</span></span>))
+    .reduceRows(Optional.&lt;Contact&gt;empty(), <i class="conum" data-value="1"></i><b>(1)</b>
+                (acc, rowView) -&gt; {
+      Contact contact = acc.orElseGet(() -&gt; rowView.getRow(Contact.class));
+
+      <span class="keyword">if</span> (rowView.getColumn(<span class="string"><span class="delimiter">&quot;</span><span class="content">p_id</span><span class="delimiter">&quot;</span></span>, <span class="predefined-type">Long</span>.class) != <span class="predefined-constant">null</span>) {
+        contact.addPhone(rowView.getRow(Phone.class));
+      }
+
+      <span class="keyword">return</span> Optional.of(contact); <i class="conum" data-value="4"></i><b>(4)</b>
+    });</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Use an empty <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html" target="_blank">Optional&lt;Contact&gt;</a>
+as the accumulator seed. After the first row, the accumulator will be a
+non-empty <code>Optional&lt;Contact&gt;</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Load the <code>Contact</code> from the accumulator if we already have it; otherwise,
+initialize it through the <code>RowView</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Rewrap the <code>Contact</code> in an <code>Optional&lt;Contact&gt;</code>, to use for the accumulator
+on the following rows.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_resultbearing_reduceresultset"><a class="anchor" href="#_resultbearing_reduceresultset"></a>ResultBearing.reduceResultSet()</h5>
+<div class="paragraph">
+<p><a href="./apidocs/org/jdbi/v3/core/result/ResultBearing.html#reduceResultSet-U-org.jdbi.v3.core.result.ResultSetAccumulator-" target="_blank">ResultBearing.reduceResultSet()</a>
+is a low-level API similar to <code>reduceRows()</code>, except it provides direct access
+to the JDBC <code>ResultSet</code> instead of a <code>RowView</code> for each row.</p>
+</div>
+<div class="paragraph">
+<p>This method can provide superior performance compared to <code>reduceRows()</code>, at the
+expense of verbosity:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">List</span>&lt;Contact&gt; contacts = handle.createQuery(SELECT_ALL)
+    .reduceResultSet(<span class="keyword">new</span> <span class="predefined-type">LinkedHashMap</span>&lt;<span class="predefined-type">Long</span>, Contact&gt;(),
+                     (acc, resultSet, ctx) -&gt; {
+      <span class="type">long</span> contactId = resultSet.getLong(<span class="string"><span class="delimiter">&quot;</span><span class="content">c_id</span><span class="delimiter">&quot;</span></span>);
+      Contact contact;
+      <span class="keyword">if</span> (acc.containsKey(contactId)) {
+        contact = acc.get(contactId);
+      } <span class="keyword">else</span> {
+        contact = <span class="keyword">new</span> Contact();
+        contact.setId(contactId);
+        contact.setName(resultSet.getString(<span class="string"><span class="delimiter">&quot;</span><span class="content">c_name</span><span class="delimiter">&quot;</span></span>);
+      }
+
+      <span class="type">long</span> phoneId = resultSet.getLong(<span class="string"><span class="delimiter">&quot;</span><span class="content">p_id</span><span class="delimiter">&quot;</span></span>);
+      <span class="keyword">if</span> (!resultSet.wasNull()) {
+        Phone phone = <span class="keyword">new</span> Phone();
+        phone.setId(phoneId);
+        phone.setType(resultSet.getString(<span class="string"><span class="delimiter">&quot;</span><span class="content">p_type</span><span class="delimiter">&quot;</span></span>);
+        phone.setPhone(resultSet.getString(<span class="string"><span class="delimiter">&quot;</span><span class="content">p_phone</span><span class="delimiter">&quot;</span></span>);
+        contact.addPhone(phone);
+      }
+
+      <span class="keyword">return</span> acc;
+    })
+    .values()
+    .stream()
+    .collect(toList());</code></pre>
+</div>
+</div>
 </div>
 <div class="sect4">
 <h5 id="_joinrowmapper"><a class="anchor" href="#_joinrowmapper"></a>JoinRowMapper</h5>
@@ -3747,8 +3969,7 @@ extracting and binding each argument individually.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java">Cache cache = ... <span class="comment">// e.g. Guava Cache</span>
-StatementContext ctx = stmt.getContext();
-NamedArgumentFinder cacheFinder = name -&gt;
+NamedArgumentFinder cacheFinder = (name, ctx) -&gt;
     Optional.ofNullable(cache.getIfPresent(name))
             .map(value -&gt; ctx.findArgumentFor(<span class="predefined-type">Object</span>.class, value));
 
@@ -4204,6 +4425,14 @@ StatementRewriter.</p>
 <code>@Bind("foo") String foo</code> redundant qualifiers in SQL Object method
 parameters.</p>
 </li>
+<li>
+<p>Use a profiler! The true root cause of performance problems can often be a
+surprise. Measure first, <em>then</em> tune for performance. And then measure again
+to be sure it made a difference.</p>
+</li>
+<li>
+<p>Don&#8217;t forget to bring a towel!</p>
+</li>
 </ul>
 </div>
 </div>
@@ -4253,7 +4482,7 @@ here!</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-06-05 17:09:05 MDT
+Last updated 2017-06-08 08:55:19 PDT
 </div>
 </div>
 </body>
