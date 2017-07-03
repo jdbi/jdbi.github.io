@@ -751,7 +751,7 @@ you can just include the relevant artifacts in your POM:</p>
   <span class="tag">&lt;dependencies&gt;</span>
     <span class="tag">&lt;dependency&gt;</span>
       <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
-      <span class="tag">&lt;artifactId&gt;</span>jdbi3-parent<span class="tag">&lt;/artifactId&gt;</span>
+      <span class="tag">&lt;artifactId&gt;</span>jdbi3-bom<span class="tag">&lt;/artifactId&gt;</span>
       <span class="tag">&lt;type&gt;</span>pom<span class="tag">&lt;/type&gt;</span>
       <span class="tag">&lt;version&gt;</span>3.0.0-beta2-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
       <span class="tag">&lt;scope&gt;</span>import<span class="tag">&lt;/scope&gt;</span>
@@ -2222,13 +2222,13 @@ to map the <code>my_value</code> column of the current row to a <code>MyValueTyp
     .registerRowMapper(BeanMapper.factory(Phone.class, <span class="string"><span class="delimiter">&quot;</span><span class="content">p</span><span class="delimiter">&quot;</span></span>))
     .reduceRows(Optional.&lt;Contact&gt;empty(), <i class="conum" data-value="1"></i><b>(1)</b>
                 (acc, rowView) -&gt; {
-      Contact contact = acc.orElseGet(() -&gt; rowView.getRow(Contact.class));
+      Contact contact = acc.orElseGet(() -&gt; rowView.getRow(Contact.class)); <i class="conum" data-value="2"></i><b>(2)</b>
 
       <span class="keyword">if</span> (rowView.getColumn(<span class="string"><span class="delimiter">&quot;</span><span class="content">p_id</span><span class="delimiter">&quot;</span></span>, <span class="predefined-type">Long</span>.class) != <span class="predefined-constant">null</span>) {
         contact.addPhone(rowView.getRow(Phone.class));
       }
 
-      <span class="keyword">return</span> Optional.of(contact); <i class="conum" data-value="4"></i><b>(4)</b>
+      <span class="keyword">return</span> Optional.of(contact); <i class="conum" data-value="3"></i><b>(3)</b>
     });</code></pre>
 </div>
 </div>
@@ -2348,22 +2348,23 @@ handwritten mappers.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Test</span>
-<span class="directive">public</span> <span class="type">void</span> testSqlObjectJoinRow()
-{
-    UserArticleDao dao = dbRule.getSharedHandle().attach(UserArticleDao.class);
-    Multimap&lt;User, Article&gt; joined = HashMultimap.create();
-    dao.getAuthorship()
-        .forEach(jr -&gt; joined.put(jr.get(User.class), jr.get(Article.class)));
-    assertThat(joined).isEqualTo(JoinRowMapperTest.getExpected());
-}
-
-<span class="directive">public</span> <span class="type">interface</span> <span class="class">UserArticleDao</span>
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserArticleDao</span>
 {
     <span class="annotation">@RegisterJoinRowMapper</span>({User.class, Article.class})
     <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT * FROM user NATURAL JOIN author NATURAL JOIN article</span><span class="delimiter">&quot;</span></span>)
     Stream&lt;JoinRow&gt; getAuthorship();
 }</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">Multimap&lt;User, Article&gt; joined = HashMultimap.create();
+
+handle.attach(UserArticleDao.class)
+        .getAuthorship()
+        .forEach(jr -&gt; joined.put(jr.get(User.class), jr.get(Article.class)));
+
+assertThat(joined).isEqualTo(JoinRowMapperTest.getExpected());</code></pre>
 </div>
 </div>
 </div>
@@ -3859,7 +3860,7 @@ to get the returned DML.</p>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
   <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
-  <span class="tag">&lt;artifactId&gt;</span>jdbi3-oracle12<span class="tag">&lt;/artifactId&gt;</span>
+  <span class="tag">&lt;artifactId&gt;</span>jdbi3-postgres<span class="tag">&lt;/artifactId&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
@@ -3927,25 +3928,112 @@ place of the standard Jdbi templating engine.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>When using core APIs, use the <code>StringTemplateSqlLocator</code> to load ST templates
-from the classpath.</p>
+<p>To use StringTemplate format in SQL statements, set the statement rewriter
+to <code>StringTemplateStatementRewriter</code>.</p>
 </div>
 <div class="paragraph">
-<p>TODO: usage example</p>
+<p>Defined attributes are provided to the StringTemplate engine to render the SQL:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">String</span> sortColumn = <span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>;
+<span class="predefined-type">String</span> sql = <span class="string"><span class="delimiter">&quot;</span><span class="content">select id, name </span><span class="delimiter">&quot;</span></span> +
+             <span class="string"><span class="delimiter">&quot;</span><span class="content">from account </span><span class="delimiter">&quot;</span></span> +
+             <span class="string"><span class="delimiter">&quot;</span><span class="content">order by &lt;if(sort)&gt; &lt;sortBy&gt;, &lt;endif&gt; id</span><span class="delimiter">&quot;</span></span>;
+
+<span class="predefined-type">List</span>&lt;Account&gt; accounts = handle.createQuery(sql)
+      .setStatementRewriter(<span class="keyword">new</span> StringTemplateStatementRewriter())
+      .define(<span class="string"><span class="delimiter">&quot;</span><span class="content">sort</span><span class="delimiter">&quot;</span></span>, <span class="predefined-constant">true</span>)
+      .define(<span class="string"><span class="delimiter">&quot;</span><span class="content">sortBy</span><span class="delimiter">&quot;</span></span>, sortColumn)
+      .mapTo(Account.class)
+      .list();</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>In SQL Objects, using the <code>@UseStringTemplateStatementRewriter</code> to switch the
-SQL in annotations to be parsed by the StringTemplate engine.</p>
+<p>Alternatively, SQL templates can be loaded from StringTemplate group files on
+the classpath:</p>
+</div>
+<div class="listingblock">
+<div class="title">com/foo/AccountDao.sql.stg</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="stringtemplate">group AccountDao;
+
+selectAll(sort,sortBy) ::= &lt;&lt;
+  select id, name
+  from account
+  order by &lt;if(sort)&gt; &lt;sortBy&gt;, &lt;endif&gt; id
+&gt;&gt;</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">ST template = StringTemplateSqlLocator.findStringTemplate(
+                  <span class="string"><span class="delimiter">&quot;</span><span class="content">com/foo/AccountDao.sql.stg</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">selectAll</span><span class="delimiter">&quot;</span></span>);
+
+<span class="predefined-type">String</span> sql = template.add(<span class="string"><span class="delimiter">&quot;</span><span class="content">sort</span><span class="delimiter">&quot;</span></span>, <span class="predefined-constant">true</span>)
+                     .add(<span class="string"><span class="delimiter">&quot;</span><span class="content">sortBy</span><span class="delimiter">&quot;</span></span>, sortColumn)
+                     .render();</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>TODO: usage example</p>
+<p>In SQL Objects, the <code>@UseStringTemplateStatementRewriter</code> annotation sets the
+statement locator, similar to first example above.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">com.foo</span>;
+
+<span class="directive">public</span> <span class="type">interface</span> <span class="class">AccountDao</span> {
+  <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select id, name </span><span class="delimiter">&quot;</span></span> +
+            <span class="string"><span class="delimiter">&quot;</span><span class="content">from account </span><span class="delimiter">&quot;</span></span> +
+            <span class="string"><span class="delimiter">&quot;</span><span class="content">order by &lt;if(sort)&gt; &lt;sortBy&gt;, &lt;endif&gt; id</span><span class="delimiter">&quot;</span></span>)
+  <span class="annotation">@UseStringTemplateStatementRewriter</span>
+  <span class="predefined-type">List</span>&lt;Account&gt; selectAll(<span class="annotation">@Define</span> <span class="type">boolean</span> sort,
+                          <span class="annotation">@Define</span> <span class="predefined-type">String</span> sortBy);
+}</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>Or, use the <code>@UseStringTemplateSqlLocator</code> annotation to switch template
-engines, and cause templates to be loaded from <code>.stg</code> files on the classpath:</p>
+<p>Alternatively, the <code>@UseStringTemplateSqlLocator</code> annotation sets the statement
+locator, and loads SQL from a StringTemplate group file on the classpath:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">com.foo</span>;
+
+<span class="directive">public</span> <span class="type">interface</span> <span class="class">AccountDao</span> {
+  <span class="annotation">@SqlQuery</span>
+  <span class="annotation">@UseStringTemplateSqlLocator</span>
+  <span class="predefined-type">List</span>&lt;Account&gt; selectAll(<span class="annotation">@Define</span> <span class="type">boolean</span> sort,
+                          <span class="annotation">@Define</span> <span class="predefined-type">String</span> sortBy);
+}</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>TODO: usage example</p>
+<p>In this example, since the fully qualified class name is <code>com.foo.AccountDao</code>,
+SQL will be loaded from the file <code>com/foo/AccountDao.sql.stg</code> on the
+classpath.</p>
+</div>
+<div class="paragraph">
+<p>By default, the template in the group with the same name as the method will be
+used. This can be overridden on the <code>@Sql___</code> annotation:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">com.foo</span>;
+
+<span class="directive">public</span> <span class="type">interface</span> <span class="class">AccountDao</span> {
+  <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">listSorted</span><span class="delimiter">&quot;</span></span>)
+  <span class="annotation">@UseStringTemplateSqlLocator</span>
+  <span class="predefined-type">List</span>&lt;Account&gt; selectAll(<span class="annotation">@Define</span> <span class="type">boolean</span> sort,
+                          <span class="annotation">@Define</span> <span class="predefined-type">String</span> sortBy);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this example, the SQL template will still be loaded from the file
+<code>com/foo/AccountDao.sql.stg</code> on the classpath, however the <code>listSorted</code>
+template will be used, regardless of the method name.</p>
 </div>
 </div>
 </div>
@@ -4482,7 +4570,7 @@ here!</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-06-08 08:55:19 PDT
+Last updated 2017-07-03 15:29:14 PDT
 </div>
 </div>
 </body>
