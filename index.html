@@ -572,9 +572,10 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#_sql_object_internal_plumbing">6.6. SQL Object internal plumbing</a></li>
 <li><a href="#_extensions">6.7. Extensions</a></li>
 <li><a href="#_sql_interpolation">6.8. SQL interpolation</a></li>
-<li><a href="#_statementrewriter">6.9. StatementRewriter</a></li>
-<li><a href="#_timingcollector">6.10. TimingCollector</a></li>
-<li><a href="#_resultproducer">6.11. ResultProducer</a></li>
+<li><a href="#_templateengine">6.9. TemplateEngine</a></li>
+<li><a href="#_sqlparser">6.10. SqlParser</a></li>
+<li><a href="#_timingcollector">6.11. TimingCollector</a></li>
+<li><a href="#_resultproducer">6.12. ResultProducer</a></li>
 </ul>
 </li>
 <li><a href="#_appendix">7. Appendix</a>
@@ -742,7 +743,7 @@ release.
 <p>Jdbi is easy to include in your Java project - with an
 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Apache 2.0</a> license, few
 external dependencies, and JARs distributed through
-<a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.jdbi%22%20AND%20v%3A%223.0.0-beta2-SNAPSHOT%22" target="_blank">Maven Central</a>,
+<a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.jdbi%22%20AND%20v%3A%223.0.0-beta2%22" target="_blank">Maven Central</a>,
 you can just include the relevant artifacts in your POM:</p>
 </div>
 <div class="listingblock">
@@ -753,7 +754,7 @@ you can just include the relevant artifacts in your POM:</p>
       <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
       <span class="tag">&lt;artifactId&gt;</span>jdbi3-bom<span class="tag">&lt;/artifactId&gt;</span>
       <span class="tag">&lt;type&gt;</span>pom<span class="tag">&lt;/type&gt;</span>
-      <span class="tag">&lt;version&gt;</span>3.0.0-beta2-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+      <span class="tag">&lt;version&gt;</span>3.0.0-beta2<span class="tag">&lt;/version&gt;</span>
       <span class="tag">&lt;scope&gt;</span>import<span class="tag">&lt;/scope&gt;</span>
     <span class="tag">&lt;/dependency&gt;</span>
   <span class="tag">&lt;/dependencies&gt;</span>
@@ -3928,8 +3929,8 @@ place of the standard Jdbi templating engine.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>To use StringTemplate format in SQL statements, set the statement rewriter
-to <code>StringTemplateStatementRewriter</code>.</p>
+<p>To use StringTemplate format in SQL statements, set the template engine
+to <code>StringTemplateEngine</code>.</p>
 </div>
 <div class="paragraph">
 <p>Defined attributes are provided to the StringTemplate engine to render the SQL:</p>
@@ -3942,7 +3943,7 @@ to <code>StringTemplateStatementRewriter</code>.</p>
              <span class="string"><span class="delimiter">&quot;</span><span class="content">order by &lt;if(sort)&gt; &lt;sortBy&gt;, &lt;endif&gt; id</span><span class="delimiter">&quot;</span></span>;
 
 <span class="predefined-type">List</span>&lt;Account&gt; accounts = handle.createQuery(sql)
-      .setStatementRewriter(<span class="keyword">new</span> StringTemplateStatementRewriter())
+      .setTemplateEngine(<span class="keyword">new</span> StringTemplateEngine())
       .define(<span class="string"><span class="delimiter">&quot;</span><span class="content">sort</span><span class="delimiter">&quot;</span></span>, <span class="predefined-constant">true</span>)
       .define(<span class="string"><span class="delimiter">&quot;</span><span class="content">sortBy</span><span class="delimiter">&quot;</span></span>, sortColumn)
       .mapTo(Account.class)
@@ -3976,7 +3977,7 @@ selectAll(sort,sortBy) ::= &lt;&lt;
 </div>
 </div>
 <div class="paragraph">
-<p>In SQL Objects, the <code>@UseStringTemplateStatementRewriter</code> annotation sets the
+<p>In SQL Objects, the <code>@UseStringTemplateEngine</code> annotation sets the
 statement locator, similar to first example above.</p>
 </div>
 <div class="listingblock">
@@ -3987,7 +3988,7 @@ statement locator, similar to first example above.</p>
   <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select id, name </span><span class="delimiter">&quot;</span></span> +
             <span class="string"><span class="delimiter">&quot;</span><span class="content">from account </span><span class="delimiter">&quot;</span></span> +
             <span class="string"><span class="delimiter">&quot;</span><span class="content">order by &lt;if(sort)&gt; &lt;sortBy&gt;, &lt;endif&gt; id</span><span class="delimiter">&quot;</span></span>)
-  <span class="annotation">@UseStringTemplateStatementRewriter</span>
+  <span class="annotation">@UseStringTemplateEngine</span>
   <span class="predefined-type">List</span>&lt;Account&gt; selectAll(<span class="annotation">@Define</span> <span class="type">boolean</span> sort,
                           <span class="annotation">@Define</span> <span class="predefined-type">String</span> sortBy);
 }</code></pre>
@@ -4431,26 +4432,126 @@ value is defined for <code>foo</code> will be substituted into the SQL statement
 </div>
 </div>
 <div class="sect2">
-<h3 id="_statementrewriter"><a class="anchor" href="#_statementrewriter"></a>6.9. StatementRewriter</h3>
+<h3 id="_templateengine"><a class="anchor" href="#_templateengine"></a>6.9. TemplateEngine</h3>
 <div class="paragraph">
-<p>TODO:</p>
+<p>Jdbi uses a <a href="./apidocs/org/jdbi/v3/core/rewriter/TemplateEngine.html" target="_blank">TemplateEngine</a>
+implementation to render templates into SQL. Template engines take a SQL
+template string and the <code>StatementContext</code> as input, and produce a parseable
+SQL string as output.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>This is what parses your SQL statements, extracts named parameters, and
-inlines defined attributes.</p>
-</li>
-<li>
-<p>Depending on your database vendor (Oracle?), you can use hash prefix named
-parameters. Configure HashPrefixStatementRewriter as the default
-StatementRewriter.</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>Out of the box, Jdbi is configured to use <code>DefinedAttributeTemplateEngine</code>,
+which replaces angle-bracked tokens like <code>&lt;name&gt;</code> in your SQL statements with
+the string value of the named attribute:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">String</span> tableName = <span class="string"><span class="delimiter">&quot;</span><span class="content">customers</span><span class="delimiter">&quot;</span></span>;
+<span class="predefined-type">Class</span>&lt;?&gt; entityClass = Customer.class;
+
+handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select &lt;columns&gt; from &lt;table&gt;</span><span class="delimiter">&quot;</span></span>)
+      .define(<span class="string"><span class="delimiter">&quot;</span><span class="content">table</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">customers</span><span class="delimiter">&quot;</span></span>)
+      .defineList(<span class="string"><span class="delimiter">&quot;</span><span class="content">columns</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>)
+      .mapToMap()
+      .list() <span class="comment">// =&gt; &quot;select id, name from customers&quot;</span></code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The <code>defineList</code> method defines a list of elements as the comma-separated
+splice of String values of the individual elements. In the above example,
+the <code>columns</code> attribute is defined as <code>"id, name"</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Any custom template engine can be used. Simply implement the <code>TemplateEngine</code>
+interface, then call <code>setTemplateEngine()</code> on the <code>Jdbi</code>, <code>Handle</code>, or on a SQL
+statement like <code>Update</code> or <code>Query</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">TemplateEngine templateEngine = (template, ctx) -&gt; {
+  ...
+};
+
+jdbi.setTemplateEngine(templateEngine);</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Jdbi also provides <code>StringTemplateEngine</code>,
+which renders templates using the StringTemplate library. See
+<a href="#_stringtemplate_4">StringTemplate 4</a>.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_timingcollector"><a class="anchor" href="#_timingcollector"></a>6.10. TimingCollector</h3>
+<h3 id="_sqlparser"><a class="anchor" href="#_sqlparser"></a>6.10. SqlParser</h3>
+<div class="paragraph">
+<p>After the SQL template has been rendered, Jdbi uses a
+<a href="./apidocs/org/jdbi/v3/core/rewriter/SqlParser.html" target="_blank">SqlParser</a> to parse out any named
+parameters from the SQL statement. This Produces a <code>ParsedSql</code> object, which
+contains all the information Jdbi needs to bind parameters and execute your SQL
+statement.</p>
+</div>
+<div class="paragraph">
+<p>Out of the box, Jdbi is configured to use <code>ColonPrefixSqlParser</code>, which
+recognizes colon-prefixed named parameters, e.g. <code>:name</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into characters (id, name) values (:id, :name)</span><span class="delimiter">&quot;</span></span>)
+      .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">1</span>)
+      .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Dolores Abernathy</span><span class="delimiter">&quot;</span></span>)
+      .execute();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Jdbi also provides <code>HashPrefixSqlParser</code>, which recognizes hash-prefixed
+parameters, e.g. <code>#hashtag</code>. Use this parser by calling <code>setSqlParser()</code> on the
+<code>Jdbi</code>, <code>Handle</code>, or any SQL statement such as <code>Query</code> or <code>Update</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">handle.setSqlParser(<span class="keyword">new</span> HashPrefixSqlParser());
+handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into characters (id, name) values (#id, #name)</span><span class="delimiter">&quot;</span></span>)
+      .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">2</span>)
+      .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Teddy Flood</span><span class="delimiter">&quot;</span></span>)
+      .execute();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For you fearless adventurers who have read the
+<a href="https://www.amazon.com/Compilers-Principles-Techniques-Tools-2nd/dp/0321486811" target="_blank">Dragon book</a>,
+any custom SQL parser can be used. Simply implement the <code>SqlParser</code> interface,
+then set it on the Jdbi, Handle, or SQL statement:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">SqlParser parser = (sql, ctx) -&gt; {
+  ...
+};
+
+jdbi.setParser(parser);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_timingcollector"><a class="anchor" href="#_timingcollector"></a>6.11. TimingCollector</h3>
 <div class="paragraph">
 <p>TODO:</p>
 </div>
@@ -4463,7 +4564,7 @@ StatementRewriter.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_resultproducer"><a class="anchor" href="#_resultproducer"></a>6.11. ResultProducer</h3>
+<h3 id="_resultproducer"><a class="anchor" href="#_resultproducer"></a>6.12. ResultProducer</h3>
 <div class="paragraph">
 <p>TODO:</p>
 </div>
@@ -4570,7 +4671,7 @@ here!</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-07-03 15:29:14 PDT
+Last updated 2017-07-18 01:28:49 MDT
 </div>
 </div>
 </body>
