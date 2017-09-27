@@ -540,6 +540,7 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#_scripts">3.14. Scripts</a></li>
 <li><a href="#_transactions">3.15. Transactions</a></li>
 <li><a href="#_sql_locators">3.16. SQL Locators</a></li>
+<li><a href="#_statementcontext">3.17. StatementContext</a></li>
 </ul>
 </li>
 <li><a href="#_sql_objects">4. SQL Objects</a>
@@ -567,7 +568,7 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#_namedargumentfinder">6.1. NamedArgumentFinder</a></li>
 <li><a href="#_jdbiconfig">6.2. JdbiConfig</a></li>
 <li><a href="#_jdbiplugin">6.3. JdbiPlugin</a></li>
-<li><a href="#_jdbicollectors_registry">6.4. JdbiCollectors registry</a></li>
+<li><a href="#_jdbicollector">6.4. JdbiCollector</a></li>
 <li><a href="#_sql_object_custom_annotations">6.5. SQL Object custom annotations</a></li>
 <li><a href="#_sql_object_internal_plumbing">6.6. SQL Object internal plumbing</a></li>
 <li><a href="#_extensions">6.7. Extensions</a></li>
@@ -743,7 +744,7 @@ release.
 <p>Jdbi is easy to include in your Java project - with an
 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Apache 2.0</a> license, few
 external dependencies, and JARs distributed through
-<a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.jdbi%22%20AND%20v%3A%223.0.0-beta2%22" target="_blank">Maven Central</a>,
+<a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.jdbi%22%20AND%20v%3A%223.0.0-beta4-SNAPSHOT%22" target="_blank">Maven Central</a>,
 you can just include the relevant artifacts in your POM:</p>
 </div>
 <div class="listingblock">
@@ -754,7 +755,7 @@ you can just include the relevant artifacts in your POM:</p>
       <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
       <span class="tag">&lt;artifactId&gt;</span>jdbi3-bom<span class="tag">&lt;/artifactId&gt;</span>
       <span class="tag">&lt;type&gt;</span>pom<span class="tag">&lt;/type&gt;</span>
-      <span class="tag">&lt;version&gt;</span>3.0.0-beta2<span class="tag">&lt;/version&gt;</span>
+      <span class="tag">&lt;version&gt;</span>3.0.0-beta4-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
       <span class="tag">&lt;scope&gt;</span>import<span class="tag">&lt;/scope&gt;</span>
     <span class="tag">&lt;/dependency&gt;</span>
   <span class="tag">&lt;/dependencies&gt;</span>
@@ -770,7 +771,7 @@ module you want to use:</p>
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependencies&gt;</span>
   <span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
-    <span class="tag">&lt;artifactId&gt;</span>jdbi3<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>jdbi3-core<span class="tag">&lt;/artifactId&gt;</span>
   <span class="tag">&lt;/dependency&gt;</span>
 <span class="tag">&lt;/dependencies&gt;</span></code></pre>
 </div>
@@ -1800,23 +1801,134 @@ and as such no custom mapper code is required at all.</p>
 <div class="sect4">
 <h5 id="_map_entry_mapping"><a class="anchor" href="#_map_entry_mapping"></a>Map.Entry mapping</h5>
 <div class="paragraph">
-<p>TODO:</p>
+<p>Out of the box, Jdbi registers a <code>RowMapper&lt;Map.Entry&lt;K,V&gt;&gt;</code>. Since each row in
+the result set is a <code>Map.Entry&lt;K,V&gt;</code>, the entire result set can be easily
+collected into a <code>Map&lt;K,V&gt;</code> (or Guava&#8217;s <code>Multimap&lt;K,V&gt;</code>).</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+A mapper must be registered for both the key and value type.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Join rows can be gathered into a map result by specifying the generic map
+signature:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">String</span> sql = <span class="string"><span class="delimiter">&quot;</span><span class="content">select u.id u_id, u.name u_name, p.id p_id, p.phone p_phone </span><span class="delimiter">&quot;</span></span> +
+        <span class="string"><span class="delimiter">&quot;</span><span class="content">from user u left join phone p on u.id = p.user_id</span><span class="delimiter">&quot;</span></span>;
+<span class="predefined-type">Map</span>&lt;User, Phone&gt; map = h.createQuery(sql)
+        .registerRowMapper(ConstructorMapper.factory(User.class, <span class="string"><span class="delimiter">&quot;</span><span class="content">u</span><span class="delimiter">&quot;</span></span>))
+        .registerRowMapper(ConstructorMapper.factory(Phone.class, <span class="string"><span class="delimiter">&quot;</span><span class="content">p</span><span class="delimiter">&quot;</span></span>))
+        .collectInto(<span class="keyword">new</span> GenericType&lt;<span class="predefined-type">Map</span>&lt;User, Phone&gt;&gt;() {});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the preceding example, the <code>User</code> mapper uses a "u" column name prefix, and
+the <code>Phone</code> mapper uses "p". Since each mapper only reads columns with the
+expected prefix, the respective <code>id</code> columns are unambiguous.</p>
+</div>
+<div class="paragraph">
+<p>A unique index (e.g. by ID column) can be obtained by setting the key column
+name:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">Map</span>&lt;<span class="predefined-type">Integer</span>, User&gt; map = h.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from user</span><span class="delimiter">&quot;</span></span>)
+        .setMapKeyColumn(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>)
+        .registerRowMapper(ConstructorMapper.factory(User.class))
+        .collectInto(<span class="keyword">new</span> GenericType&lt;<span class="predefined-type">Map</span>&lt;<span class="predefined-type">Integer</span>, User&gt;&gt;() {});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Set both the key and value column names to gather a two-column query into a map
+result:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">Map</span>&lt;<span class="predefined-type">String</span>, <span class="predefined-type">String</span>&gt; map = h.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select key, value from config</span><span class="delimiter">&quot;</span></span>)
+        .setMapKeyColumn(<span class="string"><span class="delimiter">&quot;</span><span class="content">key</span><span class="delimiter">&quot;</span></span>)
+        .setMapValueColumn(<span class="string"><span class="delimiter">&quot;</span><span class="content">value</span><span class="delimiter">&quot;</span></span>)
+        .collectInto(<span class="keyword">new</span> GenericType&lt;<span class="predefined-type">Map</span>&lt;<span class="predefined-type">String</span>, <span class="predefined-type">String</span>&gt;&gt;() {});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>All the above examples assume a one-to-one key/value relationship. What if
+there is a one-to-many relationship?</p>
+</div>
+<div class="paragraph">
+<p>Google Guava provides a <code>Multimap</code> type, which supports mapping multiple
+values per key.</p>
+</div>
+<div class="paragraph">
+<p>First, follow the instructions in the <a href="#_google_guava">Google Guava</a> section to install
+<code>GuavaPlugin</code> into Jdbi.</p>
+</div>
+<div class="paragraph">
+<p>Then, simply ask for a <code>Multimap</code> instead of a <code>Map</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">String</span> sql = <span class="string"><span class="delimiter">&quot;</span><span class="content">select u.id u_id, u.name u_name, p.id p_id, p.phone p_phone </span><span class="delimiter">&quot;</span></span> +
+        <span class="string"><span class="delimiter">&quot;</span><span class="content">from user u left join phone p on u.id = p.user_id</span><span class="delimiter">&quot;</span></span>;
+Multimap&lt;User, Phone&gt; map = h.createQuery(sql)
+        .registerRowMapper(ConstructorMapper.factory(User.class, <span class="string"><span class="delimiter">&quot;</span><span class="content">u</span><span class="delimiter">&quot;</span></span>))
+        .registerRowMapper(ConstructorMapper.factory(Phone.class, <span class="string"><span class="delimiter">&quot;</span><span class="content">p</span><span class="delimiter">&quot;</span></span>))
+        .collectInto(<span class="keyword">new</span> GenericType&lt;Multimap&lt;User, Phone&gt;&gt;() {});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>collectInto()</code> method is worth explaining. When you call it, several things
+happen behind the scenes:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Demonstrate collectInfo(new GenericType&lt;Map&lt;Key,Value&gt;&gt;(){})</p>
+<p>Consult the <code>JdbiCollectors</code> registry to obtain a
+<a href="./apidocs/org/jdbi/v3/core/collector/CollectorFactory.html" target="_blank">CollectorFactory</a> which
+supports the given container type.</p>
 </li>
 <li>
-<p>Key and value are row types (e.g. one-to-many entities)</p>
+<p>Next, ask that <code>CollectorFactory</code> to extract the element type from the
+container type signature. In the above example, the element type of
+<code>Multimap&lt;User,Phone&gt;</code> is <code>Map.Entry&lt;User,Phone&gt;</code>.</p>
 </li>
 <li>
-<p>Key is a column, value is a row type (e.g. index by id)</p>
+<p>Obtain a mapper for that element type from the mapping registry.</p>
 </li>
 <li>
-<p>Key is a column, value is a column (e.g. accessing a config table)</p>
+<p>Obtain a <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Collector.html" target="_blank">Collector</a> for the
+container type from the <code>CollectorFactory</code>.</p>
+</li>
+<li>
+<p>Finally, return <code>map(elementMapper).collect(collector)</code>.</p>
 </li>
 </ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If the lookup for the collector factory, element type, or element mapper
+fails, an exception is thrown.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Jdbi can be enhanced to support arbitrary container types. See
+<a href="#_jdbicollector">JdbiCollector</a> for more information.</p>
 </div>
 </div>
 </div>
@@ -2049,7 +2161,21 @@ result, respectively.</p>
 *Collector*s to start with.</p>
 </div>
 <div class="paragraph">
-<p>TODO: example</p>
+<p>You can also write your own custom collectors.  For example, to accumulate
+found rows into a <strong>Map</strong>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">h.execute(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into something (id, name) values (1, 'Alice'), (2, 'Bob'), (3, 'Chuckles')</span><span class="delimiter">&quot;</span></span>);
+<span class="predefined-type">Map</span>&lt;<span class="predefined-type">Integer</span>, Something&gt; users = h.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select id, name from something</span><span class="delimiter">&quot;</span></span>)
+    .mapTo(Something.class)
+    .collect(Collector.of(<span class="predefined-type">HashMap</span>::<span class="keyword">new</span>, (accum, item) -&gt; {
+        accum.put(item.getId(), item);   <span class="comment">// Each entry is added into an accumulator map</span>
+    }, (l, r) -&gt; {
+        l.putAll(r);                     <span class="comment">// While jdbi does not process rows in parallel,</span>
+        <span class="keyword">return</span> l;                        <span class="comment">// the Collector contract encourages writing combiners.</span>
+    }, Characteristics.IDENTITY_FINISH));</code></pre>
+</div>
 </div>
 </div>
 <div class="sect4">
@@ -2863,6 +2989,22 @@ classpath, rather than in string inside Java code.</p>
 <p>TODO: usage example</p>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_statementcontext"><a class="anchor" href="#_statementcontext"></a>3.17. StatementContext</h3>
+<div class="paragraph">
+<p>The <a href="./apidocs/org/jdbi/v3/core/statement/StatementContext.html">StatementContext</a> class
+is a carrier for various state related to the creation and execution of statements
+that is not appropriate to hold on the <strong>Query</strong> or other particular statement class
+itself.  Among other things, it holds open <strong>JDBC</strong> resources, processed SQL statements,
+and accumulated bindings.  It is exposed to implementations of most user extension points,
+for example <strong>RowMapper, *ColumnMapper*s, or *CollectorFactory</strong>.</p>
+</div>
+<div class="paragraph">
+<p>The <strong>StatementContext</strong> itself is not intended to be extended and generally extensions
+should not need to mutate the context.  Please read the JavaDoc for more information
+on advanced usage.</p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -3083,6 +3225,91 @@ a single row.</p>
 </ul>
 </div>
 </div>
+<div class="sect4">
+<h5 id="_map_k_v_results"><a class="anchor" href="#_map_k_v_results"></a>Map&lt;K,V&gt; Results</h5>
+<div class="paragraph">
+<p>SQL Object methods may return <code>Map&lt;K,V&gt;</code> types (see <a href="#_map_entry_mapping">Map.Entry mapping</a> in
+the Core API). In this scenario, each row is mapped to a <code>Map.Entry&lt;K,V&gt;</code>,
+and the entries for each row are collected into a single <code>Map</code> instance.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+A mapper must be registered for both the key and value types.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Gather master/detail join rows into a map, simply by registering mappers
+for the key and value types.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select u.id u_id, u.name u_name, p.id p_id, p.phone p_phone </span><span class="delimiter">&quot;</span></span> +
+        <span class="string"><span class="delimiter">&quot;</span><span class="content">from user u left join phone p on u.id = p.user_id</span><span class="delimiter">&quot;</span></span>)
+<span class="annotation">@RegisterConstructorMapper</span>(value = User.class, prefix = <span class="string"><span class="delimiter">&quot;</span><span class="content">u</span><span class="delimiter">&quot;</span></span>)
+<span class="annotation">@RegisterConstructorMapper</span>(value = Phone.class, prefix = <span class="string"><span class="delimiter">&quot;</span><span class="content">p</span><span class="delimiter">&quot;</span></span>)
+<span class="predefined-type">Map</span>&lt;User, Phone&gt; getMap();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the preceding example, the <code>User</code> mapper uses a "u" column name prefix, and
+the <code>Phone</code> mapper uses "p". Since each mapper only reads the column with the
+expected prefix, the respective <code>id</code> columns are unambigous.</p>
+</div>
+<div class="paragraph">
+<p>A unique index (e.g. by ID column) can be obtains by setting the key column
+name:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from user</span><span class="delimiter">&quot;</span></span>)
+<span class="annotation">@KeyColumn</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>)
+<span class="annotation">@RegisterConstructorMapper</span>(User.class)
+<span class="predefined-type">Map</span>&lt;<span class="predefined-type">Integer</span>, User&gt; getAll();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Set both the key and value column names to gather a two-column query into a map
+result:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select key, value from config</span><span class="delimiter">&quot;</span></span>)
+<span class="annotation">@KeyColumn</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">key</span><span class="delimiter">&quot;</span></span>)
+<span class="annotation">@ValueColumn</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">value</span><span class="delimiter">&quot;</span></span>)
+<span class="predefined-type">Map</span>&lt;<span class="predefined-type">String</span>, <span class="predefined-type">String</span>&gt; getAll();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>All of the above examples assume a one-to-one key/value relationship.</p>
+</div>
+<div class="paragraph">
+<p>What if there is a one-to-many relationship? Google Guava provides a <code>Multimap</code>
+type, which supports mapping multiple values per key.</p>
+</div>
+<div class="paragraph">
+<p>First, follow the instructions in the <a href="#_google_guava">Google Guava</a> section to install
+<code>GuavaPlugin</code>.</p>
+</div>
+<div class="paragraph">
+<p>Then, simply specify a <code>Multimap</code> return type instead of <code>Map</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select u.id u_id, u.name u_name, p.id p_id, p.phone p_phone </span><span class="delimiter">&quot;</span></span> +
+        <span class="string"><span class="delimiter">&quot;</span><span class="content">from user u left join phone p on u.id = p.user_id</span><span class="delimiter">&quot;</span></span>)
+<span class="annotation">@RegisterConstructorMapper</span>(value = User.class, prefix = <span class="string"><span class="delimiter">&quot;</span><span class="content">u</span><span class="delimiter">&quot;</span></span>)
+<span class="annotation">@RegisterConstructorMapper</span>(value = Phone.class, prefix = <span class="string"><span class="delimiter">&quot;</span><span class="content">p</span><span class="delimiter">&quot;</span></span>)
+Multimap&lt;User, Phone&gt; getMultimap();</code></pre>
+</div>
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="__sqlupdate"><a class="anchor" href="#__sqlupdate"></a>4.1.3. @SqlUpdate</h4>
@@ -3092,7 +3319,7 @@ a single row.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>By default supports voice, int/long (update count), or boolean (update count
+<p>By default supports void, int/long (update count), or boolean (update count
 &gt; 0) return types</p>
 </li>
 <li>
@@ -3563,7 +3790,19 @@ list of supported types.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>TODO: usage examples</p>
+<p>With the plugin installed, any supported Guava collection type can
+be returned from a SQL object method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
+    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from users order by name</span><span class="delimiter">&quot;</span></span>)
+    ImmutableList&lt;User&gt; list();
+
+    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from users where id = :id</span><span class="delimiter">&quot;</span></span>)
+    com.google.common.base.Optional&lt;User&gt; getById(<span class="type">long</span> id);
+}</code></pre>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -3667,6 +3906,19 @@ Jdbi. "No problem boss, it already supports JPA annotations, easy peasy!"</p>
 <div class="paragraph">
 <p><a href="http://kotlinlang.org/" target="_blank">Kotlin</a> support is provided by <strong>jdbi3-kotlin</strong> and
 <strong>jdbi3-kotlin-sqlobject</strong> modules.</p>
+</div>
+<div class="paragraph">
+<p>Kotlin API documentation:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="apidocs-kotlin/jdbi3-kotlin/index.html" target="_blank">jdbi3-kotlin</a></p>
+</li>
+<li>
+<p><a href="apidocs-kotlin/jdbi3-kotlin-sqlobject/index.html" target="_blank">jdbi3-kotlin-sqlobject</a></p>
+</li>
+</ul>
 </div>
 <div class="sect3">
 <h4 id="_resultset_mapping"><a class="anchor" href="#_resultset_mapping"></a>5.5.1. ResultSet mapping</h4>
@@ -3905,10 +4157,133 @@ singleton.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Then configure the Jdbi factory bean in your Spring container:</p>
+<p>Then configure the Jdbi factory bean in your Spring container, e.g.:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;beans</span> <span class="attribute-name">xmlns</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://www.springframework.org/schema/beans</span><span class="delimiter">&quot;</span></span>
+       <span class="attribute-name">xmlns:xsi</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://www.w3.org/2001/XMLSchema-instance</span><span class="delimiter">&quot;</span></span>
+       <span class="attribute-name">xmlns:aop</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://www.springframework.org/schema/aop</span><span class="delimiter">&quot;</span></span>
+       <span class="attribute-name">xmlns:tx</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://www.springframework.org/schema/tx</span><span class="delimiter">&quot;</span></span>
+       <span class="attribute-name">xsi:schemaLocation</span>=<span class="string"><span class="delimiter">&quot;</span>
+       <span class="content">http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd</span>
+       <span class="content">http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd</span>
+       <span class="content">http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+
+  <i class="conum" data-value="1"></i><b>(1)</b>
+  <span class="tag">&lt;bean</span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">db</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">org.springframework.jdbc.datasource.DriverManagerDataSource</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+    <span class="tag">&lt;property</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">url</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">value</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">jdbc:h2:mem:testing</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
+  <span class="tag">&lt;/bean&gt;</span>
+
+  <i class="conum" data-value="2"></i><b>(2)</b>
+  <span class="tag">&lt;bean</span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">transactionManager</span><span class="delimiter">&quot;</span></span>
+    <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">org.springframework.jdbc.datasource.DataSourceTransactionManager</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+    <span class="tag">&lt;property</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">dataSource</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">ref</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">db</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
+  <span class="tag">&lt;/bean&gt;</span>
+  <span class="tag">&lt;tx:annotation-driven</span> <span class="attribute-name">transaction-manager</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">transactionManager</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
+
+  <i class="conum" data-value="3"></i><b>(3)</b>
+  <span class="tag">&lt;bean</span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">jdbi</span><span class="delimiter">&quot;</span></span>
+    <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi.v3.spring4.JdbiFactoryBean</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+    <span class="tag">&lt;property</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">dataSource</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">ref</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">db</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
+  <span class="tag">&lt;/bean&gt;</span>
+
+  <i class="conum" data-value="4"></i><b>(4)</b>
+  <span class="tag">&lt;bean</span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">service</span><span class="delimiter">&quot;</span></span>
+    <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">com.example.service.MyService</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+    <span class="tag">&lt;constructor-arg</span> <span class="attribute-name">ref</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">jdbi</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
+  <span class="tag">&lt;/bean&gt;</span>
+<span class="tag">&lt;/beans&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The SQL data source that Jdbi will connect to. In this example we use an H2
+database, but it can be any JDBC-compatible database.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Enable configuration of transactions via annotations.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Configure <code>JdbiFactoryBean</code> using the data source configured earlier.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Inject <code>Jdbi</code> into a service class. Alternatively, use standard JSR-330
+<code>@Inject</code> annotations on the target class instead of configuring it in
+your <code>beans.xml</code>.</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_installing_plugins"><a class="anchor" href="#_installing_plugins"></a>5.8.1. Installing plugins</h4>
+<div class="paragraph">
+<p>Plugins may be automatically installed by scanning the classpath for
+<a href="https://docs.oracle.com/javase/8/docs/api/java/util/ServiceLoader.html" target="_blank">ServiceLoader</a> manifests.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;bean</span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">jdbi</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi.v3.spring4.JdbiFactoryBean</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+  ...
+  <span class="tag">&lt;property</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">autoInstallPlugins</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">value</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">true</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
+<span class="tag">&lt;/bean&gt;</span></code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>TODO: usage example</p>
+<p>Plugins may also be installed explicitly:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;bean</span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">jdbi</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi.v3.spring4.JdbiFactoryBean</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+  ...
+  <span class="tag">&lt;property</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">plugins</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+    <span class="tag">&lt;list&gt;</span>
+      <span class="tag">&lt;bean</span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi.v3.sqlobject.SqlObjectPlugin</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
+      <span class="tag">&lt;bean</span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi.v3.guava.GuavaPlugin</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
+    <span class="tag">&lt;/list&gt;</span>
+  <span class="tag">&lt;/property&gt;</span>
+<span class="tag">&lt;/bean&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Not all plugins are automatically installable. In these situations, you can
+auto-install some plugins and manually install the rest:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;bean</span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">jdbi</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi.v3.spring4.JdbiFactoryBean</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+  ...
+  <span class="tag">&lt;property</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">autoInstallPlugins</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">value</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">true</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
+  <span class="tag">&lt;property</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">plugins</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+    <span class="tag">&lt;list&gt;</span>
+      <span class="tag">&lt;bean</span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi.v3.core.h2.H2DatabasePlugin</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
+    <span class="tag">&lt;/list&gt;</span>
+  <span class="tag">&lt;/property&gt;</span>
+<span class="tag">&lt;/bean&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_global_attributes"><a class="anchor" href="#_global_attributes"></a>5.8.2. Global Attributes</h4>
+<div class="paragraph">
+<p>Global defined attributes may be configured on the factory bean:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;bean</span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">jdbi</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi.v3.spring4.JdbiFactoryBean</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+  <span class="tag">&lt;property</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">dataSource</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">ref</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">db</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
+  <span class="tag">&lt;property</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">globalDefines</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+    <span class="tag">&lt;map&gt;</span>
+      <span class="tag">&lt;entry</span> <span class="attribute-name">key</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">foo</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">value</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">bar</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
+    <span class="tag">&lt;/map&gt;</span>
+  <span class="tag">&lt;/property&gt;</span>
+<span class="tag">&lt;/bean&gt;</span></code></pre>
+</div>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -4086,66 +4461,80 @@ methods are just creating and binding custom implementations of
 <div class="sect2">
 <h3 id="_jdbiconfig"><a class="anchor" href="#_jdbiconfig"></a>6.2. JdbiConfig</h3>
 <div class="paragraph">
-<p>TODO:</p>
+<p>Configuration is managed by the
+<a href="./apidocs/org/jdbi/v3/core/config/ConfigRegistry.html">ConfigRegistry</a>
+class.  Each Jdbi object that represents a distinct database context
+(for example, <strong>Jdbi</strong> itself, a <strong>Handle</strong> instance, or an attached SqlObject
+class) gets its own configuration registry.  Most contexts implement the
+<a href="./apidocs/org/jdbi/v3/core/config/Configurable.html">Configurable</a> interface which
+allows modification of its configuration as well as retrieving the current
+context&#8217;s configuration for use by Jdbi core or extensions.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>ConfigRegistry is a registry of <code>JdbiConfig</code> implementations.</p>
-</li>
-<li>
-<p>Usage:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>ConfigRegistry.get(Class&lt;T extends JdbiConfig&gt;)</p>
-</li>
-<li>
-<p>Configurable.getConfig(Class&lt;T extends JdbiConfig&gt;)</p>
-</li>
-<li>
-<p>Configurable.configure(Class&lt;T extends JdbiConfig&gt;, Consumer&lt;T&gt;)</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>When a new configurable context is created, it inherits a copy of its parent
+configuration at the time of creation - further modifications tothe original will
+not affect already created configuration contexts.  Configuration context
+copies happen when producing a Handle from Jdbi, when opening a <strong>SqlStatement</strong>
+from the Handle, and when attaching or creating an on-demand extension such as
+<strong>SqlObject</strong>.</p>
 </div>
-</li>
-<li>
-<p>The <code>registerXyz</code> methods everywhere are part of the <code>Configurable</code>
-interface, and are actually being handled under the hood by <code>ConfigRegistry</code>.</p>
-</li>
-<li>
-<p>Jdbi, Handle, SQL objects, and SQL statements (updates, queries, etc) all
-hold a ConfigRegistry.</p>
-</li>
-<li>
-<p>Inheritance of configuration at time of instantiation:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>When Jdbi creates a Handle, the handle gets a copy of the Jdbi&#8217;s config
-registry state.</p>
-</li>
-<li>
-<p>When Jdbi creates an on-demand extension object (i.e. a SQL object), the
-extension gets a copy of the Jdbi&#8217;s config registry state.</p>
-</li>
-<li>
-<p>When a Handle creates a SQL statement object such as a Query or Update, that
-SQL statement gets a copy of the Handle&#8217;s config registry state.</p>
-</li>
-<li>
-<p>When a Handle creates an attached extension object (i.e. a SQL object), that
-extension gets a copy of the Handle&#8217;s config registry state.</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>The configuration itself is stored in various implementations of the
+<a href="./apidocs/org/jdbi/v3/core/config/JdbiConfig.html">JdbiConfig</a> interface.
+Each implementation must adhere to the contract of the interface; in particular
+it must have a public no-argument constructor that provides useful defaults
+and a <strong>createCopy</strong> method that is invoked when a configuration registry is cloned.</p>
 </div>
-</li>
-<li>
-<p>When a Jdbi create an on-demand SQL object, the SQL object receives a
-configuration at the moment it was created. The same applies when Handle
-creates a SQL statement, or attaches a SQL Object.</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>Generally, configuration should be set on a context before that context is used,
+and not changed later.  Some configuration classes may be thread safe but most are
+not.</p>
+</div>
+<div class="paragraph">
+<p>Many of Jdbi&#8217;s core features, for example argument or mapper registries, are simply
+implementations of <strong>JdbiConfig</strong> that store the registered mappings for later use
+during query execution.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">ExampleConfig</span> <span class="directive">implements</span> JdbiConfig&lt;ExampleConfig&gt;{
+
+    <span class="directive">private</span> <span class="predefined-type">String</span> color;
+    <span class="directive">private</span> <span class="type">int</span> number;
+
+    <span class="directive">public</span> ExampleConfig() {
+        color = <span class="string"><span class="delimiter">&quot;</span><span class="content">purple</span><span class="delimiter">&quot;</span></span>;
+        number = <span class="integer">42</span>;
+    }
+
+    <span class="directive">private</span> ExampleConfig(ExampleConfig other) {
+        <span class="local-variable">this</span>.color = other.color;
+        <span class="local-variable">this</span>.number = other.number;
+    }
+
+    <span class="directive">public</span> <span class="type">void</span> setColor(<span class="predefined-type">String</span> color) {
+        <span class="local-variable">this</span>.color = color;
+    }
+
+    <span class="directive">public</span> <span class="predefined-type">String</span> getColor() {
+        <span class="keyword">return</span> color;
+    }
+
+    <span class="directive">public</span> <span class="type">void</span> setNumber(<span class="type">int</span> number) {
+        <span class="local-variable">this</span>.number = number;
+    }
+
+    <span class="directive">public</span> <span class="type">int</span> getNumber() {
+        <span class="keyword">return</span> number;
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> ExampleConfig createCopy() {
+        <span class="keyword">return</span> <span class="keyword">new</span> ExampleConfig(<span class="local-variable">this</span>);
+    }
+
+}</code></pre>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_creating_a_custom_jdbiconfig_type"><a class="anchor" href="#_creating_a_custom_jdbiconfig_type"></a>6.2.1. Creating a custom JdbiConfig type</h4>
@@ -4229,7 +4618,7 @@ TODO</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_jdbicollectors_registry"><a class="anchor" href="#_jdbicollectors_registry"></a>6.4. JdbiCollectors registry</h3>
+<h3 id="_jdbicollector"><a class="anchor" href="#_jdbicollector"></a>6.4. JdbiCollector</h3>
 <div class="paragraph">
 <p>TODO:</p>
 </div>
@@ -4434,7 +4823,7 @@ value is defined for <code>foo</code> will be substituted into the SQL statement
 <div class="sect2">
 <h3 id="_templateengine"><a class="anchor" href="#_templateengine"></a>6.9. TemplateEngine</h3>
 <div class="paragraph">
-<p>Jdbi uses a <a href="./apidocs/org/jdbi/v3/core/rewriter/TemplateEngine.html" target="_blank">TemplateEngine</a>
+<p>Jdbi uses a <a href="./apidocs/org/jdbi/v3/core/statement/TemplateEngine.html" target="_blank">TemplateEngine</a>
 implementation to render templates into SQL. Template engines take a SQL
 template string and the <code>StatementContext</code> as input, and produce a parseable
 SQL string as output.</p>
@@ -4503,7 +4892,7 @@ which renders templates using the StringTemplate library. See
 <h3 id="_sqlparser"><a class="anchor" href="#_sqlparser"></a>6.10. SqlParser</h3>
 <div class="paragraph">
 <p>After the SQL template has been rendered, Jdbi uses a
-<a href="./apidocs/org/jdbi/v3/core/rewriter/SqlParser.html" target="_blank">SqlParser</a> to parse out any named
+<a href="./apidocs/org/jdbi/v3/core/statement/SqlParser.html" target="_blank">SqlParser</a> to parse out any named
 parameters from the SQL statement. This Produces a <code>ParsedSql</code> object, which
 contains all the information Jdbi needs to bind parameters and execute your SQL
 statement.</p>
@@ -4627,8 +5016,18 @@ to be sure it made a difference.</p>
 </div>
 <div class="sect2">
 <h3 id="_api_reference"><a class="anchor" href="#_api_reference"></a>7.2. API Reference</h3>
-<div class="paragraph">
+<div class="ulist">
+<ul>
+<li>
 <p><a href="apidocs/index.html" target="_blank">Javadoc</a></p>
+</li>
+<li>
+<p><a href="apidocs-kotlin/jdbi3-kotlin/index.html" target="_blank">jdbi3-kotlin</a></p>
+</li>
+<li>
+<p><a href="apidocs-kotlin/jdbi3-kotlin-sqlobject/index.html" target="_blank">jdbi3-kotlin-sqlobject</a></p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect2">
@@ -4671,7 +5070,7 @@ here!</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-07-18 01:28:49 MDT
+Last updated 2017-09-26 20:20:41 PDT
 </div>
 </div>
 </body>
