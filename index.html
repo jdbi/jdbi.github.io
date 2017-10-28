@@ -526,28 +526,75 @@ table.CodeRay td.code>pre{padding:0}
 <ul class="sectlevel2">
 <li><a href="#_jdbi">3.1. Jdbi</a></li>
 <li><a href="#_handle">3.2. Handle</a></li>
-<li><a href="#_arguments">3.3. Arguments</a></li>
+<li><a href="#_arguments">3.3. Arguments</a>
+<ul class="sectlevel3">
+<li><a href="#_positional_arguments">3.3.1. Positional Arguments</a></li>
+<li><a href="#_named_arguments">3.3.2. Named Arguments</a></li>
+<li><a href="#_supported_argument_types">3.3.3. Supported Argument Types</a></li>
+<li><a href="#_binding_arguments">3.3.4. Binding Arguments</a></li>
+<li><a href="#_custom_arguments">3.3.5. Custom Arguments</a></li>
+</ul>
+</li>
 <li><a href="#_queries">3.4. Queries</a></li>
-<li><a href="#_mappers">3.5. Mappers</a></li>
+<li><a href="#_mappers">3.5. Mappers</a>
+<ul class="sectlevel3">
+<li><a href="#_row_mappers">3.5.1. Row Mappers</a></li>
+<li><a href="#_column_mappers">3.5.2. Column Mappers</a></li>
+<li><a href="#_reflection_mappers">3.5.3. Reflection Mappers</a></li>
+</ul>
+</li>
 <li><a href="#_sql_arrays">3.6. SQL Arrays</a></li>
-<li><a href="#_results">3.7. Results</a></li>
+<li><a href="#_results">3.7. Results</a>
+<ul class="sectlevel3">
+<li><a href="#_resultbearing">3.7.1. ResultBearing</a></li>
+<li><a href="#_resultiterable">3.7.2. ResultIterable</a></li>
+<li><a href="#_joins">3.7.3. Joins</a></li>
+</ul>
+</li>
 <li><a href="#_updates">3.8. Updates</a></li>
 <li><a href="#_batches">3.9. Batches</a></li>
 <li><a href="#_prepared_batches">3.10. Prepared Batches</a></li>
-<li><a href="#_batch_updates">3.11. Batch Updates</a></li>
+<li><a href="#_batch_updates">3.11. Batch Updates</a>
+<ul class="sectlevel3">
+<li><a href="#_exception_rewriting">3.11.1. Exception Rewriting</a></li>
+</ul>
+</li>
 <li><a href="#_generated_keys">3.12. Generated Keys</a></li>
 <li><a href="#_stored_procedure_calls">3.13. Stored Procedure Calls</a></li>
 <li><a href="#_scripts">3.14. Scripts</a></li>
-<li><a href="#_transactions">3.15. Transactions</a></li>
-<li><a href="#_sql_locators">3.16. SQL Locators</a></li>
+<li><a href="#_transactions">3.15. Transactions</a>
+<ul class="sectlevel3">
+<li><a href="#_serializable_transactions">3.15.1. Serializable Transactions</a></li>
+</ul>
+</li>
+<li><a href="#_classpathsqllocator">3.16. ClasspathSqlLocator</a></li>
 <li><a href="#_statementcontext">3.17. StatementContext</a></li>
 </ul>
 </li>
 <li><a href="#_sql_objects">4. SQL Objects</a>
 <ul class="sectlevel2">
-<li><a href="#_annotated_methods">4.1. Annotated Methods</a></li>
+<li><a href="#_annotated_methods">4.1. Annotated Methods</a>
+<ul class="sectlevel3">
+<li><a href="#__sqlupdate">4.1.1. @SqlUpdate</a></li>
+<li><a href="#_binding_arguments_2">4.1.2. Binding Arguments</a></li>
+<li><a href="#__sqlquery">4.1.3. @SqlQuery</a></li>
+<li><a href="#__sqlbatch">4.1.4. @SqlBatch</a></li>
+<li><a href="#__sqlcall">4.1.5. @SqlCall</a></li>
+<li><a href="#_automatic_parameter_naming">4.1.6. Automatic parameter naming</a></li>
+<li><a href="#__getgeneratedkeys_3">4.1.7. @GetGeneratedKeys</a></li>
+<li><a href="#_sqllocator">4.1.8. SqlLocator</a></li>
+</ul>
+</li>
 <li><a href="#_default_methods">4.2. Default Methods</a></li>
-<li><a href="#_using_sql_objects">4.3. Using SQL Objects</a></li>
+<li><a href="#_transaction_management">4.3. Transaction Management</a></li>
+<li><a href="#_using_sql_objects">4.4. Using SQL Objects</a>
+<ul class="sectlevel3">
+<li><a href="#_attached_to_handle">4.4.1. Attached to Handle</a></li>
+<li><a href="#_temporary_sql_objects">4.4.2. Temporary SQL Objects</a></li>
+<li><a href="#_on_demand">4.4.3. On-Demand</a></li>
+</ul>
+</li>
+<li><a href="#_additional_annotations">4.5. Additional Annotations</a></li>
 </ul>
 </li>
 <li><a href="#_third_party_integration">5. Third-Party Integration</a>
@@ -556,20 +603,46 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#_h2_database">5.2. H2 Database</a></li>
 <li><a href="#_jodatime">5.3. JodaTime</a></li>
 <li><a href="#_jpa">5.4. JPA</a></li>
-<li><a href="#_kotlin">5.5. Kotlin</a></li>
+<li><a href="#_kotlin">5.5. Kotlin</a>
+<ul class="sectlevel3">
+<li><a href="#_resultset_mapping">5.5.1. ResultSet mapping</a></li>
+<li><a href="#_sqlobject">5.5.2. SqlObject</a></li>
+</ul>
+</li>
 <li><a href="#_oracle_12">5.6. Oracle 12</a></li>
-<li><a href="#_postgresql">5.7. PostgreSQL</a></li>
-<li><a href="#_spring">5.8. Spring</a></li>
+<li><a href="#_postgresql">5.7. PostgreSQL</a>
+<ul class="sectlevel3">
+<li><a href="#_hstore">5.7.1. hstore</a></li>
+<li><a href="#__getgeneratedkeys_4">5.7.2. @GetGeneratedKeys</a></li>
+</ul>
+</li>
+<li><a href="#_spring">5.8. Spring</a>
+<ul class="sectlevel3">
+<li><a href="#_installing_plugins">5.8.1. Installing plugins</a></li>
+<li><a href="#_global_attributes">5.8.2. Global Attributes</a></li>
+</ul>
+</li>
 <li><a href="#_stringtemplate_4">5.9. StringTemplate 4</a></li>
+<li><a href="#_vavr">5.10. Vavr</a></li>
 </ul>
 </li>
 <li><a href="#_advanced_topics">6. Advanced Topics</a>
 <ul class="sectlevel2">
 <li><a href="#_namedargumentfinder">6.1. NamedArgumentFinder</a></li>
-<li><a href="#_jdbiconfig">6.2. JdbiConfig</a></li>
+<li><a href="#_jdbiconfig">6.2. JdbiConfig</a>
+<ul class="sectlevel3">
+<li><a href="#_creating_a_custom_jdbiconfig_type">6.2.1. Creating a custom JdbiConfig type</a></li>
+</ul>
+</li>
 <li><a href="#_jdbiplugin">6.3. JdbiPlugin</a></li>
-<li><a href="#_jdbicollector">6.4. JdbiCollector</a></li>
-<li><a href="#_sql_object_custom_annotations">6.5. SQL Object custom annotations</a></li>
+<li><a href="#_jdbicollectors">6.4. JdbiCollectors</a></li>
+<li><a href="#_user_defined_annotations">6.5. User-Defined Annotations</a>
+<ul class="sectlevel3">
+<li><a href="#_statement_customizing_annotations">6.5.1. Statement Customizing Annotations</a></li>
+<li><a href="#_configuration_annotations">6.5.2. Configuration Annotations</a></li>
+<li><a href="#_method_decorating_annotations">6.5.3. Method Decorating Annotations</a></li>
+</ul>
+</li>
 <li><a href="#_sql_object_internal_plumbing">6.6. SQL Object internal plumbing</a></li>
 <li><a href="#_extensions">6.7. Extensions</a></li>
 <li><a href="#_sql_interpolation">6.8. SQL interpolation</a></li>
@@ -704,7 +777,7 @@ assertThat(userNames).containsExactly(
 </div>
 <div class="paragraph">
 <p>Jdbi has a flexible plugin architecture which makes it easy to fold in support
-for your favorite libraries (Guava, JodaTime, Spring) or database vendor
+for your favorite libraries (Guava, JodaTime, Spring, Vavr) or database vendor
 (H2, Oracle, Postgres).</p>
 </div>
 <div class="paragraph">
@@ -744,7 +817,7 @@ release.
 <p>Jdbi is easy to include in your Java project - with an
 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Apache 2.0</a> license, few
 external dependencies, and JARs distributed through
-<a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.jdbi%22%20AND%20v%3A%223.0.0-beta4-SNAPSHOT%22" target="_blank">Maven Central</a>,
+<a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.jdbi%22%20AND%20v%3A%223.0.0-beta4%22" target="_blank">Maven Central</a>,
 you can just include the relevant artifacts in your POM:</p>
 </div>
 <div class="listingblock">
@@ -755,7 +828,7 @@ you can just include the relevant artifacts in your POM:</p>
       <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
       <span class="tag">&lt;artifactId&gt;</span>jdbi3-bom<span class="tag">&lt;/artifactId&gt;</span>
       <span class="tag">&lt;type&gt;</span>pom<span class="tag">&lt;/type&gt;</span>
-      <span class="tag">&lt;version&gt;</span>3.0.0-beta4-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+      <span class="tag">&lt;version&gt;</span>3.0.0-beta4<span class="tag">&lt;/version&gt;</span>
       <span class="tag">&lt;scope&gt;</span>import<span class="tag">&lt;/scope&gt;</span>
     <span class="tag">&lt;/dependency&gt;</span>
   <span class="tag">&lt;/dependencies&gt;</span>
@@ -822,6 +895,10 @@ method default parameters.</p>
 <dt>jdbi3-stringtemplate4</dt>
 <dd>
 <p>Use the StringTemplate4 template engine, instead of JDBI&#8217;s built in engine.</p>
+</dd>
+<dt>jdbi3-vavr</dt>
+<dd>
+<p>Support for Vavr Tuples, Collections and Value arguments</p>
 </dd>
 </dl>
 </div>
@@ -1052,7 +1129,7 @@ parameters by name:</p>
 </li>
 <li>
 <p>java.time: <code>Instant</code>, <code>LocalDate</code>, <code>LocalDateTime</code>, <code>LocalTime</code>,
-<code>OffsetDateTime</code>, and <code>ZonedDateTime</code></p>
+<code>OffsetDateTime</code>, <code>ZonedDateTime</code>, and <code>ZoneId</code></p>
 </li>
 <li>
 <p>java.util: <code>Date</code>, <code>Optional</code> (around any other supported type), and <code>UUID</code></p>
@@ -1103,7 +1180,7 @@ handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><s
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">Contact contact = Contact();
+<pre class="CodeRay highlight"><code data-lang="java">Contact contact = <span class="keyword">new</span> Contact();
 contact.setId(<span class="integer">3</span>);
 contact.withName(<span class="string"><span class="delimiter">&quot;</span><span class="content">Cindy</span><span class="delimiter">&quot;</span></span>);
 
@@ -1113,9 +1190,44 @@ handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><s
 </div>
 </div>
 <div class="paragraph">
-<p>Optionally, you can qualify each bound bean with a prefix. This can help remove
-ambiguity in situations where two or more bound beans have similar property
-names:</p>
+<p>You can also bind an Object&#8217;s public fields:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">Object</span> contact = <span class="keyword">new</span> <span class="predefined-type">Object</span>() {
+    <span class="directive">public</span> <span class="type">int</span> id = <span class="integer">0</span>;
+    <span class="directive">public</span> <span class="predefined-type">String</span> name = <span class="string"><span class="delimiter">&quot;</span><span class="content">Cindy</span><span class="delimiter">&quot;</span></span>;
+};
+
+handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into contacts (id, name) values (:id, :name)</span><span class="delimiter">&quot;</span></span>)
+      .bindFields(contact)
+      .execute();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or you can bind public, parameterless methods of an Object:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">Object</span> contact = <span class="keyword">new</span> <span class="predefined-type">Object</span>() {
+    <span class="directive">public</span> <span class="type">int</span> theId() {
+        <span class="keyword">return</span> <span class="integer">0</span>;
+    }
+
+    <span class="directive">public</span> <span class="predefined-type">String</span> theName() {
+        <span class="keyword">return</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Cindy</span><span class="delimiter">&quot;</span></span>;
+    }
+};
+
+handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into contacts (id, name) values (:theId, :theName)</span><span class="delimiter">&quot;</span></span>)
+      .bindMethods(contact)
+      .execute();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Optionally, you can qualify each bound bean/object with a prefix. This can help
+remove ambiguity in situations where two or more bound beans have similar
+property names:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1126,7 +1238,8 @@ names:</p>
 handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into documents (id, folder_id, name, contents) </span><span class="delimiter">&quot;</span></span> +
                     <span class="string"><span class="delimiter">&quot;</span><span class="content">values (:d.id, :f.id, :d.name, :d.contents)</span><span class="delimiter">&quot;</span></span>)
       .bindBean(<span class="string"><span class="delimiter">&quot;</span><span class="content">f</span><span class="delimiter">&quot;</span></span>, folder)
-      .bindBean(<span class="string"><span class="delimiter">&quot;</span><span class="content">d</span><span class="delimiter">&quot;</span></span>, document)
+      .bindMethods(<span class="string"><span class="delimiter">&quot;</span><span class="content">f</span><span class="delimiter">&quot;</span></span>, folder)
+      .bindFields(<span class="string"><span class="delimiter">&quot;</span><span class="content">d</span><span class="delimiter">&quot;</span></span>, document)
       .execute();</code></pre>
 </div>
 </div>
@@ -1137,8 +1250,8 @@ handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><s
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-Neither <code>bindMap()</code> nor <code>bindBean()</code> support binding of nested properties (e.g.
-<code>:user.address.street</code>).
+Neither <code>bindMap()</code>, <code>bindMethods()</code>, <code>bindFields()</code>, nor <code>bindBean()</code> support
+ binding of nested properties (e.g. <code>:user.address.street</code>).
 </td>
 </tr>
 </table>
@@ -1616,7 +1729,7 @@ lambda inline</p>
 </li>
 <li>
 <p>java.time: <code>Instant</code>, <code>LocalDate</code>, <code>LocalDateTime</code>, <code>LocalTime</code>,
-<code>OffsetDateTime</code>, and <code>ZonedDateTime</code></p>
+<code>OffsetDateTime</code>, <code>ZonedDateTime</code>, and <code>ZoneId</code></p>
 </li>
 <li>
 <p>java.util: <code>UUID</code></p>
@@ -1720,7 +1833,24 @@ assertThat(userSet).hasSize(<span class="integer">4</span>);</code></pre>
 and as such no custom mapper code is required at all.</p>
 </div>
 <div class="paragraph">
-<p>TODO: column name prefixes</p>
+<p>TODO:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>column name prefixes</p>
+</li>
+<li>
+<p>JdbiConstructor annotation</p>
+</li>
+<li>
+<p>ConstructorProperties annotation.</p>
+</li>
+<li>
+<p>Lombok&#8217;s <code>@AllArgsConstructor</code> generates <code>@ConstructorProperties</code> on
+constructor, so constructor mappers work well with data classes that have it.</p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect4">
@@ -1928,7 +2058,7 @@ fails, an exception is thrown.
 </div>
 <div class="paragraph">
 <p>Jdbi can be enhanced to support arbitrary container types. See
-<a href="#_jdbicollector">JdbiCollector</a> for more information.</p>
+<a href="#_jdbicollectors">JdbiCollectors</a> for more information.</p>
 </div>
 </div>
 </div>
@@ -2187,6 +2317,24 @@ single remains, and then return that.</p>
 </div>
 <div class="paragraph">
 <p>TODO: example</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_resultsetscanner"><a class="anchor" href="#_resultsetscanner"></a>ResultSetScanner</h5>
+<div class="paragraph">
+<p>The <strong>ResultSetScanner</strong> interface accepts a lazily-provided <strong>ResultSet</strong>
+and produces the result Jdbi returns from statement execution.</p>
+</div>
+<div class="paragraph">
+<p>Most of the above operations are implemented in terms of <strong>ResultSetScanner</strong>.
+The Scanner has ownership of the ResultSet and may advance or seek it.</p>
+</div>
+<div class="paragraph">
+<p>The return value ends up being the final result of statement execution.</p>
+</div>
+<div class="paragraph">
+<p>Most users should prefer using the higher level result collectors described above,
+but someone&#8217;s gotta do the dirty work.</p>
 </div>
 </div>
 </div>
@@ -2977,16 +3125,23 @@ from the other, we get 30 + 60 = 90 and the assertion succeeds.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_sql_locators"><a class="anchor" href="#_sql_locators"></a>3.16. SQL Locators</h3>
+<h3 id="_classpathsqllocator"><a class="anchor" href="#_classpathsqllocator"></a>3.16. ClasspathSqlLocator</h3>
 <div class="paragraph">
 <p>You may find it helpful to store your SQL templates in individual files on the
 classpath, rather than in string inside Java code.</p>
 </div>
 <div class="paragraph">
-<p>Jdbi provides one SQL locator class in the core library: <code>ClasspathSqlLocator</code>.</p>
+<p>The <code>ClasspathSqlLocator</code> converts Java type and method names into classpath locations,
+and then reads, parses, and caches the loaded statements.</p>
 </div>
-<div class="paragraph">
-<p>TODO: usage example</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// reads classpath resource com/foo/BarDao/query.sql</span>
+ClasspathSqlLocator.findSqlOnClasspath(com.foo.BarDao.class, <span class="string"><span class="delimiter">&quot;</span><span class="content">query</span><span class="delimiter">&quot;</span></span>);
+
+<span class="comment">// same resource as above</span>
+ClasspathSqlLocator.findSqlOnClasspath(<span class="string"><span class="delimiter">&quot;</span><span class="content">com.foo.BarDao.query</span><span class="delimiter">&quot;</span></span>);</code></pre>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -3073,13 +3228,130 @@ and its parameters.</p>
 SQL statement result mapped into the method return type.</p>
 </div>
 <div class="sect3">
-<h4 id="_binding_arguments_2"><a class="anchor" href="#_binding_arguments_2"></a>4.1.1. Binding Arguments</h4>
+<h4 id="__sqlupdate"><a class="anchor" href="#__sqlupdate"></a>4.1.1. @SqlUpdate</h4>
 <div class="paragraph">
-<p>Arguments passed to the method are bound as arguments to the SQL statement.</p>
+<p>Use the <code>@SqlUpdate</code> annotation for operations that modify data (i.e. inserts,
+updates, deletes).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
+  <span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into users (id, name) values (?, ?)</span><span class="delimiter">&quot;</span></span>)
+  <span class="type">void</span> insert(<span class="type">long</span> id, <span class="predefined-type">String</span> name);
+}</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>If using positional arguments, the method arguments are bound to the
-corresponding <code>?</code> argument marker in the SQL statement:</p>
+<p>Method arguments are bound to the <code>?</code> token in the SQL statement at their
+respective positions. So <code>id</code> is bound to the first <code>?</code>, and <code>name</code> to the
+second.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<code>@SqlUpdate</code> can also be used for DDL (Data Definition Language) operations like
+creating or altering tables. We recommend using a schema migration tool such
+as <a href="https://flywaydb.org/" target="_blank">Flyway</a> or
+<a href="http://www.liquibase.org/" target="_blank">Liquibase</a> to maintain your database schemas.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>By default, a <code>@SqlUpdate</code> method may return a handful of types:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>void</code>: returns nothing (obviously)</p>
+</li>
+<li>
+<p><code>int</code> or <code>long</code>: returns the update count. Depending on the database vendor
+and JDBC driver, this may be either the number of rows changed, or the number
+matched by the query (regardless of whether any data was changed).</p>
+</li>
+<li>
+<p><code>boolean</code>: returns true if the update count is greater than zero.</p>
+</li>
+</ul>
+</div>
+<div class="sect4">
+<h5 id="__getgeneratedkeys"><a class="anchor" href="#__getgeneratedkeys"></a>@GetGeneratedKeys</h5>
+<div class="paragraph">
+<p>Some SQL statements will cause data to be generated on your behalf at the
+database, e.g. a table with an auto-generated primary key, or a primary key
+selected from a sequence. We need a way to retrieve these generated values back
+from the database.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Databases vary in support for generated keys. Some support only one generated
+key column per statement, and some (such as Postgres) can return the entire row.
+You should check your database vendor&#8217;s documentation before relying on this
+behavior.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The <code>@GetGeneratedKeys</code> annotation tells Jdbi that the return value should be
+generated key from the SQL statement, instead of the update count.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
+  <span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into users (id, name) values (nextval('user_seq'), ?)</span><span class="delimiter">&quot;</span></span>)
+  <span class="annotation">@GetGeneratedKeys</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>)
+  <span class="type">long</span> insert(<span class="predefined-type">String</span> name);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Multiple columns may be generated and returned in this way:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
+  <span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into users (id, name, created_on) values (nextval('user_seq'), ?, now())</span><span class="delimiter">&quot;</span></span>)
+  <span class="annotation">@GetGeneratedKeys</span>({<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">created_on</span><span class="delimiter">&quot;</span></span>})
+  <span class="annotation">@RegisterBeanMapper</span>(IdCreateTime.class)
+  IdCreateTime insert(<span class="predefined-type">String</span> name);
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The One True Database supports additional functionality when returning generated
+keys. See <a href="#__getgeneratedkeys_4">PostgreSQL</a> for more details.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_binding_arguments_2"><a class="anchor" href="#_binding_arguments_2"></a>4.1.2. Binding Arguments</h4>
+<div class="paragraph">
+<p>Before we go on with the other <code>@Sql___</code> annotations, let&#8217;s discuss how method
+arguments are bound as parameters to the SQL statement.</p>
+</div>
+<div class="paragraph">
+<p>By default, arguments passed to the method are bound as positional parameters
+in the SQL statement.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3126,12 +3398,33 @@ corresponding <code>?</code> argument marker in the SQL statement:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Like <code>@BindMap</code>, you can qualify a bound bean with a prefix:</p>
+<p>You can bind from the public fields of an object:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into users (id, name) values (:id, :name)</span><span class="delimiter">&quot;</span></span>)
+<span class="type">void</span> insert(<span class="annotation">@BindFields</span> User user);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or you can bind from public, parameterless methods of an object:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into users (id, name) values (:functionThatReturnsTheId, :functionThatReturnsTheName)</span><span class="delimiter">&quot;</span></span>)
+<span class="type">void</span> insert(<span class="annotation">@BindMethods</span> User user);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Like <code>@BindMap</code>, the <code>@BindBean</code>, <code>@BindMethods</code>, and <code>@BindFields</code> annotations
+can have an optional prefix:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into users (id, name) values (:user.id, :user.name)</span><span class="delimiter">&quot;</span></span>)
-<span class="type">void</span> insert(<span class="annotation">@BindBean</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">user</span><span class="delimiter">&quot;</span></span>) User user);</code></pre>
+<span class="type">void</span> insert(<span class="annotation">@BindBean</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">user</span><span class="delimiter">&quot;</span></span>) User user);
+<span class="comment">//void insert(@BindFields(&quot;user&quot;) User user);</span>
+<span class="comment">//void insert(@BindMethods(&quot;user&quot;) User user);</span></code></pre>
 </div>
 </div>
 <div class="admonitionblock warning">
@@ -3141,63 +3434,512 @@ corresponding <code>?</code> argument marker in the SQL statement:</p>
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-As in the Core API, neither <code>@BindMap</code> nor <code>@BindBean</code> support binding of
-nested properties (e.g. <code>:user.address.street</code>).
+As in the Core API, neither <code>@BindMap</code>, <code>@BindBean</code>, <code>@BindFields</code>, nor
+<code>@BindMethods</code> support binding of nested properties
+(e.g. <code>:user.address.street</code>).
 </td>
 </tr>
 </table>
 </div>
 </div>
 <div class="sect3">
-<h4 id="__sqlquery"><a class="anchor" href="#__sqlquery"></a>4.1.2. @SqlQuery</h4>
+<h4 id="__sqlquery"><a class="anchor" href="#__sqlquery"></a>4.1.3. @SqlQuery</h4>
 <div class="paragraph">
-<p>SqlQuery returns a single- or multi-row result, depending on whether the method
-return type looks like a collection.</p>
+<p>Use the <code>@SqlQuery</code> annotation for select operations.</p>
 </div>
 <div class="paragraph">
-<p>TODO:</p>
+<p>Query methods may return a single- or multi-row result, depending on whether the
+method return type looks like a collection.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>Executes a statement, and maps the result set to the method return type.</p>
-</li>
-<li>
-<p>Query methods may return single value types (which returns the first row of
-the result set), or a collection of rows.</p>
-</li>
-<li>
-<p>Foo: maps 0..1 rows to type Foo</p>
-</li>
-<li>
-<p>List&lt;Foo&gt;: maps 0..n rows to Foo, and return in a List</p>
-</li>
-<li>
-<p>Iterable&lt;Foo&gt; will return a <code>ResultIterable</code>, which must be explicitly closed</p>
-</li>
-<li>
-<p>Stream&lt;Foo&gt; will return a java.util.stream.Stream, which must be explicitly
-consumed, and then closed.</p>
-</li>
-<li>
-<p>Using an iterable or stream return type will not play nice with on-demand SQL
-objects. The iterable or stream will be closed before the method returns.</p>
-</li>
-<li>
-<p>Implement a <a href="#CollectorFactory">[CollectorFactory]</a> to teach Jdbi to recognize new collection
-types.</p>
-</li>
-</ul>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
+  <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select name from users</span><span class="delimiter">&quot;</span></span>)
+  <span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt; listNames(); <i class="conum" data-value="1"></i><b>(1)</b>
+
+  <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select name from users where id = ?</span><span class="delimiter">&quot;</span></span>)
+  <span class="predefined-type">String</span> getName(<span class="type">long</span> id);  <i class="conum" data-value="2"></i><b>(2)</b> <i class="conum" data-value="3"></i><b>(3)</b>
+
+  <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select name from users where id = ?</span><span class="delimiter">&quot;</span></span>)
+  Optional&lt;<span class="predefined-type">String</span>&gt; findName(<span class="type">long</span> id); <i class="conum" data-value="4"></i><b>(4)</b>
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>When a multi-row method returns an empty result set, an empty collection is
+returned.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>If a single-row method returns multiple rows from the query, only the first
+row in the result set is returned from the method.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>If a single-row method returns an empty result set, <code>null</code> is returned.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Methods may return <code>Optional</code> values. If the query returns no rows (or if
+the value in the row is null), <code>Optional.empty()</code> is returned instead of null.
+SQL Object throws an exception if query returns more than one row.</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Jdbi can be "taught" to recognize new collection types by registering a
+<a href="./apidocs/org/jdbi/v3/core/collector/CollectorFactory.html" target="_blank">CollectorFactory</a> with the
+<a href="#_jdbicollectors">JdbiCollectors</a> config registry.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>See
+<a href="./apidocs/org/jdbi/v3/core/collector/BuiltInCollectorFactory.html" target="_blank">BuiltInCollectorFactory</a>
+for the complete list of collection types supported out of the box. Certain
+Jdbi plugins (e.g. <code>GuavaPlugin</code>) register additional collection types.</p>
+</div>
+<div class="paragraph">
+<p>Query methods may also return a <a href="#_resultiterable">ResultIterable</a>,
+<a href="./apidocs/org/jdbi/v3/core/result/ResultIterator.html" target="_blank">ResultIterator</a>, or a
+<code>Stream</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
+  <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select name from users</span><span class="delimiter">&quot;</span></span>)
+  ResultIterable&lt;<span class="predefined-type">String</span>&gt; getNamesAsIterable();
+
+  <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select name from users</span><span class="delimiter">&quot;</span></span>)
+  ResultIterator&lt;<span class="predefined-type">String</span>&gt; getNamesAsIterator();
+
+  <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select name from users</span><span class="delimiter">&quot;</span></span>)
+  Stream&lt;<span class="predefined-type">String</span>&gt; getNamesAsStream();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The objects returned from these methods hold database resources that must be
+explicitly closed when you are done with them. We strongly recommend the use of
+try-with-resource blocks when calling these methods, to prevent resource leaks:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">try</span> (ResultIterable&lt;<span class="predefined-type">String</span>&gt; names = dao.getNamesAsIterable()) {
+  ...
+}
+
+<span class="keyword">try</span> (ResultIterator&lt;<span class="predefined-type">String</span>&gt; names = dao.getNamesAsIterator()) {
+  ...
+}
+
+<span class="keyword">try</span> (Stream&lt;<span class="predefined-type">String</span>&gt; names = dao.getNamesAsStream()) {
+  ...
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<code>ResultIterable</code>, <code>ResultIterator</code> and <code>Stream</code> methods do not play nice with
+on-demand SQL Objects. Unless the methods are called in a nested way (see
+<a href="#_on_demand">On-Demand</a>), the returned object will already be closed.
+</td>
+</tr>
+</table>
 </div>
 <div class="sect4">
-<h5 id="__register_mapper"><a class="anchor" href="#__register_mapper"></a>@Register___Mapper</h5>
+<h5 id="__registerrowmapper"><a class="anchor" href="#__registerrowmapper"></a>@RegisterRowMapper</h5>
 <div class="paragraph">
-<p>You can register mappers declaratively on SqlObjects with annotations such as:
-* @RegisterRowMapper / @RegisterRowMapperFactory
-* @RegisterColumnMapper / @RegisterColumnMapperFactory
-* @RegisterBeanMapper - treat column names as bean properties
-* @RegisterConstructorMapper - treat column name as constructor parameter names
-* @RegisterFieldMapper - treat column names as field names</p>
+<p>Use <code>@RegisterRowMapper</code> to register a concrete row mapper class:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
+  <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from users</span><span class="delimiter">&quot;</span></span>)
+  <span class="annotation">@RegisterRowMapper</span>(UserMapper.class)
+  <span class="predefined-type">List</span>&lt;User&gt; list();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Row mappers used with this annotation must meet a few requirements:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">UserMapper</span> <span class="directive">implements</span> <span class="predefined-type">RowMapper</span>&lt;User&gt; {  <i class="conum" data-value="1"></i><b>(1)</b> <i class="conum" data-value="2"></i><b>(2)</b>
+  <span class="directive">public</span> UserMapper() { <i class="conum" data-value="3"></i><b>(3)</b>
+    ...
+  }
+
+  <span class="directive">public</span> T map(<span class="predefined-type">ResultSet</span> rs, StatementContext ctx) <span class="directive">throws</span> <span class="exception">SQLException</span> {
+    ...
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Must be a public class.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Must implement <code>RowMapper</code> with an explicit type argument (e.g.
+<code>RowMapper&lt;User&gt;</code>) instead of a type variable (e.g. <code>RowMapper&lt;T&gt;</code>).</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Must have a public, no-argument constructor (or a default constructor).</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The <code>@RegisterRowMapper</code> annotation may be repeated multiple times on the same
+type or method to register multiple mappers.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="__registerrowmapperfactory"><a class="anchor" href="#__registerrowmapperfactory"></a>@RegisterRowMapperFactory</h5>
+<div class="paragraph">
+<p>Use <code>@RegisterRowMapperFactory</code> to register a <code>RowMapperFactory</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
+  <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from users</span><span class="delimiter">&quot;</span></span>)
+  <span class="annotation">@RegisterRowMapperFactory</span>(UserMapperFactory.class)
+  <span class="predefined-type">List</span>&lt;User&gt; list();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Row mapper factories used with this annotation must meet a few requirements:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">UserMapperFactory</span> <span class="directive">implements</span> RowMapperFactory { <i class="conum" data-value="1"></i><b>(1)</b>
+  <span class="directive">public</span> UserMapperFactory() { <i class="conum" data-value="2"></i><b>(2)</b>
+    ...
+  }
+
+  <span class="directive">public</span> Optional&lt;<span class="predefined-type">RowMapper</span>&lt;?&gt;&gt; build(<span class="predefined-type">Type</span> type, ConfigRegistry config) {
+    ...
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Must be a public class.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Must have a public, no-argument constructor (or a default constructor).</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The <code>@RegisterRowMapperFactory</code> annotation may be repeated multiple times on the
+same type or method to register multiple factories.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="__registercolumnmapper"><a class="anchor" href="#__registercolumnmapper"></a>@RegisterColumnMapper</h5>
+<div class="paragraph">
+<p>Use <code>@RegisterColumnMapper</code> to register a column mapper:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">AccountDao</span> {
+  <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select balance from accounts where id = ?</span><span class="delimiter">&quot;</span></span>)
+  <span class="annotation">@RegisterColumnMapper</span>(MoneyMapper.class)
+  Money getBalance(<span class="type">long</span> id);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Column mappers used with this annotation must meet a few requirements:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">MoneyMapper</span> <span class="directive">implements</span> ColumnMapper&lt;Money&gt; {  <i class="conum" data-value="1"></i><b>(1)</b> <i class="conum" data-value="2"></i><b>(2)</b>
+  <span class="directive">public</span> MoneyMapper() { <i class="conum" data-value="3"></i><b>(3)</b>
+    ...
+  }
+
+  <span class="directive">public</span> T map(<span class="predefined-type">ResultSet</span> r, <span class="type">int</span> columnNumber, StatementContext ctx) <span class="directive">throws</span> <span class="exception">SQLException</span> {
+    ...
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Must be a public class.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Must implement <code>ColumnMapper</code> with an explicit type argument (e.g.
+<code>ColumnMapper&lt;User&gt;</code>) instead of a type variable (e.g. <code>ColumnMapper&lt;T&gt;</code>).</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Must have a public, no-argument constructor (or a default constructor).</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The <code>@RegisterColumnMapper</code> annotation may be repeated multiple times on the
+same type or method to register multiple mappers.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="__registercolumnmapperfactory"><a class="anchor" href="#__registercolumnmapperfactory"></a>@RegisterColumnMapperFactory</h5>
+<div class="paragraph">
+<p>Use <code>@RegisterColumnMapperFactory</code> to register a column mapper factory:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">AccountDao</span> {
+  <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from users</span><span class="delimiter">&quot;</span></span>)
+  <span class="annotation">@RegisterColumnMapperFactory</span>(MoneyMapperFactory.class)
+  <span class="predefined-type">List</span>&lt;User&gt; list();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Row mapper factories used with this annotation must meet a few requirements:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">UserMapperFactory</span> <span class="directive">implements</span> RowMapperFactory { <i class="conum" data-value="1"></i><b>(1)</b>
+  <span class="directive">public</span> UserMapperFactory() { <i class="conum" data-value="2"></i><b>(2)</b>
+    ...
+  }
+
+  <span class="directive">public</span> Optional&lt;<span class="predefined-type">RowMapper</span>&lt;?&gt;&gt; build(<span class="predefined-type">Type</span> type, ConfigRegistry config) {
+    ...
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Must be a public class.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Must have a public, no-argument constructor (or a default constructor).</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The <code>@RegisterColumnMapperFactory</code> annotation may be repeated multiple times on
+the same type or method to register multiple factories.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="__registerbeanmapper"><a class="anchor" href="#__registerbeanmapper"></a>@RegisterBeanMapper</h5>
+<div class="paragraph">
+<p>Use <code>@RegisterBeanMapper</code> to register a <a href="#_beanmapper">BeanMapper</a> for a bean class:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
+  <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from users</span><span class="delimiter">&quot;</span></span>)
+  <span class="annotation">@RegisterBeanMapper</span>(User.class)
+  <span class="predefined-type">List</span>&lt;User&gt; list();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Using the <code>prefix</code> attribute causes the bean mapper to map only those columns
+that begin with the prefix:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
+  <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select u.id u_id, u.name u_name, r.id r_id, r.name r_name </span><span class="delimiter">&quot;</span></span> +
+      <span class="string"><span class="delimiter">&quot;</span><span class="content">from users u left join roles r on u.role_id = r.id</span><span class="delimiter">&quot;</span></span>)
+  <span class="annotation">@RegisterBeanMapper</span>(value = User.class, prefix = <span class="string"><span class="delimiter">&quot;</span><span class="content">u_</span><span class="delimiter">&quot;</span></span>)
+  <span class="annotation">@RegisterBeanMapper</span>(value = <span class="predefined-type">Role</span>.class, prefix = <span class="string"><span class="delimiter">&quot;</span><span class="content">r_</span><span class="delimiter">&quot;</span></span>)
+  <span class="predefined-type">Map</span>&lt;User,<span class="predefined-type">Role</span>&gt; getRolesPerUser();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this example, the <code>User</code> mapper will map the columns <code>u_id</code> and <code>u_name</code> into
+the <code>User.id</code> and <code>User.name</code> properties. Likewise for <code>r_id</code> and <code>r_name</code> into
+<code>Role.id</code> and <code>Role.name</code>, respectively.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The <code>@RegisterBeanMapper</code> annotation may be repeated (as demonstrated above) on
+the same type or method to register multiple bean mappers.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="__registerconstructormapper"><a class="anchor" href="#__registerconstructormapper"></a>@RegisterConstructorMapper</h5>
+<div class="paragraph">
+<p>Use <code>@RegisterConstructorMapper</code> to register a <a href="#_constructormapper">ConstructorMapper</a> for classes
+that are instantiated with all properties through the constructor.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
+  <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from users</span><span class="delimiter">&quot;</span></span>)
+  <span class="annotation">@RegisterConstructorMapper</span>(User.class)
+  <span class="predefined-type">List</span>&lt;User&gt; list();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Using the <code>prefix</code> attribute causes the constructor mapper to only map those
+columns that begin with the prefix:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
+  <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select u.id u_id, u.name u_name, r.id r_id, r.name r_name </span><span class="delimiter">&quot;</span></span> +
+      <span class="string"><span class="delimiter">&quot;</span><span class="content">from users u left join roles r on u.role_id = r.id</span><span class="delimiter">&quot;</span></span>)
+  <span class="annotation">@RegisterConstructorMapper</span>(value = User.class, prefix = <span class="string"><span class="delimiter">&quot;</span><span class="content">u_</span><span class="delimiter">&quot;</span></span>)
+  <span class="annotation">@RegisterConstructorMapper</span>(value = <span class="predefined-type">Role</span>.class, prefix = <span class="string"><span class="delimiter">&quot;</span><span class="content">r_</span><span class="delimiter">&quot;</span></span>)
+  <span class="predefined-type">Map</span>&lt;User,<span class="predefined-type">Role</span>&gt; getRolesPerUser();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this example, the <code>User</code> mapper will map the columns <code>u_id</code> and <code>u_name</code> into
+the <code>id</code> and <code>name</code> parameters of the <code>User</code> constructor. Likewise for <code>r_id</code>
+and <code>r_name</code> into <code>id</code> and <code>name</code> parameters of the <code>Role</code> constructor,
+respectively.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The <code>@RegisterConstructorMapper</code> annotation may be repeated multiple times on
+the same type or method to register multiple constructor mappers.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="__registerfieldmapper"><a class="anchor" href="#__registerfieldmapper"></a>@RegisterFieldMapper</h5>
+<div class="paragraph">
+<p>Use <code>@RegisterFieldMapper</code> to register a <a href="#_fieldmapper">FieldMapper</a> for a given class.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
+  <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from users</span><span class="delimiter">&quot;</span></span>)
+  <span class="annotation">@RegisterFieldMapper</span>(User.class)
+  <span class="predefined-type">List</span>&lt;User&gt; list();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Using the <code>prefix</code> attribute causes the field mapper to only map those columns
+that begin with the prefix:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
+  <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select u.id u_id, u.name u_name, r.id r_id, r.name r_name </span><span class="delimiter">&quot;</span></span> +
+      <span class="string"><span class="delimiter">&quot;</span><span class="content">from users u left join roles r on u.role_id = r.id</span><span class="delimiter">&quot;</span></span>)
+  <span class="annotation">@RegisterFieldMapper</span>(value = User.class, prefix = <span class="string"><span class="delimiter">&quot;</span><span class="content">u_</span><span class="delimiter">&quot;</span></span>)
+  <span class="annotation">@RegisterFieldMapper</span>(value = <span class="predefined-type">Role</span>.class, prefix = <span class="string"><span class="delimiter">&quot;</span><span class="content">r_</span><span class="delimiter">&quot;</span></span>)
+  <span class="predefined-type">Map</span>&lt;User,<span class="predefined-type">Role</span>&gt; getRolesPerUser();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this example, the <code>User</code> mapper will map the columns <code>u_id</code> and <code>u_name</code> into
+the <code>User.id</code> and <code>User.name</code> fields. Likewise for <code>r_id</code> and <code>r_name</code> into the
+<code>Role.id</code> and <code>Role.name</code> fields, respectively.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The <code>@RegisterConstructorMapper</code> annotation may be repeated multiple times on
+the same type or method to register multiple constructor mappers.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect4">
@@ -3205,24 +3947,29 @@ types.</p>
 <div class="paragraph">
 <p>Sometimes when using advanced SQL features like Arrays, a container type like
 <code>int[]</code> or <code>List&lt;Integer&gt;</code> can ambiguously mean either "a single SQL int[]" or
-"a ResultSet of int". Since arrays are not commonly used in normalized schema,
-jdbi assumes that you are collecting a ResultSet into a container object. You
-can annotate a return type as <code>@SingleValue</code> to override this.</p>
+"a ResultSet of int".</p>
 </div>
 <div class="paragraph">
-<p>TODO: provide examples</p>
+<p>Since arrays are not commonly used in normalized schema, SQL Object assumes by
+default that you are collecting a ResultSet into a container object. You can
+annotate a return type as <code>@SingleValue</code> to override this.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>Return type is List&lt;String&gt; but we&#8217;re selecting a varchar[] column from a
-single row.</p>
-</li>
-<li>
-<p>Return type is Map&lt;String,Object&gt;, but we&#8217;re selecting an hstore column from
-a single row.</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>For example, suppose we want to select a <code>varchar[]</code> column from a single row:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
+  <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select roles from users where id = ?</span><span class="delimiter">&quot;</span></span>)
+  <span class="annotation">@SingleValue</span>
+  <span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt; getUserRoles(<span class="type">long</span> userId)
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Normally, Jdbi would interpret <code>List&lt;String&gt;</code> to mean that the mapped type is
+<code>String</code>, and to collect all result rows into a list. The <code>@SingleValue</code>
+annotation causes Jdbi to treat <code>List&lt;String&gt;</code> as the mapped type instead.</p>
 </div>
 </div>
 <div class="sect4">
@@ -3309,66 +4056,206 @@ type, which supports mapping multiple values per key.</p>
 Multimap&lt;User, Phone&gt; getMultimap();</code></pre>
 </div>
 </div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="__sqlupdate"><a class="anchor" href="#__sqlupdate"></a>4.1.3. @SqlUpdate</h4>
 <div class="paragraph">
-<p>TODO:</p>
+<p>All the examples so far have been <code>Map</code> types where each row in the result set
+is a single <code>Map.Entry</code>. However, what if the <code>Map</code> we want to return is
+actually a single row or even a single column?</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>By default supports void, int/long (update count), or boolean (update count
-&gt; 0) return types</p>
-</li>
-<li>
-<p>Or use @GetGeneratedKeys annotation to return generated keys. e.g. return an
-id column value obtained from a sequence.</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>Jdbi&#8217;s <a href="./apidocs/org/jdbi/v3/core/mapper/MapMapper.html" target="_blank">MapMapper</a> maps each row to a
+<code>Map&lt;String, Object&gt;</code>, where column names (converted to lowercase) are mapped to
+column values.</p>
+</div>
+<div class="paragraph">
+<p>By default, SQL Object treats <code>Map</code> return types as a collection of <code>Map.Entry</code>
+values. Use the <code>@SingleValue</code> annotation to override this, so that the return
+type is treated as a single value instead of a collection:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from users where id = ?</span><span class="delimiter">&quot;</span></span>)
+<span class="annotation">@RegisterRowMapper</span>(MapMapper.class)
+<span class="annotation">@SingleValue</span>
+<span class="predefined-type">Map</span>&lt;<span class="predefined-type">String</span>, <span class="predefined-type">Object</span>&gt; getById(<span class="type">long</span> userId);</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Do you use PostgreSQL&#8217;s <code>hstore</code> columns? The <a href="#_postgresql">PostgreSQL</a> plugin provides an
+<code>hstore</code> to <code>Map&lt;String, String&gt;</code> column mapper. See
+<a href="#_hstore">hstore</a> for more information.
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 <div class="sect3">
 <h4 id="__sqlbatch"><a class="anchor" href="#__sqlbatch"></a>4.1.4. @SqlBatch</h4>
 <div class="paragraph">
-<p>TODO:</p>
+<p>Use the <code>@SqlBatch</code> annotation for bulk update operations. <code>@SqlBatch</code> is
+analogous to <a href="#_prepared_batches">PreparedBatch</a> in Core.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">ContactDao</span> {
+  <span class="annotation">@SqlBatch</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into contacts (id, name, email) values (?, ?, ?)</span><span class="delimiter">&quot;</span></span>)
+  <span class="type">void</span> bulkInsert(<span class="predefined-type">List</span>&lt;<span class="predefined-type">Integer</span>&gt; ids,
+                  <span class="predefined-type">Iterator</span>&lt;<span class="predefined-type">String</span>&gt; names,
+                  <span class="predefined-type">String</span>... emails);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Batch parameters may be collections, iterables, iterators, arrays (including
+varargs). We&#8217;ll call these "iterables" for brevity.</p>
+</div>
+<div class="paragraph">
+<p>When a batch method is called, SQL Object iterates through the method&#8217;s iterable
+parameters, and executes the SQL statement with the corresponding elements from
+each parameter.</p>
+</div>
+<div class="paragraph">
+<p>Thus a statement like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">contactDao.bulkInsert(
+    ImmutableList.of(<span class="integer">1</span>, <span class="integer">2</span>, <span class="integer">3</span>),
+    ImmutableList.of(<span class="string"><span class="delimiter">&quot;</span><span class="content">foo</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">bar</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">baz</span><span class="delimiter">&quot;</span></span>).iterator(),
+    <span class="string"><span class="delimiter">&quot;</span><span class="content">a@example.com</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">b@example.com</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">c@fake.com</span><span class="delimiter">&quot;</span></span>);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>would execute:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="sql"><span class="class">insert</span> <span class="class">into</span> contacts (id, name, email) <span class="keyword">values</span> (<span class="integer">1</span>, <span class="string"><span class="delimiter">'</span><span class="content">foo</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">'</span><span class="content">a@example.com</span><span class="delimiter">'</span></span>);
+<span class="class">insert</span> <span class="class">into</span> contacts (id, name, email) <span class="keyword">values</span> (<span class="integer">2</span>, <span class="string"><span class="delimiter">'</span><span class="content">bar</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">'</span><span class="content">b@example.com</span><span class="delimiter">'</span></span>);
+<span class="class">insert</span> <span class="class">into</span> contacts (id, name, email) <span class="keyword">values</span> (<span class="integer">3</span>, <span class="string"><span class="delimiter">'</span><span class="content">baz</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">'</span><span class="content">c@fake.com</span><span class="delimiter">'</span></span>);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Constant values may also be used as parameters to a SQL batch. In this case,
+the same value is bound to that parameter for every SQL statement in the batch.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
+  <span class="annotation">@SqlBatch</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into users (tenant_id, id, name) </span><span class="delimiter">&quot;</span></span> +
+      <span class="string"><span class="delimiter">&quot;</span><span class="content">values (:tenantId, :user.id, :user.name)</span><span class="delimiter">&quot;</span></span>)
+  <span class="type">void</span> bulkInsert(<span class="annotation">@Bind</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">tenantId</span><span class="delimiter">&quot;</span></span>) <span class="type">long</span> tenantId, <i class="conum" data-value="1"></i><b>(1)</b>
+                  <span class="annotation">@BindBean</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">user</span><span class="delimiter">&quot;</span></span>) User... users);
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Insert each user record using the same <code>tenant_id</code>.</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<code>@SqlBatch</code> methods must have at least one iterable parameter.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>By default, a <code>@SqlBatch</code> method may return a handful of types:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Analogous to PreparedBatch in core</p>
+<p><code>void</code>: returns nothing (obviously)</p>
 </li>
 <li>
-<p>Execute a statement multiple times, using a series of input arguments.</p>
+<p><code>int[]</code> or <code>long[]</code>: returns the update count per execution in the batch.
+Depending on the database vendor and JDBC driver, this may be either the
+number of rows changed by a statement, or the number matched by the query
+(regardless of whether any data was changed).</p>
 </li>
 <li>
-<p>Useful for e.g. batch inserts, batch updates on the same table</p>
-</li>
-<li>
-<p>Method parameters that look like collections will be used as successive
-elements in the batch. All collection parameters will be zipped.</p>
-</li>
-<li>
-<p>Method parameters that don&#8217;t look like collections will be bound to that
-same value for every element in the batch.</p>
-</li>
-<li>
-<p>All parameters are zipped into a series, and then the batch executes the
-statement for each set of arguments in the series.</p>
-</li>
-<li>
-<p>Returns void, int[] or long[] (update counts per batch statement), or
-boolean[] (update count &gt; 0 per batch statement).</p>
-</li>
-<li>
-<p>Use @GetGeneratedKeys to return containers of generated keys</p>
-</li>
-<li>
-<p>Use @SingleValue for arguments that should be treated as single values, that
-Jdbi would otherwise container a collection.</p>
+<p><code>boolean[]</code>: returns true if the update count is greater than zero, one value
+for each execution in the batch.</p>
 </li>
 </ul>
+</div>
+<div class="sect4">
+<h5 id="__getgeneratedkeys_2"><a class="anchor" href="#__getgeneratedkeys_2"></a>@GetGeneratedKeys</h5>
+<div class="paragraph">
+<p>Similar to <code>@SqlUpdate</code>, the <code>@GetGeneratedKeys</code> annotations tells SQL Object
+that the return value should be the generated keys from each SQL statement,
+instead of the update count. See
+<a href="#__getgeneratedkeys">@GetGeneratedKeys</a> for a more thorough discussion.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
+  <span class="annotation">@SqlBatch</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into users (id, name) values (nextval('user_seq'), ?)</span><span class="delimiter">&quot;</span></span>)
+  <span class="annotation">@GetGeneratedKeys</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>)
+  <span class="type">long</span><span class="type">[]</span> bulkInsert(<span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt; names); <i class="conum" data-value="1"></i><b>(1)</b>
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Returns the generated ID for each inserted name.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Multiple columns may be generated and returned in this way:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
+  <span class="annotation">@SqlBatch</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into users (id, name, created_on) values (nextval('user_seq'), ?, now())</span><span class="delimiter">&quot;</span></span>)
+  <span class="annotation">@GetGeneratedKeys</span>({<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">created_on</span><span class="delimiter">&quot;</span></span>})
+  <span class="annotation">@RegisterBeanMapper</span>(IdCreateTime.class)
+  <span class="predefined-type">List</span>&lt;IdCreateTime&gt; bulkInsert(<span class="predefined-type">String</span>... names);
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="__singlevalue_2"><a class="anchor" href="#__singlevalue_2"></a>@SingleValue</h5>
+<div class="paragraph">
+<p>In some cases you may want an iterable parameter to be treated as a
+constant&#8212;&#8203;use the <code>@SingleValue</code> annotation on the method parameter. This causes
+SQL Object to bind the whole iterable as the parameter value for every SQL
+statement in the batch (typically as a SQL Array parameter).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
+  <span class="annotation">@SqlBatch</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into users (id, name, roles) values (?, ?, ?)</span><span class="delimiter">&quot;</span></span>)
+  <span class="type">void</span> bulkInsert(<span class="predefined-type">List</span>&lt;<span class="predefined-type">Long</span>&gt; ids,
+                  <span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt; names,
+                  <span class="annotation">@SingleValue</span> <span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt; roles);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the above example, each new row would get the same <code>varchar[]</code> value in the
+<code>roles</code> column.</p>
+</div>
 </div>
 </div>
 <div class="sect3">
@@ -3471,7 +4358,7 @@ method parameters (usable via reflection)."</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="__getgeneratedkeys"><a class="anchor" href="#__getgeneratedkeys"></a>4.1.7. @GetGeneratedKeys</h4>
+<h4 id="__getgeneratedkeys_3"><a class="anchor" href="#__getgeneratedkeys_3"></a>4.1.7. @GetGeneratedKeys</h4>
 <div class="paragraph">
 <p>The <code>@GetGeneratedKeys</code> annotation may be used on a <code>@SqlUpdate</code> or <code>@SqlBatch</code>
 method to return the keys generated from the SQL statement:</p>
@@ -3503,22 +4390,19 @@ method to return the keys generated from the SQL statement:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_sql_locators_2"><a class="anchor" href="#_sql_locators_2"></a>4.1.8. SQL Locators</h4>
+<h4 id="_sqllocator"><a class="anchor" href="#_sqllocator"></a>4.1.8. SqlLocator</h4>
 <div class="paragraph">
-<p>Occasionally, such as when SQL statements start to get very large, it may be
-cumbersome to provide those statements as Java strings in <code>@Sql___</code> method
-annotations.</p>
+<p>When SQL statements grow in complexity, it may be cumbersome to provide
+the statements as Java strings in <code>@Sql___</code> method annotations.</p>
 </div>
 <div class="paragraph">
-<p>Jdbi provides annotations that let you configure where SQL will be loaded from.</p>
-</div>
-<div class="paragraph">
-<p>The SQL Object module includes two annotations:</p>
+<p>Jdbi provides annotations that let you configure external locations to
+load SQL statements.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>@UseAnnotationSqlLocator (the default behavior)</p>
+<p>@UseAnnotationSqlLocator (the default behavior; use @Sql___(&#8230;&#8203;) annotation value)</p>
 </li>
 <li>
 <p>@UseClasspathSqlLocator - loads SQL from a file on the classpath, based on
@@ -3526,8 +4410,19 @@ the package and name of the SQL Object interface type.</p>
 </li>
 </ul>
 </div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">com.foo</span>;
+<span class="annotation">@UseClasspathSqlLocator</span>
+<span class="type">interface</span> <span class="class">BarDao</span> {
+    <span class="comment">// loads classpath resource com/foo/BarDao/query.sql</span>
+    <span class="annotation">@SqlQuery</span>
+    <span class="type">void</span> query();
+}</code></pre>
+</div>
+</div>
 <div class="paragraph">
-<p>TODO: usage example</p>
+<p><strong>@UseClasspathSqlLocator</strong> is implemented with <a href="#_classpathsqllocator">ClasspathSqlLocator</a>, as described above.</p>
 </div>
 <div class="paragraph">
 <p>If you like StringTemplate, the <a href="#_stringtemplate_4">StringTemplate 4</a> module also provides a
@@ -3535,8 +4430,62 @@ SqlLocator, which can load SQL templates from StringTemplate 4 files on the
 classpath.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_transactions_2"><a class="anchor" href="#_transactions_2"></a>4.1.9. Transactions</h4>
+</div>
+<div class="sect2">
+<h3 id="_default_methods"><a class="anchor" href="#_default_methods"></a>4.2. Default Methods</h3>
+<div class="paragraph">
+<p>Occasionally a use case comes up where SQL Method annotations don&#8217;t fit. In
+these situations, you can "drop down" to the Core API using a Java 8 <code>default</code>
+method.</p>
+</div>
+<div class="paragraph">
+<p>Jdbi provides a <code>SqlObject</code> mixin interface with a single method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">SqlObject</span> {
+  Handle getHandle();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Make your SQL Object interface extend the <code>SqlObject</code> mixin, then provide your
+own implementation in a default method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">SplineDao</span> <span class="directive">extends</span> SqlObject {
+  <span class="keyword">default</span> <span class="type">void</span> reticulateSplines(Spline spline) {
+    Handle handle = getHandle();
+    <span class="comment">// do tricky stuff using the Core API.</span>
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Default methods can also be used to group multiple SQL operations into a single
+method call:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">ContactPhoneDao</span> {
+  <span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into contacts (id, name) values (nextval('contact_id'), :name)</span><span class="delimiter">&quot;</span></span>)
+  <span class="type">long</span> insertContact(<span class="annotation">@BindBean</span> Contact contact);
+
+  <span class="annotation">@SqlBatch</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into phones (contact_id, type, phone) values (:contactId, :type, :phone)</span><span class="delimiter">&quot;</span></span>)
+  <span class="type">void</span> insertPhone(<span class="type">long</span> contactId, <span class="annotation">@BindBean</span> <span class="predefined-type">Iterable</span>&lt;Phone&gt; phones);
+
+  <span class="keyword">default</span> <span class="type">long</span> insertFullContact(Contact contact) {
+    <span class="type">long</span> id = insertContact(contact);
+    insertPhone(id, contact.getPhones());
+    <span class="keyword">return</span> id;
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_transaction_management"><a class="anchor" href="#_transaction_management"></a>4.3. Transaction Management</h3>
 <div class="paragraph">
 <p>You may declare transactions with SqlObject annotations:</p>
 </div>
@@ -3616,68 +4565,14 @@ inTransaction or useTransaction. None of the others will do what you expect.</p>
 </ul>
 </div>
 </div>
-</div>
 <div class="sect2">
-<h3 id="_default_methods"><a class="anchor" href="#_default_methods"></a>4.2. Default Methods</h3>
-<div class="paragraph">
-<p>Occasionally a use case comes up where SQL Method annotations don&#8217;t fit. In
-these situations, you can "drop down" to the Core API using a Java 8 <code>default</code>
-method.</p>
-</div>
-<div class="paragraph">
-<p>Jdbi provides a <code>SqlObject</code> mixin interface with a single method:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">SqlObject</span> {
-  Handle getHandle();
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Make your SQL Object interface extend the <code>SqlObject</code> mixin, then provide your
-own implementation in a default method:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">SplineDao</span> <span class="directive">extends</span> SqlObject {
-  <span class="keyword">default</span> <span class="type">void</span> reticulateSplines(Spline spline) {
-    Handle handle = getHandle();
-    <span class="comment">// do tricky stuff using the Core API.</span>
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Default methods can also be used to group multiple SQL operations into a single
-method call:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">ContactPhoneDao</span> {
-  <span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into contacts (id, name) values (nextval('contact_id'), :name)</span><span class="delimiter">&quot;</span></span>)
-  <span class="type">long</span> insertContact(<span class="annotation">@BindBean</span> Contact contact);
-
-  <span class="annotation">@SqlBatch</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into phones (contact_id, type, phone) values (:contactId, :type, :phone)</span><span class="delimiter">&quot;</span></span>)
-  <span class="type">void</span> insertPhone(<span class="type">long</span> contactId, <span class="annotation">@BindBean</span> <span class="predefined-type">Iterable</span>&lt;Phone&gt; phones);
-
-  <span class="keyword">default</span> <span class="type">long</span> insertFullContact(Contact contact) {
-    <span class="type">long</span> id = insertContact(contact);
-    insertPhone(id, contact.getPhones());
-    <span class="keyword">return</span> id;
-  }
-}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_using_sql_objects"><a class="anchor" href="#_using_sql_objects"></a>4.3. Using SQL Objects</h3>
+<h3 id="_using_sql_objects"><a class="anchor" href="#_using_sql_objects"></a>4.4. Using SQL Objects</h3>
 <div class="paragraph">
 <p>Once you&#8217;ve defined your interface, there are a few ways to get an instance of
 it:</p>
 </div>
 <div class="sect3">
-<h4 id="_attached_to_handle"><a class="anchor" href="#_attached_to_handle"></a>4.3.1. Attached to Handle</h4>
+<h4 id="_attached_to_handle"><a class="anchor" href="#_attached_to_handle"></a>4.4.1. Attached to Handle</h4>
 <div class="paragraph">
 <p>You can get a SQL Object that is attached to an open handle.</p>
 </div>
@@ -3695,7 +4590,7 @@ closed, the SQL Object becomes unusable.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_temporary_sql_objects"><a class="anchor" href="#_temporary_sql_objects"></a>4.3.2. Temporary SQL Objects</h4>
+<h4 id="_temporary_sql_objects"><a class="anchor" href="#_temporary_sql_objects"></a>4.4.2. Temporary SQL Objects</h4>
 <div class="paragraph">
 <p>You can also get a temporary SQL Object from the Jdbi object, by passing it a
 callback (typically a lambda). Use
@@ -3717,10 +4612,10 @@ the callback returns.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_on_demand"><a class="anchor" href="#_on_demand"></a>4.3.3. On-Demand</h4>
+<h4 id="_on_demand"><a class="anchor" href="#_on_demand"></a>4.4.3. On-Demand</h4>
 <div class="paragraph">
-<p>On-demand instances have an open-ended lifecycle, as they obtain and releases
-connections for each method call. They are thread-safe, and may be reused
+<p>On-demand instances have an open-ended lifecycle, as they obtain and release a
+connection for each method call. They are thread-safe, and may be reused
 across an application. This is handy when you only need to make single calls at
 a time.</p>
 </div>
@@ -3745,6 +4640,83 @@ one of the above options for better performance, instead of on-demand.
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p>TODO:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Explain how nested calls within e.g. a default method use the same handle
+until the outer method returns</p>
+</li>
+<li>
+<p>Default methods can make multiple calls and will execute through the same
+handle.</p>
+</li>
+<li>
+<p>To make multiple calls from outside the DAO be executed against the same
+handle, extend <code>SqlObject</code> and embed all calls inside a <code>useHandle()</code> /
+<code>withHandle()</code> lambda.</p>
+</li>
+<li>
+<p><code>@CreateSqlObject</code> does not play nice with on-demand.</p>
+</li>
+<li>
+<p><code>Stream&lt;T&gt;</code> or <code>Iterable&lt;T&gt;</code> return types do not play nice with on-demand.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_additional_annotations"><a class="anchor" href="#_additional_annotations"></a>4.5. Additional Annotations</h3>
+<div class="paragraph">
+<p>Jdbi provides dozens of annotations out of the box:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="./apidocs/org/jdbi/v3/sqlobject/config/package-summary.html" target="_blank">org.jdbi.v3.sqlobject.config</a>
+provides annotations for things that can be configured at the <code>Jdbi</code> or
+<code>Handle</code> level. This includes registration of mappers and arguments, and for
+configuring SQL statement rendering and parsing.</p>
+</li>
+<li>
+<p><a href="./apidocs/org/jdbi/v3/sqlobject/customizer/package-summary.html" target="_blank">org.jdbi.v3.sqlobject.customizer</a>
+provides annotations for binding parameters, defining attributes, and
+controlling the fetch behavior of the statement&#8217;s result set.</p>
+</li>
+<li>
+<p><a href="./apidocs/org/jdbi/v3/jpa/package-summary.html" target="_blank">org.jdbi.v3.jpa</a>
+provides the <code>@BindJpa</code> annotation, for binding properties to column according
+to JPA <code>@Column</code> annotations.</p>
+</li>
+<li>
+<p><a href="./apidocs/org/jdbi/v3/sqlobject/locator/package-summary.html" target="_blank">org.jdbi.v3.sqlobject.locator</a>
+provides annotations that configure Jdbi to load SQL statements from an
+alternative source, e.g. a file on the classpath.</p>
+</li>
+<li>
+<p><a href="./apidocs/org/jdbi/v3/sqlobject/statement/package-summary.html" target="_blank">org.jdbi.v3.sqlobject.statement</a>
+provides the <code>@MapTo</code> annotation, which is used for dynamically specifying the
+mapped type at the time the method is invoked.</p>
+</li>
+<li>
+<p><a href="./apidocs/org/jdbi/v3/stringtemplate4/package-summary.html" target="_blank">org.jdbi.v3.stringtemplate4</a>
+provides annotations that configure Jdbi to load SQL from StringTemplate 4
+<code>.stg</code> files on the classpath, and/or to parse SQL templates using the
+ST4 template engine.</p>
+</li>
+<li>
+<p><a href="./apidocs/org/jdbi/v3/sqlobject/transaction/package-summary.html" target="_blank">org.jdbi.v3.sqlobject.transaction</a>
+provides annotations for transaction management in a SQL object. See
+<a href="#_transaction_management">Transaction Management</a> for details.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Jdbi is designed to support user-defined annotations. See
+<a href="#_user_defined_annotations">User-Defined Annotations</a> for a guide to creating your own.</p>
 </div>
 </div>
 </div>
@@ -4138,6 +5110,65 @@ to get the returned DML.</p>
 <p>See the <a href="./apidocs/org/jdbi/v3/postgres/package-summary.html" target="_blank">javadoc</a> for an
 exhaustive list.</p>
 </div>
+<div class="sect3">
+<h4 id="_hstore"><a class="anchor" href="#_hstore"></a>5.7.1. hstore</h4>
+<div class="paragraph">
+<p>The Postgres plugin provides an <code>hstore</code> to <code>Map&lt;String, String&gt;</code> column mapper:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">Map</span>&lt;<span class="predefined-type">String</span>, <span class="predefined-type">String</span>&gt; accountAttributes = handle
+    .select(<span class="string"><span class="delimiter">&quot;</span><span class="content">select attributes from account where id = ?</span><span class="delimiter">&quot;</span></span>, userId)
+    .mapTo(<span class="keyword">new</span> GenericType&lt;<span class="predefined-type">Map</span>&lt;<span class="predefined-type">String</span>, <span class="predefined-type">String</span>&gt;&gt;() {})
+    .findOnly();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>By default, SQL Object treats <code>Map</code> return types as a collection of <code>Map.Entry</code>
+values. Use the <code>@SingleValue</code> annotation to override this, so that the return
+type is treated as a single value instead of a collection:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">AccountDao</span> {
+  <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select attributes from account where id = ?</span><span class="delimiter">&quot;</span></span>)
+  <span class="annotation">@SingleValue</span>
+  <span class="predefined-type">Map</span>&lt;<span class="predefined-type">String</span>, <span class="predefined-type">String</span>&gt; getAccountAttributes(<span class="type">long</span> accountId);
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="__getgeneratedkeys_4"><a class="anchor" href="#__getgeneratedkeys_4"></a>5.7.2. @GetGeneratedKeys</h4>
+<div class="paragraph">
+<p>In Postgres, <code>@GetGeneratedKeys</code> can return the entire modified row if you
+request generated keys without naming any columns.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
+  <span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into users (id, name, created_on) values (nextval('user_seq'), ?, now())</span><span class="delimiter">&quot;</span></span>)
+  <span class="annotation">@GetGeneratedKeys</span>
+  <span class="annotation">@RegisterBeanMapper</span>(User.class)
+  User insert(<span class="predefined-type">String</span> name);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If a database operation modifies multiple rows (e.g. an update that will modify
+several rows), your method can return all the modified rows in a collection:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
+  <span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">update users set active = false where id = any(?)</span><span class="delimiter">&quot;</span></span>)
+  <span class="annotation">@GetGeneratedKeys</span>
+  <span class="annotation">@RegisterBeanMapper</span>(User.class)
+  <span class="predefined-type">List</span>&lt;User&gt; deactivateUsers(<span class="type">long</span>... userIds);
+}</code></pre>
+</div>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_spring"><a class="anchor" href="#_spring"></a>5.8. Spring</h3>
@@ -4412,6 +5443,148 @@ used. This can be overridden on the <code>@Sql___</code> annotation:</p>
 template will be used, regardless of the method name.</p>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_vavr"><a class="anchor" href="#_vavr"></a>5.10. Vavr</h3>
+<div class="paragraph">
+<p>The Vavr Plugin offers deep integration of <strong>Jdbi</strong> with the Vavr functional library:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Supports argument resolution of sever Vavr Value types such as
+<code>Option&lt;T&gt;</code>, <code>Either&lt;L, T&gt;</code>, <code>Lazy&lt;T&gt;</code>, <code>Try&lt;T&gt;</code> and <code>Validation&lt;T&gt;</code>.
+Given that for the wrapped type <code>T</code> a Mapper is registered.</p>
+</li>
+<li>
+<p>Return Vavr collection types from queries. Supported are <code>Seq&lt;T&gt;</code>, <code>Set&lt;T&gt;</code>
+and <code>Map&lt;T&gt;</code> as well as all subtypes thereof.
+It is possible to collect into a <code>Traversable&lt;T&gt;</code>, in this case a <code>List&lt;T&gt;</code>
+will be used as default implementation.
+For interface types a sensible default implementation will be used
+(e.q. <code>List&lt;T&gt;</code> for <code>Seq&lt;T&gt;</code>).</p>
+</li>
+<li>
+<p>Tuple projections for <strong>Jdbi</strong>! Yey! Vavr offers Tuples up to a maximum arity of 8.
+you can map your query results e.g. to <code>Tuple3&lt;Integer, String, Long&gt;</code>.
+If you select more columns than the arity of the projection the columns
+up to that index will be used.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To use the plugin, add a Maven dependency:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
+  <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
+  <span class="tag">&lt;artifactId&gt;</span>jdbi3-vavr<span class="tag">&lt;/artifactId&gt;</span>
+<span class="tag">&lt;/dependency&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Currently Vavr &gt;= 0.9.0 is supported and tested. The plugin pulls a supported version of
+Vavr and is ready to be used. As with other plugins: install via <code>Jdbi</code> instance or
+use auto install.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">jdbi.installPlugin(<span class="keyword">new</span> VavrPlugin());</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here are some usage examples of the features listed above:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">String</span> query = <span class="string"><span class="delimiter">&quot;</span><span class="content">select * from users where :name is null or name = :name</span><span class="delimiter">&quot;</span></span>;
+<span class="predefined-type">Option</span>&lt;<span class="predefined-type">String</span>&gt; param = <span class="predefined-type">Option</span>.of(<span class="string"><span class="delimiter">&quot;</span><span class="content">eric</span><span class="delimiter">&quot;</span></span>);
+
+<span class="comment">// will fetch first user with given name or first user without name (Option.none)</span>
+<span class="keyword">return</span> handle.createQuery(query)
+        .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>, param)
+        .mapToBean(User.class)
+        .findFirst();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>where <code>param</code> may be one of <code>Option&lt;T&gt;</code>, <code>Either&lt;L, T&gt;</code>, <code>Lazy&lt;T&gt;</code>, <code>Try&lt;T&gt;</code>
+or <code>Validation&lt;T&gt;</code>. Note that in the case of these types, the nested value must
+be 'present' otherwise a <code>null</code> value is used (e.g. for <code>Either.Left</code> or
+<code>Validation.Invalid</code>).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select name from users</span><span class="delimiter">&quot;</span></span>)
+        .collectInto(<span class="keyword">new</span> GenericType&lt;Seq&lt;<span class="predefined-type">String</span>&gt;&gt;() {});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This works for all the collection types supported. For the nested value
+row and column mappers already installed in <strong>Jdbi</strong> will be used. The plugin
+will obey configured key and value columns for <code>Map&lt;K, V&gt;</code> return types.</p>
+</div>
+<div class="paragraph">
+<p>Last but not least we can now project simple queries to Vavr tuples like that:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// given a 'tuples' table with t1 int, t2 varchar, t3 varchar, ...</span>
+<span class="predefined-type">List</span>&lt;Tuple3&lt;<span class="predefined-type">Integer</span>, <span class="predefined-type">String</span>, <span class="predefined-type">String</span>&gt;&gt; tupleProjection = handle
+        .createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select t1, t2, t3 from tuples</span><span class="delimiter">&quot;</span></span>)
+        .mapTo(<span class="keyword">new</span> GenericType&lt;<span class="predefined-type">List</span>&lt;Tuple3&lt;<span class="predefined-type">Integer</span>, <span class="predefined-type">String</span>, <span class="predefined-type">String</span>&gt;&gt;&gt;() {})
+        .list();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can also project complex types into a tuple as long as a row mapper is
+registered.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// given that there are row mappers registered for both complex types</span>
+Tuple2&lt;City, Address&gt; tupleProjection = handle
+        .createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select cityname, zipcode, street, housenumber from </span><span class="delimiter">&quot;</span></span> +
+            <span class="string"><span class="delimiter">&quot;</span><span class="content">addresses where user_id = 1</span><span class="delimiter">&quot;</span></span>)
+        .mapTo(<span class="keyword">new</span> GenericType&lt;Tuple2&lt;City, Address&gt;&gt;() {})
+        .findOnly();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you want to mix complex types and simple ones we also got you covered.
+Using the <code>TupleMappers</code> class you can configure your projections.(In fact,
+you have to - read below!)</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">handle.configure(TupleMappers.class, c -&gt;
+        c.setColumn(<span class="integer">2</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">street</span><span class="delimiter">&quot;</span></span>).setColumn(<span class="integer">3</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">housenumber</span><span class="delimiter">&quot;</span></span>));
+
+Tuple3&lt;City, <span class="predefined-type">String</span>, <span class="predefined-type">Integer</span>&gt; result = handle
+        .createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select cityname, zipcode, street, housenumber from </span><span class="delimiter">&quot;</span></span> +
+             <span class="string"><span class="delimiter">&quot;</span><span class="content">addresses where user_id = 1</span><span class="delimiter">&quot;</span></span>)
+        .mapTo(<span class="keyword">new</span> GenericType&lt;Tuple3&lt;City, <span class="predefined-type">String</span>, <span class="predefined-type">Integer</span>&gt;&gt;() {})
+        .findOnly();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Bear in mind:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The configuration of the columns is 1-based, since they reflect
+the tuples' values (which you would query by e.g. <code>._1</code>).</p>
+</li>
+<li>
+<p>Tuples are always mapped fully column-wise or fully via row mappers.
+If you want to mix row-mapped types and single-column mappings the
+<code>TupleMappers</code> must be configured properly i.e. all non row-mapped
+tuple indices must be provided with a column configuration!</p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -4426,9 +5599,9 @@ Typically a single <code>NamedArgumentFinder</code> instance will provide argume
 several different names.</p>
 </div>
 <div class="paragraph">
-<p>In cases where neither <code>bindBean()</code> nor <code>bindMap()</code> are a good fit, you can
-implement your own <code>NamedArgumentFinder</code> and bind that, instead of
-extracting and binding each argument individually.</p>
+<p>In cases where neither <code>bindBean()</code>, <code>bindFields()</code>, <code>bindMethods()</code>, nor
+<code>bindMap()</code> are a good fit, you can implement your own <code>NamedArgumentFinder</code> and
+bind that, instead of extracting and binding each argument individually.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4448,11 +5621,13 @@ stmt.bindNamedArgumentFinder(cacheFinder);</code></pre>
 </td>
 <td class="content">
 Under the hood, the
-<a href="./apidocs/org/jdbi/v3/core/statement/SqlStatement.html#bindBean-java.lang.Object-" target="_blank">SqlStatement.bindBean()</a>
+<a href="./apidocs/org/jdbi/v3/core/statement/SqlStatement.html#bindBean-java.lang.Object-" target="_blank">SqlStatement.bindBean()</a>,
+<a href="./apidocs/org/jdbi/v3/core/statement/SqlStatement.html#bindMethods-java.lang.Object-" target="_blank">SqlStatement.bindMethods()</a>,
+<a href="./apidocs/org/jdbi/v3/core/statement/SqlStatement.html#bindFields-java.lang.Object-" target="_blank">SqlStatement.bindFields()</a>,
 and
 <a href="./apidocs/org/jdbi/v3/core/statement/SqlStatement.html#bindMap-java.util.Map-" target="_blank">SqlStatement.bindMap()</a>
 methods are just creating and binding custom implementations of
-<code>NamedArgumentFinder</code> for beans and maps, respectively.
+<code>NamedArgumentFinder</code> for beans, methods, fields, and maps, respectively.
 </td>
 </tr>
 </table>
@@ -4497,7 +5672,7 @@ during query execution.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">ExampleConfig</span> <span class="directive">implements</span> JdbiConfig&lt;ExampleConfig&gt;{
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">ExampleConfig</span> <span class="directive">implements</span> JdbiConfig&lt;ExampleConfig&gt; {
 
     <span class="directive">private</span> <span class="predefined-type">String</span> color;
     <span class="directive">private</span> <span class="type">int</span> number;
@@ -4512,16 +5687,18 @@ during query execution.</p>
         <span class="local-variable">this</span>.number = other.number;
     }
 
-    <span class="directive">public</span> <span class="type">void</span> setColor(<span class="predefined-type">String</span> color) {
+    <span class="directive">public</span> ExampleConfig setColor(<span class="predefined-type">String</span> color) {
         <span class="local-variable">this</span>.color = color;
+        <span class="keyword">return</span> <span class="local-variable">this</span>;
     }
 
     <span class="directive">public</span> <span class="predefined-type">String</span> getColor() {
         <span class="keyword">return</span> color;
     }
 
-    <span class="directive">public</span> <span class="type">void</span> setNumber(<span class="type">int</span> number) {
+    <span class="directive">public</span> ExampleConfig setNumber(<span class="type">int</span> number) {
         <span class="local-variable">this</span>.number = number;
+        <span class="keyword">return</span> <span class="local-variable">this</span>;
     }
 
     <span class="directive">public</span> <span class="type">int</span> getNumber() {
@@ -4612,13 +5789,9 @@ classpath.</p>
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>JdbiPlugin may be used to perform bulk configuration
-TODO</p>
-</div>
 </div>
 <div class="sect2">
-<h3 id="_jdbicollector"><a class="anchor" href="#_jdbicollector"></a>6.4. JdbiCollector</h3>
+<h3 id="_jdbicollectors"><a class="anchor" href="#_jdbicollectors"></a>6.4. JdbiCollectors</h3>
 <div class="paragraph">
 <p>TODO:</p>
 </div>
@@ -4641,28 +5814,526 @@ types</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_sql_object_custom_annotations"><a class="anchor" href="#_sql_object_custom_annotations"></a>6.5. SQL Object custom annotations</h3>
+<h3 id="_user_defined_annotations"><a class="anchor" href="#_user_defined_annotations"></a>6.5. User-Defined Annotations</h3>
 <div class="paragraph">
-<p>TODO:</p>
+<p>SQL Object is designed to be extended with user-defined annotations. In fact,
+most of the annotations provided in Jdbi are wired up with the approach
+outlined below.</p>
+</div>
+<div class="paragraph">
+<p>There are a few different categories of annotations in SQL Object, and it&#8217;s
+important to understand the differences between them:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>SqlMethodAnnotation - Introduce your own SQL method annotations on par with
-@SqlQuery, @SqlUpdate, etc.</p>
+<p><a href="#_statement_customizing_annotations">Statement Customizing Annotations</a> - configures the underlying
+<a href="./apidocs/org/jdbi/v3/core/statement/SqlStatement.html" target="_blank">SqlStatement</a> of a method
+prior to execution. These can only be used in tandem with annotations like
+<code>@SqlQuery</code>, <code>@SqlUpdate</code>, etc, and do not work on default methods.</p>
 </li>
 <li>
-<p>SqlMethodDecoratingAnnotation - Introduce your own SQL method decorating
-annotations on par with @Transaction. Applies to any SQL Object method,
-annotated or default.</p>
+<p><a href="#_configuration_annotations">Configuration Annotations</a> - modifies configuration in the
+<a href="./apidocs/org/jdbi/v3/core/config/ConfigRegistry.html" target="_blank">ConfigRegistry</a> within the
+scope of a SQL object or one of its methods.</p>
 </li>
 <li>
-<p>ConfiguringAnnotation</p>
-</li>
-<li>
-<p>SqlStatementCustomizingAnnotation</p>
+<p><a href="#_method_decorating_annotations">Method Decorating Annotations</a> - decorates a method invocation with
+some additional behavior, e.g. the <code>@Transaction</code> annotation wraps the method
+call in a <code>handle.inTransaction()</code> call.</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>Once you know which type of annotation you want, proceed to the appropriate
+section below and follow the guide to set it up.</p>
+</div>
+<div class="sect3">
+<h4 id="_statement_customizing_annotations"><a class="anchor" href="#_statement_customizing_annotations"></a>6.5.1. Statement Customizing Annotations</h4>
+<div class="paragraph">
+<p>SQL statement customizing annotations are used to apply some change to the
+<a href="./apidocs/org/jdbi/v3/core/statement/SqlStatement.html" target="_blank">SqlStatement</a> associated
+with a SQL method.</p>
+</div>
+<div class="paragraph">
+<p>Typically these annotations correlate to an API method in core. e.g. <code>@Bind</code>
+corresponds to <code>SqlStatement.bind()</code>, <code>@MaxRows</code> corresponds to
+<code>Query.setMaxRows()</code>, etc.</p>
+</div>
+<div class="paragraph">
+<p>Customizing annotations are applied only after the
+<a href="./apidocs/org/jdbi/v3/core/statement/SqlStatement.html" target="_blank">SqlStatement</a> has been
+created.</p>
+</div>
+<div class="paragraph">
+<p>You can create your own SQL statement customizing annotations and attach runtime
+behavior to them.</p>
+</div>
+<div class="paragraph">
+<p>First, create an annotation that you want to attach a statement customization
+to:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Retention</span>(<span class="predefined-type">RetentionPolicy</span>.RUNTIME) <i class="conum" data-value="1"></i><b>(1)</b>
+<span class="annotation">@Target</span>({<span class="predefined-type">ElementType</span>.TYPE, <span class="predefined-type">ElementType</span>.METHOD, <span class="predefined-type">ElementType</span>.PARAMETER}) <i class="conum" data-value="2"></i><b>(2)</b>
+<span class="directive">public</span> <span class="annotation">@interface</span> MaxRows {
+  <span class="type">int</span> value();
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>All statement customizing annotations should have a <code>RUNTIME</code> retention
+policy.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Statement customizing annotations only work on types, methods, or
+parameters. Strictly speaking, the <code>@Target</code> annotation is not required, but
+it&#8217;s a good practice to include it, so that annotations can only be applied
+where they will actually do something.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Placing a customizing annotation on a type means "apply this customization to
+every method."</p>
+</div>
+<div class="paragraph">
+<p>When used on parameters, annotations may use the argument passed to the method
+while processing the annotation.</p>
+</div>
+<div class="paragraph">
+<p>Next, we write an implementation of the
+<a href="./apidocs/org/jdbi/v3/sqlobject/customizer/SqlStatementCustomizerFactory.html" target="_blank">SqlStatementCustomizerFactory</a>
+class, to process the annotation and apply the customization to the statement.</p>
+</div>
+<div class="paragraph">
+<p>The <code>SqlStatementCustomizerFactory</code> produces two different types of "statement
+customizer" command objects:
+<a href="./apidocs/org/jdbi/v3/sqlobject/customizer/SqlStatementCustomizer.html" target="_blank">SqlStatementCustomizer</a>
+(for annotations on types or methods), and
+<a href="./apidocs/org/jdbi/v3/sqlobject/customizer/SqlStatementParameterCustomizer.html" target="_blank">SqlStatementParameterCustomizer</a>
+(for annotations on method parameters).</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s implement a statement customizer factory for our annotation:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">MaxRowsFactory</span> <span class="directive">implements</span> SqlStatementCustomizerFactory {
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> SqlStatementCustomizer createForType(<span class="predefined-type">Annotation</span> annotation,
+                                                <span class="predefined-type">Class</span>&lt;?&gt; sqlObjectType) {
+        <span class="directive">final</span> <span class="type">int</span> maxRows = ((MaxRows)annotation).value(); <i class="conum" data-value="1"></i><b>(1)</b>
+        <span class="keyword">return</span> stmt -&gt; ((<span class="predefined-type">Query</span>)stmt).setMaxRows(maxRows); <i class="conum" data-value="2"></i><b>(2)</b>
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> SqlStatementCustomizer createForMethod(<span class="predefined-type">Annotation</span> annotation,
+                                                  <span class="predefined-type">Class</span>&lt;?&gt; sqlObjectType,
+                                                  <span class="predefined-type">Method</span> method) {
+        <span class="keyword">return</span> createForType(annotation, sqlObjectType); <i class="conum" data-value="3"></i><b>(3)</b>
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> SqlStatementParameterCustomizer createForParameter(<span class="predefined-type">Annotation</span> annotation,
+                                                              <span class="predefined-type">Class</span>&lt;?&gt; sqlObjectType,
+                                                              <span class="predefined-type">Method</span> method,
+                                                              Parameter param,
+                                                              <span class="type">int</span> index,
+                                                              <span class="predefined-type">Type</span> type) {
+        <span class="keyword">return</span> (stmt, maxRows) -&gt; ((<span class="predefined-type">Query</span>)stmt).setMaxRows((<span class="predefined-type">Integer</span>) maxRows); <i class="conum" data-value="4"></i><b>(4)</b>
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Extract the max rows from the annotation</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td><a href="./apidocs/org/jdbi/v3/sqlobject/customizer/SqlStatementCustomizer.html" target="_blank">SqlStatementCustomizer</a>
+can be implemented as a lambda&#8212;&#8203;it receives a
+<a href="./apidocs/org/jdbi/v3/core/statement/SqlStatement.html" target="_blank">SqlStatement</a> as a
+parameter, calls whatever method it wants on the statement, and returns
+void.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Since the customization for this annotation is the same at the method level
+as at the type level, we simply delegate to the type-level method for
+brevity.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td><a href="./apidocs/org/jdbi/v3/sqlobject/customizer/SqlStatementParameterCustomizer.html" target="_blank">SqlStatementParameterCustomizer</a>
+can also be implemented as a lambda. It accepts a <code>SqlStatement</code> and the
+value that was passed into the method on the annotated parameter.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Finally, add the
+<a href="./apidocs/org/jdbi/v3/sqlobject/customizer/SqlStatementCustomizingAnnotation.html" target="_blank">@SqlStatementCustomizingAnnotation</a>
+annotation the <code>@MaxRows</code> annotation type. This tells Jdbi that <code>MaxRowsFactory</code>
+implements the behavior of the <code>@MaxRows</code> annotation:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@SqlStatementCustomizingAnnotation</span>(MaxRowsFactory.class)
+<span class="annotation">@Retention</span>(<span class="predefined-type">RetentionPolicy</span>.RUNTIME)
+<span class="annotation">@Target</span>({<span class="predefined-type">ElementType</span>.METHOD, <span class="predefined-type">ElementType</span>.PARAMETER})
+<span class="directive">public</span> <span class="annotation">@interface</span> MaxRows {
+    <span class="type">int</span> value() <span class="keyword">default</span> -<span class="integer">1</span>;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Your statement customizing annotation is now ready to use on any SQL object:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">Dao</span> {
+  <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from contacts</span><span class="delimiter">&quot;</span></span>)
+  <span class="annotation">@MaxRows</span>(<span class="integer">100</span>)
+  <span class="predefined-type">List</span>&lt;Contact&gt; list();
+
+  <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from contacts</span><span class="delimiter">&quot;</span></span>)
+  <span class="predefined-type">List</span>&lt;Contact&gt; list(<span class="annotation">@MaxRows</span> <span class="type">int</span> maxRows);
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+We chose <code>@MaxRows</code> as an example here because it was easy to understand.
+In practice, you will get better database performance by using a <code>LIMIT</code> clause
+in your SQL statement than by using <code>@MaxRows</code>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_configuration_annotations"><a class="anchor" href="#_configuration_annotations"></a>6.5.2. Configuration Annotations</h4>
+<div class="paragraph">
+<p>Configuration annotations are used to apply some change to the
+<a href="./apidocs/org/jdbi/v3/core/config/ConfigRegistry.html" target="_blank">ConfigRegistry</a> associated with
+a SQL object or method.</p>
+</div>
+<div class="paragraph">
+<p>Typically these annotations correlate to a method of
+<a href="./apidocs/org/jdbi/v3/core/config/Configurable.html" target="_blank">Configurable</a> (<code>Jdbi</code>,
+<code>Handle</code>, and <code>SqlStatement</code> all implement this interface). For example,
+<code>@RegisterColumnMapper</code> correlates to <code>Configurable.registerColumnMapper()</code>.</p>
+</div>
+<div class="paragraph">
+<p>You can create your own configuration annotations, and attach runtime behavior
+to them:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Write a new configuration annotation, with any attributes you need.</p>
+</li>
+<li>
+<p>Write an implementation of
+<a href="./apidocs/org/jdbi/v3/sqlobject/config/Configurer.html" target="_blank">Configurer</a> which performs
+the configuration associated with your annotation.</p>
+</li>
+<li>
+<p>Add the <code>@ConfiguringAnnotation</code> annotation to your configuration annotation
+type.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>With the above steps completed, Jdbi will invoke your configurer whenever it
+encounters the associated annotation.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s re-implement one of Jdbi&#8217;s built-in annotations as an example:</p>
+</div>
+<div class="paragraph">
+<p>The <code>@RegisterColumnMapper</code> annotation has an attribute to specify the class of
+the column mapper to register. Wherever the annotation is used, we want Jdbi to
+create an instance of that mapper type, and register it with the config
+registry.</p>
+</div>
+<div class="paragraph">
+<p>First, let&#8217;s create the new annotation type:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Retention</span>(<span class="predefined-type">RetentionPolicy</span>.RUNTIME) <i class="conum" data-value="1"></i><b>(1)</b>
+<span class="annotation">@Target</span>({<span class="predefined-type">ElementType</span>.TYPE, <span class="predefined-type">ElementType</span>.METHOD}) <i class="conum" data-value="2"></i><b>(2)</b>
+<span class="directive">public</span> <span class="annotation">@interface</span> RegisterColumnMapper{
+  <span class="predefined-type">Class</span>&lt;? <span class="directive">extends</span> ColumnMapper&lt;?&gt;&gt; value();
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>All configuration annotations should have a <code>RUNTIME</code> retention policy.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Configuration annotations only work on types and methods. Strictly speaking,
+the <code>@Target</code> annotation is not required, but it&#8217;s a good practice to
+include it, so that annotations can only be applied where they will actually
+do something.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Placing a configuration annotation on a type means "apply this configuration to
+every method."</p>
+</div>
+<div class="paragraph">
+<p>Next, we write an implementation of the
+<a href="./apidocs/org/jdbi/v3/sqlobject/config/Configurer.html" target="_blank">Configurer</a> class, to process
+the annotation and apply the configuration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">RegisterColumnMapperImpl</span> <span class="directive">implements</span> Configurer {
+  <span class="annotation">@Override</span>
+  <span class="directive">public</span> <span class="type">void</span> configureForMethod(ConfigRegistry registry,
+                                 <span class="predefined-type">Annotation</span> annotation,
+                                 <span class="predefined-type">Class</span>&lt;?&gt; sqlObjectType,
+                                 <span class="predefined-type">Method</span> method) {
+    configure(registry, (RegisterColumnMapper) annotation);
+  }
+
+  <span class="annotation">@Override</span>
+  <span class="directive">public</span> <span class="type">void</span> configureForType(ConfigRegistry registry,
+                               <span class="predefined-type">Annotation</span> annotation,
+                               <span class="predefined-type">Class</span>&lt;?&gt; sqlObjectType) {
+    configure(registry, (RegisterColumnMapper) annotation);
+  }
+
+  <span class="directive">private</span> <span class="type">void</span> configure(ConfigRegistry registry,
+                         RegisterColumnMapper registerColumnMapper) { <i class="conum" data-value="1"></i><b>(1)</b>
+    <span class="keyword">try</span> {
+      <span class="predefined-type">Class</span>&lt;? <span class="directive">extends</span> ColumnMapper&gt; mapperType = registerColumnMapper.value();
+      ColumnMapper mapper = mapperType.getConstructor().newInstance();
+      registry.get(ColumnMappers.class).register(mapper);
+    }
+    <span class="keyword">catch</span> (<span class="exception">NoSuchMethodException</span> e) {
+      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">RuntimeException</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">Cannot construct </span><span class="delimiter">&quot;</span></span> + mapperType, e);
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>In this example, we&#8217;re applying the same configuration, whether the
+<code>@RegisterColumnMapper</code> annotation is used on the SQL object type or method.
+However this is not a requirement&#8212;&#8203;some annotations may choose to apply
+configuration differently depending on whether the annotation is placed on
+the type or the method.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>For configuration annotations with only one target, (e.g. <code>@KeyColumn</code> and
+<code>@ValueColumn</code> may only be applied to methods), you need only implement
+the <code>Configurer</code> method appropriate for the annotation target.</p>
+</div>
+<div class="paragraph">
+<p>Finally, add the
+<a href="./apidocs/org/jdbi/v3/sqlobject/config/ConfiguringAnnotation.html" target="_blank">@ConfiguringAnnotation</a>
+annotation to your <code>@RegisterColumnMapper</code> annotation type. This tells Jdbi that
+<code>RegisterColumnMapperImpl</code> implements the behavior of the
+<code>@RegisterColumnMapper</code> annotation.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@ConfiguringAnnotation</span>(RegisterColumnMapperImpl.class)
+<span class="annotation">@Retention</span>(<span class="predefined-type">RetentionPolicy</span>.RUNTIME)
+<span class="annotation">@Target</span>({<span class="predefined-type">ElementType</span>.TYPE, <span class="predefined-type">ElementType</span>.METHOD})
+<span class="directive">public</span> <span class="annotation">@interface</span> RegisterColumnMapper {
+    <span class="predefined-type">Class</span>&lt;? <span class="directive">extends</span> TemplateEngine&gt; value();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Your configuration annotation is now ready to use in any SQL object:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">AccountDao</span> {
+  <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select balance from accounts where id = ?</span><span class="delimiter">&quot;</span></span>)
+  <span class="annotation">@RegisterColumnMapper</span>(MoneyMapper.class)
+  <span class="directive">public</span> Money getBalance(<span class="type">long</span> accountId);
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_method_decorating_annotations"><a class="anchor" href="#_method_decorating_annotations"></a>6.5.3. Method Decorating Annotations</h4>
+<div class="paragraph">
+<p>Method decorating annotations are used to enhance a SQL Object method with
+additional (or substitute) behavior.</p>
+</div>
+<div class="paragraph">
+<p>Internally, SQL Object represents the behavior of each method with an instance
+of the <a href="./apidocs/org/jdbi/v3/sqlobject/Handler.html" target="_blank">Handler</a> interface. Every time
+you call a method on a SQL Object instance, the method is executed by executing
+the handler for the given method.</p>
+</div>
+<div class="paragraph">
+<p>When use use a decorating annotation (like <code>@Transaction</code>), the regular handler
+for a method is wrapped in another handler which may perform some action before
+and/or after passing the call to the original handler.</p>
+</div>
+<div class="paragraph">
+<p>A decorator could even perform some action <em>instead</em> of calling the original,
+e.g. for a caching annotation.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s re-implement the <code>@Transaction</code> annotation to see how it works:</p>
+</div>
+<div class="paragraph">
+<p>First, create the annotation type:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Retention</span>(<span class="predefined-type">RetentionPolicy</span>.RUNTIME) <i class="conum" data-value="1"></i><b>(1)</b>
+<span class="annotation">@Target</span>(<span class="predefined-type">ElementType</span>.METHOD) <i class="conum" data-value="2"></i><b>(2)</b>
+<span class="directive">public</span> <span class="annotation">@interface</span> Transaction {
+    TransactionIsolationLevel value();
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>All decorating annotations should have a <code>RUNTIME</code> retention policy.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Decorating annotations only work on types and methods. Strictly speaking,
+the <code>@Target</code> annotation is note required, but it&#8217;s a good practice to
+include it, so that annotations can only be applied where they will actually
+do something.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Placing a decorating annotation on a type means "apply this decoration to every
+method."</p>
+</div>
+<div class="paragraph">
+<p>Next we write an implementation of the
+<a href="./apidocs/org/jdbi/v3/sqlobject/HandlerDecorator.html" target="_blank">HandlerDecorator</a> interface, to
+process the annotation and apply the decoration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">TransactionDecorator</span> <span class="directive">implements</span> HandlerDecorator {
+  <span class="directive">public</span> <span class="predefined-type">Handler</span> decorateHandler(<span class="predefined-type">Handler</span> base,
+                                 <span class="predefined-type">Class</span>&lt;?&gt; sqlObjectType,
+                                 <span class="predefined-type">Method</span> method) {
+    Transaction anno = method.getAnnotation(Transaction.class); <i class="conum" data-value="1"></i><b>(1)</b>
+    TransactionIsolationLevel isolation = anno.value(); <i class="conum" data-value="2"></i><b>(2)</b>
+
+    <span class="keyword">return</span> (target, args, handleSupplier) -&gt; handleSupplier.getHandle() <i class="conum" data-value="3"></i><b>(3)</b>
+        .inTransaction(isolation, h -&gt; base.invoke(target, args, handleSupplier));
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Get the <code>@Transaction</code> annotation</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Extract the transaction isolation level from the annotation</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The <code>Handler</code> interface accepts a target (the SQL Object instance being
+invoked), an <code>Object[]</code> array of arguments passed to the method, and a
+<code>HandleSupplier</code>.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Finally, add the
+<a href="./apidocs/org/jdbi/v3/sqlobject/SqlMethodDecoratingAnnotation.html" target="_blank">@SqlMethodDecoratingAnnotation</a>
+annotation to your <code>@Transaction</code> annotation type. This tells Jdbi that
+<code>TransactionDecorator</code> implements the behavior of the <code>@Transaction</code> annotation.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@SqlMethodDecoratingAnnotation</span>(TransactionDecorator.class)
+<span class="annotation">@Retention</span>(<span class="predefined-type">RetentionPolicy</span>.RUNTIME)
+<span class="annotation">@Target</span>(<span class="predefined-type">ElementType</span>.METHOD)
+<span class="directive">public</span> <span class="annotation">@interface</span> Transaction {
+    TransactionIsolationLevel value();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Your decorating annotation is now ready to use in any SQL object:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">ContactDao</span> {
+  <span class="annotation">@SqlBatch</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into contacts (id, name) values (:id, :name)</span><span class="delimiter">&quot;</span></span>)
+  <span class="annotation">@Transaction</span>
+  <span class="type">void</span> batchInsert(<span class="annotation">@BindBean</span> Contact... contacts);
+}</code></pre>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_decorator_order"><a class="anchor" href="#_decorator_order"></a>Decorator Order</h5>
+<div class="paragraph">
+<p>If a SQL object method has two or more decorating annotations applied, and the
+order of decorations is important, use the <code>@DecoratorOrder</code> annotation.</p>
+</div>
+<div class="paragraph">
+<p>For example, suppose a method were annotated both with <code>@Cached</code> and
+<code>@Transaction</code> (just go with it..). We would probably want the <code>@Cached</code>
+annotation to go first, so that transactions are not created unnecessarily when
+the cache already contains the entry.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">ContactDao</span> {
+  <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from contacts where id = ?</span><span class="delimiter">&quot;</span></span>)
+  <span class="annotation">@Cached</span>
+  <span class="annotation">@Transaction</span>
+  <span class="annotation">@DecoratorOrder</span>(Cached.class, Transaction.class)
+  Contact getById(<span class="type">long</span> id);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Decorator order is expressed from outermost to innermost.</p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -4942,45 +6613,45 @@ jdbi.setParser(parser);</code></pre>
 <div class="sect2">
 <h3 id="_timingcollector"><a class="anchor" href="#_timingcollector"></a>6.11. TimingCollector</h3>
 <div class="paragraph">
-<p>TODO:</p>
+<p>The <strong>TimingCollector</strong> interface is called after executing each statement
+and given the statement context and duration of execution in nanoseconds.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>TimingCollector - use to gather database metrics</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>This interface isn&#8217;t completely thought out yet; the developers welcome
+feedback on how to improve timing collection.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_resultproducer"><a class="anchor" href="#_resultproducer"></a>6.12. ResultProducer</h3>
 <div class="paragraph">
-<p>TODO:</p>
+<p>A <strong>ResultProducer</strong> takes a lazily supplied <strong>PreparedStatement</strong> and
+produces a result.  The most common producer path, <strong>execute()</strong>,
+retrieves the <strong>ResultSet</strong> over the query results and then uses a
+<strong>ResultSetScanner</strong> or higher level mapper to produce results.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>Given a PreparedStatement supplier, produce a result of some type.</p>
-</li>
-<li>
-<p>ResultProducers factory class has some common examples</p>
-</li>
-<li>
-<p>See also OracleReturning</p>
-</li>
-<li>
-<p>Update.execute(ResultProducer)</p>
-</li>
-<li>
-<p>Query.execute(ResultProducer)</p>
-</li>
-<li>
-<p>PreparedBatch.execute(ResultProducer)</p>
-</li>
-<li>
-<p>Rules about who has to clean up a statement (whoever calls supplier.get())</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>An example alternate use is to just return the number of rows modified,
+as in an UPDATE or INSERT statement:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="directive">static</span> ResultProducer&lt;<span class="predefined-type">Integer</span>&gt; returningUpdateCount() {
+    <span class="keyword">return</span> (statementSupplier, ctx) -&gt; {
+        <span class="keyword">try</span> {
+            <span class="keyword">return</span> statementSupplier.get().getUpdateCount();
+        } <span class="keyword">finally</span> {
+            ctx.close();
+        }
+    };
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you acquire the lazy statement, you are responsible for ensuring
+that the context is closed eventually to release database resources.</p>
+</div>
+<div class="paragraph">
+<p>Most users will not need to implement the <strong>ResultProducer</strong> interface.</p>
 </div>
 </div>
 </div>
@@ -5070,7 +6741,7 @@ here!</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-09-26 20:20:41 PDT
+Last updated 2017-10-27 18:19:57 MDT
 </div>
 </div>
 </body>
