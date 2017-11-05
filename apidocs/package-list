@@ -26,3 +26,4 @@ org.jdbi.v3.sqlobject.locator
 org.jdbi.v3.sqlobject.statement
 org.jdbi.v3.sqlobject.transaction
 org.jdbi.v3.stringtemplate4
+org.jdbi.v3.vavr
