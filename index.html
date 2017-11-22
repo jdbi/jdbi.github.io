@@ -594,6 +594,7 @@ table.CodeRay td.code>pre{padding:0}
 </ul>
 </li>
 <li><a href="#_additional_annotations">4.6. Additional Annotations</a></li>
+<li><a href="#_annotations_and_inheritance">4.7. Annotations and Inheritance</a></li>
 </ul>
 </li>
 <li><a href="#_third_party_integration">5. Third-Party Integration</a>
@@ -673,6 +674,15 @@ table.CodeRay td.code>pre{padding:0}
 </div>
 </div>
 <div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="images/logo.svg" alt="Jdbi logo">
+</div>
+</div>
+</div>
+</div>
 <div class="sect1">
 <h2 id="_introduction_to_jdbi"><a class="anchor" href="#_introduction_to_jdbi"></a>1. Introduction to Jdbi</h2>
 <div class="sectionbody">
@@ -838,7 +848,7 @@ Already using Jdbi v2? See <a href="#_upgrading_from_v2_to_v3">Upgrading from v2
 <p>Jdbi is easy to include in your Java project - with an
 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Apache 2.0</a> license, few
 external dependencies, and JARs distributed through
-<a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.jdbi%22%20AND%20v%3A%223.0.0-rc1%22" target="_blank">Maven Central</a>,
+<a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.jdbi%22%20AND%20v%3A%223.0.0-rc2%22" target="_blank">Maven Central</a>,
 you can just include the relevant artifacts in your POM:</p>
 </div>
 <div class="listingblock">
@@ -849,7 +859,7 @@ you can just include the relevant artifacts in your POM:</p>
       <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
       <span class="tag">&lt;artifactId&gt;</span>jdbi3-bom<span class="tag">&lt;/artifactId&gt;</span>
       <span class="tag">&lt;type&gt;</span>pom<span class="tag">&lt;/type&gt;</span>
-      <span class="tag">&lt;version&gt;</span>3.0.0-rc1<span class="tag">&lt;/version&gt;</span>
+      <span class="tag">&lt;version&gt;</span>3.0.0-rc2<span class="tag">&lt;/version&gt;</span>
       <span class="tag">&lt;scope&gt;</span>import<span class="tag">&lt;/scope&gt;</span>
     <span class="tag">&lt;/dependency&gt;</span>
   <span class="tag">&lt;/dependencies&gt;</span>
@@ -1203,7 +1213,7 @@ handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><s
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java">Contact contact = <span class="keyword">new</span> Contact();
 contact.setId(<span class="integer">3</span>);
-contact.withName(<span class="string"><span class="delimiter">&quot;</span><span class="content">Cindy</span><span class="delimiter">&quot;</span></span>);
+contact.setName(<span class="string"><span class="delimiter">&quot;</span><span class="content">Cindy</span><span class="delimiter">&quot;</span></span>);
 
 handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into contacts (id, name) values (:id, :name)</span><span class="delimiter">&quot;</span></span>)
       .bindBean(contact)
@@ -1264,6 +1274,19 @@ handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><s
       .execute();</code></pre>
 </div>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>bindBean()</code>, <code>bindFields()</code>, and <code>bindMethods()</code> may be used to bind nested
+properties, e.g. <code>:user.address.street</code>.
+</td>
+</tr>
+</table>
+</div>
 <div class="admonitionblock warning">
 <table>
 <tr>
@@ -1271,8 +1294,8 @@ handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><s
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-Neither <code>bindMap()</code>, <code>bindMethods()</code>, <code>bindFields()</code>, nor <code>bindBean()</code> support
- binding of nested properties (e.g. <code>:user.address.street</code>).
+<code>bindMap()</code> does not bind nested properties&#8212;&#8203;map keys are expected to exactly
+match the bound parameter name.
 </td>
 </tr>
 </table>
@@ -2294,6 +2317,62 @@ use.</p>
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>Nested constructor-injected types can be mapped using the <code>@Nested</code> annotation:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">User</span> {
+  <span class="directive">public</span> User(<span class="type">int</span> id,
+              <span class="predefined-type">String</span> name,
+              <span class="annotation">@Nested</span> Address address) {
+    ...
+  }
+}
+
+<span class="directive">public</span> <span class="type">class</span> <span class="class">Address</span> {
+  <span class="directive">public</span> Address(<span class="predefined-type">String</span> street,
+                 <span class="predefined-type">String</span> city,
+                 <span class="predefined-type">String</span> state,
+                 <span class="predefined-type">String</span> zip) {
+    ...
+  }
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">handle.registerMapper(ConstructorMapper.factory(User.class));
+
+<span class="predefined-type">List</span>&lt;User&gt; users = handle
+    .select(<span class="string"><span class="delimiter">&quot;</span><span class="content">select id, name, street, city, state, zip from users</span><span class="delimiter">&quot;</span></span>)
+    .mapTo(User.class)
+    .list();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>@Nested</code> annotation has an optional <code>value()</code> attribute, which can be used
+to apply a column name prefix to each nested constructor parameter:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> User(<span class="type">int</span> id,
+            <span class="predefined-type">String</span> name,
+            <span class="annotation">@Nested</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">addr</span><span class="delimiter">&quot;</span></span>) Address address) {
+  ...
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">handle.registerMapper(ConstructorMapper.factory(User.class));
+
+<span class="predefined-type">List</span>&lt;User&gt; users = handle
+    .select(<span class="string"><span class="delimiter">&quot;</span><span class="content">select id, name, addr_street, addr_city, addr_state, addr_zip from users</span><span class="delimiter">&quot;</span></span>)
+    .mapTo(User.class)
+    .list();</code></pre>
+</div>
+</div>
 </div>
 <div class="sect4">
 <h5 id="_beanmapper"><a class="anchor" href="#_beanmapper"></a>BeanMapper</h5>
@@ -2383,6 +2462,73 @@ handle.registerRowMapper(JoinRowMapper.forTypes(ContactBean.class, PhoneBean.cla
 <p>The <code>@ColumnName</code> annotation can be placed on either the getter or setter
 method.</p>
 </div>
+<div class="paragraph">
+<p>Nested Java Bean types can be mapped using the <code>@Nested</code> annotation:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">User</span> {
+  <span class="directive">private</span> <span class="type">int</span> id;
+  <span class="directive">private</span> <span class="predefined-type">String</span> name;
+  <span class="directive">private</span> Address address;
+
+  ... (getters and setters)
+
+  <span class="annotation">@Nested</span> <i class="conum" data-value="1"></i><b>(1)</b>
+  <span class="directive">public</span> Address getAddress() { ... }
+
+  <span class="directive">public</span> <span class="type">void</span> setAddress(Address address) { ... }
+}
+
+<span class="directive">public</span> <span class="type">class</span> <span class="class">Address</span> {
+  <span class="directive">private</span> <span class="predefined-type">String</span> street;
+  <span class="directive">private</span> <span class="predefined-type">String</span> city;
+  <span class="directive">private</span> <span class="predefined-type">String</span> state;
+  <span class="directive">private</span> <span class="predefined-type">String</span> zip;
+
+  ... (getters and setters)
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The <code>@Nested</code> annotation can be placed on either the getter or setter
+method.</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">handle.registerMapper(BeanMapper.factory(User.class));
+
+<span class="predefined-type">List</span>&lt;User&gt; users = handle
+    .select(<span class="string"><span class="delimiter">&quot;</span><span class="content">select id, name, street, city, state, zip from users</span><span class="delimiter">&quot;</span></span>)
+    .mapTo(User.class)
+    .list();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>@Nested</code> annotation has an optional <code>value()</code> attribute, which can be used
+to apply a column name prefix to each nested bean property:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Nested</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">addr</span><span class="delimiter">&quot;</span></span>)
+<span class="directive">public</span> Address getAddress() { ... }</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">handle.registerMapper(BeanMapper.factory(User.class));
+
+<span class="predefined-type">List</span>&lt;User&gt; users = handle
+    .select(<span class="string"><span class="delimiter">&quot;</span><span class="content">select id, name, addr_street, addr_city, addr_state, addr_zip from users</span><span class="delimiter">&quot;</span></span>)
+    .mapTo(User.class)
+    .list();</code></pre>
+</div>
+</div>
 </div>
 <div class="sect4">
 <h5 id="_fieldmapper"><a class="anchor" href="#_fieldmapper"></a>FieldMapper</h5>
@@ -2442,6 +2588,62 @@ handle.registerRowMapper(JoinRowMapper.forTypes(Contact.class, Phone.class);
 
   <span class="directive">public</span> <span class="predefined-type">String</span> name;
 }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Nested field-mapped types can be mapped using the <code>@Nested</code> annotation:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">User</span> {
+  <span class="directive">public</span> <span class="type">int</span> id;
+  <span class="directive">public</span> <span class="predefined-type">String</span> name;
+
+  <span class="annotation">@Nested</span>
+  <span class="directive">public</span> Address address;
+}
+
+<span class="directive">public</span> <span class="type">class</span> <span class="class">Address</span> {
+  <span class="directive">public</span> <span class="predefined-type">String</span> street;
+  <span class="directive">public</span> <span class="predefined-type">String</span> city;
+  <span class="directive">public</span> <span class="predefined-type">String</span> state;
+  <span class="directive">public</span> <span class="predefined-type">String</span> zip;
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">handle.registerMapper(FieldMapper.factory(User.class));
+
+<span class="predefined-type">List</span>&lt;User&gt; users = handle
+    .select(<span class="string"><span class="delimiter">&quot;</span><span class="content">select id, name, street, city, state, zip from users</span><span class="delimiter">&quot;</span></span>)
+    .mapTo(User.class)
+    .list();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>@Nested</code> annotation has an optional <code>value()</code> attribute, which can be used
+to apply a column name prefix to each nested field:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">User</span> {
+  <span class="directive">public</span> <span class="type">int</span> id;
+  <span class="directive">public</span> <span class="predefined-type">String</span> name;
+
+  <span class="annotation">@Nested</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">addr</span><span class="delimiter">&quot;</span></span>)
+  <span class="directive">public</span> Address address;
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">handle.registerMapper(FieldMapper.factory(User.class));
+
+<span class="predefined-type">List</span>&lt;User&gt; users = handle
+    .select(<span class="string"><span class="delimiter">&quot;</span><span class="content">select id, name, addr_street, addr_city, addr_state, addr_zip from users</span><span class="delimiter">&quot;</span></span>)
+    .mapTo(User.class)
+    .list();</code></pre>
 </div>
 </div>
 </div>
@@ -3909,6 +4111,19 @@ can have an optional prefix:</p>
 <span class="comment">//void insert(@BindMethods(&quot;user&quot;) User user);</span></code></pre>
 </div>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+As in the Core API, <code>@BindBean</code>, <code>@BindFields</code>, and <code>@BindMethods</code> may be used
+to bind nested properties, e.g. <code>:user.address.street</code>.
+</td>
+</tr>
+</table>
+</div>
 <div class="admonitionblock warning">
 <table>
 <tr>
@@ -3916,9 +4131,8 @@ can have an optional prefix:</p>
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-As in the Core API, neither <code>@BindMap</code>, <code>@BindBean</code>, <code>@BindFields</code>, nor
-<code>@BindMethods</code> support binding of nested properties
-(e.g. <code>:user.address.street</code>).
+<code>@BindMap</code> does not bind nested properties&#8212;&#8203;map keys are expected to exactly
+match the bound parameter name.
 </td>
 </tr>
 </table>
@@ -4301,8 +4515,8 @@ that begin with the prefix:</p>
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
   <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select u.id u_id, u.name u_name, r.id r_id, r.name r_name </span><span class="delimiter">&quot;</span></span> +
       <span class="string"><span class="delimiter">&quot;</span><span class="content">from users u left join roles r on u.role_id = r.id</span><span class="delimiter">&quot;</span></span>)
-  <span class="annotation">@RegisterBeanMapper</span>(value = User.class, prefix = <span class="string"><span class="delimiter">&quot;</span><span class="content">u_</span><span class="delimiter">&quot;</span></span>)
-  <span class="annotation">@RegisterBeanMapper</span>(value = <span class="predefined-type">Role</span>.class, prefix = <span class="string"><span class="delimiter">&quot;</span><span class="content">r_</span><span class="delimiter">&quot;</span></span>)
+  <span class="annotation">@RegisterBeanMapper</span>(value = User.class, prefix = <span class="string"><span class="delimiter">&quot;</span><span class="content">u</span><span class="delimiter">&quot;</span></span>)
+  <span class="annotation">@RegisterBeanMapper</span>(value = <span class="predefined-type">Role</span>.class, prefix = <span class="string"><span class="delimiter">&quot;</span><span class="content">r</span><span class="delimiter">&quot;</span></span>)
   <span class="predefined-type">Map</span>&lt;User,<span class="predefined-type">Role</span>&gt; getRolesPerUser();
 }</code></pre>
 </div>
@@ -4350,8 +4564,8 @@ columns that begin with the prefix:</p>
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
   <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select u.id u_id, u.name u_name, r.id r_id, r.name r_name </span><span class="delimiter">&quot;</span></span> +
       <span class="string"><span class="delimiter">&quot;</span><span class="content">from users u left join roles r on u.role_id = r.id</span><span class="delimiter">&quot;</span></span>)
-  <span class="annotation">@RegisterConstructorMapper</span>(value = User.class, prefix = <span class="string"><span class="delimiter">&quot;</span><span class="content">u_</span><span class="delimiter">&quot;</span></span>)
-  <span class="annotation">@RegisterConstructorMapper</span>(value = <span class="predefined-type">Role</span>.class, prefix = <span class="string"><span class="delimiter">&quot;</span><span class="content">r_</span><span class="delimiter">&quot;</span></span>)
+  <span class="annotation">@RegisterConstructorMapper</span>(value = User.class, prefix = <span class="string"><span class="delimiter">&quot;</span><span class="content">u</span><span class="delimiter">&quot;</span></span>)
+  <span class="annotation">@RegisterConstructorMapper</span>(value = <span class="predefined-type">Role</span>.class, prefix = <span class="string"><span class="delimiter">&quot;</span><span class="content">r</span><span class="delimiter">&quot;</span></span>)
   <span class="predefined-type">Map</span>&lt;User,<span class="predefined-type">Role</span>&gt; getRolesPerUser();
 }</code></pre>
 </div>
@@ -4399,8 +4613,8 @@ that begin with the prefix:</p>
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
   <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select u.id u_id, u.name u_name, r.id r_id, r.name r_name </span><span class="delimiter">&quot;</span></span> +
       <span class="string"><span class="delimiter">&quot;</span><span class="content">from users u left join roles r on u.role_id = r.id</span><span class="delimiter">&quot;</span></span>)
-  <span class="annotation">@RegisterFieldMapper</span>(value = User.class, prefix = <span class="string"><span class="delimiter">&quot;</span><span class="content">u_</span><span class="delimiter">&quot;</span></span>)
-  <span class="annotation">@RegisterFieldMapper</span>(value = <span class="predefined-type">Role</span>.class, prefix = <span class="string"><span class="delimiter">&quot;</span><span class="content">r_</span><span class="delimiter">&quot;</span></span>)
+  <span class="annotation">@RegisterFieldMapper</span>(value = User.class, prefix = <span class="string"><span class="delimiter">&quot;</span><span class="content">u</span><span class="delimiter">&quot;</span></span>)
+  <span class="annotation">@RegisterFieldMapper</span>(value = <span class="predefined-type">Role</span>.class, prefix = <span class="string"><span class="delimiter">&quot;</span><span class="content">r</span><span class="delimiter">&quot;</span></span>)
   <span class="predefined-type">Map</span>&lt;User,<span class="predefined-type">Role</span>&gt; getRolesPerUser();
 }</code></pre>
 </div>
@@ -4452,6 +4666,20 @@ annotate a return type as <code>@SingleValue</code> to override this.</p>
 <p>Normally, Jdbi would interpret <code>List&lt;String&gt;</code> to mean that the mapped type is
 <code>String</code>, and to collect all result rows into a list. The <code>@SingleValue</code>
 annotation causes Jdbi to treat <code>List&lt;String&gt;</code> as the mapped type instead.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+It&#8217;s tempting to <code>@SingleValue Optional&lt;String&gt;</code>, but usually this isn&#8217;t needed.
+<code>Optional</code> is implemented as a container of zero-or-one elements.  Adding <code>@SingleValue</code>
+implies that the database itself has a column of a type like <code>optional&lt;varchar&gt;</code>.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect4">
@@ -5114,6 +5342,146 @@ provides annotations for transaction management in a SQL object. See
 <div class="paragraph">
 <p>Jdbi is designed to support user-defined annotations. See
 <a href="#_user_defined_annotations">User-Defined Annotations</a> for a guide to creating your own.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_annotations_and_inheritance"><a class="anchor" href="#_annotations_and_inheritance"></a>4.7. Annotations and Inheritance</h3>
+<div class="paragraph">
+<p>SQL Objects inherit methods and annotations from the interfaces they extend:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">com.app.dao</span>;
+
+<span class="annotation">@UseClasspathSqlLocator</span>  <i class="conum" data-value="1"></i><b>(1)</b> <i class="conum" data-value="2"></i><b>(2)</b>
+<span class="directive">public</span> <span class="type">interface</span> <span class="class">CrudDao</span>&lt;T, ID&gt; {
+  <span class="annotation">@SqlUpdate</span> <i class="conum" data-value="3"></i><b>(3)</b>
+  <span class="type">void</span> insert(<span class="annotation">@BindBean</span> T entity);
+
+  <span class="annotation">@SqlQuery</span> <i class="conum" data-value="3"></i><b>(3)</b>
+  Optional&lt;T&gt; findById(ID id);
+
+  <span class="annotation">@SqlQuery</span>
+  <span class="predefined-type">List</span>&lt;T&gt; list();
+
+  <span class="annotation">@SqlUpdate</span>
+  <span class="type">void</span> update(<span class="annotation">@BindBean</span> T entity);
+
+  <span class="annotation">@SqlUpdate</span>
+  <span class="type">void</span> deleteById(ID id);
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>See <a href="#_sqllocator">SqlLocator</a>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Class annotations are inherited by subtypes.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Method and parameter annotations are inherited by subtypes, unless the
+subtype overrides the method.</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">com.app.contact</span>;
+
+<span class="annotation">@RegisterBeanMapper</span>(Contact.class)
+<span class="directive">public</span> <span class="type">interface</span> <span class="class">ContactDao</span> <span class="directive">extends</span> CrudDao&lt;Contact, <span class="predefined-type">Long</span>&gt; {}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">com.app.account</span>;
+
+<span class="annotation">@RegisterConstructorMapper</span>(Account.class)
+<span class="directive">public</span> <span class="type">interface</span> <span class="class">AccountDao</span> <span class="directive">extends</span> CrudDao&lt;Account, <span class="predefined-type">UUID</span>&gt; {}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this example we&#8217;re using the <code>@UseClasspathSqlLocator</code> annotation, so each
+method will use SQL loaded from the classpath. Thus, <code>ContactDao</code> methods will
+use SQL from:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>/com/app/contact/ContactDao/insert.sql</code></p>
+</li>
+<li>
+<p><code>/com/app/contact/ContactDao/findById.sql</code></p>
+</li>
+<li>
+<p><code>/com/app/contact/ContactDao/list.sql</code></p>
+</li>
+<li>
+<p><code>/com/app/contact/ContactDao/update.sql</code></p>
+</li>
+<li>
+<p><code>/com/app/contact/ContactDao/deleteById.sql</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Whereas <code>AccountDao</code> will use SQL from:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>/com/app/account/AccountDao/insert.sql</code></p>
+</li>
+<li>
+<p><code>/com/app/account/AccountDao/findById.sql</code></p>
+</li>
+<li>
+<p><code>/com/app/account/AccountDao/list.sql</code></p>
+</li>
+<li>
+<p><code>/com/app/account/AccountDao/update.sql</code></p>
+</li>
+<li>
+<p><code>/com/app/account/AccountDao/deleteById.sql</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Suppose <code>Account</code> used <code>name()</code>-style accessors instead of <code>getName()</code>. In that
+case, we&#8217;d want <code>AccountDao</code> to use <code>@BindMethods</code> instead of <code>@BindBean</code>.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s override those methods with the right annotations:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">com.app.account</span>;
+
+<span class="annotation">@RegisterConstructorMapper</span>(Account.class)
+<span class="directive">public</span> <span class="type">interface</span> <span class="class">AccountDao</span> <span class="directive">extends</span> CrudDao&lt;Account, <span class="predefined-type">UUID</span>&gt; {
+  <span class="annotation">@Override</span>
+  <span class="annotation">@SqlUpdate</span> <i class="conum" data-value="1"></i><b>(1)</b>
+  <span class="type">void</span> insert(<span class="annotation">@BindMethods</span> Account entity);
+
+  <span class="annotation">@Override</span>
+  <span class="annotation">@SqlUpdate</span> <i class="conum" data-value="1"></i><b>(1)</b>
+  <span class="type">void</span> update(<span class="annotation">@BindMethods</span> Account entity);
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Method annotations are not inherited on override, so we must duplicate
+those we want to keep.</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -7270,6 +7638,10 @@ but is specific to SQL Object.</p>
 <li>
 <p>StringTemplate no longer required to process <code>&lt;name&gt;</code>-style tokens in SQL.</p>
 </li>
+<li>
+<p>Custom SqlParser implementations must now provide a way to transform raw
+parameter names to names that will be properly parsed out as named params.</p>
+</li>
 </ul>
 </div>
 <div class="paragraph">
@@ -7337,7 +7709,7 @@ return types, or on <code>@SqlBatch</code> parameters.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-04 19:16:23 MDT
+Last updated 2017-11-21 17:41:03 MST
 </div>
 </div>
 </body>
