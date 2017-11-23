@@ -706,7 +706,11 @@ Not upgrading yet? The <a href="/jdbi2">v2 documentation</a> is still available.
 </div>
 <div class="paragraph">
 <p>Jdbi is built on top of JDBC. If your database has a JDBC driver, you can use
-Jdbi with it.</p>
+Jdbi with it.  Jdbi aims to be a natural improvement over JDBC, which feels more
+natural to a Java developer, and is easy to bind to your domain data types.  Unlike
+an ORM, we do not aim to provide a complete object relational mapping framework -
+instead of that implicit complexity, we provide functional building blocks and allow you
+to construct the mapping between relations and objects as appropriate for your application.</p>
 </div>
 <div class="paragraph">
 <p>Jdbi&#8217;s API comes in two flavors:</p>
@@ -714,7 +718,8 @@ Jdbi with it.</p>
 <div class="sect2">
 <h3 id="_fluent_api"><a class="anchor" href="#_fluent_api"></a>1.1. Fluent API</h3>
 <div class="paragraph">
-<p>The Core API provides a fluent, imperative interface.</p>
+<p>The Core API provides a fluent, imperative interface.  Use Builder style objects
+to wire up your SQL to rich Java data types.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -760,7 +765,9 @@ assertThat(users).containsExactly(
 <div class="sect2">
 <h3 id="_declarative_api"><a class="anchor" href="#_declarative_api"></a>1.2. Declarative API</h3>
 <div class="paragraph">
-<p>The SQL Object extension sits atop Core, and provides a declarative interface.</p>
+<p>The SQL Object extension sits atop Core, and provides a declarative interface.
+Tell <strong>jdbi</strong> what SQL to execute and the shape of the results you like by declaring
+an annotated Java <strong>interface</strong>, and <strong>jdbi</strong> will provide the implementation.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -7708,7 +7715,7 @@ return types, or on <code>@SqlBatch</code> parameters.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-22 20:07:19 PST
+Last updated 2017-11-22 20:22:31 PST
 </div>
 </div>
 </body>
