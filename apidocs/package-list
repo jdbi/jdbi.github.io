@@ -19,6 +19,7 @@ org.jdbi.v3.jpa
 org.jdbi.v3.oracle12
 org.jdbi.v3.postgres
 org.jdbi.v3.spring4
+org.jdbi.v3.sqlite3
 org.jdbi.v3.sqlobject
 org.jdbi.v3.sqlobject.config
 org.jdbi.v3.sqlobject.customizer

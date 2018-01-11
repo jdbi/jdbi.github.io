@@ -581,6 +581,7 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#__sqlcall">4.1.5. @SqlCall</a></li>
 <li><a href="#__getgeneratedkeys_3">4.1.6. @GetGeneratedKeys</a></li>
 <li><a href="#_sqllocator">4.1.7. SqlLocator</a></li>
+<li><a href="#__createsqlobject">4.1.8. @CreateSqlObject</a></li>
 </ul>
 </li>
 <li><a href="#_consumer_methods">4.2. Consumer Methods</a></li>
@@ -622,8 +623,9 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#_global_attributes">5.8.2. Global Attributes</a></li>
 </ul>
 </li>
-<li><a href="#_stringtemplate_4">5.9. StringTemplate 4</a></li>
-<li><a href="#_vavr">5.10. Vavr</a></li>
+<li><a href="#_sqlite">5.9. SQLite</a></li>
+<li><a href="#_stringtemplate_4">5.10. StringTemplate 4</a></li>
+<li><a href="#_vavr">5.11. Vavr</a></li>
 </ul>
 </li>
 <li><a href="#_advanced_topics">6. Advanced Topics</a>
@@ -706,11 +708,11 @@ Not upgrading yet? The <a href="/jdbi2">v2 documentation</a> is still available.
 </div>
 <div class="paragraph">
 <p>Jdbi is built on top of JDBC. If your database has a JDBC driver, you can use
-Jdbi with it.  Jdbi aims to be a natural improvement over JDBC, which feels more
-natural to a Java developer, and is easy to bind to your domain data types.  Unlike
+Jdbi with it.  Jdbi improves JDBC&#8217;s rough interface, providing a more natural
+Java database interface that is easy to bind to your domain data types.  Unlike
 an ORM, we do not aim to provide a complete object relational mapping framework -
-instead of that implicit complexity, we provide functional building blocks and allow you
-to construct the mapping between relations and objects as appropriate for your application.</p>
+instead of that hidden complexity, we provide building blocks that allow you to
+construct the mapping between relations and objects as appropriate for your application.</p>
 </div>
 <div class="paragraph">
 <p>Jdbi&#8217;s API comes in two flavors:</p>
@@ -766,8 +768,8 @@ assertThat(users).containsExactly(
 <h3 id="_declarative_api"><a class="anchor" href="#_declarative_api"></a>1.2. Declarative API</h3>
 <div class="paragraph">
 <p>The SQL Object extension sits atop Core, and provides a declarative interface.
-Tell <strong>jdbi</strong> what SQL to execute and the shape of the results you like by declaring
-an annotated Java <strong>interface</strong>, and <strong>jdbi</strong> will provide the implementation.</p>
+Tell Jdbi what SQL to execute and the shape of the results you like by declaring
+an annotated Java <code>interface</code>, and it will provide the implementation.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -854,7 +856,7 @@ Already using Jdbi v2? See <a href="#_upgrading_from_v2_to_v3">Upgrading from v2
 <p>Jdbi is easy to include in your Java project - with an
 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Apache 2.0</a> license, few
 external dependencies, and JARs distributed through
-<a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.jdbi%22%20AND%20v%3A%223.0.0-SNAPSHOT%22" target="_blank">Maven Central</a>,
+<a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.jdbi%22%20AND%20v%3A%223.0.1%22" target="_blank">Maven Central</a>,
 you can just include the relevant artifacts in your POM:</p>
 </div>
 <div class="listingblock">
@@ -865,7 +867,7 @@ you can just include the relevant artifacts in your POM:</p>
       <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
       <span class="tag">&lt;artifactId&gt;</span>jdbi3-bom<span class="tag">&lt;/artifactId&gt;</span>
       <span class="tag">&lt;type&gt;</span>pom<span class="tag">&lt;/type&gt;</span>
-      <span class="tag">&lt;version&gt;</span>3.0.0-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+      <span class="tag">&lt;version&gt;</span>3.0.1<span class="tag">&lt;/version&gt;</span>
       <span class="tag">&lt;scope&gt;</span>import<span class="tag">&lt;/scope&gt;</span>
     <span class="tag">&lt;/dependency&gt;</span>
   <span class="tag">&lt;/dependencies&gt;</span>
@@ -5088,6 +5090,39 @@ SqlLocator, which can load SQL templates from StringTemplate 4 files on the
 classpath.</p>
 </div>
 </div>
+<div class="sect3">
+<h4 id="__createsqlobject"><a class="anchor" href="#__createsqlobject"></a>4.1.8. @CreateSqlObject</h4>
+<div class="paragraph">
+<p>Use the @CreateSqlObject annotation to reuse a SqlObject inside another SqlObject. For example,
+you can build a transactional method which performs an SQL update defined in other SqlObject
+as part of the transaction. Jdbi won&#8217;t open a new handle for a call to the child SqlObject.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">Bar</span> {
+
+    <span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into bar (name) values (:name)</span><span class="delimiter">&quot;</span></span>)
+    <span class="annotation">@GetGeneratedKeys</span>
+    <span class="type">int</span> insert(<span class="annotation">@Bind</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>) <span class="predefined-type">String</span> name);
+}
+
+<span class="directive">public</span> <span class="type">interface</span> <span class="class">Foo</span> {
+
+    <span class="annotation">@CreateSqlObject</span>
+    Bar createBar();
+
+    <span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into foo (bar_id, name) values (:bar_id, :name)</span><span class="delimiter">&quot;</span></span>)
+    <span class="type">void</span> insert(<span class="annotation">@Bind</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">bar_id</span><span class="delimiter">&quot;</span></span>) <span class="type">int</span> barId, <span class="annotation">@Bind</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>) <span class="predefined-type">String</span> name);
+
+    <span class="annotation">@Transaction</span>
+    <span class="keyword">default</span> <span class="type">void</span> insertBarAndFoo(<span class="predefined-type">String</span> barName, <span class="predefined-type">String</span> fooName) {
+        <span class="type">int</span> barId = createBar().insert(barName);
+        insert(barId, fooName);
+    }
+}</code></pre>
+</div>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_consumer_methods"><a class="anchor" href="#_consumer_methods"></a>4.2. Consumer Methods</h3>
@@ -5657,7 +5692,7 @@ Jdbi. "No problem boss, it already supports JPA annotations, easy peasy!"</p>
 <div class="sect3">
 <h4 id="_resultset_mapping"><a class="anchor" href="#_resultset_mapping"></a>5.5.1. ResultSet mapping</h4>
 <div class="paragraph">
-<p>The <strong>jdbi3-kotlin</strong> plugin adds ResultSet mapping to Kotlin data classes. It
+<p>The <strong>jdbi3-kotlin</strong> plugin adds mapping to Kotlin data classes. It
 supports data classes where all fields are present in the constructor as well
 as classes with writable properties. Any fields not present in the constructor
 will be set after the constructor call. The mapper supports nullable types. It
@@ -5684,8 +5719,9 @@ not nullable and the value absent in the result set.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Result set mapper also supports <code>@ColumnName</code> annotation that allows to specify
-name for a property or parameter explicitly.</p>
+<p>The Kotlin mapper also supports <code>@ColumnName</code> annotation that allows to specify
+name for a property or parameter explicitly, as well as the <code>@Nested</code> annotation
+that allows mapping nested Kotlin objects.</p>
 </div>
 <div class="paragraph">
 <p>If you load all Jdbi plugins via <code>Jdbi.installPlugins()</code> this plugin will be
@@ -5697,14 +5733,15 @@ discovered and registered automatically. Otherwise, you can attach it using
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="kotlin">data class Thing(val id: Int, val name: String,
+<pre class="CodeRay highlight"><code data-lang="kotlin">data class IdAndName(val id: Int, val name: String)
+data class Thing(@Nested val idAndName: IdAndName,
                  val nullable: String?,
                  val nullableDefaultedNull: String? = null,
                  val nullableDefaultedNotNull: String? = &quot;not null&quot;,
                  val defaulted: String = &quot;default value&quot;)
 @Test fun testFindById() {
     val qry = db.sharedHandle.createQuery(&quot;select id, name from something where id = :id&quot;)
-    val things: List&lt;Thing&gt; = qry.bind(&quot;id&quot;, brian.id).mapTo&lt;Thing&gt;().list()
+    val things: List&lt;Thing&gt; = qry.bind(&quot;id&quot;, brian.idAndName.id).mapTo&lt;Thing&gt;().list()
     assertEquals(1, things.size)
     assertEquals(brian, things[0])
 }</code></pre>
@@ -5781,7 +5818,7 @@ via: <code>Jdbi.installPlugin(KotlinSqlObjectPlugin())</code>.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="kotlin">interface ThingDao {
-    @SqlUpdate(&quot;insert into something (id, name) values (:something.id, :something.name)&quot;)
+    @SqlUpdate(&quot;insert into something (id, name) values (:something.idAndName.id, :something.idAndName.name)&quot;)
     fun insert(something: Thing)
 
     @SqlQuery(&quot;select id, name from something&quot;)
@@ -5790,8 +5827,8 @@ via: <code>Jdbi.installPlugin(KotlinSqlObjectPlugin())</code>.</p>
 @Before fun setUp() {
     val dao = db.jdbi.onDemand&lt;ThingDao&gt;()
 
-    val brian = Thing(1, &quot;Brian&quot;, null)
-    val keith = Thing(2, &quot;Keith&quot;, null)
+    val brian = Thing(IdAndName(1, &quot;Brian&quot;), null)
+    val keith = Thing(IdAndName(2, &quot;Keith&quot;), null)
 
     dao.insert(brian)
     dao.insert(keith)
@@ -6077,7 +6114,39 @@ auto-install some plugins and manually install the rest:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_stringtemplate_4"><a class="anchor" href="#_stringtemplate_4"></a>5.9. StringTemplate 4</h3>
+<h3 id="_sqlite"><a class="anchor" href="#_sqlite"></a>5.9. SQLite</h3>
+<div class="paragraph">
+<p>The <strong>jdbi3-sqlite</strong> plugin provides support for using the
+<a href="https://bitbucket.org/xerial/sqlite-jdbc/" target="_blank">SQLite JDBC Driver</a>
+with Jdbi.</p>
+</div>
+<div class="paragraph">
+<p>The plugin configures mapping for the Java <strong>URL</strong> type which is not
+supported by driver.</p>
+</div>
+<div class="paragraph">
+<p>To use this plugin, first add a Maven dependency:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
+  <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
+  <span class="tag">&lt;artifactId&gt;</span>jdbi3-sqlite<span class="tag">&lt;/artifactId&gt;</span>
+<span class="tag">&lt;/dependency&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then install the plugin into your <code>Jdbi</code> instance.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">Jdbi jdbi = Jdbi.create(<span class="string"><span class="delimiter">&quot;</span><span class="content">jdbc:sqlite:database</span><span class="delimiter">&quot;</span></span>)
+                .installPlugin(<span class="keyword">new</span> SQLitePlugin());</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_stringtemplate_4"><a class="anchor" href="#_stringtemplate_4"></a>5.10. StringTemplate 4</h3>
 <div class="paragraph">
 <p>This module allows you to plug in the StringTemplate 4 templating engine, in
 place of the standard Jdbi templating engine.</p>
@@ -6203,7 +6272,7 @@ template will be used, regardless of the method name.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_vavr"><a class="anchor" href="#_vavr"></a>5.10. Vavr</h3>
+<h3 id="_vavr"><a class="anchor" href="#_vavr"></a>5.11. Vavr</h3>
 <div class="paragraph">
 <p>The Vavr Plugin offers deep integration of <strong>Jdbi</strong> with the Vavr functional library:</p>
 </div>
@@ -6221,6 +6290,9 @@ It is possible to collect into a <code>Traversable&lt;T&gt;</code>, in this case
 will be used as default implementation.
 For interface types a sensible default implementation will be used
 (e.q. <code>List&lt;T&gt;</code> for <code>Seq&lt;T&gt;</code>).</p>
+</li>
+<li>
+<p>Columns can be mapped into Vavr&#8217;s <code>Option&lt;T&gt;</code> type.</p>
 </li>
 <li>
 <p>Tuple projections for <strong>Jdbi</strong>! Yey! Vavr offers Tuples up to a maximum arity of 8.
@@ -6280,8 +6352,17 @@ be 'present' otherwise a <code>null</code> value is used (e.g. for <code>Either.
 </div>
 <div class="paragraph">
 <p>This works for all the collection types supported. For the nested value
-row and column mappers already installed in <strong>Jdbi</strong> will be used. The plugin
-will obey configured key and value columns for <code>Map&lt;K, V&gt;</code> return types.</p>
+row and column mappers already installed in <strong>Jdbi</strong> will be used.
+Therefore the following would work and can make sense if the column is nullable:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select middle_name from users</span><span class="delimiter">&quot;</span></span>) <span class="comment">// nulls incoming!</span>
+        .collectInto(<span class="keyword">new</span> GenericType&lt;Seq&lt;<span class="predefined-type">Option</span>&lt;<span class="predefined-type">String</span>&gt;&gt;&gt;() {});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The plugin will obey configured key and value columns for <code>Map&lt;K, V&gt;</code> return types.</p>
 </div>
 <div class="paragraph">
 <p>Last but not least we can now project simple queries to Vavr tuples like that:</p>
@@ -6624,7 +6705,7 @@ context&#8217;s configuration for use by Jdbi core or extensions.</p>
 </div>
 <div class="paragraph">
 <p>When a new configurable context is created, it inherits a copy of its parent
-configuration at the time of creation - further modifications tothe original will
+configuration at the time of creation - further modifications to the original will
 not affect already created configuration contexts.  Configuration context
 copies happen when producing a Handle from Jdbi, when opening a <strong>SqlStatement</strong>
 from the Handle, and when attaching or creating an on-demand extension such as
@@ -7715,7 +7796,7 @@ return types, or on <code>@SqlBatch</code> parameters.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-22 20:22:31 PST
+Last updated 2018-01-10 19:24:10 MST
 </div>
 </div>
 </body>
