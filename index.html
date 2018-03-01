@@ -689,10 +689,10 @@ table.CodeRay td.code>pre{padding:0}
 <h2 id="_introduction_to_jdbi"><a class="anchor" href="#_introduction_to_jdbi"></a>1. Introduction to Jdbi</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The <strong>Jdbi</strong> library provides convenient, idiomatic access to relational data in
-Java.  <strong>jdbi3</strong> is the third major release which introduces enhanced support for
-Java 8 concepts, countless refinements to the design and implementation, and
-enhanced support for modular plugins.</p>
+<p>Jdbi provides convenient, idiomatic access to relational data in Java. Jdbi 3
+is the third major release which introduces enhanced support for Java 8,
+countless refinements to the design and implementation, and enhanced support
+for modular plugins.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -856,7 +856,7 @@ Already using Jdbi v2? See <a href="#_upgrading_from_v2_to_v3">Upgrading from v2
 <p>Jdbi is easy to include in your Java project - with an
 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Apache 2.0</a> license, few
 external dependencies, and JARs distributed through
-<a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.jdbi%22%20AND%20v%3A%223.0.1%22" target="_blank">Maven Central</a>,
+<a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.jdbi%22%20AND%20v%3A%223.1.0%22" target="_blank">Maven Central</a>,
 you can just include the relevant artifacts in your POM:</p>
 </div>
 <div class="listingblock">
@@ -867,7 +867,7 @@ you can just include the relevant artifacts in your POM:</p>
       <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
       <span class="tag">&lt;artifactId&gt;</span>jdbi3-bom<span class="tag">&lt;/artifactId&gt;</span>
       <span class="tag">&lt;type&gt;</span>pom<span class="tag">&lt;/type&gt;</span>
-      <span class="tag">&lt;version&gt;</span>3.0.1<span class="tag">&lt;/version&gt;</span>
+      <span class="tag">&lt;version&gt;</span>3.1.0<span class="tag">&lt;/version&gt;</span>
       <span class="tag">&lt;scope&gt;</span>import<span class="tag">&lt;/scope&gt;</span>
     <span class="tag">&lt;/dependency&gt;</span>
   <span class="tag">&lt;/dependencies&gt;</span>
@@ -1212,6 +1212,27 @@ params.put(<span class="string"><span class="delimiter">&quot;</span><span class
 handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into contacts (id, name) values (:id, :name)</span><span class="delimiter">&quot;</span></span>)
       .bindMap(contact)
       .execute();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can bind multiple values at once, from either a <code>List&lt;T&gt;</code> or a list of arguments. Note that this requires your binding to be written using the <code>&lt;boundValue&gt;</code> form (as opposed to <code>`:boundValue</code> for most of the other bindings.)</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt; keys = <span class="keyword">new</span> <span class="predefined-type">ArrayList</span>&lt;<span class="predefined-type">String</span>&gt;()
+keys.add(<span class="string"><span class="delimiter">&quot;</span><span class="content">user_name</span><span class="delimiter">&quot;</span></span>);
+keys.add(<span class="string"><span class="delimiter">&quot;</span><span class="content">street</span><span class="delimiter">&quot;</span></span>);
+
+handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT value FROM items WHERE kind in (&lt;listOfKinds&gt;)
+      .bindList(</span><span class="delimiter">&quot;</span></span>listOfKinds<span class="string"><span class="delimiter">&quot;</span><span class="content">, keys)
+      .mapTo(String.class)
+      .list();
+
+// Or, using the `vararg` definition
+handle.createQuery(</span><span class="delimiter">&quot;</span></span>SELECT value FROM items WHERE kind in (&lt;varargListOfKinds&gt;)
+      .bindList(<span class="string"><span class="delimiter">&quot;</span><span class="content">varargListOfKinds</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">user_name</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">docs</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">street</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">library</span><span class="delimiter">&quot;</span></span>)
+      .mapTo(<span class="predefined-type">String</span>.class)
+      .list();</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2350,7 +2371,7 @@ use.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">handle.registerMapper(ConstructorMapper.factory(User.class));
+<pre class="CodeRay highlight"><code data-lang="java">handle.registerRowMapper(ConstructorMapper.factory(User.class));
 
 <span class="predefined-type">List</span>&lt;User&gt; users = handle
     .select(<span class="string"><span class="delimiter">&quot;</span><span class="content">select id, name, street, city, state, zip from users</span><span class="delimiter">&quot;</span></span>)
@@ -2373,7 +2394,7 @@ to apply a column name prefix to each nested constructor parameter:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">handle.registerMapper(ConstructorMapper.factory(User.class));
+<pre class="CodeRay highlight"><code data-lang="java">handle.registerRowMapper(ConstructorMapper.factory(User.class));
 
 <span class="predefined-type">List</span>&lt;User&gt; users = handle
     .select(<span class="string"><span class="delimiter">&quot;</span><span class="content">select id, name, addr_street, addr_city, addr_state, addr_zip from users</span><span class="delimiter">&quot;</span></span>)
@@ -2509,7 +2530,7 @@ method.</td>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">handle.registerMapper(BeanMapper.factory(User.class));
+<pre class="CodeRay highlight"><code data-lang="java">handle.registerRowMapper(BeanMapper.factory(User.class));
 
 <span class="predefined-type">List</span>&lt;User&gt; users = handle
     .select(<span class="string"><span class="delimiter">&quot;</span><span class="content">select id, name, street, city, state, zip from users</span><span class="delimiter">&quot;</span></span>)
@@ -2529,7 +2550,7 @@ to apply a column name prefix to each nested bean property:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">handle.registerMapper(BeanMapper.factory(User.class));
+<pre class="CodeRay highlight"><code data-lang="java">handle.registerRowMapper(BeanMapper.factory(User.class));
 
 <span class="predefined-type">List</span>&lt;User&gt; users = handle
     .select(<span class="string"><span class="delimiter">&quot;</span><span class="content">select id, name, addr_street, addr_city, addr_state, addr_zip from users</span><span class="delimiter">&quot;</span></span>)
@@ -2621,7 +2642,7 @@ handle.registerRowMapper(JoinRowMapper.forTypes(Contact.class, Phone.class);
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">handle.registerMapper(FieldMapper.factory(User.class));
+<pre class="CodeRay highlight"><code data-lang="java">handle.registerRowMapper(FieldMapper.factory(User.class));
 
 <span class="predefined-type">List</span>&lt;User&gt; users = handle
     .select(<span class="string"><span class="delimiter">&quot;</span><span class="content">select id, name, street, city, state, zip from users</span><span class="delimiter">&quot;</span></span>)
@@ -2646,7 +2667,7 @@ to apply a column name prefix to each nested field:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">handle.registerMapper(FieldMapper.factory(User.class));
+<pre class="CodeRay highlight"><code data-lang="java">handle.registerRowMapper(FieldMapper.factory(User.class));
 
 <span class="predefined-type">List</span>&lt;User&gt; users = handle
     .select(<span class="string"><span class="delimiter">&quot;</span><span class="content">select id, name, addr_street, addr_city, addr_state, addr_zip from users</span><span class="delimiter">&quot;</span></span>)
@@ -3144,7 +3165,7 @@ the same name (<code>id</code>) from different tables.</p>
 <h5 id="_resultbearing_reducerows"><a class="anchor" href="#_resultbearing_reducerows"></a>ResultBearing.reduceRows()</h5>
 <div class="paragraph">
 <p>The
-<a href="./apidocs/org/jdbi/v3/core/result/ResultBearing.html#reduceRows-U-java.util.function.BiFunction-" target="_blank">ResultBearing.reduceRows()</a>
+<a href="./apidocs/org/jdbi/v3/core/result/ResultBearing.html#reduceRows-U-java.util.function.BiFunction-">ResultBearing.reduceRows(U, BiFunction)</a>
 method accepts an accumulator seed value and a lambda function. For each row in
 the result set, Jdbi calls the lambda with the current accumulator value and a
 <a href="./apidocs/org/jdbi/v3/core/result/RowView.html" target="_blank">RowView</a> over the current row of the
@@ -3158,8 +3179,8 @@ passed in for the next row. After the last row has been processed,
     .registerRowMapper(BeanMapper.factory(Contact.class, <span class="string"><span class="delimiter">&quot;</span><span class="content">c</span><span class="delimiter">&quot;</span></span>))
     .registerRowMapper(BeanMapper.factory(Phone.class, <span class="string"><span class="delimiter">&quot;</span><span class="content">p</span><span class="delimiter">&quot;</span></span>)) <i class="conum" data-value="1"></i><b>(1)</b>
     .reduceRows(<span class="keyword">new</span> <span class="predefined-type">LinkedHashMap</span>&lt;<span class="predefined-type">Long</span>, Contact&gt;(), <i class="conum" data-value="2"></i><b>(2)</b>
-                (acc, rowView) -&gt; {
-      Contact contact = acc.computeIfAbsent( <i class="conum" data-value="3"></i><b>(3)</b>
+                (map, rowView) -&gt; {
+      Contact contact = map.computeIfAbsent( <i class="conum" data-value="3"></i><b>(3)</b>
           rowView.getColumn(<span class="string"><span class="delimiter">&quot;</span><span class="content">c_id</span><span class="delimiter">&quot;</span></span>, <span class="predefined-type">Long</span>.class),
           id -&gt; rowView.getRow(Contact.class));
 
@@ -3167,7 +3188,7 @@ passed in for the next row. After the last row has been processed,
         contact.addPhone(rowView.getRow(Phone.class));
       }
 
-      <span class="keyword">return</span> acc; <i class="conum" data-value="5"></i><b>(5)</b>
+      <span class="keyword">return</span> map; <i class="conum" data-value="5"></i><b>(5)</b>
     })
     .values() <i class="conum" data-value="6"></i><b>(6)</b>
     .stream()
@@ -3220,6 +3241,54 @@ contact ID keys. So we call <code>Map.values()</code> to get a <code>Collection&
 </table>
 </div>
 <div class="paragraph">
+<p>Alternatively, the
+<a href="./apidocs/org/jdbi/v3/core/result/ResultBearing.html#reduceRows-org.jdbi.v3.core.result.RowReducer-" target="_blank">ResultBearing.reduceRows(RowReducer)</a>
+variant accepts a <a href="./apidocs/org/jdbi/v3/core/result/RowReducer.html" target="_blank">RowReducer</a> and
+returns a stream of reduced elements.</p>
+</div>
+<div class="paragraph">
+<p>For simple master-detail joins, the abstract
+<a href="./apidocs/org/jdbi/v3/core/result/LinkedHashMapRowReducer.html" target="_blank">LinkedHashMapRowReducer</a>
+class makes it easy to reduce these joins into a stream of master elements.
+Adapting the example above:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">List</span>&lt;Contact&gt; contacts = handle.createQuery(SELECT_ALL)
+    .registerRowMapper(BeanMapper.factory(Contact.class, <span class="string"><span class="delimiter">&quot;</span><span class="content">c</span><span class="delimiter">&quot;</span></span>))
+    .registerRowMapper(BeanMapper.factory(Phone.class, <span class="string"><span class="delimiter">&quot;</span><span class="content">p</span><span class="delimiter">&quot;</span></span>))
+    .reduceRows(LinkedHashMapRowReducer.&lt;<span class="predefined-type">Long</span>, Contact&gt; of((map, rowView) -&gt; { <i class="conum" data-value="1"></i><b>(1)</b>
+      Contact contact = map.computeIfAbsent(
+          rowView.getColumn(<span class="string"><span class="delimiter">&quot;</span><span class="content">c_id</span><span class="delimiter">&quot;</span></span>, <span class="predefined-type">Long</span>.class),
+          id -&gt; rowView.getRow(Contact.class));
+
+      <span class="keyword">if</span> (rowView.getColumn(<span class="string"><span class="delimiter">&quot;</span><span class="content">p_id</span><span class="delimiter">&quot;</span></span>, <span class="predefined-type">Long</span>.class) != <span class="predefined-constant">null</span>) {
+        contact.addPhone(rowView.getRow(Phone.class));
+      }
+      <i class="conum" data-value="2"></i><b>(2)</b>
+    })
+    .collect(toList()); <i class="conum" data-value="3"></i><b>(3)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The factory method
+<a href="./apidocs/org/jdbi/v3/core/result/LinkedHashMapRowReducer.html#of-java.util.function.BiConsumer-" target="_blank">LinkedHashMapRowReducer.of(BiConsumer)</a>
+needs only a <code>BiConsumer(Map&lt;K,V&gt;, RowView)</code></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>No <code>return</code> statement needed. The same <code>map</code> is reused on every row.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>This reduction produces a <code>Stream&lt;Contact&gt;</code>, and we can use any stream method</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
 <p>You may be wondering about the <code>getRow()</code> and <code>getColumn()</code> calls to <code>rowView</code>.
 When you call <code>rowView.getRow(SomeType.class)</code>, <code>RowView</code> looks up the
 registered row mapper for <code>SomeType</code>, and uses it to map the current row to a
@@ -3239,37 +3308,15 @@ to map the <code>my_value</code> column of the current row to a <code>MyValueTyp
     .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, contactId)
     .registerRowMapper(BeanMapper.factory(Contact.class, <span class="string"><span class="delimiter">&quot;</span><span class="content">c</span><span class="delimiter">&quot;</span></span>))
     .registerRowMapper(BeanMapper.factory(Phone.class, <span class="string"><span class="delimiter">&quot;</span><span class="content">p</span><span class="delimiter">&quot;</span></span>))
-    .reduceRows(Optional.&lt;Contact&gt;empty(), <i class="conum" data-value="1"></i><b>(1)</b>
-                (acc, rowView) -&gt; {
-      Contact contact = acc.orElseGet(() -&gt; rowView.getRow(Contact.class)); <i class="conum" data-value="2"></i><b>(2)</b>
+    .reduceRows(LinkedHashMapRowReducer.&lt;<span class="predefined-type">Long</span>, Contact&gt; of((map, rowView) -&gt; {
+      Contact contact = map.orElseGet(() -&gt; rowView.getRow(Contact.class));
 
       <span class="keyword">if</span> (rowView.getColumn(<span class="string"><span class="delimiter">&quot;</span><span class="content">p_id</span><span class="delimiter">&quot;</span></span>, <span class="predefined-type">Long</span>.class) != <span class="predefined-constant">null</span>) {
         contact.addPhone(rowView.getRow(Phone.class));
       }
-
-      <span class="keyword">return</span> Optional.of(contact); <i class="conum" data-value="3"></i><b>(3)</b>
-    });</code></pre>
+    })
+    .findFirst();</code></pre>
 </div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Use an empty <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html" target="_blank">Optional&lt;Contact&gt;</a>
-as the accumulator seed. After the first row, the accumulator will be a
-non-empty <code>Optional&lt;Contact&gt;</code>.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Load the <code>Contact</code> from the accumulator if we already have it; otherwise,
-initialize it through the <code>RowView</code>.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Rewrap the <code>Contact</code> in an <code>Optional&lt;Contact&gt;</code>, to use for the accumulator
-on the following rows.</td>
-</tr>
-</table>
 </div>
 </div>
 <div class="sect4">
@@ -4063,6 +4110,15 @@ to the parameter&#8217;s name.</p>
 </div>
 </div>
 <div class="paragraph">
+<p>Binding a list of values is done through the <code>@BindList</code> annotation. This will expand the list in a 'a,b,c,d,&#8230;&#8203;' form. Note that this annotation requires you to use the <code>&lt;binding&gt;</code> notation, unlike <code>@Bind</code> (which uses :binding)</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select name from users where id in (&lt;userIds&gt;)</span><span class="delimiter">&quot;</span></span>)
+<span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt; getFromIds(<span class="annotation">@BindList</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">userIds</span><span class="delimiter">&quot;</span></span>) userIds)</code></pre>
+</div>
+</div>
+<div class="paragraph">
 <p>You can bind from the entries of a <code>Map</code>:</p>
 </div>
 <div class="listingblock">
@@ -4808,6 +4864,92 @@ Do you use PostgreSQL&#8217;s <code>hstore</code> columns? The <a href="#_postgr
 <code>hstore</code> to <code>Map&lt;String, String&gt;</code> column mapper. See
 <a href="#_hstore">hstore</a> for more information.
 </td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="__userowreducer"><a class="anchor" href="#__userowreducer"></a>@UseRowReducer</h5>
+<div class="paragraph">
+<p><code>@SqlQuery</code> methods that use join queries may reduce master-detail joins
+into one or more master-level objects. See <a href="#_resultbearing_reducerows">ResultBearing.reduceRows()</a> for
+an introduction to row reducers.</p>
+</div>
+<div class="paragraph">
+<p>Consider a filesystem metaphor with folders and documents. In the join, we&#8217;ll
+prefix folder columns with <code>f_</code> and document columns with <code>d_</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@RegisterBeanMapper</span>(value = Folder.class, prefix = <span class="string"><span class="delimiter">&quot;</span><span class="content">f</span><span class="delimiter">&quot;</span></span>) <i class="conum" data-value="1"></i><b>(1)</b>
+<span class="annotation">@RegisterBeanMapper</span>(value = <span class="predefined-type">Document</span>.class, prefix = <span class="string"><span class="delimiter">&quot;</span><span class="content">d</span><span class="delimiter">&quot;</span></span>)
+<span class="directive">public</span> <span class="type">interface</span> <span class="class">DocumentDao</span> {
+    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select </span><span class="delimiter">&quot;</span></span> +
+            <span class="string"><span class="delimiter">&quot;</span><span class="content">f.id f_id, f.name f_name, </span><span class="delimiter">&quot;</span></span> +
+            <span class="string"><span class="delimiter">&quot;</span><span class="content">d.id d_id, d.name d_name, d.contents d_contents </span><span class="delimiter">&quot;</span></span> +
+            <span class="string"><span class="delimiter">&quot;</span><span class="content">from folders f left join documents d </span><span class="delimiter">&quot;</span></span> +
+            <span class="string"><span class="delimiter">&quot;</span><span class="content">on f.id = d.folder_id </span><span class="delimiter">&quot;</span></span> +
+            <span class="string"><span class="delimiter">&quot;</span><span class="content">where f.id = :folderId</span><span class="delimiter">&quot;</span></span> +
+            <span class="string"><span class="delimiter">&quot;</span><span class="content">order by d.name</span><span class="delimiter">&quot;</span></span>)
+    <span class="annotation">@UseRowReducer</span>(FolderDocReducer.class) <i class="conum" data-value="2"></i><b>(2)</b>
+    Optional&lt;Folder&gt; getFolder(<span class="type">int</span> folderId); <i class="conum" data-value="3"></i><b>(3)</b>
+
+    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select </span><span class="delimiter">&quot;</span></span> +
+            <span class="string"><span class="delimiter">&quot;</span><span class="content">f.id f_id, f.name f_name, </span><span class="delimiter">&quot;</span></span> +
+            <span class="string"><span class="delimiter">&quot;</span><span class="content">d.id d_id, d.name d_name, d.contents d_contents </span><span class="delimiter">&quot;</span></span> +
+            <span class="string"><span class="delimiter">&quot;</span><span class="content">from folders f left join documents d </span><span class="delimiter">&quot;</span></span> +
+            <span class="string"><span class="delimiter">&quot;</span><span class="content">on f.id = d.folder_id </span><span class="delimiter">&quot;</span></span> +
+            <span class="string"><span class="delimiter">&quot;</span><span class="content">order by f.name, d.name</span><span class="delimiter">&quot;</span></span>)
+    <span class="annotation">@UseRowReducer</span>(FolderDocReducer.class) <i class="conum" data-value="2"></i><b>(2)</b>
+    <span class="predefined-type">List</span>&lt;Folder&gt; listFolders(); <i class="conum" data-value="3"></i><b>(3)</b>
+
+    <span class="type">class</span> <span class="class">FolderDocReducer</span> <span class="directive">extends</span> LinkedHashMapRowReducer&lt;<span class="predefined-type">Integer</span>, Folder&gt; { <i class="conum" data-value="4"></i><b>(4)</b>
+        <span class="annotation">@Override</span>
+        <span class="directive">public</span> <span class="type">void</span> accumulate(<span class="predefined-type">Map</span>&lt;<span class="predefined-type">Integer</span>, Folder&gt; map, RowView rowView) {
+            Folder f = map.computeIfAbsent(rowView.getColumn(<span class="string"><span class="delimiter">&quot;</span><span class="content">f_id</span><span class="delimiter">&quot;</span></span>, <span class="predefined-type">Integer</span>.class), <i class="conum" data-value="2"></i><b>(2)</b>
+                                           id -&gt; rowView.getRow(Folder.class));
+
+            <span class="keyword">if</span> (rowView.getColumn(<span class="string"><span class="delimiter">&quot;</span><span class="content">d_id</span><span class="delimiter">&quot;</span></span>, <span class="predefined-type">Integer</span>.class) != <span class="predefined-constant">null</span>) { <i class="conum" data-value="3"></i><b>(3)</b>
+                f.getDocuments().add(rowView.getRow(<span class="predefined-type">Document</span>.class));
+            }
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>In this example, we register the folder and document mappers with a
+prefix, so that each mapper only looks at the columns with that prefix.
+These mappers are used indirectly by the row reducer in the
+<code>getRow(Folder.class)</code> and <code>getRow(Document.class)</code> calls.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Annotate the method with <code>@UseRowReducer</code>, and specify the <code>RowReducer</code>
+implementation class.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The same <code>RowReducer</code> implementation may be used for both single- and
+multi-master-record queries.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td><a href="./apidocs/org/jdbi/v3/core/result/LinkedHashMapRowReducer.html" target="_blank">LinkedHashMapRowReducer</a>
+is an abstract <code>RowReducer</code> implementation that uses a <code>LinkedHashMap</code> as the result
+container, and returns the <code>values()</code> collection as the result.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Get the <code>Folder</code> for this row from the map by ID, or create it if not in the map.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>Confirm this row has a document (this <em>is</em> a left join) before mapping a document
+and adding it to the folder.</td>
 </tr>
 </table>
 </div>
@@ -7763,6 +7905,10 @@ interfaces.</p>
 <p><code>SqlLocator</code> replaces <code>StatementLocator</code>, and only applies to SQL Objects.</p>
 </li>
 <li>
+<p><code>@RegisterMapper</code> divided into <code>@RegisterRowMapper</code> and
+<code>@RegisterColumnMapper</code>.</p>
+</li>
+<li>
 <p><code>@Bind</code> annotations on SQL Object method parameters can be made optional,
 by compiling your code with the <code>-parameters</code> compiler flag enabled.</p>
 </li>
@@ -7796,7 +7942,7 @@ return types, or on <code>@SqlBatch</code> parameters.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-01-10 19:24:10 MST
+Last updated 2018-02-28 21:23:53 MST
 </div>
 </div>
 </body>
