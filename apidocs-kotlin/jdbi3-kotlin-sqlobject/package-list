@@ -1,0 +1,5 @@
+$dokka.format:html
+$dokka.linkExtension:html
+$dokka.location:org.jdbi.v3.sqlobject.kotlin$attach(org.jdbi.v3.core.Handle)org.jdbi.v3.sqlobject.kotlin/org.jdbi.v3.core.-handle/attach.html
+$dokka.location:org.jdbi.v3.sqlobject.kotlin$onDemand(org.jdbi.v3.core.Jdbi)org.jdbi.v3.sqlobject.kotlin/org.jdbi.v3.core.-jdbi/on-demand.html
+org.jdbi.v3.sqlobject.kotlin

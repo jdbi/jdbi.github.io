@@ -1,3 +1,4 @@
+org.jdbi.v3.commonstext
 org.jdbi.v3.core
 org.jdbi.v3.core.argument
 org.jdbi.v3.core.array
@@ -13,6 +14,7 @@ org.jdbi.v3.core.result
 org.jdbi.v3.core.spi
 org.jdbi.v3.core.statement
 org.jdbi.v3.core.transaction
+org.jdbi.v3.freemarker
 org.jdbi.v3.guava
 org.jdbi.v3.jodatime2
 org.jdbi.v3.jpa
@@ -27,4 +29,5 @@ org.jdbi.v3.sqlobject.locator
 org.jdbi.v3.sqlobject.statement
 org.jdbi.v3.sqlobject.transaction
 org.jdbi.v3.stringtemplate4
+org.jdbi.v3.testing
 org.jdbi.v3.vavr
