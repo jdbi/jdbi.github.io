@@ -18,6 +18,7 @@ org.jdbi.v3.freemarker
 org.jdbi.v3.guava
 org.jdbi.v3.jodatime2
 org.jdbi.v3.jpa
+org.jdbi.v3.meta
 org.jdbi.v3.oracle12
 org.jdbi.v3.postgres
 org.jdbi.v3.spring4

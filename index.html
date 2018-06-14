@@ -858,7 +858,7 @@ Already using Jdbi v2? See <a href="#_upgrading_from_v2_to_v3">Upgrading from v2
 <p>Jdbi is easy to include in your Java project - with an
 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Apache 2.0</a> license, few
 external dependencies, and JARs distributed through
-<a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.jdbi%22%20AND%20v%3A%223.2.0%22" target="_blank">Maven Central</a>,
+<a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.jdbi%22%20AND%20v%3A%223.3.0%22" target="_blank">Maven Central</a>,
 you can just include the relevant artifacts in your POM:</p>
 </div>
 <div class="listingblock">
@@ -869,7 +869,7 @@ you can just include the relevant artifacts in your POM:</p>
       <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
       <span class="tag">&lt;artifactId&gt;</span>jdbi3-bom<span class="tag">&lt;/artifactId&gt;</span>
       <span class="tag">&lt;type&gt;</span>pom<span class="tag">&lt;/type&gt;</span>
-      <span class="tag">&lt;version&gt;</span>3.2.0<span class="tag">&lt;/version&gt;</span>
+      <span class="tag">&lt;version&gt;</span>3.3.0<span class="tag">&lt;/version&gt;</span>
       <span class="tag">&lt;scope&gt;</span>import<span class="tag">&lt;/scope&gt;</span>
     <span class="tag">&lt;/dependency&gt;</span>
   <span class="tag">&lt;/dependencies&gt;</span>
@@ -1207,9 +1207,9 @@ later.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">Map</span>&lt;<span class="predefined-type">String</span>, <span class="predefined-type">Object</span>&gt; params = <span class="keyword">new</span> <span class="predefined-type">HashMap</span>&lt;&gt;();
-params.put(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">2</span>)
-params.put(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Bob</span><span class="delimiter">&quot;</span></span>);
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">Map</span>&lt;<span class="predefined-type">String</span>, <span class="predefined-type">Object</span>&gt; contact = <span class="keyword">new</span> <span class="predefined-type">HashMap</span>&lt;&gt;();
+contact.put(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">2</span>)
+contact.put(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Bob</span><span class="delimiter">&quot;</span></span>);
 
 handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into contacts (id, name) values (:id, :name)</span><span class="delimiter">&quot;</span></span>)
       .bindMap(contact)
@@ -1217,7 +1217,7 @@ handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><s
 </div>
 </div>
 <div class="paragraph">
-<p>You can bind multiple values at once, from either a <code>List&lt;T&gt;</code> or a list of arguments. Note that this requires your binding to be written using the <code>&lt;boundValue&gt;</code> form (as opposed to <code>`:boundValue</code> for most of the other bindings.)</p>
+<p>You can bind multiple values at once, from either a <code>List&lt;T&gt;</code> or a list of arguments. Note that this requires your binding to be written using the <code>&lt;boundValue&gt;</code> form (as opposed to <code>:boundValue</code> for most of the other bindings.)</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1230,7 +1230,7 @@ handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><sp
       .mapTo(<span class="predefined-type">String</span>.class)
       .list();
 
-<span class="comment">// Or, using the `vararg` definition</span>
+<span class="comment">// Or, using the 'vararg' definition</span>
 handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT value FROM items WHERE kind in (&lt;varargListOfKinds&gt;)</span><span class="delimiter">&quot;</span></span>)
       .bindList(<span class="string"><span class="delimiter">&quot;</span><span class="content">varargListOfKinds</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">user_name</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">docs</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">street</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">library</span><span class="delimiter">&quot;</span></span>)
       .mapTo(<span class="predefined-type">String</span>.class)
@@ -1352,7 +1352,7 @@ single value into a binding.</p>
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">static</span> <span class="type">class</span> <span class="class">UUIDArgument</span> <span class="directive">implements</span> Argument {
     <span class="directive">private</span> <span class="predefined-type">UUID</span> uuid;
 
-    <span class="directive">public</span> UUIDArgument(<span class="predefined-type">UUID</span> uuid) {
+    UUIDArgument(<span class="predefined-type">UUID</span> uuid) {
         <span class="local-variable">this</span>.uuid = uuid;
     }
 
@@ -1404,7 +1404,7 @@ the <code>ArgumentFactory</code> contract:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">static</span> <span class="type">class</span> <span class="class">UUIDArgumentFactory</span> <span class="directive">extends</span> AbstractArgumentFactory&lt;<span class="predefined-type">UUID</span>&gt; {
-    <span class="directive">public</span> UUIDArgumentFactory() {
+    UUIDArgumentFactory() {
         <span class="local-variable">super</span>(<span class="predefined-type">Types</span>.VARCHAR); <i class="conum" data-value="1"></i><b>(1)</b>
     }
 
@@ -2465,10 +2465,10 @@ classes have identical property names (like <code>id</code> or <code>name</code>
 <pre class="CodeRay highlight"><code data-lang="java">handle.registerRowMapper(BeanMapper.factory(ContactBean.class, <span class="string"><span class="delimiter">&quot;</span><span class="content">c</span><span class="delimiter">&quot;</span></span>));
 handle.registerRowMapper(BeanMapper.factory(PhoneBean.class, <span class="string"><span class="delimiter">&quot;</span><span class="content">p</span><span class="delimiter">&quot;</span></span>));
 handle.registerRowMapper(JoinRowMapper.forTypes(ContactBean.class, PhoneBean.class));
-<span class="predefined-type">List</span>&lt;JoinRow&gt; contactPhones = handle.select(<span class="string"><span class="delimiter">&quot;</span><span class="content">select </span><span class="delimiter">&quot;</span></span> +
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">c.id cid, c.name cname, </span><span class="delimiter">&quot;</span></span> +
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">p.id pid, p.name pname, p.number pnumber </span><span class="delimiter">&quot;</span></span> +
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">from contacts c left join phones p on c.id = p.contact_id</span><span class="delimiter">&quot;</span></span>)
+<span class="predefined-type">List</span>&lt;JoinRow&gt; contactPhones = handle.select(<span class="string"><span class="delimiter">&quot;</span><span class="content">select </span><span class="delimiter">&quot;</span></span>
+        + <span class="string"><span class="delimiter">&quot;</span><span class="content">c.id cid, c.name cname, </span><span class="delimiter">&quot;</span></span>
+        + <span class="string"><span class="delimiter">&quot;</span><span class="content">p.id pid, p.name pname, p.number pnumber </span><span class="delimiter">&quot;</span></span>
+        + <span class="string"><span class="delimiter">&quot;</span><span class="content">from contacts c left join phones p on c.id = p.contact_id</span><span class="delimiter">&quot;</span></span>)
         .mapTo(JoinRow.class)
         .list();</code></pre>
 </div>
@@ -2703,8 +2703,9 @@ signature:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">String</span> sql = <span class="string"><span class="delimiter">&quot;</span><span class="content">select u.id u_id, u.name u_name, p.id p_id, p.phone p_phone </span><span class="delimiter">&quot;</span></span> +
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">from user u left join phone p on u.id = p.user_id</span><span class="delimiter">&quot;</span></span>;
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">String</span> sql = <span class="string"><span class="delimiter">&quot;</span><span class="content">select u.id u_id, u.name u_name, p.id p_id, p.phone p_phone </span><span class="delimiter">&quot;</span></span>
+
+    + <span class="string"><span class="delimiter">&quot;</span><span class="content">from user u left join phone p on u.id = p.user_id</span><span class="delimiter">&quot;</span></span>;
 <span class="predefined-type">Map</span>&lt;User, Phone&gt; map = h.createQuery(sql)
         .registerRowMapper(ConstructorMapper.factory(User.class, <span class="string"><span class="delimiter">&quot;</span><span class="content">u</span><span class="delimiter">&quot;</span></span>))
         .registerRowMapper(ConstructorMapper.factory(Phone.class, <span class="string"><span class="delimiter">&quot;</span><span class="content">p</span><span class="delimiter">&quot;</span></span>))
@@ -2757,8 +2758,8 @@ values per key.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">String</span> sql = <span class="string"><span class="delimiter">&quot;</span><span class="content">select u.id u_id, u.name u_name, p.id p_id, p.phone p_phone </span><span class="delimiter">&quot;</span></span> +
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">from user u left join phone p on u.id = p.user_id</span><span class="delimiter">&quot;</span></span>;
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">String</span> sql = <span class="string"><span class="delimiter">&quot;</span><span class="content">select u.id u_id, u.name u_name, p.id p_id, p.phone p_phone </span><span class="delimiter">&quot;</span></span>
+    + <span class="string"><span class="delimiter">&quot;</span><span class="content">from user u left join phone p on u.id = p.user_id</span><span class="delimiter">&quot;</span></span>;
 Multimap&lt;User, Phone&gt; map = h.createQuery(sql)
         .registerRowMapper(ConstructorMapper.factory(User.class, <span class="string"><span class="delimiter">&quot;</span><span class="content">u</span><span class="delimiter">&quot;</span></span>))
         .registerRowMapper(ConstructorMapper.factory(Phone.class, <span class="string"><span class="delimiter">&quot;</span><span class="content">p</span><span class="delimiter">&quot;</span></span>))
@@ -3445,7 +3446,7 @@ assertThat(joined).isEqualTo(JoinRowMapperTest.getExpected());</code></pre>
 as a database <strong>INSERT</strong>, <strong>UPDATE</strong>, or <strong>DELETE</strong>.</p>
 </div>
 <div class="paragraph">
-<p>You can execute a simple update with <code>Handle&#8217;s `int execute(String sql, Object&#8230;&#8203; args)</code>
+<p>You can execute a simple update with <code>Handle</code>'s <code>int execute(String sql, Object&#8230;&#8203; args)</code>
 method which binds simple positional parameters.</p>
 </div>
 <div class="listingblock">
@@ -3751,8 +3752,8 @@ can be executed in a single <strong>Batch</strong> or individually.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="type">int</span><span class="type">[]</span> results = handle.createScript(
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO user VALUES(3, 'Charlie');</span><span class="delimiter">&quot;</span></span> +
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">UPDATE user SET name='Bobby Tables' WHERE id=2;</span><span class="delimiter">&quot;</span></span>)
+        <span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO user VALUES(3, 'Charlie');</span><span class="delimiter">&quot;</span></span>
+        + <span class="string"><span class="delimiter">&quot;</span><span class="content">UPDATE user SET name='Bobby Tables' WHERE id=2;</span><span class="delimiter">&quot;</span></span>)
     .execute();
 
 assertThat(results).containsExactly(<span class="integer">1</span>, <span class="integer">1</span>);</code></pre>
@@ -4775,8 +4776,8 @@ for the key and value types.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select u.id u_id, u.name u_name, p.id p_id, p.phone p_phone </span><span class="delimiter">&quot;</span></span> +
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">from user u left join phone p on u.id = p.user_id</span><span class="delimiter">&quot;</span></span>)
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select u.id u_id, u.name u_name, p.id p_id, p.phone p_phone </span><span class="delimiter">&quot;</span></span>
+    + <span class="string"><span class="delimiter">&quot;</span><span class="content">from user u left join phone p on u.id = p.user_id</span><span class="delimiter">&quot;</span></span>)
 <span class="annotation">@RegisterConstructorMapper</span>(value = User.class, prefix = <span class="string"><span class="delimiter">&quot;</span><span class="content">u</span><span class="delimiter">&quot;</span></span>)
 <span class="annotation">@RegisterConstructorMapper</span>(value = Phone.class, prefix = <span class="string"><span class="delimiter">&quot;</span><span class="content">p</span><span class="delimiter">&quot;</span></span>)
 <span class="predefined-type">Map</span>&lt;User, Phone&gt; getMap();</code></pre>
@@ -4827,8 +4828,8 @@ type, which supports mapping multiple values per key.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select u.id u_id, u.name u_name, p.id p_id, p.phone p_phone </span><span class="delimiter">&quot;</span></span> +
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">from user u left join phone p on u.id = p.user_id</span><span class="delimiter">&quot;</span></span>)
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select u.id u_id, u.name u_name, p.id p_id, p.phone p_phone </span><span class="delimiter">&quot;</span></span>
+    + <span class="string"><span class="delimiter">&quot;</span><span class="content">from user u left join phone p on u.id = p.user_id</span><span class="delimiter">&quot;</span></span>)
 <span class="annotation">@RegisterConstructorMapper</span>(value = User.class, prefix = <span class="string"><span class="delimiter">&quot;</span><span class="content">u</span><span class="delimiter">&quot;</span></span>)
 <span class="annotation">@RegisterConstructorMapper</span>(value = Phone.class, prefix = <span class="string"><span class="delimiter">&quot;</span><span class="content">p</span><span class="delimiter">&quot;</span></span>)
 Multimap&lt;User, Phone&gt; getMultimap();</code></pre>
@@ -6496,7 +6497,7 @@ Given that for the wrapped type <code>T</code> a Mapper is registered.</p>
 It is possible to collect into a <code>Traversable&lt;T&gt;</code>, in this case a <code>List&lt;T&gt;</code>
 will be returned.
 For all interface types a sensible default implementation will be used
-(e.q. <code>List&lt;T&gt;</code> for <code>Seq&lt;T&gt;</code>). Furthermore <code>Multimap&lt;K, T&gt;`s are backed by a `Seq&lt;T&gt;</code>
+(e.q. <code>List&lt;T&gt;</code> for <code>Seq&lt;T&gt;</code>). Furthermore <code>Multimap&lt;K, T&gt;</code>s are backed by a <code>Seq&lt;T&gt;</code>
 as default value container.</p>
 </li>
 <li>
@@ -8030,7 +8031,7 @@ return types, or on <code>@SqlBatch</code> parameters.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-27 09:50:14 MDT
+Last updated 2018-06-03 17:53:11 MDT
 </div>
 </div>
 </body>
