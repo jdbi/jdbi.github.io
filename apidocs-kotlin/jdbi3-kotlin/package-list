@@ -1,5 +1,7 @@
 $dokka.format:html
 $dokka.linkExtension:html
+$dokka.location:org.jdbi.v3.core.kotlin$bindKotlin(org.jdbi.v3.core.statement.SqlStatement((org.jdbi.v3.core.kotlin.bindKotlin.This)), kotlin.Any)org.jdbi.v3.core.kotlin/org.jdbi.v3.core.statement.-sql-statement/bind-kotlin.html
+$dokka.location:org.jdbi.v3.core.kotlin$bindKotlin(org.jdbi.v3.core.statement.SqlStatement((org.jdbi.v3.core.kotlin.bindKotlin.This)), kotlin.String, kotlin.Any)org.jdbi.v3.core.kotlin/org.jdbi.v3.core.statement.-sql-statement/bind-kotlin.html
 $dokka.location:org.jdbi.v3.core.kotlin$inTransactionUnchecked(org.jdbi.v3.core.Jdbi, kotlin.Function1((org.jdbi.v3.core.Handle, org.jdbi.v3.core.kotlin.inTransactionUnchecked.R)))org.jdbi.v3.core.kotlin/org.jdbi.v3.core.-jdbi/in-transaction-unchecked.html
 $dokka.location:org.jdbi.v3.core.kotlin$inTransactionUnchecked(org.jdbi.v3.core.Jdbi, org.jdbi.v3.core.transaction.TransactionIsolationLevel, kotlin.Function1((org.jdbi.v3.core.Handle, org.jdbi.v3.core.kotlin.inTransactionUnchecked.R)))org.jdbi.v3.core.kotlin/org.jdbi.v3.core.-jdbi/in-transaction-unchecked.html
 $dokka.location:org.jdbi.v3.core.kotlin$isKotlinClass(java.lang.Class((kotlin.Any)))org.jdbi.v3.core.kotlin/java.lang.-class/is-kotlin-class.html
@@ -16,3 +18,4 @@ $dokka.location:org.jdbi.v3.core.kotlin$withExtensionUnchecked(org.jdbi.v3.core.
 $dokka.location:org.jdbi.v3.core.kotlin$withExtensionUnchecked(org.jdbi.v3.core.Jdbi, kotlin.reflect.KClass((org.jdbi.v3.core.kotlin.withExtensionUnchecked.E)), kotlin.Function1((org.jdbi.v3.core.kotlin.withExtensionUnchecked.E, org.jdbi.v3.core.kotlin.withExtensionUnchecked.R)))org.jdbi.v3.core.kotlin/org.jdbi.v3.core.-jdbi/with-extension-unchecked.html
 $dokka.location:org.jdbi.v3.core.kotlin$withHandleUnchecked(org.jdbi.v3.core.Jdbi, kotlin.Function1((org.jdbi.v3.core.Handle, org.jdbi.v3.core.kotlin.withHandleUnchecked.R)))org.jdbi.v3.core.kotlin/org.jdbi.v3.core.-jdbi/with-handle-unchecked.html
 org.jdbi.v3.core.kotlin
+org.jdbi.v3.core.kotlin.internal
