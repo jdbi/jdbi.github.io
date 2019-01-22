@@ -5416,10 +5416,10 @@ prefix folder columns with <code>f_</code> and document columns with <code>d_</c
     <span class="type">class</span> <span class="class">FolderDocReducer</span> <span class="directive">implements</span> LinkedHashMapRowReducer&lt;<span class="predefined-type">Integer</span>, Folder&gt; { <i class="conum" data-value="4"></i><b>(4)</b>
         <span class="annotation">@Override</span>
         <span class="directive">public</span> <span class="type">void</span> accumulate(<span class="predefined-type">Map</span>&lt;<span class="predefined-type">Integer</span>, Folder&gt; map, RowView rowView) {
-            Folder f = map.computeIfAbsent(rowView.getColumn(<span class="string"><span class="delimiter">&quot;</span><span class="content">f_id</span><span class="delimiter">&quot;</span></span>, <span class="predefined-type">Integer</span>.class), <i class="conum" data-value="2"></i><b>(2)</b>
+            Folder f = map.computeIfAbsent(rowView.getColumn(<span class="string"><span class="delimiter">&quot;</span><span class="content">f_id</span><span class="delimiter">&quot;</span></span>, <span class="predefined-type">Integer</span>.class), <i class="conum" data-value="5"></i><b>(5)</b>
                                            id -&gt; rowView.getRow(Folder.class));
 
-            <span class="keyword">if</span> (rowView.getColumn(<span class="string"><span class="delimiter">&quot;</span><span class="content">d_id</span><span class="delimiter">&quot;</span></span>, <span class="predefined-type">Integer</span>.class) != <span class="predefined-constant">null</span>) { <i class="conum" data-value="3"></i><b>(3)</b>
+            <span class="keyword">if</span> (rowView.getColumn(<span class="string"><span class="delimiter">&quot;</span><span class="content">d_id</span><span class="delimiter">&quot;</span></span>, <span class="predefined-type">Integer</span>.class) != <span class="predefined-constant">null</span>) { <i class="conum" data-value="6"></i><b>(6)</b>
                 f.getDocuments().add(rowView.getRow(<span class="predefined-type">Document</span>.class));
             }
         }
@@ -8928,7 +8928,7 @@ return types, or on <code>@SqlBatch</code> parameters.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-01-22 11:25:53 PST
+Last updated 2019-01-22 11:47:00 PST
 </div>
 </div>
 </body>
