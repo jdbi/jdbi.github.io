@@ -542,14 +542,14 @@ table.CodeRay td.code>pre{padding:0}
 </ul>
 </li>
 <li><a href="#_queries">3.4. Queries</a></li>
-<li><a href="#_templating">3.5. Templating</a></li>
-<li><a href="#_mappers">3.6. Mappers</a>
+<li><a href="#_mappers">3.5. Mappers</a>
 <ul class="sectlevel3">
-<li><a href="#_row_mappers">3.6.1. Row Mappers</a></li>
-<li><a href="#_column_mappers">3.6.2. Column Mappers</a></li>
-<li><a href="#_reflection_mappers">3.6.3. Reflection Mappers</a></li>
+<li><a href="#_row_mappers">3.5.1. Row Mappers</a></li>
+<li><a href="#_column_mappers">3.5.2. Column Mappers</a></li>
+<li><a href="#_reflection_mappers">3.5.3. Reflection Mappers</a></li>
 </ul>
 </li>
+<li><a href="#_templating">3.6. Templating</a></li>
 <li><a href="#_sql_arrays">3.7. SQL Arrays</a>
 <ul class="sectlevel3">
 <li><a href="#_registering_array_types">3.7.1. Registering array types</a></li>
@@ -580,127 +580,133 @@ table.CodeRay td.code>pre{padding:0}
 </ul>
 </li>
 <li><a href="#_classpathsqllocator">3.16. ClasspathSqlLocator</a></li>
-<li><a href="#_statementcontext">3.17. StatementContext</a></li>
 </ul>
 </li>
-<li><a href="#_sql_objects">4. SQL Objects</a>
+<li><a href="#_configuration">4. Configuration</a>
 <ul class="sectlevel2">
-<li><a href="#_annotated_methods">4.1. Annotated Methods</a>
-<ul class="sectlevel3">
-<li><a href="#__sqlupdate">4.1.1. @SqlUpdate</a></li>
-<li><a href="#_binding_arguments_2">4.1.2. Binding Arguments</a></li>
-<li><a href="#__sqlquery">4.1.3. @SqlQuery</a></li>
-<li><a href="#__sqlbatch">4.1.4. @SqlBatch</a></li>
-<li><a href="#__sqlcall">4.1.5. @SqlCall</a></li>
-<li><a href="#__sqlscript">4.1.6. @SqlScript</a></li>
-<li><a href="#__getgeneratedkeys_3">4.1.7. @GetGeneratedKeys</a></li>
-<li><a href="#_sqllocator">4.1.8. SqlLocator</a></li>
-<li><a href="#__createsqlobject">4.1.9. @CreateSqlObject</a></li>
-<li><a href="#__timestamped">4.1.10. @Timestamped</a></li>
+<li><a href="#_qualified_types">4.1. Qualified Types</a></li>
 </ul>
 </li>
-<li><a href="#_consumer_methods">4.2. Consumer Methods</a></li>
-<li><a href="#_default_methods">4.3. Default Methods</a></li>
-<li><a href="#_transaction_management">4.4. Transaction Management</a></li>
-<li><a href="#_using_sql_objects">4.5. Using SQL Objects</a>
-<ul class="sectlevel3">
-<li><a href="#_attached_to_handle">4.5.1. Attached to Handle</a></li>
-<li><a href="#_temporary_sql_objects">4.5.2. Temporary SQL Objects</a></li>
-<li><a href="#_on_demand">4.5.3. On-Demand</a></li>
-</ul>
-</li>
-<li><a href="#_additional_annotations">4.6. Additional Annotations</a></li>
-<li><a href="#_annotations_and_inheritance">4.7. Annotations and Inheritance</a></li>
-</ul>
-</li>
-<li><a href="#_testing">5. Testing</a></li>
-<li><a href="#_third_party_integration">6. Third-Party Integration</a>
+<li><a href="#_sql_objects">5. SQL Objects</a>
 <ul class="sectlevel2">
-<li><a href="#_google_guava">6.1. Google Guava</a></li>
-<li><a href="#_h2_database">6.2. H2 Database</a></li>
-<li><a href="#_json">6.3. JSON</a>
+<li><a href="#_annotated_methods">5.1. Annotated Methods</a>
 <ul class="sectlevel3">
-<li><a href="#_jackson_2">6.3.1. Jackson 2</a></li>
-<li><a href="#_gson_2">6.3.2. Gson 2</a></li>
-<li><a href="#_operation">6.3.3. Operation</a></li>
-<li><a href="#_usage">6.3.4. Usage</a></li>
+<li><a href="#__sqlupdate">5.1.1. @SqlUpdate</a></li>
+<li><a href="#_binding_arguments_2">5.1.2. Binding Arguments</a></li>
+<li><a href="#__sqlquery">5.1.3. @SqlQuery</a></li>
+<li><a href="#__sqlbatch">5.1.4. @SqlBatch</a></li>
+<li><a href="#__sqlcall">5.1.5. @SqlCall</a></li>
+<li><a href="#__sqlscript">5.1.6. @SqlScript</a></li>
+<li><a href="#__getgeneratedkeys_3">5.1.7. @GetGeneratedKeys</a></li>
+<li><a href="#_sqllocator">5.1.8. SqlLocator</a></li>
+<li><a href="#__createsqlobject">5.1.9. @CreateSqlObject</a></li>
+<li><a href="#__timestamped">5.1.10. @Timestamped</a></li>
 </ul>
 </li>
-<li><a href="#_immutables">6.4. Immutables</a></li>
-<li><a href="#_jodatime">6.5. JodaTime</a></li>
-<li><a href="#_jpa">6.6. JPA</a></li>
-<li><a href="#_kotlin">6.7. Kotlin</a>
+<li><a href="#_consumer_methods">5.2. Consumer Methods</a></li>
+<li><a href="#_default_methods">5.3. Default Methods</a></li>
+<li><a href="#_transaction_management">5.4. Transaction Management</a></li>
+<li><a href="#_using_sql_objects">5.5. Using SQL Objects</a>
 <ul class="sectlevel3">
-<li><a href="#_resultset_mapping">6.7.1. ResultSet mapping</a></li>
-<li><a href="#_sqlobject">6.7.2. SqlObject</a></li>
+<li><a href="#_attached_to_handle">5.5.1. Attached to Handle</a></li>
+<li><a href="#_temporary_sql_objects">5.5.2. Temporary SQL Objects</a></li>
+<li><a href="#_on_demand">5.5.3. On-Demand</a></li>
 </ul>
 </li>
-<li><a href="#_lombok">6.8. Lombok</a></li>
-<li><a href="#_oracle_12">6.9. Oracle 12</a></li>
-<li><a href="#_postgresql">6.10. PostgreSQL</a>
-<ul class="sectlevel3">
-<li><a href="#_hstore">6.10.1. hstore</a></li>
-<li><a href="#__getgeneratedkeys_4">6.10.2. @GetGeneratedKeys</a></li>
+<li><a href="#_additional_annotations">5.6. Additional Annotations</a></li>
+<li><a href="#_annotations_and_inheritance">5.7. Annotations and Inheritance</a></li>
 </ul>
 </li>
-<li><a href="#_spring">6.11. Spring</a>
-<ul class="sectlevel3">
-<li><a href="#_installing_plugins">6.11.1. Installing plugins</a></li>
-<li><a href="#_global_attributes">6.11.2. Global Attributes</a></li>
-</ul>
-</li>
-<li><a href="#_sqlite">6.12. SQLite</a></li>
-<li><a href="#_stringtemplate_4">6.13. StringTemplate 4</a></li>
-<li><a href="#_vavr">6.14. Vavr</a></li>
-</ul>
-</li>
-<li><a href="#_cookbook">7. Cookbook</a>
+<li><a href="#_testing">6. Testing</a></li>
+<li><a href="#_third_party_integration">7. Third-Party Integration</a>
 <ul class="sectlevel2">
-<li><a href="#_like_clauses_with_parameters">7.1. LIKE clauses with Parameters</a></li>
+<li><a href="#_google_guava">7.1. Google Guava</a></li>
+<li><a href="#_h2_database">7.2. H2 Database</a></li>
+<li><a href="#jdbi3-json">7.3. JSON</a>
+<ul class="sectlevel3">
+<li><a href="#_jackson_2">7.3.1. Jackson 2</a></li>
+<li><a href="#_gson_2">7.3.2. Gson 2</a></li>
+<li><a href="#_operation">7.3.3. Operation</a></li>
+<li><a href="#_usage">7.3.4. Usage</a></li>
 </ul>
 </li>
-<li><a href="#_advanced_topics">8. Advanced Topics</a>
+<li><a href="#_immutables">7.4. Immutables</a></li>
+<li><a href="#_jodatime">7.5. JodaTime</a></li>
+<li><a href="#_jpa">7.6. JPA</a></li>
+<li><a href="#_kotlin">7.7. Kotlin</a>
+<ul class="sectlevel3">
+<li><a href="#_resultset_mapping">7.7.1. ResultSet mapping</a></li>
+<li><a href="#_sqlobject">7.7.2. SqlObject</a></li>
+</ul>
+</li>
+<li><a href="#_lombok">7.8. Lombok</a></li>
+<li><a href="#_oracle_12">7.9. Oracle 12</a></li>
+<li><a href="#_postgresql">7.10. PostgreSQL</a>
+<ul class="sectlevel3">
+<li><a href="#_hstore">7.10.1. hstore</a></li>
+<li><a href="#__getgeneratedkeys_4">7.10.2. @GetGeneratedKeys</a></li>
+</ul>
+</li>
+<li><a href="#_spring">7.11. Spring</a>
+<ul class="sectlevel3">
+<li><a href="#_installing_plugins">7.11.1. Installing plugins</a></li>
+<li><a href="#_global_attributes">7.11.2. Global Attributes</a></li>
+</ul>
+</li>
+<li><a href="#_sqlite">7.12. SQLite</a></li>
+<li><a href="#_stringtemplate_4">7.13. StringTemplate 4</a></li>
+<li><a href="#_vavr">7.14. Vavr</a></li>
+</ul>
+</li>
+<li><a href="#_cookbook">8. Cookbook</a>
 <ul class="sectlevel2">
-<li><a href="#_compiling_with_parameter_names">8.1. Compiling with Parameter Names</a>
-<ul class="sectlevel3">
-<li><a href="#_maven_setup">8.1.1. Maven setup</a></li>
-<li><a href="#_intellij_idea_setup">8.1.2. IntelliJ IDEA setup</a></li>
-<li><a href="#_eclipse_setup">8.1.3. Eclipse setup</a></li>
+<li><a href="#_like_clauses_with_parameters">8.1. LIKE clauses with Parameters</a></li>
 </ul>
 </li>
-<li><a href="#_working_with_generic_types">8.2. Working with Generic Types</a>
-<ul class="sectlevel3">
-<li><a href="#_generictype">8.2.1. GenericType</a></li>
-<li><a href="#_generictypes">8.2.2. GenericTypes</a></li>
-</ul>
-</li>
-<li><a href="#_namedargumentfinder">8.3. NamedArgumentFinder</a></li>
-<li><a href="#_jdbiconfig">8.4. JdbiConfig</a>
-<ul class="sectlevel3">
-<li><a href="#_creating_a_custom_jdbiconfig_type">8.4.1. Creating a custom JdbiConfig type</a></li>
-</ul>
-</li>
-<li><a href="#_jdbiplugin">8.5. JdbiPlugin</a></li>
-<li><a href="#_user_defined_annotations">8.6. User-Defined Annotations</a>
-<ul class="sectlevel3">
-<li><a href="#_statement_customizing_annotations">8.6.1. Statement Customizing Annotations</a></li>
-<li><a href="#_configuration_annotations">8.6.2. Configuration Annotations</a></li>
-<li><a href="#_method_decorating_annotations">8.6.3. Method Decorating Annotations</a></li>
-</ul>
-</li>
-<li><a href="#_templateengine">8.7. TemplateEngine</a></li>
-<li><a href="#_sqlparser">8.8. SqlParser</a></li>
-<li><a href="#_sqllogger">8.9. SqlLogger</a></li>
-<li><a href="#_resultproducer">8.10. ResultProducer</a></li>
-</ul>
-</li>
-<li><a href="#_appendix">9. Appendix</a>
+<li><a href="#_advanced_topics">9. Advanced Topics</a>
 <ul class="sectlevel2">
-<li><a href="#_best_practices">9.1. Best Practices</a></li>
-<li><a href="#_api_reference">9.2. API Reference</a></li>
-<li><a href="#_related_projects">9.3. Related Projects</a></li>
-<li><a href="#_contributing">9.4. Contributing</a></li>
-<li><a href="#_upgrading_from_v2_to_v3">9.5. Upgrading from v2 to v3</a></li>
+<li><a href="#_high_availability">9.1. High Availability</a></li>
+<li><a href="#_compiling_with_parameter_names">9.2. Compiling with Parameter Names</a>
+<ul class="sectlevel3">
+<li><a href="#_maven_setup">9.2.1. Maven setup</a></li>
+<li><a href="#_intellij_idea_setup">9.2.2. IntelliJ IDEA setup</a></li>
+<li><a href="#_eclipse_setup">9.2.3. Eclipse setup</a></li>
+</ul>
+</li>
+<li><a href="#_working_with_generic_types">9.3. Working with Generic Types</a>
+<ul class="sectlevel3">
+<li><a href="#_generictype">9.3.1. GenericType</a></li>
+<li><a href="#_generictypes">9.3.2. GenericTypes</a></li>
+</ul>
+</li>
+<li><a href="#_namedargumentfinder">9.4. NamedArgumentFinder</a></li>
+<li><a href="#_jdbiconfig">9.5. JdbiConfig</a>
+<ul class="sectlevel3">
+<li><a href="#_creating_a_custom_jdbiconfig_type">9.5.1. Creating a custom JdbiConfig type</a></li>
+</ul>
+</li>
+<li><a href="#_jdbiplugin">9.6. JdbiPlugin</a></li>
+<li><a href="#_statementcontext">9.7. StatementContext</a></li>
+<li><a href="#_user_defined_annotations">9.8. User-Defined Annotations</a>
+<ul class="sectlevel3">
+<li><a href="#_statement_customizing_annotations">9.8.1. Statement Customizing Annotations</a></li>
+<li><a href="#_configuration_annotations">9.8.2. Configuration Annotations</a></li>
+<li><a href="#_method_decorating_annotations">9.8.3. Method Decorating Annotations</a></li>
+</ul>
+</li>
+<li><a href="#_templateengine">9.9. TemplateEngine</a></li>
+<li><a href="#_sqlparser">9.10. SqlParser</a></li>
+<li><a href="#_sqllogger">9.11. SqlLogger</a></li>
+<li><a href="#_resultproducer">9.12. ResultProducer</a></li>
+</ul>
+</li>
+<li><a href="#_appendix">10. Appendix</a>
+<ul class="sectlevel2">
+<li><a href="#_best_practices">10.1. Best Practices</a></li>
+<li><a href="#_api_reference">10.2. API Reference</a></li>
+<li><a href="#_related_projects">10.3. Related Projects</a></li>
+<li><a href="#_contributing">10.4. Contributing</a></li>
+<li><a href="#_upgrading_from_v2_to_v3">10.5. Upgrading from v2 to v3</a></li>
 </ul>
 </li>
 </ul>
@@ -887,7 +893,7 @@ Already using Jdbi v2? See <a href="#_upgrading_from_v2_to_v3">Upgrading from v2
 <p>Jdbi is easy to include in your Java project - with an
 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Apache 2.0</a> license, few
 external dependencies, and JARs distributed through
-<a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.jdbi%22%20AND%20v%3A%223.6.1-SNAPSHOT%22" target="_blank">Maven Central</a>,
+<a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.jdbi%22%20AND%20v%3A%223.7.0%22" target="_blank">Maven Central</a>,
 you can just include the relevant artifacts in your POM:</p>
 </div>
 <div class="listingblock">
@@ -898,7 +904,7 @@ you can just include the relevant artifacts in your POM:</p>
       <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
       <span class="tag">&lt;artifactId&gt;</span>jdbi3-bom<span class="tag">&lt;/artifactId&gt;</span>
       <span class="tag">&lt;type&gt;</span>pom<span class="tag">&lt;/type&gt;</span>
-      <span class="tag">&lt;version&gt;</span>3.6.1-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+      <span class="tag">&lt;version&gt;</span>3.7.0<span class="tag">&lt;/version&gt;</span>
       <span class="tag">&lt;scope&gt;</span>import<span class="tag">&lt;/scope&gt;</span>
     <span class="tag">&lt;/dependency&gt;</span>
   <span class="tag">&lt;/dependencies&gt;</span>
@@ -1041,7 +1047,11 @@ Jdbi jdbi = Jdbi.create(ds);</code></pre>
 </div>
 <div class="paragraph">
 <p>Typically applications create a single, shared <code>Jdbi</code> instance, and set up
-any common configuration there.</p>
+any common configuration there.  See <a href="#_configuration">Configuration</a> for more details.</p>
+</div>
+<div class="paragraph">
+<p><code>Jdbi</code> itself does not provide connection pooling or other <a href="#_high_availability">High Availability</a>
+features, but it can be combined with other software that does.</p>
 </div>
 <div class="paragraph">
 <p>In a more limited scope (such as an HTTP request, or event callback),
@@ -1061,7 +1071,8 @@ access to fluent statement APIs that can bind arguments, execute the statement,
 and then map any results into Java objects.</p>
 </div>
 <div class="paragraph">
-<p>A <code>Handle</code> inherits configuration from the <code>Jdbi</code> at the time it is created.</p>
+<p>A <code>Handle</code> inherits configuration from the <code>Jdbi</code> at the time it is created.
+See <a href="#_configuration">Configuration</a> for more details.</p>
 </div>
 <div class="admonitionblock caution">
 <table>
@@ -1290,7 +1301,7 @@ This <code>:foo</code> syntax is default behavior that can be changed; see the <
 </li>
 <li>
 <p>java.lang: <code>Boolean</code>, <code>Byte</code>, <code>Short</code>, <code>Integer</code>, <code>Long</code>, <code>Character</code>,
-<code>Float</code>, <code>Double</code>, <code>String</code>, and <code>Enum</code> (stored as the enum value&#8217;s name)</p>
+<code>Float</code>, <code>Double</code>, <code>String</code>, and <code>Enum</code> (stored as the enum value&#8217;s name by default)</p>
 </li>
 <li>
 <p>java.math: <code>BigDecimal</code></p>
@@ -1718,115 +1729,7 @@ map to many other data types:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_templating"><a class="anchor" href="#_templating"></a>3.5. Templating</h3>
-<div class="paragraph">
-<p>Binding query parameters, as described above, is excellent for sending a static set of parameters to the database engine.  Binding ensures that the parameterized query string (<code>&#8230;&#8203; where foo = ?</code>) is transmitted to the database without allowing hostile parameter values to inject SQL.</p>
-</div>
-<div class="paragraph">
-<p>Bound parameters are not always enough. Sometimes a query needs complicated or structural changes before being executed, and parameters just don&#8217;t cut it. Templating (using a <code>TemplateEngine</code>) allows you to alter a query&#8217;s content with general String manipulations.</p>
-</div>
-<div class="paragraph">
-<p>Typical uses for templating are optional or repeating segments (conditions and loops), complex variables such as comma-separated lists for IN clauses, and variable substitution for non-bindable SQL elements (like table names). Unlike <em>argument binding</em>, the <em>rendering</em> of <em>attributes</em> performed by TemplateEngines is <strong>not</strong> SQL-aware. Since they perform generic String manipulations, TemplateEngines can easily produce horribly mangled or subtly defective queries if you don&#8217;t use them carefully.</p>
-</div>
-<div class="admonitionblock caution">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-caution" title="Caution"></i>
-</td>
-<td class="content">
-<a href="https://www.xkcd.com/327/">Query templating is a common attack vector!</a>^  Always prefer binding parameters to static SQL over dynamic SQL when possible.
-</td>
-</tr>
-</table>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from &lt;TABLE&gt; where name = :n;</span><span class="delimiter">&quot;</span></span>)
-
-    <span class="comment">// -&gt; &quot;select * from Person where name = :n;&quot;</span>
-    .define(<span class="string"><span class="delimiter">&quot;</span><span class="content">TABLE</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Person</span><span class="delimiter">&quot;</span></span>)
-
-    <span class="comment">// -&gt; &quot;select * from Person where name = 'MyName';&quot;</span>
-    .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">n</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">MyName</span><span class="delimiter">&quot;</span></span>);</code></pre>
-</div>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Use a TemplateEngine to perform crude String manipulations on a query. Query parameters should be handled by Arguments.
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock caution">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-caution" title="Caution"></i>
-</td>
-<td class="content">
-TemplateEngines and SqlParsers operate sequentially: the initial String will be rendered by the TemplateEngine using attributes, then parsed by the SqlParser with Argument bindings.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>If the TemplateEngine outputs text matching the parameter format of the SqlParser, the parser will attempt to bind an Argument to it. This can be useful to e.g. have named parameters of which the name itself is also a variable, but can also cause confusing bugs:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">String</span> paramName = <span class="string"><span class="delimiter">&quot;</span><span class="content">arg</span><span class="delimiter">&quot;</span></span>;
-
-handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from Foo where bar = :&lt;attr&gt;</span><span class="delimiter">&quot;</span></span>)
-    .define(<span class="string"><span class="delimiter">&quot;</span><span class="content">attr</span><span class="delimiter">&quot;</span></span>, paramName)
-    ...
-    .bind(paramName, <span class="string"><span class="delimiter">&quot;</span><span class="content">baz</span><span class="delimiter">&quot;</span></span>); <span class="comment">// &lt;- does not need to know the parameter's name (&quot;arg&quot;)!</span></code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from emotion where emoticon = &lt;sticker&gt;;</span><span class="delimiter">&quot;</span></span>)
-    .define(<span class="string"><span class="delimiter">&quot;</span><span class="content">sticker</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">:-)</span><span class="delimiter">&quot;</span></span>) <span class="comment">// -&gt; &quot;... where emoticon = :-);&quot;</span>
-    .mapToMap()
-    <span class="comment">// exception: no binding/argument named &quot;-)&quot; present</span>
-    .list();</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Bindings and definitions are usually separate.  You can link them in a limited manner
-using the <code>stmt.defineNamedBindings()</code> or <code>@DefineNamedBindings</code> customizers.
-For each bound parameter (including bean properties), this will define a boolean which is <code>true</code> if the
-binding is present and not <code>null</code> (a <code>NullArgument</code>, specifically).  You can use this to
-craft conditional updates and query clauses.</p>
-</div>
-<div class="paragraph">
-<p>For example,</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="type">class</span> <span class="class">MyBean</span> {
-    <span class="predefined-type">String</span> getA();
-    <span class="predefined-type">String</span> getB();
-    Instant getModified();
-}
-
-handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><span class="content">update mybeans set &lt;if(a)&gt;a = :a,&lt;endif&gt; &lt;if(b)&gt;b = :b,&lt;endif&gt; modified=now() where id=:id</span><span class="delimiter">&quot;</span></span>)
-    .bindBean(mybean)
-    .defineNamedBindings()
-    .execute();</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Also see the section about <a href="#_templateengine">TemplateEngine</a>.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_mappers"><a class="anchor" href="#_mappers"></a>3.6. Mappers</h3>
+<h3 id="_mappers"><a class="anchor" href="#_mappers"></a>3.5. Mappers</h3>
 <div class="paragraph">
 <p>Jdbi makes use of mappers to convert result data into Java objects. There are
 two types of mappers:</p>
@@ -1842,7 +1745,7 @@ two types of mappers:</p>
 </ul>
 </div>
 <div class="sect3">
-<h4 id="_row_mappers"><a class="anchor" href="#_row_mappers"></a>3.6.1. Row Mappers</h4>
+<h4 id="_row_mappers"><a class="anchor" href="#_row_mappers"></a>3.5.1. Row Mappers</h4>
 <div class="paragraph">
 <p><a href="./apidocs/org/jdbi/v3/core/mapper/RowMapper.html" target="_blank">RowMapper</a> is a functional
 interface, which maps the current row of a JDBC
@@ -2165,7 +2068,7 @@ The <code>GenericType</code> utility class is discussed in <a href="#_working_wi
 </div>
 </div>
 <div class="sect3">
-<h4 id="_column_mappers"><a class="anchor" href="#_column_mappers"></a>3.6.2. Column Mappers</h4>
+<h4 id="_column_mappers"><a class="anchor" href="#_column_mappers"></a>3.5.2. Column Mappers</h4>
 <div class="paragraph">
 <p><a href="./apidocs/org/jdbi/v3/core/mapper/ColumnMapper.html" target="_blank">ColumnMapper</a> is a functional
 interface, which maps a column from the current row of a JDBC
@@ -2260,7 +2163,7 @@ appropriate.</p>
 </li>
 <li>
 <p>java.lang: <code>Boolean</code>, <code>Byte</code>, <code>Short</code>, <code>Integer</code>, <code>Long</code>, <code>Character</code>,
-<code>Float</code>, <code>Double</code>, <code>String</code>, and <code>Enum</code> (stored as the enum value&#8217;s name)</p>
+<code>Float</code>, <code>Double</code>, <code>String</code>, and <code>Enum</code> (stored as the enum value&#8217;s name by default)</p>
 </li>
 <li>
 <p>java.math: <code>BigDecimal</code></p>
@@ -2287,6 +2190,21 @@ additional setup may be required depending on the type of array element&#8212;&#
 <a href="#_sql_arrays">SQL Arrays</a>.</p>
 </li>
 </ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The binding and mapping method for enum values
+can be controlled via the <a href="./apidocs/org/jdbi/v3/core/Enums.html" target="_blank">Enums</a> config,
+as well as the <a href="./apidocs/org/jdbi/v3/core/EnumByName.html" target="_blank">EnumByName</a> and
+<a href="./apidocs/org/jdbi/v3/core/EnumByOrdinal.html" target="_blank">EnumByOrdinal</a> annotations.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect4">
@@ -2479,7 +2397,7 @@ The <code>GenericType</code> utility class is discussed in <a href="#_working_wi
 </div>
 </div>
 <div class="sect3">
-<h4 id="_reflection_mappers"><a class="anchor" href="#_reflection_mappers"></a>3.6.3. Reflection Mappers</h4>
+<h4 id="_reflection_mappers"><a class="anchor" href="#_reflection_mappers"></a>3.5.3. Reflection Mappers</h4>
 <div class="paragraph">
 <p>Jdbi provides a few reflection-based mappers out of the box.</p>
 </div>
@@ -3132,6 +3050,115 @@ fails, an exception is thrown.
 <a href="#JdbiCollectors">[JdbiCollectors]</a> for more information.</p>
 </div>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_templating"><a class="anchor" href="#_templating"></a>3.6. Templating</h3>
+<div class="paragraph">
+<p>Binding query parameters, as described above, is excellent for sending a static set of parameters to the database engine.  Binding ensures that the parameterized query string (<code>&#8230;&#8203; where foo = ?</code>) is transmitted to the database without allowing hostile parameter values to inject SQL.</p>
+</div>
+<div class="paragraph">
+<p>Bound parameters are not always enough. Sometimes a query needs complicated or structural changes before being executed, and parameters just don&#8217;t cut it. Templating (using a <code>TemplateEngine</code>) allows you to alter a query&#8217;s content with general String manipulations.</p>
+</div>
+<div class="paragraph">
+<p>Typical uses for templating are optional or repeating segments (conditions and loops), complex variables such as comma-separated lists for IN clauses, and variable substitution for non-bindable SQL elements (like table names). Unlike <em>argument binding</em>, the <em>rendering</em> of <em>attributes</em> performed by TemplateEngines is <strong>not</strong> SQL-aware. Since they perform generic String manipulations, TemplateEngines can easily produce horribly mangled or subtly defective queries if you don&#8217;t use them carefully.</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<a href="https://www.xkcd.com/327/">Query templating is a common attack vector!</a>^  Always prefer binding parameters to static SQL over dynamic SQL when possible.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from &lt;TABLE&gt; where name = :n;</span><span class="delimiter">&quot;</span></span>)
+
+    <span class="comment">// -&gt; &quot;select * from Person where name = :n;&quot;</span>
+    .define(<span class="string"><span class="delimiter">&quot;</span><span class="content">TABLE</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Person</span><span class="delimiter">&quot;</span></span>)
+
+    <span class="comment">// -&gt; &quot;select * from Person where name = 'MyName';&quot;</span>
+    .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">n</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">MyName</span><span class="delimiter">&quot;</span></span>);</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Use a TemplateEngine to perform crude String manipulations on a query. Query parameters should be handled by Arguments.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+TemplateEngines and SqlParsers operate sequentially: the initial String will be rendered by the TemplateEngine using attributes, then parsed by the SqlParser with Argument bindings.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>If the TemplateEngine outputs text matching the parameter format of the SqlParser, the parser will attempt to bind an Argument to it. This can be useful to e.g. have named parameters of which the name itself is also a variable, but can also cause confusing bugs:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">String</span> paramName = <span class="string"><span class="delimiter">&quot;</span><span class="content">arg</span><span class="delimiter">&quot;</span></span>;
+
+handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from Foo where bar = :&lt;attr&gt;</span><span class="delimiter">&quot;</span></span>)
+    .define(<span class="string"><span class="delimiter">&quot;</span><span class="content">attr</span><span class="delimiter">&quot;</span></span>, paramName)
+    ...
+    .bind(paramName, <span class="string"><span class="delimiter">&quot;</span><span class="content">baz</span><span class="delimiter">&quot;</span></span>); <span class="comment">// &lt;- does not need to know the parameter's name (&quot;arg&quot;)!</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from emotion where emoticon = &lt;sticker&gt;;</span><span class="delimiter">&quot;</span></span>)
+    .define(<span class="string"><span class="delimiter">&quot;</span><span class="content">sticker</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">:-)</span><span class="delimiter">&quot;</span></span>) <span class="comment">// -&gt; &quot;... where emoticon = :-);&quot;</span>
+    .mapToMap()
+    <span class="comment">// exception: no binding/argument named &quot;-)&quot; present</span>
+    .list();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Bindings and definitions are usually separate.  You can link them in a limited manner
+using the <code>stmt.defineNamedBindings()</code> or <code>@DefineNamedBindings</code> customizers.
+For each bound parameter (including bean properties), this will define a boolean which is <code>true</code> if the
+binding is present and not <code>null</code>.  You can use this to
+craft conditional updates and query clauses.</p>
+</div>
+<div class="paragraph">
+<p>For example,</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="type">class</span> <span class="class">MyBean</span> {
+    <span class="type">long</span> id();
+    <span class="predefined-type">String</span> getA();
+    <span class="predefined-type">String</span> getB();
+    Instant getModified();
+}
+
+handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><span class="content">update mybeans set &lt;if(a)&gt;a = :a,&lt;endif&gt; &lt;if(b)&gt;b = :b,&lt;endif&gt; modified=now() where id=:id</span><span class="delimiter">&quot;</span></span>)
+    .bindBean(mybean)
+    .defineNamedBindings()
+    .execute();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Also see the section about <a href="#_templateengine">TemplateEngine</a>.</p>
 </div>
 </div>
 <div class="sect2">
@@ -4356,26 +4383,193 @@ ClasspathSqlLocator.findSqlOnClasspath(<span class="string"><span class="delimit
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_statementcontext"><a class="anchor" href="#_statementcontext"></a>3.17. StatementContext</h3>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configuration"><a class="anchor" href="#_configuration"></a>4. Configuration</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>The <a href="./apidocs/org/jdbi/v3/core/statement/StatementContext.html">StatementContext</a> class
-is a carrier for various state related to the creation and execution of statements
-that is not appropriate to hold on the <strong>Query</strong> or other particular statement class
-itself.  Among other things, it holds open <strong>JDBC</strong> resources, processed SQL statements,
-and accumulated bindings.  It is exposed to implementations of most user extension points,
-for example <strong>RowMapper, *ColumnMapper*s, or *CollectorFactory</strong>.</p>
+<p><code>Jdbi</code> aims to be useful out of the box with minimal configuration.  Sometimes
+you need to change default behavior, or add in extensions to handle additional
+database types.  Each piece of core or extension that wishes to participate in
+configuration defines a configuration class, for example the <code>SqlStatements</code>
+class stores SqlStatement related configuration.  Then, on any <code>Configurable</code> context
+(like a <code>Jdbi</code> or <code>Handle</code>) you can change configuration in a type safe way:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">jdbi.getConfig(SqlStatements.class).setUnusedBindingAllowed(<span class="predefined-constant">true</span>);
+jdbi.getConfig(Arguments.class).register(<span class="keyword">new</span> MyTypeArgumentFactory());
+jdbi.getConfig(Handles.class).setForceEndTransactions(<span class="predefined-constant">true</span>);
+
+<span class="comment">// Or, if you have a bunch of work to do:</span>
+jdbi.configure(RowMappers.class, rm -&gt; {
+    rm.register(<span class="keyword">new</span> TypeARowMapperFactory();
+    rm.register(<span class="keyword">new</span> TypeBRowMapperFactory();
+});</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>The <strong>StatementContext</strong> itself is not intended to be extended and generally extensions
-should not need to mutate the context.  Please read the JavaDoc for more information
-on advanced usage.</p>
+<p>Generally, you should finalize all configuration changes before interacting with
+the database.</p>
+</div>
+<div class="paragraph">
+<p>When a new context is created, it inherits a copy of the parent context
+configuration at the time of creation.  So a <code>Handle</code> initializes its
+configuration from the creating <code>Jdbi</code>, but changes never propagate back up.</p>
+</div>
+<div class="paragraph">
+<p>See <a href="#_jdbiconfig">JdbiConfig</a> for more advanced implementation details.</p>
+</div>
+<div class="sect2">
+<h3 id="_qualified_types"><a class="anchor" href="#_qualified_types"></a>4.1. Qualified Types</h3>
+<div class="paragraph">
+<p>Sometimes the same Java object can correspond to multiple data types in a database. For example,
+a <code>String</code> could be <code>varchar</code> plaintext, <code>nvarchar</code> text, <code>json</code> data, etc, all with different handling requirements.</p>
+</div>
+<div class="paragraph">
+<p><a href="./apidocs/org/jdbi/v3/core/qualifier/QualifiedType.html">QualifiedType</a> allows you to add such context to a Java type:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">QualifiedType.of(<span class="predefined-type">String</span>.class).with(Json.class);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This <code>QualifiedType</code> still represents the <code>String</code> <em>type</em>, but <em>qualified</em> with the <code>@Json</code> annotation.
+It can be used in a way similar to <a href="#_generictype">GenericType</a>, to make components
+handling values (mainly <code>ArgumentFactories</code> and <code>ColumnMapperFactories</code>) perform their work differently,
+and to have the values handled by different implementations altogether:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Json</span>
+<span class="directive">public</span> <span class="type">class</span> <span class="class">JsonArgumentFactory</span> <span class="directive">extends</span> AbstractArgumentFactory&lt;<span class="predefined-type">String</span>&gt; {
+    <span class="annotation">@Override</span>
+    <span class="directive">protected</span> Argument build(<span class="predefined-type">String</span> value, ConfigRegistry config) {
+        <span class="comment">// do something specifically for json data</span>
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Once registered, this <code>@Json</code> qualified factory will receive <strong>only</strong> <code>@Json String</code> values.
+Other factories <em>not</em> qualified as such will <strong>not</strong> receive this value:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">QualifiedType&lt;<span class="predefined-type">String</span>&gt; json = QualifiedType.of(<span class="predefined-type">String</span>.class).with(Json.class);
+query.bindByType(<span class="string"><span class="delimiter">&quot;</span><span class="content">jsonValue</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">{</span><span class="char">\&quot;</span><span class="content">foo</span><span class="char">\&quot;</span><span class="content">:1}</span><span class="delimiter">&quot;</span></span>, json);</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Jdbi chooses factories to handle values by <strong>exactly matching</strong> their <em>qualifiers</em>. It&#8217;s up to the
+factory implementations to discriminate on the <em>type</em> of the value afterwards.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Qualifiers are implemented as <code>Annotations</code>. This allows factories to independently inspect values for qualifiers at the source,
+such as on their <code>Class</code>, to alter their own behavior or to <em>requalify</em> a value
+and have it re-evaluated by Jdbi&#8217;s lookup chain.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Qualifiers being annotations does <strong>not</strong> mean they inherently activate
+their function when placed in source classes. Each feature decides its own
+rules regarding their use.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Arguments can only be qualified for binding via <code>bindByType</code> calls, not regular
+<code>bind</code> or <code>update.execute(Object&#8230;&#8203;)</code>. Also, arrays cannot be qualified.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>These features currently make use of qualified types:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>@NVarchar</code> and <code>@MacAddr</code> (the latter in <code>jdbi3-postgres</code>) bind and map Strings as <code>nvarchar</code> and <code>macaddr</code>
+respectively, instead of the usual <code>varchar</code>.</p>
+</li>
+<li>
+<p><code>jdbi3-postgres</code> offers <a href="#_hstore">HStore</a>.</p>
+</li>
+<li>
+<p><a href="#jdbi3-json">JSON</a></p>
+</li>
+<li>
+<p><code>BeanMapper</code>, <code>@BindBean</code>, <code>@RegisterBeanMapper</code>, <code>mapTobean()</code>, and <code>bindBean()</code> respect qualifiers on getters, setters,
+and setter parameters.</p>
+</li>
+<li>
+<p><code>ConstructorMapper</code> and <code>@RegisterConstructorMapper</code> respect qualifiers on constructor parameters.</p>
+</li>
+<li>
+<p><code>@BindMethods</code> and <code>bindMethods()</code> respect qualifiers on methods.</p>
+</li>
+<li>
+<p><code>@BindFields</code>, <code>@RegisterFieldMapper</code>, <code>FieldMapper</code> and <code>bindFields()</code> respect qualifiers on fields.</p>
+</li>
+<li>
+<p><code>SqlObject</code> respects qualifiers on methods (applies them to the return type) and parameters.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>on parameters of type <code>Consumer&lt;T&gt;</code>, qualifiers are applied to the <code>T</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>@MapTo</code></p>
+</li>
+<li>
+<p><code>@BindJpa</code> and <code>JpaMapper</code> respect qualifiers on getters and setters.</p>
+</li>
+<li>
+<p><code>@BindKotlin</code>, <code>bindKotlin()</code>, and <code>KotlinMapper</code> respect qualifiers on constructor parameters, getters, setters, and setter parameters.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_sql_objects"><a class="anchor" href="#_sql_objects"></a>4. SQL Objects</h2>
+<h2 id="_sql_objects"><a class="anchor" href="#_sql_objects"></a>5. SQL Objects</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>SQL Objects are a declarative-style alternative to the fluent-style Core API.</p>
@@ -4425,7 +4619,7 @@ implementation in the method body.</p>
 an implementation based on the annotations and methods you declared.</p>
 </div>
 <div class="sect2">
-<h3 id="_annotated_methods"><a class="anchor" href="#_annotated_methods"></a>4.1. Annotated Methods</h3>
+<h3 id="_annotated_methods"><a class="anchor" href="#_annotated_methods"></a>5.1. Annotated Methods</h3>
 <div class="paragraph">
 <p>Methods annotated with one of Jdbi&#8217;s SQL method annotations
 (<a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlBatch.html" target="_blank">@SqlBatch</a>,
@@ -4440,7 +4634,7 @@ and its parameters.</p>
 SQL statement result mapped into the method return type.</p>
 </div>
 <div class="sect3">
-<h4 id="__sqlupdate"><a class="anchor" href="#__sqlupdate"></a>4.1.1. @SqlUpdate</h4>
+<h4 id="__sqlupdate"><a class="anchor" href="#__sqlupdate"></a>5.1.1. @SqlUpdate</h4>
 <div class="paragraph">
 <p>Use the <code>@SqlUpdate</code> annotation for operations that modify data (i.e. inserts,
 updates, deletes).</p>
@@ -4556,7 +4750,7 @@ keys. See <a href="#__getgeneratedkeys_4">PostgreSQL</a> for more details.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_binding_arguments_2"><a class="anchor" href="#_binding_arguments_2"></a>4.1.2. Binding Arguments</h4>
+<h4 id="_binding_arguments_2"><a class="anchor" href="#_binding_arguments_2"></a>5.1.2. Binding Arguments</h4>
 <div class="paragraph">
 <p>Before we go on with the other <code>@Sql___</code> annotations, let&#8217;s discuss how method
 arguments are bound as parameters to the SQL statement.</p>
@@ -4687,7 +4881,7 @@ match the bound parameter name.
 </div>
 </div>
 <div class="sect3">
-<h4 id="__sqlquery"><a class="anchor" href="#__sqlquery"></a>4.1.3. @SqlQuery</h4>
+<h4 id="__sqlquery"><a class="anchor" href="#__sqlquery"></a>5.1.3. @SqlQuery</h4>
 <div class="paragraph">
 <p>Use the <code>@SqlQuery</code> annotation for select operations.</p>
 </div>
@@ -5466,7 +5660,7 @@ and adding it to the folder.</td>
 </div>
 </div>
 <div class="sect3">
-<h4 id="__sqlbatch"><a class="anchor" href="#__sqlbatch"></a>4.1.4. @SqlBatch</h4>
+<h4 id="__sqlbatch"><a class="anchor" href="#__sqlbatch"></a>5.1.4. @SqlBatch</h4>
 <div class="paragraph">
 <p>Use the <code>@SqlBatch</code> annotation for bulk update operations. <code>@SqlBatch</code> is
 analogous to <a href="#_prepared_batches">PreparedBatch</a> in Core.</p>
@@ -5629,7 +5823,7 @@ statement in the batch (typically as a SQL Array parameter).</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="__sqlcall"><a class="anchor" href="#__sqlcall"></a>4.1.5. @SqlCall</h4>
+<h4 id="__sqlcall"><a class="anchor" href="#__sqlcall"></a>5.1.5. @SqlCall</h4>
 <div class="paragraph">
 <p>Use the <code>@SqlCall</code> annotation to call stored procedures.</p>
 </div>
@@ -5670,7 +5864,7 @@ the method:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="__sqlscript"><a class="anchor" href="#__sqlscript"></a>4.1.6. @SqlScript</h4>
+<h4 id="__sqlscript"><a class="anchor" href="#__sqlscript"></a>5.1.6. @SqlScript</h4>
 <div class="paragraph">
 <p>Use <code>@SqlScript</code> to execute one or more statements in a batch.  You can define attributes
 for the template engine to use.</p>
@@ -5692,7 +5886,7 @@ for the template engine to use.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="__getgeneratedkeys_3"><a class="anchor" href="#__getgeneratedkeys_3"></a>4.1.7. @GetGeneratedKeys</h4>
+<h4 id="__getgeneratedkeys_3"><a class="anchor" href="#__getgeneratedkeys_3"></a>5.1.7. @GetGeneratedKeys</h4>
 <div class="paragraph">
 <p>The <code>@GetGeneratedKeys</code> annotation may be used on a <code>@SqlUpdate</code> or <code>@SqlBatch</code>
 method to return the keys generated from the SQL statement:</p>
@@ -5724,7 +5918,7 @@ method to return the keys generated from the SQL statement:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_sqllocator"><a class="anchor" href="#_sqllocator"></a>4.1.8. SqlLocator</h4>
+<h4 id="_sqllocator"><a class="anchor" href="#_sqllocator"></a>5.1.8. SqlLocator</h4>
 <div class="paragraph">
 <p>When SQL statements grow in complexity, it may be cumbersome to provide
 the statements as Java strings in <code>@Sql___</code> method annotations.</p>
@@ -5765,7 +5959,7 @@ classpath.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="__createsqlobject"><a class="anchor" href="#__createsqlobject"></a>4.1.9. @CreateSqlObject</h4>
+<h4 id="__createsqlobject"><a class="anchor" href="#__createsqlobject"></a>5.1.9. @CreateSqlObject</h4>
 <div class="paragraph">
 <p>Use the @CreateSqlObject annotation to reuse a SqlObject inside another SqlObject. For example,
 you can build a transactional method which performs an SQL update defined in other SqlObject
@@ -5798,7 +5992,7 @@ as part of the transaction. Jdbi won&#8217;t open a new handle for a call to the
 </div>
 </div>
 <div class="sect3">
-<h4 id="__timestamped"><a class="anchor" href="#__timestamped"></a>4.1.10. @Timestamped</h4>
+<h4 id="__timestamped"><a class="anchor" href="#__timestamped"></a>5.1.10. @Timestamped</h4>
 <div class="paragraph">
 <p>You can annotate any statement with <code>@Timestamped</code> to bind an <code>OffsetDateTime</code>,
 of which the value is the current time, under the binding <code>now</code>:</p>
@@ -5827,7 +6021,7 @@ the timezone used for this.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_consumer_methods"><a class="anchor" href="#_consumer_methods"></a>4.2. Consumer Methods</h3>
+<h3 id="_consumer_methods"><a class="anchor" href="#_consumer_methods"></a>5.2. Consumer Methods</h3>
 <div class="paragraph">
 <p>As a special case, you may provide a <code>Consumer&lt;T&gt;</code> argument in addition to other bound parameters.
 The provided consumer is executed once for each row in the result set.
@@ -5841,7 +6035,7 @@ The static type of parameter T determines the row type.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_default_methods"><a class="anchor" href="#_default_methods"></a>4.3. Default Methods</h3>
+<h3 id="_default_methods"><a class="anchor" href="#_default_methods"></a>5.3. Default Methods</h3>
 <div class="paragraph">
 <p>Occasionally a use case comes up where SQL Method annotations don&#8217;t fit. In
 these situations, you can "drop down" to the Core API using a Java 8 <code>default</code>
@@ -5885,7 +6079,7 @@ method call:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_transaction_management"><a class="anchor" href="#_transaction_management"></a>4.4. Transaction Management</h3>
+<h3 id="_transaction_management"><a class="anchor" href="#_transaction_management"></a>5.4. Transaction Management</h3>
 <div class="paragraph">
 <p>You may declare transactions with SqlObject annotations:</p>
 </div>
@@ -5951,13 +6145,13 @@ anything, in which case the isolation level of the outer method is used.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_using_sql_objects"><a class="anchor" href="#_using_sql_objects"></a>4.5. Using SQL Objects</h3>
+<h3 id="_using_sql_objects"><a class="anchor" href="#_using_sql_objects"></a>5.5. Using SQL Objects</h3>
 <div class="paragraph">
 <p>Once you&#8217;ve defined your interface, there are a few ways to get an instance of
 it:</p>
 </div>
 <div class="sect3">
-<h4 id="_attached_to_handle"><a class="anchor" href="#_attached_to_handle"></a>4.5.1. Attached to Handle</h4>
+<h4 id="_attached_to_handle"><a class="anchor" href="#_attached_to_handle"></a>5.5.1. Attached to Handle</h4>
 <div class="paragraph">
 <p>You can get a SQL Object that is attached to an open handle.</p>
 </div>
@@ -5975,7 +6169,7 @@ closed, the SQL Object becomes unusable.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_temporary_sql_objects"><a class="anchor" href="#_temporary_sql_objects"></a>4.5.2. Temporary SQL Objects</h4>
+<h4 id="_temporary_sql_objects"><a class="anchor" href="#_temporary_sql_objects"></a>5.5.2. Temporary SQL Objects</h4>
 <div class="paragraph">
 <p>You can also get a temporary SQL Object from the Jdbi object, by passing it a
 callback (typically a lambda). Use
@@ -5997,7 +6191,7 @@ the callback returns.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_on_demand"><a class="anchor" href="#_on_demand"></a>4.5.3. On-Demand</h4>
+<h4 id="_on_demand"><a class="anchor" href="#_on_demand"></a>5.5.3. On-Demand</h4>
 <div class="paragraph">
 <p>On-demand instances have an open-ended lifecycle, as they obtain and release a
 connection for each method call. They are thread-safe, and may be reused
@@ -6028,7 +6222,7 @@ one of the above options for better performance, instead of on-demand.
 </div>
 </div>
 <div class="sect2">
-<h3 id="_additional_annotations"><a class="anchor" href="#_additional_annotations"></a>4.6. Additional Annotations</h3>
+<h3 id="_additional_annotations"><a class="anchor" href="#_additional_annotations"></a>5.6. Additional Annotations</h3>
 <div class="paragraph">
 <p>Jdbi provides dozens of annotations out of the box:</p>
 </div>
@@ -6079,7 +6273,7 @@ provides annotations for transaction management in a SQL object. See
 </div>
 </div>
 <div class="sect2">
-<h3 id="_annotations_and_inheritance"><a class="anchor" href="#_annotations_and_inheritance"></a>4.7. Annotations and Inheritance</h3>
+<h3 id="_annotations_and_inheritance"><a class="anchor" href="#_annotations_and_inheritance"></a>5.7. Annotations and Inheritance</h3>
 <div class="paragraph">
 <p>SQL Objects inherit methods and annotations from the interfaces they extend:</p>
 </div>
@@ -6221,7 +6415,7 @@ those we want to keep.</td>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_testing"><a class="anchor" href="#_testing"></a>5. Testing</h2>
+<h2 id="_testing"><a class="anchor" href="#_testing"></a>6. Testing</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The <code>jdbi3-testing</code> artifact provides a <a href="./apidocs/org/jdbi/v3/testing/JdbiRule.html">JdbiRule</a>
@@ -6255,10 +6449,10 @@ the database dependency itself, for example to get a pure H2 Java database:</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_third_party_integration"><a class="anchor" href="#_third_party_integration"></a>6. Third-Party Integration</h2>
+<h2 id="_third_party_integration"><a class="anchor" href="#_third_party_integration"></a>7. Third-Party Integration</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_google_guava"><a class="anchor" href="#_google_guava"></a>6.1. Google Guava</h3>
+<h3 id="_google_guava"><a class="anchor" href="#_google_guava"></a>7.1. Google Guava</h3>
 <div class="paragraph">
 <p>This plugin adds support for the following types:</p>
 </div>
@@ -6311,7 +6505,7 @@ be returned from a SQL object method:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_h2_database"><a class="anchor" href="#_h2_database"></a>6.2. H2 Database</h3>
+<h3 id="_h2_database"><a class="anchor" href="#_h2_database"></a>7.2. H2 Database</h3>
 <div class="paragraph">
 <p>This plugin configures Jdbi to correctly handle <code>integer[]</code> and <code>uuid[]</code> data
 types in an H2 database.</p>
@@ -6328,7 +6522,7 @@ instance:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_json"><a class="anchor" href="#_json"></a>6.3. JSON</h3>
+<h3 id="jdbi3-json"><a class="anchor" href="#jdbi3-json"></a>7.3. JSON</h3>
 <div class="paragraph">
 <p>The <code>jdbi3-json</code> module adds a <code>@Json</code> type qualifier that allows to store arbitrary Java objects as JSON data in your database.</p>
 </div>
@@ -6353,7 +6547,7 @@ You do <strong>not</strong> need to install it yourself or include the <code>jdb
 and <code>varchar</code> columns in H2 and Sqlite.</p>
 </div>
 <div class="sect3">
-<h4 id="_jackson_2"><a class="anchor" href="#_jackson_2"></a>6.3.1. Jackson 2</h4>
+<h4 id="_jackson_2"><a class="anchor" href="#_jackson_2"></a>7.3.1. Jackson 2</h4>
 <div class="paragraph">
 <p>This plugin provides JSON backing through Jackson 2.</p>
 </div>
@@ -6374,7 +6568,7 @@ jdbi.getConfig(Jackson2Config.class).setMapper(myObjectMapper);</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_gson_2"><a class="anchor" href="#_gson_2"></a>6.3.2. Gson 2</h4>
+<h4 id="_gson_2"><a class="anchor" href="#_gson_2"></a>7.3.2. Gson 2</h4>
 <div class="paragraph">
 <p>This plugin provides JSON backing through Gson 2.</p>
 </div>
@@ -6395,7 +6589,7 @@ jdbi.getConfig(Gson2Config.class).setGson(myGson);</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_operation"><a class="anchor" href="#_operation"></a>6.3.3. Operation</h4>
+<h4 id="_operation"><a class="anchor" href="#_operation"></a>7.3.3. Operation</h4>
 <div class="paragraph">
 <p>Any bound object qualified as <a href="./apidocs/org/jdbi/v3/json/Json.html" target="_blank">@Json</a> — except <code>String</code> —
 will be converted by the <a href="./apidocs/org/jdbi/v3/json/JsonConfig.html" target="_blank">registered</a>
@@ -6423,7 +6617,7 @@ bind/map the <code>@Json String</code> to/from <code>json</code> or <code>jsonb<
 </div>
 </div>
 <div class="sect3">
-<h4 id="_usage"><a class="anchor" href="#_usage"></a>6.3.4. Usage</h4>
+<h4 id="_usage"><a class="anchor" href="#_usage"></a>7.3.4. Usage</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java">handle.execute(<span class="string"><span class="delimiter">&quot;</span><span class="content">create table myjsons (id serial not null, value json not null)</span><span class="delimiter">&quot;</span></span>);</code></pre>
@@ -6476,7 +6670,7 @@ MyJson result = h.createQuery(<span class="string"><span class="delimiter">&quot
 </div>
 </div>
 <div class="sect2">
-<h3 id="_immutables"><a class="anchor" href="#_immutables"></a>6.4. Immutables</h3>
+<h3 id="_immutables"><a class="anchor" href="#_immutables"></a>7.4. Immutables</h3>
 <div class="paragraph">
 <p><a href="https://immutables.github.io/" target="_blank">Immutables</a> is an annotation processor that generates
 value types based on simple interface descriptions.  The value types naturally map very well
@@ -6537,7 +6731,7 @@ We do support the configurable <code>get</code>, <code>is</code>, and <code>set<
 </div>
 </div>
 <div class="sect2">
-<h3 id="_jodatime"><a class="anchor" href="#_jodatime"></a>6.5. JodaTime</h3>
+<h3 id="_jodatime"><a class="anchor" href="#_jodatime"></a>7.5. JodaTime</h3>
 <div class="paragraph">
 <p>This plugin adds support for using joda-time&#8217;s <code>DateTime</code> type.</p>
 </div>
@@ -6562,7 +6756,7 @@ We do support the configurable <code>get</code>, <code>is</code>, and <code>set<
 </div>
 </div>
 <div class="sect2">
-<h3 id="_jpa"><a class="anchor" href="#_jpa"></a>6.6. JPA</h3>
+<h3 id="_jpa"><a class="anchor" href="#_jpa"></a>7.6. JPA</h3>
 <div class="paragraph">
 <p>Using the JPA plugin is a great way to trick your boss into letting you try
 Jdbi. "No problem boss, it already supports JPA annotations, easy peasy!"</p>
@@ -6607,7 +6801,7 @@ Jdbi. "No problem boss, it already supports JPA annotations, easy peasy!"</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_kotlin"><a class="anchor" href="#_kotlin"></a>6.7. Kotlin</h3>
+<h3 id="_kotlin"><a class="anchor" href="#_kotlin"></a>7.7. Kotlin</h3>
 <div class="paragraph">
 <p><a href="http://kotlinlang.org/" target="_blank">Kotlin</a> support is provided by <strong>jdbi3-kotlin</strong> and
 <strong>jdbi3-kotlin-sqlobject</strong> modules.</p>
@@ -6626,7 +6820,7 @@ Jdbi. "No problem boss, it already supports JPA annotations, easy peasy!"</p>
 </ul>
 </div>
 <div class="sect3">
-<h4 id="_resultset_mapping"><a class="anchor" href="#_resultset_mapping"></a>6.7.1. ResultSet mapping</h4>
+<h4 id="_resultset_mapping"><a class="anchor" href="#_resultset_mapping"></a>7.7.1. ResultSet mapping</h4>
 <div class="paragraph">
 <p>The <strong>jdbi3-kotlin</strong> plugin adds mapping to Kotlin data classes. It
 supports data classes where all fields are present in the constructor as well
@@ -6644,6 +6838,14 @@ not nullable and the value absent in the result set.</p>
   <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
   <span class="tag">&lt;artifactId&gt;</span>jdbi3-kotlin<span class="tag">&lt;/artifactId&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Ensure the Kotlin compiler&#8217;s <a href="https://kotlinlang.org/docs/reference/using-maven.html#attributes-specific-for-jvm">JVM target version</a> is set to at least 1.8:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;kotlin.compiler.jvmTarget&gt;</span>1.8<span class="tag">&lt;/kotlin.compiler.jvmTarget&gt;</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6717,7 +6919,7 @@ val things = qry.bind(&quot;id&quot;, brian.id).mapTo&lt;Thing&gt;.list()</code>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_sqlobject"><a class="anchor" href="#_sqlobject"></a>6.7.2. SqlObject</h4>
+<h4 id="_sqlobject"><a class="anchor" href="#_sqlobject"></a>7.7.2. SqlObject</h4>
 <div class="paragraph">
 <p>The <strong>jdbi3-kotlin-sqlobject</strong> plugin adds automatic parameter binding by name
 for Kotlin methods in SqlObjects as well as support for Kotlin default methods.</p>
@@ -6784,7 +6986,7 @@ via: <code>Jdbi.installPlugin(KotlinSqlObjectPlugin())</code>.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_lombok"><a class="anchor" href="#_lombok"></a>6.8. Lombok</h3>
+<h3 id="_lombok"><a class="anchor" href="#_lombok"></a>7.8. Lombok</h3>
 <div class="paragraph">
 <p>Lombok is a great tool for cutting the boilerplate out of POJO classes.</p>
 </div>
@@ -6860,7 +7062,7 @@ lombok.copyableAnnotations += org.jdbi.v3.postgres.HStore</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_oracle_12"><a class="anchor" href="#_oracle_12"></a>6.9. Oracle 12</h3>
+<h3 id="_oracle_12"><a class="anchor" href="#_oracle_12"></a>7.9. Oracle 12</h3>
 <div class="paragraph">
 <p>This module adds support for Oracle <code>RETURNING</code> DML expressions.</p>
 </div>
@@ -6881,7 +7083,7 @@ to get the returned DML.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_postgresql"><a class="anchor" href="#_postgresql"></a>6.10. PostgreSQL</h3>
+<h3 id="_postgresql"><a class="anchor" href="#_postgresql"></a>7.10. PostgreSQL</h3>
 <div class="paragraph">
 <p>The <strong>jdbi3-postgres</strong> plugin provides enhanced integration with the
 <a href="https://jdbc.postgresql.org/" target="_blank">PostgreSQL JDBC Driver</a>.</p>
@@ -6933,9 +7135,10 @@ escape operators to e.g. <code>??</code> or <code>\:</code>.
 </table>
 </div>
 <div class="sect3">
-<h4 id="_hstore"><a class="anchor" href="#_hstore"></a>6.10.1. hstore</h4>
+<h4 id="_hstore"><a class="anchor" href="#_hstore"></a>7.10.1. hstore</h4>
 <div class="paragraph">
-<p>The Postgres plugin provides an <code>hstore</code> to <code>Map&lt;String, String&gt;</code> column mapper:</p>
+<p>The Postgres plugin provides an <code>hstore</code> to <code>Map&lt;String, String&gt;</code> column mapper
+and vice versa argument factory:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6943,6 +7146,19 @@ escape operators to e.g. <code>??</code> or <code>\:</code>.
     .select(<span class="string"><span class="delimiter">&quot;</span><span class="content">select attributes from account where id = ?</span><span class="delimiter">&quot;</span></span>, userId)
     .mapTo(<span class="keyword">new</span> GenericType&lt;<span class="predefined-type">Map</span>&lt;<span class="predefined-type">String</span>, <span class="predefined-type">String</span>&gt;&gt;() {})
     .findOnly();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>With <code>@HStore</code> qualified type:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">QualifiedType&lt;&gt; HSTORE_MAP = QualifiedType.of(<span class="keyword">new</span> GenericType&lt;<span class="predefined-type">Map</span>&lt;<span class="predefined-type">String</span>, <span class="predefined-type">String</span>&gt;&gt;() {})
+    .with(HStore.class);
+
+<span class="predefined-type">Map</span>&lt;<span class="predefined-type">String</span>, <span class="predefined-type">String</span>&gt; caps = handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><span class="content">update account set attributes = :hstore</span><span class="delimiter">&quot;</span></span>)
+    .bindByType(<span class="string"><span class="delimiter">&quot;</span><span class="content">hstore</span><span class="delimiter">&quot;</span></span>, mapOfStrings, HSTORE_MAP)
+    .execute();</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6961,7 +7177,7 @@ type is treated as a single value instead of a collection:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="__getgeneratedkeys_4"><a class="anchor" href="#__getgeneratedkeys_4"></a>6.10.2. @GetGeneratedKeys</h4>
+<h4 id="__getgeneratedkeys_4"><a class="anchor" href="#__getgeneratedkeys_4"></a>7.10.2. @GetGeneratedKeys</h4>
 <div class="paragraph">
 <p>In Postgres, <code>@GetGeneratedKeys</code> can return the entire modified row if you
 request generated keys without naming any columns.</p>
@@ -6993,7 +7209,7 @@ several rows), your method can return all the modified rows in a collection:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_spring"><a class="anchor" href="#_spring"></a>6.11. Spring</h3>
+<h3 id="_spring"><a class="anchor" href="#_spring"></a>7.11. Spring</h3>
 <div class="paragraph">
 <p>This module provides <code>JdbiFactoryBean</code>, a factory bean which sets up a <code>Jdbi</code>
 singleton.</p>
@@ -7073,7 +7289,7 @@ your <code>beans.xml</code>.</td>
 </table>
 </div>
 <div class="sect3">
-<h4 id="_installing_plugins"><a class="anchor" href="#_installing_plugins"></a>6.11.1. Installing plugins</h4>
+<h4 id="_installing_plugins"><a class="anchor" href="#_installing_plugins"></a>7.11.1. Installing plugins</h4>
 <div class="paragraph">
 <p>Plugins may be automatically installed by scanning the classpath for
 <a href="https://docs.oracle.com/javase/8/docs/api/java/util/ServiceLoader.html" target="_blank">ServiceLoader</a> manifests.</p>
@@ -7121,7 +7337,7 @@ auto-install some plugins and manually install the rest:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_global_attributes"><a class="anchor" href="#_global_attributes"></a>6.11.2. Global Attributes</h4>
+<h4 id="_global_attributes"><a class="anchor" href="#_global_attributes"></a>7.11.2. Global Attributes</h4>
 <div class="paragraph">
 <p>Global defined attributes may be configured on the factory bean:</p>
 </div>
@@ -7140,7 +7356,7 @@ auto-install some plugins and manually install the rest:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_sqlite"><a class="anchor" href="#_sqlite"></a>6.12. SQLite</h3>
+<h3 id="_sqlite"><a class="anchor" href="#_sqlite"></a>7.12. SQLite</h3>
 <div class="paragraph">
 <p>The <strong>jdbi3-sqlite</strong> plugin provides support for using the
 <a href="https://bitbucket.org/xerial/sqlite-jdbc/" target="_blank">SQLite JDBC Driver</a>
@@ -7172,7 +7388,7 @@ supported by driver.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_stringtemplate_4"><a class="anchor" href="#_stringtemplate_4"></a>6.13. StringTemplate 4</h3>
+<h3 id="_stringtemplate_4"><a class="anchor" href="#_stringtemplate_4"></a>7.13. StringTemplate 4</h3>
 <div class="paragraph">
 <p>This module allows you to plug in the StringTemplate 4 templating engine, in
 place of the standard Jdbi templating engine.</p>
@@ -7298,7 +7514,7 @@ template will be used, regardless of the method name.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_vavr"><a class="anchor" href="#_vavr"></a>6.14. Vavr</h3>
+<h3 id="_vavr"><a class="anchor" href="#_vavr"></a>7.14. Vavr</h3>
 <div class="paragraph">
 <p>The Vavr Plugin offers deep integration of <strong>Jdbi</strong> with the Vavr functional library:</p>
 </div>
@@ -7464,13 +7680,13 @@ tuple indices must be provided with a column configuration!</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_cookbook"><a class="anchor" href="#_cookbook"></a>7. Cookbook</h2>
+<h2 id="_cookbook"><a class="anchor" href="#_cookbook"></a>8. Cookbook</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>This section includes examples of various things you might like to do with <code>Jdbi</code>.</p>
 </div>
 <div class="sect2">
-<h3 id="_like_clauses_with_parameters"><a class="anchor" href="#_like_clauses_with_parameters"></a>7.1. LIKE clauses with Parameters</h3>
+<h3 id="_like_clauses_with_parameters"><a class="anchor" href="#_like_clauses_with_parameters"></a>8.1. LIKE clauses with Parameters</h3>
 <div class="paragraph">
 <p>Since JDBC (and therefore <code>Jdbi</code>) does not allow binding parameters into the middle of string literals,
 you cannot interpolate bindings into <code>LIKE</code> clauses (<code>LIKE '%:param%'</code>).</p>
@@ -7480,8 +7696,7 @@ you cannot interpolate bindings into <code>LIKE</code> clauses (<code>LIKE '%:pa
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select name from things
-where name like '%:search%'</span><span class="delimiter">&quot;</span></span>)
+<pre class="CodeRay highlight"><code data-lang="java">handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select name from things where name like '%:search%'</span><span class="delimiter">&quot;</span></span>)
     .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">search</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">foo</span><span class="delimiter">&quot;</span></span>)
     .mapTo(<span class="predefined-type">String</span>.class)
     .list()</code></pre>
@@ -7500,8 +7715,7 @@ because we don&#8217;t allow unused argument bindings by default.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select name from things
-where name like '%' || :search || '%'</span><span class="delimiter">&quot;</span></span>)
+<pre class="CodeRay highlight"><code data-lang="java">handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select name from things where name like '%' || :search || '%'</span><span class="delimiter">&quot;</span></span>)
     .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">search</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">foo</span><span class="delimiter">&quot;</span></span>)
     .mapTo(<span class="predefined-type">String</span>.class)
     .list()</code></pre>
@@ -7526,10 +7740,39 @@ Check the string concatenation syntax of your database before doing this.
 </div>
 </div>
 <div class="sect1">
-<h2 id="_advanced_topics"><a class="anchor" href="#_advanced_topics"></a>8. Advanced Topics</h2>
+<h2 id="_advanced_topics"><a class="anchor" href="#_advanced_topics"></a>9. Advanced Topics</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_compiling_with_parameter_names"><a class="anchor" href="#_compiling_with_parameter_names"></a>8.1. Compiling with Parameter Names</h3>
+<h3 id="_high_availability"><a class="anchor" href="#_high_availability"></a>9.1. High Availability</h3>
+<div class="paragraph">
+<p>Jdbi can be combined with connection pools and high-availability features in your database driver.
+We&#8217;ve used <a href="https://brettwooldridge.github.io/HikariCP/" target="_blank">HikariCP</a> in combination
+with the <a href="https://jdbc.postgresql.org/documentation/head/connect.html" target="_blank">PgJDBC connection load balancing</a>
+features with good success.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">PGSimpleDataSource ds = <span class="keyword">new</span> PGSimpleDataSource();
+ds.setServerName(<span class="string"><span class="delimiter">&quot;</span><span class="content">host1,host2,host3</span><span class="delimiter">&quot;</span></span>);
+ds.setLoadBalanceHosts(<span class="predefined-constant">true</span>);
+HikariConfig hc = <span class="keyword">new</span> HikariConfig();
+hc.setDataSource(ds);
+hc.setMaximumPoolSize(<span class="integer">6</span>);
+Jdbi jdbi = Jdbi.create(<span class="keyword">new</span> HikariDataSource(hc)).installPlugin(<span class="keyword">new</span> PostgresPlugin());</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Each Jdbi may be backed by a pool of any number of hosts, but the connections should all be alike.
+Exactly which parameters must stay the same and which may vary depends on your database and driver.</p>
+</div>
+<div class="paragraph">
+<p>If you want to have two separate pools, for example a read-only set that connects to read replicas
+and a smaller pool of writers that go only to a single host, you currently should have separate
+<code>Jdbi</code> instances each pointed at a separate <code>DataSource</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_compiling_with_parameter_names"><a class="anchor" href="#_compiling_with_parameter_names"></a>9.2. Compiling with Parameter Names</h3>
 <div class="paragraph">
 <p>By default, the Java compiler does not write parameter names of constructors and
 methods to class files. At runtime, reflectively asking for parameter names
@@ -7574,7 +7817,7 @@ these annotations is removed&#8212;&#8203;Jdbi automatically uses the method par
 </div>
 </div>
 <div class="sect3">
-<h4 id="_maven_setup"><a class="anchor" href="#_maven_setup"></a>8.1.1. Maven setup</h4>
+<h4 id="_maven_setup"><a class="anchor" href="#_maven_setup"></a>9.2.1. Maven setup</h4>
 <div class="paragraph">
 <p>Configure the <code>maven-compiler-plugin</code> in your POM:</p>
 </div>
@@ -7593,7 +7836,7 @@ these annotations is removed&#8212;&#8203;Jdbi automatically uses the method par
 </div>
 </div>
 <div class="sect3">
-<h4 id="_intellij_idea_setup"><a class="anchor" href="#_intellij_idea_setup"></a>8.1.2. IntelliJ IDEA setup</h4>
+<h4 id="_intellij_idea_setup"><a class="anchor" href="#_intellij_idea_setup"></a>9.2.2. IntelliJ IDEA setup</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -7615,7 +7858,7 @@ these annotations is removed&#8212;&#8203;Jdbi automatically uses the method par
 </div>
 </div>
 <div class="sect3">
-<h4 id="_eclipse_setup"><a class="anchor" href="#_eclipse_setup"></a>8.1.3. Eclipse setup</h4>
+<h4 id="_eclipse_setup"><a class="anchor" href="#_eclipse_setup"></a>9.2.3. Eclipse setup</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -7633,12 +7876,12 @@ method parameters (usable via reflection)."</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_working_with_generic_types"><a class="anchor" href="#_working_with_generic_types"></a>8.2. Working with Generic Types</h3>
+<h3 id="_working_with_generic_types"><a class="anchor" href="#_working_with_generic_types"></a>9.3. Working with Generic Types</h3>
 <div class="paragraph">
 <p>Jdbi provides utility classes to make it easier to work with Java generic types.</p>
 </div>
 <div class="sect3">
-<h4 id="_generictype"><a class="anchor" href="#_generictype"></a>8.2.1. GenericType</h4>
+<h4 id="_generictype"><a class="anchor" href="#_generictype"></a>9.3.1. GenericType</h4>
 <div class="paragraph">
 <p><a href="./apidocs/org/jdbi/v3/core/generic/GenericType.html" target="_blank">GenericType</a> represents a generic
 type signature that can be passed around in a type-safe way.</p>
@@ -7670,7 +7913,7 @@ to represent generics in Java.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_generictypes"><a class="anchor" href="#_generictypes"></a>8.2.2. GenericTypes</h4>
+<h4 id="_generictypes"><a class="anchor" href="#_generictypes"></a>9.3.2. GenericTypes</h4>
 <div class="paragraph">
 <p><a href="./apidocs/org/jdbi/v3/core/generic/GenericTypes.html" target="_blank">GenericTypes</a> provides methods
 for working with Java generic types signatures.</p>
@@ -7747,7 +7990,7 @@ cannot be resolved, or the types have nothing to do with each other:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_namedargumentfinder"><a class="anchor" href="#_namedargumentfinder"></a>8.3. NamedArgumentFinder</h3>
+<h3 id="_namedargumentfinder"><a class="anchor" href="#_namedargumentfinder"></a>9.4. NamedArgumentFinder</h3>
 <div class="paragraph">
 <p>The <a href="./apidocs/org/jdbi/v3/core/argument/NamedArgumentFinder" target="_blank">NamedArgumentFinder</a>
 interface, as its name suggests, finds arguments by name from some source.
@@ -7790,7 +8033,7 @@ methods are just creating and binding custom implementations of
 </div>
 </div>
 <div class="sect2">
-<h3 id="_jdbiconfig"><a class="anchor" href="#_jdbiconfig"></a>8.4. JdbiConfig</h3>
+<h3 id="_jdbiconfig"><a class="anchor" href="#_jdbiconfig"></a>9.5. JdbiConfig</h3>
 <div class="paragraph">
 <p>Configuration is managed by the
 <a href="./apidocs/org/jdbi/v3/core/config/ConfigRegistry.html">ConfigRegistry</a>
@@ -7870,7 +8113,7 @@ during query execution.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_creating_a_custom_jdbiconfig_type"><a class="anchor" href="#_creating_a_custom_jdbiconfig_type"></a>8.4.1. Creating a custom JdbiConfig type</h4>
+<h4 id="_creating_a_custom_jdbiconfig_type"><a class="anchor" href="#_creating_a_custom_jdbiconfig_type"></a>9.5.1. Creating a custom JdbiConfig type</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -7914,7 +8157,7 @@ ReflectionMappers config class to keep common configuration.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_jdbiplugin"><a class="anchor" href="#_jdbiplugin"></a>8.5. JdbiPlugin</h3>
+<h3 id="_jdbiplugin"><a class="anchor" href="#_jdbiplugin"></a>9.6. JdbiPlugin</h3>
 <div class="paragraph">
 <p>JdbiPlugin can be used to bundle bulk configuration.
 Plugins may be installed explicitly via <code>Jdbi.installPlugin(JdbiPlugin)</code>, or
@@ -7946,7 +8189,23 @@ for static analysis tools about what code is or isn&#8217;t used.
 </div>
 </div>
 <div class="sect2">
-<h3 id="_user_defined_annotations"><a class="anchor" href="#_user_defined_annotations"></a>8.6. User-Defined Annotations</h3>
+<h3 id="_statementcontext"><a class="anchor" href="#_statementcontext"></a>9.7. StatementContext</h3>
+<div class="paragraph">
+<p>The <a href="./apidocs/org/jdbi/v3/core/statement/StatementContext.html">StatementContext</a> class
+is a carrier for various state related to the creation and execution of statements
+that is not appropriate to hold on the <strong>Query</strong> or other particular statement class
+itself.  Among other things, it holds open <strong>JDBC</strong> resources, processed SQL statements,
+and accumulated bindings.  It is exposed to implementations of most user extension points,
+for example <strong>RowMapper, *ColumnMapper*s, or *CollectorFactory</strong>.</p>
+</div>
+<div class="paragraph">
+<p>The <strong>StatementContext</strong> itself is not intended to be extended and generally extensions
+should not need to mutate the context.  Please read the JavaDoc for more information
+on advanced usage.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_user_defined_annotations"><a class="anchor" href="#_user_defined_annotations"></a>9.8. User-Defined Annotations</h3>
 <div class="paragraph">
 <p>SQL Object is designed to be extended with user-defined annotations. In fact,
 most of the annotations provided in Jdbi are wired up with the approach
@@ -7981,7 +8240,7 @@ call in a <code>handle.inTransaction()</code> call.</p>
 section below and follow the guide to set it up.</p>
 </div>
 <div class="sect3">
-<h4 id="_statement_customizing_annotations"><a class="anchor" href="#_statement_customizing_annotations"></a>8.6.1. Statement Customizing Annotations</h4>
+<h4 id="_statement_customizing_annotations"><a class="anchor" href="#_statement_customizing_annotations"></a>9.8.1. Statement Customizing Annotations</h4>
 <div class="paragraph">
 <p>SQL statement customizing annotations are used to apply some change to the
 <a href="./apidocs/org/jdbi/v3/core/statement/SqlStatement.html" target="_blank">SqlStatement</a> associated
@@ -8158,7 +8417,7 @@ in your SQL statement than by using <code>@MaxRows</code>.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_configuration_annotations"><a class="anchor" href="#_configuration_annotations"></a>8.6.2. Configuration Annotations</h4>
+<h4 id="_configuration_annotations"><a class="anchor" href="#_configuration_annotations"></a>9.8.2. Configuration Annotations</h4>
 <div class="paragraph">
 <p>Configuration annotations are used to apply some change to the
 <a href="./apidocs/org/jdbi/v3/core/config/ConfigRegistry.html" target="_blank">ConfigRegistry</a> associated with
@@ -8319,7 +8578,7 @@ annotation to your <code>@RegisterColumnMapper</code> annotation type. This tell
 </div>
 </div>
 <div class="sect3">
-<h4 id="_method_decorating_annotations"><a class="anchor" href="#_method_decorating_annotations"></a>8.6.3. Method Decorating Annotations</h4>
+<h4 id="_method_decorating_annotations"><a class="anchor" href="#_method_decorating_annotations"></a>9.8.3. Method Decorating Annotations</h4>
 <div class="paragraph">
 <p>Method decorating annotations are used to enhance a SQL Object method with
 additional (or substitute) behavior.</p>
@@ -8469,7 +8728,7 @@ the cache already contains the entry.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_templateengine"><a class="anchor" href="#_templateengine"></a>8.7. TemplateEngine</h3>
+<h3 id="_templateengine"><a class="anchor" href="#_templateengine"></a>9.9. TemplateEngine</h3>
 <div class="paragraph">
 <p>Jdbi uses a <a href="./apidocs/org/jdbi/v3/core/statement/TemplateEngine.html" target="_blank">TemplateEngine</a>
 implementation to render templates into SQL. Template engines take a SQL
@@ -8537,7 +8796,7 @@ which renders templates using the StringTemplate library. See
 </div>
 </div>
 <div class="sect2">
-<h3 id="_sqlparser"><a class="anchor" href="#_sqlparser"></a>8.8. SqlParser</h3>
+<h3 id="_sqlparser"><a class="anchor" href="#_sqlparser"></a>9.10. SqlParser</h3>
 <div class="paragraph">
 <p>After the SQL template has been rendered, Jdbi uses a
 <a href="./apidocs/org/jdbi/v3/core/statement/SqlParser.html" target="_blank">SqlParser</a> to parse out any named
@@ -8614,7 +8873,7 @@ jdbi.setParser(parser);</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_sqllogger"><a class="anchor" href="#_sqllogger"></a>8.9. SqlLogger</h3>
+<h3 id="_sqllogger"><a class="anchor" href="#_sqllogger"></a>9.11. SqlLogger</h3>
 <div class="paragraph">
 <p>The <a href="./apidocs/org/jdbi/v3/core/statement/SqlLogger.html" target="_blank">SqlLogger</a> interface
 is called before and after executing each statement,
@@ -8624,7 +8883,7 @@ attributes and bindings, and important timestamps.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_resultproducer"><a class="anchor" href="#_resultproducer"></a>8.10. ResultProducer</h3>
+<h3 id="_resultproducer"><a class="anchor" href="#_resultproducer"></a>9.12. ResultProducer</h3>
 <div class="paragraph">
 <p>A <strong>ResultProducer</strong> takes a lazily supplied <strong>PreparedStatement</strong> and
 produces a result.  The most common producer path, <strong>execute()</strong>,
@@ -8659,10 +8918,10 @@ that the context is closed eventually to release database resources.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_appendix"><a class="anchor" href="#_appendix"></a>9. Appendix</h2>
+<h2 id="_appendix"><a class="anchor" href="#_appendix"></a>10. Appendix</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_best_practices"><a class="anchor" href="#_best_practices"></a>9.1. Best Practices</h3>
+<h3 id="_best_practices"><a class="anchor" href="#_best_practices"></a>10.1. Best Practices</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -8686,7 +8945,7 @@ to be sure it made a difference.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_api_reference"><a class="anchor" href="#_api_reference"></a>9.2. API Reference</h3>
+<h3 id="_api_reference"><a class="anchor" href="#_api_reference"></a>10.2. API Reference</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -8702,7 +8961,7 @@ to be sure it made a difference.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_related_projects"><a class="anchor" href="#_related_projects"></a>9.3. Related Projects</h3>
+<h3 id="_related_projects"><a class="anchor" href="#_related_projects"></a>10.3. Related Projects</h3>
 <div class="paragraph">
 <p><a href="https://github.com/opentable/otj-pg-embedded" target="_blank">Embedded Postgres</a>
 makes testing against a real database quick and easy.</p>
@@ -8721,7 +8980,7 @@ here!</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_contributing"><a class="anchor" href="#_contributing"></a>9.4. Contributing</h3>
+<h3 id="_contributing"><a class="anchor" href="#_contributing"></a>10.4. Contributing</h3>
 <div class="paragraph">
 <p><strong>jdbi</strong> uses GitHub for collaboration. Please check out the
 <a href="https://github.com/jdbi/jdbi" target="_blank">project page</a> for more information.</p>
@@ -8736,7 +8995,7 @@ here!</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_upgrading_from_v2_to_v3"><a class="anchor" href="#_upgrading_from_v2_to_v3"></a>9.5. Upgrading from v2 to v3</h3>
+<h3 id="_upgrading_from_v2_to_v3"><a class="anchor" href="#_upgrading_from_v2_to_v3"></a>10.5. Upgrading from v2 to v3</h3>
 <div class="paragraph">
 <p>Already using Jdbi v2?</p>
 </div>
@@ -8928,7 +9187,7 @@ return types, or on <code>@SqlBatch</code> parameters.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-01-22 11:47:00 PST
+Last updated 2019-03-18 19:33:36 PDT
 </div>
 </div>
 </body>
