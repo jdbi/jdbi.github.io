@@ -546,7 +546,8 @@ table.CodeRay td.code>pre{padding:0}
 <ul class="sectlevel3">
 <li><a href="#_row_mappers">3.5.1. Row Mappers</a></li>
 <li><a href="#_column_mappers">3.5.2. Column Mappers</a></li>
-<li><a href="#_reflection_mappers">3.5.3. Reflection Mappers</a></li>
+<li><a href="#_immutables_mapping">3.5.3. Immutables Mapping</a></li>
+<li><a href="#_reflection_mappers">3.5.4. Reflection Mappers</a></li>
 </ul>
 </li>
 <li><a href="#_templating">3.6. Templating</a></li>
@@ -1166,49 +1167,18 @@ or <code>useHandle</code> over <code>open</code> whenever possible.
 <div class="sect2">
 <h3 id="_arguments"><a class="anchor" href="#_arguments"></a>3.3. Arguments</h3>
 <div class="paragraph">
-<p>Arguments are Jdbi&#8217;s representation of SQL statement parameters, as in <code>select * from Foo where bar = ?</code>.</p>
+<p>Arguments are Jdbi&#8217;s representation of JDBC statement parameters (the <code>?</code> in <code>select * from Foo where bar = ?</code>).</p>
 </div>
 <div class="paragraph">
-<p>For this query, you would usually bind the 1st parameter as a varchar: <code>'Baz'</code>. In Jdbi terms, this means <em>binding</em> an <em>Argument</em> that will insert a String into the placeholder as a varchar. Arguments can perform other bindings: a BigDecimal could be bound as a SQL decimal, a java.time.Year as a SQL int, or a complex object could be serialized to a byte array and bound as a SQL blob.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Think of Arguments as functions that map Java objects to SQL data values.
-</td>
-</tr>
-</table>
+<p>To set a parameter <code>?</code> on a JDBC <code>PreparedStatement</code>, you would <code>ps.setString(1, "Baz")</code>.
+With Jdbi, when you bind the string <code>"Baz"</code>, it will search through all registered <em>ArgumentFactory</em> instances
+until it finds one that is willing to convert the String into an <em>Argument</em>.
+The argument is responsible for setting the String for the placeholder exactly as <code>setString</code> does.</p>
 </div>
 <div class="paragraph">
-<p>In addition to classic positional parameters (<code>?</code> placeholders), Jdbi has created the concept of <em>named</em> parameters, which can make queries with multiple parameters easier to read. Any statement can use either positional or named arguments, but they can never be mixed in the same SQL statement. In such cases, Jdbi can&#8217;t be sure it&#8217;s binding the right arguments, and will throw an exception.</p>
-</div>
-<div class="admonitionblock caution">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-caution" title="Caution"></i>
-</td>
-<td class="content">
-Support for query parameters (SQL data type and location within a query) is database-specific. JDBC drivers also have inconsistent support for different Java object types. This means Arguments, while convenient, SQL-safe, and familiar in concept, are platform-specific.
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Jdbi&#8217;s configuration system enables you to easily set up different Arguments and ArgumentFactories for different platforms, so don&#8217;t worry about it too much. It is strongly recommended to use Arguments anywhere they make sense.
-</td>
-</tr>
-</table>
+<p>Arguments can perform more advanced bindings than simple JDBC supports:
+a BigDecimal could be bound as a SQL decimal, a java.time.Year as a SQL int,
+or a complex object could be serialized to a byte array and bound as a SQL blob.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1217,21 +1187,11 @@ Jdbi&#8217;s configuration system enables you to easily set up different Argumen
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<em>Binding</em> is a term specifically related to <em>Arguments</em> only. <em>Attributes</em> are involved in <em>rendering</em> a query <em>template</em> using a <em>TemplateEngine</em> to perform String-wise manipulations on a query before it is interpreted as SQL.
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The use of bound parameters is limited by JDBC support.  Notably, parameters usually cannot be used to change the structure of a query
+The use of Jdbi bindings is limited to JDBC prepared statement parameters.
+Notably, parameters usually cannot be used to change the structure of a query
 (for example the table or column name, <code>SELECT</code> or <code>INSERT</code>, etc.)
-nor may they be interpolated into string literals.  See <a href="#_templateengine">TemplateEngine</a> for more information.
+nor may they be interpolated into string literals.
+See <a href="#_templating">Templating</a> and <a href="#_templateengine">TemplateEngine</a> for more information.
 </td>
 </tr>
 </table>
@@ -1283,6 +1243,18 @@ parameters by name:</p>
 </td>
 <td class="content">
 This <code>:foo</code> syntax is default behavior that can be changed; see the <code>ColonPrefixSqlParser</code> class. Jdbi alternatively provides support for <code>#foo</code> syntax out-of-the-box, and you can create your own as well.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Mixing named and positional arguments is not allowed, as it would become confusing very quickly.
 </td>
 </tr>
 </table>
@@ -1390,7 +1362,7 @@ handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><sp
 <td class="content">
 Using <code>bindList</code> requires writing your SQL with an attribute, not a binding,
 despite the fact that your values are bound. The attribute is a placeholder that will be
-safely rendered to a comma-separated list of bindings.
+safely rendered to a comma-separated list of binding placeholders.
 </td>
 </tr>
 </table>
@@ -1489,6 +1461,19 @@ match the bound parameter name.
 </tr>
 </table>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The authors recommend checking out <a href="#_immutables">Immutables</a> support for an advanced way
+to easily bind and map value types.
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_custom_arguments"><a class="anchor" href="#_custom_arguments"></a>3.3.5. Custom Arguments</h4>
@@ -1497,7 +1482,22 @@ match the bound parameter name.
 Jdbi (see <a href="#_supported_argument_types">Supported Argument Types</a>).</p>
 </div>
 <div class="paragraph">
-<p>Fortunately, Jdbi can be configured to bind custom data types as arguments.</p>
+<p>Fortunately, Jdbi can be configured to bind custom data types as arguments,
+by implementing a few simple interfaces.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Core JDBC features are generally well supported by all database vendors.
+However, more advanced usages like array support or geometry types tend to
+quickly become vendor-specific.
+</td>
+</tr>
+</table>
 </div>
 <div class="sect4">
 <h5 id="_argument"><a class="anchor" href="#_argument"></a>Argument</h5>
@@ -2397,7 +2397,13 @@ The <code>GenericType</code> utility class is discussed in <a href="#_working_wi
 </div>
 </div>
 <div class="sect3">
-<h4 id="_reflection_mappers"><a class="anchor" href="#_reflection_mappers"></a>3.5.3. Reflection Mappers</h4>
+<h4 id="_immutables_mapping"><a class="anchor" href="#_immutables_mapping"></a>3.5.3. Immutables Mapping</h4>
+<div class="paragraph">
+<p><code>Immutables</code> value objects may be mapped, see the <a href="#_immutables">Immutables</a> section for details.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_reflection_mappers"><a class="anchor" href="#_reflection_mappers"></a>3.5.4. Reflection Mappers</h4>
 <div class="paragraph">
 <p>Jdbi provides a few reflection-based mappers out of the box.</p>
 </div>
@@ -2408,6 +2414,18 @@ constructor parameter names (ConstructorMapper), or field names (FieldMapper).</
 <div class="paragraph">
 <p>Reflective mappers are snake_case aware and will automatically match up these
 columns to camelCase field/argument/property names.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+To instruct Jdbi to ignore an otherwise mappable method, annotate it as <code>@Unmappable</code>.
+</td>
+</tr>
+</table>
 </div>
 <div class="sect4">
 <h5 id="_constructormapper"><a class="anchor" href="#_constructormapper"></a>ConstructorMapper</h5>
@@ -3070,19 +3088,19 @@ fails, an exception is thrown.
 <i class="fa icon-caution" title="Caution"></i>
 </td>
 <td class="content">
-<a href="https://www.xkcd.com/327/">Query templating is a common attack vector!</a>^  Always prefer binding parameters to static SQL over dynamic SQL when possible.
+<a href="https://www.xkcd.com/327/" target="_blank">Query templating is a common attack vector!</a>  Always prefer binding parameters to static SQL over dynamic SQL when possible.
 </td>
 </tr>
 </table>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from &lt;TABLE&gt; where name = :n;</span><span class="delimiter">&quot;</span></span>)
+<pre class="CodeRay highlight"><code data-lang="java">handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from &lt;TABLE&gt; where name = :n</span><span class="delimiter">&quot;</span></span>)
 
-    <span class="comment">// -&gt; &quot;select * from Person where name = :n;&quot;</span>
+    <span class="comment">// -&gt; &quot;select * from Person where name = :n&quot;</span>
     .define(<span class="string"><span class="delimiter">&quot;</span><span class="content">TABLE</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Person</span><span class="delimiter">&quot;</span></span>)
 
-    <span class="comment">// -&gt; &quot;select * from Person where name = 'MyName';&quot;</span>
+    <span class="comment">// -&gt; &quot;select * from Person where name = 'MyName'&quot;</span>
     .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">n</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">MyName</span><span class="delimiter">&quot;</span></span>);</code></pre>
 </div>
 </div>
@@ -3125,8 +3143,8 @@ handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><sp
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from emotion where emoticon = &lt;sticker&gt;;</span><span class="delimiter">&quot;</span></span>)
-    .define(<span class="string"><span class="delimiter">&quot;</span><span class="content">sticker</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">:-)</span><span class="delimiter">&quot;</span></span>) <span class="comment">// -&gt; &quot;... where emoticon = :-);&quot;</span>
+<pre class="CodeRay highlight"><code data-lang="java">handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from emotion where emoticon = &lt;sticker&gt;</span><span class="delimiter">&quot;</span></span>)
+    .define(<span class="string"><span class="delimiter">&quot;</span><span class="content">sticker</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">:-)</span><span class="delimiter">&quot;</span></span>) <span class="comment">// -&gt; &quot;... where emoticon = :-)&quot;</span>
     .mapToMap()
     <span class="comment">// exception: no binding/argument named &quot;-)&quot; present</span>
     .list();</code></pre>
@@ -6562,8 +6580,11 @@ and <code>varchar</code> columns in H2 and Sqlite.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java">jdbi.installPlugin(<span class="keyword">new</span> Jackson2Plugin());
-<span class="comment">// optional</span>
-jdbi.getConfig(Jackson2Config.class).setMapper(myObjectMapper);</code></pre>
+<span class="comment">// optionally configure your ObjectMapper (recommended)</span>
+jdbi.getConfig(Jackson2Config.class).setMapper(myObjectMapper);
+
+<span class="comment">// now with simple support for Json Views if you want to filter properties:</span>
+jdbi.getConfig(Jackson2Config.class).setView(ApiProperty.class);</code></pre>
 </div>
 </div>
 </div>
@@ -6690,7 +6711,7 @@ We do support the configurable <code>get</code>, <code>is</code>, and <code>set<
 </table>
 </div>
 <div class="paragraph">
-<p>Just tell us about your types by installing the plugin (possibly multiple times):</p>
+<p>Just tell us about your types by installing the plugin and configuring your <code>Immutables</code> type:</p>
 </div>
 <div class="paragraph">
 <p><code>jdbi.getConfig(JdbiImmutables.class).registerImmutable(MyValueType.class)</code></p>
@@ -8837,8 +8858,8 @@ handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><s
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The default parsers do not readily recognize non-Latin characters as identifiers;
-they must be surrounded by double quotes.
+The default parsers recognize any Java identifier as a parameter or attribute name.
+Even some strange cases like emoji are allowed, although the Jdbi authors encourage appropriate discretion 🧐.
 </td>
 </tr>
 </table>
@@ -9187,7 +9208,7 @@ return types, or on <code>@SqlBatch</code> parameters.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-03-18 19:33:36 PDT
+Last updated 2019-04-08 23:05:30 PDT
 </div>
 </div>
 </body>
