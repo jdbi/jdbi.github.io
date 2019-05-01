@@ -894,7 +894,7 @@ Already using Jdbi v2? See <a href="#_upgrading_from_v2_to_v3">Upgrading from v2
 <p>Jdbi is easy to include in your Java project - with an
 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Apache 2.0</a> license, few
 external dependencies, and JARs distributed through
-<a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.jdbi%22%20AND%20v%3A%223.8.0%22" target="_blank">Maven Central</a>,
+<a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.jdbi%22%20AND%20v%3A%223.8.1%22" target="_blank">Maven Central</a>,
 you can just include the relevant artifacts in your POM:</p>
 </div>
 <div class="listingblock">
@@ -905,7 +905,7 @@ you can just include the relevant artifacts in your POM:</p>
       <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
       <span class="tag">&lt;artifactId&gt;</span>jdbi3-bom<span class="tag">&lt;/artifactId&gt;</span>
       <span class="tag">&lt;type&gt;</span>pom<span class="tag">&lt;/type&gt;</span>
-      <span class="tag">&lt;version&gt;</span>3.8.0<span class="tag">&lt;/version&gt;</span>
+      <span class="tag">&lt;version&gt;</span>3.8.1<span class="tag">&lt;/version&gt;</span>
       <span class="tag">&lt;scope&gt;</span>import<span class="tag">&lt;/scope&gt;</span>
     <span class="tag">&lt;/dependency&gt;</span>
   <span class="tag">&lt;/dependencies&gt;</span>
@@ -3952,6 +3952,7 @@ expense of verbosity:</p>
         contact = acc.get(contactId);
       } <span class="keyword">else</span> {
         contact = <span class="keyword">new</span> Contact();
+        acc.put(contactId,contact);
         contact.setId(contactId);
         contact.setName(resultSet.getString(<span class="string"><span class="delimiter">&quot;</span><span class="content">c_name</span><span class="delimiter">&quot;</span></span>);
       }
@@ -9302,7 +9303,7 @@ return types, or on <code>@SqlBatch</code> parameters.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-04-23 19:54:20 PDT
+Last updated 2019-04-30 18:29:32 MDT
 </div>
 </div>
 </body>
