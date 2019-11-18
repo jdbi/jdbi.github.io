@@ -546,8 +546,9 @@ table.CodeRay td.code>pre{padding:0}
 <ul class="sectlevel3">
 <li><a href="#_row_mappers">3.5.1. Row Mappers</a></li>
 <li><a href="#_column_mappers">3.5.2. Column Mappers</a></li>
-<li><a href="#_immutables_mapping">3.5.3. Immutables Mapping</a></li>
-<li><a href="#_reflection_mappers">3.5.4. Reflection Mappers</a></li>
+<li><a href="#_primitive_mapping">3.5.3. Primitive Mapping</a></li>
+<li><a href="#_immutables_mapping">3.5.4. Immutables Mapping</a></li>
+<li><a href="#_reflection_mappers">3.5.5. Reflection Mappers</a></li>
 </ul>
 </li>
 <li><a href="#_templating">3.6. Templating</a></li>
@@ -699,6 +700,7 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#_sqlparser">9.10. SqlParser</a></li>
 <li><a href="#_sqllogger">9.11. SqlLogger</a></li>
 <li><a href="#_resultproducer">9.12. ResultProducer</a></li>
+<li><a href="#_generator">9.13. Generator</a></li>
 </ul>
 </li>
 <li><a href="#_appendix">10. Appendix</a>
@@ -739,7 +741,7 @@ for modular plugins.</p>
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Not upgrading yet? The <a href="/jdbi2">v2 documentation</a> is still available.
+Not upgrading yet? The <a href="/jdbi2/">v2 documentation</a> is still available.
 </td>
 </tr>
 </table>
@@ -894,7 +896,7 @@ Already using Jdbi v2? See <a href="#_upgrading_from_v2_to_v3">Upgrading from v2
 <p>Jdbi is easy to include in your Java project - with an
 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Apache 2.0</a> license, few
 external dependencies, and JARs distributed through
-<a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.jdbi%22%20AND%20v%3A%223.8.2%22" target="_blank">Maven Central</a>,
+<a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.jdbi%22%20AND%20v%3A%223.11.0%22" target="_blank">Maven Central</a>,
 you can just include the relevant artifacts in your POM:</p>
 </div>
 <div class="listingblock">
@@ -905,7 +907,7 @@ you can just include the relevant artifacts in your POM:</p>
       <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
       <span class="tag">&lt;artifactId&gt;</span>jdbi3-bom<span class="tag">&lt;/artifactId&gt;</span>
       <span class="tag">&lt;type&gt;</span>pom<span class="tag">&lt;/type&gt;</span>
-      <span class="tag">&lt;version&gt;</span>3.8.2<span class="tag">&lt;/version&gt;</span>
+      <span class="tag">&lt;version&gt;</span>3.11.0<span class="tag">&lt;/version&gt;</span>
       <span class="tag">&lt;scope&gt;</span>import<span class="tag">&lt;/scope&gt;</span>
     <span class="tag">&lt;/dependency&gt;</span>
   <span class="tag">&lt;/dependencies&gt;</span>
@@ -2228,9 +2230,9 @@ additional setup may be required depending on the type of array element&#8212;&#
 </td>
 <td class="content">
 The binding and mapping method for enum values
-can be controlled via the <a href="./apidocs/org/jdbi/v3/core/Enums.html" target="_blank">Enums</a> config,
-as well as the <a href="./apidocs/org/jdbi/v3/core/EnumByName.html" target="_blank">EnumByName</a> and
-<a href="./apidocs/org/jdbi/v3/core/EnumByOrdinal.html" target="_blank">EnumByOrdinal</a> annotations.
+can be controlled via the <a href="./apidocs/org/jdbi/v3/core/enums/Enums.html" target="_blank">Enums</a> config,
+as well as the <a href="./apidocs/org/jdbi/v3/core/enums/EnumByName.html" target="_blank">EnumByName</a> and
+<a href="./apidocs/org/jdbi/v3/core/enums/EnumByOrdinal.html" target="_blank">EnumByOrdinal</a> annotations.
 </td>
 </tr>
 </table>
@@ -2426,13 +2428,26 @@ The <code>GenericType</code> utility class is discussed in <a href="#_working_wi
 </div>
 </div>
 <div class="sect3">
-<h4 id="_immutables_mapping"><a class="anchor" href="#_immutables_mapping"></a>3.5.3. Immutables Mapping</h4>
+<h4 id="_primitive_mapping"><a class="anchor" href="#_primitive_mapping"></a>3.5.3. Primitive Mapping</h4>
+<div class="paragraph">
+<p>All Java primitive types have default mappings to their corresponding JDBC types.
+Generally, Jdbi will automatically perform boxing and unboxing as appropriate when
+it encounters wrapper types.</p>
+</div>
+<div class="paragraph">
+<p>By default, SQL <code>null</code> mapped to a primitive type will adopt the Java default value.
+This may be disabled by configuring
+<code>jdbi.getConfig(ColumnMappers.class).setCoalesceNullPrimitivesToDefaults(false)</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_immutables_mapping"><a class="anchor" href="#_immutables_mapping"></a>3.5.4. Immutables Mapping</h4>
 <div class="paragraph">
 <p><code>Immutables</code> value objects may be mapped, see the <a href="#_immutables">Immutables</a> section for details.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_reflection_mappers"><a class="anchor" href="#_reflection_mappers"></a>3.5.4. Reflection Mappers</h4>
+<h4 id="_reflection_mappers"><a class="anchor" href="#_reflection_mappers"></a>3.5.5. Reflection Mappers</h4>
 <div class="paragraph">
 <p>Jdbi provides a few reflection-based mappers out of the box.</p>
 </div>
@@ -3270,13 +3285,13 @@ handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><s
 </div>
 <div class="paragraph">
 <p>You can also use Collections in place of arrays, but you&#8217;ll need to provide
-generic type information if you&#8217;re using the fluent API:</p>
+the element type if you&#8217;re using the fluent API, since it&#8217;s erased:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java">handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into groups (id, user_ids) values (:id, :userIds)</span><span class="delimiter">&quot;</span></span>)
       .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">1</span>)
-      .bindByType(<span class="string"><span class="delimiter">&quot;</span><span class="content">userIds</span><span class="delimiter">&quot;</span></span>, <span class="predefined-type">Arrays</span>.asList(<span class="integer">10</span>, <span class="integer">5</span>, <span class="integer">70</span>), <span class="keyword">new</span> GenericType&lt;<span class="predefined-type">List</span>&lt;<span class="predefined-type">Integer</span>&gt;&gt;() {})
+      .bindArray(<span class="string"><span class="delimiter">&quot;</span><span class="content">userIds</span><span class="delimiter">&quot;</span></span>, <span class="type">int</span>.class, <span class="predefined-type">Arrays</span>.asList(<span class="integer">10</span>, <span class="integer">5</span>, <span class="integer">70</span>))
       .execute();
 
 <span class="predefined-type">List</span>&lt;<span class="predefined-type">Integer</span>&gt; userIds = handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select user_ids from groups where id = :id</span><span class="delimiter">&quot;</span></span>)
@@ -4332,6 +4347,13 @@ contains the value(s) returned from the stored procedure call.</p>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="type">int</span> sum = result.getInt(<span class="string"><span class="delimiter">&quot;</span><span class="content">sum</span><span class="delimiter">&quot;</span></span>);</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>It is possible to return open cursors as a result-like object by declaring it
+as <code>Types.REF_CURSOR</code> and then inspecting it via <code>OutParameters.getRowSet()</code>.
+Usually this must be done in a transaction, and the results must be consumed
+before closing the statement by processing it using the <code>Call.invoke(Consumer)</code>
+or <code>Call.invoke(Function)</code> callback style.</p>
 </div>
 <div class="admonitionblock warning">
 <table>
@@ -5961,6 +5983,11 @@ the method:</p>
 <span class="type">double</span> orderTotal = outParams.getDouble(<span class="string"><span class="delimiter">&quot;</span><span class="content">orderTotal</span><span class="delimiter">&quot;</span></span>);</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>By passing a <code>Consumer&lt;OutParameters&gt;</code> or a <code>Function&lt;OutParameters, T&gt;</code>,
+you may process the result before the statement is closed.  This is useful
+to process cursor-typed results.</p>
+</div>
 </div>
 <div class="sect3">
 <h4 id="__sqlscript"><a class="anchor" href="#__sqlscript"></a>5.1.6. @SqlScript</h4>
@@ -6304,6 +6331,33 @@ a time.</p>
 <span class="type">long</span> bobId = dao.insertFullContact(bob);</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>On-demand state is stored in <code>ThreadLocal</code> storage to imitate lexical scoping.</p>
+</div>
+<div class="paragraph">
+<p>There is a performance penalty every time a connection is allocated and
+released.  In the example above, the two <code>insertFullContact</code> operations take
+separate <code>Connection</code> objects from your database connection pool.
+To avoid this, keep the handle open for the duration that you will use your DAO:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">dao.useTransaction(txn -&gt; {
+    User bob = txn.readContact(bobId);
+    Order order = txn.getOpenOrder(bobId);
+    txn.createInvoice(computeInvoice(bob, metadata));
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Interface <code>default</code> methods, and mix-ins such as
+<a href="./apidocs/org/jdbi/v3/sqlobject/SqlObject.html" target="_blank">SqlObject</a>
+and
+<a href="./apidocs/org/jdbi/v3/sqlobject/transaction/Transactional.html" target="_blank">Transactional</a>,
+allow you to run your code with the on-demand handle held open.
+Re-entrant calls on the same thread will receive the same <code>Handle</code>.
+The handle will be closed when the outermost on-demand invocation completes.</p>
+</div>
 <div class="admonitionblock warning">
 <table>
 <tr>
@@ -6311,9 +6365,9 @@ a time.</p>
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-There is a performance penalty every time a connection is allocated and
-released. If you need to make successive calls to a SQL Object, consider using
-one of the above options for better performance, instead of on-demand.
+Returning cursor-like types such as <code>Stream&lt;T&gt;</code> or <code>Iterable&lt;T&gt;</code> outside of
+the outermost on-demand call does not work.  Since the <code>Handle</code> is closed,
+the database cursor is released and reading will fail.
 </td>
 </tr>
 </table>
@@ -6905,7 +6959,7 @@ Jdbi. "No problem boss, it already supports JPA annotations, easy peasy!"</p>
 <div class="sect2">
 <h3 id="_kotlin"><a class="anchor" href="#_kotlin"></a>7.7. Kotlin</h3>
 <div class="paragraph">
-<p><a href="http://kotlinlang.org/" target="_blank">Kotlin</a> support is provided by <strong>jdbi3-kotlin</strong> and
+<p><a href="https://kotlinlang.org/" target="_blank">Kotlin</a> support is provided by <strong>jdbi3-kotlin</strong> and
 <strong>jdbi3-kotlin-sqlobject</strong> modules.</p>
 </div>
 <div class="paragraph">
@@ -7401,6 +7455,19 @@ database, but it can be any JDBC-compatible database.</td>
 <td>Inject <code>Jdbi</code> into a service class. Alternatively, use standard JSR-330
 <code>@Inject</code> annotations on the target class instead of configuring it in
 your <code>beans.xml</code>.</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This module has been tested to be compatible
+with Spring 5.1.8 (used by Spring Boot 2.1.4) as well.
+</td>
 </tr>
 </table>
 </div>
@@ -8706,7 +8773,7 @@ you call a method on a SQL Object instance, the method is executed by executing
 the handler for the given method.</p>
 </div>
 <div class="paragraph">
-<p>When use use a decorating annotation (like <code>@Transaction</code>), the regular handler
+<p>When you use a decorating annotation (like <code>@Transaction</code>), the regular handler
 for a method is wrapped in another handler which may perform some action before
 and/or after passing the call to the original handler.</p>
 </div>
@@ -9031,6 +9098,16 @@ that the context is closed eventually to release database resources.</p>
 <p>Most users will not need to implement the <strong>ResultProducer</strong> interface.</p>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_generator"><a class="anchor" href="#_generator"></a>9.13. Generator</h3>
+<div class="paragraph">
+<p>Jdbi includes an experimental SqlObject code generator.  If you include the
+<code>jdbi3-generator</code> artifact as an annotation processor and annotate your SqlObject
+definitions with <code>@GenerateSqlObject</code>, the generator will produce an implementing
+class and avoid using <code>Proxy</code> instances.  This may be useful for <code>graal-native</code>
+compilation.</p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -9303,7 +9380,7 @@ return types, or on <code>@SqlBatch</code> parameters.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-04-30 18:29:32 MDT
+Last updated 2019-09-06 11:24:43 PDT
 </div>
 </div>
 </body>
