@@ -896,7 +896,7 @@ Already using Jdbi v2? See <a href="#_upgrading_from_v2_to_v3">Upgrading from v2
 <p>Jdbi is easy to include in your Java project - with an
 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Apache 2.0</a> license, few
 external dependencies, and JARs distributed through
-<a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.jdbi%22%20AND%20v%3A%223.11.0%22" target="_blank">Maven Central</a>,
+<a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.jdbi%22%20AND%20v%3A%223.11.2-SNAPSHOT%22" target="_blank">Maven Central</a>,
 you can just include the relevant artifacts in your POM:</p>
 </div>
 <div class="listingblock">
@@ -907,7 +907,7 @@ you can just include the relevant artifacts in your POM:</p>
       <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
       <span class="tag">&lt;artifactId&gt;</span>jdbi3-bom<span class="tag">&lt;/artifactId&gt;</span>
       <span class="tag">&lt;type&gt;</span>pom<span class="tag">&lt;/type&gt;</span>
-      <span class="tag">&lt;version&gt;</span>3.11.0<span class="tag">&lt;/version&gt;</span>
+      <span class="tag">&lt;version&gt;</span>3.11.2-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
       <span class="tag">&lt;scope&gt;</span>import<span class="tag">&lt;/scope&gt;</span>
     <span class="tag">&lt;/dependency&gt;</span>
   <span class="tag">&lt;/dependencies&gt;</span>
@@ -1602,6 +1602,16 @@ simple lambda expression.</td>
 </div>
 </div>
 <div class="sect4">
+<h5 id="_prepared_arguments"><a class="anchor" href="#_prepared_arguments"></a>Prepared Arguments</h5>
+<div class="paragraph">
+<p>Traditional argument factories decide to bind based on both the type and actual value of the binding.
+This is very flexible but when binding a large <code>PreparedBatch</code> it incurs a serious performance penalty
+as the entire chain of argument factories must be consulted for each batch of arguments added.
+To address this issue, implement <code>ArgumentFactory.Preparable</code> which promises to handle all values
+of a given <code>Type</code>.  Most built in argument factories now implement the Preparable interface.</p>
+</div>
+</div>
+<div class="sect4">
 <h5 id="_arguments_registry"><a class="anchor" href="#_arguments_registry"></a>Arguments Registry</h5>
 <div class="paragraph">
 <p>When you register an <code>ArgumentFactory</code>, the registration is stored in an
@@ -1627,7 +1637,8 @@ is applied to the JDBC
 </td>
 <td class="content">
 Occasionally, two or more argument factories will support arguments of the same
-data type. When this happens, the last-registered factory wins. This means that
+data type. When this happens, the last-registered factory wins. Preparable argument factories
+always take precedence over base argument factories. This means that
 you can override the way any data type is bound, including the data types
 supported out of the box.
 </td>
@@ -7024,6 +7035,19 @@ that allows mapping nested Kotlin objects.</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
+Instead of using <code>@BindBean</code>, <code>bindBean()</code>, and <code>@RegisterBeanMapper</code> use <code>@BindKotlin</code>, <code>bindKotlin()</code>, and <code>KotlinMapper</code>
+for qualifiers on constrictor parameters, getter, setters, and setter parameters of Kotlin class.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
 The <code>@ColumnName</code> annotation only applies while mapping SQL data into Java
 objects. When binding object properties (e.g. with <code>bindBean()</code>), bind the
 property name (<code>:id</code>) rather than the column name (<code>:user_id</code>).
@@ -9380,7 +9404,7 @@ return types, or on <code>@SqlBatch</code> parameters.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-09-06 11:24:43 PDT
+Last updated 2019-11-28 16:25:41 PST
 </div>
 </div>
 </body>
