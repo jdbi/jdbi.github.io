@@ -16,6 +16,7 @@ org.jdbi.v3.core.internal
 org.jdbi.v3.core.locator
 org.jdbi.v3.core.locator.internal
 org.jdbi.v3.core.mapper
+org.jdbi.v3.core.mapper.freebuilder
 org.jdbi.v3.core.mapper.immutables
 org.jdbi.v3.core.mapper.reflect
 org.jdbi.v3.core.mapper.reflect.internal

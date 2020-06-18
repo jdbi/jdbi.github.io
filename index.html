@@ -647,6 +647,7 @@ table.CodeRay td.code>pre{padding:0}
 <ul class="sectlevel3">
 <li><a href="#_hstore">7.10.1. hstore</a></li>
 <li><a href="#__getgeneratedkeys_4">7.10.2. @GetGeneratedKeys</a></li>
+<li><a href="#_large_objects">7.10.3. Large Objects</a></li>
 </ul>
 </li>
 <li><a href="#_spring">7.11. Spring</a>
@@ -662,7 +663,8 @@ table.CodeRay td.code>pre{padding:0}
 </li>
 <li><a href="#_cookbook">8. Cookbook</a>
 <ul class="sectlevel2">
-<li><a href="#_like_clauses_with_parameters">8.1. LIKE clauses with Parameters</a></li>
+<li><a href="#_simple_dependency_injection">8.1. Simple Dependency Injection</a></li>
+<li><a href="#_like_clauses_with_parameters">8.2. LIKE clauses with Parameters</a></li>
 </ul>
 </li>
 <li><a href="#_advanced_topics">9. Advanced Topics</a>
@@ -896,7 +898,7 @@ Already using Jdbi v2? See <a href="#_upgrading_from_v2_to_v3">Upgrading from v2
 <p>Jdbi is easy to include in your Java project - with an
 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Apache 2.0</a> license, few
 external dependencies, and JARs distributed through
-<a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.jdbi%22%20AND%20v%3A%223.12.1%22" target="_blank">Maven Central</a>,
+<a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.jdbi%22%20AND%20v%3A%223.14.1%22" target="_blank">Maven Central</a>,
 you can just include the relevant artifacts in your POM:</p>
 </div>
 <div class="listingblock">
@@ -907,7 +909,7 @@ you can just include the relevant artifacts in your POM:</p>
       <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
       <span class="tag">&lt;artifactId&gt;</span>jdbi3-bom<span class="tag">&lt;/artifactId&gt;</span>
       <span class="tag">&lt;type&gt;</span>pom<span class="tag">&lt;/type&gt;</span>
-      <span class="tag">&lt;version&gt;</span>3.12.1<span class="tag">&lt;/version&gt;</span>
+      <span class="tag">&lt;version&gt;</span>3.14.1<span class="tag">&lt;/version&gt;</span>
       <span class="tag">&lt;scope&gt;</span>import<span class="tag">&lt;/scope&gt;</span>
     <span class="tag">&lt;/dependency&gt;</span>
   <span class="tag">&lt;/dependencies&gt;</span>
@@ -3689,7 +3691,7 @@ result, respectively.</p>
 <div class="paragraph">
 <p><strong>#collect</strong> takes a <strong>Collector&lt;T, ? , R&gt;</strong> that builds a resulting collection
 <strong>R&lt;T&gt;</strong>. The <strong>java.util.stream.Collectors</strong> class has a number of interesting
-*Collector*s to start with.</p>
+<strong>Collector</strong> implementations to start with.</p>
 </div>
 <div class="paragraph">
 <p>You can also write your own custom collectors.  For example, to accumulate
@@ -3713,7 +3715,7 @@ found rows into a <strong>Map</strong>:</p>
 <h5 id="_reduction"><a class="anchor" href="#_reduction"></a>Reduction</h5>
 <div class="paragraph">
 <p><strong>#reduce</strong> provides a simplified <strong>Stream#reduce</strong>. Given an identity starting
-value and a <strong>BiFunction&lt;U, T, U&gt;</strong> it will repeatedly combine *U*s until only a
+value and a <strong>BiFunction&lt;U, T, U&gt;</strong> it will repeatedly combine <strong>U</strong> until only a
 single remains, and then return that.</p>
 </div>
 </div>
@@ -4427,7 +4429,7 @@ allows you to return a result, and <strong>useTransaction</strong> has no return
 <div class="paragraph">
 <p>Additionally, Handle has a number of methods for direct transaction management:
 begin(), savepoint(), rollback(), commit(), etc.  Normally, you will not need to use these.
-Failing to explicitly commit or roll back a transaction will roll back the transaction and throw an exception.</p>
+If you do not explicitly commit a manually opened transaction, it will be rolled back.</p>
 </div>
 <div class="sect3">
 <h4 id="_serializable_transactions"><a class="anchor" href="#_serializable_transactions"></a>3.15.1. Serializable Transactions</h4>
@@ -7401,6 +7403,45 @@ several rows), your method can return all the modified rows in a collection:</p>
 </div>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_large_objects"><a class="anchor" href="#_large_objects"></a>7.10.3. Large Objects</h4>
+<div class="paragraph">
+<p>Postgres supports storing large character or binary data in separate storage from
+table data.  Jdbi allows you to stream this data in and out of the database as part
+of an enclosing transaction.  Storing, reading, and a delete hook are provided.
+The test case serves as a simple example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">void</span> blobCrud(<span class="predefined-type">InputStream</span> myStream) <span class="directive">throws</span> <span class="exception">IOException</span> {
+    h.useTransaction(th -&gt; {
+        Lobject lob = th.attach(Lobject.class);
+        lob.insert(<span class="integer">1</span>, myStream);
+        readItBack = lob.readBlob(<span class="integer">1</span>);
+        lob.deleteLob(<span class="integer">1</span>);
+        <span class="keyword">assert</span> lob.readBlob(<span class="integer">1</span>) == <span class="predefined-constant">null</span>;
+    });
+}
+
+<span class="directive">public</span> <span class="type">interface</span> <span class="class">Lobject</span> {
+    <span class="comment">// CREATE TABLE lob (id int, lob oid</span>
+    <span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into lob (id, lob) values (:id, :blob)</span><span class="delimiter">&quot;</span></span>)
+    <span class="type">void</span> insert(<span class="type">int</span> id, <span class="predefined-type">InputStream</span> blob);
+
+    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select lob from lob where id = :id</span><span class="delimiter">&quot;</span></span>)
+    <span class="predefined-type">InputStream</span> readBlob(<span class="type">int</span> id);
+
+    <span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">delete from lob where id = :id returning lo_unlink(lob)</span><span class="delimiter">&quot;</span></span>)
+    <span class="type">void</span> deleteLob(<span class="type">int</span> id);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Please refer to
+<a href="https://jdbc.postgresql.org/documentation/head/binary-data.html" target="_blank">Pg-JDBC docs</a>
+for upstream driver documentation.</p>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_spring"><a class="anchor" href="#_spring"></a>7.11. Spring</h3>
@@ -7893,7 +7934,35 @@ tuple indices must be provided with a column configuration!</p>
 <p>This section includes examples of various things you might like to do with <code>Jdbi</code>.</p>
 </div>
 <div class="sect2">
-<h3 id="_like_clauses_with_parameters"><a class="anchor" href="#_like_clauses_with_parameters"></a>8.1. LIKE clauses with Parameters</h3>
+<h3 id="_simple_dependency_injection"><a class="anchor" href="#_simple_dependency_injection"></a>8.1. Simple Dependency Injection</h3>
+<div class="paragraph">
+<p><code>Jdbi</code> tries to be independent of using a dependency injection framework,
+but it&#8217;s straightforward to integrate yours.  Just do field injection on a simple custom config type:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="type">class</span> <span class="class">InjectedDependencies</span> <span class="directive">implements</span> JdbiConfig&lt;InjectedDependencies&gt; {
+    <span class="annotation">@Inject</span>
+    SomeDependency dep;
+
+    <span class="directive">public</span> InjectedDependencies() {}
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> InjectedDependencies createCopy() {
+        <span class="keyword">return</span> <span class="local-variable">this</span>; <span class="comment">// effectively immutable</span>
+    }
+}
+
+Jdbi jdbi = Jdbi.create(myDataSource);
+myIoC.inject(jdbi.getConfig(InjectedDependencies.class));
+
+<span class="comment">// Then, in any component that needs to access it:</span>
+getHandle().getConfig(InjectedDependencies.class).dep</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_like_clauses_with_parameters"><a class="anchor" href="#_like_clauses_with_parameters"></a>8.2. LIKE clauses with Parameters</h3>
 <div class="paragraph">
 <p>Since JDBC (and therefore <code>Jdbi</code>) does not allow binding parameters into the middle of string literals,
 you cannot interpolate bindings into <code>LIKE</code> clauses (<code>LIKE '%:param%'</code>).</p>
@@ -9404,7 +9473,7 @@ return types, or on <code>@SqlBatch</code> parameters.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-02-11 16:49:12 PST
+Last updated 2020-06-18 09:40:56 PDT
 </div>
 </div>
 </body>
