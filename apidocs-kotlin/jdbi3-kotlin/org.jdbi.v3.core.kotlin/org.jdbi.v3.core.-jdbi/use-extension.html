@@ -1,0 +1,31 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>useExtension - jdbi3-kotlin</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">jdbi3-kotlin</a>&nbsp;/&nbsp;<a href="../index.html">org.jdbi.v3.core.kotlin</a>&nbsp;/&nbsp;<a href="index.html">org.jdbi.v3.core.Jdbi</a>&nbsp;/&nbsp;<a href="./use-extension.html">useExtension</a><br/>
+<br/>
+<h1>useExtension</h1>
+<a name="org.jdbi.v3.core.kotlin$useExtension(org.jdbi.v3.core.Jdbi, kotlin.reflect.KClass((org.jdbi.v3.core.kotlin.useExtension.E)), org.jdbi.v3.core.extension.ExtensionConsumer((org.jdbi.v3.core.kotlin.useExtension.E, org.jdbi.v3.core.kotlin.useExtension.X)))"></a>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">E</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">, </span><span class="identifier">X</span><span class="symbol">&gt;</span> <span class="identifier">Jdbi</span><span class="symbol">.</span><span class="identifier">useExtension</span><span class="symbol">(</span><span class="identifier" id="org.jdbi.v3.core.kotlin$useExtension(org.jdbi.v3.core.Jdbi, kotlin.reflect.KClass((org.jdbi.v3.core.kotlin.useExtension.E)), org.jdbi.v3.core.extension.ExtensionConsumer((org.jdbi.v3.core.kotlin.useExtension.E, org.jdbi.v3.core.kotlin.useExtension.X)))/extensionType">extensionType</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-class/index.html"><span class="identifier">KClass</span></a><span class="symbol">&lt;</span><a href="use-extension.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="org.jdbi.v3.core.kotlin$useExtension(org.jdbi.v3.core.Jdbi, kotlin.reflect.KClass((org.jdbi.v3.core.kotlin.useExtension.E)), org.jdbi.v3.core.extension.ExtensionConsumer((org.jdbi.v3.core.kotlin.useExtension.E, org.jdbi.v3.core.kotlin.useExtension.X)))/callback">callback</span><span class="symbol">:</span>&nbsp;<span class="identifier">ExtensionConsumer</span><span class="symbol">&lt;</span><a href="use-extension.html#E"><span class="identifier">E</span></a><span class="symbol">,</span>&nbsp;<a href="use-extension.html#X"><span class="identifier">X</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>A convenience method which opens an extension of the given type, and yields it to a callback. A handle is opened
+if needed by the extention, and closed before returning to the caller.</p>
+<h3>Parameters</h3>
+<p><a name="extensionType"></a>
+<code>extensionType</code> - the type of extension</p>
+<p><a name="callback"></a>
+<code>callback</code> - a callback which will receive the extension</p>
+<h3>Exceptions</h3>
+<p><a name="org.jdbi.v3.core.extension.NoSuchExtensionException"></a>
+<code>org.jdbi.v3.core.extension.NoSuchExtensionException</code> - if no <a href="#">org.jdbi.v3.core.extension.ExtensionFactory</a>
+is registered which supports the given extension type.</p>
+<p><a name="X"></a>
+<code>X</code> - if thrown by the callback.</p>
+<p><strong>Parameters</strong><br/>
+</p>
+<p><strong>Parameters</strong><br/>
+</p>
+</BODY>
+</HTML>

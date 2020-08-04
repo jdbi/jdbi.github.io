@@ -548,7 +548,8 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#_column_mappers">3.5.2. Column Mappers</a></li>
 <li><a href="#_primitive_mapping">3.5.3. Primitive Mapping</a></li>
 <li><a href="#_immutables_mapping">3.5.4. Immutables Mapping</a></li>
-<li><a href="#_reflection_mappers">3.5.5. Reflection Mappers</a></li>
+<li><a href="#_freebuilder_mapping">3.5.5. Freebuilder Mapping</a></li>
+<li><a href="#_reflection_mappers">3.5.6. Reflection Mappers</a></li>
 </ul>
 </li>
 <li><a href="#_templating">3.6. Templating</a></li>
@@ -633,32 +634,33 @@ table.CodeRay td.code>pre{padding:0}
 </ul>
 </li>
 <li><a href="#_immutables">7.4. Immutables</a></li>
-<li><a href="#_jodatime">7.5. JodaTime</a></li>
-<li><a href="#_jpa">7.6. JPA</a></li>
-<li><a href="#_kotlin">7.7. Kotlin</a>
+<li><a href="#_freebuilder">7.5. Freebuilder</a></li>
+<li><a href="#_jodatime">7.6. JodaTime</a></li>
+<li><a href="#_jpa">7.7. JPA</a></li>
+<li><a href="#_kotlin">7.8. Kotlin</a>
 <ul class="sectlevel3">
-<li><a href="#_resultset_mapping">7.7.1. ResultSet mapping</a></li>
-<li><a href="#_sqlobject">7.7.2. SqlObject</a></li>
+<li><a href="#_resultset_mapping">7.8.1. ResultSet mapping</a></li>
+<li><a href="#_sqlobject">7.8.2. SqlObject</a></li>
 </ul>
 </li>
-<li><a href="#_lombok">7.8. Lombok</a></li>
-<li><a href="#_oracle_12">7.9. Oracle 12</a></li>
-<li><a href="#_postgresql">7.10. PostgreSQL</a>
+<li><a href="#_lombok">7.9. Lombok</a></li>
+<li><a href="#_oracle_12">7.10. Oracle 12</a></li>
+<li><a href="#_postgresql">7.11. PostgreSQL</a>
 <ul class="sectlevel3">
-<li><a href="#_hstore">7.10.1. hstore</a></li>
-<li><a href="#__getgeneratedkeys_4">7.10.2. @GetGeneratedKeys</a></li>
-<li><a href="#_large_objects">7.10.3. Large Objects</a></li>
+<li><a href="#_hstore">7.11.1. hstore</a></li>
+<li><a href="#__getgeneratedkeys_4">7.11.2. @GetGeneratedKeys</a></li>
+<li><a href="#_large_objects">7.11.3. Large Objects</a></li>
 </ul>
 </li>
-<li><a href="#_spring">7.11. Spring</a>
+<li><a href="#_spring">7.12. Spring</a>
 <ul class="sectlevel3">
-<li><a href="#_installing_plugins">7.11.1. Installing plugins</a></li>
-<li><a href="#_global_attributes">7.11.2. Global Attributes</a></li>
+<li><a href="#_installing_plugins">7.12.1. Installing plugins</a></li>
+<li><a href="#_global_attributes">7.12.2. Global Attributes</a></li>
 </ul>
 </li>
-<li><a href="#_sqlite">7.12. SQLite</a></li>
-<li><a href="#_stringtemplate_4">7.13. StringTemplate 4</a></li>
-<li><a href="#_vavr">7.14. Vavr</a></li>
+<li><a href="#_sqlite">7.13. SQLite</a></li>
+<li><a href="#_stringtemplate_4">7.14. StringTemplate 4</a></li>
+<li><a href="#_vavr">7.15. Vavr</a></li>
 </ul>
 </li>
 <li><a href="#_cookbook">8. Cookbook</a>
@@ -898,7 +900,7 @@ Already using Jdbi v2? See <a href="#_upgrading_from_v2_to_v3">Upgrading from v2
 <p>Jdbi is easy to include in your Java project - with an
 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Apache 2.0</a> license, few
 external dependencies, and JARs distributed through
-<a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.jdbi%22%20AND%20v%3A%223.14.1%22" target="_blank">Maven Central</a>,
+<a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.jdbi%22%20AND%20v%3A%223.14.2%22" target="_blank">Maven Central</a>,
 you can just include the relevant artifacts in your POM:</p>
 </div>
 <div class="listingblock">
@@ -909,7 +911,7 @@ you can just include the relevant artifacts in your POM:</p>
       <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
       <span class="tag">&lt;artifactId&gt;</span>jdbi3-bom<span class="tag">&lt;/artifactId&gt;</span>
       <span class="tag">&lt;type&gt;</span>pom<span class="tag">&lt;/type&gt;</span>
-      <span class="tag">&lt;version&gt;</span>3.14.1<span class="tag">&lt;/version&gt;</span>
+      <span class="tag">&lt;version&gt;</span>3.14.2<span class="tag">&lt;/version&gt;</span>
       <span class="tag">&lt;scope&gt;</span>import<span class="tag">&lt;/scope&gt;</span>
     <span class="tag">&lt;/dependency&gt;</span>
   <span class="tag">&lt;/dependencies&gt;</span>
@@ -2460,7 +2462,13 @@ This may be disabled by configuring
 </div>
 </div>
 <div class="sect3">
-<h4 id="_reflection_mappers"><a class="anchor" href="#_reflection_mappers"></a>3.5.5. Reflection Mappers</h4>
+<h4 id="_freebuilder_mapping"><a class="anchor" href="#_freebuilder_mapping"></a>3.5.5. Freebuilder Mapping</h4>
+<div class="paragraph">
+<p><code>Freebuilder</code> value objects may be mapped, see the <a href="#_freebuilder">Freebuilder</a> section for details.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_reflection_mappers"><a class="anchor" href="#_reflection_mappers"></a>3.5.6. Reflection Mappers</h4>
 <div class="paragraph">
 <p>Jdbi provides a few reflection-based mappers out of the box.</p>
 </div>
@@ -6900,7 +6908,80 @@ We do support the configurable <code>get</code>, <code>is</code>, and <code>set<
 </div>
 </div>
 <div class="sect2">
-<h3 id="_jodatime"><a class="anchor" href="#_jodatime"></a>7.5. JodaTime</h3>
+<h3 id="_freebuilder"><a class="anchor" href="#_freebuilder"></a>7.5. Freebuilder</h3>
+<div class="paragraph">
+<p><a href="https://https://freebuilder.inferred.org/" target="_blank">Freebuilder</a> is an annotation
+processor that generates value types based on simple interface or abstract
+class descriptions. Jdbi supports Freebuilder in much the same way that it
+supports Immutables.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Freebuilder support is still experimental and may not support all Freebuilder
+implemented feaatures. We do support both JavaBean style getters and setters as
+well as unprefixed getters and setters.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Just tell us about your Freebuilder types by installing the plugin and
+configuring your <code>Freebuilder</code> type:</p>
+</div>
+<div class="paragraph">
+<p><code>jdbi.getConfig(JdbiFreebuilder.class).registerFreebuilder(MyFreeBuilderType.class)</code></p>
+</div>
+<div class="paragraph">
+<p>The configuration will both register appropriate <code>RowMapper`s as well as
+configure the new `bindPojo</code> (or <code>@BindPojo</code>) binders:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@FreeBuilder</span>
+<span class="directive">public</span> <span class="type">interface</span> <span class="class">Train</span> {
+    <span class="predefined-type">String</span> name();
+    <span class="type">int</span> carriages();
+    <span class="type">boolean</span> observationCar();
+
+    <span class="type">class</span> <span class="class">Builder</span> <span class="directive">extends</span> FreeBuildersTest_Train_Builder {}
+}
+
+<span class="annotation">@Test</span>
+<span class="directive">public</span> <span class="type">void</span> simpleTest() {
+    jdbi.getConfig(JdbiFreeBuilders.class).registerFreeBuilder(Train.class);
+    <span class="keyword">try</span> (Handle handle = jdbi.open()) {
+        handle.execute(<span class="string"><span class="delimiter">&quot;</span><span class="content">create table train (name varchar, carriages int, observation_car boolean)</span><span class="delimiter">&quot;</span></span>);
+
+        Train train = <span class="keyword">new</span> Train.Builder()
+            .name(<span class="string"><span class="delimiter">&quot;</span><span class="content">Zephyr</span><span class="delimiter">&quot;</span></span>)
+            .carriages(<span class="integer">8</span>)
+            .observationCar(<span class="predefined-constant">true</span>)
+            .build();
+
+        assertThat(
+            handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into train(name, carriages, observation_car) values (:name, :carriages, :observationCar)</span><span class="delimiter">&quot;</span></span>)
+                .bindPojo(train)
+                .execute())
+            .isEqualTo(<span class="integer">1</span>);
+
+        assertThat(
+            handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from train</span><span class="delimiter">&quot;</span></span>)
+                .mapTo(Train.class)
+                .one())
+            .extracting(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">carriages</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">observationCar</span><span class="delimiter">&quot;</span></span>)
+            .containsExactly(<span class="string"><span class="delimiter">&quot;</span><span class="content">Zephyr</span><span class="delimiter">&quot;</span></span>, <span class="integer">8</span>, <span class="predefined-constant">true</span>);
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_jodatime"><a class="anchor" href="#_jodatime"></a>7.6. JodaTime</h3>
 <div class="paragraph">
 <p>This plugin adds support for using joda-time&#8217;s <code>DateTime</code> type.</p>
 </div>
@@ -6925,7 +7006,7 @@ We do support the configurable <code>get</code>, <code>is</code>, and <code>set<
 </div>
 </div>
 <div class="sect2">
-<h3 id="_jpa"><a class="anchor" href="#_jpa"></a>7.6. JPA</h3>
+<h3 id="_jpa"><a class="anchor" href="#_jpa"></a>7.7. JPA</h3>
 <div class="paragraph">
 <p>Using the JPA plugin is a great way to trick your boss into letting you try
 Jdbi. "No problem boss, it already supports JPA annotations, easy peasy!"</p>
@@ -6970,7 +7051,7 @@ Jdbi. "No problem boss, it already supports JPA annotations, easy peasy!"</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_kotlin"><a class="anchor" href="#_kotlin"></a>7.7. Kotlin</h3>
+<h3 id="_kotlin"><a class="anchor" href="#_kotlin"></a>7.8. Kotlin</h3>
 <div class="paragraph">
 <p><a href="https://kotlinlang.org/" target="_blank">Kotlin</a> support is provided by <strong>jdbi3-kotlin</strong> and
 <strong>jdbi3-kotlin-sqlobject</strong> modules.</p>
@@ -6989,7 +7070,7 @@ Jdbi. "No problem boss, it already supports JPA annotations, easy peasy!"</p>
 </ul>
 </div>
 <div class="sect3">
-<h4 id="_resultset_mapping"><a class="anchor" href="#_resultset_mapping"></a>7.7.1. ResultSet mapping</h4>
+<h4 id="_resultset_mapping"><a class="anchor" href="#_resultset_mapping"></a>7.8.1. ResultSet mapping</h4>
 <div class="paragraph">
 <p>The <strong>jdbi3-kotlin</strong> plugin adds mapping to Kotlin data classes. It
 supports data classes where all fields are present in the constructor as well
@@ -7115,7 +7196,7 @@ val things = qry.bind(&quot;id&quot;, brian.id).mapTo&lt;Thing&gt;.list()</code>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_sqlobject"><a class="anchor" href="#_sqlobject"></a>7.7.2. SqlObject</h4>
+<h4 id="_sqlobject"><a class="anchor" href="#_sqlobject"></a>7.8.2. SqlObject</h4>
 <div class="paragraph">
 <p>The <strong>jdbi3-kotlin-sqlobject</strong> plugin adds automatic parameter binding by name
 for Kotlin methods in SqlObjects as well as support for Kotlin default methods.</p>
@@ -7182,7 +7263,7 @@ via: <code>Jdbi.installPlugin(KotlinSqlObjectPlugin())</code>.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_lombok"><a class="anchor" href="#_lombok"></a>7.8. Lombok</h3>
+<h3 id="_lombok"><a class="anchor" href="#_lombok"></a>7.9. Lombok</h3>
 <div class="paragraph">
 <p>Lombok is a great tool for cutting the boilerplate out of POJO classes.</p>
 </div>
@@ -7258,7 +7339,7 @@ lombok.copyableAnnotations += org.jdbi.v3.postgres.HStore</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_oracle_12"><a class="anchor" href="#_oracle_12"></a>7.9. Oracle 12</h3>
+<h3 id="_oracle_12"><a class="anchor" href="#_oracle_12"></a>7.10. Oracle 12</h3>
 <div class="paragraph">
 <p>This module adds support for Oracle <code>RETURNING</code> DML expressions.</p>
 </div>
@@ -7279,7 +7360,7 @@ to get the returned DML.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_postgresql"><a class="anchor" href="#_postgresql"></a>7.10. PostgreSQL</h3>
+<h3 id="_postgresql"><a class="anchor" href="#_postgresql"></a>7.11. PostgreSQL</h3>
 <div class="paragraph">
 <p>The <strong>jdbi3-postgres</strong> plugin provides enhanced integration with the
 <a href="https://jdbc.postgresql.org/" target="_blank">PostgreSQL JDBC Driver</a>.</p>
@@ -7331,7 +7412,7 @@ escape operators to e.g. <code>??</code> or <code>\:</code>.
 </table>
 </div>
 <div class="sect3">
-<h4 id="_hstore"><a class="anchor" href="#_hstore"></a>7.10.1. hstore</h4>
+<h4 id="_hstore"><a class="anchor" href="#_hstore"></a>7.11.1. hstore</h4>
 <div class="paragraph">
 <p>The Postgres plugin provides an <code>hstore</code> to <code>Map&lt;String, String&gt;</code> column mapper
 and vice versa argument factory:</p>
@@ -7373,7 +7454,7 @@ type is treated as a single value instead of a collection:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="__getgeneratedkeys_4"><a class="anchor" href="#__getgeneratedkeys_4"></a>7.10.2. @GetGeneratedKeys</h4>
+<h4 id="__getgeneratedkeys_4"><a class="anchor" href="#__getgeneratedkeys_4"></a>7.11.2. @GetGeneratedKeys</h4>
 <div class="paragraph">
 <p>In Postgres, <code>@GetGeneratedKeys</code> can return the entire modified row if you
 request generated keys without naming any columns.</p>
@@ -7404,7 +7485,7 @@ several rows), your method can return all the modified rows in a collection:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_large_objects"><a class="anchor" href="#_large_objects"></a>7.10.3. Large Objects</h4>
+<h4 id="_large_objects"><a class="anchor" href="#_large_objects"></a>7.11.3. Large Objects</h4>
 <div class="paragraph">
 <p>Postgres supports storing large character or binary data in separate storage from
 table data.  Jdbi allows you to stream this data in and out of the database as part
@@ -7444,7 +7525,7 @@ for upstream driver documentation.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_spring"><a class="anchor" href="#_spring"></a>7.11. Spring</h3>
+<h3 id="_spring"><a class="anchor" href="#_spring"></a>7.12. Spring</h3>
 <div class="paragraph">
 <p>This module provides <code>JdbiFactoryBean</code>, a factory bean which sets up a <code>Jdbi</code>
 singleton.</p>
@@ -7537,7 +7618,7 @@ with Spring 5.1.8 (used by Spring Boot 2.1.4) as well.
 </table>
 </div>
 <div class="sect3">
-<h4 id="_installing_plugins"><a class="anchor" href="#_installing_plugins"></a>7.11.1. Installing plugins</h4>
+<h4 id="_installing_plugins"><a class="anchor" href="#_installing_plugins"></a>7.12.1. Installing plugins</h4>
 <div class="paragraph">
 <p>Plugins may be automatically installed by scanning the classpath for
 <a href="https://docs.oracle.com/javase/8/docs/api/java/util/ServiceLoader.html" target="_blank">ServiceLoader</a> manifests.</p>
@@ -7585,7 +7666,7 @@ auto-install some plugins and manually install the rest:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_global_attributes"><a class="anchor" href="#_global_attributes"></a>7.11.2. Global Attributes</h4>
+<h4 id="_global_attributes"><a class="anchor" href="#_global_attributes"></a>7.12.2. Global Attributes</h4>
 <div class="paragraph">
 <p>Global defined attributes may be configured on the factory bean:</p>
 </div>
@@ -7604,7 +7685,7 @@ auto-install some plugins and manually install the rest:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_sqlite"><a class="anchor" href="#_sqlite"></a>7.12. SQLite</h3>
+<h3 id="_sqlite"><a class="anchor" href="#_sqlite"></a>7.13. SQLite</h3>
 <div class="paragraph">
 <p>The <strong>jdbi3-sqlite</strong> plugin provides support for using the
 <a href="https://bitbucket.org/xerial/sqlite-jdbc/" target="_blank">SQLite JDBC Driver</a>
@@ -7636,7 +7717,7 @@ supported by driver.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_stringtemplate_4"><a class="anchor" href="#_stringtemplate_4"></a>7.13. StringTemplate 4</h3>
+<h3 id="_stringtemplate_4"><a class="anchor" href="#_stringtemplate_4"></a>7.14. StringTemplate 4</h3>
 <div class="paragraph">
 <p>This module allows you to plug in the StringTemplate 4 templating engine, in
 place of the standard Jdbi templating engine.</p>
@@ -7762,7 +7843,7 @@ template will be used, regardless of the method name.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_vavr"><a class="anchor" href="#_vavr"></a>7.14. Vavr</h3>
+<h3 id="_vavr"><a class="anchor" href="#_vavr"></a>7.15. Vavr</h3>
 <div class="paragraph">
 <p>The Vavr Plugin offers deep integration of <strong>Jdbi</strong> with the Vavr functional library:</p>
 </div>
@@ -9473,7 +9554,7 @@ return types, or on <code>@SqlBatch</code> parameters.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-06-18 09:40:56 PDT
+Last updated 2020-08-03 17:44:52 PDT
 </div>
 </div>
 </body>
