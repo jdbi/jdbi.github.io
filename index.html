@@ -900,7 +900,7 @@ Already using Jdbi v2? See <a href="#_upgrading_from_v2_to_v3">Upgrading from v2
 <p>Jdbi is easy to include in your Java project - with an
 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Apache 2.0</a> license, few
 external dependencies, and JARs distributed through
-<a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.jdbi%22%20AND%20v%3A%223.14.4%22" target="_blank">Maven Central</a>,
+<a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.jdbi%22%20AND%20v%3A%223.16.0%22" target="_blank">Maven Central</a>,
 you can just include the relevant artifacts in your POM:</p>
 </div>
 <div class="listingblock">
@@ -911,7 +911,7 @@ you can just include the relevant artifacts in your POM:</p>
       <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
       <span class="tag">&lt;artifactId&gt;</span>jdbi3-bom<span class="tag">&lt;/artifactId&gt;</span>
       <span class="tag">&lt;type&gt;</span>pom<span class="tag">&lt;/type&gt;</span>
-      <span class="tag">&lt;version&gt;</span>3.14.4<span class="tag">&lt;/version&gt;</span>
+      <span class="tag">&lt;version&gt;</span>3.16.0<span class="tag">&lt;/version&gt;</span>
       <span class="tag">&lt;scope&gt;</span>import<span class="tag">&lt;/scope&gt;</span>
     <span class="tag">&lt;/dependency&gt;</span>
   <span class="tag">&lt;/dependencies&gt;</span>
@@ -8979,7 +8979,7 @@ e.g. for a caching annotation.</p>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
 <td>Decorating annotations only work on types and methods. Strictly speaking,
-the <code>@Target</code> annotation is note required, but it&#8217;s a good practice to
+the <code>@Target</code> annotation is not required, but it&#8217;s a good practice to
 include it, so that annotations can only be applied where they will actually
 do something.</td>
 </tr>
@@ -9059,7 +9059,9 @@ annotation to your <code>@Transaction</code> annotation type. This tells Jdbi th
 <h5 id="_decorator_order"><a class="anchor" href="#_decorator_order"></a>Decorator Order</h5>
 <div class="paragraph">
 <p>If a SQL object method has two or more decorating annotations applied, and the
-order of decorations is important, use the <code>@DecoratorOrder</code> annotation.</p>
+order of decorations is important, use the <code>@DecoratorOrder</code> annotation. If no order
+is declared, type decorators apply first, then method decorators, but the order is
+not further specified.</p>
 </div>
 <div class="paragraph">
 <p>For example, suppose a method were annotated both with <code>@Cached</code> and
@@ -9554,7 +9556,7 @@ return types, or on <code>@SqlBatch</code> parameters.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-08-01 12:50:00 PDT
+Last updated 2020-10-09 16:14:44 PDT
 </div>
 </div>
 </body>
