@@ -524,8 +524,9 @@ table.CodeRay td.code>pre{padding:0}
 </li>
 <li><a href="#_getting_started">2. Getting Started</a>
 <ul class="sectlevel2">
-<li><a href="#_modules">2.1. Modules</a></li>
-<li><a href="#_forethoughts">2.2. Forethoughts</a></li>
+<li><a href="#_java_compatibility">2.1. Java Compatibility</a></li>
+<li><a href="#_modules">2.2. Modules</a></li>
+<li><a href="#_forethoughts">2.3. Forethoughts</a></li>
 </ul>
 </li>
 <li><a href="#_core_api">3. Core API</a>
@@ -552,37 +553,42 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#_reflection_mappers">3.5.6. Reflection Mappers</a></li>
 </ul>
 </li>
-<li><a href="#_templating">3.6. Templating</a></li>
-<li><a href="#_sql_arrays">3.7. SQL Arrays</a>
+<li><a href="#_codecs">3.6. Codecs</a>
 <ul class="sectlevel3">
-<li><a href="#_registering_array_types">3.7.1. Registering array types</a></li>
-<li><a href="#_binding_custom_array_types">3.7.2. Binding custom array types</a></li>
-<li><a href="#_mapping_array_types">3.7.3. Mapping array types</a></li>
+<li><a href="#_resolving_types">3.6.1. Resolving Types</a></li>
 </ul>
 </li>
-<li><a href="#_results">3.8. Results</a>
+<li><a href="#_templating">3.7. Templating</a></li>
+<li><a href="#_sql_arrays">3.8. SQL Arrays</a>
 <ul class="sectlevel3">
-<li><a href="#_resultbearing">3.8.1. ResultBearing</a></li>
-<li><a href="#_resultiterable">3.8.2. ResultIterable</a></li>
-<li><a href="#_joins">3.8.3. Joins</a></li>
+<li><a href="#_registering_array_types">3.8.1. Registering array types</a></li>
+<li><a href="#_binding_custom_array_types">3.8.2. Binding custom array types</a></li>
+<li><a href="#_mapping_array_types">3.8.3. Mapping array types</a></li>
 </ul>
 </li>
-<li><a href="#_updates">3.9. Updates</a></li>
-<li><a href="#_batches">3.10. Batches</a></li>
-<li><a href="#_prepared_batches">3.11. Prepared Batches</a>
+<li><a href="#_results">3.9. Results</a>
 <ul class="sectlevel3">
-<li><a href="#_exception_rewriting">3.11.1. Exception Rewriting</a></li>
+<li><a href="#_resultbearing">3.9.1. ResultBearing</a></li>
+<li><a href="#_resultiterable">3.9.2. ResultIterable</a></li>
+<li><a href="#_joins">3.9.3. Joins</a></li>
 </ul>
 </li>
-<li><a href="#_generated_keys">3.12. Generated Keys</a></li>
-<li><a href="#_stored_procedure_calls">3.13. Stored Procedure Calls</a></li>
-<li><a href="#_scripts">3.14. Scripts</a></li>
-<li><a href="#_transactions">3.15. Transactions</a>
+<li><a href="#_updates">3.10. Updates</a></li>
+<li><a href="#_batches">3.11. Batches</a></li>
+<li><a href="#_prepared_batches">3.12. Prepared Batches</a>
 <ul class="sectlevel3">
-<li><a href="#_serializable_transactions">3.15.1. Serializable Transactions</a></li>
+<li><a href="#_exception_rewriting">3.12.1. Exception Rewriting</a></li>
 </ul>
 </li>
-<li><a href="#_classpathsqllocator">3.16. ClasspathSqlLocator</a></li>
+<li><a href="#_generated_keys">3.13. Generated Keys</a></li>
+<li><a href="#_stored_procedure_calls">3.14. Stored Procedure Calls</a></li>
+<li><a href="#_scripts">3.15. Scripts</a></li>
+<li><a href="#_transactions">3.16. Transactions</a>
+<ul class="sectlevel3">
+<li><a href="#_serializable_transactions">3.16.1. Serializable Transactions</a></li>
+</ul>
+</li>
+<li><a href="#_classpathsqllocator">3.17. ClasspathSqlLocator</a></li>
 </ul>
 </li>
 <li><a href="#_configuration">4. Configuration</a>
@@ -629,8 +635,9 @@ table.CodeRay td.code>pre{padding:0}
 <ul class="sectlevel3">
 <li><a href="#_jackson_2">7.3.1. Jackson 2</a></li>
 <li><a href="#_gson_2">7.3.2. Gson 2</a></li>
-<li><a href="#_operation">7.3.3. Operation</a></li>
-<li><a href="#_usage">7.3.4. Usage</a></li>
+<li><a href="#_moshi">7.3.3. Moshi</a></li>
+<li><a href="#_operation">7.3.4. Operation</a></li>
+<li><a href="#_usage">7.3.5. Usage</a></li>
 </ul>
 </li>
 <li><a href="#_immutables">7.4. Immutables</a></li>
@@ -652,7 +659,7 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#_large_objects">7.11.3. Large Objects</a></li>
 </ul>
 </li>
-<li><a href="#_spring">7.12. Spring</a>
+<li><a href="#_spring5">7.12. Spring5</a>
 <ul class="sectlevel3">
 <li><a href="#_installing_plugins">7.12.1. Installing plugins</a></li>
 <li><a href="#_global_attributes">7.12.2. Global Attributes</a></li>
@@ -900,7 +907,7 @@ Already using Jdbi v2? See <a href="#_upgrading_from_v2_to_v3">Upgrading from v2
 <p>Jdbi is easy to include in your Java project - with an
 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Apache 2.0</a> license, few
 external dependencies, and JARs distributed through
-<a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.jdbi%22%20AND%20v%3A%223.18.1%22" target="_blank">Maven Central</a>,
+<a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.jdbi%22%20AND%20v%3A%223.19.0%22" target="_blank">Maven Central</a>,
 you can just include the relevant artifacts in your POM:</p>
 </div>
 <div class="listingblock">
@@ -911,7 +918,7 @@ you can just include the relevant artifacts in your POM:</p>
       <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
       <span class="tag">&lt;artifactId&gt;</span>jdbi3-bom<span class="tag">&lt;/artifactId&gt;</span>
       <span class="tag">&lt;type&gt;</span>pom<span class="tag">&lt;/type&gt;</span>
-      <span class="tag">&lt;version&gt;</span>3.18.1<span class="tag">&lt;/version&gt;</span>
+      <span class="tag">&lt;version&gt;</span>3.19.0<span class="tag">&lt;/version&gt;</span>
       <span class="tag">&lt;scope&gt;</span>import<span class="tag">&lt;/scope&gt;</span>
     <span class="tag">&lt;/dependency&gt;</span>
   <span class="tag">&lt;/dependencies&gt;</span>
@@ -937,7 +944,27 @@ module you want to use:</p>
 features.</p>
 </div>
 <div class="sect2">
-<h3 id="_modules"><a class="anchor" href="#_modules"></a>2.1. Modules</h3>
+<h3 id="_java_compatibility"><a class="anchor" href="#_java_compatibility"></a>2.1. Java Compatibility</h3>
+<div class="paragraph">
+<p><code>Jdbi</code> runs on all Java versions 8 or later. 11 or later is requied to build.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Java 8 support is considered deprecated and will be maintained best-effort for now,
+but will be going away soon! In order to run on 8, you might need to dependency-manage your
+<code>caffeine</code> version back to 2.x. 3.x is required to run on newer JDKs, but will not run on 8.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_modules"><a class="anchor" href="#_modules"></a>2.2. Modules</h3>
 <div class="dlist glossary">
 <dl>
 <dt>jdbi3-sqlobject</dt>
@@ -973,7 +1000,7 @@ method default parameters.</p>
 <dd>
 <p>Support for most data types supported by Postgres driver.</p>
 </dd>
-<dt>jdbi3-spring4</dt>
+<dt>jdbi3-spring5</dt>
 <dd>
 <p>Provides a factory bean to set up Jdbi singleton.</p>
 </dd>
@@ -989,7 +1016,7 @@ method default parameters.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_forethoughts"><a class="anchor" href="#_forethoughts"></a>2.2. Forethoughts</h3>
+<h3 id="_forethoughts"><a class="anchor" href="#_forethoughts"></a>2.3. Forethoughts</h3>
 <div class="admonitionblock tip">
 <table>
 <tr>
@@ -997,7 +1024,7 @@ method default parameters.</p>
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-You&#8217;ll probably want to add our annotation <code>org.jdbi.v3.meta.Beta</code> to your IDE&#8217;s "unstable API usage" blacklist.
+You&#8217;ll probably want to add our annotations <code>org.jdbi.v3.meta.Beta</code> and <code>org.jdbi.v3.meta.Alpha</code> to your IDE&#8217;s "unstable API usage" blacklist.
 </td>
 </tr>
 </table>
@@ -3178,7 +3205,217 @@ fails, an exception is thrown.
 </div>
 </div>
 <div class="sect2">
-<h3 id="_templating"><a class="anchor" href="#_templating"></a>3.6. Templating</h3>
+<h3 id="_codecs"><a class="anchor" href="#_codecs"></a>3.6. Codecs</h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The Codec API is still unstable and may change.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>A codec is a replacement for registering an argument and a column mapper for a type. It is responsible for serializing a typed value into a database column and creating a type from a database column.</p>
+</div>
+<div class="paragraph">
+<p>Codecs are collected in a codec factory which can be registered with the registerCodecFactory convenience method.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// register a single codec</span>
+jdbi.registerCodecFactory(CodecFactory.forSingleCodec(type, codec));
+
+<span class="comment">// register a few codecs</span>
+jdbi.registerCodecFactory(CodecFactory.builder()
+  <span class="comment">// register a codec by qualified type</span>
+  .addCodec(QualifiedType.of(Foo.class), codec1)
+  <span class="comment">// register a codec by direct java type</span>
+  .addCodec(Foo.class, codec2)
+  <span class="comment">// register a codec by generic type</span>
+  .addCodec(<span class="keyword">new</span> GenericType&lt;<span class="predefined-type">Set</span>&lt;Foo&gt;&gt;() {}. codec3)
+  .build());
+
+<span class="comment">// register many codecs</span>
+<span class="predefined-type">Map</span>&lt;QualifiedType&lt;?&gt;, Codec&lt;?&gt;&gt; codecs = ...
+jdbi.registerCodecFactory(<span class="keyword">new</span> CodecFactory(codecs));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Codec example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">Counter</span> {
+
+    <span class="directive">private</span> <span class="type">int</span> count = <span class="integer">0</span>;
+
+    <span class="directive">public</span> Counter() {}
+
+    <span class="directive">public</span> <span class="type">int</span> nextValue() {
+        <span class="keyword">return</span> count++;
+    }
+
+    <span class="directive">private</span> Counter setValue(<span class="type">int</span> value) {
+        <span class="local-variable">this</span>.count = value;
+        <span class="keyword">return</span> <span class="local-variable">this</span>;
+    }
+
+    <span class="directive">private</span> <span class="type">int</span> getValue() {
+        <span class="keyword">return</span> count;
+    }
+
+    <span class="comment">/**
+     * Codec to persist a counter to the database and restore it back.
+     */</span>
+    <span class="directive">public</span> <span class="directive">static</span> <span class="type">class</span> <span class="class">CounterCodec</span> <span class="directive">implements</span> Codec&lt;Counter&gt; {
+
+        <span class="annotation">@Override</span>
+        <span class="directive">public</span> ColumnMapper&lt;Counter&gt; getColumnMapper() {
+            <span class="keyword">return</span> (r, idx, ctx) -&gt; <span class="keyword">new</span> Counter().setValue(r.getInt(idx));
+        }
+
+        <span class="annotation">@Override</span>
+        <span class="directive">public</span> Function&lt;Counter, Argument&gt; getArgumentFunction() {
+            <span class="keyword">return</span> counter -&gt; (idx, stmt, ctx) -&gt; stmt.setInt(idx, counter.getValue());
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>JDBI core API:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// register the codec with JDBI</span>
+jdbi.registerCodecFactory(CodecFactory.forSingleCodec(COUNTER_TYPE, <span class="keyword">new</span> CounterCodec()));
+
+
+<span class="comment">// store object</span>
+<span class="type">int</span> result = jdbi.withHandle(h -&gt; h.createUpdate(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO counters (id, value) VALUES (:id, :value)</span><span class="delimiter">&quot;</span></span>)
+    .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, counterId)
+    .bindByType(<span class="string"><span class="delimiter">&quot;</span><span class="content">value</span><span class="delimiter">&quot;</span></span>, counter, COUNTER_TYPE)
+    .execute());
+
+
+<span class="comment">// load object</span>
+Counter restoredCounter = jdbi.withHandle(h -&gt; h.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT value from counters where id = :id</span><span class="delimiter">&quot;</span></span>)
+    .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, counterId)
+    .mapTo(COUNTER_TYPE).first());</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>SQL Object API uses the codecs transparently:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// SQL object dao</span>
+<span class="directive">public</span> <span class="type">interface</span> <span class="class">CounterDao</span> {
+    <span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO counters (id, value) VALUES (:id, :value)</span><span class="delimiter">&quot;</span></span>)
+    <span class="type">int</span> storeCounter(<span class="annotation">@Bind</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>) <span class="predefined-type">String</span> id, <span class="annotation">@Bind</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">value</span><span class="delimiter">&quot;</span></span>) Counter counter);
+
+    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT value from counters where id = :id</span><span class="delimiter">&quot;</span></span>)
+    Counter loadCounter(<span class="annotation">@Bind</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>) <span class="predefined-type">String</span> id);
+}
+
+
+    <span class="comment">// register the codec with JDBI</span>
+    jdbi.registerCodecFactory(CodecFactory.forSingleCodec(COUNTER_TYPE, <span class="keyword">new</span> CounterCodec()));
+
+
+    <span class="comment">// store object</span>
+    <span class="type">int</span> result = jdbi.withExtension(CounterDao.class, dao -&gt; dao.storeCounter(counterId, counter));
+
+
+    <span class="comment">// load object</span>
+    Counter restoredCounter = jdbi.withExtension(CounterDao.class, dao -&gt; dao.loadCounter(counterId));</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_resolving_types"><a class="anchor" href="#_resolving_types"></a>3.6.1. Resolving Types</h4>
+<div class="paragraph">
+<p>By using the <code>TypeResolvingCodecFactory</code> from the <a href="./apidocs/org/jdbi/v3/guava/package-summary.html" target="_blank">guava</a> module, it is possible to use codecs that are registered for subclasses or interface types for concrete classes. This is necessary to e.g. map <a href="https://github.com/google/auto/blob/master/value/userguide/index.md" target="_blank">Auto Value</a> generated classes to database columns.</p>
+</div>
+<div class="paragraph">
+<p>In the following example, there is only a codec for <code>Value&lt;String&gt;</code> registered, but the code uses beans and classes that are concrete implementations (<code>StringBean</code> contains a <code>StringValue</code> and <code>StringValue</code> implements the <code>Value&lt;String&gt;</code> interface). The <code>TypeResolvingCodecFactory</code> will inspect the types to find a codec for an interface or superclass if no perfect match can be found.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// SQL object dao using concrete types</span>
+<span class="directive">public</span> <span class="type">interface</span> <span class="class">DataDao</span> {
+
+    <span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO data (id, value) VALUES (:bean.id, :bean.value)</span><span class="delimiter">&quot;</span></span>)
+    <span class="type">int</span> storeData(<span class="annotation">@BindBean</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">bean</span><span class="delimiter">&quot;</span></span>) StringBean bean);
+
+    <span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO data (id, value) VALUES (:id, :value)</span><span class="delimiter">&quot;</span></span>)
+    <span class="type">int</span> storeData(<span class="annotation">@Bind</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>) <span class="predefined-type">String</span> id, <span class="annotation">@Bind</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">value</span><span class="delimiter">&quot;</span></span>) StringValue data);
+
+    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT value from data where id = :id</span><span class="delimiter">&quot;</span></span>)
+    StringValue loadData(<span class="annotation">@Bind</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>) <span class="predefined-type">String</span> id);
+}
+
+
+<span class="comment">// generic type representation</span>
+<span class="directive">public</span> <span class="directive">static</span> <span class="directive">final</span> QualifiedType&lt;Value&lt;<span class="predefined-type">String</span>&gt;&gt; DATA_TYPE = QualifiedType.of(<span class="keyword">new</span> GenericType&lt;Value&lt;<span class="predefined-type">String</span>&gt;&gt;() {});
+
+
+<span class="directive">public</span> <span class="directive">static</span> <span class="type">class</span> <span class="class">DataCodec</span> <span class="directive">implements</span> Codec&lt;Value&lt;<span class="predefined-type">String</span>&gt;&gt; {
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> ColumnMapper&lt;Value&lt;<span class="predefined-type">String</span>&gt;&gt; getColumnMapper() {
+        <span class="keyword">return</span> (r, idx, ctx) -&gt; {
+            <span class="keyword">return</span> <span class="keyword">new</span> StringValue(r.getString(idx));
+        };
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> Function&lt;Value&lt;<span class="predefined-type">String</span>&gt;, Argument&gt; getArgumentFunction() {
+        <span class="keyword">return</span> data -&gt; (idx, stmt, ctx) -&gt; {
+            stmt.setString(idx, data.getValue());
+        };
+    }
+}
+
+
+<span class="comment">// value interface</span>
+<span class="directive">public</span> <span class="type">interface</span> <span class="class">Value</span>&lt;T&gt; {
+
+    T getValue();
+}
+
+
+<span class="comment">// bean using concrete types, not interface types.</span>
+<span class="directive">public</span> <span class="directive">static</span> <span class="type">class</span> <span class="class">StringBean</span> <span class="directive">implements</span> Bean&lt;Value&lt;<span class="predefined-type">String</span>&gt;&gt; {
+
+    <span class="directive">private</span> <span class="directive">final</span> <span class="predefined-type">String</span> id;
+
+    <span class="directive">private</span> <span class="directive">final</span> StringValue value;
+
+    <span class="directive">public</span> StringBean(<span class="predefined-type">String</span> id, StringValue value) {
+        <span class="local-variable">this</span>.id = id;
+        <span class="local-variable">this</span>.value = value;
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="predefined-type">String</span> getId() {
+        <span class="keyword">return</span> id;
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> StringValue getValue() {
+        <span class="keyword">return</span> value;
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_templating"><a class="anchor" href="#_templating"></a>3.7. Templating</h3>
 <div class="paragraph">
 <p>Binding query parameters, as described above, is excellent for sending a static set of parameters to the database engine.  Binding ensures that the parameterized query string (<code>&#8230;&#8203; where foo = ?</code>) is transmitted to the database without allowing hostile parameter values to inject SQL.</p>
 </div>
@@ -3287,7 +3524,7 @@ handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><s
 </div>
 </div>
 <div class="sect2">
-<h3 id="_sql_arrays"><a class="anchor" href="#_sql_arrays"></a>3.7. SQL Arrays</h3>
+<h3 id="_sql_arrays"><a class="anchor" href="#_sql_arrays"></a>3.8. SQL Arrays</h3>
 <div class="paragraph">
 <p>Jdbi can bind/map Java arrays to/from SQL arrays:</p>
 </div>
@@ -3334,7 +3571,7 @@ the element type if you&#8217;re using the fluent API, since it&#8217;s erased:<
 </div>
 </div>
 <div class="sect3">
-<h4 id="_registering_array_types"><a class="anchor" href="#_registering_array_types"></a>3.7.1. Registering array types</h4>
+<h4 id="_registering_array_types"><a class="anchor" href="#_registering_array_types"></a>3.8.1. Registering array types</h4>
 <div class="paragraph">
 <p>Any Java array element type you want binding support for needs to be registered
 with Jdbi&#8217;s <code>SqlArrayTypes</code> registry. An array type that is directly supported
@@ -3377,7 +3614,7 @@ where <code>"colors"</code> is a user-defined enum type name in your database.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_binding_custom_array_types"><a class="anchor" href="#_binding_custom_array_types"></a>3.7.2. Binding custom array types</h4>
+<h4 id="_binding_custom_array_types"><a class="anchor" href="#_binding_custom_array_types"></a>3.8.2. Binding custom array types</h4>
 <div class="paragraph">
 <p>You can also provide your own implementation of <code>SqlArrayType</code> that converts
 a custom Java element type to a type supported by the JDBC driver:</p>
@@ -3428,7 +3665,7 @@ registered for the same data type, the last registered wins.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_mapping_array_types"><a class="anchor" href="#_mapping_array_types"></a>3.7.3. Mapping array types</h4>
+<h4 id="_mapping_array_types"><a class="anchor" href="#_mapping_array_types"></a>3.8.3. Mapping array types</h4>
 <div class="paragraph">
 <p><code>SqlArrayType</code> only allows you to bind Java array/collection arguments to their
 SQL counterparts. To map SQL array columns back to Java types, you can register
@@ -3470,7 +3707,7 @@ Array columns can be mapped to any container type registered with the
 </div>
 </div>
 <div class="sect2">
-<h3 id="_results"><a class="anchor" href="#_results"></a>3.8. Results</h3>
+<h3 id="_results"><a class="anchor" href="#_results"></a>3.9. Results</h3>
 <div class="paragraph">
 <p>After executing a database query, you need to interpret the results. JDBC
 provides the <strong>ResultSet</strong> class which can do simple mapping to Java primitives
@@ -3530,8 +3767,17 @@ to you in a container such as a <strong>List</strong>, <strong>Stream</strong>, 
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>When Jdbi consumes all rows to make the result, like a <code>List&lt;T&gt;</code> or single result,
+the underlying <code>ResultSet</code> will be closed before returning the result. Otherwise,
+such as with a <code>Stream&lt;T&gt;</code> or a <code>Iterable&lt;T&gt;</code> result, you are responsible to <code>close()</code> the
+result object, which closes the <code>ResultSet</code>. Prefer automatic resource management
+like <code>use</code> or <code>with</code> methods, or use <code>try-with-resources</code>. Generally, ending the transaction,
+or closing the Handle (<code>Connection</code>) will release all associated result sets.
+Attempting to iterate a closed result set is an error.</p>
+</div>
 <div class="sect3">
-<h4 id="_resultbearing"><a class="anchor" href="#_resultbearing"></a>3.8.1. ResultBearing</h4>
+<h4 id="_resultbearing"><a class="anchor" href="#_resultbearing"></a>3.9.1. ResultBearing</h4>
 <div class="paragraph">
 <p>The <a href="./apidocs/org/jdbi/v3/core/result/ResultBearing.html">ResultBearing</a> interface
 represents a result set of a database operation, which has not been mapped to
@@ -3597,7 +3843,7 @@ same as mapTo(User.class).collect(toList())</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_resultiterable"><a class="anchor" href="#_resultiterable"></a>3.8.2. ResultIterable</h4>
+<h4 id="_resultiterable"><a class="anchor" href="#_resultiterable"></a>3.9.2. ResultIterable</h4>
 <div class="paragraph">
 <p><a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html">ResultIterable</a> represents a
 result set which has been mapped to a specific type, e.g.
@@ -3747,7 +3993,7 @@ but someone&#8217;s gotta do the dirty work.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_joins"><a class="anchor" href="#_joins"></a>3.8.3. Joins</h4>
+<h4 id="_joins"><a class="anchor" href="#_joins"></a>3.9.3. Joins</h4>
 <div class="paragraph">
 <p>Joining multiple tables together is a very common database task. It is also
 where the mismatch between the relational model and Java&#8217;s object model starts
@@ -4081,7 +4327,7 @@ assertThat(joined).isEqualTo(JoinRowMapperTest.getExpected());</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_updates"><a class="anchor" href="#_updates"></a>3.9. Updates</h3>
+<h3 id="_updates"><a class="anchor" href="#_updates"></a>3.10. Updates</h3>
 <div class="paragraph">
 <p>Updates are operations that return an integer number of rows modified, such
 as a database <strong>INSERT</strong>, <strong>UPDATE</strong>, or <strong>DELETE</strong>.</p>
@@ -4113,7 +4359,7 @@ assertThat(count).isEqualTo(<span class="integer">1</span>);</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_batches"><a class="anchor" href="#_batches"></a>3.10. Batches</h3>
+<h3 id="_batches"><a class="anchor" href="#_batches"></a>3.11. Batches</h3>
 <div class="paragraph">
 <p>A <strong>Batch</strong> sends many commands to the server in bulk.</p>
 </div>
@@ -4137,7 +4383,7 @@ those counts are then returned in an <code>int[]</code> array.  In common cases 
 </div>
 </div>
 <div class="sect2">
-<h3 id="_prepared_batches"><a class="anchor" href="#_prepared_batches"></a>3.11. Prepared Batches</h3>
+<h3 id="_prepared_batches"><a class="anchor" href="#_prepared_batches"></a>3.12. Prepared Batches</h3>
 <div class="paragraph">
 <p>A <strong>PreparedBatch</strong> sends one statement to the server with many argument sets.
 The statement is executed repeatedly, once for each batch of arguments that is <strong>add</strong>-ed to it.</p>
@@ -4195,7 +4441,7 @@ and committed in pieces - or risk bringing your database to its knees.
 </table>
 </div>
 <div class="sect3">
-<h4 id="_exception_rewriting"><a class="anchor" href="#_exception_rewriting"></a>3.11.1. Exception Rewriting</h4>
+<h4 id="_exception_rewriting"><a class="anchor" href="#_exception_rewriting"></a>3.12.1. Exception Rewriting</h4>
 <div class="paragraph">
 <p>The JDBC SQLException class is very old and predates more modern exception
 facilities like Throwable&#8217;s suppressed exceptions. When a batch fails, there
@@ -4229,7 +4475,7 @@ Suppressed: org.postgresql.util.PSQLException: ERROR: duplicate key value violat
 </div>
 </div>
 <div class="sect2">
-<h3 id="_generated_keys"><a class="anchor" href="#_generated_keys"></a>3.12. Generated Keys</h3>
+<h3 id="_generated_keys"><a class="anchor" href="#_generated_keys"></a>3.13. Generated Keys</h3>
 <div class="paragraph">
 <p>An Update or PreparedBatch may automatically generate keys. These keys
 are treated separately from normal results. Depending on your database and
@@ -4297,7 +4543,7 @@ separately querying after the insert completes.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_stored_procedure_calls"><a class="anchor" href="#_stored_procedure_calls"></a>3.13. Stored Procedure Calls</h3>
+<h3 id="_stored_procedure_calls"><a class="anchor" href="#_stored_procedure_calls"></a>3.14. Stored Procedure Calls</h3>
 <div class="paragraph">
 <p>A <strong>Call</strong> invokes a database stored procedure.</p>
 </div>
@@ -4392,7 +4638,7 @@ This cannot be expanded through e.g. mapper registration.
 </div>
 </div>
 <div class="sect2">
-<h3 id="_scripts"><a class="anchor" href="#_scripts"></a>3.14. Scripts</h3>
+<h3 id="_scripts"><a class="anchor" href="#_scripts"></a>3.15. Scripts</h3>
 <div class="paragraph">
 <p>A <strong>Script</strong> parses a String into semicolon terminated statements. The statements
 can be executed in a single <strong>Batch</strong> or individually.</p>
@@ -4409,7 +4655,7 @@ assertThat(results).containsExactly(<span class="integer">1</span>, <span class=
 </div>
 </div>
 <div class="sect2">
-<h3 id="_transactions"><a class="anchor" href="#_transactions"></a>3.15. Transactions</h3>
+<h3 id="_transactions"><a class="anchor" href="#_transactions"></a>3.16. Transactions</h3>
 <div class="paragraph">
 <p><strong>jdbi</strong> provides full support for JDBC transactions.</p>
 </div>
@@ -4440,7 +4686,7 @@ begin(), savepoint(), rollback(), commit(), etc.  Normally, you will not need to
 If you do not explicitly commit a manually opened transaction, it will be rolled back.</p>
 </div>
 <div class="sect3">
-<h4 id="_serializable_transactions"><a class="anchor" href="#_serializable_transactions"></a>3.15.1. Serializable Transactions</h4>
+<h4 id="_serializable_transactions"><a class="anchor" href="#_serializable_transactions"></a>3.16.1. Serializable Transactions</h4>
 <div class="paragraph">
 <p>For more advanced queries, sometimes serializable transactions are required.
 <strong>jdbi</strong> includes a transaction runner that is able to retry transactions that
@@ -4506,7 +4752,7 @@ from the other, we get 30 + 60 = 90 and the assertion succeeds.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_classpathsqllocator"><a class="anchor" href="#_classpathsqllocator"></a>3.16. ClasspathSqlLocator</h3>
+<h3 id="_classpathsqllocator"><a class="anchor" href="#_classpathsqllocator"></a>3.17. ClasspathSqlLocator</h3>
 <div class="paragraph">
 <p>You may find it helpful to store your SQL templates in individual files on the
 classpath, rather than in string inside Java code.</p>
@@ -6766,7 +7012,28 @@ jdbi.getConfig(Gson2Config.class).setGson(myGson);</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_operation"><a class="anchor" href="#_operation"></a>7.3.3. Operation</h4>
+<h4 id="_moshi"><a class="anchor" href="#_moshi"></a>7.3.3. Moshi</h4>
+<div class="paragraph">
+<p>This plugin provides JSON backing through Moshi.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
+  <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
+  <span class="tag">&lt;artifactId&gt;</span>jdbi3-moshi<span class="tag">&lt;/artifactId&gt;</span>
+<span class="tag">&lt;/dependency&gt;</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">jdbi.installPlugin(<span class="keyword">new</span> MoshiPlugin());
+<span class="comment">// optional</span>
+jdbi.getConfig(MoshiConfig.class).setMoshi(myMoshi);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_operation"><a class="anchor" href="#_operation"></a>7.3.4. Operation</h4>
 <div class="paragraph">
 <p>Any bound object qualified as <a href="./apidocs/org/jdbi/v3/json/Json.html" target="_blank">@Json</a> — except <code>String</code> —
 will be converted by the <a href="./apidocs/org/jdbi/v3/json/JsonConfig.html" target="_blank">registered</a>
@@ -6794,7 +7061,7 @@ bind/map the <code>@Json String</code> to/from <code>json</code> or <code>jsonb<
 </div>
 </div>
 <div class="sect3">
-<h4 id="_usage"><a class="anchor" href="#_usage"></a>7.3.4. Usage</h4>
+<h4 id="_usage"><a class="anchor" href="#_usage"></a>7.3.5. Usage</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java">handle.execute(<span class="string"><span class="delimiter">&quot;</span><span class="content">create table myjsons (id serial not null, value json not null)</span><span class="delimiter">&quot;</span></span>);</code></pre>
@@ -7525,10 +7792,10 @@ for upstream driver documentation.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_spring"><a class="anchor" href="#_spring"></a>7.12. Spring</h3>
+<h3 id="_spring5"><a class="anchor" href="#_spring5"></a>7.12. Spring5</h3>
 <div class="paragraph">
 <p>This module provides <code>JdbiFactoryBean</code>, a factory bean which sets up a <code>Jdbi</code>
-singleton.</p>
+singleton in a Spring 5 (or Spring Boot) application context.</p>
 </div>
 <div class="paragraph">
 <p>To use this module, add a Maven dependency:</p>
@@ -7537,7 +7804,7 @@ singleton.</p>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
   <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
-  <span class="tag">&lt;artifactId&gt;</span>jdbi3-spring4<span class="tag">&lt;/artifactId&gt;</span>
+  <span class="tag">&lt;artifactId&gt;</span>jdbi3-spring5<span class="tag">&lt;/artifactId&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
@@ -7569,7 +7836,7 @@ singleton.</p>
 
   <i class="conum" data-value="3"></i><b>(3)</b>
   <span class="tag">&lt;bean</span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">jdbi</span><span class="delimiter">&quot;</span></span>
-    <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi.v3.spring4.JdbiFactoryBean</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+    <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi.v3.spring5.JdbiFactoryBean</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
     <span class="tag">&lt;property</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">dataSource</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">ref</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">db</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
   <span class="tag">&lt;/bean&gt;</span>
 
@@ -7604,19 +7871,6 @@ your <code>beans.xml</code>.</td>
 </tr>
 </table>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-This module has been tested to be compatible
-with Spring 5.1.8 (used by Spring Boot 2.1.4) as well.
-</td>
-</tr>
-</table>
-</div>
 <div class="sect3">
 <h4 id="_installing_plugins"><a class="anchor" href="#_installing_plugins"></a>7.12.1. Installing plugins</h4>
 <div class="paragraph">
@@ -7625,7 +7879,7 @@ with Spring 5.1.8 (used by Spring Boot 2.1.4) as well.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;bean</span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">jdbi</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi.v3.spring4.JdbiFactoryBean</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;bean</span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">jdbi</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi.v3.spring5.JdbiFactoryBean</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
   ...
   <span class="tag">&lt;property</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">autoInstallPlugins</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">value</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">true</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
 <span class="tag">&lt;/bean&gt;</span></code></pre>
@@ -7636,7 +7890,7 @@ with Spring 5.1.8 (used by Spring Boot 2.1.4) as well.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;bean</span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">jdbi</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi.v3.spring4.JdbiFactoryBean</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;bean</span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">jdbi</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi.v3.spring5.JdbiFactoryBean</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
   ...
   <span class="tag">&lt;property</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">plugins</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
     <span class="tag">&lt;list&gt;</span>
@@ -7653,7 +7907,7 @@ auto-install some plugins and manually install the rest:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;bean</span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">jdbi</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi.v3.spring4.JdbiFactoryBean</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;bean</span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">jdbi</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi.v3.spring5.JdbiFactoryBean</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
   ...
   <span class="tag">&lt;property</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">autoInstallPlugins</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">value</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">true</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
   <span class="tag">&lt;property</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">plugins</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
@@ -7672,7 +7926,7 @@ auto-install some plugins and manually install the rest:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;bean</span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">jdbi</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi.v3.spring4.JdbiFactoryBean</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;bean</span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">jdbi</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi.v3.spring5.JdbiFactoryBean</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
   <span class="tag">&lt;property</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">dataSource</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">ref</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">db</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
   <span class="tag">&lt;property</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">globalDefines</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
     <span class="tag">&lt;map&gt;</span>
@@ -7754,6 +8008,19 @@ to <code>StringTemplateEngine</code>.</p>
       .mapTo(Account.class)
       .list();</code></pre>
 </div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Since StringTemplate by default uses the <code>&lt;</code> character to mark ST expressions,
+you might need to escape some SQL: <code>String datePredSql = "&lt;if(datePredicate)&gt; &lt;dateColumn&gt; \\&lt; :dateFilter &lt;endif&gt;"</code>
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>Alternatively, SQL templates can be loaded from StringTemplate group files on
@@ -9240,6 +9507,10 @@ and given the current <code>StatementContext</code>, to log any relevant informa
 mainly the query in various compilation stages,
 attributes and bindings, and important timestamps.</p>
 </div>
+<div class="paragraph">
+<p>There&#8217;s a simple <a href="./apidocs/org/jdbi/v3/core/statement/Slf4jSqlLogger.html" target="_blank">Slf4jSqlLogger</a>
+implementation that logs all executed statements for debugging.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_resultproducer"><a class="anchor" href="#_resultproducer"></a>9.12. ResultProducer</h3>
@@ -9556,7 +9827,7 @@ return types, or on <code>@SqlBatch</code> parameters.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-03-25 16:10:39 PDT
+Last updated 2021-04-09 15:55:08 PDT
 </div>
 </div>
 </body>
