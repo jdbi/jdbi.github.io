@@ -486,7 +486,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_resolving_types">3.6.1. Resolving Types</a></li>
 </ul>
 </li>
-<li><a href="#_templating">3.7. Templating</a></li>
+<li><a href="#_templating">3.7. Templating</a>
+<ul class="sectlevel3">
+<li><a href="#_classpathsqllocator">3.7.1. ClasspathSqlLocator</a></li>
+</ul>
+</li>
 <li><a href="#_sql_arrays">3.8. SQL Arrays</a>
 <ul class="sectlevel3">
 <li><a href="#_registering_array_types">3.8.1. Registering array types</a></li>
@@ -516,7 +520,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_serializable_transactions">3.16.1. Serializable Transactions</a></li>
 </ul>
 </li>
-<li><a href="#_classpathsqllocator">3.17. ClasspathSqlLocator</a></li>
 </ul>
 </li>
 <li><a href="#_configuration">4. Configuration</a>
@@ -3450,6 +3453,26 @@ handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><s
 <div class="paragraph">
 <p>Also see the section about <a href="#_templateengine">TemplateEngine</a>.</p>
 </div>
+<div class="sect3">
+<h4 id="_classpathsqllocator"><a class="anchor" href="#_classpathsqllocator"></a><a class="link" href="#_classpathsqllocator">3.7.1. ClasspathSqlLocator</a></h4>
+<div class="paragraph">
+<p>You may find it helpful to store your SQL templates in individual files on the
+classpath, rather than in string inside Java code.</p>
+</div>
+<div class="paragraph">
+<p>The <code>ClasspathSqlLocator</code> converts Java type and method names into classpath locations,
+and then reads, parses, and caches the loaded statements.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// reads classpath resource com/foo/BarDao/query.sql</span>
+ClasspathSqlLocator.findSqlOnClasspath(com.foo.BarDao.class, <span class="string"><span class="delimiter">&quot;</span><span class="content">query</span><span class="delimiter">&quot;</span></span>);
+
+<span class="comment">// same resource as above</span>
+ClasspathSqlLocator.findSqlOnClasspath(<span class="string"><span class="delimiter">&quot;</span><span class="content">com.foo.BarDao.query</span><span class="delimiter">&quot;</span></span>);</code></pre>
+</div>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_sql_arrays"><a class="anchor" href="#_sql_arrays"></a><a class="link" href="#_sql_arrays">3.8. SQL Arrays</a></h3>
@@ -4676,26 +4699,6 @@ serial execution of the transactions!</p>
 <p>With serializable isolation, one of the two transactions is forced to abort and
 retry. On the second go around, it calculates 10 + 20 + 30 = 60. Adding to 30
 from the other, we get 30 + 60 = 90 and the assertion succeeds.</p>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_classpathsqllocator"><a class="anchor" href="#_classpathsqllocator"></a><a class="link" href="#_classpathsqllocator">3.17. ClasspathSqlLocator</a></h3>
-<div class="paragraph">
-<p>You may find it helpful to store your SQL templates in individual files on the
-classpath, rather than in string inside Java code.</p>
-</div>
-<div class="paragraph">
-<p>The <code>ClasspathSqlLocator</code> converts Java type and method names into classpath locations,
-and then reads, parses, and caches the loaded statements.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// reads classpath resource com/foo/BarDao/query.sql</span>
-ClasspathSqlLocator.findSqlOnClasspath(com.foo.BarDao.class, <span class="string"><span class="delimiter">&quot;</span><span class="content">query</span><span class="delimiter">&quot;</span></span>);
-
-<span class="comment">// same resource as above</span>
-ClasspathSqlLocator.findSqlOnClasspath(<span class="string"><span class="delimiter">&quot;</span><span class="content">com.foo.BarDao.query</span><span class="delimiter">&quot;</span></span>);</code></pre>
 </div>
 </div>
 </div>
@@ -9776,7 +9779,7 @@ return types, or on <code>@SqlBatch</code> parameters.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-07-03 16:11:54 -0700
+Last updated 2021-07-03 16:55:24 -0700
 </div>
 </div>
 <style>
