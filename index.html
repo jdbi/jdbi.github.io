@@ -520,6 +520,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_serializable_transactions">3.16.1. Serializable Transactions</a></li>
 </ul>
 </li>
+<li><a href="#_metadata">3.17. Metadata</a></li>
 </ul>
 </li>
 <li><a href="#_configuration">4. Configuration</a>
@@ -4699,6 +4700,34 @@ serial execution of the transactions!</p>
 <p>With serializable isolation, one of the two transactions is forced to abort and
 retry. On the second go around, it calculates 10 + 20 + 30 = 60. Adding to 30
 from the other, we get 30 + 60 = 90 and the assertion succeeds.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_metadata"><a class="anchor" href="#_metadata"></a><a class="link" href="#_metadata">3.17. Metadata</a></h3>
+<div class="paragraph">
+<p>Jdbi allows access to the Database Metadata through <code>queryMetadata</code> methods on the <a href="./apidocs/org/jdbi/v3/core/Handle.html" target="_blank" rel="noopener">Handle</a>.</p>
+</div>
+<div class="paragraph">
+<p>Simple values can be queried directly using a method reference:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">String</span> url = h.queryMetadata(<span class="predefined-type">DatabaseMetaData</span>::getURL);
+<span class="type">boolean</span> supportsTransactions = h.queryMetadata(<span class="predefined-type">DatabaseMetaData</span>::supportsTransactions);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Many methods on the <a href="https://docs.oracle.com/javase/8/docs/api/java/sql/DatabaseMetaData.html" target="_blank" rel="noopener">DatabaseMetaData</a> return a <a href="https://docs.oracle.com/javase/8/docs/api/java/sql/ResultSet.html" target="_blank" rel="noopener">ResultSet</a>. These can be used with the <code>queryMetadata</code> method that returns a <a href="#_resultbearing">ResultBearing</a>.</p>
+</div>
+<div class="paragraph">
+<p>All JDBI <a href="#_row_mappers">Row Mappers</a> and <a href="#_column_mappers">Column Mappers</a> are available to map these results:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt; catalogNames = h.queryMetadata(<span class="predefined-type">DatabaseMetaData</span>::getCatalogs)
+            .mapTo(<span class="predefined-type">String</span>.class)
+            .list();</code></pre>
 </div>
 </div>
 </div>
@@ -9779,7 +9808,7 @@ return types, or on <code>@SqlBatch</code> parameters.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-07-03 16:55:24 -0700
+Last updated 2021-07-04 12:59:16 -0700
 </div>
 </div>
 <style>
