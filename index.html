@@ -3467,11 +3467,40 @@ and then reads, parses, and caches the loaded statements.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// reads classpath resource com/foo/BarDao/query.sql</span>
-ClasspathSqlLocator.findSqlOnClasspath(com.foo.BarDao.class, <span class="string"><span class="delimiter">&quot;</span><span class="content">query</span><span class="delimiter">&quot;</span></span>);
+ClasspathSqlLocator.create().locate(com.foo.BarDao.class, <span class="string"><span class="delimiter">&quot;</span><span class="content">query</span><span class="delimiter">&quot;</span></span>);
 
 <span class="comment">// same resource as above</span>
-ClasspathSqlLocator.findSqlOnClasspath(<span class="string"><span class="delimiter">&quot;</span><span class="content">com.foo.BarDao.query</span><span class="delimiter">&quot;</span></span>);</code></pre>
+ClasspathSqlLocator.create().locate(<span class="string"><span class="delimiter">&quot;</span><span class="content">com.foo.BarDao.query</span><span class="delimiter">&quot;</span></span>);</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>By default, any comments in the loaded file are left untouched. Comments can be stripped out by
+instantiating the <code>ClasspathSqlLocator</code> with the <code>removingComments()</code> method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// reads classpath resource com/foo/BarDao/query.sql, stripping all comments</span>
+ClasspathSqlLocator.removingComments().locate(com.foo.BarDao.class, <span class="string"><span class="delimiter">&quot;</span><span class="content">query</span><span class="delimiter">&quot;</span></span>);
+
+<span class="comment">// same resource as above</span>
+ClasspathSqlLocator.removingComments().locate(<span class="string"><span class="delimiter">&quot;</span><span class="content">com.foo.BarDao.query</span><span class="delimiter">&quot;</span></span>);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Multiple comment styles are supported:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>C-style (<code>/* &#8230;&#8203; */</code> and <code>//</code> to the end of the line)</p>
+</li>
+<li>
+<p>SQL style (<code>--</code> to the end of the line)</p>
+</li>
+<li>
+<p>shell style (<code><mark></code> to the end of the line; except if followed immediately by the <code>&gt;</code> character; this is required for the Postgres <code></mark>&gt;</code> and <code>#&gt;&gt;</code> operators).</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -6304,6 +6333,29 @@ the package and name of the SQL Object interface type.</p>
 </div>
 <div class="paragraph">
 <p><strong>@UseClasspathSqlLocator</strong> is implemented with <a href="#_classpathsqllocator">ClasspathSqlLocator</a>, as described above.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Unlike the <a href="#_classpathsqllocator">ClasspathSqlLocator</a>, which loads files unchanged by default, the <code>@UseClasspathSqlLocator</code> will strip out comments! This may lead to unexpected behavior, e.g. SQL Server uses the <code>#</code> character to denote temporary tables. This can be controlled with the <code>stripComments</code> attribute.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">com.foo</span>;
+<span class="annotation">@UseClasspathSqlLocator</span>(stripComments=<span class="predefined-constant">false</span>)
+<span class="type">interface</span> <span class="class">BarDao</span> {
+    <span class="comment">// loads classpath resource com/foo/BarDao/query.sql without stripping comment lines</span>
+    <span class="annotation">@SqlQuery</span>
+    <span class="type">void</span> query();
+}</code></pre>
+</div>
 </div>
 <div class="paragraph">
 <p>If you like StringTemplate, the <a href="#_stringtemplate_4">StringTemplate 4</a> module also provides a
@@ -9808,7 +9860,7 @@ return types, or on <code>@SqlBatch</code> parameters.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-07-05 16:32:12 -0700
+Last updated 2021-07-07 11:55:59 -0700
 </div>
 </div>
 <style>
