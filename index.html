@@ -443,7 +443,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.21.1-SNAPSHOT,</span>
-<span id="revdate">09/11/2021 20:27 -0700</span>
+<span id="revdate">09/12/2021 15:04 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -581,10 +581,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_jodatime">7.6. JodaTime</a></li>
 <li><a href="#_google_guice">7.7. Google Guice</a>
 <ul class="sectlevel3">
-<li><a href="#_configuring_jdbi_instances">7.7.1. Configuring Jdbi instances</a></li>
+<li><a href="#_creating_jdbi_instances">7.7.1. Creating Jdbi instances</a></li>
 <li><a href="#_using_guice_injection_in_jdbi_classes">7.7.2. Using Guice injection in Jdbi classes</a></li>
-<li><a href="#_guice_jdbi_customization">7.7.3. Guice Jdbi customization</a></li>
-<li><a href="#_global_settings">7.7.4. Global settings</a></li>
+<li><a href="#_jdbi_customization_using_guice">7.7.3. Jdbi customization using Guice</a></li>
+<li><a href="#_element_configuration_modules">7.7.4. Element configuration modules</a></li>
 <li><a href="#_advanced_topics">7.7.5. Advanced Topics</a></li>
 </ul>
 </li>
@@ -7314,14 +7314,24 @@ Guice support is still experimental.
 <div class="paragraph">
 <p>The Guice module adds support for configuring and injecting <code>Jdbi</code> instances with the <a href="https://github.com/google/guice/wiki" target="_blank" rel="noopener">Google Guice dependency injection framework</a>.</p>
 </div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Jdbi definition modules</strong> extend the <a href="./apidocs/org/jdbi/v3/guice/AbstractJdbiDefinitionModule.html" target="_blank" rel="noopener">AbstractJdbiDefinitionModule</a> class. Each of these modules creates a new <code>Jdbi</code> instance which is exposed into the Guice binding process using an annotation.</p>
+</li>
+<li>
+<p><strong>Jdbi element configuration modules</strong> extend the <a href="./apidocs/org/jdbi/v3/guice/AbstractJdbiConfigurationModule.html" target="_blank" rel="noopener">AbstractJdbiConfigurationModule</a>. These modules contribute elements that are referenced in Jdbi definition modules.</p>
+</li>
+</ul>
+</div>
 <div class="sect3">
-<h4 id="_configuring_jdbi_instances"><a class="anchor" href="#_configuring_jdbi_instances"></a><a class="link" href="#_configuring_jdbi_instances">7.7.1. Configuring Jdbi instances</a></h4>
+<h4 id="_creating_jdbi_instances"><a class="anchor" href="#_creating_jdbi_instances"></a><a class="link" href="#_creating_jdbi_instances">7.7.1. Creating Jdbi instances</a></h4>
 <div class="paragraph">
-<p>Every <code>Jdbi</code> instance should be configured in its own module which must extend the <a href="./apidocs/org/jdbi/v3/guice/AbstractJdbiModule.html" target="_blank" rel="noopener">AbstractJdbiModule</a> class:</p>
+<p>Every <code>Jdbi</code> instance is defined in its own module which extends the <a href="./apidocs/org/jdbi/v3/guice/AbstractJdbiDefinitionModule.html" target="_blank" rel="noopener">AbstractJdbiDefinitionModule</a> class. This class takes an annotation instance or class on its constructor which is used to bind the resulting Jdbi object:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">GuiceJdbiModule</span> <span class="directive">extends</span> AbstractJdbiModule {
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">GuiceJdbiModule</span> <span class="directive">extends</span> AbstractJdbiDefinitionModule {
 
     <span class="directive">public</span> GuiceJdbiModule() {
         <span class="local-variable">super</span>(GuiceJdbi.class);
@@ -7350,10 +7360,13 @@ Guice support is still experimental.
 </div>
 </div>
 <div class="paragraph">
-<p>In this example, a new <code>Jdbi</code> is configured using specific mappers and other customizations. The <code>Jdbi</code> object itself will be exposed to Guice using the annotation passed on the module constructor (named <code>GuiceJdbi</code> in the example). The <a href="./apidocs/org/jdbi/v3/guice/AbstractJdbiModule.html" target="_blank" rel="noopener">AbstractJdbiModule</a> supports both Annotation instances and Classes extending Annotation, similar to Guice itself.</p>
+<p>In this example, a new <code>Jdbi</code> is defined using specific mappers and other customizations. The <code>Jdbi</code> object is exposed to Guice using the annotation passed on the module constructor (<code>GuiceJdbi</code> in the example). The <a href="./apidocs/org/jdbi/v3/guice/AbstractJdbiDefinitionModule.html" target="_blank" rel="noopener">AbstractJdbiDefinitionModule</a> supports both annotation instances and classes, similar to Guice itself.</p>
 </div>
 <div class="paragraph">
-<p>When implementing the <a href="./apidocs/org/jdbi/v3/guice/AbstractJdbiModule.html" target="_blank" rel="noopener">configureJdbi()</a> method, a number of convenience methods are available as shown above. These methods return Guice LinkedBindingBuilder instances and allow the full range of bindings that guice supports (classes, instances, providers etc).</p>
+<p>A Jdbi definition module requires that a DataSource object is bound within Guice using the same annotation or annotation class as is passed into the module constructor. <strong>Creating this data source is outside the scope of a Jdbi definition module!</strong></p>
+</div>
+<div class="paragraph">
+<p>When implementing the <a href="./apidocs/org/jdbi/v3/guice/AbstractJdbiDefinitionModule.html#jdbiBinder()" target="_blank" rel="noopener">configureJdbi()</a> method, a number of convenience methods are available as shown above. These methods return Guice LinkedBindingBuilder instances and allow the full range of bindings that guice supports (classes, instances, providers etc).</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 1. Supported bindings</caption>
@@ -7371,55 +7384,55 @@ Guice support is still experimental.
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">bindRowMapper()</p></td>
-<td class="tableblock halign-left valign-top" rowspan="3"><p class="tableblock">RowMapper&lt;?&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/guice/JdbiBinder.html#bindRowMapper()" target="_blank" rel="noopener">bindRowMapper()</a></p></td>
+<td class="tableblock halign-left valign-top" rowspan="3"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/core/mapper/RowMapper.html" target="_blank" rel="noopener">RowMapper&lt;?&gt;</a></p></td>
 <td class="tableblock halign-left valign-top" rowspan="3"><p class="tableblock"><a href="#_row_mappers">Row Mappers</a></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">bindRowMapper(GenericType&lt;?&gt;)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/guice/JdbiBinder.html#bindRowMapper(org.jdbi.v3.core.generic.GenericType)" target="_blank" rel="noopener">bindRowMapper(GenericType&lt;?&gt;)</a></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">bindRowMapper(Type)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/guice/JdbiBinder.html#bindRowMapper(java.lang.reflect.Type)" target="_blank" rel="noopener">bindRowMapper(Type)</a></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">bindColumnMapper()</p></td>
-<td class="tableblock halign-left valign-top" rowspan="4"><p class="tableblock">ColumnMapper&lt;?&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/guice/JdbiBinder.html#bindColumnMapper()" target="_blank" rel="noopener">bindColumnMapper()</a></p></td>
+<td class="tableblock halign-left valign-top" rowspan="4"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/core/mapper/ColumnMapper.html" target="_blank" rel="noopener">ColumnMapper&lt;?&gt;</a></p></td>
 <td class="tableblock halign-left valign-top" rowspan="4"><p class="tableblock"><a href="#_column_mappers">Column Mappers</a></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">bindColumnMapper(QualifiedType&lt;?&gt;)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/guice/JdbiBinder.html#bindColumnMapper(org.jdbi.v3.core.qualifier.QualifiedType)" target="_blank" rel="noopener">bindColumnMapper(QualifiedType&lt;?&gt;)</a></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">bindColumnMapper(GenericType&lt;?&gt;)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/guice/JdbiBinder.html#bindColumnMapper(org.jdbi.v3.core.generic.GenericType)" target="_blank" rel="noopener">bindColumnMapper(GenericType&lt;?&gt;)</a></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">bindColumnMapper(Type)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/guice/JdbiBinder.html#bindColumnMapper(java.lang.reflect.Type)" target="_blank" rel="noopener">bindColumnMapper(Type)</a></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">bindCodec(QualifiedType&lt;?&gt;)</p></td>
-<td class="tableblock halign-left valign-top" rowspan="3"><p class="tableblock">Codec&lt;?&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/guice/JdbiBinder.html#bindCodec(org.jdbi.v3.core.qualifier.QualifiedType)" target="_blank" rel="noopener">bindCodec(QualifiedType&lt;?&gt;)</a></p></td>
+<td class="tableblock halign-left valign-top" rowspan="3"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/core/codec/Codec.html" target="_blank" rel="noopener">Codec&lt;?&gt;</a></p></td>
 <td class="tableblock halign-left valign-top" rowspan="3"><p class="tableblock"><a href="#_codecs">Codecs</a></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">bindCodec(GenericType&lt;?&gt;)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/guice/JdbiBinder.html#bindCodec(org.jdbi.v3.core.generic.GenericType)" target="_blank" rel="noopener">bindCodec(GenericType&lt;?&gt;)</a></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">bindCodec(Type)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/guice/JdbiBinder.html#bindCodec(java.lang.reflect.Type)" target="_blank" rel="noopener">bindCodec(Type)</a></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">bindArrayType(Class&lt;?&gt;)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/guice/JdbiBinder.html#bindArrayType(java.lang.Class)" target="_blank" rel="noopener">bindArrayType(Class&lt;?&gt;)</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#_registering_array_types">Registering array types</a></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">bindPlugin()</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">JdbiPlugin</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/guice/JdbiBinder.html#bindPlugin()" target="_blank" rel="noopener">bindPlugin()</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/core/spi/JdbiPlugin.html" target="_blank" rel="noopener">JdbiPlugin</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#_installing_plugins">Installing plugins</a></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">bindCustomizer()</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">GuiceJdbiCustomizer</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#_guice_jdbi_customization">Guice Jdbi customization</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/guice/JdbiBinder.html#bindCustomizer()" target="_blank" rel="noopener">bindCustomizer()</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/guice/GuiceJdbiCustomizer.html" target="_blank" rel="noopener">GuiceJdbiCustomizer</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#_jdbi_customization_using_guice">Jdbi customization using Guice</a></p></td>
 </tr>
 </tbody>
 </table>
@@ -7430,11 +7443,11 @@ Guice support is still experimental.
 <div class="sect3">
 <h4 id="_using_guice_injection_in_jdbi_classes"><a class="anchor" href="#_using_guice_injection_in_jdbi_classes"></a><a class="link" href="#_using_guice_injection_in_jdbi_classes">7.7.2. Using Guice injection in Jdbi classes</a></h4>
 <div class="paragraph">
-<p>The Guice modules store the various related elements (mappers, codecs etc.) using multibindings. As a result, it is not possible to use injection directly when constructing mapper instances. The following example does not work:</p>
+<p>The Jdbi related guice modules store the various related elements (mappers, codecs etc.) using <a href="https://github.com/google/guice/wiki/Multibindings" target="_blank" rel="noopener">Multibindings</a>. As a result, it is not possible to use injection directly when constructing mapper instances. The following example <strong>does not work</strong>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">JdbiModule</span> <span class="directive">extends</span> AbstractJdbiModule {
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">JdbiModule</span> <span class="directive">extends</span> AbstractJdbiDefinitionModule {
 
     <span class="directive">public</span> JdbiModule() {
         <span class="local-variable">super</span>(Names.named(<span class="string"><span class="delimiter">&quot;</span><span class="content">data</span><span class="delimiter">&quot;</span></span>));
@@ -7450,7 +7463,7 @@ Guice support is still experimental.
 <span class="directive">public</span> <span class="type">class</span> <span class="class">CustomStringMapper</span> <span class="directive">implements</span> ColumnMapper&lt;<span class="predefined-type">String</span>&gt; {
 
     <span class="annotation">@Override</span>
-    <span class="directive">public</span> <span class="predefined-type">String</span> map(<span class="predefined-type">ResultSet</span> r, <span class="type">int</span> columnNumber, StatementContext ctx) <span class="directive">throws</span> <span class="exception">SQLException</span> {
+    <span class="directive">public</span> <span class="predefined-type">String</span> map(<span class="predefined-type">ResultSet</span> r, <span class="type">int</span> columnNumber, StatementContext ctx) {
         <span class="type">long</span> x = r.getLong(columnNumber);
         <span class="keyword">return</span> (x &gt; <span class="integer">1000</span>) ? <span class="string"><span class="delimiter">&quot;</span><span class="content">Huge</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">Small</span><span class="delimiter">&quot;</span></span>;
     }
@@ -7466,7 +7479,7 @@ Guice support is still experimental.
     }
 
     <span class="annotation">@Override</span>
-    <span class="directive">public</span> DataRow map(<span class="predefined-type">ResultSet</span> rs, StatementContext ctx) <span class="directive">throws</span> <span class="exception">SQLException</span> {
+    <span class="directive">public</span> DataRow map(<span class="predefined-type">ResultSet</span> rs, StatementContext ctx) {
         <span class="keyword">return</span> <span class="keyword">new</span> DataRow(rs.getInt(<span class="string"><span class="delimiter">&quot;</span><span class="content">intValue</span><span class="delimiter">&quot;</span></span>),
                 stringMapper.map(rs, <span class="string"><span class="delimiter">&quot;</span><span class="content">longValue</span><span class="delimiter">&quot;</span></span>, ctx));
     }
@@ -7474,11 +7487,11 @@ Guice support is still experimental.
 </div>
 </div>
 <div class="paragraph">
-<p>Guice will report an error that it can not locate the CustomStringMapper. Within the Guice Jdbi support, mappers etc. are managed as groups and not directly accessible for injection. The right way to compose mappers is using the Jdbi registries which will be configured through Guice:</p>
+<p>Guice will report an error that it can not locate the <code>CustomStringMapper</code> instance. The Guice Jdbi integration manages mappers etc. as groups and the separate instances are not directly accessible for injection. The right way to compose mappers is using the Jdbi configuration (see <a href="#_jdbiconfig">JdbiConfig</a>), which is configured through Guice:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">JdbiModule</span> <span class="directive">extends</span> AbstractJdbiModule {
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">JdbiModule</span> <span class="directive">extends</span> AbstractJdbiDefinitionModule {
 
     <span class="directive">public</span> JdbiModule() {
         <span class="local-variable">super</span>(Names.named(<span class="string"><span class="delimiter">&quot;</span><span class="content">data</span><span class="delimiter">&quot;</span></span>));
@@ -7522,48 +7535,61 @@ Guice support is still experimental.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_guice_jdbi_customization"><a class="anchor" href="#_guice_jdbi_customization"></a><a class="link" href="#_guice_jdbi_customization">7.7.3. Guice Jdbi customization</a></h4>
+<h4 id="_jdbi_customization_using_guice"><a class="anchor" href="#_jdbi_customization_using_guice"></a><a class="link" href="#_jdbi_customization_using_guice">7.7.3. Jdbi customization using Guice</a></h4>
 <div class="paragraph">
-<p>Many Jdbi specific settings can be configured through binding (RowMappers, ColumnMappers, Codecs, Plugins etc.), however there are additional features that may not be available through the <a href="./apidocs/org/jdbi/v3/guice/AbstractJdbiModule.html" target="_blank" rel="noopener">AbstractJdbiModule</a>. For those use cases, classes can implement the GuiceJdbiCustomizer interface and then getting bound in a module. Every customizer will get the Jdbi instance passed at construction time and may modify any aspect of the <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instance before it gets exposed to other parts of the application.</p>
+<p>Many Jdbi specific settings can be configured through binding (row mappers, column mappers, codecs, plugins etc.), however there are additional features that may not be available through methods on <a href="./apidocs/org/jdbi/v3/guice/AbstractJdbiDefinitionModule.html" target="_blank" rel="noopener">AbstractJdbiDefinitionModule</a>. For those use cases, classes can implement the <a href="./apidocs/org/jdbi/v3/guice/GuiceJdbiCustomizer.html" target="_blank" rel="noopener">GuiceJdbiCustomizer</a> interface and then bound in a module. Every customizer will get the <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instance passed at construction time and may modify any aspect before it gets exposed to other parts of the application.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">GuiceCustomization</span> <span class="directive">extends</span> AbstractJdbiModule {
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">GuiceCustomizationModule</span> <span class="directive">extends</span> AbstractJdbiDefinitionModule {
 
-    <span class="directive">public</span> GuiceCustomization() {
+    <span class="directive">public</span> GuiceCustomizationModule() {
         <span class="local-variable">super</span>(Custom.class);
     }
 
     <span class="annotation">@Override</span>
     <span class="directive">protected</span> <span class="type">void</span> configureJdbi() {
-        bindCustomizer().to(<span class="predefined-type">Customizer</span>.class);
+        bindCustomizer().to(MyCustomizer.class);
     }
 }
 
-<span class="type">class</span> <span class="class">Customizer</span> <span class="directive">implements</span> GuiceJdbiCustomizer {
+<span class="type">class</span> <span class="class">MyCustomizer</span> <span class="directive">implements</span> GuiceJdbiCustomizer {
 
     <span class="annotation">@Override</span>
     <span class="directive">public</span> <span class="type">void</span> customize(Jdbi jdbi) {
+        <span class="comment">// set the logger to use Slf4j</span>
         jdbi.setSqlLogger(<span class="keyword">new</span> Slf4JSqlLogger());
     }
 }</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>In this example, the customizer sets the logger explictly.</p>
-</div>
 </div>
 <div class="sect3">
-<h4 id="_global_settings"><a class="anchor" href="#_global_settings"></a><a class="link" href="#_global_settings">7.7.4. Global settings</a></h4>
-<div class="paragraph">
-<p>Within any module that defines a <code>Jdbi</code> object, all bindings are local to this module. This is useful if all Jdbi code can be grouped around the module. In larger projects however, some parts of the code (and their Jdbi related classes such as Row and Column mappers) may be located in different code modules.</p>
+<h4 id="_element_configuration_modules"><a class="anchor" href="#_element_configuration_modules"></a><a class="link" href="#_element_configuration_modules">7.7.4. Element configuration modules</a></h4>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Element configuration modules are completely optional and should not be used when only a single Jdbi instance is required. They help organize code in larger projects that have more complex needs.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>To support such modular designs, code modules that want to contribute Jdbi specific classes such as mappers but do not expose a Jdbi instance themselves can define a module extending AbstractJdbiGlobalsModule and register mappers, plugins etc. similar to a Jdbi specific module. Anything that is registered in such a module is global and will be applied to all instances even if they are defined in another module.</p>
+<p>Within any module that defines a <code>Jdbi</code> object, all bindings are local to that module. This is useful if all Jdbi code can be grouped around the module. In larger projects, some parts of the code (and their Jdbi related classes such as row and column mappers) may be located in different part of the code base.</p>
+</div>
+<div class="paragraph">
+<p>To support such modular designs, code that wants to contribute Jdbi specific classes such as mappers but does not define a <code>Jdbi</code> instance themselves can use an element configuration module.</p>
+</div>
+<div class="paragraph">
+<p>These modules extend <a href="./apidocs/org/jdbi/v3/guice/AbstractJdbiConfigurationModule.html" target="_blank" rel="noopener">AbstractJdbiConfigurationModule</a> and can define mappers, plugins etc. similar to a Jdbi definition module. Anything that is registered in such a module is global and will be applied to all instances even if they are defined in another module.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">DomainModule</span> <span class="directive">extends</span> AbstractJdbiGlobalsModule {
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">DomainModule</span> <span class="directive">extends</span> AbstractJdbiConfigurationModule {
 
     <span class="annotation">@Override</span>
     <span class="directive">protected</span> <span class="type">void</span> configureJdbi() {
@@ -7597,7 +7623,7 @@ Guice support is still experimental.
 <p>All configured <code>Jdbi</code> instances will be able to map DomainObject instances without having to configure them explicitly as a row mapper.</p>
 </div>
 <div class="paragraph">
-<p>Multiple modules extending AbstractJdbiGlobalsModule can be installed in a single injector; the resulting bindings will be aggregated.</p>
+<p>Multiple modules extending <a href="./apidocs/org/jdbi/v3/guice/AbstractJdbiConfigurationModule.html" target="_blank" rel="noopener">AbstractJdbiConfigurationModule</a> can be installed in a single injector; the resulting bindings will be aggregated.</p>
 </div>
 </div>
 <div class="sect3">
@@ -7605,10 +7631,10 @@ Guice support is still experimental.
 <div class="sect4">
 <h5 id="_exposing_additional_bindings"><a class="anchor" href="#_exposing_additional_bindings"></a><a class="link" href="#_exposing_additional_bindings">Exposing additional bindings</a></h5>
 <div class="paragraph">
-<p>Each module that defines a <code>Jdbi</code> instance keeps all bindings private and exposes only the actual <code>Jdbi</code> object itself. This allows the installation of multiple modules where each definition is completely independent. Sometimes it is useful to "attach" additional objects to this process and expose them using the same annotations. The most common use cases are data access objects.</p>
+<p>Each module that defines a <code>Jdbi</code> instance keeps all bindings private and exposes only the actual <code>Jdbi</code> object itself. This allows the installation of multiple modules where each definition is completely independent. Sometimes it is useful to attach additional objects and expose them using the same annotations. The most common use cases are data access objects.</p>
 </div>
 <div class="paragraph">
-<p>Consider a use case where two DataSource instances exist, one annotated as Writer and one as Reader. Both are accessing databases with the same schema, and it would make sense to have two data access objects that are identical except that they are using the different data sources.</p>
+<p>Consider a use case where two DataSource instances exist, one annotated as Writer and one as Reader. Both are accessing databases with the same schema, and it would make sense to have two data access objects that are identical except that they are using the different data sources (this is often referred to as the "robot legs" problem of dependency injection):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -7622,11 +7648,11 @@ Guice support is still experimental.
 </div>
 </div>
 <div class="paragraph">
-<p>To bind two instances of this object, each connected to the appropriate Jdbi instance, define it in the module and expose it as an annotated binding with exposeBinding:</p>
+<p>To bind two instances of this object, each connected to the appropriate Jdbi instance, add its definition and binding to the definition module and add an expose it as an annotated binding with exposeBinding:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">DatabaseModule</span> <span class="directive">extends</span> AbstractJdbiModule {
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">DatabaseModule</span> <span class="directive">extends</span> AbstractJdbiDefinitionModule {
     <span class="directive">public</span> DatabaseModule(<span class="predefined-type">Class</span>&lt;? <span class="directive">extends</span> <span class="predefined-type">Annotation</span>&gt; a) {
         <span class="local-variable">super</span>(a);
     }
@@ -7647,11 +7673,12 @@ Guice support is still experimental.
 </div>
 </div>
 <div class="paragraph">
-<p>Finally, install the module with different annotations:</p>
+<p>Now install the module with different annotations:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java">Injector injector = Guice.createInjector(
+    <span class="comment">// bind data sources created somewhere</span>
     binder -&gt; binder.bind(<span class="predefined-type">DataSource</span>.class).annotatedWith(<span class="predefined-type">Reader</span>.class).toInstance(...);
     binder -&gt; binder.bind(<span class="predefined-type">DataSource</span>.class).annotatedWith(<span class="predefined-type">Writer</span>.class).toInstance(...);
 
@@ -7662,6 +7689,12 @@ Guice support is still experimental.
 DatabaseAccess readerAccess = injector.getInstance(<span class="predefined-type">Key</span>.get(DatabaseAccess.class, <span class="predefined-type">Reader</span>.class));
 DatabaseAccess writerAccess = injector.getInstance(<span class="predefined-type">Key</span>.get(DatabaseAccess.class, <span class="predefined-type">Writer</span>.class));</code></pre>
 </div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_use_multiple_global_definition_modules"><a class="anchor" href="#_use_multiple_global_definition_modules"></a><a class="link" href="#_use_multiple_global_definition_modules">Use multiple global definition modules</a></h5>
+<div class="paragraph">
+<p>Sometimes, it is useful to group Jdbi related elements in a global module (see <a href="#Global definition modules">[Global definition modules]</a>) which is used only in a subset of the actual Jdbi definition modules.</p>
 </div>
 </div>
 </div>
@@ -10243,7 +10276,7 @@ return types, or on <code>@SqlBatch</code> parameters.</p>
 <div id="footer">
 <div id="footer-text">
 Version 3.21.1-SNAPSHOT<br>
-Last updated 09/11/2021 20:27 -0700
+Last updated 09/12/2021 15:04 -0700
 </div>
 </div>
 <style>
