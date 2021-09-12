@@ -443,7 +443,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.21.1-SNAPSHOT,</span>
-<span id="revdate">07/16/2021 14:53 -0700</span>
+<span id="revdate">09/11/2021 18:02 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -579,31 +579,40 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_immutables">7.4. Immutables</a></li>
 <li><a href="#_freebuilder">7.5. Freebuilder</a></li>
 <li><a href="#_jodatime">7.6. JodaTime</a></li>
-<li><a href="#_jpa">7.7. JPA</a></li>
-<li><a href="#_kotlin">7.8. Kotlin</a>
+<li><a href="#_google_guice">7.7. Google Guice</a>
 <ul class="sectlevel3">
-<li><a href="#_resultset_mapping">7.8.1. ResultSet mapping</a></li>
-<li><a href="#_sqlobject">7.8.2. SqlObject</a></li>
+<li><a href="#_configuring_jdbi_instances">7.7.1. Configuring Jdbi instances</a></li>
+<li><a href="#_using_guice_injection_in_jdbi_classes">7.7.2. Using Guice injection in Jdbi classes</a></li>
+<li><a href="#_guice_jdbi_customization">7.7.3. Guice Jdbi customization</a></li>
+<li><a href="#_global_settings">7.7.4. Global settings</a></li>
+<li><a href="#_advanced_topics">7.7.5. Advanced Topics</a></li>
 </ul>
 </li>
-<li><a href="#_lombok">7.9. Lombok</a></li>
-<li><a href="#_oracle_12">7.10. Oracle 12</a></li>
-<li><a href="#_postgresql">7.11. PostgreSQL</a>
+<li><a href="#_jpa">7.8. JPA</a></li>
+<li><a href="#_kotlin">7.9. Kotlin</a>
 <ul class="sectlevel3">
-<li><a href="#_hstore">7.11.1. hstore</a></li>
-<li><a href="#_getgeneratedkeys_4">7.11.2. @GetGeneratedKeys</a></li>
-<li><a href="#_large_objects">7.11.3. Large Objects</a></li>
+<li><a href="#_resultset_mapping">7.9.1. ResultSet mapping</a></li>
+<li><a href="#_sqlobject">7.9.2. SqlObject</a></li>
 </ul>
 </li>
-<li><a href="#_spring5">7.12. Spring5</a>
+<li><a href="#_lombok">7.10. Lombok</a></li>
+<li><a href="#_oracle_12">7.11. Oracle 12</a></li>
+<li><a href="#_postgresql">7.12. PostgreSQL</a>
 <ul class="sectlevel3">
-<li><a href="#_installing_plugins">7.12.1. Installing plugins</a></li>
-<li><a href="#_global_attributes">7.12.2. Global Attributes</a></li>
+<li><a href="#_hstore">7.12.1. hstore</a></li>
+<li><a href="#_getgeneratedkeys_4">7.12.2. @GetGeneratedKeys</a></li>
+<li><a href="#_large_objects">7.12.3. Large Objects</a></li>
 </ul>
 </li>
-<li><a href="#_sqlite">7.13. SQLite</a></li>
-<li><a href="#_stringtemplate_4">7.14. StringTemplate 4</a></li>
-<li><a href="#_vavr">7.15. Vavr</a></li>
+<li><a href="#_spring5">7.13. Spring5</a>
+<ul class="sectlevel3">
+<li><a href="#_installing_plugins">7.13.1. Installing plugins</a></li>
+<li><a href="#_global_attributes">7.13.2. Global Attributes</a></li>
+</ul>
+</li>
+<li><a href="#_sqlite">7.14. SQLite</a></li>
+<li><a href="#_stringtemplate_4">7.15. StringTemplate 4</a></li>
+<li><a href="#_vavr">7.16. Vavr</a></li>
 </ul>
 </li>
 <li><a href="#_cookbook">8. Cookbook</a>
@@ -612,7 +621,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_like_clauses_with_parameters">8.2. LIKE clauses with Parameters</a></li>
 </ul>
 </li>
-<li><a href="#_advanced_topics">9. Advanced Topics</a>
+<li><a href="#_advanced_topics_2">9. Advanced Topics</a>
 <ul class="sectlevel2">
 <li><a href="#_high_availability">9.1. High Availability</a></li>
 <li><a href="#_compiling_with_parameter_names">9.2. Compiling with Parameter Names</a>
@@ -7289,7 +7298,376 @@ configure the new `bindPojo</code> (or <code>@BindPojo</code>) binders:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_jpa"><a class="anchor" href="#_jpa"></a><a class="link" href="#_jpa">7.7. JPA</a></h3>
+<h3 id="_google_guice"><a class="anchor" href="#_google_guice"></a><a class="link" href="#_google_guice">7.7. Google Guice</a></h3>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Guice support is still experimental.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The Guice module adds support for configuring and injecting <code>Jdbi</code> instances with the <a href="https://github.com/google/guice/wiki" target="_blank" rel="noopener">Google Guice dependency injection framework</a>.</p>
+</div>
+<div class="sect3">
+<h4 id="_configuring_jdbi_instances"><a class="anchor" href="#_configuring_jdbi_instances"></a><a class="link" href="#_configuring_jdbi_instances">7.7.1. Configuring Jdbi instances</a></h4>
+<div class="paragraph">
+<p>Every <code>Jdbi</code> instance should be configured in its own module which must extend the <a href="./apidocs/org/jdbi/v3/guice/AbstractJdbiModule.html" target="_blank" rel="noopener">AbstractJdbiModule</a> class:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">GuiceJdbiModule</span> <span class="directive">extends</span> AbstractJdbiModule {
+
+    <span class="directive">public</span> GuiceJdbiModule() {
+        <span class="local-variable">super</span>(GuiceJdbi.class);
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">protected</span> <span class="type">void</span> configureJdbi() {
+        <span class="comment">// bind a custom row mapper</span>
+        bindRowMapper().to(CustomRowMapper.class);
+
+        <span class="comment">// bind a custom column mapper</span>
+        bindColumnMapper().toInstance(<span class="keyword">new</span> CustomColumnMapper());
+
+        <span class="comment">// bind a Codec</span>
+        bindCodec(<span class="predefined-type">String</span>.class).to(<span class="predefined-type">Key</span>.get(CustomStringCodec.class, Custom.class));
+
+        <span class="comment">// bind a custom array type</span>
+        bindArrayType(CustomArrayType.class).toInstance(<span class="string"><span class="delimiter">&quot;</span><span class="content">custom_array</span><span class="delimiter">&quot;</span></span>);
+
+        <span class="comment">// bind a jdbi plugin</span>
+        bindPlugin().toInstance(<span class="keyword">new</span> SqlObjectPlugin());
+
+        <span class="comment">// bind a customizer</span>
+        bindCustomizer().to(SpecialCustomizer.class);
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this example, a new <code>Jdbi</code> is configured using specific mappers and other customizations. The <code>Jdbi</code> object itself will be exposed to Guice using the annotation passed on the module constructor (named <code>GuiceJdbi</code> in the example). The <a href="./apidocs/org/jdbi/v3/guice/AbstractJdbiModule.html" target="_blank" rel="noopener">AbstractJdbiModule</a> supports both Annotation instances and Classes extending Annotation, similar to Guice itself.</p>
+</div>
+<div class="paragraph">
+<p>When implementing the <a href="./apidocs/org/jdbi/v3/guice/AbstractJdbiModule.html" target="_blank" rel="noopener">AbstractJdbiModule</a>configureJdbi() method, a number of convenience methods are available as shown above. These methods return Guice LinkedBindingBuilder instances and allow the full range of bindings that guice supports (classes, instances, providers etc).</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Supported bindings</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Method</th>
+<th class="tableblock halign-left valign-top">Type of binding</th>
+<th class="tableblock halign-left valign-top">JDBI function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">bindRowMapper()</p></td>
+<td class="tableblock halign-left valign-top" rowspan="3"><p class="tableblock">RowMapper&lt;?&gt;</p></td>
+<td class="tableblock halign-left valign-top" rowspan="3"><p class="tableblock"><a href="#_row_mappers">Row Mappers</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">bindRowMapper(GenericType&lt;?&gt;)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">bindRowMapper(Type)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">bindColumnMapper()</p></td>
+<td class="tableblock halign-left valign-top" rowspan="4"><p class="tableblock">ColumnMapper&lt;?&gt;</p></td>
+<td class="tableblock halign-left valign-top" rowspan="4"><p class="tableblock"><a href="#_column_mappers">Column Mappers</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">bindColumnMapper(QualifiedType&lt;?&gt;)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">bindColumnMapper(GenericType&lt;?&gt;)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">bindColumnMapper(Type)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">bindCodec(QualifiedType&lt;?&gt;)</p></td>
+<td class="tableblock halign-left valign-top" rowspan="3"><p class="tableblock">Codec&lt;?&gt;</p></td>
+<td class="tableblock halign-left valign-top" rowspan="3"><p class="tableblock"><a href="#_codecs">Codecs</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">bindCodec(GenericType&lt;?&gt;)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">bindCodec(Type)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">bindArrayType(Class&lt;?&gt;)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#_registering_array_types">Registering array types</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">bindPlugin()</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JdbiPlugin</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#_installing_plugins">Installing plugins</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">bindCustomizer()</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GuiceJdbiCustomizer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#_guice_jdbi_customization">Guice Jdbi customization</a></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Each module is completely independent and all definitions within the module only apply to the specific <code>Jdbi</code> instance.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_using_guice_injection_in_jdbi_classes"><a class="anchor" href="#_using_guice_injection_in_jdbi_classes"></a><a class="link" href="#_using_guice_injection_in_jdbi_classes">7.7.2. Using Guice injection in Jdbi classes</a></h4>
+<div class="paragraph">
+<p>The Guice modules store the various related elements (mappers, codecs etc.) using multibindings. As a result, it is not possible to use injection directly when constructing mapper instances. The following example does not work:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">JdbiModule</span> <span class="directive">extends</span> AbstractJdbiModule {
+
+    <span class="directive">public</span> JdbiModule() {
+        <span class="local-variable">super</span>(Names.named(<span class="string"><span class="delimiter">&quot;</span><span class="content">data</span><span class="delimiter">&quot;</span></span>));
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">protected</span> <span class="type">void</span> configureJdbi() {
+        bindRowMapper().to(BrokenRowMapper.class);
+        bindColumnMapper().to(CustomStringMapper.class);
+    }
+}
+
+<span class="directive">public</span> <span class="type">class</span> <span class="class">CustomStringMapper</span> <span class="directive">implements</span> ColumnMapper&lt;<span class="predefined-type">String</span>&gt; {
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="predefined-type">String</span> map(<span class="predefined-type">ResultSet</span> r, <span class="type">int</span> columnNumber, StatementContext ctx) <span class="directive">throws</span> <span class="exception">SQLException</span> {
+        <span class="type">long</span> x = r.getLong(columnNumber);
+        <span class="keyword">return</span> (x &gt; <span class="integer">1000</span>) ? <span class="string"><span class="delimiter">&quot;</span><span class="content">Huge</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">Small</span><span class="delimiter">&quot;</span></span>;
+    }
+}
+
+<span class="directive">public</span> <span class="type">class</span> <span class="class">BrokenRowMapper</span> <span class="directive">implements</span> <span class="predefined-type">RowMapper</span>&lt;DataRow&gt; {
+
+    <span class="directive">private</span> <span class="directive">final</span> ColumnMapper&lt;<span class="predefined-type">String</span>&gt; stringMapper;
+
+    <span class="annotation">@Inject</span>
+    <span class="directive">public</span> BrokenRowMapper(CustomStringMapper stringMapper) {
+        <span class="local-variable">this</span>.stringMapper = stringMapper;
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> DataRow map(<span class="predefined-type">ResultSet</span> rs, StatementContext ctx) <span class="directive">throws</span> <span class="exception">SQLException</span> {
+        <span class="keyword">return</span> <span class="keyword">new</span> DataRow(rs.getInt(<span class="string"><span class="delimiter">&quot;</span><span class="content">intValue</span><span class="delimiter">&quot;</span></span>),
+                stringMapper.map(rs, <span class="string"><span class="delimiter">&quot;</span><span class="content">longValue</span><span class="delimiter">&quot;</span></span>, ctx));
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Guice will report an error that it can not locate the CustomStringMapper. Within the Guice Jdbi support, mappers etc. are managed as groups and not directly accessible for injection. The right way to compose mappers is using the Jdbi registries which will be configured through Guice:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">JdbiModule</span> <span class="directive">extends</span> AbstractJdbiModule {
+
+    <span class="directive">public</span> JdbiModule() {
+        <span class="local-variable">super</span>(Names.named(<span class="string"><span class="delimiter">&quot;</span><span class="content">data</span><span class="delimiter">&quot;</span></span>));
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">protected</span> <span class="type">void</span> configureJdbi() {
+        bindRowMapper().to(WorkingRowMapper.class);
+        bindColumnMapper(CustomStringMapper.TYPE).to(CustomStringMapper.class);
+    }
+}
+
+<span class="directive">public</span> <span class="directive">static</span> <span class="type">class</span> <span class="class">CustomStringMapper</span> <span class="directive">implements</span> ColumnMapper&lt;<span class="predefined-type">String</span>&gt; {
+
+    <span class="directive">public</span> <span class="directive">static</span> QualifiedType&lt;<span class="predefined-type">String</span>&gt; TYPE = QualifiedType.of(<span class="predefined-type">String</span>.class).with(Names.named(<span class="string"><span class="delimiter">&quot;</span><span class="content">data</span><span class="delimiter">&quot;</span></span>));
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="predefined-type">String</span> map(<span class="predefined-type">ResultSet</span> r, <span class="type">int</span> columnNumber, StatementContext ctx) <span class="directive">throws</span> <span class="exception">SQLException</span> {
+        <span class="type">long</span> x = r.getLong(columnNumber);
+        <span class="keyword">return</span> (x &gt; <span class="integer">1000</span>) ? <span class="string"><span class="delimiter">&quot;</span><span class="content">Huge</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">Small</span><span class="delimiter">&quot;</span></span>;
+    }
+}
+
+<span class="directive">public</span> <span class="type">class</span> <span class="class">WorkingRowMapper</span> <span class="directive">implements</span> <span class="predefined-type">RowMapper</span>&lt;DataRow&gt; {
+
+    <span class="directive">private</span> ColumnMapper&lt;<span class="predefined-type">String</span>&gt; stringMapper;
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="type">void</span> init(ConfigRegistry registry) {
+        <span class="local-variable">this</span>.stringMapper = registry.get(ColumnMappers.class).findFor(CustomStringMapper.TYPE)
+                .orElseThrow(<span class="exception">IllegalStateException</span>::<span class="keyword">new</span>);
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> DataRow map(<span class="predefined-type">ResultSet</span> rs, StatementContext ctx) <span class="directive">throws</span> <span class="exception">SQLException</span> {
+        <span class="keyword">return</span> <span class="keyword">new</span> DataRow(rs.getInt(<span class="string"><span class="delimiter">&quot;</span><span class="content">intValue</span><span class="delimiter">&quot;</span></span>),
+            stringMapper.map(rs, <span class="string"><span class="delimiter">&quot;</span><span class="content">longValue</span><span class="delimiter">&quot;</span></span>, ctx));
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_guice_jdbi_customization"><a class="anchor" href="#_guice_jdbi_customization"></a><a class="link" href="#_guice_jdbi_customization">7.7.3. Guice Jdbi customization</a></h4>
+<div class="paragraph">
+<p>Many Jdbi specific settings can be configured through binding (RowMappers, ColumnMappers, Codecs, Plugins etc.), however there are additional features that may not be available through the <a href="./apidocs/org/jdbi/v3/guice/AbstractJdbiModule.html" target="_blank" rel="noopener">AbstractJdbiModule</a>. For those use cases, classes can implement the GuiceJdbiCustomizer interface and then getting bound in a module. Every customizer will get the Jdbi instance passed at construction time and may modify any aspect of the <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instance before it gets exposed to other parts of the application.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">GuiceCustomization</span> <span class="directive">extends</span> AbstractJdbiModule {
+
+    <span class="directive">public</span> GuiceCustomization() {
+        <span class="local-variable">super</span>(Custom.class);
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">protected</span> <span class="type">void</span> configureJdbi() {
+        bindCustomizer().to(<span class="predefined-type">Customizer</span>.class);
+    }
+}
+
+<span class="type">class</span> <span class="class">Customizer</span> <span class="directive">implements</span> GuiceJdbiCustomizer {
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="type">void</span> customize(Jdbi jdbi) {
+        jdbi.setSqlLogger(<span class="keyword">new</span> Slf4JSqlLogger());
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this example, the customizer sets the logger explictly.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_global_settings"><a class="anchor" href="#_global_settings"></a><a class="link" href="#_global_settings">7.7.4. Global settings</a></h4>
+<div class="paragraph">
+<p>Within any module that defines a <code>Jdbi</code> object, all bindings are local to this module. This is useful if all Jdbi code can be grouped around the module. In larger projects however, some parts of the code (and their Jdbi related classes such as Row and Column mappers) may be located in different code modules.</p>
+</div>
+<div class="paragraph">
+<p>To support such modular designs, code modules that want to contribute Jdbi specific classes such as mappers but do not expose a Jdbi instance themselves can define a module extending AbstractJdbiGlobalsModule and register mappers, plugins etc. similar to a Jdbi specific module. Anything that is registered in such a module is global and will be applied to all instances even if they are defined in another module.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">DomainModule</span> <span class="directive">extends</span> AbstractJdbiGlobalsModule {
+
+    <span class="annotation">@Override</span>
+    <span class="directive">protected</span> <span class="type">void</span> configureJdbi() {
+        bindRowMapper().to(DomainMapper.class);
+    }
+}
+
+<span class="type">class</span> <span class="class">DomainMapper</span> <span class="directive">implements</span> <span class="predefined-type">RowMapper</span>&lt;DomainObject&gt; {
+
+    <span class="directive">private</span> ColumnMapper&lt;<span class="predefined-type">UUID</span>&gt; uuidMapper;
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="type">void</span> init(ConfigRegistry registry) {
+        <span class="local-variable">this</span>.uuidMapper = registry.get(ColumnMappers.class).findFor(<span class="predefined-type">UUID</span>.class)
+                .orElseThrow(<span class="exception">IllegalStateException</span>::<span class="keyword">new</span>);
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> DomainObject map(<span class="predefined-type">ResultSet</span> rs, StatementContext ctx) <span class="directive">throws</span> <span class="exception">SQLException</span> {
+        <span class="keyword">return</span> <span class="keyword">new</span> DomainObject(
+            uuidMapper.map(rs, <span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, ctx),
+            rs.getString(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>),
+            rs.getString(<span class="string"><span class="delimiter">&quot;</span><span class="content">data</span><span class="delimiter">&quot;</span></span>),
+            rs.getInt(<span class="string"><span class="delimiter">&quot;</span><span class="content">value</span><span class="delimiter">&quot;</span></span>),
+            rs.getBoolean(<span class="string"><span class="delimiter">&quot;</span><span class="content">flag</span><span class="delimiter">&quot;</span></span>));
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>All configured <code>Jdbi</code> instances will be able to map DomainObject instances without having to configure them explicitly as a row mapper.</p>
+</div>
+<div class="paragraph">
+<p>Multiple modules extending AbstractJdbiGlobalsModule can be installed in a single injector; the resulting bindings will be aggregated.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_advanced_topics"><a class="anchor" href="#_advanced_topics"></a><a class="link" href="#_advanced_topics">7.7.5. Advanced Topics</a></h4>
+<div class="sect4">
+<h5 id="_exposing_additional_bindings"><a class="anchor" href="#_exposing_additional_bindings"></a><a class="link" href="#_exposing_additional_bindings">Exposing additional bindings</a></h5>
+<div class="paragraph">
+<p>Each module that defines a <code>Jdbi</code> instance keeps all bindings private and exposes only the actual <code>Jdbi</code> object itself. This allows the installation of multiple modules where each definition is completely independent. Sometimes it is useful to "attach" additional objects to this process and expose them using the same annotations. The most common use cases are data access objects.</p>
+</div>
+<div class="paragraph">
+<p>Consider a use case where two DataSource instances exist, one annotated as Writer and one as Reader. Both are accessing databases with the same schema, and it would make sense to have two data access objects that are identical except that they are using the different data sources.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">DatabaseAccess</span> {
+    <span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO data_table ....</span><span class="delimiter">&quot;</span></span>)
+    <span class="type">int</span> insert(...);
+
+    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT * FROM data_table</span><span class="delimiter">&quot;</span></span>)
+    Data select();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To bind two instances of this object, each connected to the appropriate Jdbi instance, define it in the module and expose it as an annotated binding with exposeBinding:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">DatabaseModule</span> <span class="directive">extends</span> AbstractJdbiModule {
+    <span class="directive">public</span> DatabaseModule(<span class="predefined-type">Class</span>&lt;? <span class="directive">extends</span> <span class="predefined-type">Annotation</span>&gt; a) {
+        <span class="local-variable">super</span>(a);
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="type">void</span> configureJdbi() {
+        ... bind mappers, plugins etc. ...
+
+        exposeBinding(DatabaseAccess.class);
+    }
+
+    <span class="annotation">@Provides</span>
+    <span class="annotation">@Singleton</span>
+    DatabaseAccess createDatabaseAccess(Jdbi jdbi) {
+        <span class="keyword">return</span> jdbi.onDemand(DatabaseAccess.class);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Finally, install the module with different annotations:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">Injector injector = Guice.createInjector(
+    binder -&gt; binder.bind(<span class="predefined-type">DataSource</span>.class).annotatedWith(<span class="predefined-type">Reader</span>.class).toInstance(...);
+    binder -&gt; binder.bind(<span class="predefined-type">DataSource</span>.class).annotatedWith(<span class="predefined-type">Writer</span>.class).toInstance(...);
+
+    <span class="keyword">new</span> DatabaseModule(<span class="predefined-type">Reader</span>.class),
+    <span class="keyword">new</span> DatabaseModule(<span class="predefined-type">Writer</span>.class)
+);
+
+DatabaseAccess readerAccess = injector.getInstance(<span class="predefined-type">Key</span>.get(DatabaseAccess.class, <span class="predefined-type">Reader</span>.class));
+DatabaseAccess writerAccess = injector.getInstance(<span class="predefined-type">Key</span>.get(DatabaseAccess.class, <span class="predefined-type">Writer</span>.class));</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_jpa"><a class="anchor" href="#_jpa"></a><a class="link" href="#_jpa">7.8. JPA</a></h3>
 <div class="paragraph">
 <p>Using the JPA plugin is a great way to trick your boss into letting you try
 Jdbi. "No problem boss, it already supports JPA annotations, easy peasy!"</p>
@@ -7334,7 +7712,7 @@ Jdbi. "No problem boss, it already supports JPA annotations, easy peasy!"</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_kotlin"><a class="anchor" href="#_kotlin"></a><a class="link" href="#_kotlin">7.8. Kotlin</a></h3>
+<h3 id="_kotlin"><a class="anchor" href="#_kotlin"></a><a class="link" href="#_kotlin">7.9. Kotlin</a></h3>
 <div class="paragraph">
 <p><a href="https://kotlinlang.org/" target="_blank" rel="noopener">Kotlin</a> support is provided by <strong>jdbi3-kotlin</strong> and
 <strong>jdbi3-kotlin-sqlobject</strong> modules.</p>
@@ -7353,7 +7731,7 @@ Jdbi. "No problem boss, it already supports JPA annotations, easy peasy!"</p>
 </ul>
 </div>
 <div class="sect3">
-<h4 id="_resultset_mapping"><a class="anchor" href="#_resultset_mapping"></a><a class="link" href="#_resultset_mapping">7.8.1. ResultSet mapping</a></h4>
+<h4 id="_resultset_mapping"><a class="anchor" href="#_resultset_mapping"></a><a class="link" href="#_resultset_mapping">7.9.1. ResultSet mapping</a></h4>
 <div class="paragraph">
 <p>The <strong>jdbi3-kotlin</strong> plugin adds mapping to Kotlin data classes. It
 supports data classes where all fields are present in the constructor as well
@@ -7479,7 +7857,7 @@ val things = qry.bind(&quot;id&quot;, brian.id).mapTo&lt;Thing&gt;.list()</code>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_sqlobject"><a class="anchor" href="#_sqlobject"></a><a class="link" href="#_sqlobject">7.8.2. SqlObject</a></h4>
+<h4 id="_sqlobject"><a class="anchor" href="#_sqlobject"></a><a class="link" href="#_sqlobject">7.9.2. SqlObject</a></h4>
 <div class="paragraph">
 <p>The <strong>jdbi3-kotlin-sqlobject</strong> plugin adds automatic parameter binding by name
 for Kotlin methods in SqlObjects as well as support for Kotlin default methods.</p>
@@ -7546,7 +7924,7 @@ via: <code>Jdbi.installPlugin(KotlinSqlObjectPlugin())</code>.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_lombok"><a class="anchor" href="#_lombok"></a><a class="link" href="#_lombok">7.9. Lombok</a></h3>
+<h3 id="_lombok"><a class="anchor" href="#_lombok"></a><a class="link" href="#_lombok">7.10. Lombok</a></h3>
 <div class="paragraph">
 <p>Lombok is a great tool for cutting the boilerplate out of POJO classes.</p>
 </div>
@@ -7622,7 +8000,7 @@ lombok.copyableAnnotations += org.jdbi.v3.postgres.HStore</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_oracle_12"><a class="anchor" href="#_oracle_12"></a><a class="link" href="#_oracle_12">7.10. Oracle 12</a></h3>
+<h3 id="_oracle_12"><a class="anchor" href="#_oracle_12"></a><a class="link" href="#_oracle_12">7.11. Oracle 12</a></h3>
 <div class="paragraph">
 <p>This module adds support for Oracle <code>RETURNING</code> DML expressions.</p>
 </div>
@@ -7643,7 +8021,7 @@ to get the returned DML.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_postgresql"><a class="anchor" href="#_postgresql"></a><a class="link" href="#_postgresql">7.11. PostgreSQL</a></h3>
+<h3 id="_postgresql"><a class="anchor" href="#_postgresql"></a><a class="link" href="#_postgresql">7.12. PostgreSQL</a></h3>
 <div class="paragraph">
 <p>The <strong>jdbi3-postgres</strong> plugin provides enhanced integration with the
 <a href="https://jdbc.postgresql.org/" target="_blank" rel="noopener">PostgreSQL JDBC Driver</a>.</p>
@@ -7695,7 +8073,7 @@ escape operators to e.g. <code>??</code> or <code>\:</code>.
 </table>
 </div>
 <div class="sect3">
-<h4 id="_hstore"><a class="anchor" href="#_hstore"></a><a class="link" href="#_hstore">7.11.1. hstore</a></h4>
+<h4 id="_hstore"><a class="anchor" href="#_hstore"></a><a class="link" href="#_hstore">7.12.1. hstore</a></h4>
 <div class="paragraph">
 <p>The Postgres plugin provides an <code>hstore</code> to <code>Map&lt;String, String&gt;</code> column mapper
 and vice versa argument factory:</p>
@@ -7758,7 +8136,7 @@ The default variant to install the plugin adds unqualified mappings of raw <code
 </div>
 </div>
 <div class="sect3">
-<h4 id="_getgeneratedkeys_4"><a class="anchor" href="#_getgeneratedkeys_4"></a><a class="link" href="#_getgeneratedkeys_4">7.11.2. @GetGeneratedKeys</a></h4>
+<h4 id="_getgeneratedkeys_4"><a class="anchor" href="#_getgeneratedkeys_4"></a><a class="link" href="#_getgeneratedkeys_4">7.12.2. @GetGeneratedKeys</a></h4>
 <div class="paragraph">
 <p>In Postgres, <code>@GetGeneratedKeys</code> can return the entire modified row if you
 request generated keys without naming any columns.</p>
@@ -7789,7 +8167,7 @@ several rows), your method can return all the modified rows in a collection:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_large_objects"><a class="anchor" href="#_large_objects"></a><a class="link" href="#_large_objects">7.11.3. Large Objects</a></h4>
+<h4 id="_large_objects"><a class="anchor" href="#_large_objects"></a><a class="link" href="#_large_objects">7.12.3. Large Objects</a></h4>
 <div class="paragraph">
 <p>Postgres supports storing large character or binary data in separate storage from
 table data.  Jdbi allows you to stream this data in and out of the database as part
@@ -7829,7 +8207,7 @@ for upstream driver documentation.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_spring5"><a class="anchor" href="#_spring5"></a><a class="link" href="#_spring5">7.12. Spring5</a></h3>
+<h3 id="_spring5"><a class="anchor" href="#_spring5"></a><a class="link" href="#_spring5">7.13. Spring5</a></h3>
 <div class="paragraph">
 <p>This module provides <code>JdbiFactoryBean</code>, a factory bean which sets up a <code>Jdbi</code>
 singleton in a Spring 5 (or Spring Boot) application context.</p>
@@ -7909,7 +8287,7 @@ your <code>beans.xml</code>.</td>
 </table>
 </div>
 <div class="sect3">
-<h4 id="_installing_plugins"><a class="anchor" href="#_installing_plugins"></a><a class="link" href="#_installing_plugins">7.12.1. Installing plugins</a></h4>
+<h4 id="_installing_plugins"><a class="anchor" href="#_installing_plugins"></a><a class="link" href="#_installing_plugins">7.13.1. Installing plugins</a></h4>
 <div class="paragraph">
 <p>Plugins may be automatically installed by scanning the classpath for
 <a href="https://docs.oracle.com/javase/8/docs/api/java/util/ServiceLoader.html" target="_blank" rel="noopener">ServiceLoader</a> manifests.</p>
@@ -7957,7 +8335,7 @@ auto-install some plugins and manually install the rest:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_global_attributes"><a class="anchor" href="#_global_attributes"></a><a class="link" href="#_global_attributes">7.12.2. Global Attributes</a></h4>
+<h4 id="_global_attributes"><a class="anchor" href="#_global_attributes"></a><a class="link" href="#_global_attributes">7.13.2. Global Attributes</a></h4>
 <div class="paragraph">
 <p>Global defined attributes may be configured on the factory bean:</p>
 </div>
@@ -7976,7 +8354,7 @@ auto-install some plugins and manually install the rest:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_sqlite"><a class="anchor" href="#_sqlite"></a><a class="link" href="#_sqlite">7.13. SQLite</a></h3>
+<h3 id="_sqlite"><a class="anchor" href="#_sqlite"></a><a class="link" href="#_sqlite">7.14. SQLite</a></h3>
 <div class="paragraph">
 <p>The <strong>jdbi3-sqlite</strong> plugin provides support for using the
 <a href="https://bitbucket.org/xerial/sqlite-jdbc/" target="_blank" rel="noopener">SQLite JDBC Driver</a>
@@ -8008,7 +8386,7 @@ supported by driver.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_stringtemplate_4"><a class="anchor" href="#_stringtemplate_4"></a><a class="link" href="#_stringtemplate_4">7.14. StringTemplate 4</a></h3>
+<h3 id="_stringtemplate_4"><a class="anchor" href="#_stringtemplate_4"></a><a class="link" href="#_stringtemplate_4">7.15. StringTemplate 4</a></h3>
 <div class="paragraph">
 <p>This module allows you to plug in the StringTemplate 4 templating engine, in
 place of the standard Jdbi templating engine.</p>
@@ -8147,7 +8525,7 @@ template will be used, regardless of the method name.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_vavr"><a class="anchor" href="#_vavr"></a><a class="link" href="#_vavr">7.15. Vavr</a></h3>
+<h3 id="_vavr"><a class="anchor" href="#_vavr"></a><a class="link" href="#_vavr">7.16. Vavr</a></h3>
 <div class="paragraph">
 <p>The Vavr Plugin offers deep integration of <strong>Jdbi</strong> with the Vavr functional library:</p>
 </div>
@@ -8401,13 +8779,13 @@ Check the string concatenation syntax of your database before doing this.
 </div>
 </div>
 <div class="sect1">
-<h2 id="_advanced_topics"><a class="anchor" href="#_advanced_topics"></a><a class="link" href="#_advanced_topics">9. Advanced Topics</a></h2>
+<h2 id="_advanced_topics_2"><a class="anchor" href="#_advanced_topics_2"></a><a class="link" href="#_advanced_topics_2">9. Advanced Topics</a></h2>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_high_availability"><a class="anchor" href="#_high_availability"></a><a class="link" href="#_high_availability">9.1. High Availability</a></h3>
 <div class="paragraph">
 <p>Jdbi can be combined with connection pools and high-availability features in your database driver.
-We&#8217;ve used <a href="https://brettwooldridge.github.io/HikariCP/" target="_blank" rel="noopener">HikariCP</a> in combination
+We&#8217;ve used <a href="https://github.com/brettwooldridge/HikariCP" target="_blank" rel="noopener">HikariCP</a> in combination
 with the <a href="https://jdbc.postgresql.org/documentation/head/connect.html" target="_blank" rel="noopener">PgJDBC connection load balancing</a>
 features with good success.</p>
 </div>
@@ -9865,7 +10243,7 @@ return types, or on <code>@SqlBatch</code> parameters.</p>
 <div id="footer">
 <div id="footer-text">
 Version 3.21.1-SNAPSHOT<br>
-Last updated 07/16/2021 14:53 -0700
+Last updated 09/11/2021 18:02 -0700
 </div>
 </div>
 <style>

@@ -32,6 +32,8 @@ org.jdbi.v3.freemarker
 org.jdbi.v3.freemarker.internal
 org.jdbi.v3.guava
 org.jdbi.v3.guava.codec
+org.jdbi.v3.guice
+org.jdbi.v3.guice.internal
 org.jdbi.v3.jackson2
 org.jdbi.v3.jodatime2
 org.jdbi.v3.jpa
