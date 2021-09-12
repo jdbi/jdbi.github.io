@@ -443,7 +443,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.21.1-SNAPSHOT,</span>
-<span id="revdate">09/11/2021 18:02 -0700</span>
+<span id="revdate">09/11/2021 20:27 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -7353,7 +7353,7 @@ Guice support is still experimental.
 <p>In this example, a new <code>Jdbi</code> is configured using specific mappers and other customizations. The <code>Jdbi</code> object itself will be exposed to Guice using the annotation passed on the module constructor (named <code>GuiceJdbi</code> in the example). The <a href="./apidocs/org/jdbi/v3/guice/AbstractJdbiModule.html" target="_blank" rel="noopener">AbstractJdbiModule</a> supports both Annotation instances and Classes extending Annotation, similar to Guice itself.</p>
 </div>
 <div class="paragraph">
-<p>When implementing the <a href="./apidocs/org/jdbi/v3/guice/AbstractJdbiModule.html" target="_blank" rel="noopener">AbstractJdbiModule</a>configureJdbi() method, a number of convenience methods are available as shown above. These methods return Guice LinkedBindingBuilder instances and allow the full range of bindings that guice supports (classes, instances, providers etc).</p>
+<p>When implementing the <a href="./apidocs/org/jdbi/v3/guice/AbstractJdbiModule.html" target="_blank" rel="noopener">configureJdbi()</a> method, a number of convenience methods are available as shown above. These methods return Guice LinkedBindingBuilder instances and allow the full range of bindings that guice supports (classes, instances, providers etc).</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 1. Supported bindings</caption>
@@ -10243,7 +10243,7 @@ return types, or on <code>@SqlBatch</code> parameters.</p>
 <div id="footer">
 <div id="footer-text">
 Version 3.21.1-SNAPSHOT<br>
-Last updated 09/11/2021 18:02 -0700
+Last updated 09/11/2021 20:27 -0700
 </div>
 </div>
 <style>
