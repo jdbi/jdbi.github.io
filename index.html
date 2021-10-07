@@ -443,7 +443,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.22.1-SNAPSHOT,</span>
-<span id="revdate">09/23/2021 04:43 -0700</span>
+<span id="revdate">10/07/2021 12:37 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -7728,13 +7728,26 @@ Element configuration modules are completely optional and should not be used whe
 <div class="paragraph">
 <p>Multiple modules extending <a href="./apidocs/org/jdbi/v3/guice/AbstractJdbiConfigurationModule.html" target="_blank" rel="noopener">AbstractJdbiConfigurationModule</a> can be installed in a single injector; the resulting bindings will be aggregated.</p>
 </div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+It is not possible to install a configuration module from within the <code>configureJdbi</code> method of a definition module using the <code>install()</code> or <code>binder().install()</code> methods!
+Definition modules are Guice private modules and anything defined within them will not be exposed to the general dependency tree. This is a limitation due to the way Guice works.
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_advanced_topics"><a class="anchor" href="#_advanced_topics"></a><a class="link" href="#_advanced_topics">7.7.5. Advanced Topics</a></h4>
 <div class="sect4">
 <h5 id="_exposing_additional_bindings"><a class="anchor" href="#_exposing_additional_bindings"></a><a class="link" href="#_exposing_additional_bindings">Exposing additional bindings</a></h5>
 <div class="paragraph">
-<p>Each module that defines a <code>Jdbi</code> instance keeps all bindings private and exposes only the actual <code>Jdbi</code> object itself. This allows the installation of multiple modules where each definition is completely independent. Sometimes it is useful to attach additional objects and expose them using the same annotations. The most common use cases are data access objects.</p>
+<p>Each definition module that defines a <code>Jdbi</code> instance keeps all bindings private and exposes only the actual <code>Jdbi</code> object itself. This allows the installation of multiple modules where each definition is completely independent. Sometimes it is useful to attach additional objects and expose them using the same annotations. The most common use cases are data access objects.</p>
 </div>
 <div class="paragraph">
 <p>Consider a use case where two DataSource instances exist, one annotated as <code>Writer</code> and the other as <code>Reader</code>. Both are accessing databases with the same schema, and it makes sense to have two data access objects that are identical except that they are using the different data sources (this is often referred to as the "robot legs" problem of dependency injection).</p>
@@ -7792,6 +7805,228 @@ Element configuration modules are completely optional and should not be used whe
 <span class="comment">// fetch object directly from the injector</span>
 DatabaseAccess readerAccess = injector.getInstance(<span class="predefined-type">Key</span>.get(DatabaseAccess.class, <span class="predefined-type">Reader</span>.class));
 DatabaseAccess writerAccess = injector.getInstance(<span class="predefined-type">Key</span>.get(DatabaseAccess.class, <span class="predefined-type">Writer</span>.class));</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_importing_external_bindings"><a class="anchor" href="#_importing_external_bindings"></a><a class="link" href="#_importing_external_bindings">Importing external bindings</a></h5>
+<div class="paragraph">
+<p>The main use case of guice is code modularization and code reuse. Jdbi definition modules can pull dependencies out of the global dependency definitions and using the <code>importBinding</code> and <code>importBindingLoosely</code> methods.</p>
+</div>
+<div class="paragraph">
+<p><code>importBinding</code> requires a dependency to exist and pulls it into the definition module. The dependency must be defined using the same annotation or annotation class as the definition module uses.</p>
+</div>
+<div class="paragraph">
+<p>This example shows how to define an external dependency (<code>SpecialLogger</code>, annotated with <code>Store</code>) in a different module and then pull it into the definition module using <code>importBinding</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">//</span>
+<span class="comment">// This is logging code that can be located e.g. in a specific part of the code base that</span>
+<span class="comment">// deals with all aspects of logging. The Logging module creates the binding for the special</span>
+<span class="comment">// logger depending on the environment that the code has been deployed in.</span>
+<span class="type">class</span> <span class="class">LoggingModule</span> <span class="directive">extends</span> AbstractModule {
+
+    <span class="directive">private</span> <span class="directive">final</span> <span class="type">boolean</span> production;
+    <span class="directive">private</span> <span class="directive">final</span> <span class="predefined-type">Class</span>&lt;? <span class="directive">extends</span> <span class="predefined-type">Annotation</span>&gt; annotation;
+
+    LoggingModule(<span class="type">boolean</span> production, <span class="predefined-type">Class</span>&lt;? <span class="directive">extends</span> <span class="predefined-type">Annotation</span>&gt; annotation) {
+        <span class="local-variable">this</span>.production = production;
+        <span class="local-variable">this</span>.annotation = annotation;
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="type">void</span> configure() {
+        <span class="keyword">if</span> (production) {
+            bind(SpecialLogger.class).annotatedWith(annotation).toInstance(<span class="keyword">new</span> MaskingLogger());
+        } <span class="keyword">else</span> {
+            bind(SpecialLogger.class).annotatedWith(annotation).toInstance(<span class="keyword">new</span> DebugLogger());
+        }
+    }
+}
+
+<span class="comment">//</span>
+<span class="comment">// This is Jdbi code that deals with the data store. It can be located in a different part of the</span>
+<span class="comment">// application. It requires the &quot;SpecialLogger&quot; dependency to be bound somewhere.</span>
+<span class="comment">//</span>
+<span class="annotation">@Singleton</span>
+<span class="type">class</span> <span class="class">JdbiSpecialLogging</span> <span class="directive">implements</span> GuiceJdbiCustomizer {
+
+    <span class="directive">private</span> <span class="directive">final</span> SpecialLogger logger;
+
+    <span class="annotation">@Inject</span>
+    JdbiSpecialLogging(SpecialLogger logger) {
+        <span class="local-variable">this</span>.logger = logger;
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="type">void</span> customize(Jdbi jdbi) {
+        jdbi.setSqlLogger(<span class="keyword">new</span> SpecialSqlLogger(logger));
+    }
+}
+
+<span class="type">class</span> <span class="class">DatabaseModule</span> <span class="directive">extends</span> AbstractJdbiDefinitionModule {
+    <span class="directive">public</span> DatabaseModule(<span class="predefined-type">Class</span>&lt;? <span class="directive">extends</span> <span class="predefined-type">Annotation</span>&gt; a) {
+        <span class="local-variable">super</span>(a);
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="type">void</span> configureJdbi() {
+        ... bind mappers, plugins etc. ...
+
+        <span class="comment">// pull the &quot;SpecialLogger&quot; annotated with Store into the module scope</span>
+        importBinding(SpecialLogger.class).in(Scopes.SINGLETON);
+        bindCustomizer().to(JdbiSpecialLogging.class);
+    }
+}
+
+
+Injector injector = Guice.createInjector(
+        <span class="keyword">new</span> LoggingModule(production, Store.class),
+        <span class="keyword">new</span> DatabaseModule(Store.class)
+)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>importBinding</code> returns a binding builder, that allows different binding styles:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="type">class</span> <span class="class">DatabaseModule</span> <span class="directive">extends</span> AbstractJdbiDefinitionModule {
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="type">void</span> configureJdbi() {
+         <span class="comment">// simplest use case, pull in Foo.class using the same annotation</span>
+        importBinding(Foo.class);
+
+         <span class="comment">// supports everything that a ScopedBindingBuilder does</span>
+        importBinding(Foo.class).in(Scopes.SINGLETON);
+
+         <span class="comment">// supports &quot;to()&quot; to bind interfaces to implementation</span>
+        importBinding(Foo.class).to(FooImpl.class);
+
+         <span class="comment">// supports type literals</span>
+        importBinding(<span class="keyword">new</span> TypeLiteral&lt;<span class="predefined-type">Set</span>&lt;Foo&gt;&gt;() {}).to(FooSet.class);
+
+        <span class="comment">// supports binding into the various binder methods as well</span>
+
+        <span class="comment">// pull SpecialCustomizer using the same annotation as the module and add it to the set of customizers</span>
+        importBinding(bindCustomizer(), SpecialCustomizer.class).in(Scopes.SINGLETON);
+
+        <span class="comment">// bind column mapper using a type literal</span>
+        importBinding(bindColumnMapper(), <span class="keyword">new</span> TypeLiteral&lt;<span class="predefined-type">Map</span>&lt;<span class="predefined-type">String</span>, <span class="predefined-type">Object</span>&gt;&gt;() {}).to(JsonMapper.class);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Static bindings require that the dependency is always defined. However, it is often desirable to have optional bindings that do not need to exist. This is supported using the <code>importLooseBinding</code> mechanism.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="type">class</span> <span class="class">DropwizardStoreModule</span> <span class="directive">extends</span> AbstractModule {
+
+    <span class="annotation">@Store</span>
+    <span class="annotation">@Provides</span>
+    <span class="annotation">@Singleton</span>
+    DropwizardJdbiSupport getDropwizardJdbiSupport(<span class="annotation">@Dropwizard</span> DataSourcConfiguration configuration, <span class="annotation">@Dropwizard</span> Environment environment) {
+            <span class="keyword">return</span> <span class="keyword">new</span> DropwizardJdbiSupport(<span class="string"><span class="delimiter">&quot;</span><span class="content">store</span><span class="delimiter">&quot;</span></span>, configuration, environment);
+    }
+
+    <span class="directive">static</span> <span class="type">class</span> <span class="class">DropwizardJdbiSupport</span> <span class="directive">implements</span> GuiceJdbiCustomizer {
+        <span class="directive">private</span> <span class="directive">final</span> <span class="predefined-type">String</span> name;
+        <span class="directive">private</span> <span class="directive">final</span> Environment environment;
+        <span class="directive">private</span> <span class="directive">final</span> DataSourceConfiguration&lt;?&gt; configuration;
+
+
+    DropwizardJdbiSupport(<span class="predefined-type">String</span> name, DataSourceConfiguration configuration, Environment environment) {
+        <span class="local-variable">this</span>.name = name;
+        <span class="local-variable">this</span>.configuration = configuration;
+        <span class="local-variable">this</span>.environment = environment;
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="type">void</span> customize(<span class="directive">final</span> Jdbi jdbi) {
+        <span class="directive">final</span> <span class="predefined-type">String</span> validationQuery = configuration.getValidationQuery();
+        environment.healthChecks().register(name, <span class="keyword">new</span> JdbiHealthCheck(
+                environment.getHealthCheckExecutorService(),
+                configuration.getValidationQueryTimeout().orElse(<span class="predefined-type">Duration</span>.seconds(<span class="integer">5</span>)),
+                jdbi,
+                Optional.of(validationQuery)));
+    }
+}
+
+<span class="type">class</span> <span class="class">StoreJdbiModule</span> <span class="directive">extends</span> AbstractJdbiDefinitionModule {
+        <span class="annotation">@Override</span>
+        <span class="directive">public</span> <span class="type">void</span> configureJdbi() {
+            ... other JDBI code bindings <span class="keyword">for</span> the store ...
+
+            importBindingLoosely(bindCustomizer(), GuiceJdbiCustomizer.class)
+                    .withDefault(GuiceJdbiCustomizer.NOP)
+                    .to(DropwizardJdbiSupport.class);
+        }
+}
+
+<span class="comment">// production code (running in dropwizard framework)</span>
+Injector injector = Guice.createInjector(
+                        <span class="keyword">new</span> DropwizardModule(),      <span class="comment">// binds @Dropwizard stuff</span>
+                        <span class="keyword">new</span> DropwizardStoreModule(), <span class="comment">// binds dropwizard support for store jdbi</span>
+                        <span class="keyword">new</span> StoreDataSourceModule(), <span class="comment">// binds @Store DataSource</span>
+                        <span class="keyword">new</span> StoreJdbiModule()        <span class="comment">// Store Jdbi code</span>
+);
+
+<span class="comment">// test code</span>
+Injector injector = Guice.createInjector(
+                        <span class="keyword">new</span> StoreTestingDataSourceModule(), <span class="comment">// testing datasource for store</span>
+                        <span class="keyword">new</span> StoreJdbiModule()               <span class="comment">// store Jdbi code</span>
+);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this example there is code specific to the dropwizard framework that would not work in unit tests (that are not run within the framework). This code is only bound in the production environment using the <code>DropwizardStoreModule</code> and not present in testing.</p>
+</div>
+<div class="paragraph">
+<p>The <code>StoreJdbiModule</code> uses <code>importBindingLoosely</code> to pull in the <code>DropwizardJdbiSupport</code> binding using the <code>Store</code> annotation if it exists or uses a No-Op otherwise.</p>
+</div>
+<div class="paragraph">
+<p><code>importBindingLoosely</code> allows for full decoupling of optional dependencies without having to resort to conditionals or separate testing modules.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="type">class</span> <span class="class">DatabaseModule</span> <span class="directive">extends</span> AbstractJdbiDefinitionModule {
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="type">void</span> configureJdbi() {
+         <span class="comment">// simplest use case, pull in Foo.class using the same annotation</span>
+        importBindingLoosely(Foo.class);
+
+         <span class="comment">// supports everything that a ScopedBindingBuilder does</span>
+        importBindingLoosely(Foo.class).in(Scopes.SINGLETON);
+
+         <span class="comment">// supports &quot;to()&quot; to bind interfaces to implementation</span>
+        importBindingLoosely(Foo.class).to(FooImpl.class);
+
+        <span class="comment">// supports default value that is used if the binding</span>
+        <span class="comment">// is not present</span>
+        importBindingLoosely(Foo.class)
+            .withDefault(<span class="keyword">new</span> Foo(<span class="string"><span class="delimiter">&quot;</span><span class="content">default</span><span class="delimiter">&quot;</span></span>));
+
+         <span class="comment">// supports type literals</span>
+        importBindingLoosely(<span class="keyword">new</span> TypeLiteral&lt;<span class="predefined-type">Set</span>&lt;Foo&gt;&gt;() {}).to(FooSet.class);
+
+        <span class="comment">// supports binding into the various binder methods as well</span>
+
+        <span class="comment">// pull SpecialCustomizer using the same annotation as the module and add it to the set of customizers</span>
+        importBindingLoosely(bindCustomizer(), SpecialCustomizer.class).in(Scopes.SINGLETON);
+
+        <span class="comment">// bind column mapper using a type literal</span>
+        importBindingLoosely(bindColumnMapper(), <span class="keyword">new</span> TypeLiteral&lt;<span class="predefined-type">Map</span>&lt;<span class="predefined-type">String</span>, <span class="predefined-type">Object</span>&gt;&gt;() {}).to(JsonMapper.class);
+
+        <span class="comment">// full example</span>
+        importBindingLoosely(bindCustomizer(), GuiceJdbiCustomizer.class)
+            .withDefault(GuiceJdbiCustomizer.NOP)
+            .to(SpecialCustomizer.class)
+            .asEagerSingleton();
+    }
+}</code></pre>
 </div>
 </div>
 </div>
@@ -10417,7 +10652,7 @@ return types, or on <code>@SqlBatch</code> parameters.</p>
 <div id="footer">
 <div id="footer-text">
 Version 3.22.1-SNAPSHOT<br>
-Last updated 09/23/2021 04:43 -0700
+Last updated 10/07/2021 12:37 -0700
 </div>
 </div>
 <style>
