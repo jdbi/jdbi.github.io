@@ -437,13 +437,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="icon" type="image/png" href="/images/favicon.png"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.3/gh-fork-ribbon.min.css" />
 </head>
 <body class="book toc2 toc-left">
+<a class="github-fork-ribbon" href="https://github.com/jdbi/jdbi" data-ribbon="Fork me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a>
 <div id="header">
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
-<span id="revnumber">version 3.23.0,</span>
-<span id="revdate">10/08/2021 18:44 -0700</span>
+<span id="revnumber">version 3.24.1-SNAPSHOT,</span>
+<span id="revdate">11/10/2021 11:26 -0800</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -562,7 +564,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_annotations_and_inheritance">5.7. Annotations and Inheritance</a></li>
 </ul>
 </li>
-<li><a href="#_testing">6. Testing</a></li>
+<li><a href="#_testing">6. Testing</a>
+<ul class="sectlevel2">
+<li><a href="#_junit_4">6.1. JUnit 4</a></li>
+<li><a href="#_junit_5">6.2. JUnit 5</a></li>
+</ul>
+</li>
 <li><a href="#_third_party_integration">7. Third-Party Integration</a>
 <ul class="sectlevel2">
 <li><a href="#_google_guava">7.1. Google Guava</a></li>
@@ -852,7 +859,7 @@ Already using Jdbi v2? See <a href="#_upgrading_from_v2_to_v3">Upgrading from v2
 <p>Jdbi is easy to include in your Java project - with an
 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" target="_blank" rel="noopener">Apache 2.0</a> license, few
 external dependencies, and JARs distributed through
-<a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.jdbi%22%20AND%20v%3A%223.23.0%22" target="_blank" rel="noopener">Maven Central</a>,
+<a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.jdbi%22%20AND%20v%3A%223.24.1-SNAPSHOT%22" target="_blank" rel="noopener">Maven Central</a>,
 you can just include the relevant artifacts in your POM:</p>
 </div>
 <div class="listingblock">
@@ -863,7 +870,7 @@ you can just include the relevant artifacts in your POM:</p>
       <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
       <span class="tag">&lt;artifactId&gt;</span>jdbi3-bom<span class="tag">&lt;/artifactId&gt;</span>
       <span class="tag">&lt;type&gt;</span>pom<span class="tag">&lt;/type&gt;</span>
-      <span class="tag">&lt;version&gt;</span>3.23.0<span class="tag">&lt;/version&gt;</span>
+      <span class="tag">&lt;version&gt;</span>3.24.1-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
       <span class="tag">&lt;scope&gt;</span>import<span class="tag">&lt;/scope&gt;</span>
     <span class="tag">&lt;/dependency&gt;</span>
   <span class="tag">&lt;/dependencies&gt;</span>
@@ -1585,6 +1592,10 @@ This is very flexible but when binding a large <code>PreparedBatch</code> it inc
 as the entire chain of argument factories must be consulted for each batch of arguments added.
 To address this issue, implement <code>ArgumentFactory.Preparable</code> which promises to handle all values
 of a given <code>Type</code>.  Most built in argument factories now implement the Preparable interface.</p>
+</div>
+<div class="paragraph">
+<p>Preparable argument factories are consulted before traditional argument factories. If you&#8217;d prefer
+to keep the old behavior, you may disable this feature with <code>getConfig(Arguments.class).setPreparedArgumentsEnabled(false)</code>.</p>
 </div>
 </div>
 <div class="sect4">
@@ -3260,6 +3271,7 @@ Counter restoredCounter = jdbi.withHandle(h -&gt; h.createQuery(<span class="str
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// SQL object dao</span>
 <span class="directive">public</span> <span class="type">interface</span> <span class="class">CounterDao</span> {
+
     <span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO counters (id, value) VALUES (:id, :value)</span><span class="delimiter">&quot;</span></span>)
     <span class="type">int</span> storeCounter(<span class="annotation">@Bind</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>) <span class="predefined-type">String</span> id, <span class="annotation">@Bind</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">value</span><span class="delimiter">&quot;</span></span>) Counter counter);
 
@@ -3736,8 +3748,10 @@ to you in a container such as a <strong>List</strong>, <strong>Stream</strong>, 
     }
 }
 
-<span class="annotation">@Before</span>
+<span class="annotation">@BeforeEach</span>
 <span class="directive">public</span> <span class="type">void</span> setUp() {
+    handle = h2Extension.getSharedHandle();
+
     handle.execute(<span class="string"><span class="delimiter">&quot;</span><span class="content">CREATE TABLE user (id INTEGER PRIMARY KEY AUTO_INCREMENT, name VARCHAR)</span><span class="delimiter">&quot;</span></span>);
     <span class="keyword">for</span> (<span class="predefined-type">String</span> name : <span class="predefined-type">Arrays</span>.asList(<span class="string"><span class="delimiter">&quot;</span><span class="content">Alice</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Bob</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Charlie</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Data</span><span class="delimiter">&quot;</span></span>)) {
         handle.execute(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO user(name) VALUES (?)</span><span class="delimiter">&quot;</span></span>, name);
@@ -4300,6 +4314,7 @@ handwritten mappers.
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserArticleDao</span> {
+
     <span class="annotation">@RegisterJoinRowMapper</span>({User.class, Article.class})
     <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT * FROM user NATURAL JOIN author NATURAL JOIN article</span><span class="delimiter">&quot;</span></span>)
     Stream&lt;JoinRow&gt; getAuthorship();
@@ -4311,8 +4326,8 @@ handwritten mappers.
 <pre class="CodeRay highlight"><code data-lang="java">Multimap&lt;User, Article&gt; joined = HashMultimap.create();
 
 handle.attach(UserArticleDao.class)
-        .getAuthorship()
-        .forEach(jr -&gt; joined.put(jr.get(User.class), jr.get(Article.class)));
+    .getAuthorship()
+    .forEach(jr -&gt; joined.put(jr.get(User.class), jr.get(Article.class)));
 
 assertThat(joined).isEqualTo(JoinRowMapperTest.getExpected());</code></pre>
 </div>
@@ -4500,6 +4515,7 @@ separately querying after the insert completes.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="directive">static</span> <span class="type">class</span> <span class="class">User</span> {
+
     <span class="directive">final</span> <span class="type">int</span> id;
     <span class="directive">final</span> <span class="predefined-type">String</span> name;
 
@@ -4509,8 +4525,10 @@ separately querying after the insert completes.</p>
     }
 }
 
-<span class="annotation">@Before</span>
+<span class="annotation">@BeforeEach</span>
 <span class="directive">public</span> <span class="type">void</span> setUp() {
+    db = pgExtension.getJdbi();
+
     db.useHandle(h -&gt; h.execute(<span class="string"><span class="delimiter">&quot;</span><span class="content">CREATE TABLE users (id SERIAL PRIMARY KEY, name VARCHAR)</span><span class="delimiter">&quot;</span></span>));
     db.registerRowMapper(ConstructorMapper.factory(User.class));
 }</code></pre>
@@ -4559,7 +4577,7 @@ separately querying after the insert completes.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java">OutParameters result = handle
-        .createCall(<span class="string"><span class="delimiter">&quot;</span><span class="content">{:sum = call add(:a, :b)}</span><span class="delimiter">&quot;</span></span>) <i class="conum" data-value="1"></i><b>(1)</b>
+    .createCall(<span class="string"><span class="delimiter">&quot;</span><span class="content">{:sum = call add(:a, :b)}</span><span class="delimiter">&quot;</span></span>) <i class="conum" data-value="1"></i><b>(1)</b>
         .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">a</span><span class="delimiter">&quot;</span></span>, <span class="integer">13</span>) <i class="conum" data-value="2"></i><b>(2)</b>
         .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">b</span><span class="delimiter">&quot;</span></span>, <span class="integer">9</span>) <i class="conum" data-value="2"></i><b>(2)</b>
         .registerOutParameter(<span class="string"><span class="delimiter">&quot;</span><span class="content">sum</span><span class="delimiter">&quot;</span></span>, <span class="predefined-type">Types</span>.INTEGER)  <i class="conum" data-value="3"></i><b>(3)</b> <i class="conum" data-value="4"></i><b>(4)</b>
@@ -6862,10 +6880,27 @@ those we want to keep.</td>
 <div class="sect1">
 <h2 id="_testing"><a class="anchor" href="#_testing"></a><a class="link" href="#_testing">6. Testing</a></h2>
 <div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The official test support from JDBI is in the <code>jdbi-testing</code> package. There are a number of additional JUnit 5 extensions in the <code>jdbi-core</code> test artifact. These are only intended for JDBI internal use and not part of the official, public API.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_junit_4"><a class="anchor" href="#_junit_4"></a><a class="link" href="#_junit_4">6.1. JUnit 4</a></h3>
 <div class="paragraph">
-<p>The <code>jdbi3-testing</code> artifact provides a <a href="./apidocs/org/jdbi/v3/testing/JdbiRule.html">JdbiRule</a>
-class which provides helpers for writing JUnit tests integrated with a managed database
-instance.  This makes writing unit tests quick and easy!  You must remember to include
+<p>The <code>jdbi3-testing</code> artifact provides <a href="./apidocs/org/jdbi/v3/testing/JdbiRule.html">JdbiRule</a>
+class which implements <a href="https://junit.org/junit4/javadoc/latest/org/junit/rules/TestRule.html">TestRule</a> and can be used with the <a href="https://junit.org/junit4/javadoc/latest/org/junit/Rule.html">Rule</a> and <a href="https://junit.org/junit4/javadoc/latest/org/junit/ClassRule.html">ClassRule</a> annotations.</p>
+</div>
+<div class="paragraph">
+<p>It provides helpers for writing JUnit 4 tests integrated with a managed database
+instance. This makes writing unit tests quick and easy!  You must remember to include
 the database dependency itself, for example to get a pure H2 Java database:</p>
 </div>
 <div class="listingblock">
@@ -6873,22 +6908,72 @@ the database dependency itself, for example to get a pure H2 Java database:</p>
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>com.h2database<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>h2<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>1.4.197<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;version&gt;</span>1.4.200<span class="tag">&lt;/version&gt;</span>
     <span class="tag">&lt;scope&gt;</span>test<span class="tag">&lt;/scope&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>If you want to test against Postgres, you&#8217;d instead include:</p>
+<p>JUnit 4 supports the OTJ embedded postgres component, which needs to be included when
+using Postgres:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>com.opentable.components<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>otj-pg-embedded<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>0.11.3<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;version&gt;</span>0.13.4<span class="tag">&lt;/version&gt;</span>
     <span class="tag">&lt;scope&gt;</span>test<span class="tag">&lt;/scope&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_junit_5"><a class="anchor" href="#_junit_5"></a><a class="link" href="#_junit_5">6.2. JUnit 5</a></h3>
+<div class="paragraph">
+<p>The <code>jdbi3-testing</code> artifact provides <a href="./apidocs/org/jdbi/v3/testing/junit5/JdbiExtension.html">JdbiExtension</a> for JUnit 5 based tests.</p>
+</div>
+<div class="paragraph">
+<p>It supports both the <a href="https://junit.org/junit5/docs/current/api/org.junit.jupiter.api/org/junit/jupiter/api/extension/RegisterExtension.html">@RegisterExtension</a> and <a href="https://junit.org/junit5/docs/current/api/org.junit.jupiter.api/org/junit/jupiter/api/extension/ExtendWith.html">@ExtendWith</a> annotations.</p>
+</div>
+<div class="paragraph">
+<p>When using <code>@RegisterExtension</code>, the extensions can be customized further:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">Test</span> {
+    <span class="annotation">@RegisterExtension</span>
+    <span class="directive">public</span> JdbiExtension h2Extension = JdbiExtension.h2()
+        withPlugin(<span class="keyword">new</span> SqlObjectPlugin());
+
+    <span class="annotation">@Test</span>
+    <span class="directive">public</span> <span class="type">void</span> testWithJunit5() {
+        Jdbi jdbi = h2Extension.getJdbi();
+        Handle handle = h2Extension.openHandle();
+        [...]
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When using the <code>@ExtendWith</code> declarative extension, test methods can access the <code>Jdbi</code> and <code>Handle</code> objects through method parameters:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@ExtendWith</span>(JdbiH2Extension.class)
+<span class="directive">public</span> <span class="type">class</span> <span class="class">Test</span> {
+    <span class="annotation">@Test</span>
+    <span class="directive">public</span> <span class="type">void</span> testWithJunit5(Jdbi jdbi, Handle handle) {
+        [...]
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The instances injected are the same instances as returned by <code>getJdbi()</code> and <code>getSharedHandle()</code>.</p>
+</div>
+<div class="paragraph">
+<p>The javadoc for <a href="./apidocs/org/jdbi/v3/testing/junit5/JdbiExtension.html">JdbiExtension</a> contains further information on how to customize a programmatically registered instance.</p>
 </div>
 </div>
 </div>
@@ -7171,8 +7256,11 @@ We do support the configurable <code>get</code>, <code>is</code>, and <code>set<
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Value</span>.Immutable
 <span class="directive">public</span> <span class="type">interface</span> <span class="class">Train</span> {
+
     <span class="predefined-type">String</span> name();
+
     <span class="type">int</span> carriages();
+
     <span class="type">boolean</span> observationCar();
 }
 
@@ -8219,13 +8307,16 @@ discovered and registered automatically. Otherwise, you can attach it using
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="kotlin">data class IdAndName(val id: Int, val name: String)
-data class Thing(@Nested val idAndName: IdAndName,
-                 val nullable: String?,
-                 val nullableDefaultedNull: String? = null,
-                 val nullableDefaultedNotNull: String? = &quot;not null&quot;,
-                 val defaulted: String = &quot;default value&quot;)
-@Test fun testFindById() {
-    val qry = db.sharedHandle.createQuery(&quot;select id, name from something where id = :id&quot;)
+data class Thing(
+    @Nested val idAndName: IdAndName,
+    val nullable: String?,
+    val nullableDefaultedNull: String? = null,
+    val nullableDefaultedNotNull: String? = &quot;not null&quot;,
+    val defaulted: String = &quot;default value&quot;
+)
+@Test
+fun testFindById() {
+    val qry = h2Extension.sharedHandle.createQuery(&quot;select id, name from something where id = :id&quot;)
     val things: List&lt;Thing&gt; = qry.bind(&quot;id&quot;, brian.idAndName.id).mapTo&lt;Thing&gt;().list()
     assertEquals(1, things.size)
     assertEquals(brian, things[0])
@@ -8309,8 +8400,9 @@ via: <code>Jdbi.installPlugin(KotlinSqlObjectPlugin())</code>.</p>
     @SqlQuery(&quot;select id, name from something&quot;)
     fun list(): List&lt;Thing&gt;
 }
-@Before fun setUp() {
-    val dao = db.jdbi.onDemand&lt;ThingDao&gt;()
+@BeforeEach
+fun setUp() {
+    val dao = h2Extension.jdbi.onDemand&lt;ThingDao&gt;()
 
     val brian = Thing(IdAndName(1, &quot;Brian&quot;), null)
     val keith = Thing(IdAndName(2, &quot;Keith&quot;), null)
@@ -8318,15 +8410,15 @@ via: <code>Jdbi.installPlugin(KotlinSqlObjectPlugin())</code>.</p>
     dao.insert(brian)
     dao.insert(keith)
 }
-@Test fun testDao() {
-    val dao = db.jdbi.onDemand&lt;ThingDao&gt;()
+@Test
+fun testDao() {
+    val dao = h2Extension.jdbi.onDemand&lt;ThingDao&gt;()
 
     val rs = dao.list()
 
     assertEquals(2, rs.size.toLong())
     assertEquals(brian, rs[0])
     assertEquals(keith, rs[1])
-
 }</code></pre>
 </div>
 </div>
@@ -10651,8 +10743,8 @@ return types, or on <code>@SqlBatch</code> parameters.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 3.23.0<br>
-Last updated 10/08/2021 18:44 -0700
+Version 3.24.1-SNAPSHOT<br>
+Last updated 11/10/2021 11:26 -0800
 </div>
 </div>
 <style>

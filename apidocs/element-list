@@ -13,6 +13,7 @@ org.jdbi.v3.core.enums.internal
 org.jdbi.v3.core.extension
 org.jdbi.v3.core.generic
 org.jdbi.v3.core.h2
+org.jdbi.v3.core.interceptor
 org.jdbi.v3.core.internal
 org.jdbi.v3.core.locator
 org.jdbi.v3.core.locator.internal
@@ -59,4 +60,6 @@ org.jdbi.v3.sqlobject.transaction.internal
 org.jdbi.v3.stringtemplate4
 org.jdbi.v3.stringtemplate4.internal
 org.jdbi.v3.testing
+org.jdbi.v3.testing.junit5
+org.jdbi.v3.testing.junit5.internal
 org.jdbi.v3.vavr
