@@ -444,8 +444,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="header">
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
-<span id="revnumber">version 3.24.1,</span>
-<span id="revdate">11/16/2021 17:39 -0800</span>
+<span id="revnumber">version 3.25.0,</span>
+<span id="revdate">12/07/2021 14:15 -0800</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -860,7 +860,7 @@ Already using Jdbi v2? See <a href="#_upgrading_from_v2_to_v3">Upgrading from v2
 <p>Jdbi is easy to include in your Java project - with an
 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" target="_blank" rel="noopener">Apache 2.0</a> license, few
 external dependencies, and JARs distributed through
-<a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.jdbi%22%20AND%20v%3A%223.24.1%22" target="_blank" rel="noopener">Maven Central</a>,
+<a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.jdbi%22%20AND%20v%3A%223.25.0%22" target="_blank" rel="noopener">Maven Central</a>,
 you can just include the relevant artifacts in your POM:</p>
 </div>
 <div class="listingblock">
@@ -871,7 +871,7 @@ you can just include the relevant artifacts in your POM:</p>
       <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
       <span class="tag">&lt;artifactId&gt;</span>jdbi3-bom<span class="tag">&lt;/artifactId&gt;</span>
       <span class="tag">&lt;type&gt;</span>pom<span class="tag">&lt;/type&gt;</span>
-      <span class="tag">&lt;version&gt;</span>3.24.1<span class="tag">&lt;/version&gt;</span>
+      <span class="tag">&lt;version&gt;</span>3.25.0<span class="tag">&lt;/version&gt;</span>
       <span class="tag">&lt;scope&gt;</span>import<span class="tag">&lt;/scope&gt;</span>
     <span class="tag">&lt;/dependency&gt;</span>
   <span class="tag">&lt;/dependencies&gt;</span>
@@ -4391,6 +4391,11 @@ batch.add(<span class="string"><span class="delimiter">&quot;</span><span class=
 There are no parameters.  Each statement returns a modification count, as with an Update, and
 those counts are then returned in an <code>int[]</code> array.  In common cases all elements will be <code>1</code>.</p>
 </div>
+<div class="paragraph">
+<p>Some database drivers might return special values in conditions where modification counts are not available.
+See the
+<a href="https://docs.oracle.com/javase/8/docs/api/java/sql/Statement.html#executeBatch--" target="_blank" rel="noopener">executeBatch</a> documentation for details.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_prepared_batches"><a class="anchor" href="#_prepared_batches"></a><a class="link" href="#_prepared_batches">3.12. Prepared Batches</a></h3>
@@ -7146,16 +7151,17 @@ jdbi.getConfig(MoshiConfig.class).setMoshi(myMoshi);</code></pre>
 <div class="sect3">
 <h4 id="_operation"><a class="anchor" href="#_operation"></a><a class="link" href="#_operation">7.3.4. Operation</a></h4>
 <div class="paragraph">
-<p>Any bound object qualified as <a href="./apidocs/org/jdbi/v3/json/Json.html" target="_blank" rel="noopener">@Json</a> — except <code>String</code> —
+<p>Any bound object qualified as <a href="./apidocs/org/jdbi/v3/json/Json.html" target="_blank" rel="noopener">@Json</a>
 will be converted by the <a href="./apidocs/org/jdbi/v3/json/JsonConfig.html" target="_blank" rel="noopener">registered</a>
-<a href="./apidocs/org/jdbi/v3/json/JsonMapper.html" target="_blank" rel="noopener">JsonMapper</a> and <em>requalified</em> as <code>@Json String</code>.
-A correspondingly qualified <code>ArgumentFactory</code> will then be called to store the JSON data,
+<a href="./apidocs/org/jdbi/v3/json/JsonMapper.html" target="_blank" rel="noopener">JsonMapper</a> and <em>requalified</em> as
+<a href="./apidocs/org/jdbi/v3/json/EncodedJson.html" target="_blank" rel="noopener">@EncodedJson</a> <code>String</code>.
+A corresponding <code>@EncodedJson ArgumentFactory</code> will then be called to store the JSON data,
 allowing special JSON handling for your database to be implemented.
 If none are found, a factory for plain <code>String</code> will be used instead, to handle the JSON as plaintext.</p>
 </div>
 <div class="paragraph">
 <p>Mapping works just the same way, but in reverse: an output type qualified as <code>@Json T</code> will be fetched from a
-<code>@Json String</code> or <code>String</code> ColumnMapper, and then passed through the <code>JsonMapper</code>.</p>
+<code>@EncodedJson String</code> or <code>String</code> ColumnMapper, and then passed through the <code>JsonMapper</code>.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -7165,7 +7171,7 @@ If none are found, a factory for plain <code>String</code> will be used instead,
 </td>
 <td class="content">
 Our PostgresPlugin provides qualified factories that will
-bind/map the <code>@Json String</code> to/from <code>json</code> or <code>jsonb</code>-typed columns.
+bind/map the <code>@EncodedJson String</code> to/from <code>json</code> or <code>jsonb</code>-typed columns.
 </td>
 </tr>
 </table>
@@ -10757,8 +10763,8 @@ return types, or on <code>@SqlBatch</code> parameters.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 3.24.1<br>
-Last updated 11/16/2021 17:39 -0800
+Version 3.25.0<br>
+Last updated 12/07/2021 14:15 -0800
 </div>
 </div>
 <style>
