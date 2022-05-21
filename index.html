@@ -444,8 +444,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="header">
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
-<span id="revnumber">version 3.28.0,</span>
-<span id="revdate">03/08/2022 14:24 -0800</span>
+<span id="revnumber">version 3.29.0,</span>
+<span id="revdate">05/21/2022 12:13 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -860,7 +860,7 @@ Already using Jdbi v2? See <a href="#_upgrading_from_v2_to_v3">Upgrading from v2
 <p>Jdbi is easy to include in your Java project - with an
 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" target="_blank" rel="noopener">Apache 2.0</a> license, few
 external dependencies, and JARs distributed through
-<a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.jdbi%22%20AND%20v%3A%223.28.0%22" target="_blank" rel="noopener">Maven Central</a>,
+<a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.jdbi%22%20AND%20v%3A%223.29.0%22" target="_blank" rel="noopener">Maven Central</a>,
 you can just include the relevant artifacts in your POM:</p>
 </div>
 <div class="listingblock">
@@ -871,7 +871,7 @@ you can just include the relevant artifacts in your POM:</p>
       <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
       <span class="tag">&lt;artifactId&gt;</span>jdbi3-bom<span class="tag">&lt;/artifactId&gt;</span>
       <span class="tag">&lt;type&gt;</span>pom<span class="tag">&lt;/type&gt;</span>
-      <span class="tag">&lt;version&gt;</span>3.28.0<span class="tag">&lt;/version&gt;</span>
+      <span class="tag">&lt;version&gt;</span>3.29.0<span class="tag">&lt;/version&gt;</span>
       <span class="tag">&lt;scope&gt;</span>import<span class="tag">&lt;/scope&gt;</span>
     <span class="tag">&lt;/dependency&gt;</span>
   <span class="tag">&lt;/dependencies&gt;</span>
@@ -3325,16 +3325,12 @@ Counter restoredCounter = jdbi.withHandle(h -&gt; h.createQuery(<span class="str
 
     <span class="annotation">@Override</span>
     <span class="directive">public</span> ColumnMapper&lt;Value&lt;<span class="predefined-type">String</span>&gt;&gt; getColumnMapper() {
-        <span class="keyword">return</span> (r, idx, ctx) -&gt; {
-            <span class="keyword">return</span> <span class="keyword">new</span> StringValue(r.getString(idx));
-        };
+        <span class="keyword">return</span> (r, idx, ctx) -&gt; <span class="keyword">new</span> StringValue(r.getString(idx));
     }
 
     <span class="annotation">@Override</span>
     <span class="directive">public</span> Function&lt;Value&lt;<span class="predefined-type">String</span>&gt;, Argument&gt; getArgumentFunction() {
-        <span class="keyword">return</span> data -&gt; (idx, stmt, ctx) -&gt; {
-            stmt.setString(idx, data.getValue());
-        };
+        <span class="keyword">return</span> data -&gt; (idx, stmt, ctx) -&gt; stmt.setString(idx, data.getValue());
     }
 }
 
@@ -7257,7 +7253,7 @@ We do support the configurable <code>get</code>, <code>is</code>, and <code>set<
 <p><code>jdbi.getConfig(JdbiImmutables.class).registerImmutable(MyValueType.class)</code></p>
 </div>
 <div class="paragraph">
-<p>The configuration will both register appropriate <code>RowMapper`s as well as configure the new `bindPojo</code> (or <code>@BindPojo</code>) binders:</p>
+<p>The configuration will both register appropriate <code>RowMapper</code>&#8288;s as well as configure the new <code>bindPojo</code> (or <code>@BindPojo</code>) binders:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -10763,8 +10759,8 @@ return types, or on <code>@SqlBatch</code> parameters.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 3.28.0<br>
-Last updated 03/08/2022 14:24 -0800
+Version 3.29.0<br>
+Last updated 05/21/2022 12:13 -0700
 </div>
 </div>
 <style>
