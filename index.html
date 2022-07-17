@@ -444,8 +444,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="header">
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
-<span id="revnumber">version 3.29.0,</span>
-<span id="revdate">05/21/2022 12:13 -0700</span>
+<span id="revnumber">version 3.31.0,</span>
+<span id="revdate">07/17/2022 00:30 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -860,7 +860,7 @@ Already using Jdbi v2? See <a href="#_upgrading_from_v2_to_v3">Upgrading from v2
 <p>Jdbi is easy to include in your Java project - with an
 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" target="_blank" rel="noopener">Apache 2.0</a> license, few
 external dependencies, and JARs distributed through
-<a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.jdbi%22%20AND%20v%3A%223.29.0%22" target="_blank" rel="noopener">Maven Central</a>,
+<a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.jdbi%22%20AND%20v%3A%223.31.0%22" target="_blank" rel="noopener">Maven Central</a>,
 you can just include the relevant artifacts in your POM:</p>
 </div>
 <div class="listingblock">
@@ -871,7 +871,7 @@ you can just include the relevant artifacts in your POM:</p>
       <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
       <span class="tag">&lt;artifactId&gt;</span>jdbi3-bom<span class="tag">&lt;/artifactId&gt;</span>
       <span class="tag">&lt;type&gt;</span>pom<span class="tag">&lt;/type&gt;</span>
-      <span class="tag">&lt;version&gt;</span>3.29.0<span class="tag">&lt;/version&gt;</span>
+      <span class="tag">&lt;version&gt;</span>3.31.0<span class="tag">&lt;/version&gt;</span>
       <span class="tag">&lt;scope&gt;</span>import<span class="tag">&lt;/scope&gt;</span>
     <span class="tag">&lt;/dependency&gt;</span>
   <span class="tag">&lt;/dependencies&gt;</span>
@@ -1130,7 +1130,7 @@ use <code>jdbi.open()</code>:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">try</span> (Handle handle = jdbi.open()) {
-    handle.execute(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into contacts (id, name) values (?, ?)</span><span class="delimiter">&quot;</span></span>, <span class="integer">3</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Chuck</span><span class="delimiter">&quot;</span></span>);
+    result = handle.execute(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into contacts (id, name) values (?, ?)</span><span class="delimiter">&quot;</span></span>, <span class="integer">3</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Chuck</span><span class="delimiter">&quot;</span></span>);
 }</code></pre>
 </div>
 </div>
@@ -4345,7 +4345,7 @@ method which binds simple positional parameters.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java">count = handle.execute(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO </span><span class="char">\&quot;</span><span class="content">user</span><span class="char">\&quot;</span><span class="content"> (id, </span><span class="char">\&quot;</span><span class="content">name</span><span class="char">\&quot;</span><span class="content">) VALUES(?, ?)</span><span class="delimiter">&quot;</span></span>, <span class="integer">4</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Alice</span><span class="delimiter">&quot;</span></span>);
-assertThat(count).isEqualTo(<span class="integer">1</span>);</code></pre>
+assertThat(count).isOne();</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4357,7 +4357,7 @@ assertThat(count).isEqualTo(<span class="integer">1</span>);</code></pre>
     .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">3</span>)
     .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Charlie</span><span class="delimiter">&quot;</span></span>)
     .execute();
-assertThat(count).isEqualTo(<span class="integer">1</span>);</code></pre>
+assertThat(count).isOne();</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -7277,7 +7277,7 @@ We do support the configurable <code>get</code>, <code>is</code>, and <code>set<
             handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into train(name, carriages, observation_car) values (:name, :carriages, :observationCar)</span><span class="delimiter">&quot;</span></span>)
                 .bindPojo(ImmutableTrain.builder().name(<span class="string"><span class="delimiter">&quot;</span><span class="content">Zephyr</span><span class="delimiter">&quot;</span></span>).carriages(<span class="integer">8</span>).observationCar(<span class="predefined-constant">true</span>).build())
                 .execute())
-            .isEqualTo(<span class="integer">1</span>);
+            .isOne();
 
         assertThat(
             handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from train</span><span class="delimiter">&quot;</span></span>)
@@ -7350,7 +7350,7 @@ configure the new `bindPojo</code> (or <code>@BindPojo</code>) binders:</p>
             handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into train(name, carriages, observation_car) values (:name, :carriages, :observationCar)</span><span class="delimiter">&quot;</span></span>)
                 .bindPojo(train)
                 .execute())
-            .isEqualTo(<span class="integer">1</span>);
+            .isOne();
 
         assertThat(
             handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from train</span><span class="delimiter">&quot;</span></span>)
@@ -10759,8 +10759,8 @@ return types, or on <code>@SqlBatch</code> parameters.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 3.29.0<br>
-Last updated 05/21/2022 12:13 -0700
+Version 3.31.0<br>
+Last updated 07/17/2022 00:30 -0700
 </div>
 </div>
 <style>
