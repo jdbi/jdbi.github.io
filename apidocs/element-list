@@ -4,6 +4,7 @@ org.jdbi.v3.core
 org.jdbi.v3.core.annotation
 org.jdbi.v3.core.argument
 org.jdbi.v3.core.argument.internal
+org.jdbi.v3.core.argument.internal.strategies
 org.jdbi.v3.core.array
 org.jdbi.v3.core.codec
 org.jdbi.v3.core.collector
@@ -15,6 +16,8 @@ org.jdbi.v3.core.generic
 org.jdbi.v3.core.h2
 org.jdbi.v3.core.interceptor
 org.jdbi.v3.core.internal
+org.jdbi.v3.core.internal.exceptions
+org.jdbi.v3.core.internal.lexer
 org.jdbi.v3.core.locator
 org.jdbi.v3.core.locator.internal
 org.jdbi.v3.core.mapper
@@ -42,6 +45,7 @@ org.jdbi.v3.jpa.internal
 org.jdbi.v3.json
 org.jdbi.v3.json.internal
 org.jdbi.v3.meta
+org.jdbi.v3.postgis
 org.jdbi.v3.postgres
 org.jdbi.v3.postgres.internal
 org.jdbi.v3.sqlite3
