@@ -1,10 +1,5 @@
 $dokka.format:html-v1
 $dokka.linkExtension:html
-$dokka.location:org.jdbi.v3.core.kotlin.internal////PointingToDeclaration/jdbi3-kotlin/org.jdbi.v3.core.kotlin.internal/index.html
-$dokka.location:org.jdbi.v3.core.kotlin.internal/KotlinPropertyArguments///PointingToDeclaration/jdbi3-kotlin/org.jdbi.v3.core.kotlin.internal/-kotlin-property-arguments/index.html
-$dokka.location:org.jdbi.v3.core.kotlin.internal/KotlinPropertyArguments/KotlinPropertyArguments/#kotlin.Any#kotlin.String/PointingToDeclaration/jdbi3-kotlin/org.jdbi.v3.core.kotlin.internal/-kotlin-property-arguments/-kotlin-property-arguments.html
-$dokka.location:org.jdbi.v3.core.kotlin.internal/KotlinPropertyArguments/getNames/#/PointingToDeclaration/jdbi3-kotlin/org.jdbi.v3.core.kotlin.internal/-kotlin-property-arguments/get-names.html
-$dokka.location:org.jdbi.v3.core.kotlin.internal/KotlinPropertyArguments/toString/#/PointingToDeclaration/jdbi3-kotlin/org.jdbi.v3.core.kotlin.internal/-kotlin-property-arguments/to-string.html
 $dokka.location:org.jdbi.v3.core.kotlin////PointingToDeclaration/jdbi3-kotlin/org.jdbi.v3.core.kotlin/index.html
 $dokka.location:org.jdbi.v3.core.kotlin//bindKotlin/org.jdbi.v3.core.statement.SqlStatement[TypeParam(bounds=[org.jdbi.v3.core.statement.SqlStatement[^]])]#kotlin.Any/PointingToDeclaration/jdbi3-kotlin/org.jdbi.v3.core.kotlin/bind-kotlin.html
 $dokka.location:org.jdbi.v3.core.kotlin//bindKotlin/org.jdbi.v3.core.statement.SqlStatement[TypeParam(bounds=[org.jdbi.v3.core.statement.SqlStatement[^]])]#kotlin.String#kotlin.Any/PointingToDeclaration/jdbi3-kotlin/org.jdbi.v3.core.kotlin/bind-kotlin.html
@@ -38,5 +33,4 @@ $dokka.location:org.jdbi.v3.core.kotlin/KotlinPlugin///PointingToDeclaration/jd
 $dokka.location:org.jdbi.v3.core.kotlin/KotlinPlugin/KotlinPlugin/#kotlin.Boolean/PointingToDeclaration/jdbi3-kotlin/org.jdbi.v3.core.kotlin/-kotlin-plugin/-kotlin-plugin.html
 $dokka.location:org.jdbi.v3.core.kotlin/KotlinPlugin/customizeJdbi/#org.jdbi.v3.core.Jdbi/PointingToDeclaration/jdbi3-kotlin/org.jdbi.v3.core.kotlin/-kotlin-plugin/customize-jdbi.html
 org.jdbi.v3.core.kotlin
-org.jdbi.v3.core.kotlin.internal
 
