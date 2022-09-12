@@ -534,7 +534,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.32.1-SNAPSHOT,</span>
-<span id="revdate">09/09/2022 10:03 -0700</span>
+<span id="revdate">09/12/2022 12:12 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -2904,7 +2904,8 @@ handle.registerRowMapper(JoinRowMapper.forTypes(ContactBean.class, PhoneBean.cla
 </div>
 <div class="paragraph">
 <p>The <code>@ColumnName</code> annotation can be placed on either the getter or setter
-method.</p>
+method. Annotations on the setter are preferred if conflicting annotations
+exist.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -7426,7 +7427,7 @@ supports Immutables.</p>
 </td>
 <td class="content">
 Freebuilder support is still experimental and may not support all Freebuilder
-implemented feaatures. We do support both JavaBean style getters and setters as
+implemented features. We do support both JavaBean style getters and setters as
 well as unprefixed getters and setters.
 </td>
 </tr>
@@ -10880,7 +10881,7 @@ return types, or on <code>@SqlBatch</code> parameters.</p>
 <div id="footer">
 <div id="footer-text">
 Version 3.32.1-SNAPSHOT<br>
-Last updated 09/09/2022 10:03 -0700
+Last updated 09/12/2022 12:12 -0700
 </div>
 </div>
 </body>
