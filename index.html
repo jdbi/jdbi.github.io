@@ -534,7 +534,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.32.1-SNAPSHOT,</span>
-<span id="revdate">09/28/2022 11:26 -0700</span>
+<span id="revdate">09/28/2022 14:39 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -582,7 +582,8 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_primitive_mapping">4.5.3. Primitive Mapping</a></li>
 <li><a href="#_immutables_mapping">4.5.4. Immutables Mapping</a></li>
 <li><a href="#_freebuilder_mapping">4.5.5. Freebuilder Mapping</a></li>
-<li><a href="#_reflection_mappers">4.5.6. Reflection Mappers</a></li>
+<li><a href="#_reflection_mappers_for_beans_and_pojos">4.5.6. Reflection Mappers for Beans and POJOs</a></li>
+<li><a href="#_map_entry_mapping">4.5.7. Map.Entry mapping</a></li>
 </ul>
 </li>
 <li><a href="#_codecs">4.6. Codecs</a>
@@ -2572,35 +2573,106 @@ This may be disabled by configuring
 </div>
 </div>
 <div class="sect3">
-<h4 id="_reflection_mappers"><a class="anchor" href="#_reflection_mappers"></a><a class="link" href="#_reflection_mappers">4.5.6. Reflection Mappers</a></h4>
+<h4 id="_reflection_mappers_for_beans_and_pojos"><a class="anchor" href="#_reflection_mappers_for_beans_and_pojos"></a><a class="link" href="#_reflection_mappers_for_beans_and_pojos">4.5.6. Reflection Mappers for Beans and POJOs</a></h4>
 <div class="paragraph">
-<p>Jdbi provides a few reflection-based mappers out of the box.</p>
+<p>Jdbi provides a number of reflection-based mappers out of the box which treat column
+names as attributes. The different mappers can be used to map values onto</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Java Bean properties (<code>BeanMapper</code>)</p>
+</li>
+<li>
+<p>Class fields (<code>FieldMapper</code>)</p>
+</li>
+<li>
+<p>Constructor parameters (<code>ConstructorMapper</code>)</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>Reflective mappers treat column names as bean property names (BeanMapper),
-constructor parameter names (ConstructorMapper), or field names (FieldMapper).</p>
+<p>There is also an equivalent mapper for Kotlin classes that supports constructor arguments and class properties.</p>
 </div>
 <div class="paragraph">
 <p>Reflective mappers are snake_case aware and will automatically match up these
 columns to camelCase field/argument/property names.</p>
 </div>
-<div class="admonitionblock tip">
+<div class="sect4">
+<h5 id="_supported_attribute_annotations"><a class="anchor" href="#_supported_attribute_annotations"></a><a class="link" href="#_supported_attribute_annotations">Supported attribute annotations</a></h5>
+<div class="paragraph">
+<p>Reflection mappers support the following annotations. Unless otherwise noted, all annotations are supported on bean getters and setters for the <code>BeanMapper</code>, constructor parameters for the <code>ConstructorMapper</code> and bean fields for the <code>FieldMapper</code>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>@ColumnName</code> allows explicit naming of the column that is mapped to
+the specific attribute.</p>
+</li>
+<li>
+<p><code>@Nested</code> for nested beans. Without this annotation, any attribute is treated as mappable from a single column. This annotation creates
+a mapper for the nested bean. There is a limitation that only one type of mapper can be nested at a time; <code>BeanMapper</code> will create
+another <code>BeanMapper</code>, <code>ConstructorMapper</code> will create another <code>ConstructorMapper</code> etc. <code>@Nested</code> supports an optional prefix for
+all attributes in the nested bean (<code>@Nested("prefix")</code>).</p>
+</li>
+<li>
+<p><code>@PropagateNull</code> on a given attribute propagates a null value for a specific attribute up. So if the attribute or column is null, the whole bean will be discarded and a null value will be used instead of the bean itself. This annotation can also be used on the bean
+class with a column name that must be present in the result set. When used on an attribute, no value must be set.</p>
+</li>
+<li>
+<p><code>@Nullable</code> for <code>ConstructorMapper</code> arguments. If no column is mapped onto a specific constructor argument, don&#8217;t fail but use <code>null</code> as value. Any annotation called <code>Nullable</code> is accepted.</p>
+</li>
+<li>
+<p><code>@Unmappable</code> for <code>BeanMapper</code> bean properties and <code>FieldMapper</code> fields. Any attribute with this annotation will be ignored.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-To instruct Jdbi to ignore an otherwise mappable method, annotate it as <code>@Unmappable</code>.
+The <code>@ColumnName</code> annotation only applies while mapping SQL data into Java
+objects. When binding object properties (e.g. with <code>bindBean()</code>), bind the
+property name (<code>:id</code>) rather than the column name (<code>:user_id</code>).
 </td>
 </tr>
 </table>
 </div>
+</div>
 <div class="sect4">
 <h5 id="_constructormapper"><a class="anchor" href="#_constructormapper"></a><a class="link" href="#_constructormapper">ConstructorMapper</a></h5>
 <div class="paragraph">
-<p><strong>Jdbi</strong> provides a simple constructor mapper which uses reflection to assign
-columns to constructor parameters by name.</p>
+<p><a href="./apidocs/org/jdbi/v3/core/mapper/reflect/ConstructorMapper.html" target="_blank" rel="noopener">ConstructorMapper</a> assigns columns to constructor parameters by
+name. If the java compiler stores method parameter names in the java
+classes (using the <code>-parameters</code> flag on the compiler&#8201;&#8212;&#8201;see also
+<a href="#_compiling_with_parameter_names">Compiling with Parameter Names</a>), the constructor mapper will use
+these names to select columns.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> User(<span class="type">int</span> id, <span class="predefined-type">String</span> name) {
+    <span class="local-variable">this</span>.id = id;
+    <span class="local-variable">this</span>.name = name;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Otherwise, the names can be explictly set with the <code>@ColumnName</code>
+annotation on each constructor parameter:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> User(<span class="annotation">@ColumnName</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>) <span class="type">int</span> id, <span class="annotation">@ColumnName</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>) <span class="predefined-type">String</span> name) {
+  <span class="local-variable">this</span>.id = id;
+  <span class="local-variable">this</span>.name = name;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The standard Java Bean <code>@ConstructorProperties</code> annotation can also be used:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2610,11 +2682,6 @@ columns to constructor parameters by name.</p>
   <span class="local-variable">this</span>.name = name;
 }</code></pre>
 </div>
-</div>
-<div class="paragraph">
-<p>The <code>@ConstructorProperties</code> annotations tells Jdbi the property name of each
-constructor parameter, so it can figure out which column corresponds to each
-constructor parameter.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -2630,21 +2697,8 @@ Lombok&#8217;s <code>@AllArgsConstructor</code> annotation generates the
 </table>
 </div>
 <div class="paragraph">
-<p>Enabling the <code>-parameters</code> Java compiler flag removes the need for the
-<code>@ConstructorProperties</code> annotation&#8212;&#8203;see <a href="#_compiling_with_parameter_names">Compiling with Parameter Names</a>.
-Thus:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> User(<span class="type">int</span> id, <span class="predefined-type">String</span> name) {
-    <span class="local-variable">this</span>.id = id;
-    <span class="local-variable">this</span>.name = name;
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Register a constructor mapper for your mapped class using the <code>factory()</code>
-method:</p>
+<p>Register a constructor mapper for your mapped class using the <code>factory()</code> or <code>of()</code>
+methods:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2707,20 +2761,6 @@ use.</p>
   <span class="local-variable">this</span>.name = name;
 }</code></pre>
 </div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The <code>@ColumnName</code> annotation only applies while mapping SQL data into Java
-objects. When binding object properties (e.g. with <code>bindBean()</code>), bind the
-property name (<code>:id</code>) rather than the column name (<code>:user_id</code>).
-</td>
-</tr>
-</table>
 </div>
 <div class="paragraph">
 <p>Nested constructor-injected types can be mapped using the <code>@Nested</code> annotation:</p>
@@ -2821,7 +2861,7 @@ Any <code>@Nullable</code> annotation from any package may be used.
 <div class="sect4">
 <h5 id="_beanmapper"><a class="anchor" href="#_beanmapper"></a><a class="link" href="#_beanmapper">BeanMapper</a></h5>
 <div class="paragraph">
-<p>We also provide basic support for mapping beans:</p>
+<p><a href="./apidocs/org/jdbi/v3/core/mapper/reflect/BeanMapper.html" target="_blank" rel="noopener">BeanMapper</a> assigns columns to bean properties. This mapper uses the standard Java Bean conventions.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2843,6 +2883,19 @@ Any <code>@Nullable</code> annotation from any package may be used.
     }
 }</code></pre>
 </div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The standard bean convention requires that the setter returns a <code>void</code> value. The popular "builder pattern" setter
+convention of returning the bean itself does not work with the standard Java Bean convention and the setter will not be found. This is a common source of problems when using the <code>BeanMapper</code>.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>Register a bean mapper for your mapped class, using the <code>factory()</code> method:</p>
@@ -2866,6 +2919,17 @@ Any <code>@Nullable</code> annotation from any package may be used.
         .createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select id, </span><span class="char">\&quot;</span><span class="content">name</span><span class="char">\&quot;</span><span class="content"> from </span><span class="char">\&quot;</span><span class="content">user</span><span class="char">\&quot;</span><span class="delimiter">&quot;</span></span>)
         .mapToBean(UserBean.class)
         .list();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or use <code>map</code> with an instance:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">List</span>&lt;UserBean&gt; users = handle
+    .createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select id, </span><span class="char">\&quot;</span><span class="content">name</span><span class="char">\&quot;</span><span class="content"> from </span><span class="char">\&quot;</span><span class="content">user</span><span class="char">\&quot;</span><span class="delimiter">&quot;</span></span>)
+    .map(BeanMapper.of(UserBean.class))
+    .list();</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2904,22 +2968,7 @@ handle.registerRowMapper(JoinRowMapper.forTypes(ContactBean.class, PhoneBean.cla
 </div>
 <div class="paragraph">
 <p>The <code>@ColumnName</code> annotation can be placed on either the getter or setter
-method. Annotations on the setter are preferred if conflicting annotations
-exist.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The <code>@ColumnName</code> annotation only applies while mapping SQL data into Java
-objects. When binding object properties (e.g. with <code>bindBean()</code>), bind the
-property name (<code>:id</code>) rather than the column name (<code>:user_id</code>).
-</td>
-</tr>
-</table>
+method. If conflicting annotations exist, then Annotations on the setter are preferred.</p>
 </div>
 <div class="paragraph">
 <p>Nested Java Bean types can be mapped using the <code>@Nested</code> annotation:</p>
@@ -2954,7 +3003,7 @@ property name (<code>:id</code>) rather than the column name (<code>:user_id</co
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
 <td>The <code>@Nested</code> annotation can be placed on either the getter or setter
-method.</td>
+method. The setter is preferred.</td>
 </tr>
 </table>
 </div>
@@ -3062,20 +3111,6 @@ handle.registerRowMapper(JoinRowMapper.forTypes(Contact.class, Phone.class);
 }</code></pre>
 </div>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The <code>@ColumnName</code> annotation only applies while mapping SQL data into Java
-objects. When binding object properties (e.g. with <code>bindBean()</code>), bind the
-property name (<code>:id</code>) rather than the column name (<code>:user_id</code>).
-</td>
-</tr>
-</table>
-</div>
 <div class="paragraph">
 <p>Nested field-mapped types can be mapped using the <code>@Nested</code> annotation:</p>
 </div>
@@ -3146,8 +3181,9 @@ columns matching any fields of the nested object.
 </table>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_map_entry_mapping"><a class="anchor" href="#_map_entry_mapping"></a><a class="link" href="#_map_entry_mapping">Map.Entry mapping</a></h5>
+</div>
+<div class="sect3">
+<h4 id="_map_entry_mapping"><a class="anchor" href="#_map_entry_mapping"></a><a class="link" href="#_map_entry_mapping">4.5.7. Map.Entry mapping</a></h4>
 <div class="paragraph">
 <p>Out of the box, Jdbi registers a <code>RowMapper&lt;Map.Entry&lt;K,V&gt;&gt;</code>. Since each row in
 the result set is a <code>Map.Entry&lt;K,V&gt;</code>, the entire result set can be easily
@@ -3278,7 +3314,6 @@ fails, an exception is thrown.
 <div class="paragraph">
 <p>Jdbi can be enhanced to support arbitrary container types. See
 <a href="#JdbiCollectors">[JdbiCollectors]</a> for more information.</p>
-</div>
 </div>
 </div>
 </div>
@@ -8564,7 +8599,7 @@ jdbi.getConfig(Jackson2Config::class.java).mapper = jacksonObjectMapper()</code>
 <div class="sect2">
 <h3 id="_lombok"><a class="anchor" href="#_lombok"></a><a class="link" href="#_lombok">8.10. Lombok</a></h3>
 <div class="paragraph">
-<p>Lombok is a great tool for cutting the boilerplate out of POJO classes.</p>
+<p>Lombok is a tool for auto-generation of mutable and immutable data classes through annotations.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -8584,7 +8619,7 @@ jdbi.getConfig(Jackson2Config::class.java).mapper = jacksonObjectMapper()</code>
 </div>
 </div>
 <div class="paragraph">
-<p>Lombok and Jdbi mostly play nice out of the box:</p>
+<p>Classes annotated with <code>@Value</code> are immutable, classes annotated with <code>@Data</code> behave like standard, mutable Java Beans.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -8601,39 +8636,24 @@ classes.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>We say "mostly" because there&#8217;s a wrinkle once you start annotating fields with
-Jdbi annotations like <code>@Nested</code>, <code>@ColumnMapper</code>, or type qualifying annotations
-such as <code>@HStore</code>.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>BeanMapper looks for these annotations on getters, setters, or setter
-parameters.</p>
-</li>
-<li>
-<p>ConstructorMapper looks for them on constructor parameters.</p>
-</li>
-<li>
-<p>Lombok doesn&#8217;t move them there by default.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>As of Lombok version 1.18.4, Lombok can be configured to copy any annotations
-you specify to generated getter, setter, setter parameters, and constructor
-parameters.</p>
-</div>
-<div class="paragraph">
-<p>Create a file <code>lombok.config</code> in your project src tree (or edit the existing
-one), and add a line for each annotation type which should be copied, as
-in the following example:</p>
+<p>Lombok must be configured to propagate annotations from the source code into the generated classes. Since version 1.18.4, lombok
+supports the <code>lombok.copyableAnnotations</code> setting in its config file. To support all JDBI features, the following lines must be added:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">lombok.copyableAnnotations += org.jdbi.v3.core.mapper.Nested
-lombok.copyableAnnotations += org.jdbi.v3.core.mapper.reflect.ColumnName
-lombok.copyableAnnotations += org.jdbi.v3.postgres.HStore</code></pre>
+<pre class="CodeRay highlight"><code data-lang="java">lombok.copyableAnnotations += org.jdbi.v3.core.mapper.reflect.ColumnName
+lombok.copyableAnnotations += org.jdbi.v3.core.mapper.Nested
+lombok.copyableAnnotations += org.jdbi.v3.core.mapper.PropagateNull
+lombok.copyableAnnotations += org.jdbi.v3.core.annotation.Unmappable
+lombok.copyableAnnotations += org.jdbi.v3.core.mapper.reflect.JdbiConstructor</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Any additional annotation (such as the <code>@HStore</code> annotation for PostgreSQL support) can also be added:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">lombok.copyableAnnotations += org.jdbi.v3.postgres.HStore</code></pre>
 </div>
 </div>
 </div>
@@ -10881,7 +10901,7 @@ return types, or on <code>@SqlBatch</code> parameters.</p>
 <div id="footer">
 <div id="footer-text">
 Version 3.32.1-SNAPSHOT<br>
-Last updated 09/28/2022 11:26 -0700
+Last updated 09/28/2022 14:39 -0700
 </div>
 </div>
 </body>
