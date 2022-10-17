@@ -534,7 +534,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.34.1-SNAPSHOT,</span>
-<span id="revdate">10/17/2022 14:35 -0700</span>
+<span id="revdate">10/17/2022 14:58 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -721,59 +721,6 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_sqlite">8.14. SQLite</a></li>
 <li><a href="#_stringtemplate_4">8.15. StringTemplate 4</a></li>
 <li><a href="#_vavr">8.16. Vavr</a></li>
-</ul>
-</li>
-<li><a href="#_cookbook">9. Cookbook</a>
-<ul class="sectlevel2">
-<li><a href="#_simple_dependency_injection">9.1. Simple Dependency Injection</a></li>
-<li><a href="#_like_clauses_with_parameters">9.2. LIKE clauses with Parameters</a></li>
-</ul>
-</li>
-<li><a href="#_advanced_topics_2">10. Advanced Topics</a>
-<ul class="sectlevel2">
-<li><a href="#_high_availability">10.1. High Availability</a></li>
-<li><a href="#_compiling_with_parameter_names">10.2. Compiling with Parameter Names</a>
-<ul class="sectlevel3">
-<li><a href="#_maven_setup">10.2.1. Maven setup</a></li>
-<li><a href="#_intellij_idea_setup">10.2.2. IntelliJ IDEA setup</a></li>
-<li><a href="#_eclipse_setup">10.2.3. Eclipse setup</a></li>
-</ul>
-</li>
-<li><a href="#_working_with_generic_types">10.3. Working with Generic Types</a>
-<ul class="sectlevel3">
-<li><a href="#_generictype">10.3.1. GenericType</a></li>
-<li><a href="#_generictypes">10.3.2. GenericTypes</a></li>
-</ul>
-</li>
-<li><a href="#_namedargumentfinder">10.4. NamedArgumentFinder</a></li>
-<li><a href="#_jdbiconfig">10.5. JdbiConfig</a>
-<ul class="sectlevel3">
-<li><a href="#_creating_a_custom_jdbiconfig_type">10.5.1. Creating a custom JdbiConfig type</a></li>
-</ul>
-</li>
-<li><a href="#_jdbiplugin">10.6. JdbiPlugin</a></li>
-<li><a href="#_statementcontext">10.7. StatementContext</a></li>
-<li><a href="#_user_defined_annotations">10.8. User-Defined Annotations</a>
-<ul class="sectlevel3">
-<li><a href="#_statement_customizing_annotations">10.8.1. Statement Customizing Annotations</a></li>
-<li><a href="#_configuration_annotations">10.8.2. Configuration Annotations</a></li>
-<li><a href="#_method_decorating_annotations">10.8.3. Method Decorating Annotations</a></li>
-</ul>
-</li>
-<li><a href="#_templateengine">10.9. TemplateEngine</a></li>
-<li><a href="#_sqlparser">10.10. SqlParser</a></li>
-<li><a href="#_sqllogger">10.11. SqlLogger</a></li>
-<li><a href="#_resultproducer">10.12. ResultProducer</a></li>
-<li><a href="#_generator">10.13. Generator</a></li>
-</ul>
-</li>
-<li><a href="#_appendix">11. Appendix</a>
-<ul class="sectlevel2">
-<li><a href="#_best_practices">11.1. Best Practices</a></li>
-<li><a href="#_api_reference">11.2. API Reference</a></li>
-<li><a href="#_related_projects">11.3. Related Projects</a></li>
-<li><a href="#_contributing">11.4. Contributing</a></li>
-<li><a href="#_upgrading_from_v2_to_v3">11.5. Upgrading from v2 to v3</a></li>
 </ul>
 </li>
 </ul>
@@ -967,7 +914,7 @@ God intended.</p>
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Already using Jdbi v2? See <a href="#_upgrading_from_v2_to_v3">Upgrading from v2 to v3</a>.
+Already using Jdbi v2? See <a href="#Upgrading from v2 to v3">[Upgrading from v2 to v3]</a>.
 </td>
 </tr>
 </table>
@@ -1155,11 +1102,11 @@ Jdbi jdbi = Jdbi.create(ds);</code></pre>
 <p><code>Jdbi</code> instances are thread-safe and do not own any database resources.</p>
 </div>
 <div class="paragraph">
-<p>Typically applications create a single, shared <code>Jdbi</code> instance, and set up
+<p>Typically, applications create a single, shared <code>Jdbi</code> instance, and set up
 any common configuration there.  See <a href="#_configuration">Configuration</a> for more details.</p>
 </div>
 <div class="paragraph">
-<p><code>Jdbi</code> itself does not provide connection pooling or other <a href="#_high_availability">High Availability</a>
+<p><code>Jdbi</code> itself does not provide connection pooling or other <a href="#High Availability">[High Availability]</a>
 features, but it can be combined with other software that does.</p>
 </div>
 <div class="paragraph">
@@ -1202,7 +1149,7 @@ drain your connection pool.
 <p>There are a few ways to obtain a <code>Handle</code> instance at runtime.</p>
 </div>
 <div class="paragraph">
-<p>If your operation will return some result, use
+<p>If your operation returns some result, use
 <a href="./apidocs/org/jdbi/v3/core/Jdbi.html#withHandle-org.jdbi.v3.core.HandleCallback-" target="_blank" rel="noopener">jdbi.withHandle()</a>:</p>
 </div>
 <div class="listingblock">
@@ -1299,7 +1246,7 @@ The use of Jdbi arguments is limited to JDBC prepared statement parameters.
 Notably, arguments usually cannot be used to change the structure of a query
 (for example the table or column name, <code>SELECT</code> or <code>INSERT</code>, etc.)
 nor may they be interpolated into string literals.
-See <a href="#_templating">Templating</a> and <a href="#_templateengine">TemplateEngine</a> for more information.
+See <a href="#_templating">Templating</a> and <a href="#TemplateEngine">[TemplateEngine]</a> for more information.
 </td>
 </tr>
 </table>
@@ -1610,7 +1557,7 @@ by implementing a few simple interfaces.</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Core JDBC features are generally well supported by all database vendors.
+Core JDBC features are generally well-supported by all database vendors.
 However, more advanced usages like array support or geometry types tend to
 quickly become vendor-specific.
 </td>
@@ -2023,7 +1970,7 @@ columns to bean properties for any bean class.</p>
 </li>
 <li>
 <p>The mapped type has a generic signature, and/or the mapper could be composed
-from other registered mappers. For example, Jdbi provides a
+of other registered mappers. For example, Jdbi provides a
 <a href="#_map_entry_mapping">Map.Entry&lt;K,V&gt; mapper</a>, provided a mapper is registered
 for types <code>K</code> and <code>V</code>.</p>
 </li>
@@ -2088,7 +2035,7 @@ mappers registered for both <code>L</code> and <code>R</code>.</p>
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-The <code>GenericTypes</code> utility class is discussed in <a href="#_working_with_generic_types">Working with Generic Types</a>.
+The <code>GenericTypes</code> utility class is discussed in <a href="#Working with Generic Types">[Working with Generic Types]</a>.
 </td>
 </tr>
 </table>
@@ -2222,7 +2169,7 @@ working as expected.
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-The <code>GenericType</code> utility class is discussed in <a href="#_working_with_generic_types">Working with Generic Types</a>.
+The <code>GenericType</code> utility class is discussed in <a href="#Working with Generic Types">[Working with Generic Types]</a>.
 </td>
 </tr>
 </table>
@@ -2385,7 +2332,7 @@ produce column mappers for arbitrary types.</p>
 </li>
 <li>
 <p>The type being mapped is generic, and/or the mapper could be composed
-from other registered mappers.</p>
+of other registered mappers.</p>
 </li>
 <li>
 <p>You want to bundle multiple mappers into a single class.</p>
@@ -2431,7 +2378,7 @@ mapper is registered for <code>T</code>.</p>
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-The <code>GenericTypes</code> utility class is discussed in <a href="#_working_with_generic_types">Working with Generic Types</a>.
+The <code>GenericTypes</code> utility class is discussed in <a href="#Working with Generic Types">[Working with Generic Types]</a>.
 </td>
 </tr>
 </table>
@@ -2551,7 +2498,7 @@ expected.
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-The <code>GenericType</code> utility class is discussed in <a href="#_working_with_generic_types">Working with Generic Types</a>.
+The <code>GenericType</code> utility class is discussed in <a href="#Working with Generic Types">[Working with Generic Types]</a>.
 </td>
 </tr>
 </table>
@@ -2659,7 +2606,7 @@ property name (<code>:id</code>) rather than the column name (<code>:user_id</co
 <p><a href="./apidocs/org/jdbi/v3/core/mapper/reflect/ConstructorMapper.html" target="_blank" rel="noopener">ConstructorMapper</a> assigns columns to constructor parameters by
 name. If the java compiler stores method parameter names in the java
 classes (using the <code>-parameters</code> flag on the compiler&#8201;&#8212;&#8201;see also
-<a href="#_compiling_with_parameter_names">Compiling with Parameter Names</a>), the constructor mapper will use
+<a href="#Compiling with Parameter Names">[Compiling with Parameter Names]</a>), the constructor mapper will use
 these names to select columns.</p>
 </div>
 <div class="listingblock">
@@ -3641,7 +3588,7 @@ handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><s
 </div>
 </div>
 <div class="paragraph">
-<p>Also see the section about <a href="#_templateengine">TemplateEngine</a>.</p>
+<p>Also see the section about <a href="#TemplateEngine">[TemplateEngine]</a>.</p>
 </div>
 <div class="sect3">
 <h4 id="_classpathsqllocator"><a class="anchor" href="#_classpathsqllocator"></a><a class="link" href="#_classpathsqllocator">4.7.1. ClasspathSqlLocator</a></h4>
@@ -3881,7 +3828,7 @@ Array columns can be mapped to any container type registered with the
 <div class="paragraph">
 <p>After executing a database query, you need to interpret the results. JDBC
 provides the <strong>ResultSet</strong> class which can do simple mapping to Java primitives
-and built in classes, but the API is often cumbersome to use. <strong>Jdbi</strong> provides
+and built in classes, but the API is often cumbersome to use. Jdbi provides
 configurable mapping, including the ability to register custom mappers for rows
 and columns.</p>
 </div>
@@ -3897,7 +3844,7 @@ build more complex <strong>RowMapper</strong> types.</p>
 <p>The mapper is selected based on the declared result type of your query.</p>
 </div>
 <div class="paragraph">
-<p><strong>jdbi</strong> iterates over the rows in the ResultSet and presents the mapped results
+<p>Jdbi iterates over the rows in the ResultSet and presents the mapped results
 to you in a container such as a <strong>List</strong>, <strong>Stream</strong>, <strong>Optional</strong>, or <strong>Iterator</strong>.</p>
 </div>
 <div class="listingblock">
@@ -4433,7 +4380,7 @@ expense of verbosity:</p>
 <div class="paragraph">
 <p>The JoinRowMapper takes a set of types to extract from each row. It uses the
 mapping registry to determine how to map each given type, and presents you with
-a JoinRow that holds all of the resulting values.</p>
+a JoinRow that holds all the resulting values.</p>
 </div>
 <div class="paragraph">
 <p>Let&#8217;s consider two simple types, User and Article, with a join table named
@@ -4640,7 +4587,7 @@ and end up with logs that say nothing other than</p>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>jdbi</strong> will attempt to rewrite such nextExceptions into "suppressed exceptions"
+<p>Jdbi will attempt to rewrite such nextExceptions into "suppressed exceptions"
 (new in Java 8) so that your logs are more helpful:</p>
 </div>
 <div class="listingblock">
@@ -4838,7 +4785,7 @@ assertThat(results).containsExactly(<span class="integer">1</span>, <span class=
 <div class="sect2">
 <h3 id="_transactions"><a class="anchor" href="#_transactions"></a><a class="link" href="#_transactions">4.16. Transactions</a></h3>
 <div class="paragraph">
-<p><strong>jdbi</strong> provides full support for JDBC transactions.</p>
+<p>Jdbi provides full support for JDBC transactions.</p>
 </div>
 <div class="paragraph">
 <p><strong>Handle</strong> objects provide two ways to open a transaction&#8201;&#8212;&#8201;<strong>inTransaction</strong>
@@ -4870,7 +4817,7 @@ If you do not explicitly commit a manually opened transaction, it will be rolled
 <h4 id="_serializable_transactions"><a class="anchor" href="#_serializable_transactions"></a><a class="link" href="#_serializable_transactions">4.16.1. Serializable Transactions</a></h4>
 <div class="paragraph">
 <p>For more advanced queries, sometimes serializable transactions are required.
-<strong>jdbi</strong> includes a transaction runner that is able to retry transactions that
+Jdbi includes a transaction runner that is able to retry transactions that
 abort due to serialization failures. It is important that your transaction does
 not have side effects as it may be executed multiple times.</p>
 </div>
@@ -4996,7 +4943,7 @@ configuration at the time of creation.  So a <code>Handle</code> initializes its
 configuration from the creating <code>Jdbi</code>, but changes never propagate back up.</p>
 </div>
 <div class="paragraph">
-<p>See <a href="#_jdbiconfig">JdbiConfig</a> for more advanced implementation details.</p>
+<p>See <a href="#JdbiConfig">[JdbiConfig]</a> for more advanced implementation details.</p>
 </div>
 <div class="sect2">
 <h3 id="_qualified_types"><a class="anchor" href="#_qualified_types"></a><a class="link" href="#_qualified_types">5.1. Qualified Types</a></h3>
@@ -5014,7 +4961,7 @@ a <code>String</code> could be <code>varchar</code> plaintext, <code>nvarchar</c
 </div>
 <div class="paragraph">
 <p>This <code>QualifiedType</code> still represents the <code>String</code> <em>type</em>, but <em>qualified</em> with the <code>@Json</code> annotation.
-It can be used in a way similar to <a href="#_generictype">GenericType</a>, to make components
+It can be used in a way similar to <a href="#GenericType">[GenericType]</a>, to make components
 handling values (mainly <code>ArgumentFactories</code> and <code>ColumnMapperFactories</code>) perform their work differently,
 and to have the values handled by different implementations altogether:</p>
 </div>
@@ -5354,7 +5301,7 @@ in the SQL statement.</p>
 </div>
 </div>
 <div class="paragraph">
-<p><a href="#_compiling_with_parameter_names">Compiling with parameter names</a> removes the
+<p><a href="#Compiling with Parameter Names">Compiling with parameter names</a> removes the
 need for the <code>@Bind</code> annotation. Jdbi will then bind each un-annotated parameter
 to the parameter&#8217;s name.</p>
 </div>
@@ -6262,7 +6209,7 @@ parameters, and executes the SQL statement with the corresponding elements from
 each parameter.</p>
 </div>
 <div class="paragraph">
-<p>Thus a statement like:</p>
+<p>Thus, a statement like:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6541,7 +6488,7 @@ the package and name of the SQL Object interface type.</p>
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-<a href="#_classpathsqllocator">ClasspathSqlLocator</a> loads files unchanged by default. Using the <code>@UseClasspathSqlLocator</code> annotation will strip out comments by default! This may lead to unexpected behavior, e.g. SQL Server uses the <code>#</code> character to denote temporary tables. This can be controlled with the <code>stripComments</code> annotation attribute.
+<a href="#_classpathsqllocator">ClasspathSqlLocator</a> loads a file unchanged by default. Using the <code>@UseClasspathSqlLocator</code> annotation will strip out comments by default! This may lead to unexpected behavior, e.g. SQL Server uses the <code>#</code> character to denote temporary tables. This can be controlled with the <code>stripComments</code> annotation attribute.
 </td>
 </tr>
 </table>
@@ -6901,7 +6848,7 @@ provides annotations for transaction management in a SQL object. See
 </div>
 <div class="paragraph">
 <p>Jdbi is designed to support user-defined annotations. See
-<a href="#_user_defined_annotations">User-Defined Annotations</a> for a guide to creating your own.</p>
+<a href="#User-Defined Annotations">[User-Defined Annotations]</a> for a guide to creating your own.</p>
 </div>
 </div>
 <div class="sect2">
@@ -7790,7 +7737,7 @@ A Jdbi definition module requires that a DataSource object is bound within Guice
 </div>
 </div>
 <div class="paragraph">
-<p>Guice will report an error that it can not locate the <code>CustomStringMapper</code> instance. The Guice Jdbi integration manages mappers etc. as groups and the separate instances are not directly accessible for injection. The right way to compose mappers is using the Jdbi configuration (see <a href="#_jdbiconfig">JdbiConfig</a>), which is configured through Guice:</p>
+<p>Guice will report an error that it can not locate the <code>CustomStringMapper</code> instance. The Guice Jdbi integration manages mappers etc. as groups and the separate instances are not directly accessible for injection. The right way to compose mappers is using the Jdbi configuration (see <a href="#JdbiConfig">[JdbiConfig]</a>), which is configured through Guice:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -8337,7 +8284,7 @@ Injector injector = Guice.createInjector(
 <h3 id="_jpa"><a class="anchor" href="#_jpa"></a><a class="link" href="#_jpa">8.8. JPA</a></h3>
 <div class="paragraph">
 <p>Using the JPA plugin is a great way to trick your boss into letting you try
-Jdbi. "No problem boss, it already supports JPA annotations, easy peasy!"</p>
+Jdbi. "No problem boss, it already supports JPA annotations, easy-peasy!"</p>
 </div>
 <div class="paragraph">
 <p>This plugin adds mapping support for a small subset of JPA entity annotations:</p>
@@ -8375,7 +8322,7 @@ Jdbi. "No problem boss, it already supports JPA annotations, easy peasy!"</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Honestly though.. just tear off the bandage and switch to Jdbi proper.</p>
+<p>Honestly though&#8230;&#8203; just tear off the bandage and switch to Jdbi proper.</p>
 </div>
 </div>
 <div class="sect2">
@@ -8840,7 +8787,7 @@ several rows), your method can return all the modified rows in a collection:</p>
 <div class="paragraph">
 <p>Postgres supports storing large character or binary data in separate storage from
 table data.  Jdbi allows you to stream this data in and out of the database as part
-of an enclosing transaction.  Storing, reading, and a delete hook are provided.
+of an enclosing transaction.  Operations for storing, reading, and a hook for deletions are provided.
 The test case serves as a simple example:</p>
 </div>
 <div class="listingblock">
@@ -9196,7 +9143,7 @@ template will be used, regardless of the method name.</p>
 <div class="sect2">
 <h3 id="_vavr"><a class="anchor" href="#_vavr"></a><a class="link" href="#_vavr">8.16. Vavr</a></h3>
 <div class="paragraph">
-<p>The Vavr Plugin offers deep integration of <strong>Jdbi</strong> with the Vavr functional library:</p>
+<p>The Vavr Plugin offers deep integration of Jdbi with the Vavr functional library:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -9218,7 +9165,7 @@ as default value container.</p>
 <p>Columns can be mapped into Vavr&#8217;s <code>Option&lt;T&gt;</code> type.</p>
 </li>
 <li>
-<p>Tuple projections for <strong>Jdbi</strong>! Yey! Vavr offers Tuples up to a maximum arity of 8.
+<p>Tuple projections for Jdbi! Yey! Vavr offers Tuples up to a maximum arity of 8.
 you can map your query results e.g. to <code>Tuple3&lt;Integer, String, Long&gt;</code>.
 If you select more columns than the arity of the projection the columns
 up to that index will be used.</p>
@@ -9275,8 +9222,16 @@ be 'present' otherwise a <code>null</code> value is used (e.g. for <code>Either.
 </div>
 <div class="paragraph">
 <p>This works for all the collection types supported. For the nested value
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; Updated upstream
 row and column mappers already installed in <strong>Jdbi</strong> will be used.
-Therefore the following would work and can make sense if the column is nullable:</p>
+Therefore, the following would work and can make sense if the column is nullable:</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>row and column mappers already installed in Jdbi will be used.
+Therefore the following would work and can make sense if the column is nullable:
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; Stashed changes</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9356,17 +9311,15 @@ tuple indices must be provided with a column configuration!</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>== Cookbook</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_cookbook"><a class="anchor" href="#_cookbook"></a><a class="link" href="#_cookbook">9. Cookbook</a></h2>
-<div class="sectionbody">
 <div class="paragraph">
 <p>This section includes examples of various things you might like to do with <code>Jdbi</code>.</p>
 </div>
-<div class="sect2">
-<h3 id="_simple_dependency_injection"><a class="anchor" href="#_simple_dependency_injection"></a><a class="link" href="#_simple_dependency_injection">9.1. Simple Dependency Injection</a></h3>
+<div class="paragraph">
+<p>=== Simple Dependency Injection</p>
+</div>
 <div class="paragraph">
 <p><code>Jdbi</code> tries to be independent of using a dependency injection framework,
 but it&#8217;s straightforward to integrate yours.  Just do field injection on a simple custom config type:</p>
@@ -9392,9 +9345,9 @@ myIoC.inject(jdbi.getConfig(InjectedDependencies.class));
 getHandle().getConfig(InjectedDependencies.class).dep</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>=== LIKE clauses with Parameters</p>
 </div>
-<div class="sect2">
-<h3 id="_like_clauses_with_parameters"><a class="anchor" href="#_like_clauses_with_parameters"></a><a class="link" href="#_like_clauses_with_parameters">9.2. LIKE clauses with Parameters</a></h3>
 <div class="paragraph">
 <p>Since JDBC (and therefore <code>Jdbi</code>) does not allow binding parameters into the middle of string literals,
 you cannot interpolate bindings into <code>LIKE</code> clauses (<code>LIKE '%:param%'</code>).</p>
@@ -9444,14 +9397,12 @@ Check the string concatenation syntax of your database before doing this.
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p>== Advanced Topics</p>
 </div>
+<div class="paragraph">
+<p>=== High Availability</p>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_advanced_topics_2"><a class="anchor" href="#_advanced_topics_2"></a><a class="link" href="#_advanced_topics_2">10. Advanced Topics</a></h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_high_availability"><a class="anchor" href="#_high_availability"></a><a class="link" href="#_high_availability">10.1. High Availability</a></h3>
 <div class="paragraph">
 <p>Jdbi can be combined with connection pools and high-availability features in your database driver.
 We&#8217;ve used <a href="https://github.com/brettwooldridge/HikariCP" target="_blank" rel="noopener">HikariCP</a> in combination
@@ -9478,9 +9429,9 @@ Exactly which parameters must stay the same and which may vary depends on your d
 and a smaller pool of writers that go only to a single host, you currently should have separate
 <code>Jdbi</code> instances each pointed at a separate <code>DataSource</code>.</p>
 </div>
+<div class="paragraph">
+<p>=== Compiling with Parameter Names</p>
 </div>
-<div class="sect2">
-<h3 id="_compiling_with_parameter_names"><a class="anchor" href="#_compiling_with_parameter_names"></a><a class="link" href="#_compiling_with_parameter_names">10.2. Compiling with Parameter Names</a></h3>
 <div class="paragraph">
 <p>By default, the Java compiler does not write parameter names of constructors and
 methods to class files. At runtime, reflectively asking for parameter names
@@ -9524,8 +9475,9 @@ these annotations is removed&#8212;&#8203;Jdbi automatically uses the method par
 <span class="type">void</span> insert(<span class="type">long</span> id, <span class="predefined-type">String</span> name);</code></pre>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_maven_setup"><a class="anchor" href="#_maven_setup"></a><a class="link" href="#_maven_setup">10.2.1. Maven setup</a></h4>
+<div class="paragraph">
+<p>==== Maven setup</p>
+</div>
 <div class="paragraph">
 <p>Configure the <code>maven-compiler-plugin</code> in your POM:</p>
 </div>
@@ -9542,9 +9494,9 @@ these annotations is removed&#8212;&#8203;Jdbi automatically uses the method par
 <span class="tag">&lt;/plugin&gt;</span></code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>==== IntelliJ IDEA setup</p>
 </div>
-<div class="sect3">
-<h4 id="_intellij_idea_setup"><a class="anchor" href="#_intellij_idea_setup"></a><a class="link" href="#_intellij_idea_setup">10.2.2. IntelliJ IDEA setup</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -9564,9 +9516,9 @@ these annotations is removed&#8212;&#8203;Jdbi automatically uses the method par
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>==== Eclipse setup</p>
 </div>
-<div class="sect3">
-<h4 id="_eclipse_setup"><a class="anchor" href="#_eclipse_setup"></a><a class="link" href="#_eclipse_setup">10.2.3. Eclipse setup</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -9581,15 +9533,15 @@ method parameters (usable via reflection)."</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>=== Working with Generic Types</p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_working_with_generic_types"><a class="anchor" href="#_working_with_generic_types"></a><a class="link" href="#_working_with_generic_types">10.3. Working with Generic Types</a></h3>
 <div class="paragraph">
 <p>Jdbi provides utility classes to make it easier to work with Java generic types.</p>
 </div>
-<div class="sect3">
-<h4 id="_generictype"><a class="anchor" href="#_generictype"></a><a class="link" href="#_generictype">10.3.1. GenericType</a></h4>
+<div class="paragraph">
+<p>==== GenericType</p>
+</div>
 <div class="paragraph">
 <p><a href="./apidocs/org/jdbi/v3/core/generic/GenericType.html" target="_blank" rel="noopener">GenericType</a> represents a generic
 type signature that can be passed around in a type-safe way.</p>
@@ -9619,9 +9571,9 @@ type signature that can be passed around in a type-safe way.</p>
 <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Type.html" target="_blank" rel="noopener">java.lang.reflect.Type</a> object used
 to represent generics in Java.</p>
 </div>
+<div class="paragraph">
+<p>==== GenericTypes</p>
 </div>
-<div class="sect3">
-<h4 id="_generictypes"><a class="anchor" href="#_generictypes"></a><a class="link" href="#_generictypes">10.3.2. GenericTypes</a></h4>
 <div class="paragraph">
 <p><a href="./apidocs/org/jdbi/v3/core/generic/GenericTypes.html" target="_blank" rel="noopener">GenericTypes</a> provides methods
 for working with Java generic types signatures.</p>
@@ -9695,15 +9647,14 @@ cannot be resolved, or the types have nothing to do with each other:</p>
 <span class="comment">// =&gt; Optional.empty();</span></code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>=== NamedArgumentFinder</p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_namedargumentfinder"><a class="anchor" href="#_namedargumentfinder"></a><a class="link" href="#_namedargumentfinder">10.4. NamedArgumentFinder</a></h3>
 <div class="paragraph">
 <p>The <a href="./apidocs/org/jdbi/v3/core/argument/NamedArgumentFinder" target="_blank" rel="noopener">NamedArgumentFinder</a>
 interface, as its name suggests, finds arguments by name from some source.
-Typically a single <code>NamedArgumentFinder</code> instance will provide arguments for
-several different names.</p>
+Typically, a single <code>NamedArgumentFinder</code> instance will provide arguments for
+several names.</p>
 </div>
 <div class="paragraph">
 <p>In cases where neither <code>bindBean()</code>, <code>bindFields()</code>, <code>bindMethods()</code>, nor
@@ -9739,14 +9690,14 @@ methods are just creating and binding custom implementations of
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p>=== JdbiConfig</p>
 </div>
-<div class="sect2">
-<h3 id="_jdbiconfig"><a class="anchor" href="#_jdbiconfig"></a><a class="link" href="#_jdbiconfig">10.5. JdbiConfig</a></h3>
 <div class="paragraph">
 <p>Configuration is managed by the
 <a href="./apidocs/org/jdbi/v3/core/config/ConfigRegistry.html">ConfigRegistry</a>
 class.  Each Jdbi object that represents a distinct database context
-(for example, <strong>Jdbi</strong> itself, a <strong>Handle</strong> instance, or an attached SqlObject
+(for example, Jdbi itself, a <strong>Handle</strong> instance, or an attached SqlObject
 class) gets its own configuration registry.  Most contexts implement the
 <a href="./apidocs/org/jdbi/v3/core/config/Configurable.html">Configurable</a> interface which
 allows modification of its configuration as well as retrieving the current
@@ -9820,8 +9771,9 @@ during query execution.</p>
 }</code></pre>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_creating_a_custom_jdbiconfig_type"><a class="anchor" href="#_creating_a_custom_jdbiconfig_type"></a><a class="link" href="#_creating_a_custom_jdbiconfig_type">10.5.1. Creating a custom JdbiConfig type</a></h4>
+<div class="paragraph">
+<p>==== Creating a custom JdbiConfig type</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -9862,10 +9814,9 @@ ReflectionMappers config class to keep common configuration.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>=== JdbiPlugin</p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_jdbiplugin"><a class="anchor" href="#_jdbiplugin"></a><a class="link" href="#_jdbiplugin">10.6. JdbiPlugin</a></h3>
 <div class="paragraph">
 <p>JdbiPlugin can be used to bundle bulk configuration.
 Plugins may be installed explicitly via <code>Jdbi.installPlugin(JdbiPlugin)</code>, or
@@ -9895,9 +9846,9 @@ for static analysis tools about what code is or isn&#8217;t used.
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p>=== StatementContext</p>
 </div>
-<div class="sect2">
-<h3 id="_statementcontext"><a class="anchor" href="#_statementcontext"></a><a class="link" href="#_statementcontext">10.7. StatementContext</a></h3>
 <div class="paragraph">
 <p>The <a href="./apidocs/org/jdbi/v3/core/statement/StatementContext.html">StatementContext</a> class
 is a carrier for various state related to the creation and execution of statements
@@ -9911,9 +9862,9 @@ for example <strong>RowMapper, *ColumnMapper*s, or *CollectorFactory</strong>.</
 should not need to mutate the context.  Please read the JavaDoc for more information
 on advanced usage.</p>
 </div>
+<div class="paragraph">
+<p>=== User-Defined Annotations</p>
 </div>
-<div class="sect2">
-<h3 id="_user_defined_annotations"><a class="anchor" href="#_user_defined_annotations"></a><a class="link" href="#_user_defined_annotations">10.8. User-Defined Annotations</a></h3>
 <div class="paragraph">
 <p>SQL Object is designed to be extended with user-defined annotations. In fact,
 most of the annotations provided in Jdbi are wired up with the approach
@@ -9926,18 +9877,18 @@ important to understand the differences between them:</p>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="#_statement_customizing_annotations">Statement Customizing Annotations</a> - configures the underlying
+<p><a href="#Statement Customizing Annotations">[Statement Customizing Annotations]</a> - configures the underlying
 <a href="./apidocs/org/jdbi/v3/core/statement/SqlStatement.html" target="_blank" rel="noopener">SqlStatement</a> of a method
 prior to execution. These can only be used in tandem with annotations like
-<code>@SqlQuery</code>, <code>@SqlUpdate</code>, etc, and do not work on default methods.</p>
+<code>@SqlQuery</code>, <code>@SqlUpdate</code>, etc., and do not work on default methods.</p>
 </li>
 <li>
-<p><a href="#_configuration_annotations">Configuration Annotations</a> - modifies configuration in the
+<p><a href="#Configuration Annotations">[Configuration Annotations]</a> - modifies configuration in the
 <a href="./apidocs/org/jdbi/v3/core/config/ConfigRegistry.html" target="_blank" rel="noopener">ConfigRegistry</a> within the
 scope of a SQL object or one of its methods.</p>
 </li>
 <li>
-<p><a href="#_method_decorating_annotations">Method Decorating Annotations</a> - decorates a method invocation with
+<p><a href="#Method Decorating Annotations">[Method Decorating Annotations]</a> - decorates a method invocation with
 some additional behavior, e.g. the <code>@Transaction</code> annotation wraps the method
 call in a <code>handle.inTransaction()</code> call.</p>
 </li>
@@ -9947,15 +9898,16 @@ call in a <code>handle.inTransaction()</code> call.</p>
 <p>Once you know which type of annotation you want, proceed to the appropriate
 section below and follow the guide to set it up.</p>
 </div>
-<div class="sect3">
-<h4 id="_statement_customizing_annotations"><a class="anchor" href="#_statement_customizing_annotations"></a><a class="link" href="#_statement_customizing_annotations">10.8.1. Statement Customizing Annotations</a></h4>
+<div class="paragraph">
+<p>==== Statement Customizing Annotations</p>
+</div>
 <div class="paragraph">
 <p>SQL statement customizing annotations are used to apply some change to the
 <a href="./apidocs/org/jdbi/v3/core/statement/SqlStatement.html" target="_blank" rel="noopener">SqlStatement</a> associated
 with a SQL method.</p>
 </div>
 <div class="paragraph">
-<p>Typically these annotations correlate to an API method in core. e.g. <code>@Bind</code>
+<p>Typically, these annotations correlate to an API method in core. e.g. <code>@Bind</code>
 corresponds to <code>SqlStatement.bind()</code>, <code>@MaxRows</code> corresponds to
 <code>Query.setMaxRows()</code>, etc.</p>
 </div>
@@ -10123,16 +10075,16 @@ in your SQL statement than by using <code>@MaxRows</code>.
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p>==== Configuration Annotations</p>
 </div>
-<div class="sect3">
-<h4 id="_configuration_annotations"><a class="anchor" href="#_configuration_annotations"></a><a class="link" href="#_configuration_annotations">10.8.2. Configuration Annotations</a></h4>
 <div class="paragraph">
 <p>Configuration annotations are used to apply some change to the
 <a href="./apidocs/org/jdbi/v3/core/config/ConfigRegistry.html" target="_blank" rel="noopener">ConfigRegistry</a> associated with
 a SQL object or method.</p>
 </div>
 <div class="paragraph">
-<p>Typically these annotations correlate to a method of
+<p>Typically, these annotations correlate to a method of
 <a href="./apidocs/org/jdbi/v3/core/config/Configurable.html" target="_blank" rel="noopener">Configurable</a> (<code>Jdbi</code>,
 <code>Handle</code>, and <code>SqlStatement</code> all implement this interface). For example,
 <code>@RegisterColumnMapper</code> correlates to <code>Configurable.registerColumnMapper()</code>.</p>
@@ -10244,7 +10196,7 @@ the annotation and apply the configuration:</p>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
 <td>In this example, we&#8217;re applying the same configuration, whether the
 <code>@RegisterColumnMapper</code> annotation is used on the SQL object type or method.
-However this is not a requirement&#8212;&#8203;some annotations may choose to apply
+However, this is not a requirement&#8212;&#8203;some annotations may choose to apply
 configuration differently depending on whether the annotation is placed on
 the type or the method.</td>
 </tr>
@@ -10284,9 +10236,9 @@ annotation to your <code>@RegisterColumnMapper</code> annotation type. This tell
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>==== Method Decorating Annotations</p>
 </div>
-<div class="sect3">
-<h4 id="_method_decorating_annotations"><a class="anchor" href="#_method_decorating_annotations"></a><a class="link" href="#_method_decorating_annotations">10.8.3. Method Decorating Annotations</a></h4>
 <div class="paragraph">
 <p>Method decorating annotations are used to enhance a SQL Object method with
 additional (or substitute) behavior.</p>
@@ -10406,8 +10358,9 @@ annotation to your <code>@Transaction</code> annotation type. This tells Jdbi th
 }</code></pre>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_decorator_order"><a class="anchor" href="#_decorator_order"></a><a class="link" href="#_decorator_order">Decorator Order</a></h5>
+<div class="paragraph">
+<p>===== Decorator Order</p>
+</div>
 <div class="paragraph">
 <p>If a SQL object method has two or more decorating annotations applied, and the
 order of decorations is important, use the <code>@DecoratorOrder</code> annotation. If no order
@@ -10434,11 +10387,9 @@ the cache already contains the entry.</p>
 <div class="paragraph">
 <p>Decorator order is expressed from outermost to innermost.</p>
 </div>
+<div class="paragraph">
+<p>=== TemplateEngine</p>
 </div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_templateengine"><a class="anchor" href="#_templateengine"></a><a class="link" href="#_templateengine">10.9. TemplateEngine</a></h3>
 <div class="paragraph">
 <p>Jdbi uses a <a href="./apidocs/org/jdbi/v3/core/statement/TemplateEngine.html" target="_blank" rel="noopener">TemplateEngine</a>
 implementation to render templates into SQL. Template engines take a SQL
@@ -10504,9 +10455,9 @@ which renders templates using the StringTemplate library. See
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p>=== SqlParser</p>
 </div>
-<div class="sect2">
-<h3 id="_sqlparser"><a class="anchor" href="#_sqlparser"></a><a class="link" href="#_sqlparser">10.10. SqlParser</a></h3>
 <div class="paragraph">
 <p>After the SQL template has been rendered, Jdbi uses a
 <a href="./apidocs/org/jdbi/v3/core/statement/SqlParser.html" target="_blank" rel="noopener">SqlParser</a> to parse out any named
@@ -10581,9 +10532,9 @@ then set it on the Jdbi, Handle, or SQL statement:</p>
 jdbi.setParser(parser);</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>=== SqlLogger</p>
 </div>
-<div class="sect2">
-<h3 id="_sqllogger"><a class="anchor" href="#_sqllogger"></a><a class="link" href="#_sqllogger">10.11. SqlLogger</a></h3>
 <div class="paragraph">
 <p>The <a href="./apidocs/org/jdbi/v3/core/statement/SqlLogger.html" target="_blank" rel="noopener">SqlLogger</a> interface
 is called before and after executing each statement,
@@ -10595,9 +10546,9 @@ attributes and bindings, and important timestamps.</p>
 <p>There&#8217;s a simple <a href="./apidocs/org/jdbi/v3/core/statement/Slf4JSqlLogger.html" target="_blank" rel="noopener">Slf4JSqlLogger</a>
 implementation that logs all executed statements for debugging.</p>
 </div>
+<div class="paragraph">
+<p>=== ResultProducer</p>
 </div>
-<div class="sect2">
-<h3 id="_resultproducer"><a class="anchor" href="#_resultproducer"></a><a class="link" href="#_resultproducer">10.12. ResultProducer</a></h3>
 <div class="paragraph">
 <p>A <strong>ResultProducer</strong> takes a lazily supplied <strong>PreparedStatement</strong> and
 produces a result.  The most common producer path, <strong>execute()</strong>,
@@ -10628,9 +10579,9 @@ that the context is closed eventually to release database resources.</p>
 <div class="paragraph">
 <p>Most users will not need to implement the <strong>ResultProducer</strong> interface.</p>
 </div>
+<div class="paragraph">
+<p>=== Generator</p>
 </div>
-<div class="sect2">
-<h3 id="_generator"><a class="anchor" href="#_generator"></a><a class="link" href="#_generator">10.13. Generator</a></h3>
 <div class="paragraph">
 <p>Jdbi includes an experimental SqlObject code generator.  If you include the
 <code>jdbi3-generator</code> artifact as an annotation processor and annotate your SqlObject
@@ -10638,14 +10589,12 @@ definitions with <code>@GenerateSqlObject</code>, the generator will produce an 
 class and avoid using <code>Proxy</code> instances.  This may be useful for <code>graal-native</code>
 compilation.</p>
 </div>
+<div class="paragraph">
+<p>== Appendix</p>
 </div>
+<div class="paragraph">
+<p>=== Best Practices</p>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_appendix"><a class="anchor" href="#_appendix"></a><a class="link" href="#_appendix">11. Appendix</a></h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_best_practices"><a class="anchor" href="#_best_practices"></a><a class="link" href="#_best_practices">11.1. Best Practices</a></h3>
 <div class="ulist">
 <ul>
 <li>
@@ -10655,7 +10604,7 @@ Jdbi tries to be defensive and fail eagerly when you hold it wrong.</p>
 <li>
 <p>Use the <code>-parameters</code> compiler flag to avoid all those
 <code>@Bind("foo") String foo</code> redundant qualifiers in SQL Object method
-parameters.  See <a href="#_compiling_with_parameter_names">Compiling with Parameter Names</a>.</p>
+parameters.  See <a href="#Compiling with Parameter Names">[Compiling with Parameter Names]</a>.</p>
 </li>
 <li>
 <p>Use a profiler! The true root cause of performance problems can often be a
@@ -10667,9 +10616,9 @@ to be sure it made a difference.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>=== API Reference</p>
 </div>
-<div class="sect2">
-<h3 id="_api_reference"><a class="anchor" href="#_api_reference"></a><a class="link" href="#_api_reference">11.2. API Reference</a></h3>
 <div class="ulist">
 <ul>
 <li>
@@ -10683,9 +10632,9 @@ to be sure it made a difference.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>=== Related Projects</p>
 </div>
-<div class="sect2">
-<h3 id="_related_projects"><a class="anchor" href="#_related_projects"></a><a class="link" href="#_related_projects">11.3. Related Projects</a></h3>
 <div class="paragraph">
 <p><a href="https://github.com/opentable/otj-pg-embedded" target="_blank" rel="noopener">Embedded Postgres</a>
 makes testing against a real database quick and easy.</p>
@@ -10699,14 +10648,14 @@ provides integration with DropWizard.</p>
 instruments using DropWizard-Metrics to emit statement timing statistics.</p>
 </div>
 <div class="paragraph">
-<p>Do you know of a project related to Jdbi? Send us an issue and we&#8217;ll add a link
+<p>Do you know of a project related to Jdbi? Send us an issue, and we&#8217;ll add a link
 here!</p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_contributing"><a class="anchor" href="#_contributing"></a><a class="link" href="#_contributing">11.4. Contributing</a></h3>
 <div class="paragraph">
-<p><strong>jdbi</strong> uses GitHub for collaboration. Please check out the
+<p>=== Contributing</p>
+</div>
+<div class="paragraph">
+<p>Jdbi uses GitHub for collaboration. Please check out the
 <a href="https://github.com/jdbi/jdbi" target="_blank" rel="noopener">project page</a> for more information.</p>
 </div>
 <div class="paragraph">
@@ -10717,9 +10666,9 @@ here!</p>
 <p>Users sometimes hang out on
 <a href="irc://irc.freenode.net/#jdbi" target="_blank" rel="noopener">IRC in #jdbi on Freenode</a>.</p>
 </div>
+<div class="paragraph">
+<p>=== Upgrading from v2 to v3</p>
 </div>
-<div class="sect2">
-<h3 id="_upgrading_from_v2_to_v3"><a class="anchor" href="#_upgrading_from_v2_to_v3"></a><a class="link" href="#_upgrading_from_v2_to_v3">11.5. Upgrading from v2 to v3</a></h3>
 <div class="paragraph">
 <p>Already using Jdbi v2?</p>
 </div>
@@ -10819,7 +10768,7 @@ and <code>ResultIterable&lt;T&gt;</code>. Call <code>.mapTo(type)</code> to get 
 </li>
 <li>
 <p><code>CallbackFailedException</code> class removed. The functional interfaces like
-<code>HandleConsumer</code>, <code>HandleCallback</code>, <code>TransactionCallback</code>, etc can now throw
+<code>HandleConsumer</code>, <code>HandleCallback</code>, <code>TransactionCallback</code>, etc. can now throw
 any exception type. Methods like <code>Jdbi.inTransaction</code> that take these
 callbacks use exception transparency to throw only the exception thrown by
 the callback. If your callback throws no checked exceptions, you don&#8217;t need
@@ -10909,10 +10858,12 @@ return types, or on <code>@SqlBatch</code> parameters.</p>
 </div>
 </div>
 </div>
+</div>
+</div>
 <div id="footer">
 <div id="footer-text">
 Version 3.34.1-SNAPSHOT<br>
-Last updated 10/17/2022 14:35 -0700
+Last updated 10/17/2022 14:58 -0700
 </div>
 </div>
 </body>
