@@ -534,7 +534,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.34.1-SNAPSHOT,</span>
-<span id="revdate">10/21/2022 11:33 -0700</span>
+<span id="revdate">10/23/2022 21:46 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -1023,19 +1023,23 @@ features.</p>
 <div class="paragraph">
 <p><code>Jdbi</code> runs on all Java versions 8 or later. 11 or later is required to build.</p>
 </div>
-<div class="admonitionblock warning">
+<div class="admonitionblock caution">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
+<i class="fa icon-caution" title="Caution"></i>
 </td>
 <td class="content">
-Java 8 support is considered deprecated and will be maintained best-effort for now,
-but will be going away soon! In order to run on 8, you might need to dependency-manage your
-<code>caffeine</code> version back to 2.x. 3.x is required to run on newer JDKs, but will not run on 8.
+Java 8 has been deprecated for a while now. While there is no cutoff date yet to drop JDK 8 support,
+it will go away. We are already no longer support all tests on JDK 8 (only 11+) and require JDK 11 or
+better to build the code base (but still maintain JDK 8 byte code compatibility).
 </td>
 </tr>
 </table>
+</div>
+<div class="paragraph">
+<p>In order to run on JDK 8, some default dependencies, such as <code>caffeine</code> need to be explicitly version
+managed to a version that is supported on JDK 8.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1104,14 +1108,14 @@ You&#8217;ll probably want to add our annotations <code>org.jdbi.v3.meta.Beta</c
 </tr>
 </table>
 </div>
-<div class="admonitionblock warning">
+<div class="admonitionblock caution">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
+<i class="fa icon-caution" title="Caution"></i>
 </td>
 <td class="content">
-Our <code>org.jdbi.*.internal</code> packages are not considered public API; their contents may change radically without warning.
+Our <code>org.jdbi.*.internal</code> packages are not considered public API and they are not maintained or changed in a backwards compatible way.
 </td>
 </tr>
 </table>
@@ -1556,11 +1560,11 @@ properties, e.g. <code>:user.address.street</code>.
 </tr>
 </table>
 </div>
-<div class="admonitionblock warning">
+<div class="admonitionblock caution">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
+<i class="fa icon-caution" title="Caution"></i>
 </td>
 <td class="content">
 <code>bindMap()</code> does not bind nested properties&#8212;&#8203;map keys are expected to exactly
@@ -3228,7 +3232,7 @@ signature:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>In the preceding example, the <code>User</code> mapper uses a "u" column name prefix, and
+<p>In the preceding example, the <code>User</code> mapper uses the "u" column name prefix, and
 the <code>Phone</code> mapper uses "p". Since each mapper only reads columns with the
 expected prefix, the respective <code>id</code> columns are unambiguous.</p>
 </div>
@@ -4115,7 +4119,7 @@ result, respectively.</p>
 <div class="sect4">
 <h5 id="_collectors"><a class="anchor" href="#_collectors"></a><a class="link" href="#_collectors">Collectors</a></h5>
 <div class="paragraph">
-<p><strong>#collect</strong> takes a <strong>Collector&lt;T, ? , R&gt;</strong> that builds a resulting collection
+<p><strong>#collect</strong> takes a <code>Collector&lt;T, ?, R&gt;</code> that builds a resulting collection
 <strong>R&lt;T&gt;</strong>. The <strong>java.util.stream.Collectors</strong> class has a number of interesting
 <strong>Collector</strong> implementations to start with.</p>
 </div>
@@ -4659,14 +4663,14 @@ Suppressed: org.postgresql.util.PSQLException: ERROR: duplicate key value violat
 are treated separately from normal results. Depending on your database and
 configuration, the entire inserted row may be available.</p>
 </div>
-<div class="admonitionblock warning">
+<div class="admonitionblock caution">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
+<i class="fa icon-caution" title="Caution"></i>
 </td>
 <td class="content">
-Unfortunately there is a lot of variation between databases supporting
+There is a lot of variation between databases supporting
 this feature so please test this feature&#8217;s interaction with your database
 thoroughly.
 </td>
@@ -5270,11 +5274,11 @@ database, e.g. a table with an auto-generated primary key, or a primary key
 selected from a sequence. We need a way to retrieve these generated values back
 from the database.</p>
 </div>
-<div class="admonitionblock warning">
+<div class="admonitionblock caution">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
+<i class="fa icon-caution" title="Caution"></i>
 </td>
 <td class="content">
 Databases vary in support for generated keys. Some support only one generated
@@ -6034,7 +6038,7 @@ for the key and value types.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>In the preceding example, the <code>User</code> mapper uses a "u" column name prefix, and
+<p>In the preceding example, the <code>User</code> mapper uses the "u" column name prefix, and
 the <code>Phone</code> mapper uses "p". Since each mapper only reads the column with the
 expected prefix, the respective <code>id</code> columns are unambigous.</p>
 </div>
@@ -7557,11 +7561,11 @@ configure the new `bindPojo</code> (or <code>@BindPojo</code>) binders:</p>
 </div>
 <div class="sect2">
 <h3 id="_google_guice"><a class="anchor" href="#_google_guice"></a><a class="link" href="#_google_guice">8.7. Google Guice</a></h3>
-<div class="admonitionblock warning">
+<div class="admonitionblock caution">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
+<i class="fa icon-caution" title="Caution"></i>
 </td>
 <td class="content">
 Guice support is experimental.
@@ -7653,11 +7657,11 @@ Jdbi definition modules are by far more common. Element configuration modules ar
 <div class="paragraph">
 <p>In this example, a new <code>Jdbi</code> is defined using specific mappers and other customizations. The <code>Jdbi</code> object is exposed to Guice using the annotation passed on the module constructor (<code>GuiceJdbi</code> in the example). The <a href="./apidocs/org/jdbi/v3/guice/AbstractJdbiDefinitionModule.html" target="_blank" rel="noopener">AbstractJdbiDefinitionModule</a> supports both annotation instances and classes, similar to Guice itself.</p>
 </div>
-<div class="admonitionblock warning">
+<div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
 A Jdbi definition module requires that a DataSource object is bound within Guice using the same annotation or annotation class as is passed into the module constructor. <strong>Creating this data source is outside the scope of a Jdbi definition module!</strong>
@@ -7986,11 +7990,11 @@ Element configuration modules are completely optional and should not be used whe
 <div class="paragraph">
 <p>Multiple modules extending <a href="./apidocs/org/jdbi/v3/guice/AbstractJdbiConfigurationModule.html" target="_blank" rel="noopener">AbstractJdbiConfigurationModule</a> can be installed in a single injector; the resulting bindings will be aggregated.</p>
 </div>
-<div class="admonitionblock warning">
+<div class="admonitionblock caution">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
+<i class="fa icon-caution" title="Caution"></i>
 </td>
 <td class="content">
 It is not possible to install a configuration module from within the <code>configureJdbi</code> method of a definition module using the <code>install()</code> or <code>binder().install()</code> methods!
@@ -9275,7 +9279,7 @@ be 'present' otherwise a <code>null</code> value is used (e.g. for <code>Either.
 </div>
 <div class="paragraph">
 <p>This works for all the collection types supported. For the nested value
-row and column mappers already installed in <strong>Jdbi</strong> will be used.
+row and column mappers already installed in Jdbi will be used.
 Therefore, the following would work and can make sense if the column is nullable:</p>
 </div>
 <div class="listingblock">
@@ -10912,7 +10916,7 @@ return types, or on <code>@SqlBatch</code> parameters.</p>
 <div id="footer">
 <div id="footer-text">
 Version 3.34.1-SNAPSHOT<br>
-Last updated 10/21/2022 11:33 -0700
+Last updated 10/23/2022 21:46 -0700
 </div>
 </div>
 </body>
