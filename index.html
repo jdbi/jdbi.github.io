@@ -534,7 +534,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.34.1-SNAPSHOT,</span>
-<span id="revdate">11/03/2022 12:38 -0700</span>
+<span id="revdate">11/03/2022 18:33 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -4830,12 +4830,12 @@ can be executed in a single <strong>Batch</strong> or individually.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="type">int</span><span class="type">[]</span> results = handle.createScript(
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO </span><span class="char">\&quot;</span><span class="content">user</span><span class="char">\&quot;</span><span class="content"> VALUES(3, 'Charlie');</span><span class="delimiter">&quot;</span></span>
-        + <span class="string"><span class="delimiter">&quot;</span><span class="content">UPDATE </span><span class="char">\&quot;</span><span class="content">user</span><span class="char">\&quot;</span><span class="content"> SET </span><span class="char">\&quot;</span><span class="content">name</span><span class="char">\&quot;</span><span class="content">='Bobby Tables' WHERE id=2;</span><span class="delimiter">&quot;</span></span>)
-    .execute();
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">try</span> (Script script = handle.createScript(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO </span><span class="char">\&quot;</span><span class="content">user</span><span class="char">\&quot;</span><span class="content"> VALUES(3, 'Charlie');</span><span class="delimiter">&quot;</span></span>
+        + <span class="string"><span class="delimiter">&quot;</span><span class="content">UPDATE </span><span class="char">\&quot;</span><span class="content">user</span><span class="char">\&quot;</span><span class="content"> SET </span><span class="char">\&quot;</span><span class="content">name</span><span class="char">\&quot;</span><span class="content">='Bobby Tables' WHERE id=2;</span><span class="delimiter">&quot;</span></span>)) {
+    <span class="type">int</span><span class="type">[]</span> results = script.execute();
 
-assertThat(results).containsExactly(<span class="integer">1</span>, <span class="integer">1</span>);</code></pre>
+    assertThat(results).containsExactly(<span class="integer">1</span>, <span class="integer">1</span>);
+}</code></pre>
 </div>
 </div>
 </div>
@@ -10916,7 +10916,7 @@ return types, or on <code>@SqlBatch</code> parameters.</p>
 <div id="footer">
 <div id="footer-text">
 Version 3.34.1-SNAPSHOT<br>
-Last updated 11/03/2022 12:38 -0700
+Last updated 11/03/2022 18:33 -0700
 </div>
 </div>
 </body>
