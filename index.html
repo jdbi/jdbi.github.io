@@ -534,7 +534,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.34.1-SNAPSHOT,</span>
-<span id="revdate">11/16/2022 17:52 -0800</span>
+<span id="revdate">11/17/2022 23:39 -0800</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -6903,9 +6903,10 @@ the timezone used for this.</p>
 <div class="sect2">
 <h3 id="_consumer_methods"><a class="anchor" href="#_consumer_methods"></a><a class="link" href="#_consumer_methods">6.2. Consumer Methods</a></h3>
 <div class="paragraph">
-<p>As a special case, you may provide a <code>Consumer&lt;T&gt;</code> argument in addition to other bound parameters.
-The provided consumer is executed once for each row in the result set.
-The static type of parameter T determines the row type.</p>
+<p>As a special case, you may provide a <code>Consumer&lt;T&gt;</code>, <code>Consumer&lt;Iterator&lt;T&gt;&gt;</code>, or <code>Consumer&lt;Stream&lt;T&gt;&gt;</code> argument in addition to other bound parameters.
+When consuming <code>&lt;T&gt;</code>, the provided consumer is executed once for each row in the result set.
+Otherwise, the consumer is executed once with the <code>Iterator</code> or <code>Stream</code> holding the results.
+The static type of parameter T determines the mapped row type.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11172,7 +11173,7 @@ return types, or on <code>@SqlBatch</code> parameters.</p>
 <div id="footer">
 <div id="footer-text">
 Version 3.34.1-SNAPSHOT<br>
-Last updated 11/16/2022 17:52 -0800
+Last updated 11/17/2022 23:39 -0800
 </div>
 </div>
 </body>
