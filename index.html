@@ -534,7 +534,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.34.1-SNAPSHOT,</span>
-<span id="revdate">11/18/2022 11:11 -0800</span>
+<span id="revdate">11/18/2022 22:04 -0800</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -915,7 +915,7 @@ Already using Jdbi v2? See <a href="#_upgrading_from_v2_to_v3">Upgrading from v2
 <div class="sect2">
 <h3 id="_java_compatibility"><a class="anchor" href="#_java_compatibility"></a><a class="link" href="#_java_compatibility">2.2. Java compatibility</a></h3>
 <div class="paragraph">
-<p><code>Jdbi</code> runs on all Java versions 8 or later. 11 or later is required to build. All releases are built with the latest LTS version of Java using Java 8 byte code compatibility.</p>
+<p>Jdbi runs on all Java versions 8 or later. 11 or later is required to build. All releases are built with the latest LTS version of Java using Java 8 byte code compatibility.</p>
 </div>
 <div class="admonitionblock caution">
 <table>
@@ -1379,13 +1379,13 @@ assertThat(userNames).containsExactly(
 <p>The <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> class is the main entry point into the library.</p>
 </div>
 <div class="paragraph">
-<p>Each <code>Jdbi</code> maintains a set of configuration settings and wraps a JDBC <a href="https://docs.oracle.com/javase/8/docs/api/javax/sql/DataSource.html" target="_blank" rel="noopener">DataSource</a>.</p>
+<p>Each <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instance maintains a set of configuration settings and wraps a JDBC <a href="https://docs.oracle.com/javase/8/docs/api/javax/sql/DataSource.html" target="_blank" rel="noopener">DataSource</a>.</p>
 </div>
 <div class="paragraph">
-<p><code>Jdbi</code> instances are thread-safe and do not own any database resources.</p>
+<p><a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instances are thread-safe and do not own any database resources.</p>
 </div>
 <div class="paragraph">
-<p>There are a few ways to create a <code>Jdbi</code> instance:</p>
+<p>There are a few ways to create a <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instance:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1440,13 +1440,13 @@ Jdbi jdbi = Jdbi.create(ds);</code></pre>
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Production code rarely provides a connection object directly to a <code>Jdbi</code> instance. It is useful for testing and debugging.
+Production code rarely provides a connection object directly to a <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instance. It is useful for testing and debugging.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Applications create a single, shared <code>Jdbi</code> instance per data source, and set up any common configuration there.  See <a href="#_configuration">Configuration</a> for more details.</p>
+<p>Applications create a single, shared <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instance per data source, and set up any common configuration there.  See <a href="#_configuration">Configuration</a> for more details.</p>
 </div>
 <div class="paragraph">
 <p>Jdbi does not provide connection pooling or other <a href="#_high_availability">High Availability</a> features, but it can be combined with other software that does.</p>
@@ -1458,14 +1458,14 @@ Production code rarely provides a connection object directly to a <code>Jdbi</co
 <p>A <a href="./apidocs/org/jdbi/v3/core/Handle.html" target="_blank" rel="noopener">Handle</a> wraps an active <a href="https://docs.oracle.com/javase/8/docs/api/java/sql/Connection.html" target="_blank" rel="noopener">database connection</a>.</p>
 </div>
 <div class="paragraph">
-<p>Handle instances are created by a <code>Jdbi</code> instance to provide a database connection e.g. for a single HTTP request or event callback). Handles are intended to be short-lived and must be closed to release the database connection and possible other resources.</p>
+<p>Handle instances are created by a <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instance to provide a database connection e.g. for a single HTTP request or event callback). Handles are intended to be short-lived and must be closed to release the database connection and possible other resources.</p>
 </div>
 <div class="paragraph">
 <p>A <a href="./apidocs/org/jdbi/v3/core/Handle.html" target="_blank" rel="noopener">Handle</a> is used to prepare and run SQL statements against the database, and manage database transactions. It provides  access to fluent statement APIs that can bind arguments, execute the statement,
 and then map any results into Java objects.</p>
 </div>
 <div class="paragraph">
-<p>A <code>Handle</code> inherits configuration from the <code>Jdbi</code> at the time it is created. See <a href="#_configuration">Configuration</a> for more details.</p>
+<p>A <a href="./apidocs/org/jdbi/v3/core/Handle.html" target="_blank" rel="noopener">Handle</a> inherits configuration from the <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> at the time it is created. See <a href="#_configuration">Configuration</a> for more details.</p>
 </div>
 <div class="paragraph">
 <p>Handles and all attached query objects such as <a href="./apidocs/org/jdbi/v3/core/statement/Batch.html" target="_blank" rel="noopener">Batch</a>, <a href="./apidocs/org/jdbi/v3/core/statement/Call.html" target="_blank" rel="noopener">Call</a>, <a href="./apidocs/org/jdbi/v3/core/statement/Query.html" target="_blank" rel="noopener">Query</a>, <a href="./apidocs/org/jdbi/v3/core/statement/Script.html" target="_blank" rel="noopener">Script</a> and <a href="./apidocs/org/jdbi/v3/core/statement/Update.html" target="_blank" rel="noopener">Update</a> should be used by a single thread and are <strong>not thread-safe</strong>.</p>
@@ -1476,7 +1476,7 @@ and then map any results into Java objects.</p>
 <div class="sect3">
 <h4 id="_obtaining_a_managed_handle"><a class="anchor" href="#_obtaining_a_managed_handle"></a><a class="link" href="#_obtaining_a_managed_handle">4.2.1. Obtaining a managed handle</a></h4>
 <div class="paragraph">
-<p>The most convenient way to get access to a handle is by using the <a href="./apidocs/org/jdbi/v3/core/Jdbi.html#withHandle(org.jdbi.v3.core.HandleCallback)" target="_blank" rel="noopener">withHandle</a> or <a href="./apidocs/org/jdbi/v3/core/Jdbi.html#useHandle(org.jdbi.v3.core.HandleConsumer)" target="_blank" rel="noopener">useHandle</a> methods on the <code>Jdbi</code> class. These methods use callbacks and provide a fully managed handle that is correctly closed and all related resources are released. <code>withHandle</code> allows the callback to return a result while <code>useHandle</code> is just executing operations that do not need to return any value.</p>
+<p>The most convenient way to get access to a handle is by using the <a href="./apidocs/org/jdbi/v3/core/Jdbi.html#withHandle(org.jdbi.v3.core.HandleCallback)" target="_blank" rel="noopener">withHandle</a> or <a href="./apidocs/org/jdbi/v3/core/Jdbi.html#useHandle(org.jdbi.v3.core.HandleConsumer)" target="_blank" rel="noopener">useHandle</a> methods on the <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> class. These methods use callbacks and provide a fully managed handle that is correctly closed and all related resources are released. <code>withHandle</code> allows the callback to return a result while <code>useHandle</code> is just executing operations that do not need to return any value.</p>
 </div>
 <div class="paragraph">
 <p>Providing a return value from a query using the <a href="./apidocs/org/jdbi/v3/core/Jdbi.html#withHandle(org.jdbi.v3.core.HandleCallback)" target="_blank" rel="noopener">Jdbi#withHandle()</a> method:</p>
@@ -1713,7 +1713,7 @@ map to many other data types:</p>
 as a database <strong>INSERT</strong>, <strong>UPDATE</strong>, or <strong>DELETE</strong>.</p>
 </div>
 <div class="paragraph">
-<p>You can execute a simple update with <code>Handle</code>'s <code>int execute(String sql, Object&#8230;&#8203; args)</code>
+<p>You can execute a simple update with <a href="./apidocs/org/jdbi/v3/core/Handle.html" target="_blank" rel="noopener">Handle</a>'s <code>int execute(String sql, Object&#8230;&#8203; args)</code>
 method which binds simple positional parameters.</p>
 </div>
 <div class="listingblock">
@@ -4784,7 +4784,7 @@ assertThat(joined).isEqualTo(JoinRowMapperTest.getExpected());</code></pre>
 </ul>
 </div>
 <div class="paragraph">
-<p>Each of these methods method also has a variant that allows setting the transaction isolation level. Changing the transaction isolation level within an open transaction is not supported (and will cause an exception).</p>
+<p>Each of these methods also has a variant that allows setting the <a href="http://jdbi.org/apidocs/org/jdbi/v3/core/transaction/TransactionIsolationLevel.html" target="_blank" rel="noopener">transaction isolation level</a>. Changing the transaction isolation level within an open transaction is not supported (and will cause an exception).</p>
 </div>
 <div class="paragraph">
 <p>At the end of the callback, the transaction is committed, if</p>
@@ -4838,13 +4838,13 @@ assertThat(joined).isEqualTo(JoinRowMapperTest.getExpected());</code></pre>
 <p>the <a href="https://jdbi.org/apidocs/org/jdbi/v3/core/Handle.html#begin()">begin()<sup></a>/<a href="https://jdbi.org/apidocs/org/jdbi/v3/core/Handle.html#commit()">commit()</sup></a>/<a href="https://jdbi.org/apidocs/org/jdbi/v3/core/Handle.html#rollback()" target="_blank" rel="noopener">rollback()</a> methods provide standard transaction semantics</p>
 </li>
 <li>
-<p><a href="https://jdbi.org/apidocs/org/jdbi/v3/core/Handle.html#setTransactionIsolation(org.jdbi.v3.core.transaction.TransactionIsolationLevel)" target="_blank" rel="noopener">setTransactionIsolation()</a> and <a href="https://jdbi.org/apidocs/org/jdbi/v3/core/Handle.html#getTransactionIsolationLevel()" target="_blank" rel="noopener">getTransactionIsolationLevel()</a> to control the transaction isolation level</p>
+<p><a href="https://jdbi.org/apidocs/org/jdbi/v3/core/Handle.html#setTransactionIsolationLevel(org.jdbi.v3.core.transaction.TransactionIsolationLevel)" target="_blank" rel="noopener">setTransactionIsolationLevel()</a> and <a href="https://jdbi.org/apidocs/org/jdbi/v3/core/Handle.html#getTransactionIsolationLevel()" target="_blank" rel="noopener">getTransactionIsolationLevel()</a> to control the transaction isolation level</p>
 </li>
 <li>
 <p><a href="https://jdbi.org/apidocs/org/jdbi/v3/core/Handle.html#isInTransaction()" target="_blank" rel="noopener">isInTransaction()</a> returns <code>true</code> if the handle is currently in a transaction</p>
 </li>
 <li>
-<p><a href="https://jdbi.org/apidocs/org/jdbi/v3/core/Handle.html#savepoint(java.lang.String)">savepoint()<sup></a>/<a href="https://jdbi.org/apidocs/org/jdbi/v3/core/Handle.html#release(java.lang.String)">release()</sup></a>/<a href="https://jdbi.org/apidocs/org/jdbi/v3/core/Handle.html#rollbackToSavepoint(java.lang.String)" target="_blank" rel="noopener">rollbackToSavepoint()</a> for transaction savepoint support. This is not supported by all TransactionHandlers and requires support from the JDBC driver</p>
+<p><a href="https://jdbi.org/apidocs/org/jdbi/v3/core/Handle.html#savepoint(java.lang.String)">savepoint()<sup></a>/<a href="https://jdbi.org/apidocs/org/jdbi/v3/core/Handle.html#releaseSavepoint(java.lang.String)">releaseSavepoint()</sup></a>/<a href="https://jdbi.org/apidocs/org/jdbi/v3/core/Handle.html#rollbackToSavepoint(java.lang.String)" target="_blank" rel="noopener">rollbackToSavepoint()</a> for transaction savepoint support. This is not supported by all TransactionHandlers and requires support from the JDBC driver</p>
 </li>
 </ul>
 </div>
@@ -4852,7 +4852,7 @@ assertThat(joined).isEqualTo(JoinRowMapperTest.getExpected());</code></pre>
 <p>Transactions are managed by <a href="https://jdbi.org/apidocs/org/jdbi/v3/core/transaction/TransactionHandler.html" target="_blank" rel="noopener">TransactionHandler</a> implementations. By default, transactions are delegated to the JDBC connection and managed through the connection by the database.</p>
 </div>
 <div class="paragraph">
-<p>The transaction handler can be set per <code>Jdbi</code> instance using the <a href="https://jdbi.org/apidocs/org/jdbi/v3/core/Jdbi.html#setTransactionHandler(org.jdbi.v3.core.transaction.TransactionHandler)" target="_blank" rel="noopener">setTransactionHandler</a> and <a href="https://jdbi.org/apidocs/org/jdbi/v3/core/Jdbi.html#getTransactionHandler()" target="_blank" rel="noopener">getTransactionHandler</a> methods.</p>
+<p>The transaction handler can be set per <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instance using the <a href="https://jdbi.org/apidocs/org/jdbi/v3/core/Jdbi.html#setTransactionHandler(org.jdbi.v3.core.transaction.TransactionHandler)" target="_blank" rel="noopener">setTransactionHandler</a> and <a href="https://jdbi.org/apidocs/org/jdbi/v3/core/Jdbi.html#getTransactionHandler()" target="_blank" rel="noopener">getTransactionHandler</a> methods.</p>
 </div>
 <div class="paragraph">
 <p>In addition to the <a href="https://jdbi.org/apidocs/org/jdbi/v3/core/transaction/LocalTransactionHandler.html" target="_blank" rel="noopener">standard transaction handler</a>, Jdbi includes a <a href="https://jdbi.org/apidocs/org/jdbi/v3/core/transaction/CMTTransactionHandler.html" target="_blank" rel="noopener">handler that works correctly in a container managed environment</a> and a <a href="https://jdbi.org/apidocs/org/jdbi/v3/core/transaction/SerializableTransactionRunner.html" target="_blank" rel="noopener">serializable transaction handler</a> that allows multiple concurrent operations on a single handle to retry transparently.</p>
@@ -5350,12 +5350,12 @@ ClasspathSqlLocator.removingComments().locate(<span class="string"><span class="
 <h2 id="_configuration"><a class="anchor" href="#_configuration"></a><a class="link" href="#_configuration">5. Configuration</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>Jdbi</code> aims to be useful out of the box with minimal configuration.  Sometimes
+<p>Jdbi aims to be useful out of the box with minimal configuration.  Sometimes
 you need to change default behavior, or add in extensions to handle additional
 database types.  Each piece of core or extension that wishes to participate in
 configuration defines a configuration class, for example the <code>SqlStatements</code>
 class stores SqlStatement related configuration.  Then, on any <code>Configurable</code> context
-(like a <code>Jdbi</code> or <code>Handle</code>) you can change configuration in a type safe way:</p>
+(like a <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> or <a href="./apidocs/org/jdbi/v3/core/Handle.html" target="_blank" rel="noopener">Handle</a>) you can change configuration in a type safe way:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5376,8 +5376,8 @@ the database.</p>
 </div>
 <div class="paragraph">
 <p>When a new context is created, it inherits a copy of the parent context
-configuration at the time of creation.  So a <code>Handle</code> initializes its
-configuration from the creating <code>Jdbi</code>, but changes never propagate back up.</p>
+configuration at the time of creation, e.g. a <a href="./apidocs/org/jdbi/v3/core/Handle.html" target="_blank" rel="noopener">Handle</a> inherits its
+configuration from the <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> when it is created.</p>
 </div>
 <div class="paragraph">
 <p>See <a href="#_jdbiconfig">JdbiConfig</a> for more advanced implementation details.</p>
@@ -5547,7 +5547,7 @@ and setter parameters.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Then install the plugin into your <code>Jdbi</code> instance:</p>
+<p>Then install the plugin into the <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instance:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5849,13 +5849,16 @@ match the bound parameter name.
 <div class="sect3">
 <h4 id="_consumer_arguments"><a class="anchor" href="#_consumer_arguments"></a><a class="link" href="#_consumer_arguments">6.1.3. Consumer Arguments</a></h4>
 <div class="paragraph">
-<p>As a special case, it is possible to use a <a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/Consumer.html" target="_blank" rel="noopener">Consumer&lt;T&gt;</a> argument in addition to other bound parameters.</p>
+<p>As a special case, it is possible to use a <a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/Consumer.html" target="_blank" rel="noopener">Consumer&lt;T&gt;</a> argument in addition to other bound arguments.</p>
 </div>
 <div class="paragraph">
 <p>Unless the type <code>T</code> is a <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html" target="_blank" rel="noopener">Stream</a> or an <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Iterator.html" target="_blank" rel="noopener">Iterator</a>, the consumer is executed once for each row in the result set. The static type of parameter <code>T</code> determines the row type.</p>
 </div>
 <div class="paragraph">
 <p>If the consumer implements <a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/Consumer.html" target="_blank" rel="noopener">Consumer&lt;Iterator&lt;T&gt;&gt;</a>, or <a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/Consumer.html" target="_blank" rel="noopener">Consumer&lt;Stream&lt;T&gt;&gt;</a>, then the consumer is executed once with the <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Iterator.html" target="_blank" rel="noopener">Iterator</a> or <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html" target="_blank" rel="noopener">Stream</a> holding the results. The static type of parameter T determines the mapped row type here as well.</p>
+</div>
+<div class="paragraph">
+<p>When using a consumer argument with an iterator or a stream, Jdbi will manage these objects and close them when the consumer code exits.</p>
 </div>
 </div>
 <div class="sect3">
@@ -7110,7 +7113,7 @@ To avoid this, keep the handle open for the duration that you will use your DAO:
 and
 <a href="./apidocs/org/jdbi/v3/sqlobject/transaction/Transactional.html" target="_blank" rel="noopener">Transactional</a>,
 allow you to run your code with the on-demand handle held open.
-Re-entrant calls on the same thread will receive the same <code>Handle</code>.
+Re-entrant calls on the same thread will receive the same Handle.
 The handle will be closed when the outermost on-demand invocation completes.</p>
 </div>
 <div class="admonitionblock warning">
@@ -7121,7 +7124,7 @@ The handle will be closed when the outermost on-demand invocation completes.</p>
 </td>
 <td class="content">
 Returning cursor-like types such as <code>Stream&lt;T&gt;</code> or <code>Iterable&lt;T&gt;</code> outside of
-the outermost on-demand call does not work.  Since the <code>Handle</code> is closed,
+the outermost on-demand call does not work.  Since the`Handle is closed,
 the database cursor is released and reading will fail.
 </td>
 </tr>
@@ -7228,7 +7231,7 @@ transaction isolation level:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Similar to the <code>inTransaction</code> and <code>useTransaction</code> operations in the core API, transactions are not nested. If a method that has been annotated with <a href="https://jdbi.org/apidocs/org/jdbi/v3/sqlobject/transaction/Transaction.html" target="_blank" rel="noopener">@Transaction</a>, calls another method that is annotated as well (e.g. through an interface default method), then the same transaction will be reused, and it will be committed when the outer transaction ends.</p>
+<p>Similar to the <code>inTransaction</code> and <code>useTransaction</code> operations in the core API, transactions are not nested. If a method, that has been annotated with <a href="https://jdbi.org/apidocs/org/jdbi/v3/sqlobject/transaction/Transaction.html" target="_blank" rel="noopener">@Transaction</a>, calls another method that is annotated as well (e.g. through an interface default method), then the same transaction will be reused, and it will be committed when the outer transaction ends.</p>
 </div>
 <div class="paragraph">
 <p>Nested method calls must either use the same transaction isolation level or inner methods must not specify any transaction level. In that case, the transaction level of the outer transaction maintained.</p>
@@ -7382,8 +7385,8 @@ transaction isolation level:</p>
 <ul>
 <li>
 <p><a href="./apidocs/org/jdbi/v3/sqlobject/config/package-summary.html" target="_blank" rel="noopener">org.jdbi.v3.sqlobject.config</a>
-provides annotations for things that can be configured at the <code>Jdbi</code> or
-<code>Handle</code> level. This includes registration of mappers and arguments, and for
+provides annotations for things that can be configured at the <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> or
+<a href="./apidocs/org/jdbi/v3/core/Handle.html" target="_blank" rel="noopener">Handle</a> level. This includes registration of mappers and arguments, and for
 configuring SQL statement rendering and parsing.</p>
 </li>
 <li>
@@ -7415,7 +7418,7 @@ ST4 template engine.</p>
 <li>
 <p><a href="./apidocs/org/jdbi/v3/sqlobject/transaction/package-summary.html" target="_blank" rel="noopener">org.jdbi.v3.sqlobject.transaction</a>
 provides annotations for transaction management in a SQL object. See
-<a href="#Transaction Management">[Transaction Management]</a> for details.</p>
+<a href="#_sql_object_transactions">SQL Object Transactions</a> for details.</p>
 </li>
 </ul>
 </div>
@@ -7645,7 +7648,7 @@ using Postgres:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>When using the <code>@ExtendWith</code> declarative extension, test methods can access the <code>Jdbi</code> and <code>Handle</code> objects through method parameters:</p>
+<p>When using the <code>@ExtendWith</code> declarative extension, test methods can access the <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> and <a href="./apidocs/org/jdbi/v3/core/Handle.html" target="_blank" rel="noopener">Handle</a> objects through method parameters:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -7700,7 +7703,7 @@ list of supported types.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Then install the plugin into your <code>Jdbi</code> instance:</p>
+<p>Then install the plugin into the <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instance:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -7731,7 +7734,7 @@ types in an H2 database.</p>
 </div>
 <div class="paragraph">
 <p>This plugin is included with the core jar (but may be extracted to separate
-artifact in the future). Use it by installing the plugin into your <code>Jdbi</code>
+artifact in the future). Use it by installing the plugin into your <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a>
 instance:</p>
 </div>
 <div class="listingblock">
@@ -7918,7 +7921,7 @@ MyJson result = h.createQuery(<span class="string"><span class="delimiter">&quot
 <div class="paragraph">
 <p><a href="https://immutables.github.io/" target="_blank" rel="noopener">Immutables</a> is an annotation processor that generates
 value types based on simple interface descriptions.  The value types naturally map very well
-to <code>Jdbi</code> properties binding and row mapping.</p>
+to property binding and row mapping.</p>
 </div>
 <div class="admonitionblock warning">
 <table>
@@ -8067,7 +8070,7 @@ configure the new `bindPojo</code> (or <code>@BindPojo</code>) binders:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Then install the plugin into your <code>Jdbi</code> instance:</p>
+<p>Then install the plugin into the <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instance:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -8090,7 +8093,7 @@ Guice support is experimental.
 </table>
 </div>
 <div class="paragraph">
-<p>The Guice module adds support for configuring and injecting <code>Jdbi</code> instances in applications and services that use the <a href="https://github.com/google/guice/wiki" target="_blank" rel="noopener">Google Guice </a> dependency injection framework.</p>
+<p>The Guice module adds support for configuring and injecting <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instances in applications and services that use the <a href="https://github.com/google/guice/wiki" target="_blank" rel="noopener">Google Guice </a> dependency injection framework.</p>
 </div>
 <div class="paragraph">
 <p>Guice support for Jdbi is split into two module types:</p>
@@ -8098,7 +8101,7 @@ Guice support is experimental.
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Jdbi definition modules</strong> extend the <a href="./apidocs/org/jdbi/v3/guice/AbstractJdbiDefinitionModule.html" target="_blank" rel="noopener">AbstractJdbiDefinitionModule</a> class. Each of these modules creates a new <code>Jdbi</code> instance which is exposed into the Guice binding process using an annotation.</p>
+<p><strong>Jdbi definition modules</strong> extend the <a href="./apidocs/org/jdbi/v3/guice/AbstractJdbiDefinitionModule.html" target="_blank" rel="noopener">AbstractJdbiDefinitionModule</a> class. Each of these modules creates a new <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instance which is exposed into the Guice binding process using an annotation.</p>
 </li>
 <li>
 <p><strong>Jdbi element configuration modules</strong> extend the <a href="./apidocs/org/jdbi/v3/guice/AbstractJdbiConfigurationModule.html" target="_blank" rel="noopener">AbstractJdbiConfigurationModule</a>. These modules contribute elements that are referenced in Jdbi definition modules.</p>
@@ -8120,7 +8123,7 @@ Jdbi definition modules are by far more common. Element configuration modules ar
 <div class="sect3">
 <h4 id="_definition_modules"><a class="anchor" href="#_definition_modules"></a><a class="link" href="#_definition_modules">8.7.1. Definition modules</a></h4>
 <div class="paragraph">
-<p>Every <code>Jdbi</code> instance is defined in its own Guice module which extends the <a href="./apidocs/org/jdbi/v3/guice/AbstractJdbiDefinitionModule.html" target="_blank" rel="noopener">AbstractJdbiDefinitionModule</a> base class.</p>
+<p>Every <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instance is defined in its own Guice module which extends the <a href="./apidocs/org/jdbi/v3/guice/AbstractJdbiDefinitionModule.html" target="_blank" rel="noopener">AbstractJdbiDefinitionModule</a> base class.</p>
 </div>
 <div class="paragraph">
 <p>The  annotation instance or class used on the constructor is used to bind the resulting Jdbi object:</p>
@@ -8171,7 +8174,7 @@ Jdbi definition modules are by far more common. Element configuration modules ar
 </div>
 </div>
 <div class="paragraph">
-<p>In this example, a new <code>Jdbi</code> is defined using specific mappers and other customizations. The <code>Jdbi</code> object is exposed to Guice using the annotation passed on the module constructor (<code>GuiceJdbi</code> in the example). The <a href="./apidocs/org/jdbi/v3/guice/AbstractJdbiDefinitionModule.html" target="_blank" rel="noopener">AbstractJdbiDefinitionModule</a> supports both annotation instances and classes, similar to Guice itself.</p>
+<p>In this example, a new <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> object is defined using specific mappers and other customizations. The <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> object is exposed to Guice using the annotation passed on the module constructor (<code>GuiceJdbi</code> in the example). The <a href="./apidocs/org/jdbi/v3/guice/AbstractJdbiDefinitionModule.html" target="_blank" rel="noopener">AbstractJdbiDefinitionModule</a> supports both annotation instances and classes, similar to Guice itself.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -8257,7 +8260,7 @@ A Jdbi definition module requires that a DataSource object is bound within Guice
 </tbody>
 </table>
 <div class="paragraph">
-<p>Each Jdbi definition module is completely independent and all definitions within the module only apply to the specific <code>Jdbi</code> instance.</p>
+<p>Each Jdbi definition module is completely independent and all definitions within the module only apply to the specific <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instance.</p>
 </div>
 </div>
 <div class="sect3">
@@ -8457,7 +8460,7 @@ Element configuration modules are completely optional and should not be used whe
 </table>
 </div>
 <div class="paragraph">
-<p>All bindings in a Jdbi module that defines a <code>Jdbi</code> object are local to that module. This is useful if all Jdbi related code can be grouped around the module. In larger projects, some parts of the code (and their Jdbi related elements such as row and column mappers) may be located in different part of the code base.</p>
+<p>All bindings in a Jdbi module that defines a <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> object are local to that module. This is useful if all Jdbi related code can be grouped around the module. In larger projects, some parts of the code (and their Jdbi related elements such as row and column mappers) may be located in different part of the code base.</p>
 </div>
 <div class="paragraph">
 <p>In larger projects, generic mappers should be available for multiple Jdbi instances. This leads often to a proliferation of small modules that only contain such generic code and is in turn imported into every code module that wants to use them.</p>
@@ -8501,7 +8504,7 @@ Element configuration modules are completely optional and should not be used whe
 </div>
 </div>
 <div class="paragraph">
-<p>If the <code>DomainModule</code> is bound within Guice, then all configured <code>Jdbi</code> instances will be able to map DomainObject instances without having to configure them explicitly as a row mapper.</p>
+<p>If the <code>DomainModule</code> is bound within Guice, then all configured <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instances will be able to map DomainObject instances without having to configure them explicitly as a row mapper.</p>
 </div>
 <div class="paragraph">
 <p>Multiple modules extending <a href="./apidocs/org/jdbi/v3/guice/AbstractJdbiConfigurationModule.html" target="_blank" rel="noopener">AbstractJdbiConfigurationModule</a> can be installed in a single injector; the resulting bindings will be aggregated.</p>
@@ -8525,7 +8528,7 @@ Definition modules are Guice private modules and anything defined within them wi
 <div class="sect4">
 <h5 id="_exposing_additional_bindings"><a class="anchor" href="#_exposing_additional_bindings"></a><a class="link" href="#_exposing_additional_bindings">Exposing additional bindings</a></h5>
 <div class="paragraph">
-<p>Each definition module that defines a <code>Jdbi</code> instance keeps all bindings private and exposes only the actual <code>Jdbi</code> object itself. This allows the installation of multiple modules where each definition is completely independent. Sometimes it is useful to attach additional objects and expose them using the same annotations. The most common use cases are data access objects.</p>
+<p>Each definition module that defines a <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instance keeps all bindings private and exposes only the actual <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> object itself. This allows the installation of multiple modules where each definition is completely independent. Sometimes it is useful to attach additional objects and expose them using the same annotations. The most common use cases are data access objects.</p>
 </div>
 <div class="paragraph">
 <p>Consider a use case where two DataSource instances exist, one annotated as <code>Writer</code> and the other as <code>Reader</code>. Both are accessing databases with the same schema, and it makes sense to have two data access objects that are identical except that they are using the different data sources (this is often referred to as the "robot legs" problem of dependency injection).</p>
@@ -8887,7 +8890,7 @@ Jdbi. "No problem boss, it already supports JPA annotations, easy-peasy!"</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Then install the plugin into your <code>Jdbi</code> instance:</p>
+<p>Then install the plugin into the <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instance:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -8947,7 +8950,7 @@ not nullable and the value absent in the result set.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Then install the plugin into your <code>Jdbi</code> instance:</p>
+<p>Then install the plugin into the <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instance:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9061,7 +9064,7 @@ for Kotlin methods in SqlObjects as well as support for Kotlin default methods.<
 </div>
 </div>
 <div class="paragraph">
-<p>Then install the plugin into your <code>Jdbi</code> instance:</p>
+<p>Then install the plugin into the <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instance:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9227,7 +9230,7 @@ to get the returned DML.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Then install the plugin into your <code>Jdbi</code> instance.</p>
+<p>Then install the plugin into the <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instance.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9255,7 +9258,7 @@ exhaustive list.</p>
 </td>
 <td class="content">
 Some Postgres operators, for example the <code>?</code> query operator, collide
-with <code>jdbi</code> or <code>JDBC</code> special characters.  In such cases, you may need to
+with Jdbi or JDBC specific special characters.  In such cases, you may need to
 escape operators to e.g. <code>??</code> or <code>\:</code>.
 </td>
 </tr>
@@ -9398,7 +9401,7 @@ for upstream driver documentation.</p>
 <div class="sect2">
 <h3 id="_spring5"><a class="anchor" href="#_spring5"></a><a class="link" href="#_spring5">8.13. Spring5</a></h3>
 <div class="paragraph">
-<p>This module provides <code>JdbiFactoryBean</code>, a factory bean which sets up a <code>Jdbi</code>
+<p>This module provides <code>JdbiFactoryBean</code>, a factory bean which sets up a <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a>
 singleton in a Spring 5 (or Spring Boot) application context.</p>
 </div>
 <div class="paragraph">
@@ -9469,9 +9472,7 @@ database, but it can be any JDBC-compatible database.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>Inject <code>Jdbi</code> into a service class. Alternatively, use standard JSR-330
-<code>@Inject</code> annotations on the target class instead of configuring it in
-your <code>beans.xml</code>.</td>
+<td>Inject a <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instance into a service class. Alternatively, use standard JSR-330 <code>@Inject</code> annotations on the target class instead of configuring it in your <code>beans.xml</code>.</td>
 </tr>
 </table>
 </div>
@@ -9565,7 +9566,7 @@ supported by driver.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Then install the plugin into your <code>Jdbi</code> instance.</p>
+<p>Then install the plugin into the <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instance.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9758,8 +9759,7 @@ up to that index will be used.</p>
 </div>
 <div class="paragraph">
 <p>Currently Vavr &gt;= 0.9.0 is supported and tested. The plugin pulls a supported version of
-Vavr and is ready to be used. As with other plugins: install via <code>Jdbi</code> instance or
-use auto install.</p>
+Vavr and is ready to be used. As with other plugins: install through a <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instance or use auto install.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9883,12 +9883,12 @@ tuple indices must be provided with a column configuration!</p>
 <h2 id="_cookbook"><a class="anchor" href="#_cookbook"></a><a class="link" href="#_cookbook">9. Cookbook</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This section includes examples of various things you might like to do with <code>Jdbi</code>.</p>
+<p>This section includes examples of various things you might like to do with Jdbi.</p>
 </div>
 <div class="sect2">
 <h3 id="_simple_dependency_injection"><a class="anchor" href="#_simple_dependency_injection"></a><a class="link" href="#_simple_dependency_injection">9.1. Simple Dependency Injection</a></h3>
 <div class="paragraph">
-<p><code>Jdbi</code> tries to be independent of using a dependency injection framework,
+<p>Jdbi tries to be independent of using a dependency injection framework,
 but it&#8217;s straightforward to integrate yours.  Just do field injection on a simple custom config type:</p>
 </div>
 <div class="listingblock">
@@ -9916,7 +9916,7 @@ getHandle().getConfig(InjectedDependencies.class).dep</code></pre>
 <div class="sect2">
 <h3 id="_like_clauses_with_parameters"><a class="anchor" href="#_like_clauses_with_parameters"></a><a class="link" href="#_like_clauses_with_parameters">9.2. LIKE clauses with Parameters</a></h3>
 <div class="paragraph">
-<p>Since JDBC (and therefore <code>Jdbi</code>) does not allow binding parameters into the middle of string literals,
+<p>Since JDBC (and therefore Jdbi) does not allow binding parameters into the middle of string literals,
 you cannot interpolate bindings into <code>LIKE</code> clauses (<code>LIKE '%:param%'</code>).</p>
 </div>
 <div class="paragraph">
@@ -9996,7 +9996,7 @@ Exactly which parameters must stay the same and which may vary depends on your d
 <div class="paragraph">
 <p>If you want to have two separate pools, for example a read-only set that connects to read replicas
 and a smaller pool of writers that go only to a single host, you currently should have separate
-<code>Jdbi</code> instances each pointed at a separate <code>DataSource</code>.</p>
+<a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instances each pointed at a separate <code>DataSource</code>.</p>
 </div>
 </div>
 <div class="sect2">
@@ -10653,8 +10653,8 @@ a SQL object or method.</p>
 </div>
 <div class="paragraph">
 <p>Typically, these annotations correlate to a method of
-<a href="./apidocs/org/jdbi/v3/core/config/Configurable.html" target="_blank" rel="noopener">Configurable</a> (<code>Jdbi</code>,
-<code>Handle</code>, and <code>SqlStatement</code> all implement this interface). For example,
+<a href="./apidocs/org/jdbi/v3/core/config/Configurable.html" target="_blank" rel="noopener">Configurable</a> (<a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a>,
+<a href="./apidocs/org/jdbi/v3/core/Handle.html" target="_blank" rel="noopener">Handle</a>, and <code>SqlStatement</code> all implement this interface). For example,
 <code>@RegisterColumnMapper</code> correlates to <code>Configurable.registerColumnMapper()</code>.</p>
 </div>
 <div class="paragraph">
@@ -10998,7 +10998,7 @@ the <code>columns</code> attribute is defined as <code>"id, name"</code>.
 </div>
 <div class="paragraph">
 <p>Any custom template engine can be used. Simply implement the <code>TemplateEngine</code>
-interface, then call <code>setTemplateEngine()</code> on the <code>Jdbi</code>, <code>Handle</code>, or on a SQL
+interface, then call <code>setTemplateEngine()</code> on the <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a>, <a href="./apidocs/org/jdbi/v3/core/Handle.html" target="_blank" rel="noopener">Handle</a>, or on a SQL
 statement like <code>Update</code> or <code>Query</code>:</p>
 </div>
 <div class="listingblock">
@@ -11049,7 +11049,7 @@ recognizes colon-prefixed named parameters, e.g. <code>:name</code>.</p>
 <div class="paragraph">
 <p>Jdbi also provides <code>HashPrefixSqlParser</code>, which recognizes hash-prefixed
 parameters, e.g. <code>#hashtag</code>. Use this parser by calling <code>setSqlParser()</code> on the
-<code>Jdbi</code>, <code>Handle</code>, or any SQL statement such as <code>Query</code> or <code>Update</code>.</p>
+<a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a>, <a href="./apidocs/org/jdbi/v3/core/Handle.html" target="_blank" rel="noopener">Handle</a>, or any SQL statement such as <code>Query</code> or <code>Update</code>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11256,7 +11256,7 @@ here!</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>DBI</code>, <code>IDBI</code> &#8594; <code>Jdbi</code></p>
+<p><code>DBI</code>, <code>IDBI</code> &#8594; <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a></p>
 <div class="ulist">
 <ul>
 <li>
@@ -11316,7 +11316,7 @@ from <code>RowMapper</code>--the current row number can be retrieved directly fr
 and <code>ResultIterable&lt;T&gt;</code>. Call <code>.mapTo(type)</code> to get a <code>ResultIterable&lt;T&gt;</code>.</p>
 </li>
 <li>
-<p><code>TransactionConsumer</code> and <code>TransactionCallback</code> only take a <code>Handle</code> now&#8212;&#8203;the
+<p><code>TransactionConsumer</code> and <code>TransactionCallback</code> only take a <a href="./apidocs/org/jdbi/v3/core/Handle.html" target="_blank" rel="noopener">Handle</a> now&#8212;&#8203;the
 <code>TransactionStatus</code> argument is removed. Just rollback the handle now.</p>
 </li>
 <li>
@@ -11354,7 +11354,7 @@ parameter names to names that will be properly parsed out as named params.</p>
 <ul>
 <li>
 <p>SQL Object support is not installed by default. It must be added as a
-separate dependency, and the plugin installed into the <code>Jdbi</code> object:</p>
+separate dependency, and the plugin installed into the <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> object:</p>
 </li>
 </ul>
 </div>
@@ -11398,7 +11398,7 @@ leaks.</p>
 </li>
 <li>
 <p>SQL Objects are no longer closeable&#8201;&#8212;&#8201;they are either on-demand, or their
-lifecycle is tied to the lifecycle of the <code>Handle</code> they are attached to.</p>
+lifecycle is tied to the lifecycle of the <a href="./apidocs/org/jdbi/v3/core/Handle.html" target="_blank" rel="noopener">Handle</a> they are attached to.</p>
 </li>
 <li>
 <p><code>@BindAnnotation</code> meta-annotation removed. Use
@@ -11417,7 +11417,7 @@ return types, or on <code>@SqlBatch</code> parameters.</p>
 <div id="footer">
 <div id="footer-text">
 Version 3.34.1-SNAPSHOT<br>
-Last updated 11/18/2022 11:11 -0800
+Last updated 11/18/2022 22:04 -0800
 </div>
 </div>
 </body>
