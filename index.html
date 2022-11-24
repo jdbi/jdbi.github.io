@@ -534,7 +534,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.34.1-SNAPSHOT,</span>
-<span id="revdate">11/23/2022 16:30 -0800</span>
+<span id="revdate">11/23/2022 21:41 -0800</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -745,7 +745,12 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_testing">16. Testing</a>
 <ul class="sectlevel2">
 <li><a href="#_junit_4">16.1. JUnit 4</a></li>
-<li><a href="#_junit_5">16.2. JUnit 5</a></li>
+<li><a href="#_junit_5">16.2. JUnit 5</a>
+<ul class="sectlevel3">
+<li><a href="#_testing_with_h2">16.2.1. Testing with H2</a></li>
+<li><a href="#_testing_with_postgres">16.2.2. Testing with Postgres</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#_third_party_integration">17. Third-Party Integration</a>
@@ -8081,30 +8086,27 @@ The official test support from JDBI is in the <code>jdbi-testing</code> package.
 class which implements <a href="https://junit.org/junit4/javadoc/latest/org/junit/rules/TestRule.html" target="_blank" rel="noopener">TestRule</a> and can be used with the <a href="https://junit.org/junit4/javadoc/latest/org/junit/Rule.html" target="_blank" rel="noopener">Rule</a> and <a href="https://junit.org/junit4/javadoc/latest/org/junit/ClassRule.html" target="_blank" rel="noopener">ClassRule</a> annotations.</p>
 </div>
 <div class="paragraph">
-<p>It provides helpers for writing JUnit 4 tests integrated with a managed database
-instance. This makes writing unit tests quick and easy!  You must remember to include
-the database dependency itself, for example to get a pure H2 Java database:</p>
+<p>It provides helpers for writing JUnit 4 tests integrated with a managed database instance. This makes writing unit tests quick and easy!  You must remember to include the database dependency itself, for example to get a pure H2 Java database:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>com.h2database<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>h2<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>1.4.200<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;version&gt;</span>2.1.212<span class="tag">&lt;/version&gt;</span>
     <span class="tag">&lt;scope&gt;</span>test<span class="tag">&lt;/scope&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>JUnit 4 supports the OTJ embedded postgres component, which needs to be included when
-using Postgres:</p>
+<p>JUnit 4 supports the OTJ embedded postgres component, which needs to be included when using Postgres:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>com.opentable.components<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>otj-pg-embedded<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>0.13.4<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;version&gt;</span>1.0.1<span class="tag">&lt;/version&gt;</span>
     <span class="tag">&lt;scope&gt;</span>test<span class="tag">&lt;/scope&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
@@ -8119,7 +8121,7 @@ using Postgres:</p>
 <p>It supports both the <a href="https://junit.org/junit5/docs/current/api/org.junit.jupiter.api/org/junit/jupiter/api/extension/RegisterExtension.html" target="_blank" rel="noopener">@RegisterExtension</a> and <a href="https://junit.org/junit5/docs/current/api/org.junit.jupiter.api/org/junit/jupiter/api/extension/ExtendWith.html" target="_blank" rel="noopener">@ExtendWith</a> annotations.</p>
 </div>
 <div class="paragraph">
-<p>When using <code>@RegisterExtension</code>, the extensions can be customized further:</p>
+<p>When using <a href="https://junit.org/junit5/docs/current/api/org.junit.jupiter.api/org/junit/jupiter/api/extension/RegisterExtension.html" target="_blank" rel="noopener">@RegisterExtension</a>, the extensions can be customized further:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -8137,8 +8139,23 @@ using Postgres:</p>
 }</code></pre>
 </div>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<a href="./apidocs/org/jdbi/v3/testing/junit5/JdbiExtension.html" target="_blank" rel="noopener">JdbiExtension</a> and all the database specific subclasses are intended to be registered as instance fields. Fields annotated with the <a href="https://junit.org/junit5/docs/current/api/org.junit.jupiter.api/org/junit/jupiter/api/extension/RegisterExtension.html" target="_blank" rel="noopener">@RegisterExtension</a> that hold JdbiExtension instances should <strong>not</strong> be static! While this may work, the behavior is currently undefined and should be avoided.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
-<p>When using the <code>@ExtendWith</code> declarative extension, test methods can access the <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> and <a href="./apidocs/org/jdbi/v3/core/Handle.html" target="_blank" rel="noopener">Handle</a> objects through method parameters:</p>
+<p>The javadoc page for <a href="./apidocs/org/jdbi/v3/testing/junit5/JdbiExtension.html" target="_blank" rel="noopener">JdbiExtension</a> contains additional information on how to customize a programmatically registered instance.</p>
+</div>
+<div class="paragraph">
+<p>When using the <a href="https://junit.org/junit5/docs/current/api/org.junit.jupiter.api/org/junit/jupiter/api/extension/ExtendWith.html" target="_blank" rel="noopener">@ExtendWith</a> declarative extension, test methods can access the <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> and <a href="./apidocs/org/jdbi/v3/core/Handle.html" target="_blank" rel="noopener">Handle</a> objects through method parameters:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -8152,10 +8169,85 @@ using Postgres:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The instances injected are the same instances as returned by <code>getJdbi()</code> and <code>getSharedHandle()</code>.</p>
+<p>The instances injected are the same instances as returned by <a href="./apidocs/org/jdbi/v3/testing/junit5/JdbiExtension.html#getJdbi()">getJdbi()</a> and <a href="./apidocs/org/jdbi/v3/testing/junit5/JdbiExtension.html#getSharedHandle()">getSharedHandle()</a>.</p>
 </div>
 <div class="paragraph">
-<p>The javadoc for <a href="./apidocs/org/jdbi/v3/testing/junit5/JdbiExtension.html">JdbiExtension</a> contains further information on how to customize a programmatically registered instance.</p>
+<p>Currently supported databases:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.postgresql.org/">Postgres</a> - <a href="./apidocs/org/jdbi/v3/testing/junit5/JdbiPostgresExtension.html" target="_blank" rel="noopener">JdbiPostgresExtension</a>, <a href="./apidocs/org/jdbi/v3/testing/junit5/JdbiExternalPostgresExtension.html" target="_blank" rel="noopener">JdbiExternalPostgresExtension</a>, <a href="./apidocs/org/jdbi/v3/testing/junit5/JdbiOtjPostgresExtension.html" target="_blank" rel="noopener">JdbiOtjPostgresExtension</a></p>
+</li>
+<li>
+<p><a href="https://www.h2database.com/">H2</a> - <a href="./apidocs/org/jdbi/v3/testing/junit5/JdbiH2Extension.html" target="_blank" rel="noopener">JdbiH2Extension</a></p>
+</li>
+<li>
+<p><a href="https://www.sqlite.org/">Sqlite</a> - <a href="./apidocs/org/jdbi/v3/testing/junit5/JdbiSqliteExtension.html" target="_blank" rel="noopener">JdbiSqliteExtension</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Support for other databases is wanted!</p>
+</div>
+<div class="paragraph">
+<p>The <a href="./apidocs/org/jdbi/v3/testing/junit5/JdbiExtension.html" target="_blank" rel="noopener">JdbiExtension</a> provides a number of convenience methods:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">JdbiExtension</span> {
+    <span class="directive">public</span> JdbiExtension postgres(...) <span class="comment">// new JdbiPostgresExtension(...)</span>
+
+    <span class="directive">public</span> JdbiExtension externalPostgres(...) <span class="comment">// new JdbiExternalPostgresExtension(...)</span>
+
+    <span class="directive">public</span> JdbiExtension otjEmbeddedPostgres() <span class="comment">// new JdbiOtjPostgresExtension()</span>
+
+    <span class="directive">public</span> JdbiExtension h2() <span class="comment">// new JdbiH2Extension()</span>
+
+    <span class="directive">public</span> JdbiExtension sqlite() <span class="comment">// new JdbiSqliteExtension()</span>
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Additional functionality may be available by using the database specific implementation classes directly. For most common use cases, the convenience methods should suffice.</p>
+</div>
+<div class="sect3">
+<h4 id="_testing_with_h2"><a class="anchor" href="#_testing_with_h2"></a><a class="link" href="#_testing_with_h2">16.2.1. Testing with H2</a></h4>
+<div class="paragraph">
+<p>The H2 database is one of the most popular choices for embedded testing. The <a href="./apidocs/org/jdbi/v3/testing/junit5/JdbiH2Extension.html" target="_blank" rel="noopener">JdbiH2Extension</a> class allows for a few additional customizations:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// JdbiH2Extension(String) constructor allows H2 options</span>
+<span class="comment">// JDBC URL is jdbc:h2:mem:&lt;UUID&gt;;MODE=MySQL</span>
+JdbiH2Extension extension = <span class="keyword">new</span> JdbiH2Extension(<span class="string"><span class="delimiter">&quot;</span><span class="content">MODE=MySQL</span><span class="delimiter">&quot;</span></span>);
+
+<span class="comment">// set H2 user</span>
+extension.withUser(<span class="string"><span class="delimiter">&quot;</span><span class="content">h2-user</span><span class="delimiter">&quot;</span></span>);
+
+<span class="comment">// set H2 user and password</span>
+extension.withCredentials(<span class="string"><span class="delimiter">&quot;</span><span class="content">h2-user</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">h2-password</span><span class="delimiter">&quot;</span></span>);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_testing_with_postgres"><a class="anchor" href="#_testing_with_postgres"></a><a class="link" href="#_testing_with_postgres">16.2.2. Testing with Postgres</a></h4>
+<div class="paragraph">
+<p>Postgres is supported through multiple test classes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="./apidocs/org/jdbi/v3/testing/junit5/JdbiPostgresExtension.html" target="_blank" rel="noopener">JdbiPostgresExtension</a> manages a local database on the host. It uses the <a href="https://pg-embedded.softwareforge.de/">pg-embedded</a> library that can spin up postgres instances on various OS and architectures. This is the fastest way to get to a postgres instance. Most of the Jdbi test classes that use Postgres use this extension.</p>
+</li>
+<li>
+<p><a href="./apidocs/org/jdbi/v3/testing/junit5/JdbiExternalPostgresExtension.html" target="_blank" rel="noopener">JdbiExternalPostgresExtension</a> supports an external Postgres database and can run tests against any local or remote database.</p>
+</li>
+<li>
+<p><a href="./apidocs/org/jdbi/v3/testing/junit5/JdbiOtjPostgresExtension.html" target="_blank" rel="noopener">JdbiOtjPostgresExtension</a> supports the <a href="https://github.com/opentable/otj-pg-embedded">OpenTable Java Embedded PostgreSQL component</a>.</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </div>
@@ -11902,7 +11994,7 @@ return types, or on <code>@SqlBatch</code> parameters.</p>
 <div id="footer">
 <div id="footer-text">
 Version 3.34.1-SNAPSHOT<br>
-Last updated 11/23/2022 16:30 -0800
+Last updated 11/23/2022 21:41 -0800
 </div>
 </div>
 </body>
