@@ -534,7 +534,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.34.1-SNAPSHOT,</span>
-<span id="revdate">11/24/2022 15:26 -0800</span>
+<span id="revdate">11/24/2022 16:27 -0800</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -8185,6 +8185,9 @@ class which implements <a href="https://junit.org/junit4/javadoc/latest/org/juni
 <li>
 <p><a href="https://www.sqlite.org/">Sqlite</a> - <a href="./apidocs/org/jdbi/v3/testing/junit5/JdbiSqliteExtension.html" target="_blank" rel="noopener">JdbiSqliteExtension</a></p>
 </li>
+<li>
+<p>Generic JDBC database support - <a href="./apidocs/org/jdbi/v3/testing/junit5/JdbiGenericExtension.html" target="_blank" rel="noopener">JdbiGenericExtension</a>. This is a minimal extension that can support any database that support JDBC. The driver for the database must be on the classpath. All database management (schema creation, DDL object management etc.) must be done by the calling code.</p>
+</li>
 </ul>
 </div>
 <div class="paragraph">
@@ -11994,7 +11997,7 @@ return types, or on <code>@SqlBatch</code> parameters.</p>
 <div id="footer">
 <div id="footer-text">
 Version 3.34.1-SNAPSHOT<br>
-Last updated 11/24/2022 15:26 -0800
+Last updated 11/24/2022 16:27 -0800
 </div>
 </div>
 </body>
