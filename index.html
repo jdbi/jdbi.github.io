@@ -534,7 +534,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.35.1-SNAPSHOT,</span>
-<span id="revdate">12/05/2022 09:22 -0800</span>
+<span id="revdate">12/06/2022 18:57 -0800</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -8139,6 +8139,9 @@ class which implements <a href="https://junit.org/junit4/javadoc/latest/org/juni
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>The <a href="./apidocs/org/jdbi/v3/testing/junit5/JdbiExtension.html" target="_blank" rel="noopener">JdbiExtension</a> and all its database specific subclasses can be registered as instance fields or as class-level (static) fields.</p>
+</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -8146,10 +8149,16 @@ class which implements <a href="https://junit.org/junit4/javadoc/latest/org/juni
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<a href="./apidocs/org/jdbi/v3/testing/junit5/JdbiExtension.html" target="_blank" rel="noopener">JdbiExtension</a> and all the database specific subclasses are intended to be registered as instance fields. Fields annotated with the <a href="https://junit.org/junit5/docs/current/api/org.junit.jupiter.api/org/junit/jupiter/api/extension/RegisterExtension.html" target="_blank" rel="noopener">@RegisterExtension</a> that hold JdbiExtension instances should <strong>not</strong> be static! While this may work, the behavior is currently undefined and should be avoided.
+Registration as class-level (static) fields is <strong>only supported in Jdbi version 3.35.1 and beyond</strong>. For all releases before this, the behavior of the <a href="./apidocs/org/jdbi/v3/testing/junit5/JdbiExtension.html" target="_blank" rel="noopener">JdbiExtension</a> instances is undefined.
 </td>
 </tr>
 </table>
+</div>
+<div class="paragraph">
+<p>When registered as an instance field, each test will get a new Jdbi instance. The in-memory database specific subclasses (H2, SQLite or HsqlDB with the generic extension) will reset their content and provide a new instance.</p>
+</div>
+<div class="paragraph">
+<p>When registered as a static field, the extension will be initialized before all test methods are executed. All tests share the same extension instance and its associated fields. The in-memory database specfic subclasses will retain their contents across multiple tests.</p>
 </div>
 <div class="paragraph">
 <p>The javadoc page for <a href="./apidocs/org/jdbi/v3/testing/junit5/JdbiExtension.html" target="_blank" rel="noopener">JdbiExtension</a> contains additional information on how to customize a programmatically registered instance.</p>
@@ -11997,7 +12006,7 @@ return types, or on <code>@SqlBatch</code> parameters.</p>
 <div id="footer">
 <div id="footer-text">
 Version 3.35.1-SNAPSHOT<br>
-Last updated 12/05/2022 09:22 -0800
+Last updated 12/06/2022 18:57 -0800
 </div>
 </div>
 </body>
