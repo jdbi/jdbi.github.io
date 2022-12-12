@@ -46,4 +46,5 @@ org.jdbi.v3.sqlobject.transaction
 org.jdbi.v3.stringtemplate4
 org.jdbi.v3.testing
 org.jdbi.v3.testing.junit5
+org.jdbi.v3.testing.junit5.tc
 org.jdbi.v3.vavr
