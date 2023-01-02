@@ -534,7 +534,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.36.1-SNAPSHOT,</span>
-<span id="revdate">12/31/2022 15:04 -0800</span>
+<span id="revdate">01/01/2023 23:56 -0800</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -2804,8 +2804,7 @@ single value into a binding.</p>
     }
 
     <span class="annotation">@Override</span>
-    <span class="directive">public</span> <span class="type">void</span> apply(<span class="type">int</span> position, <span class="predefined-type">PreparedStatement</span> statement, StatementContext ctx)
-    <span class="directive">throws</span> <span class="exception">SQLException</span> {
+    <span class="directive">public</span> <span class="type">void</span> apply(<span class="type">int</span> position, <span class="predefined-type">PreparedStatement</span> statement, StatementContext ctx) <span class="directive">throws</span> <span class="exception">SQLException</span> {
         statement.setString(position, uuid.toString()); <i class="conum" data-value="1"></i><b>(1)</b>
     }
 }
@@ -12108,7 +12107,7 @@ return types, or on <code>@SqlBatch</code> parameters.</p>
 <div id="footer">
 <div id="footer-text">
 Version 3.36.1-SNAPSHOT<br>
-Last updated 12/31/2022 15:04 -0800
+Last updated 01/01/2023 23:56 -0800
 </div>
 </div>
 </body>
