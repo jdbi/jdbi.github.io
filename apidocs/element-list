@@ -1,12 +1,8 @@
-org.jdbi.v3.cache.caffeine
-org.jdbi.v3.cache.guava
-org.jdbi.v3.cache.noop
 org.jdbi.v3.commonstext
 org.jdbi.v3.core
 org.jdbi.v3.core.annotation
 org.jdbi.v3.core.argument
 org.jdbi.v3.core.array
-org.jdbi.v3.core.cache
 org.jdbi.v3.core.codec
 org.jdbi.v3.core.collector
 org.jdbi.v3.core.config
