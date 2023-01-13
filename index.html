@@ -534,7 +534,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.36.1-SNAPSHOT,</span>
-<span id="revdate">01/12/2023 14:02 -0800</span>
+<span id="revdate">01/12/2023 23:08 -0800</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -1207,11 +1207,11 @@ While Oracle support is considered part of Jdbi, the actual library is developed
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependencies&gt;</span>
-  <span class="tag">&lt;dependency&gt;</span>
-    <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
-    <span class="tag">&lt;artifactId&gt;</span>jdbi3-core<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>3.36.1-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
-  <span class="tag">&lt;/dependency&gt;</span>
+    <span class="tag">&lt;dependency&gt;</span>
+        <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
+        <span class="tag">&lt;artifactId&gt;</span>jdbi3-core<span class="tag">&lt;/artifactId&gt;</span>
+        <span class="tag">&lt;version&gt;</span>3.36.1-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;/dependency&gt;</span>
 <span class="tag">&lt;/dependencies&gt;</span></code></pre>
 </div>
 </div>
@@ -1237,15 +1237,15 @@ While Oracle support is considered part of Jdbi, the actual library is developed
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependencyManagement&gt;</span>
-  <span class="tag">&lt;dependencies&gt;</span>
-    <span class="tag">&lt;dependency&gt;</span>
-      <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
-      <span class="tag">&lt;artifactId&gt;</span>jdbi3-bom<span class="tag">&lt;/artifactId&gt;</span>
-      <span class="tag">&lt;type&gt;</span>pom<span class="tag">&lt;/type&gt;</span>
-      <span class="tag">&lt;version&gt;</span>3.36.1-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
-      <span class="tag">&lt;scope&gt;</span>import<span class="tag">&lt;/scope&gt;</span>
-    <span class="tag">&lt;/dependency&gt;</span>
-  <span class="tag">&lt;/dependencies&gt;</span>
+    <span class="tag">&lt;dependencies&gt;</span>
+        <span class="tag">&lt;dependency&gt;</span>
+            <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
+            <span class="tag">&lt;artifactId&gt;</span>jdbi3-bom<span class="tag">&lt;/artifactId&gt;</span>
+            <span class="tag">&lt;type&gt;</span>pom<span class="tag">&lt;/type&gt;</span>
+            <span class="tag">&lt;version&gt;</span>3.36.1-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+            <span class="tag">&lt;scope&gt;</span>import<span class="tag">&lt;/scope&gt;</span>
+        <span class="tag">&lt;/dependency&gt;</span>
+    <span class="tag">&lt;/dependencies&gt;</span>
 <span class="tag">&lt;/dependencyManagement&gt;</span></code></pre>
 </div>
 </div>
@@ -1743,8 +1743,8 @@ zero rows.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt; name = handle.createQuery(
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">select title from films where genre = :genre order by title</span><span class="delimiter">&quot;</span></span>)
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt; name = handle
+    .createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select title from films where genre = :genre order by title</span><span class="delimiter">&quot;</span></span>)
     .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">genre</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Action</span><span class="delimiter">&quot;</span></span>)
     .mapTo(<span class="predefined-type">String</span>.class)
     .list();</code></pre>
@@ -1756,8 +1756,8 @@ zero rows.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">Set</span>&lt;<span class="predefined-type">String</span>&gt; name = handle.createQuery(
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">select title from films where genre = :genre order by title</span><span class="delimiter">&quot;</span></span>)
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">Set</span>&lt;<span class="predefined-type">String</span>&gt; name = handle
+    .createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select title from films where genre = :genre order by title</span><span class="delimiter">&quot;</span></span>)
     .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">genre</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Action</span><span class="delimiter">&quot;</span></span>)
     .mapTo(<span class="predefined-type">String</span>.class)
     .collect(Collectors.toSet());</code></pre>
@@ -1769,10 +1769,10 @@ zero rows.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java">handle.createQuery(
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">select title from films where genre = :genre order by title</span><span class="delimiter">&quot;</span></span>)
+    <span class="string"><span class="delimiter">&quot;</span><span class="content">select title from films where genre = :genre order by title</span><span class="delimiter">&quot;</span></span>)
     .mapTo(<span class="predefined-type">String</span>.class)
     .useStream(stream -&gt; {
-      <span class="comment">// do stuff with stream</span>
+        <span class="comment">// do stuff with stream</span>
     });</code></pre>
 </div>
 </div>
@@ -1782,8 +1782,8 @@ map to many other data types:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">LocalDate releaseDate = handle.createQuery(
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">select release_date from films where name = :name</span><span class="delimiter">&quot;</span></span>)
+<pre class="CodeRay highlight"><code data-lang="java">LocalDate releaseDate = handle
+    .createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select release_date from films where name = :name</span><span class="delimiter">&quot;</span></span>)
     .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Star Wars: A New Hope</span><span class="delimiter">&quot;</span></span>)
     .mapTo(LocalDate.class)
     .one();</code></pre>
@@ -2101,7 +2101,7 @@ can be executed in a single <strong>Batch</strong> or individually.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">try</span> (Handle handle = jdbi.open();
-        <span class="predefined-type">Query</span> query = handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT * from users</span><span class="delimiter">&quot;</span></span>)) {
+    <span class="predefined-type">Query</span> query = handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT * from users</span><span class="delimiter">&quot;</span></span>)) {
     <span class="predefined-type">List</span>&lt;User&gt; users = query.mapTo(User.class).list();
 }</code></pre>
 </div>
@@ -2160,7 +2160,7 @@ User user = userDao.getUser(id);
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">try</span> (Handle handle = jdbi.open()) {
-    ... handle operations ...
+    <span class="comment">// handle operations here</span>
 }</code></pre>
 </div>
 </div>
@@ -2177,10 +2177,10 @@ User user = userDao.getUser(id);
     User user = userDao.getUser(id);
 }
 
-User user = jdbi.withHandle(handle -&gt; {  <i class="conum" data-value="2"></i><b>(2)</b>
+User user = jdbi.withHandle(handle -&gt; { <i class="conum" data-value="2"></i><b>(2)</b>
     UserDao dao = handle.attach(UserDao.class);
     <span class="keyword">return</span> userDao.getUser(id);
-})
+});
 
 <span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
     <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from users where id = :id</span><span class="delimiter">&quot;</span></span>)
@@ -2234,8 +2234,8 @@ User user = jdbi.withHandle(handle -&gt; {  <i class="conum" data-value="2"></i>
     <span class="keyword">for</span> (<span class="type">int</span> i = <span class="integer">0</span>; i &lt; <span class="integer">100</span>_000; i++) {
         <span class="keyword">try</span> (Update update = handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO users (id, name) VALUES (:id, :name)</span><span class="delimiter">&quot;</span></span>)) {
             update.bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, i)
-                .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">user_</span><span class="delimiter">&quot;</span></span> + i)
-                .execute();
+                  .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">user_</span><span class="delimiter">&quot;</span></span> + i)
+                  .execute();
         }
     }
 });</code></pre>
@@ -2251,8 +2251,8 @@ User user = jdbi.withHandle(handle -&gt; {  <i class="conum" data-value="2"></i>
         Update update = handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO users (id, name) VALUES (:id, :name)</span><span class="delimiter">&quot;</span></span>);
         <span class="keyword">try</span> {
             update.bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, i)
-                .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">user_</span><span class="delimiter">&quot;</span></span> + i)
-                .execute();
+                  .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">user_</span><span class="delimiter">&quot;</span></span> + i)
+                  .execute();
         } <span class="keyword">finally</span> {
             update.close();
         }
@@ -2281,8 +2281,9 @@ User user = jdbi.withHandle(handle -&gt; {  <i class="conum" data-value="2"></i>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">try</span> (Handle handle = jdbi.open()) {
-    <span class="predefined-type">List</span>&lt;User&gt; users = handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT * from users</span><span class="delimiter">&quot;</span></span>) <i class="conum" data-value="1"></i><b>(1)</b>
-        .mapTo(User.class)  <i class="conum" data-value="2"></i><b>(2)</b>
+    <span class="predefined-type">List</span>&lt;User&gt; users = handle
+        .createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT * from users</span><span class="delimiter">&quot;</span></span>) <i class="conum" data-value="1"></i><b>(1)</b>
+        .mapTo(User.class) <i class="conum" data-value="2"></i><b>(2)</b>
         .list(); <i class="conum" data-value="3"></i><b>(3)</b>
 }</code></pre>
 </div>
@@ -2349,9 +2350,9 @@ Just using an iterator or stream may not be enough to actually stream data witho
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// managing resources through the query SQL statement</span>
 <span class="keyword">try</span> (Handle handle = jdbi.open()) {
-    <span class="keyword">try</span> (<span class="predefined-type">Query</span> query = handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT * from users</span><span class="delimiter">&quot;</span></span>)) {  <i class="conum" data-value="1"></i><b>(1)</b>
+    <span class="keyword">try</span> (<span class="predefined-type">Query</span> query = handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT * from users</span><span class="delimiter">&quot;</span></span>)) { <i class="conum" data-value="1"></i><b>(1)</b>
         Stream&lt;User&gt; users = query.mapTo(User.class).stream();
-            <span class="comment">// consume the stream</span>
+        <span class="comment">// consume the stream</span>
     }
 }
 
@@ -2386,7 +2387,7 @@ Just using an iterator or stream may not be enough to actually stream data witho
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">try</span> (Handle handle = jdbi.open()) {
-    <span class="keyword">try</span> (<span class="predefined-type">Query</span> query = handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT * from users</span><span class="delimiter">&quot;</span></span>)) {  <i class="conum" data-value="1"></i><b>(1)</b>
+    <span class="keyword">try</span> (<span class="predefined-type">Query</span> query = handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT * from users</span><span class="delimiter">&quot;</span></span>)) { <i class="conum" data-value="1"></i><b>(1)</b>
         query.mapTo(User.class).useIterator(it -&gt; {
             <span class="comment">// consume the iterator</span>
         });
@@ -2424,10 +2425,10 @@ This functionality is only available in version 3.35.0 and beyond!
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java">User user = jdbi.withHandle(handle -&gt; handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from users where id = :id</span><span class="delimiter">&quot;</span></span>)
-        .attachToHandleForCleanup() <i class="conum" data-value="1"></i><b>(1)</b>
-        .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, id)
-        .mapTo(User.class)
-        .one());</code></pre>
+    .attachToHandleForCleanup() <i class="conum" data-value="1"></i><b>(1)</b>
+    .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, id)
+    .mapTo(User.class)
+    .one());</code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -2592,9 +2593,9 @@ later.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java">handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into contacts (id, name) values (:id, :name)</span><span class="delimiter">&quot;</span></span>)
-      .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">1</span>)
-      .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Alice</span><span class="delimiter">&quot;</span></span>)
-      .execute();</code></pre>
+    .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">1</span>)
+    .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Alice</span><span class="delimiter">&quot;</span></span>)
+    .execute();</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2607,8 +2608,8 @@ contact.put(<span class="string"><span class="delimiter">&quot;</span><span clas
 contact.put(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Bob</span><span class="delimiter">&quot;</span></span>);
 
 handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into contacts (id, name) values (:id, :name)</span><span class="delimiter">&quot;</span></span>)
-      .bindMap(contact)
-      .execute();</code></pre>
+    .bindMap(contact)
+    .execute();</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2621,15 +2622,15 @@ keys.add(<span class="string"><span class="delimiter">&quot;</span><span class="
 keys.add(<span class="string"><span class="delimiter">&quot;</span><span class="content">street</span><span class="delimiter">&quot;</span></span>);
 
 handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT value FROM items WHERE kind in (&lt;listOfKinds&gt;)</span><span class="delimiter">&quot;</span></span>)
-      .bindList(<span class="string"><span class="delimiter">&quot;</span><span class="content">listOfKinds</span><span class="delimiter">&quot;</span></span>, keys)
-      .mapTo(<span class="predefined-type">String</span>.class)
-      .list();
+    .bindList(<span class="string"><span class="delimiter">&quot;</span><span class="content">listOfKinds</span><span class="delimiter">&quot;</span></span>, keys)
+    .mapTo(<span class="predefined-type">String</span>.class)
+    .list();
 
-<span class="comment">// Or, using the 'vararg' definition</span>
+<span class="comment">// or, using the 'vararg' definition</span>
 handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT value FROM items WHERE kind in (&lt;varargListOfKinds&gt;)</span><span class="delimiter">&quot;</span></span>)
-      .bindList(<span class="string"><span class="delimiter">&quot;</span><span class="content">varargListOfKinds</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">user_name</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">docs</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">street</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">library</span><span class="delimiter">&quot;</span></span>)
-      .mapTo(<span class="predefined-type">String</span>.class)
-      .list();</code></pre>
+    .bindList(<span class="string"><span class="delimiter">&quot;</span><span class="content">varargListOfKinds</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">user_name</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">docs</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">street</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">library</span><span class="delimiter">&quot;</span></span>)
+    .mapTo(<span class="predefined-type">String</span>.class)
+    .list();</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -2656,8 +2657,8 @@ contact.setId(<span class="integer">3</span>);
 contact.setName(<span class="string"><span class="delimiter">&quot;</span><span class="content">Cindy</span><span class="delimiter">&quot;</span></span>);
 
 handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into contacts (id, name) values (:id, :name)</span><span class="delimiter">&quot;</span></span>)
-      .bindBean(contact)
-      .execute();</code></pre>
+    .bindBean(contact)
+    .execute();</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2671,8 +2672,8 @@ handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><s
 };
 
 handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into contacts (id, name) values (:id, :name)</span><span class="delimiter">&quot;</span></span>)
-      .bindFields(contact)
-      .execute();</code></pre>
+    .bindFields(contact)
+    .execute();</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2691,8 +2692,8 @@ handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><s
 };
 
 handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into contacts (id, name) values (:theId, :theName)</span><span class="delimiter">&quot;</span></span>)
-      .bindMethods(contact)
-      .execute();</code></pre>
+    .bindMethods(contact)
+    .execute();</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2708,10 +2709,10 @@ property names:</p>
 
 handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into documents (id, folder_id, name, contents) </span><span class="delimiter">&quot;</span></span> +
                     <span class="string"><span class="delimiter">&quot;</span><span class="content">values (:d.id, :f.id, :d.name, :d.contents)</span><span class="delimiter">&quot;</span></span>)
-      .bindBean(<span class="string"><span class="delimiter">&quot;</span><span class="content">f</span><span class="delimiter">&quot;</span></span>, folder)
-      .bindMethods(<span class="string"><span class="delimiter">&quot;</span><span class="content">f</span><span class="delimiter">&quot;</span></span>, folder)
-      .bindFields(<span class="string"><span class="delimiter">&quot;</span><span class="content">d</span><span class="delimiter">&quot;</span></span>, document)
-      .execute();</code></pre>
+    .bindBean(<span class="string"><span class="delimiter">&quot;</span><span class="content">f</span><span class="delimiter">&quot;</span></span>, folder)
+    .bindMethods(<span class="string"><span class="delimiter">&quot;</span><span class="content">f</span><span class="delimiter">&quot;</span></span>, folder)
+    .bindFields(<span class="string"><span class="delimiter">&quot;</span><span class="content">d</span><span class="delimiter">&quot;</span></span>, document)
+    .execute();</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -3025,7 +3026,8 @@ automatically looks up the mapper from the registry, and uses it.</p>
     (rs, ctx) -&gt; <span class="keyword">new</span> User(rs.getInt(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>), rs.getString(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>));
 
 <span class="keyword">try</span> (Handle handle = jdbi.open()) {
-  <span class="predefined-type">List</span>&lt;User&gt; users = handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT id, name FROM user ORDER BY id ASC</span><span class="delimiter">&quot;</span></span>)
+    <span class="predefined-type">List</span>&lt;User&gt; users = handle
+        .createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT id, name FROM user ORDER BY id ASC</span><span class="delimiter">&quot;</span></span>)
         .mapTo(User.class)
         .list();
 }</code></pre>
@@ -3086,13 +3088,13 @@ for types <code>K</code> and <code>V</code>.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="directive">final</span> <span class="type">class</span> <span class="class">Pair</span>&lt;L, R&gt; {
-  <span class="directive">public</span> <span class="directive">final</span> L left;
-  <span class="directive">public</span> <span class="directive">final</span> R right;
+    <span class="directive">public</span> <span class="directive">final</span> L left;
+    <span class="directive">public</span> <span class="directive">final</span> R right;
 
-  <span class="directive">public</span> Pair(L left, R right) {
-    <span class="local-variable">this</span>.left = left;
-    <span class="local-variable">this</span>.right = right;
-  }
+    <span class="directive">public</span> Pair(L left, R right) {
+        <span class="local-variable">this</span>.left = left;
+        <span class="local-variable">this</span>.right = right;
+    }
 }</code></pre>
 </div>
 </div>
@@ -3108,9 +3110,9 @@ mappers registered for both <code>L</code> and <code>R</code>.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">PairMapperFactory</span> <span class="directive">implements</span> RowMapperFactory {
-  <span class="directive">public</span> Optional&lt;<span class="predefined-type">RowMapper</span>&lt;?&gt;&gt; build(<span class="predefined-type">Type</span> type, ConfigRegistry config) {
-    ...
-  }
+    <span class="directive">public</span> Optional&lt;<span class="predefined-type">RowMapper</span>&lt;?&gt;&gt; build(<span class="predefined-type">Type</span> type, ConfigRegistry config) {
+        <span class="comment">// ...</span>
+    }
 }</code></pre>
 </div>
 </div>
@@ -3125,7 +3127,7 @@ mappers registered for both <code>L</code> and <code>R</code>.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">if</span> (!Pair.class.equals(GenericTypes.getErasedType(type))) {
-  <span class="keyword">return</span> Optional.empty();
+    <span class="keyword">return</span> Optional.empty();
 }</code></pre>
 </div>
 </div>
@@ -3169,11 +3171,11 @@ registry:</p>
 <pre class="CodeRay highlight"><code data-lang="java">ColumnMappers columnMappers = config.get(ColumnMappers.class);
 
 ColumnMapper&lt;?&gt; leftMapper = columnMappers.findFor(leftType)
-   .orElseThrow(() -&gt; <span class="keyword">new</span> NoSuchMapperException(
-       <span class="string"><span class="delimiter">&quot;</span><span class="content">No column mapper registered for Pair left parameter </span><span class="delimiter">&quot;</span></span> + leftType));
+    .orElseThrow(() -&gt; <span class="keyword">new</span> NoSuchMapperException(
+        <span class="string"><span class="delimiter">&quot;</span><span class="content">No column mapper registered for Pair left parameter </span><span class="delimiter">&quot;</span></span> + leftType));
 ColumnMapper&lt;?&gt; rightMapper = columnMappers.findFor(rightType)
-   .orElseThrow(() -&gt; <span class="keyword">new</span> NoSuchMapperException(
-       <span class="string"><span class="delimiter">&quot;</span><span class="content">No column mapper registered for Pair right parameter </span><span class="delimiter">&quot;</span></span> + rightType));</code></pre>
+    .orElseThrow(() -&gt; <span class="keyword">new</span> NoSuchMapperException(
+        <span class="string"><span class="delimiter">&quot;</span><span class="content">No column mapper registered for Pair right parameter </span><span class="delimiter">&quot;</span></span> + rightType));</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3222,29 +3224,28 @@ working as expected.
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">PairMapperFactory</span> <span class="directive">implements</span> RowMapperFactory {
-  <span class="directive">public</span> Optional&lt;<span class="predefined-type">RowMapper</span>&lt;?&gt;&gt; build(<span class="predefined-type">Type</span> type, ConfigRegistry config) {
-    <span class="keyword">if</span> (!Pair.class.equals(GenericTypes.getErasedType(type))) {
-      <span class="keyword">return</span> Optional.empty();
+    <span class="directive">public</span> Optional&lt;<span class="predefined-type">RowMapper</span>&lt;?&gt;&gt; build(<span class="predefined-type">Type</span> type, ConfigRegistry config) {
+        <span class="keyword">if</span> (!Pair.class.equals(GenericTypes.getErasedType(type))) {
+            <span class="keyword">return</span> Optional.empty();
+        }
+
+        <span class="predefined-type">Type</span> leftType = GenericTypes.resolveType(Pair.class.getTypeParameters()[<span class="integer">0</span>], type);
+        <span class="predefined-type">Type</span> rightType = GenericTypes.resolveType(Pair.class.getTypeParameters()[<span class="integer">1</span>], type);
+
+        ColumnMappers columnMappers = config.get(ColumnMappers.class);
+
+        ColumnMapper&lt;?&gt; leftMapper = columnMappers.findFor(leftType)
+            .orElseThrow(() -&gt; <span class="keyword">new</span> NoSuchMapperException(
+                <span class="string"><span class="delimiter">&quot;</span><span class="content">No column mapper registered for Pair left parameter </span><span class="delimiter">&quot;</span></span> + leftType));
+        ColumnMapper&lt;?&gt; rightMapper = columnMappers.findFor(rightType)
+            .orElseThrow(() -&gt; <span class="keyword">new</span> NoSuchMapperException(
+                <span class="string"><span class="delimiter">&quot;</span><span class="content">No column mapper registered for Pair right parameter </span><span class="delimiter">&quot;</span></span> + rightType));
+
+        <span class="predefined-type">RowMapper</span>&lt;?&gt; pairMapper = (rs, ctx) -&gt; <span class="keyword">new</span> Pair(leftMapper.map(rs, <span class="integer">1</span>, ctx),
+            rightMapper.map(rs, <span class="integer">2</span>, ctx));
+
+        <span class="keyword">return</span> Optional.of(pairMapper);
     }
-
-    <span class="predefined-type">Type</span> leftType = GenericTypes.resolveType(Pair.class.getTypeParameters()[<span class="integer">0</span>], type);
-    <span class="predefined-type">Type</span> rightType = GenericTypes.resolveType(Pair.class.getTypeParameters()[<span class="integer">1</span>], type);
-
-    ColumnMappers columnMappers = config.get(ColumnMappers.class);
-
-    ColumnMapper&lt;?&gt; leftMapper = columnMappers.findFor(leftType)
-       .orElseThrow(() -&gt; <span class="keyword">new</span> NoSuchMapperException(
-           <span class="string"><span class="delimiter">&quot;</span><span class="content">No column mapper registered for Pair left parameter </span><span class="delimiter">&quot;</span></span> + leftType));
-    ColumnMapper&lt;?&gt; rightMapper = columnMappers.findFor(rightType)
-       .orElseThrow(() -&gt; <span class="keyword">new</span> NoSuchMapperException(
-           <span class="string"><span class="delimiter">&quot;</span><span class="content">No column mapper registered for Pair right parameter </span><span class="delimiter">&quot;</span></span> + rightType));
-
-    <span class="predefined-type">RowMapper</span>&lt;?&gt; pairMapper = (rs, ctx) -&gt;
-        <span class="keyword">new</span> Pair(leftMapper.map(rs, <span class="integer">1</span>, ctx),
-                 rightMapper.map(rs, <span class="integer">2</span>, ctx));
-
-    <span class="keyword">return</span> Optional.of(pairMapper);
-  }
 }</code></pre>
 </div>
 </div>
@@ -3256,10 +3257,10 @@ working as expected.
 <pre class="CodeRay highlight"><code data-lang="java">jdbi.registerRowMapper(<span class="keyword">new</span> PairMapperFactory());
 
 <span class="keyword">try</span> (Handle handle = jdbi.open()) {
-  <span class="predefined-type">List</span>&lt;Pair&lt;<span class="predefined-type">String</span>, <span class="predefined-type">String</span>&gt;&gt; configPairs = handle
-          .createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT key, value FROM config</span><span class="delimiter">&quot;</span></span>)
-          .mapTo(<span class="keyword">new</span> GenericType&lt;Pair&lt;<span class="predefined-type">String</span>, <span class="predefined-type">String</span>&gt;&gt;() {})
-          .list();
+    <span class="predefined-type">List</span>&lt;Pair&lt;<span class="predefined-type">String</span>, <span class="predefined-type">String</span>&gt;&gt; configPairs = handle
+        .createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT key, value FROM config</span><span class="delimiter">&quot;</span></span>)
+        .mapTo(<span class="keyword">new</span> GenericType&lt;Pair&lt;<span class="predefined-type">String</span>, <span class="predefined-type">String</span>&gt;&gt;() {})
+        .list();
 }</code></pre>
 </div>
 </div>
@@ -3306,9 +3307,9 @@ is mapped.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">MoneyMapper</span> <span class="directive">implements</span> ColumnMapper&lt;Money&gt; {
-  <span class="directive">public</span> Money map(<span class="predefined-type">ResultSet</span> r, <span class="type">int</span> columnNumber, StatementContext ctx) <span class="directive">throws</span> <span class="exception">SQLException</span> {
-    <span class="keyword">return</span> Money.parse(r.getString(columnNumber));
-  }
+    <span class="directive">public</span> Money map(<span class="predefined-type">ResultSet</span> r, <span class="type">int</span> columnNumber, StatementContext ctx) <span class="directive">throws</span> <span class="exception">SQLException</span> {
+        <span class="keyword">return</span> Money.parse(r.getString(columnNumber));
+    }
 }</code></pre>
 </div>
 </div>
@@ -3337,8 +3338,8 @@ looks up the mapper from the registry, and uses it.</p>
 
 <span class="predefined-type">List</span>&lt;Money&gt; amounts = jdbi.withHandle(handle -&gt;
     handle.select(<span class="string"><span class="delimiter">&quot;</span><span class="content">select amount from transactions where account_id = ?</span><span class="delimiter">&quot;</span></span>, accountId)
-          .mapTo(Money.class)
-          .list());</code></pre>
+        .mapTo(Money.class)
+        .list());</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3451,9 +3452,9 @@ mapper is registered for <code>T</code>.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">OptionalColumnMapperFactory</span> <span class="directive">implements</span> ColumnMapperFactory {
-  <span class="directive">public</span> Optional&lt;ColumnMapper&lt;?&gt;&gt; build(<span class="predefined-type">Type</span> type, ConfigRegistry config) {
-    ...
-  }
+    <span class="directive">public</span> Optional&lt;ColumnMapper&lt;?&gt;&gt; build(<span class="predefined-type">Type</span> type, ConfigRegistry config) {
+        <span class="comment">// ...</span>
+    }
 }</code></pre>
 </div>
 </div>
@@ -3468,7 +3469,7 @@ mapper is registered for <code>T</code>.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">if</span> (!Optional.class.equals(GenericTypes.getErasedType(type))) {
-  <span class="keyword">return</span> Optional.empty();
+    <span class="keyword">return</span> Optional.empty();
 }</code></pre>
 </div>
 </div>
@@ -3557,23 +3558,22 @@ expected.
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">OptionalColumnMapperFactory</span> <span class="directive">implements</span> ColumnMapperFactory {
-  <span class="directive">public</span> Optional&lt;ColumnMapper&lt;?&gt;&gt; build(<span class="predefined-type">Type</span> type, ConfigRegistry config) {
-    <span class="keyword">if</span> (!Optional.class.equals(GenericTypes.getErasedType(type))) {
-      <span class="keyword">return</span> Optional.empty();
+    <span class="directive">public</span> Optional&lt;ColumnMapper&lt;?&gt;&gt; build(<span class="predefined-type">Type</span> type, ConfigRegistry config) {
+        <span class="keyword">if</span> (!Optional.class.equals(GenericTypes.getErasedType(type))) {
+            <span class="keyword">return</span> Optional.empty();
+        }
+
+        <span class="predefined-type">Type</span> t = GenericTypes.resolveType(Optional.class.getTypeParameters()[<span class="integer">0</span>], type);
+
+        ColumnMapper&lt;?&gt; tMapper = config.get(ColumnMappers.class)
+            .findFor(t)
+            .orElseThrow(() -&gt; <span class="keyword">new</span> NoSuchMapperException(
+                <span class="string"><span class="delimiter">&quot;</span><span class="content">No column mapper registered for parameter </span><span class="delimiter">&quot;</span></span> + t + <span class="string"><span class="delimiter">&quot;</span><span class="content"> of type </span><span class="delimiter">&quot;</span></span> + type));
+
+        ColumnMapper&lt;?&gt; optionalMapper = (rs, col, ctx) -&gt; Optional.ofNullable(tMapper.map(rs, col, ctx));
+
+        <span class="keyword">return</span> Optional.of(optionalMapper);
     }
-
-    <span class="predefined-type">Type</span> t = GenericTypes.resolveType(Optional.class.getTypeParameters()[<span class="integer">0</span>], type);
-
-    ColumnMapper&lt;?&gt; tMapper = config.get(ColumnMappers.class)
-        .findFor(t)
-        .orElseThrow(() -&gt; <span class="keyword">new</span> NoSuchMapperException(
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">No column mapper registered for parameter </span><span class="delimiter">&quot;</span></span> + t + <span class="string"><span class="delimiter">&quot;</span><span class="content"> of type </span><span class="delimiter">&quot;</span></span> + type));
-
-    ColumnMapper&lt;?&gt; optionalMapper = (rs, col, ctx) -&gt;
-        Optional.ofNullable(tMapper.map(rs, col, ctx));
-
-    <span class="keyword">return</span> Optional.of(optionalMapper);
-  }
 }</code></pre>
 </div>
 </div>
@@ -3585,10 +3585,10 @@ expected.
 <pre class="CodeRay highlight"><code data-lang="java">jdbi.registerColumnMapper(<span class="keyword">new</span> OptionalColumnMapperFactory());
 
 <span class="keyword">try</span> (Handle handle = jdbi.open()) {
-  <span class="predefined-type">List</span>&lt;Optional&lt;<span class="predefined-type">String</span>&gt;&gt; middleNames = handle
-          .createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select middle_name from contacts</span><span class="delimiter">&quot;</span></span>)
-          .mapTo(<span class="keyword">new</span> GenericType&lt;Optional&lt;<span class="predefined-type">String</span>&gt;&gt;() {})
-          .list();
+    <span class="predefined-type">List</span>&lt;Optional&lt;<span class="predefined-type">String</span>&gt;&gt; middleNames = handle
+        .createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select middle_name from contacts</span><span class="delimiter">&quot;</span></span>)
+        .mapTo(<span class="keyword">new</span> GenericType&lt;Optional&lt;<span class="predefined-type">String</span>&gt;&gt;() {})
+        .list();
 }</code></pre>
 </div>
 </div>
@@ -3725,8 +3725,8 @@ annotation on each constructor parameter:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> User(<span class="annotation">@ColumnName</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>) <span class="type">int</span> id, <span class="annotation">@ColumnName</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>) <span class="predefined-type">String</span> name) {
-  <span class="local-variable">this</span>.id = id;
-  <span class="local-variable">this</span>.name = name;
+    <span class="local-variable">this</span>.id = id;
+    <span class="local-variable">this</span>.name = name;
 }</code></pre>
 </div>
 </div>
@@ -3737,8 +3737,8 @@ annotation on each constructor parameter:</p>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@ConstructorProperties</span>({<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>})
 <span class="directive">public</span> User(<span class="type">int</span> id, <span class="predefined-type">String</span> name) {
-  <span class="local-variable">this</span>.id = id;
-  <span class="local-variable">this</span>.name = name;
+    <span class="local-variable">this</span>.id = id;
+    <span class="local-variable">this</span>.name = name;
 }</code></pre>
 </div>
 </div>
@@ -3783,10 +3783,11 @@ two mapped classes have identical property names (like <code>id</code> or <code>
 <pre class="CodeRay highlight"><code data-lang="java">handle.registerRowMapper(ConstructorMapper.factory(Contact.class, <span class="string"><span class="delimiter">&quot;</span><span class="content">c</span><span class="delimiter">&quot;</span></span>));
 handle.registerRowMapper(ConstructorMapper.factory(Phone.class, <span class="string"><span class="delimiter">&quot;</span><span class="content">p</span><span class="delimiter">&quot;</span></span>));
 handle.registerRowMapper(JoinRowMapper.forTypes(Contact.class, Phone.class);
+
 <span class="predefined-type">List</span>&lt;JoinRow&gt; contactPhones = handle.select(<span class="string"><span class="delimiter">&quot;</span><span class="content">select </span><span class="delimiter">&quot;</span></span> +
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">c.id cid, c.name cname, </span><span class="delimiter">&quot;</span></span> +
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">p.id pid, p.name pname, p.number pnumber </span><span class="delimiter">&quot;</span></span> +
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">from contacts c left join phones p on c.id = p.contact_id</span><span class="delimiter">&quot;</span></span>)
+    <span class="string"><span class="delimiter">&quot;</span><span class="content">c.id cid, c.name cname, </span><span class="delimiter">&quot;</span></span> +
+    <span class="string"><span class="delimiter">&quot;</span><span class="content">p.id pid, p.name pname, p.number pnumber </span><span class="delimiter">&quot;</span></span> +
+    <span class="string"><span class="delimiter">&quot;</span><span class="content">from contacts c left join phones p on c.id = p.contact_id</span><span class="delimiter">&quot;</span></span>)
     .mapTo(JoinRow.class)
     .list();</code></pre>
 </div>
@@ -3816,8 +3817,8 @@ use.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> User(<span class="annotation">@ColumnName</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">user_id</span><span class="delimiter">&quot;</span></span>) <span class="type">int</span> id, <span class="predefined-type">String</span> name) {
-  <span class="local-variable">this</span>.id = id;
-  <span class="local-variable">this</span>.name = name;
+    <span class="local-variable">this</span>.id = id;
+    <span class="local-variable">this</span>.name = name;
 }</code></pre>
 </div>
 </div>
@@ -3827,20 +3828,20 @@ use.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">User</span> {
-  <span class="directive">public</span> User(<span class="type">int</span> id,
-              <span class="predefined-type">String</span> name,
-              <span class="annotation">@Nested</span> Address address) {
-    ...
-  }
+    <span class="directive">public</span> User(<span class="type">int</span> id,
+                <span class="predefined-type">String</span> name,
+                <span class="annotation">@Nested</span> Address address) {
+        <span class="comment">// ...</span>
+    }
 }
 
 <span class="directive">public</span> <span class="type">class</span> <span class="class">Address</span> {
-  <span class="directive">public</span> Address(<span class="predefined-type">String</span> street,
-                 <span class="predefined-type">String</span> city,
-                 <span class="predefined-type">String</span> state,
-                 <span class="predefined-type">String</span> zip) {
-    ...
-  }
+    <span class="directive">public</span> Address(<span class="predefined-type">String</span> street,
+                   <span class="predefined-type">String</span> city,
+                   <span class="predefined-type">String</span> state,
+                   <span class="predefined-type">String</span> zip) {
+        <span class="comment">// ...</span>
+    }
 }</code></pre>
 </div>
 </div>
@@ -3863,7 +3864,7 @@ to apply a column name prefix to each nested constructor parameter:</p>
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> User(<span class="type">int</span> id,
             <span class="predefined-type">String</span> name,
             <span class="annotation">@Nested</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">addr</span><span class="delimiter">&quot;</span></span>) Address address) {
-  ...
+    <span class="comment">// ...</span>
 }</code></pre>
 </div>
 </div>
@@ -3889,12 +3890,12 @@ cannot be mapped.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">User</span> {
-  <span class="directive">public</span> User(<span class="type">int</span> id,
-              <span class="predefined-type">String</span> name,
-              <span class="annotation">@Nullable</span> <span class="predefined-type">String</span> passwordHash,
-              <span class="annotation">@Nullable</span> <span class="annotation">@Nested</span> Address address) {
-    ...
-  }
+    <span class="directive">public</span> User(<span class="type">int</span> id,
+                <span class="predefined-type">String</span> name,
+                <span class="annotation">@Nullable</span> <span class="predefined-type">String</span> passwordHash,
+                <span class="annotation">@Nullable</span> <span class="annotation">@Nested</span> Address address) {
+        <span class="comment">// ...</span>
+    }
 }</code></pre>
 </div>
 </div>
@@ -4016,12 +4017,12 @@ handle.registerRowMapper(JoinRowMapper.forTypes(ContactBean.class, PhoneBean.cla
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">User</span> {
-  <span class="directive">private</span> <span class="type">int</span> id;
+    <span class="directive">private</span> <span class="type">int</span> id;
 
-  <span class="annotation">@ColumnName</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">user_id</span><span class="delimiter">&quot;</span></span>)
-  <span class="directive">public</span> <span class="type">int</span> getId() { <span class="keyword">return</span> id; }
+    <span class="annotation">@ColumnName</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">user_id</span><span class="delimiter">&quot;</span></span>)
+    <span class="directive">public</span> <span class="type">int</span> getId() { <span class="keyword">return</span> id; }
 
-  <span class="directive">public</span> <span class="type">void</span> setId(<span class="type">int</span> id) { <span class="local-variable">this</span>.id = id; }
+    <span class="directive">public</span> <span class="type">void</span> setId(<span class="type">int</span> id) { <span class="local-variable">this</span>.id = id; }
 }</code></pre>
 </div>
 </div>
@@ -4035,25 +4036,25 @@ method. If conflicting annotations exist, then Annotations on the setter are pre
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">User</span> {
-  <span class="directive">private</span> <span class="type">int</span> id;
-  <span class="directive">private</span> <span class="predefined-type">String</span> name;
-  <span class="directive">private</span> Address address;
+    <span class="directive">private</span> <span class="type">int</span> id;
+    <span class="directive">private</span> <span class="predefined-type">String</span> name;
+    <span class="directive">private</span> Address address;
 
-  ... (getters and setters)
+    <span class="comment">// ... (getters and setters)</span>
 
-  <span class="annotation">@Nested</span> <i class="conum" data-value="1"></i><b>(1)</b>
-  <span class="directive">public</span> Address getAddress() { ... }
+    <span class="annotation">@Nested</span> <i class="conum" data-value="1"></i><b>(1)</b>
+    <span class="directive">public</span> Address getAddress() { ... }
 
-  <span class="directive">public</span> <span class="type">void</span> setAddress(Address address) { ... }
+    <span class="directive">public</span> <span class="type">void</span> setAddress(Address address) { ... }
 }
 
 <span class="directive">public</span> <span class="type">class</span> <span class="class">Address</span> {
-  <span class="directive">private</span> <span class="predefined-type">String</span> street;
-  <span class="directive">private</span> <span class="predefined-type">String</span> city;
-  <span class="directive">private</span> <span class="predefined-type">String</span> state;
-  <span class="directive">private</span> <span class="predefined-type">String</span> zip;
+    <span class="directive">private</span> <span class="predefined-type">String</span> street;
+    <span class="directive">private</span> <span class="predefined-type">String</span> city;
+    <span class="directive">private</span> <span class="predefined-type">String</span> state;
+    <span class="directive">private</span> <span class="predefined-type">String</span> zip;
 
-  ... (getters and setters)
+    <span class="comment">// ... (getters and setters)</span>
 }</code></pre>
 </div>
 </div>
@@ -4119,9 +4120,9 @@ to map database columns directly to object fields (including private fields).</p
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">User</span> {
-  <span class="directive">public</span> <span class="type">int</span> id;
+    <span class="directive">public</span> <span class="type">int</span> id;
 
-  <span class="directive">public</span> <span class="predefined-type">String</span> name;
+    <span class="directive">public</span> <span class="predefined-type">String</span> name;
 }</code></pre>
 </div>
 </div>
@@ -4133,9 +4134,9 @@ to map database columns directly to object fields (including private fields).</p
 <pre class="CodeRay highlight"><code data-lang="java">handle.registerRowMapper(FieldMapper.factory(User.class));
 
 <span class="predefined-type">List</span>&lt;UserBean&gt; users = handle
-        .createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select id, name from user</span><span class="delimiter">&quot;</span></span>)
-        .mapTo(User.class)
-        .list();</code></pre>
+    .createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select id, name from user</span><span class="delimiter">&quot;</span></span>)
+    .mapTo(User.class)
+    .list();</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4148,10 +4149,11 @@ classes have identical property names (like <code>id</code> or <code>name</code>
 <pre class="CodeRay highlight"><code data-lang="java">handle.registerRowMapper(FieldMapper.factory(Contact.class, <span class="string"><span class="delimiter">&quot;</span><span class="content">c</span><span class="delimiter">&quot;</span></span>));
 handle.registerRowMapper(FieldMapper.factory(Phone.class, <span class="string"><span class="delimiter">&quot;</span><span class="content">p</span><span class="delimiter">&quot;</span></span>));
 handle.registerRowMapper(JoinRowMapper.forTypes(Contact.class, Phone.class);
-<span class="predefined-type">List</span>&lt;JoinRow&gt; contactPhones = handle.select(<span class="string"><span class="delimiter">&quot;</span><span class="content">select </span><span class="delimiter">&quot;</span></span> +
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">c.id cid, c.name cname, </span><span class="delimiter">&quot;</span></span> +
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">p.id pid, p.name pname, p.number pnumber </span><span class="delimiter">&quot;</span></span> +
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">from contacts c left join phones p on c.id = p.contact_id</span><span class="delimiter">&quot;</span></span>)
+<span class="predefined-type">List</span>&lt;JoinRow&gt; contactPhones = handle.select(
+    <span class="string"><span class="delimiter">&quot;</span><span class="content">select </span><span class="delimiter">&quot;</span></span> +
+    <span class="string"><span class="delimiter">&quot;</span><span class="content">c.id cid, c.name cname, </span><span class="delimiter">&quot;</span></span> +
+    <span class="string"><span class="delimiter">&quot;</span><span class="content">p.id pid, p.name pname, p.number pnumber </span><span class="delimiter">&quot;</span></span> +
+    <span class="string"><span class="delimiter">&quot;</span><span class="content">from contacts c left join phones p on c.id = p.contact_id</span><span class="delimiter">&quot;</span></span>)
     .mapTo(JoinRow.class)
     .list();</code></pre>
 </div>
@@ -4163,10 +4165,10 @@ handle.registerRowMapper(JoinRowMapper.forTypes(Contact.class, Phone.class);
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">User</span> {
-  <span class="annotation">@ColumnName</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">user_id</span><span class="delimiter">&quot;</span></span>)
-  <span class="directive">public</span> <span class="type">int</span> id;
+    <span class="annotation">@ColumnName</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">user_id</span><span class="delimiter">&quot;</span></span>)
+    <span class="directive">public</span> <span class="type">int</span> id;
 
-  <span class="directive">public</span> <span class="predefined-type">String</span> name;
+    <span class="directive">public</span> <span class="predefined-type">String</span> name;
 }</code></pre>
 </div>
 </div>
@@ -4176,18 +4178,18 @@ handle.registerRowMapper(JoinRowMapper.forTypes(Contact.class, Phone.class);
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">User</span> {
-  <span class="directive">public</span> <span class="type">int</span> id;
-  <span class="directive">public</span> <span class="predefined-type">String</span> name;
+    <span class="directive">public</span> <span class="type">int</span> id;
+    <span class="directive">public</span> <span class="predefined-type">String</span> name;
 
-  <span class="annotation">@Nested</span>
-  <span class="directive">public</span> Address address;
+    <span class="annotation">@Nested</span>
+    <span class="directive">public</span> Address address;
 }
 
 <span class="directive">public</span> <span class="type">class</span> <span class="class">Address</span> {
-  <span class="directive">public</span> <span class="predefined-type">String</span> street;
-  <span class="directive">public</span> <span class="predefined-type">String</span> city;
-  <span class="directive">public</span> <span class="predefined-type">String</span> state;
-  <span class="directive">public</span> <span class="predefined-type">String</span> zip;
+    <span class="directive">public</span> <span class="predefined-type">String</span> street;
+    <span class="directive">public</span> <span class="predefined-type">String</span> city;
+    <span class="directive">public</span> <span class="predefined-type">String</span> state;
+    <span class="directive">public</span> <span class="predefined-type">String</span> zip;
 }</code></pre>
 </div>
 </div>
@@ -4208,11 +4210,11 @@ to apply a column name prefix to each nested field:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">User</span> {
-  <span class="directive">public</span> <span class="type">int</span> id;
-  <span class="directive">public</span> <span class="predefined-type">String</span> name;
+    <span class="directive">public</span> <span class="type">int</span> id;
+    <span class="directive">public</span> <span class="predefined-type">String</span> name;
 
-  <span class="annotation">@Nested</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">addr</span><span class="delimiter">&quot;</span></span>)
-  <span class="directive">public</span> Address address;
+    <span class="annotation">@Nested</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">addr</span><span class="delimiter">&quot;</span></span>)
+    <span class="directive">public</span> Address address;
 }</code></pre>
 </div>
 </div>
@@ -4404,13 +4406,13 @@ jdbi.registerCodecFactory(CodecFactory.forSingleCodec(type, codec));
 
 <span class="comment">// register a few codecs</span>
 jdbi.registerCodecFactory(CodecFactory.builder()
-  <span class="comment">// register a codec by qualified type</span>
-  .addCodec(QualifiedType.of(Foo.class), codec1)
-  <span class="comment">// register a codec by direct java type</span>
-  .addCodec(Foo.class, codec2)
-  <span class="comment">// register a codec by generic type</span>
-  .addCodec(<span class="keyword">new</span> GenericType&lt;<span class="predefined-type">Set</span>&lt;Foo&gt;&gt;() {}. codec3)
-  .build());
+    <span class="comment">// register a codec by qualified type</span>
+    .addCodec(QualifiedType.of(Foo.class), codec1)
+    <span class="comment">// register a codec by direct java type</span>
+    .addCodec(Foo.class, codec2)
+    <span class="comment">// register a codec by generic type</span>
+    .addCodec(<span class="keyword">new</span> GenericType&lt;<span class="predefined-type">Set</span>&lt;Foo&gt;&gt;() {}. codec3)
+    .build());
 
 <span class="comment">// register many codecs</span>
 <span class="predefined-type">Map</span>&lt;QualifiedType&lt;?&gt;, Codec&lt;?&gt;&gt; codecs = ...
@@ -4743,7 +4745,8 @@ to you in a container such as a <a href="https://docs.oracle.com/javase/8/docs/a
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">ResultIterable&lt;User&gt; resultIterable = handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT * from users</span><span class="delimiter">&quot;</span></span>)
+<pre class="CodeRay highlight"><code data-lang="java">ResultIterable&lt;User&gt; resultIterable = handle
+    .createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT * from users</span><span class="delimiter">&quot;</span></span>)
     .mapTo(User.class);
 
 <span class="predefined-type">List</span>&lt;User&gt; users = resultIterable.list();</code></pre>
@@ -4851,14 +4854,14 @@ any.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java">handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT id, name FROM user ORDER BY id ASC</span><span class="delimiter">&quot;</span></span>)
-      .map(<span class="keyword">new</span> UserMapper())
-      .useStream(stream -&gt; {
-          Optional&lt;<span class="predefined-type">String</span>&gt; first = stream
-              .filter(u -&gt; u.id &gt; <span class="integer">2</span>)
-              .map(u -&gt; u.name)
-              .findFirst();
-          assertThat(first).contains(<span class="string"><span class="delimiter">&quot;</span><span class="content">Charlie</span><span class="delimiter">&quot;</span></span>);
-      });</code></pre>
+    .map(<span class="keyword">new</span> UserMapper())
+    .useStream(stream -&gt; {
+        Optional&lt;<span class="predefined-type">String</span>&gt; first = stream
+            .filter(u -&gt; u.id &gt; <span class="integer">2</span>)
+            .map(u -&gt; u.name)
+            .findFirst();
+        assertThat(first).contains(<span class="string"><span class="delimiter">&quot;</span><span class="content">Charlie</span><span class="delimiter">&quot;</span></span>);
+    });</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4899,7 +4902,7 @@ found rows into a <strong>Map</strong>:</p>
         accum.put(item.getId(), item);   <span class="comment">// Each entry is added into an accumulator map</span>
     }, (l, r) -&gt; {
         l.putAll(r);                     <span class="comment">// While jdbi does not process rows in parallel,</span>
-        <span class="keyword">return</span> l;                        <span class="comment">// the Collector contract encourages writing combiners.</span>
+        <span class="keyword">return</span> l;                        <span class="comment">// the Collector contract encourages writing combiners</span>
     }, Characteristics.IDENTITY_FINISH));</code></pre>
 </div>
 </div>
@@ -4950,19 +4953,19 @@ Phone numbers have a type (e.g. home, work) and a phone number:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="type">class</span> <span class="class">Contact</span> {
-  <span class="predefined-type">Long</span> id;
-  <span class="predefined-type">String</span> name;
-  <span class="predefined-type">List</span>&lt;Phone&gt; phones = <span class="keyword">new</span> <span class="predefined-type">ArrayList</span>&lt;&gt;();
+    <span class="predefined-type">Long</span> id;
+    <span class="predefined-type">String</span> name;
+    <span class="predefined-type">List</span>&lt;Phone&gt; phones = <span class="keyword">new</span> <span class="predefined-type">ArrayList</span>&lt;&gt;();
 
-  <span class="type">void</span> addPhone(Phone phone) {
-    phones.add(phone);
-  }
+    <span class="type">void</span> addPhone(Phone phone) {
+        phones.add(phone);
+    }
 }
 
 <span class="type">class</span> <span class="class">Phone</span> {
-  <span class="predefined-type">Long</span> id;
-  <span class="predefined-type">String</span> type;
-  <span class="predefined-type">String</span> phone;
+    <span class="predefined-type">Long</span> id;
+    <span class="predefined-type">String</span> type;
+    <span class="predefined-type">String</span> phone;
 }</code></pre>
 </div>
 </div>
@@ -5007,17 +5010,17 @@ passed in for the next row. After the last row has been processed,
     .registerRowMapper(BeanMapper.factory(Contact.class, <span class="string"><span class="delimiter">&quot;</span><span class="content">c</span><span class="delimiter">&quot;</span></span>))
     .registerRowMapper(BeanMapper.factory(Phone.class, <span class="string"><span class="delimiter">&quot;</span><span class="content">p</span><span class="delimiter">&quot;</span></span>)) <i class="conum" data-value="1"></i><b>(1)</b>
     .reduceRows(<span class="keyword">new</span> <span class="predefined-type">LinkedHashMap</span>&lt;<span class="predefined-type">Long</span>, Contact&gt;(), <i class="conum" data-value="2"></i><b>(2)</b>
-                (map, rowView) -&gt; {
-      Contact contact = map.computeIfAbsent( <i class="conum" data-value="3"></i><b>(3)</b>
-          rowView.getColumn(<span class="string"><span class="delimiter">&quot;</span><span class="content">c_id</span><span class="delimiter">&quot;</span></span>, <span class="predefined-type">Long</span>.class),
-          id -&gt; rowView.getRow(Contact.class));
+        (map, rowView) -&gt; {
+            Contact contact = map.computeIfAbsent( <i class="conum" data-value="3"></i><b>(3)</b>
+                rowView.getColumn(<span class="string"><span class="delimiter">&quot;</span><span class="content">c_id</span><span class="delimiter">&quot;</span></span>, <span class="predefined-type">Long</span>.class),
+                id -&gt; rowView.getRow(Contact.class));
 
-      <span class="keyword">if</span> (rowView.getColumn(<span class="string"><span class="delimiter">&quot;</span><span class="content">p_id</span><span class="delimiter">&quot;</span></span>, <span class="predefined-type">Long</span>.class) != <span class="predefined-constant">null</span>) { <i class="conum" data-value="4"></i><b>(4)</b>
-        contact.addPhone(rowView.getRow(Phone.class));
-      }
+            <span class="keyword">if</span> (rowView.getColumn(<span class="string"><span class="delimiter">&quot;</span><span class="content">p_id</span><span class="delimiter">&quot;</span></span>, <span class="predefined-type">Long</span>.class) != <span class="predefined-constant">null</span>) { <i class="conum" data-value="4"></i><b>(4)</b>
+                contact.addPhone(rowView.getRow(Phone.class));
+            }
 
-      <span class="keyword">return</span> map; <i class="conum" data-value="5"></i><b>(5)</b>
-    })
+            <span class="keyword">return</span> map; <i class="conum" data-value="5"></i><b>(5)</b>
+        })
     .values() <i class="conum" data-value="6"></i><b>(6)</b>
     .stream()
     .collect(toList()); <i class="conum" data-value="7"></i><b>(7)</b></code></pre>
@@ -5088,14 +5091,14 @@ method makes it easy to reduce these joins into a stream of master elements.</p>
     .registerRowMapper(BeanMapper.factory(Contact.class, <span class="string"><span class="delimiter">&quot;</span><span class="content">c</span><span class="delimiter">&quot;</span></span>))
     .registerRowMapper(BeanMapper.factory(Phone.class, <span class="string"><span class="delimiter">&quot;</span><span class="content">p</span><span class="delimiter">&quot;</span></span>))
     .reduceRows((<span class="predefined-type">Map</span>&lt;<span class="predefined-type">Long</span>, Contact&gt; map, RowView rowView) -&gt; { <i class="conum" data-value="1"></i><b>(1)</b>
-      Contact contact = map.computeIfAbsent(
-          rowView.getColumn(<span class="string"><span class="delimiter">&quot;</span><span class="content">c_id</span><span class="delimiter">&quot;</span></span>, <span class="predefined-type">Long</span>.class),
-          id -&gt; rowView.getRow(Contact.class));
+        Contact contact = map.computeIfAbsent(
+            rowView.getColumn(<span class="string"><span class="delimiter">&quot;</span><span class="content">c_id</span><span class="delimiter">&quot;</span></span>, <span class="predefined-type">Long</span>.class),
+            id -&gt; rowView.getRow(Contact.class));
 
-      <span class="keyword">if</span> (rowView.getColumn(<span class="string"><span class="delimiter">&quot;</span><span class="content">p_id</span><span class="delimiter">&quot;</span></span>, <span class="predefined-type">Long</span>.class) != <span class="predefined-constant">null</span>) {
-        contact.addPhone(rowView.getRow(Phone.class));
-      }
-      <i class="conum" data-value="2"></i><b>(2)</b>
+        <span class="keyword">if</span> (rowView.getColumn(<span class="string"><span class="delimiter">&quot;</span><span class="content">p_id</span><span class="delimiter">&quot;</span></span>, <span class="predefined-type">Long</span>.class) != <span class="predefined-constant">null</span>) {
+            contact.addPhone(rowView.getRow(Phone.class));
+        }
+        <i class="conum" data-value="2"></i><b>(2)</b>
     })
     .collect(toList()); <i class="conum" data-value="3"></i><b>(3)</b></code></pre>
 </div>
@@ -5166,29 +5169,29 @@ expense of verbosity:</p>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">List</span>&lt;Contact&gt; contacts = handle.createQuery(SELECT_ALL)
     .reduceResultSet(<span class="keyword">new</span> <span class="predefined-type">LinkedHashMap</span>&lt;<span class="predefined-type">Long</span>, Contact&gt;(),
-                     (acc, resultSet, ctx) -&gt; {
-      <span class="type">long</span> contactId = resultSet.getLong(<span class="string"><span class="delimiter">&quot;</span><span class="content">c_id</span><span class="delimiter">&quot;</span></span>);
-      Contact contact;
-      <span class="keyword">if</span> (acc.containsKey(contactId)) {
-        contact = acc.get(contactId);
-      } <span class="keyword">else</span> {
-        contact = <span class="keyword">new</span> Contact();
-        acc.put(contactId,contact);
-        contact.setId(contactId);
-        contact.setName(resultSet.getString(<span class="string"><span class="delimiter">&quot;</span><span class="content">c_name</span><span class="delimiter">&quot;</span></span>);
-      }
+        (acc, resultSet, ctx) -&gt; {
+            <span class="type">long</span> contactId = resultSet.getLong(<span class="string"><span class="delimiter">&quot;</span><span class="content">c_id</span><span class="delimiter">&quot;</span></span>);
+            Contact contact;
+            <span class="keyword">if</span> (acc.containsKey(contactId)) {
+                contact = acc.get(contactId);
+            } <span class="keyword">else</span> {
+                contact = <span class="keyword">new</span> Contact();
+                acc.put(contactId, contact);
+                contact.setId(contactId);
+                contact.setName(resultSet.getString(<span class="string"><span class="delimiter">&quot;</span><span class="content">c_name</span><span class="delimiter">&quot;</span></span>));
+            }
 
-      <span class="type">long</span> phoneId = resultSet.getLong(<span class="string"><span class="delimiter">&quot;</span><span class="content">p_id</span><span class="delimiter">&quot;</span></span>);
-      <span class="keyword">if</span> (!resultSet.wasNull()) {
-        Phone phone = <span class="keyword">new</span> Phone();
-        phone.setId(phoneId);
-        phone.setType(resultSet.getString(<span class="string"><span class="delimiter">&quot;</span><span class="content">p_type</span><span class="delimiter">&quot;</span></span>);
-        phone.setPhone(resultSet.getString(<span class="string"><span class="delimiter">&quot;</span><span class="content">p_phone</span><span class="delimiter">&quot;</span></span>);
-        contact.addPhone(phone);
-      }
+            <span class="type">long</span> phoneId = resultSet.getLong(<span class="string"><span class="delimiter">&quot;</span><span class="content">p_id</span><span class="delimiter">&quot;</span></span>);
+            <span class="keyword">if</span> (!resultSet.wasNull()) {
+                Phone phone = <span class="keyword">new</span> Phone();
+                phone.setId(phoneId);
+                phone.setType(resultSet.getString(<span class="string"><span class="delimiter">&quot;</span><span class="content">p_type</span><span class="delimiter">&quot;</span></span>));
+                phone.setPhone(resultSet.getString(<span class="string"><span class="delimiter">&quot;</span><span class="content">p_phone</span><span class="delimiter">&quot;</span></span>));
+                contact.addPhone(phone);
+            }
 
-      <span class="keyword">return</span> acc;
-    })
+            <span class="keyword">return</span> acc;
+        })
     .values()
     .stream()
     .collect(toList());</code></pre>
@@ -5520,14 +5523,14 @@ separately querying after the insert completes.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java">handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into groups (id, user_ids) values (:id, :userIds)</span><span class="delimiter">&quot;</span></span>)
-      .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">1</span>)
-      .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">userIds</span><span class="delimiter">&quot;</span></span>, <span class="keyword">new</span> <span class="type">int</span><span class="type">[]</span> { <span class="integer">10</span>, <span class="integer">5</span>, <span class="integer">70</span> })
-      .execute();
+    .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">1</span>)
+    .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">userIds</span><span class="delimiter">&quot;</span></span>, <span class="keyword">new</span> <span class="type">int</span><span class="type">[]</span> {<span class="integer">10</span>, <span class="integer">5</span>, <span class="integer">70</span>})
+    .execute();
 
 <span class="type">int</span><span class="type">[]</span> userIds = handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select user_ids from groups where id = :id</span><span class="delimiter">&quot;</span></span>)
-      .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">1</span>)
-      .mapTo(<span class="type">int</span><span class="type">[]</span>.class)
-      .one();</code></pre>
+    .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">1</span>)
+    .mapTo(<span class="type">int</span><span class="type">[]</span>.class)
+    .one();</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5537,14 +5540,14 @@ the element type if you&#8217;re using the fluent API, since it&#8217;s erased:<
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java">handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into groups (id, user_ids) values (:id, :userIds)</span><span class="delimiter">&quot;</span></span>)
-      .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">1</span>)
-      .bindArray(<span class="string"><span class="delimiter">&quot;</span><span class="content">userIds</span><span class="delimiter">&quot;</span></span>, <span class="type">int</span>.class, <span class="predefined-type">Arrays</span>.asList(<span class="integer">10</span>, <span class="integer">5</span>, <span class="integer">70</span>))
-      .execute();
+    .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">1</span>)
+    .bindArray(<span class="string"><span class="delimiter">&quot;</span><span class="content">userIds</span><span class="delimiter">&quot;</span></span>, <span class="type">int</span>.class, <span class="predefined-type">Arrays</span>.asList(<span class="integer">10</span>, <span class="integer">5</span>, <span class="integer">70</span>))
+    .execute();
 
 <span class="predefined-type">List</span>&lt;<span class="predefined-type">Integer</span>&gt; userIds = handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select user_ids from groups where id = :id</span><span class="delimiter">&quot;</span></span>)
-      .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">1</span>)
-      .mapTo(<span class="keyword">new</span> GenericType&lt;<span class="predefined-type">List</span>&lt;<span class="predefined-type">Integer</span>&gt;&gt;() {})
-      .one();</code></pre>
+    .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">1</span>)
+    .mapTo(<span class="keyword">new</span> GenericType&lt;<span class="predefined-type">List</span>&lt;<span class="predefined-type">Integer</span>&gt;&gt;() {})
+    .one();</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5553,9 +5556,9 @@ the element type if you&#8217;re using the fluent API, since it&#8217;s erased:<
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">GroupsDao</span> {
-  <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select user_ids from groups where id = ?</span><span class="delimiter">&quot;</span></span>)
-  <span class="annotation">@SingleValue</span>
-  <span class="predefined-type">List</span>&lt;<span class="predefined-type">Integer</span>&gt; getUserIds(<span class="type">int</span> groupId);
+    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select user_ids from groups where id = ?</span><span class="delimiter">&quot;</span></span>)
+    <span class="annotation">@SingleValue</span>
+    <span class="predefined-type">List</span>&lt;<span class="predefined-type">Integer</span>&gt; getUserIds(<span class="type">int</span> groupId);
 }</code></pre>
 </div>
 </div>
@@ -5629,14 +5632,14 @@ a custom Java element type to a type supported by the JDBC driver:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">User user1 = <span class="keyword">new</span> User(<span class="integer">1</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">bob</span><span class="delimiter">&quot;</span></span>)
-User user2 = <span class="keyword">new</span> User(<span class="integer">42</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">alice</span><span class="delimiter">&quot;</span></span>)
+<pre class="CodeRay highlight"><code data-lang="java">User user1 = <span class="keyword">new</span> User(<span class="integer">1</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">bob</span><span class="delimiter">&quot;</span></span>);
+User user2 = <span class="keyword">new</span> User(<span class="integer">42</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">alice</span><span class="delimiter">&quot;</span></span>);
 
 handle.registerArrayType(<span class="keyword">new</span> UserArrayType());
 handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into groups (id, user_ids) values (:id, :users)</span><span class="delimiter">&quot;</span></span>)
-      .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">1</span>)
-      .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">users</span><span class="delimiter">&quot;</span></span>, <span class="keyword">new</span> User<span class="type">[]</span> { user1, user2 })
-      .execute();</code></pre>
+    .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">1</span>)
+    .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">users</span><span class="delimiter">&quot;</span></span>, <span class="keyword">new</span> User<span class="type">[]</span> {user1, user2})
+    .execute();</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -5674,9 +5677,9 @@ a regular <code>ColumnMapper</code>:</p>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java">handle.registerColumnMapper(<span class="keyword">new</span> UserIdColumnMapper());
 <span class="predefined-type">List</span>&lt;UserId&gt; userIds = handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select user_ids from groups where id = :id</span><span class="delimiter">&quot;</span></span>)
-      .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">1</span>)
-      .mapTo(<span class="keyword">new</span> GenericType&lt;<span class="predefined-type">List</span>&lt;UserId&gt;&gt;() {})
-      .one();</code></pre>
+    .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">1</span>)
+    .mapTo(<span class="keyword">new</span> GenericType&lt;<span class="predefined-type">List</span>&lt;UserId&gt;&gt;() {})
+    .one();</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -5764,7 +5767,7 @@ TemplateEngines and SqlParsers operate sequentially: the initial String will be 
 
 handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from Foo where bar = :&lt;attr&gt;</span><span class="delimiter">&quot;</span></span>)
     .define(<span class="string"><span class="delimiter">&quot;</span><span class="content">attr</span><span class="delimiter">&quot;</span></span>, paramName)
-    ...
+    <span class="comment">// ...</span>
     .bind(paramName, <span class="string"><span class="delimiter">&quot;</span><span class="content">baz</span><span class="delimiter">&quot;</span></span>); <span class="comment">// &lt;- does not need to know the parameter's name (&quot;arg&quot;)!</span></code></pre>
 </div>
 </div>
@@ -6192,9 +6195,9 @@ generated key from the SQL statement, instead of the update count.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
-  <span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into users (id, name) values (nextval('user_seq'), ?)</span><span class="delimiter">&quot;</span></span>)
-  <span class="annotation">@GetGeneratedKeys</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>)
-  <span class="type">long</span> insert(<span class="predefined-type">String</span> name);
+    <span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into users (id, name) values (nextval('user_seq'), ?)</span><span class="delimiter">&quot;</span></span>)
+    <span class="annotation">@GetGeneratedKeys</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>)
+    <span class="type">long</span> insert(<span class="predefined-type">String</span> name);
 }</code></pre>
 </div>
 </div>
@@ -6204,10 +6207,10 @@ generated key from the SQL statement, instead of the update count.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
-  <span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into users (id, name, created_on) values (nextval('user_seq'), ?, now())</span><span class="delimiter">&quot;</span></span>)
-  <span class="annotation">@GetGeneratedKeys</span>({<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">created_on</span><span class="delimiter">&quot;</span></span>})
-  <span class="annotation">@RegisterBeanMapper</span>(IdCreateTime.class)
-  IdCreateTime insert(<span class="predefined-type">String</span> name);
+    <span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into users (id, name, created_on) values (nextval('user_seq'), ?, now())</span><span class="delimiter">&quot;</span></span>)
+    <span class="annotation">@GetGeneratedKeys</span>({<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">created_on</span><span class="delimiter">&quot;</span></span>})
+    <span class="annotation">@RegisterBeanMapper</span>(IdCreateTime.class)
+    IdCreateTime insert(<span class="predefined-type">String</span> name);
 }</code></pre>
 </div>
 </div>
@@ -6238,8 +6241,8 @@ in the SQL statement.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
-  <span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into users (id, name) values (?, ?)</span><span class="delimiter">&quot;</span></span>)
-  <span class="type">void</span> insert(<span class="type">long</span> id, <span class="predefined-type">String</span> name);
+    <span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into users (id, name) values (?, ?)</span><span class="delimiter">&quot;</span></span>)
+    <span class="type">void</span> insert(<span class="type">long</span> id, <span class="predefined-type">String</span> name);
 }</code></pre>
 </div>
 </div>
@@ -6383,14 +6386,14 @@ method return type looks like a collection.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
-  <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select name from users</span><span class="delimiter">&quot;</span></span>)
-  <span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt; listNames(); <i class="conum" data-value="1"></i><b>(1)</b>
+    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select name from users</span><span class="delimiter">&quot;</span></span>)
+    <span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt; listNames(); <i class="conum" data-value="1"></i><b>(1)</b>
 
-  <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select name from users where id = ?</span><span class="delimiter">&quot;</span></span>)
-  <span class="predefined-type">String</span> getName(<span class="type">long</span> id);  <i class="conum" data-value="2"></i><b>(2)</b> <i class="conum" data-value="3"></i><b>(3)</b>
+    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select name from users where id = ?</span><span class="delimiter">&quot;</span></span>)
+    <span class="predefined-type">String</span> getName(<span class="type">long</span> id);  <i class="conum" data-value="2"></i><b>(2)</b> <i class="conum" data-value="3"></i><b>(3)</b>
 
-  <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select name from users where id = ?</span><span class="delimiter">&quot;</span></span>)
-  Optional&lt;<span class="predefined-type">String</span>&gt; findName(<span class="type">long</span> id); <i class="conum" data-value="4"></i><b>(4)</b>
+    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select name from users where id = ?</span><span class="delimiter">&quot;</span></span>)
+    Optional&lt;<span class="predefined-type">String</span>&gt; findName(<span class="type">long</span> id); <i class="conum" data-value="4"></i><b>(4)</b>
 }</code></pre>
 </div>
 </div>
@@ -6445,14 +6448,14 @@ Jdbi plugins (e.g. <code>GuavaPlugin</code>) register additional collection type
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
-  <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select name from users</span><span class="delimiter">&quot;</span></span>)
-  ResultIterable&lt;<span class="predefined-type">String</span>&gt; getNamesAsIterable();
+    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select name from users</span><span class="delimiter">&quot;</span></span>)
+    ResultIterable&lt;<span class="predefined-type">String</span>&gt; getNamesAsIterable();
 
-  <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select name from users</span><span class="delimiter">&quot;</span></span>)
-  ResultIterator&lt;<span class="predefined-type">String</span>&gt; getNamesAsIterator();
+    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select name from users</span><span class="delimiter">&quot;</span></span>)
+    ResultIterator&lt;<span class="predefined-type">String</span>&gt; getNamesAsIterator();
 
-  <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select name from users</span><span class="delimiter">&quot;</span></span>)
-  Stream&lt;<span class="predefined-type">String</span>&gt; getNamesAsStream();
+    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select name from users</span><span class="delimiter">&quot;</span></span>)
+    Stream&lt;<span class="predefined-type">String</span>&gt; getNamesAsStream();
 }</code></pre>
 </div>
 </div>
@@ -6464,15 +6467,15 @@ explicitly closed when you are done with them. We strongly recommend the use of
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">try</span> (ResultIterable&lt;<span class="predefined-type">String</span>&gt; names = dao.getNamesAsIterable()) {
-  ...
+    <span class="comment">// ...</span>
 }
 
 <span class="keyword">try</span> (ResultIterator&lt;<span class="predefined-type">String</span>&gt; names = dao.getNamesAsIterator()) {
-  ...
+    <span class="comment">// ...</span>
 }
 
 <span class="keyword">try</span> (Stream&lt;<span class="predefined-type">String</span>&gt; names = dao.getNamesAsStream()) {
-  ...
+    <span class="comment">// ...</span>
 }</code></pre>
 </div>
 </div>
@@ -6496,9 +6499,9 @@ Methods returning <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
-  <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from users</span><span class="delimiter">&quot;</span></span>)
-  <span class="annotation">@RegisterRowMapper</span>(UserMapper.class)
-  <span class="predefined-type">List</span>&lt;User&gt; list();
+    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from users</span><span class="delimiter">&quot;</span></span>)
+    <span class="annotation">@RegisterRowMapper</span>(UserMapper.class)
+    <span class="predefined-type">List</span>&lt;User&gt; list();
 }</code></pre>
 </div>
 </div>
@@ -6508,13 +6511,13 @@ Methods returning <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">UserMapper</span> <span class="directive">implements</span> <span class="predefined-type">RowMapper</span>&lt;User&gt; {  <i class="conum" data-value="1"></i><b>(1)</b> <i class="conum" data-value="2"></i><b>(2)</b>
-  <span class="directive">public</span> UserMapper() { <i class="conum" data-value="3"></i><b>(3)</b>
-    ...
-  }
+    <span class="directive">public</span> UserMapper() { <i class="conum" data-value="3"></i><b>(3)</b>
+        <span class="comment">// ...</span>
+    }
 
-  <span class="directive">public</span> T map(<span class="predefined-type">ResultSet</span> rs, StatementContext ctx) <span class="directive">throws</span> <span class="exception">SQLException</span> {
-    ...
-  }
+    <span class="directive">public</span> T map(<span class="predefined-type">ResultSet</span> rs, StatementContext ctx) <span class="directive">throws</span> <span class="exception">SQLException</span> {
+        <span class="comment">// ...</span>
+    }
 }</code></pre>
 </div>
 </div>
@@ -6557,9 +6560,9 @@ type or method to register multiple mappers.
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
-  <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from users</span><span class="delimiter">&quot;</span></span>)
-  <span class="annotation">@RegisterRowMapperFactory</span>(UserMapperFactory.class)
-  <span class="predefined-type">List</span>&lt;User&gt; list();
+    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from users</span><span class="delimiter">&quot;</span></span>)
+    <span class="annotation">@RegisterRowMapperFactory</span>(UserMapperFactory.class)
+    <span class="predefined-type">List</span>&lt;User&gt; list();
 }</code></pre>
 </div>
 </div>
@@ -6569,13 +6572,13 @@ type or method to register multiple mappers.
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">UserMapperFactory</span> <span class="directive">implements</span> RowMapperFactory { <i class="conum" data-value="1"></i><b>(1)</b>
-  <span class="directive">public</span> UserMapperFactory() { <i class="conum" data-value="2"></i><b>(2)</b>
-    ...
-  }
+    <span class="directive">public</span> UserMapperFactory() { <i class="conum" data-value="2"></i><b>(2)</b>
+        <span class="comment">// ...</span>
+    }
 
-  <span class="directive">public</span> Optional&lt;<span class="predefined-type">RowMapper</span>&lt;?&gt;&gt; build(<span class="predefined-type">Type</span> type, ConfigRegistry config) {
-    ...
-  }
+    <span class="directive">public</span> Optional&lt;<span class="predefined-type">RowMapper</span>&lt;?&gt;&gt; build(<span class="predefined-type">Type</span> type, ConfigRegistry config) {
+        <span class="comment">// ...</span>
+    }
 }</code></pre>
 </div>
 </div>
@@ -6613,9 +6616,9 @@ same type or method to register multiple factories.
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">AccountDao</span> {
-  <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select balance from accounts where id = ?</span><span class="delimiter">&quot;</span></span>)
-  <span class="annotation">@RegisterColumnMapper</span>(MoneyMapper.class)
-  Money getBalance(<span class="type">long</span> id);
+    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select balance from accounts where id = ?</span><span class="delimiter">&quot;</span></span>)
+    <span class="annotation">@RegisterColumnMapper</span>(MoneyMapper.class)
+    Money getBalance(<span class="type">long</span> id);
 }</code></pre>
 </div>
 </div>
@@ -6625,13 +6628,13 @@ same type or method to register multiple factories.
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">MoneyMapper</span> <span class="directive">implements</span> ColumnMapper&lt;Money&gt; {  <i class="conum" data-value="1"></i><b>(1)</b> <i class="conum" data-value="2"></i><b>(2)</b>
-  <span class="directive">public</span> MoneyMapper() { <i class="conum" data-value="3"></i><b>(3)</b>
-    ...
-  }
+    <span class="directive">public</span> MoneyMapper() { <i class="conum" data-value="3"></i><b>(3)</b>
+        <span class="comment">// ...</span>
+    }
 
-  <span class="directive">public</span> T map(<span class="predefined-type">ResultSet</span> r, <span class="type">int</span> columnNumber, StatementContext ctx) <span class="directive">throws</span> <span class="exception">SQLException</span> {
-    ...
-  }
+    <span class="directive">public</span> T map(<span class="predefined-type">ResultSet</span> r, <span class="type">int</span> columnNumber, StatementContext ctx) <span class="directive">throws</span> <span class="exception">SQLException</span> {
+        <span class="comment">// ...</span>
+    }
 }</code></pre>
 </div>
 </div>
@@ -6674,9 +6677,9 @@ same type or method to register multiple mappers.
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">AccountDao</span> {
-  <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from users</span><span class="delimiter">&quot;</span></span>)
-  <span class="annotation">@RegisterColumnMapperFactory</span>(MoneyMapperFactory.class)
-  <span class="predefined-type">List</span>&lt;User&gt; list();
+    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from users</span><span class="delimiter">&quot;</span></span>)
+    <span class="annotation">@RegisterColumnMapperFactory</span>(MoneyMapperFactory.class)
+    <span class="predefined-type">List</span>&lt;User&gt; list();
 }</code></pre>
 </div>
 </div>
@@ -6686,13 +6689,13 @@ same type or method to register multiple mappers.
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">UserMapperFactory</span> <span class="directive">implements</span> RowMapperFactory { <i class="conum" data-value="1"></i><b>(1)</b>
-  <span class="directive">public</span> UserMapperFactory() { <i class="conum" data-value="2"></i><b>(2)</b>
-    ...
-  }
+    <span class="directive">public</span> UserMapperFactory() { <i class="conum" data-value="2"></i><b>(2)</b>
+        <span class="comment">// ...</span>
+    }
 
-  <span class="directive">public</span> Optional&lt;<span class="predefined-type">RowMapper</span>&lt;?&gt;&gt; build(<span class="predefined-type">Type</span> type, ConfigRegistry config) {
-    ...
-  }
+    <span class="directive">public</span> Optional&lt;<span class="predefined-type">RowMapper</span>&lt;?&gt;&gt; build(<span class="predefined-type">Type</span> type, ConfigRegistry config) {
+        <span class="comment">// ...</span>
+    }
 }</code></pre>
 </div>
 </div>
@@ -6730,9 +6733,9 @@ the same type or method to register multiple factories.
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
-  <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from users</span><span class="delimiter">&quot;</span></span>)
-  <span class="annotation">@RegisterBeanMapper</span>(User.class)
-  <span class="predefined-type">List</span>&lt;User&gt; list();
+    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from users</span><span class="delimiter">&quot;</span></span>)
+    <span class="annotation">@RegisterBeanMapper</span>(User.class)
+    <span class="predefined-type">List</span>&lt;User&gt; list();
 }</code></pre>
 </div>
 </div>
@@ -6743,11 +6746,11 @@ that begin with the prefix:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
-  <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select u.id u_id, u.name u_name, r.id r_id, r.name r_name </span><span class="delimiter">&quot;</span></span> +
-      <span class="string"><span class="delimiter">&quot;</span><span class="content">from users u left join roles r on u.role_id = r.id</span><span class="delimiter">&quot;</span></span>)
-  <span class="annotation">@RegisterBeanMapper</span>(value = User.class, prefix = <span class="string"><span class="delimiter">&quot;</span><span class="content">u</span><span class="delimiter">&quot;</span></span>)
-  <span class="annotation">@RegisterBeanMapper</span>(value = <span class="predefined-type">Role</span>.class, prefix = <span class="string"><span class="delimiter">&quot;</span><span class="content">r</span><span class="delimiter">&quot;</span></span>)
-  <span class="predefined-type">Map</span>&lt;User,<span class="predefined-type">Role</span>&gt; getRolesPerUser();
+    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select u.id u_id, u.name u_name, r.id r_id, r.name r_name </span><span class="delimiter">&quot;</span></span> +
+              <span class="string"><span class="delimiter">&quot;</span><span class="content">from users u left join roles r on u.role_id = r.id</span><span class="delimiter">&quot;</span></span>)
+    <span class="annotation">@RegisterBeanMapper</span>(value = User.class, prefix = <span class="string"><span class="delimiter">&quot;</span><span class="content">u</span><span class="delimiter">&quot;</span></span>)
+    <span class="annotation">@RegisterBeanMapper</span>(value = <span class="predefined-type">Role</span>.class, prefix = <span class="string"><span class="delimiter">&quot;</span><span class="content">r</span><span class="delimiter">&quot;</span></span>)
+    <span class="predefined-type">Map</span>&lt;User,<span class="predefined-type">Role</span>&gt; getRolesPerUser();
 }</code></pre>
 </div>
 </div>
@@ -6779,9 +6782,9 @@ that are instantiated with all properties through the constructor.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
-  <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from users</span><span class="delimiter">&quot;</span></span>)
-  <span class="annotation">@RegisterConstructorMapper</span>(User.class)
-  <span class="predefined-type">List</span>&lt;User&gt; list();
+    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from users</span><span class="delimiter">&quot;</span></span>)
+    <span class="annotation">@RegisterConstructorMapper</span>(User.class)
+    <span class="predefined-type">List</span>&lt;User&gt; list();
 }</code></pre>
 </div>
 </div>
@@ -6792,11 +6795,11 @@ columns that begin with the prefix:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
-  <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select u.id u_id, u.name u_name, r.id r_id, r.name r_name </span><span class="delimiter">&quot;</span></span> +
-      <span class="string"><span class="delimiter">&quot;</span><span class="content">from users u left join roles r on u.role_id = r.id</span><span class="delimiter">&quot;</span></span>)
-  <span class="annotation">@RegisterConstructorMapper</span>(value = User.class, prefix = <span class="string"><span class="delimiter">&quot;</span><span class="content">u</span><span class="delimiter">&quot;</span></span>)
-  <span class="annotation">@RegisterConstructorMapper</span>(value = <span class="predefined-type">Role</span>.class, prefix = <span class="string"><span class="delimiter">&quot;</span><span class="content">r</span><span class="delimiter">&quot;</span></span>)
-  <span class="predefined-type">Map</span>&lt;User,<span class="predefined-type">Role</span>&gt; getRolesPerUser();
+    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select u.id u_id, u.name u_name, r.id r_id, r.name r_name </span><span class="delimiter">&quot;</span></span> +
+              <span class="string"><span class="delimiter">&quot;</span><span class="content">from users u left join roles r on u.role_id = r.id</span><span class="delimiter">&quot;</span></span>)
+    <span class="annotation">@RegisterConstructorMapper</span>(value = User.class, prefix = <span class="string"><span class="delimiter">&quot;</span><span class="content">u</span><span class="delimiter">&quot;</span></span>)
+    <span class="annotation">@RegisterConstructorMapper</span>(value = <span class="predefined-type">Role</span>.class, prefix = <span class="string"><span class="delimiter">&quot;</span><span class="content">r</span><span class="delimiter">&quot;</span></span>)
+    <span class="predefined-type">Map</span>&lt;User,<span class="predefined-type">Role</span>&gt; getRolesPerUser();
 }</code></pre>
 </div>
 </div>
@@ -6828,9 +6831,9 @@ the same type or method to register multiple constructor mappers.
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
-  <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from users</span><span class="delimiter">&quot;</span></span>)
-  <span class="annotation">@RegisterFieldMapper</span>(User.class)
-  <span class="predefined-type">List</span>&lt;User&gt; list();
+    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from users</span><span class="delimiter">&quot;</span></span>)
+    <span class="annotation">@RegisterFieldMapper</span>(User.class)
+    <span class="predefined-type">List</span>&lt;User&gt; list();
 }</code></pre>
 </div>
 </div>
@@ -6841,11 +6844,11 @@ that begin with the prefix:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
-  <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select u.id u_id, u.name u_name, r.id r_id, r.name r_name </span><span class="delimiter">&quot;</span></span> +
-      <span class="string"><span class="delimiter">&quot;</span><span class="content">from users u left join roles r on u.role_id = r.id</span><span class="delimiter">&quot;</span></span>)
-  <span class="annotation">@RegisterFieldMapper</span>(value = User.class, prefix = <span class="string"><span class="delimiter">&quot;</span><span class="content">u</span><span class="delimiter">&quot;</span></span>)
-  <span class="annotation">@RegisterFieldMapper</span>(value = <span class="predefined-type">Role</span>.class, prefix = <span class="string"><span class="delimiter">&quot;</span><span class="content">r</span><span class="delimiter">&quot;</span></span>)
-  <span class="predefined-type">Map</span>&lt;User,<span class="predefined-type">Role</span>&gt; getRolesPerUser();
+    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select u.id u_id, u.name u_name, r.id r_id, r.name r_name </span><span class="delimiter">&quot;</span></span> +
+              <span class="string"><span class="delimiter">&quot;</span><span class="content">from users u left join roles r on u.role_id = r.id</span><span class="delimiter">&quot;</span></span>)
+    <span class="annotation">@RegisterFieldMapper</span>(value = User.class, prefix = <span class="string"><span class="delimiter">&quot;</span><span class="content">u</span><span class="delimiter">&quot;</span></span>)
+    <span class="annotation">@RegisterFieldMapper</span>(value = <span class="predefined-type">Role</span>.class, prefix = <span class="string"><span class="delimiter">&quot;</span><span class="content">r</span><span class="delimiter">&quot;</span></span>)
+    <span class="predefined-type">Map</span>&lt;User,<span class="predefined-type">Role</span>&gt; getRolesPerUser();
 }</code></pre>
 </div>
 </div>
@@ -6886,9 +6889,9 @@ annotate a return type as <code>@SingleValue</code> to override this.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
-  <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select roles from users where id = ?</span><span class="delimiter">&quot;</span></span>)
-  <span class="annotation">@SingleValue</span>
-  <span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt; getUserRoles(<span class="type">long</span> userId)
+    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select roles from users where id = ?</span><span class="delimiter">&quot;</span></span>)
+    <span class="annotation">@SingleValue</span>
+    <span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt; getUserRoles(<span class="type">long</span> userId)
 }</code></pre>
 </div>
 </div>
@@ -7077,21 +7080,21 @@ prefix folder columns with <code>f_</code> and document columns with <code>d_</c
 <span class="annotation">@RegisterBeanMapper</span>(value = <span class="predefined-type">Document</span>.class, prefix = <span class="string"><span class="delimiter">&quot;</span><span class="content">d</span><span class="delimiter">&quot;</span></span>)
 <span class="directive">public</span> <span class="type">interface</span> <span class="class">DocumentDao</span> {
     <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select </span><span class="delimiter">&quot;</span></span> +
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">f.id f_id, f.name f_name, </span><span class="delimiter">&quot;</span></span> +
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">d.id d_id, d.name d_name, d.contents d_contents </span><span class="delimiter">&quot;</span></span> +
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">from folders f left join documents d </span><span class="delimiter">&quot;</span></span> +
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">on f.id = d.folder_id </span><span class="delimiter">&quot;</span></span> +
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">where f.id = :folderId</span><span class="delimiter">&quot;</span></span> +
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">order by d.name</span><span class="delimiter">&quot;</span></span>)
+        <span class="string"><span class="delimiter">&quot;</span><span class="content">f.id f_id, f.name f_name, </span><span class="delimiter">&quot;</span></span> +
+        <span class="string"><span class="delimiter">&quot;</span><span class="content">d.id d_id, d.name d_name, d.contents d_contents </span><span class="delimiter">&quot;</span></span> +
+        <span class="string"><span class="delimiter">&quot;</span><span class="content">from folders f left join documents d </span><span class="delimiter">&quot;</span></span> +
+        <span class="string"><span class="delimiter">&quot;</span><span class="content">on f.id = d.folder_id </span><span class="delimiter">&quot;</span></span> +
+        <span class="string"><span class="delimiter">&quot;</span><span class="content">where f.id = :folderId</span><span class="delimiter">&quot;</span></span> +
+        <span class="string"><span class="delimiter">&quot;</span><span class="content">order by d.name</span><span class="delimiter">&quot;</span></span>)
     <span class="annotation">@UseRowReducer</span>(FolderDocReducer.class) <i class="conum" data-value="2"></i><b>(2)</b>
     Optional&lt;Folder&gt; getFolder(<span class="type">int</span> folderId); <i class="conum" data-value="3"></i><b>(3)</b>
 
     <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select </span><span class="delimiter">&quot;</span></span> +
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">f.id f_id, f.name f_name, </span><span class="delimiter">&quot;</span></span> +
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">d.id d_id, d.name d_name, d.contents d_contents </span><span class="delimiter">&quot;</span></span> +
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">from folders f left join documents d </span><span class="delimiter">&quot;</span></span> +
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">on f.id = d.folder_id </span><span class="delimiter">&quot;</span></span> +
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">order by f.name, d.name</span><span class="delimiter">&quot;</span></span>)
+        <span class="string"><span class="delimiter">&quot;</span><span class="content">f.id f_id, f.name f_name, </span><span class="delimiter">&quot;</span></span> +
+        <span class="string"><span class="delimiter">&quot;</span><span class="content">d.id d_id, d.name d_name, d.contents d_contents </span><span class="delimiter">&quot;</span></span> +
+        <span class="string"><span class="delimiter">&quot;</span><span class="content">from folders f left join documents d </span><span class="delimiter">&quot;</span></span> +
+        <span class="string"><span class="delimiter">&quot;</span><span class="content">on f.id = d.folder_id </span><span class="delimiter">&quot;</span></span> +
+        <span class="string"><span class="delimiter">&quot;</span><span class="content">order by f.name, d.name</span><span class="delimiter">&quot;</span></span>)
     <span class="annotation">@UseRowReducer</span>(FolderDocReducer.class) <i class="conum" data-value="2"></i><b>(2)</b>
     <span class="predefined-type">List</span>&lt;Folder&gt; listFolders(); <i class="conum" data-value="3"></i><b>(3)</b>
 
@@ -7099,7 +7102,7 @@ prefix folder columns with <code>f_</code> and document columns with <code>d_</c
         <span class="annotation">@Override</span>
         <span class="directive">public</span> <span class="type">void</span> accumulate(<span class="predefined-type">Map</span>&lt;<span class="predefined-type">Integer</span>, Folder&gt; map, RowView rowView) {
             Folder f = map.computeIfAbsent(rowView.getColumn(<span class="string"><span class="delimiter">&quot;</span><span class="content">f_id</span><span class="delimiter">&quot;</span></span>, <span class="predefined-type">Integer</span>.class), <i class="conum" data-value="5"></i><b>(5)</b>
-                                           id -&gt; rowView.getRow(Folder.class));
+                id -&gt; rowView.getRow(Folder.class));
 
             <span class="keyword">if</span> (rowView.getColumn(<span class="string"><span class="delimiter">&quot;</span><span class="content">d_id</span><span class="delimiter">&quot;</span></span>, <span class="predefined-type">Integer</span>.class) != <span class="predefined-constant">null</span>) { <i class="conum" data-value="6"></i><b>(6)</b>
                 f.getDocuments().add(rowView.getRow(<span class="predefined-type">Document</span>.class));
@@ -7156,10 +7159,10 @@ analogous to <a href="#_prepared_batches">PreparedBatch</a> in Core.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">ContactDao</span> {
-  <span class="annotation">@SqlBatch</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into contacts (id, name, email) values (?, ?, ?)</span><span class="delimiter">&quot;</span></span>)
-  <span class="type">void</span> bulkInsert(<span class="predefined-type">List</span>&lt;<span class="predefined-type">Integer</span>&gt; ids,
-                  <span class="predefined-type">Iterator</span>&lt;<span class="predefined-type">String</span>&gt; names,
-                  <span class="predefined-type">String</span>... emails);
+    <span class="annotation">@SqlBatch</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into contacts (id, name, email) values (?, ?, ?)</span><span class="delimiter">&quot;</span></span>)
+    <span class="type">void</span> bulkInsert(<span class="predefined-type">List</span>&lt;<span class="predefined-type">Integer</span>&gt; ids,
+                    <span class="predefined-type">Iterator</span>&lt;<span class="predefined-type">String</span>&gt; names,
+                    <span class="predefined-type">String</span>... emails);
 }</code></pre>
 </div>
 </div>
@@ -7200,10 +7203,10 @@ the same value is bound to that parameter for every SQL statement in the batch.<
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
-  <span class="annotation">@SqlBatch</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into users (tenant_id, id, name) </span><span class="delimiter">&quot;</span></span> +
-      <span class="string"><span class="delimiter">&quot;</span><span class="content">values (:tenantId, :user.id, :user.name)</span><span class="delimiter">&quot;</span></span>)
-  <span class="type">void</span> bulkInsert(<span class="annotation">@Bind</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">tenantId</span><span class="delimiter">&quot;</span></span>) <span class="type">long</span> tenantId, <i class="conum" data-value="1"></i><b>(1)</b>
-                  <span class="annotation">@BindBean</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">user</span><span class="delimiter">&quot;</span></span>) User... users);
+    <span class="annotation">@SqlBatch</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into users (tenant_id, id, name) </span><span class="delimiter">&quot;</span></span> +
+              <span class="string"><span class="delimiter">&quot;</span><span class="content">values (:tenantId, :user.id, :user.name)</span><span class="delimiter">&quot;</span></span>)
+    <span class="type">void</span> bulkInsert(<span class="annotation">@Bind</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">tenantId</span><span class="delimiter">&quot;</span></span>) <span class="type">long</span> tenantId, <i class="conum" data-value="1"></i><b>(1)</b>
+        <span class="annotation">@BindBean</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">user</span><span class="delimiter">&quot;</span></span>) User... users);
 }</code></pre>
 </div>
 </div>
@@ -7258,9 +7261,9 @@ instead of the update count. See
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
-  <span class="annotation">@SqlBatch</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into users (id, name) values (nextval('user_seq'), ?)</span><span class="delimiter">&quot;</span></span>)
-  <span class="annotation">@GetGeneratedKeys</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>)
-  <span class="type">long</span><span class="type">[]</span> bulkInsert(<span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt; names); <i class="conum" data-value="1"></i><b>(1)</b>
+    <span class="annotation">@SqlBatch</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into users (id, name) values (nextval('user_seq'), ?)</span><span class="delimiter">&quot;</span></span>)
+    <span class="annotation">@GetGeneratedKeys</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>)
+    <span class="type">long</span><span class="type">[]</span> bulkInsert(<span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt; names); <i class="conum" data-value="1"></i><b>(1)</b>
 }</code></pre>
 </div>
 </div>
@@ -7278,10 +7281,10 @@ instead of the update count. See
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
-  <span class="annotation">@SqlBatch</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into users (id, name, created_on) values (nextval('user_seq'), ?, now())</span><span class="delimiter">&quot;</span></span>)
-  <span class="annotation">@GetGeneratedKeys</span>({<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">created_on</span><span class="delimiter">&quot;</span></span>})
-  <span class="annotation">@RegisterBeanMapper</span>(IdCreateTime.class)
-  <span class="predefined-type">List</span>&lt;IdCreateTime&gt; bulkInsert(<span class="predefined-type">String</span>... names);
+    <span class="annotation">@SqlBatch</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into users (id, name, created_on) values (nextval('user_seq'), ?, now())</span><span class="delimiter">&quot;</span></span>)
+    <span class="annotation">@GetGeneratedKeys</span>({<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">created_on</span><span class="delimiter">&quot;</span></span>})
+    <span class="annotation">@RegisterBeanMapper</span>(IdCreateTime.class)
+    <span class="predefined-type">List</span>&lt;IdCreateTime&gt; bulkInsert(<span class="predefined-type">String</span>... names);
 }</code></pre>
 </div>
 </div>
@@ -7297,10 +7300,10 @@ statement in the batch (typically as a SQL Array parameter).</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
-  <span class="annotation">@SqlBatch</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into users (id, name, roles) values (?, ?, ?)</span><span class="delimiter">&quot;</span></span>)
-  <span class="type">void</span> bulkInsert(<span class="predefined-type">List</span>&lt;<span class="predefined-type">Long</span>&gt; ids,
-                  <span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt; names,
-                  <span class="annotation">@SingleValue</span> <span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt; roles);
+    <span class="annotation">@SqlBatch</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into users (id, name, roles) values (?, ?, ?)</span><span class="delimiter">&quot;</span></span>)
+    <span class="type">void</span> bulkInsert(<span class="predefined-type">List</span>&lt;<span class="predefined-type">Long</span>&gt; ids,
+                    <span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt; names,
+                    <span class="annotation">@SingleValue</span> <span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt; roles);
 }</code></pre>
 </div>
 </div>
@@ -7318,8 +7321,8 @@ statement in the batch (typically as a SQL Array parameter).</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">AccountDao</span> {
-  <span class="annotation">@SqlCall</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">{call suspend_account(:id)}</span><span class="delimiter">&quot;</span></span>)
-  <span class="type">void</span> suspendAccount(<span class="annotation">@Bind</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>) <span class="type">long</span> accountId);
+    <span class="annotation">@SqlCall</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">{call suspend_account(:id)}</span><span class="delimiter">&quot;</span></span>)
+    <span class="type">void</span> suspendAccount(<span class="annotation">@Bind</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>) <span class="type">long</span> accountId);
 }</code></pre>
 </div>
 </div>
@@ -7331,10 +7334,10 @@ registered with the <code>@OutParameter</code> annotation.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">OrderDao</span> {
-  <span class="annotation">@SqlCall</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">{call prepare_order_from_cart(:cartId, :orderId, :orderTotal)}</span><span class="delimiter">&quot;</span></span>)
-  <span class="annotation">@OutParameter</span>(name = <span class="string"><span class="delimiter">&quot;</span><span class="content">orderId</span><span class="delimiter">&quot;</span></span>,    sqlType = java.sql.Types.BIGINT)
-  <span class="annotation">@OutParameter</span>(name = <span class="string"><span class="delimiter">&quot;</span><span class="content">orderTotal</span><span class="delimiter">&quot;</span></span>, sqlType = java.sql.Types.DECIMAL)
-  OutParameters prepareOrderFromCart(<span class="annotation">@Bind</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">cartId</span><span class="delimiter">&quot;</span></span>) <span class="type">long</span> cartId);
+    <span class="annotation">@SqlCall</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">{call prepare_order_from_cart(:cartId, :orderId, :orderTotal)}</span><span class="delimiter">&quot;</span></span>)
+    <span class="annotation">@OutParameter</span>(name = <span class="string"><span class="delimiter">&quot;</span><span class="content">orderId</span><span class="delimiter">&quot;</span></span>,    sqlType = java.sql.Types.BIGINT)
+    <span class="annotation">@OutParameter</span>(name = <span class="string"><span class="delimiter">&quot;</span><span class="content">orderTotal</span><span class="delimiter">&quot;</span></span>, sqlType = java.sql.Types.DECIMAL)
+    OutParameters prepareOrderFromCart(<span class="annotation">@Bind</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">cartId</span><span class="delimiter">&quot;</span></span>) <span class="type">long</span> cartId);
 }</code></pre>
 </div>
 </div>
@@ -7484,7 +7487,6 @@ as part of the transaction. Jdbi won&#8217;t open a new handle for a call to the
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">Bar</span> {
-
     <span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into bar (name) values (:name)</span><span class="delimiter">&quot;</span></span>)
     <span class="annotation">@GetGeneratedKeys</span>
     <span class="type">int</span> insert(<span class="annotation">@Bind</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>) <span class="predefined-type">String</span> name);
@@ -7550,8 +7552,8 @@ it:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">try</span> (Handle handle = jdbi.open()) {
-  ContactPhoneDao dao = handle.attach(ContactPhoneDao.class);
-  dao.insertFullContact(contact);
+    ContactPhoneDao dao = handle.attach(ContactPhoneDao.class);
+    dao.insertFullContact(contact);
 }</code></pre>
 </div>
 </div>
@@ -7605,7 +7607,7 @@ the callback returns.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">dao.useTransaction(txn -&gt; {  <i class="conum" data-value="1"></i><b>(1)</b>
+<pre class="CodeRay highlight"><code data-lang="java">dao.useTransaction(txn -&gt; { <i class="conum" data-value="1"></i><b>(1)</b>
     User bob = txn.readContact(bobId);
     Order order = txn.getOpenOrder(bobId);
     txn.createInvoice(computeInvoice(bob, metadata));
@@ -7688,10 +7690,10 @@ This is most useful for SQL object instances that get passed from other code or 
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">SplineDao</span> <span class="directive">extends</span> SqlObject {
-  <span class="keyword">default</span> <span class="type">void</span> reticulateSplines(Spline spline) {
-    Handle handle = getHandle();
-    <span class="comment">// do tricky stuff using the Core API.</span>
-  }
+    <span class="keyword">default</span> <span class="type">void</span> reticulateSplines(Spline spline) {
+        Handle handle = getHandle();
+        <span class="comment">// do tricky stuff using the Core API</span>
+    }
 }</code></pre>
 </div>
 </div>
@@ -7701,17 +7703,17 @@ This is most useful for SQL object instances that get passed from other code or 
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">ContactPhoneDao</span> {
-  <span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into contacts (id, name) values (nextval('contact_id'), :name)</span><span class="delimiter">&quot;</span></span>)
-  <span class="type">long</span> insertContact(<span class="annotation">@BindBean</span> Contact contact);
+    <span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into contacts (id, name) values (nextval('contact_id'), :name)</span><span class="delimiter">&quot;</span></span>)
+    <span class="type">long</span> insertContact(<span class="annotation">@BindBean</span> Contact contact);
 
-  <span class="annotation">@SqlBatch</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into phones (contact_id, type, phone) values (:contactId, :type, :phone)</span><span class="delimiter">&quot;</span></span>)
-  <span class="type">void</span> insertPhone(<span class="type">long</span> contactId, <span class="annotation">@BindBean</span> <span class="predefined-type">Iterable</span>&lt;Phone&gt; phones);
+    <span class="annotation">@SqlBatch</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into phones (contact_id, type, phone) values (:contactId, :type, :phone)</span><span class="delimiter">&quot;</span></span>)
+    <span class="type">void</span> insertPhone(<span class="type">long</span> contactId, <span class="annotation">@BindBean</span> <span class="predefined-type">Iterable</span>&lt;Phone&gt; phones);
 
-  <span class="keyword">default</span> <span class="type">long</span> insertFullContact(Contact contact) {
-    <span class="type">long</span> id = insertContact(contact);
-    insertPhone(id, contact.getPhones());
-    <span class="keyword">return</span> id;
-  }
+    <span class="keyword">default</span> <span class="type">long</span> insertFullContact(Contact contact) {
+        <span class="type">long</span> id = insertContact(contact);
+        insertPhone(id, contact.getPhones());
+        <span class="keyword">return</span> id;
+    }
 }</code></pre>
 </div>
 </div>
@@ -7948,20 +7950,20 @@ provides annotations for transaction management in a SQL object. See
 
 <span class="annotation">@UseClasspathSqlLocator</span>  <i class="conum" data-value="1"></i><b>(1)</b> <i class="conum" data-value="2"></i><b>(2)</b>
 <span class="directive">public</span> <span class="type">interface</span> <span class="class">CrudDao</span>&lt;T, ID&gt; {
-  <span class="annotation">@SqlUpdate</span> <i class="conum" data-value="3"></i><b>(3)</b>
-  <span class="type">void</span> insert(<span class="annotation">@BindBean</span> T entity);
+    <span class="annotation">@SqlUpdate</span> <i class="conum" data-value="3"></i><b>(3)</b>
+    <span class="type">void</span> insert(<span class="annotation">@BindBean</span> T entity);
 
-  <span class="annotation">@SqlQuery</span> <i class="conum" data-value="3"></i><b>(3)</b>
-  Optional&lt;T&gt; findById(ID id);
+    <span class="annotation">@SqlQuery</span> <i class="conum" data-value="3"></i><b>(3)</b>
+    Optional&lt;T&gt; findById(ID id);
 
-  <span class="annotation">@SqlQuery</span>
-  <span class="predefined-type">List</span>&lt;T&gt; list();
+    <span class="annotation">@SqlQuery</span>
+    <span class="predefined-type">List</span>&lt;T&gt; list();
 
-  <span class="annotation">@SqlUpdate</span>
-  <span class="type">void</span> update(<span class="annotation">@BindBean</span> T entity);
+    <span class="annotation">@SqlUpdate</span>
+    <span class="type">void</span> update(<span class="annotation">@BindBean</span> T entity);
 
-  <span class="annotation">@SqlUpdate</span>
-  <span class="type">void</span> deleteById(ID id);
+    <span class="annotation">@SqlUpdate</span>
+    <span class="type">void</span> deleteById(ID id);
 }</code></pre>
 </div>
 </div>
@@ -8057,13 +8059,13 @@ case, we&#8217;d want <code>AccountDao</code> to use <code>@BindMethods</code> i
 
 <span class="annotation">@RegisterConstructorMapper</span>(Account.class)
 <span class="directive">public</span> <span class="type">interface</span> <span class="class">AccountDao</span> <span class="directive">extends</span> CrudDao&lt;Account, <span class="predefined-type">UUID</span>&gt; {
-  <span class="annotation">@Override</span>
-  <span class="annotation">@SqlUpdate</span> <i class="conum" data-value="1"></i><b>(1)</b>
-  <span class="type">void</span> insert(<span class="annotation">@BindMethods</span> Account entity);
+    <span class="annotation">@Override</span>
+    <span class="annotation">@SqlUpdate</span> <i class="conum" data-value="1"></i><b>(1)</b>
+    <span class="type">void</span> insert(<span class="annotation">@BindMethods</span> Account entity);
 
-  <span class="annotation">@Override</span>
-  <span class="annotation">@SqlUpdate</span> <i class="conum" data-value="1"></i><b>(1)</b>
-  <span class="type">void</span> update(<span class="annotation">@BindMethods</span> Account entity);
+    <span class="annotation">@Override</span>
+    <span class="annotation">@SqlUpdate</span> <i class="conum" data-value="1"></i><b>(1)</b>
+    <span class="type">void</span> update(<span class="annotation">@BindMethods</span> Account entity);
 }</code></pre>
 </div>
 </div>
@@ -8149,7 +8151,7 @@ class which implements <a href="https://junit.org/junit4/javadoc/latest/org/juni
     <span class="directive">public</span> <span class="type">void</span> testWithJunit5() {
         Jdbi jdbi = h2Extension.getJdbi();
         Handle handle = h2Extension.openHandle();
-        [...]
+        <span class="comment">// ...</span>
     }
 }</code></pre>
 </div>
@@ -8187,7 +8189,7 @@ Registration as class-level (static) fields is <strong>only supported in Jdbi ve
 <span class="directive">public</span> <span class="type">class</span> <span class="class">Test</span> {
     <span class="annotation">@Test</span>
     <span class="directive">public</span> <span class="type">void</span> testWithJunit5(Jdbi jdbi, Handle handle) {
-        [...]
+        <span class="comment">// ...</span>
     }
 }</code></pre>
 </div>
@@ -8516,8 +8518,8 @@ jdbi.getConfig(Gson2Config.class).setGson(myGson);</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
-  <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
-  <span class="tag">&lt;artifactId&gt;</span>jdbi3-moshi<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>jdbi3-moshi<span class="tag">&lt;/artifactId&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
@@ -8759,8 +8761,8 @@ configure the new `bindPojo</code> (or <code>@BindPojo</code>) binders:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
-  <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
-  <span class="tag">&lt;artifactId&gt;</span>jdbi3-jodatime2<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>jdbi3-jodatime2<span class="tag">&lt;/artifactId&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
@@ -9257,7 +9259,7 @@ Definition modules are Guice private modules and anything defined within them wi
 
     <span class="annotation">@Override</span>
     <span class="directive">public</span> <span class="type">void</span> configureJdbi() {
-        ... bind mappers, plugins etc. ...
+        <span class="comment">// ... bind mappers, plugins etc. ...</span>
 
         exposeBinding(DatabaseAccess.class);
     }
@@ -9358,8 +9360,8 @@ DatabaseAccess writerAccess = injector.getInstance(<span class="predefined-type"
 
 
 Injector injector = Guice.createInjector(
-        <span class="keyword">new</span> LoggingModule(production, Store.class),
-        <span class="keyword">new</span> DatabaseModule(Store.class)
+    <span class="keyword">new</span> LoggingModule(production, Store.class),
+    <span class="keyword">new</span> DatabaseModule(Store.class)
 )</code></pre>
 </div>
 </div>
@@ -9432,28 +9434,28 @@ Injector injector = Guice.createInjector(
 }
 
 <span class="type">class</span> <span class="class">StoreJdbiModule</span> <span class="directive">extends</span> AbstractJdbiDefinitionModule {
-        <span class="annotation">@Override</span>
-        <span class="directive">public</span> <span class="type">void</span> configureJdbi() {
-            ... other JDBI code bindings <span class="keyword">for</span> the store ...
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="type">void</span> configureJdbi() {
+        <span class="comment">// ... other JDBI code bindings for the store ...</span>
 
-            importBindingLoosely(bindCustomizer(), GuiceJdbiCustomizer.class)
-                    .withDefault(GuiceJdbiCustomizer.NOP)
-                    .to(DropwizardJdbiSupport.class);
-        }
+        importBindingLoosely(bindCustomizer(), GuiceJdbiCustomizer.class)
+                .withDefault(GuiceJdbiCustomizer.NOP)
+                .to(DropwizardJdbiSupport.class);
+    }
 }
 
 <span class="comment">// production code (running in dropwizard framework)</span>
 Injector injector = Guice.createInjector(
-                        <span class="keyword">new</span> DropwizardModule(),      <span class="comment">// binds @Dropwizard stuff</span>
-                        <span class="keyword">new</span> DropwizardStoreModule(), <span class="comment">// binds dropwizard support for store jdbi</span>
-                        <span class="keyword">new</span> StoreDataSourceModule(), <span class="comment">// binds @Store DataSource</span>
-                        <span class="keyword">new</span> StoreJdbiModule()        <span class="comment">// Store Jdbi code</span>
+    <span class="keyword">new</span> DropwizardModule(),      <span class="comment">// binds @Dropwizard stuff</span>
+    <span class="keyword">new</span> DropwizardStoreModule(), <span class="comment">// binds dropwizard support for store jdbi</span>
+    <span class="keyword">new</span> StoreDataSourceModule(), <span class="comment">// binds @Store DataSource</span>
+    <span class="keyword">new</span> StoreJdbiModule()        <span class="comment">// Store Jdbi code</span>
 );
 
 <span class="comment">// test code</span>
 Injector injector = Guice.createInjector(
-                        <span class="keyword">new</span> StoreTestingDataSourceModule(), <span class="comment">// testing datasource for store</span>
-                        <span class="keyword">new</span> StoreJdbiModule()               <span class="comment">// store Jdbi code</span>
+    <span class="keyword">new</span> StoreTestingDataSourceModule(), <span class="comment">// testing datasource for store</span>
+    <span class="keyword">new</span> StoreJdbiModule()               <span class="comment">// store Jdbi code</span>
 );</code></pre>
 </div>
 </div>
@@ -9834,16 +9836,16 @@ jdbi.getConfig(Jackson2Config::class.java).mapper = jacksonObjectMapper()</code>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Data</span>
 <span class="directive">public</span> <span class="type">void</span> DataClass {
-  <span class="directive">private</span> <span class="predefined-type">Long</span> id;
-  <span class="directive">private</span> <span class="predefined-type">String</span> name;
-  <span class="comment">// autogenerates default constructor, getters, setters, equals, hashCode, and toString</span>
+    <span class="directive">private</span> <span class="predefined-type">Long</span> id;
+    <span class="directive">private</span> <span class="predefined-type">String</span> name;
+    <span class="comment">// autogenerates default constructor, getters, setters, equals, hashCode, and toString</span>
 }
 
 <span class="annotation">@Value</span>
 <span class="directive">public</span> <span class="type">void</span> ValueClass {
-  <span class="directive">private</span> <span class="type">long</span> id;
-  <span class="directive">private</span> <span class="predefined-type">String</span> name;
-  <span class="comment">// autogenerates all-args constructor, getters, equals, hashCode, and toString</span>
+    <span class="directive">private</span> <span class="type">long</span> id;
+    <span class="directive">private</span> <span class="predefined-type">String</span> name;
+    <span class="comment">// autogenerates all-args constructor, getters, equals, hashCode, and toString</span>
 }</code></pre>
 </div>
 </div>
@@ -9994,9 +9996,9 @@ type is treated as a single value instead of a collection:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">AccountDao</span> {
-  <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select attributes from account where id = ?</span><span class="delimiter">&quot;</span></span>)
-  <span class="annotation">@SingleValue</span>
-  <span class="predefined-type">Map</span>&lt;<span class="predefined-type">String</span>, <span class="predefined-type">String</span>&gt; getAccountAttributes(<span class="type">long</span> accountId);
+    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select attributes from account where id = ?</span><span class="delimiter">&quot;</span></span>)
+    <span class="annotation">@SingleValue</span>
+    <span class="predefined-type">Map</span>&lt;<span class="predefined-type">String</span>, <span class="predefined-type">String</span>&gt; getAccountAttributes(<span class="type">long</span> accountId);
 }</code></pre>
 </div>
 </div>
@@ -10031,10 +10033,10 @@ request generated keys without naming any columns.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
-  <span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into users (id, name, created_on) values (nextval('user_seq'), ?, now())</span><span class="delimiter">&quot;</span></span>)
-  <span class="annotation">@GetGeneratedKeys</span>
-  <span class="annotation">@RegisterBeanMapper</span>(User.class)
-  User insert(<span class="predefined-type">String</span> name);
+    <span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into users (id, name, created_on) values (nextval('user_seq'), ?, now())</span><span class="delimiter">&quot;</span></span>)
+    <span class="annotation">@GetGeneratedKeys</span>
+    <span class="annotation">@RegisterBeanMapper</span>(User.class)
+    User insert(<span class="predefined-type">String</span> name);
 }</code></pre>
 </div>
 </div>
@@ -10045,10 +10047,10 @@ several rows), your method can return all the modified rows in a collection:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
-  <span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">update users set active = false where id = any(?)</span><span class="delimiter">&quot;</span></span>)
-  <span class="annotation">@GetGeneratedKeys</span>
-  <span class="annotation">@RegisterBeanMapper</span>(User.class)
-  <span class="predefined-type">List</span>&lt;User&gt; deactivateUsers(<span class="type">long</span>... userIds);
+    <span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">update users set active = false where id = any(?)</span><span class="delimiter">&quot;</span></span>)
+    <span class="annotation">@GetGeneratedKeys</span>
+    <span class="annotation">@RegisterBeanMapper</span>(User.class)
+    <span class="predefined-type">List</span>&lt;User&gt; deactivateUsers(<span class="type">long</span>... userIds);
 }</code></pre>
 </div>
 </div>
@@ -10105,8 +10107,8 @@ singleton in a Spring 5 (or Spring Boot) application context.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
-  <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
-  <span class="tag">&lt;artifactId&gt;</span>jdbi3-spring5<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>jdbi3-spring5<span class="tag">&lt;/artifactId&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
@@ -10301,12 +10303,13 @@ to <code>StringTemplateEngine</code>.</p>
              <span class="string"><span class="delimiter">&quot;</span><span class="content">from account </span><span class="delimiter">&quot;</span></span> +
              <span class="string"><span class="delimiter">&quot;</span><span class="content">order by &lt;if(sort)&gt; &lt;sortBy&gt;, &lt;endif&gt; id</span><span class="delimiter">&quot;</span></span>;
 
-<span class="predefined-type">List</span>&lt;Account&gt; accounts = handle.createQuery(sql)
-      .setTemplateEngine(<span class="keyword">new</span> StringTemplateEngine())
-      .define(<span class="string"><span class="delimiter">&quot;</span><span class="content">sort</span><span class="delimiter">&quot;</span></span>, <span class="predefined-constant">true</span>)
-      .define(<span class="string"><span class="delimiter">&quot;</span><span class="content">sortBy</span><span class="delimiter">&quot;</span></span>, sortColumn)
-      .mapTo(Account.class)
-      .list();</code></pre>
+<span class="predefined-type">List</span>&lt;Account&gt; accounts = handle
+    .createQuery(sql)
+    .setTemplateEngine(<span class="keyword">new</span> StringTemplateEngine())
+    .define(<span class="string"><span class="delimiter">&quot;</span><span class="content">sort</span><span class="delimiter">&quot;</span></span>, <span class="predefined-constant">true</span>)
+    .define(<span class="string"><span class="delimiter">&quot;</span><span class="content">sortBy</span><span class="delimiter">&quot;</span></span>, sortColumn)
+    .mapTo(Account.class)
+    .list();</code></pre>
 </div>
 </div>
 <div class="admonitionblock warning">
@@ -10375,10 +10378,10 @@ locator, and loads SQL from a StringTemplate group file on the classpath:</p>
 <pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">com.foo</span>;
 
 <span class="directive">public</span> <span class="type">interface</span> <span class="class">AccountDao</span> {
-  <span class="annotation">@SqlQuery</span>
-  <span class="annotation">@UseStringTemplateSqlLocator</span>
-  <span class="predefined-type">List</span>&lt;Account&gt; selectAll(<span class="annotation">@Define</span> <span class="type">boolean</span> sort,
-                          <span class="annotation">@Define</span> <span class="predefined-type">String</span> sortBy);
+    <span class="annotation">@SqlQuery</span>
+    <span class="annotation">@UseStringTemplateSqlLocator</span>
+    <span class="predefined-type">List</span>&lt;Account&gt; selectAll(<span class="annotation">@Define</span> <span class="type">boolean</span> sort,
+                            <span class="annotation">@Define</span> <span class="predefined-type">String</span> sortBy);
 }</code></pre>
 </div>
 </div>
@@ -10396,10 +10399,10 @@ used. This can be overridden on the <code>@Sql___</code> annotation:</p>
 <pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">com.foo</span>;
 
 <span class="directive">public</span> <span class="type">interface</span> <span class="class">AccountDao</span> {
-  <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">listSorted</span><span class="delimiter">&quot;</span></span>)
-  <span class="annotation">@UseStringTemplateSqlLocator</span>
-  <span class="predefined-type">List</span>&lt;Account&gt; selectAll(<span class="annotation">@Define</span> <span class="type">boolean</span> sort,
-                          <span class="annotation">@Define</span> <span class="predefined-type">String</span> sortBy);
+    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">listSorted</span><span class="delimiter">&quot;</span></span>)
+    <span class="annotation">@UseStringTemplateSqlLocator</span>
+    <span class="predefined-type">List</span>&lt;Account&gt; selectAll(<span class="annotation">@Define</span> <span class="type">boolean</span> sort,
+                            <span class="annotation">@Define</span> <span class="predefined-type">String</span> sortBy);
 }</code></pre>
 </div>
 </div>
@@ -10470,10 +10473,11 @@ Vavr and is ready to be used. As with other plugins: install through a <a href="
 <span class="predefined-type">Option</span>&lt;<span class="predefined-type">String</span>&gt; param = <span class="predefined-type">Option</span>.of(<span class="string"><span class="delimiter">&quot;</span><span class="content">eric</span><span class="delimiter">&quot;</span></span>);
 
 <span class="comment">// will fetch first user with given name or first user with any name (Option.none)</span>
-<span class="keyword">return</span> handle.createQuery(query)
-        .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>, param)
-        .mapToBean(User.class)
-        .findFirst();</code></pre>
+<span class="keyword">return</span> handle
+    .createQuery(query)
+    .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>, param)
+    .mapToBean(User.class)
+    .findFirst();</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -10485,7 +10489,7 @@ be 'present' otherwise a <code>null</code> value is used (e.g. for <code>Either.
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java">handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select name from users</span><span class="delimiter">&quot;</span></span>)
-        .collectInto(<span class="keyword">new</span> GenericType&lt;Seq&lt;<span class="predefined-type">String</span>&gt;&gt;() {});</code></pre>
+      .collectInto(<span class="keyword">new</span> GenericType&lt;Seq&lt;<span class="predefined-type">String</span>&gt;&gt;() {});</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -10496,7 +10500,7 @@ Therefore, the following would work and can make sense if the column is nullable
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java">handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select middle_name from users</span><span class="delimiter">&quot;</span></span>) <span class="comment">// nulls incoming!</span>
-        .collectInto(<span class="keyword">new</span> GenericType&lt;Seq&lt;<span class="predefined-type">Option</span>&lt;<span class="predefined-type">String</span>&gt;&gt;&gt;() {});</code></pre>
+      .collectInto(<span class="keyword">new</span> GenericType&lt;Seq&lt;<span class="predefined-type">Option</span>&lt;<span class="predefined-type">String</span>&gt;&gt;&gt;() {});</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -10506,9 +10510,10 @@ by their name, which is not necessarily unique.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">Multimap&lt;<span class="predefined-type">String</span>, User&gt; usersByName = handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from users</span><span class="delimiter">&quot;</span></span>)
-        .setMapKeyColumn(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>)
-        .collectInto(<span class="keyword">new</span> GenericType&lt;Multimap&lt;<span class="predefined-type">String</span>, User&gt;&gt;() {});</code></pre>
+<pre class="CodeRay highlight"><code data-lang="java">Multimap&lt;<span class="predefined-type">String</span>, User&gt; usersByName = handle
+    .createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from users</span><span class="delimiter">&quot;</span></span>)
+    .setMapKeyColumn(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>)
+    .collectInto(<span class="keyword">new</span> GenericType&lt;Multimap&lt;<span class="predefined-type">String</span>, User&gt;&gt;() {});</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -10518,9 +10523,9 @@ by their name, which is not necessarily unique.</p>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// given a 'tuples' table with t1 int, t2 varchar, t3 varchar, ...</span>
 <span class="predefined-type">List</span>&lt;Tuple3&lt;<span class="predefined-type">Integer</span>, <span class="predefined-type">String</span>, <span class="predefined-type">String</span>&gt;&gt; tupleProjection = handle
-        .createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select t1, t2, t3 from tuples</span><span class="delimiter">&quot;</span></span>)
-        .mapTo(<span class="keyword">new</span> GenericType&lt;Tuple3&lt;<span class="predefined-type">Integer</span>, <span class="predefined-type">String</span>, <span class="predefined-type">String</span>&gt;&gt;() {})
-        .list();</code></pre>
+    .createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select t1, t2, t3 from tuples</span><span class="delimiter">&quot;</span></span>)
+    .mapTo(<span class="keyword">new</span> GenericType&lt;Tuple3&lt;<span class="predefined-type">Integer</span>, <span class="predefined-type">String</span>, <span class="predefined-type">String</span>&gt;&gt;() {})
+    .list();</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -10531,10 +10536,10 @@ registered.</p>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// given that there are row mappers registered for both complex types</span>
 Tuple2&lt;City, Address&gt; tupleProjection = handle
-        .createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select cityname, zipcode, street, housenumber from </span><span class="delimiter">&quot;</span></span> +
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">addresses where user_id = 1</span><span class="delimiter">&quot;</span></span>)
-        .mapTo(<span class="keyword">new</span> GenericType&lt;Tuple2&lt;City, Address&gt;&gt;() {})
-        .one();</code></pre>
+    .createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select cityname, zipcode, street, housenumber from </span><span class="delimiter">&quot;</span></span> +
+                 <span class="string"><span class="delimiter">&quot;</span><span class="content">addresses where user_id = 1</span><span class="delimiter">&quot;</span></span>)
+    .mapTo(<span class="keyword">new</span> GenericType&lt;Tuple2&lt;City, Address&gt;&gt;() {})
+    .one();</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -10544,14 +10549,13 @@ you have to - read below!)</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">handle.configure(TupleMappers.class, c -&gt;
-        c.setColumn(<span class="integer">2</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">street</span><span class="delimiter">&quot;</span></span>).setColumn(<span class="integer">3</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">housenumber</span><span class="delimiter">&quot;</span></span>));
+<pre class="CodeRay highlight"><code data-lang="java">handle.configure(TupleMappers.class, c -&gt; c.setColumn(<span class="integer">2</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">street</span><span class="delimiter">&quot;</span></span>).setColumn(<span class="integer">3</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">housenumber</span><span class="delimiter">&quot;</span></span>));
 
 Tuple3&lt;City, <span class="predefined-type">String</span>, <span class="predefined-type">Integer</span>&gt; result = handle
-        .createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select cityname, zipcode, street, housenumber from </span><span class="delimiter">&quot;</span></span> +
-             <span class="string"><span class="delimiter">&quot;</span><span class="content">addresses where user_id = 1</span><span class="delimiter">&quot;</span></span>)
-        .mapTo(<span class="keyword">new</span> GenericType&lt;Tuple3&lt;City, <span class="predefined-type">String</span>, <span class="predefined-type">Integer</span>&gt;&gt;() {})
-        .one();</code></pre>
+    .createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select cityname, zipcode, street, housenumber from </span><span class="delimiter">&quot;</span></span> +
+        <span class="string"><span class="delimiter">&quot;</span><span class="content">addresses where user_id = 1</span><span class="delimiter">&quot;</span></span>)
+    .mapTo(<span class="keyword">new</span> GenericType&lt;Tuple3&lt;City, <span class="predefined-type">String</span>, <span class="predefined-type">Integer</span>&gt;&gt;() {})
+    .one();</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -10678,9 +10682,11 @@ features with good success.</p>
 <pre class="CodeRay highlight"><code data-lang="java">PGSimpleDataSource ds = <span class="keyword">new</span> PGSimpleDataSource();
 ds.setServerName(<span class="string"><span class="delimiter">&quot;</span><span class="content">host1,host2,host3</span><span class="delimiter">&quot;</span></span>);
 ds.setLoadBalanceHosts(<span class="predefined-constant">true</span>);
+
 HikariConfig hc = <span class="keyword">new</span> HikariConfig();
 hc.setDataSource(ds);
 hc.setMaximumPoolSize(<span class="integer">6</span>);
+
 Jdbi jdbi = Jdbi.create(<span class="keyword">new</span> HikariDataSource(hc)).installPlugin(<span class="keyword">new</span> PostgresPlugin());</code></pre>
 </div>
 </div>
@@ -11188,7 +11194,7 @@ to:</p>
 <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Retention</span>(<span class="predefined-type">RetentionPolicy</span>.RUNTIME) <i class="conum" data-value="1"></i><b>(1)</b>
 <span class="annotation">@Target</span>({<span class="predefined-type">ElementType</span>.TYPE, <span class="predefined-type">ElementType</span>.METHOD, <span class="predefined-type">ElementType</span>.PARAMETER}) <i class="conum" data-value="2"></i><b>(2)</b>
 <span class="directive">public</span> <span class="annotation">@interface</span> MaxRows {
-  <span class="type">int</span> value();
+    <span class="type">int</span> value();
 }</code></pre>
 </div>
 </div>
@@ -11610,9 +11616,9 @@ annotation to your <code>@Transaction</code> annotation type. This tells Jdbi th
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">ContactDao</span> {
-  <span class="annotation">@SqlBatch</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into contacts (id, name) values (:id, :name)</span><span class="delimiter">&quot;</span></span>)
-  <span class="annotation">@Transaction</span>
-  <span class="type">void</span> batchInsert(<span class="annotation">@BindBean</span> Contact... contacts);
+    <span class="annotation">@SqlBatch</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into contacts (id, name) values (:id, :name)</span><span class="delimiter">&quot;</span></span>)
+    <span class="annotation">@Transaction</span>
+    <span class="type">void</span> batchInsert(<span class="annotation">@BindBean</span> Contact... contacts);
 }</code></pre>
 </div>
 </div>
@@ -11743,8 +11749,8 @@ parameters, e.g. <code>#hashtag</code>. Use this parser by calling <code>setSqlP
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">handle.setSqlParser(<span class="keyword">new</span> HashPrefixSqlParser());
-handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into characters (id, name) values (#id, #name)</span><span class="delimiter">&quot;</span></span>)
+<pre class="CodeRay highlight"><code data-lang="java">handle.setSqlParser(<span class="keyword">new</span> HashPrefixSqlParser())
+      .createUpdate(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into characters (id, name) values (#id, #name)</span><span class="delimiter">&quot;</span></span>)
       .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">2</span>)
       .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Teddy Flood</span><span class="delimiter">&quot;</span></span>)
       .execute();</code></pre>
@@ -11785,7 +11791,7 @@ then set it on the Jdbi, Handle, or SQL statement:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java">SqlParser parser = (sql, ctx) -&gt; {
-  ...
+    <span class="comment">// ...</span>
 };
 
 jdbi.setParser(parser);</code></pre>
@@ -12107,7 +12113,7 @@ return types, or on <code>@SqlBatch</code> parameters.</p>
 <div id="footer">
 <div id="footer-text">
 Version 3.36.1-SNAPSHOT<br>
-Last updated 01/12/2023 14:02 -0800
+Last updated 01/12/2023 23:08 -0800
 </div>
 </div>
 </body>
