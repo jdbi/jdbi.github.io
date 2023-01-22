@@ -534,7 +534,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.36.1-SNAPSHOT,</span>
-<span id="revdate">01/21/2023 18:09 -0800</span>
+<span id="revdate">01/21/2023 21:10 -0800</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -1186,6 +1186,10 @@ While Oracle support is considered part of Jdbi, the actual library is developed
 <dt class="hdlist1">jdbi3-caffeine-cache</dt>
 <dd>
 <p>Use the <a href="https://github.com/ben-manes/caffeine" target="_blank" rel="noopener">Caffeine</a> caching library for SQL template and parse caching.</p>
+</dd>
+<dt class="hdlist1">jdbi3-noop-cache</dt>
+<dd>
+<p>Turn off SQL template and parse caching for testing and debugging.</p>
 </dd>
 </dl>
 </div>
@@ -8127,6 +8131,9 @@ those we want to keep.</td>
 <li>
 <p><code>jdbi3-caffeine-cache</code> - using the <a href="https://github.com/ben-manes/caffeine" target="_blank" rel="noopener">Caffeine</a> cache library. This used to be the default cache up to version 3.36.0</p>
 </li>
+<li>
+<p><code>jdbi3-noop-cache</code>, - disables caching. This is useful for testing and debugging.</p>
+</li>
 </ul>
 </div>
 <div class="paragraph">
@@ -12209,7 +12216,7 @@ return types, or on <code>@SqlBatch</code> parameters.</p>
 <div id="footer">
 <div id="footer-text">
 Version 3.36.1-SNAPSHOT<br>
-Last updated 01/21/2023 18:09 -0800
+Last updated 01/21/2023 21:10 -0800
 </div>
 </div>
 </body>
