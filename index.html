@@ -534,7 +534,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.38.0-SNAPSHOT,</span>
-<span id="revdate">02/25/2023 16:39 -0800</span>
+<span id="revdate">02/27/2023 19:33 -0800</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -587,6 +587,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_metadata">4.3.7. Metadata</a></li>
 </ul>
 </li>
+<li><a href="#_usage_in_asynchronous_applications">4.4. Usage in asynchronous applications</a></li>
 </ul>
 </li>
 <li><a href="#_resource_management">5. Resource Management</a>
@@ -2101,6 +2102,98 @@ can be executed in a single <strong>Batch</strong> or individually.</p>
             .mapTo(<span class="predefined-type">String</span>.class)
             .list();</code></pre>
 </div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_usage_in_asynchronous_applications"><a class="anchor" href="#_usage_in_asynchronous_applications"></a><a class="link" href="#_usage_in_asynchronous_applications">4.4. Usage in asynchronous applications</a></h3>
+<div class="paragraph">
+<p>Calling Jdbc and by extension Jdbi is inherently a blocking operation.
+In asynchronous applications
+(where results are returned as a <a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletionStage.html" target="_blank" rel="noopener">CompletionStage</a>
+or a <a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html" target="_blank" rel="noopener">CompletableFuture</a>)
+it is very important never to block on threads that the caller doesn&#8217;t control. For this, there is the
+<a href="./apidocs/org/jdbi/v3/core/async/JdbiExecutor.html" target="_blank" rel="noopener">JdbiExcecutor</a> class that wraps around a <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instance
+and makes sure calls are made on a specific thread pool.</p>
+</div>
+<div class="paragraph">
+<p>To create a <a href="./apidocs/org/jdbi/v3/core/async/JdbiExecutor.html" target="_blank" rel="noopener">JdbiExcecutor</a> instance, we first need to create
+a <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instance (see <a href="#_the_jdbi_class">The Jdbi class</a>). Then pass that instance into
+<a href="./apidocs/org/jdbi/v3/core/async/JdbiExecutor.html#create(org.jdbi.v3.core.Jdbi,java.util.concurrent.Executor)">JdbiExecutor.create</a>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">Executor</span> executor = <span class="predefined-type">Executors</span>.newFixedThreadPool(<span class="integer">8</span>);
+JdbiExecutor jdbiExecutor = JdbiExecutor.create(jdbi, executor);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It is important to size the executor to the specific implementation.
+See <a href="./apidocs/org/jdbi/v3/core/async/JdbiExecutor.html#create(org.jdbi.v3.core.Jdbi,java.util.concurrent.Executor)">here</a> for some hints.</p>
+</div>
+<div class="paragraph">
+<p>To use the <code>jdbiExecutor</code>, we make similar calls to <a href="./apidocs/org/jdbi/v3/core/async/JdbiExecutor.html" target="_blank" rel="noopener">JdbiExcecutor</a>
+as we do to <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">CompletionStage&lt;<span class="predefined-type">Void</span>&gt; futureResult = jdbiExecutor.useHandle(handle -&gt; {
+    handle.execute(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into contacts (id, name) values (?, ?)</span><span class="delimiter">&quot;</span></span>, <span class="integer">3</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Erin</span><span class="delimiter">&quot;</span></span>);
+});
+
+<span class="comment">// wait for stage to complete (don't do this in production code!)</span>
+futureResult.toCompletableFuture().join();
+assertThat(handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select name from contacts where id = 3</span><span class="delimiter">&quot;</span></span>)
+    .mapTo(<span class="predefined-type">String</span>.class)
+    .list()).contains(<span class="string"><span class="delimiter">&quot;</span><span class="content">Erin</span><span class="delimiter">&quot;</span></span>);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">CompletionStage&lt;<span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt;&gt; futureResult = jdbiExecutor.withHandle(handle -&gt; {
+    <span class="keyword">return</span> handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select name from contacts where id = 1</span><span class="delimiter">&quot;</span></span>)
+        .mapTo(<span class="predefined-type">String</span>.class)
+        .list();
+});
+
+assertThat(futureResult)
+    .succeedsWithin(<span class="predefined-type">Duration</span>.ofSeconds(<span class="integer">10</span>))
+    .asList()
+    .contains(<span class="string"><span class="delimiter">&quot;</span><span class="content">Alice</span><span class="delimiter">&quot;</span></span>);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">CompletionStage&lt;<span class="predefined-type">String</span>&gt; futureResult =
+    jdbiExecutor.withExtension(SomethingDao.class, dao -&gt; dao.getName(<span class="integer">1</span>));
+
+assertThat(futureResult)
+    .succeedsWithin(<span class="predefined-type">Duration</span>.ofSeconds(<span class="integer">10</span>))
+    .isEqualTo(<span class="string"><span class="delimiter">&quot;</span><span class="content">Alice</span><span class="delimiter">&quot;</span></span>);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note, since the handle closes as soon as the callback returns, you cannot return
+an iterator, since iteration will call upon the (now closed) handle</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">CompletionStage&lt;<span class="predefined-type">Iterator</span>&lt;<span class="predefined-type">String</span>&gt;&gt; futureResult = jdbiExecutor.withHandle(handle -&gt; {
+    <span class="keyword">return</span> handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select name from contacts where id = 1</span><span class="delimiter">&quot;</span></span>)
+        .mapTo(<span class="predefined-type">String</span>.class)
+        .iterator();
+});
+
+<span class="comment">// wait for stage to complete (don't do this in production code!)</span>
+<span class="predefined-type">Iterator</span>&lt;<span class="predefined-type">String</span>&gt; result = futureResult.toCompletableFuture().join();
+<span class="comment">// result.hasNext() fails because the handle is already closed at this point</span>
+assertThatException().isThrownBy(() -&gt; result.hasNext());</code></pre>
 </div>
 </div>
 </div>
@@ -12216,7 +12309,7 @@ return types, or on <code>@SqlBatch</code> parameters.</p>
 <div id="footer">
 <div id="footer-text">
 Version 3.38.0-SNAPSHOT<br>
-Last updated 02/25/2023 16:39 -0800
+Last updated 02/27/2023 19:33 -0800
 </div>
 </div>
 </body>
