@@ -534,7 +534,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.38.0-SNAPSHOT,</span>
-<span id="revdate">02/27/2023 19:33 -0800</span>
+<span id="revdate">03/02/2023 09:58 -0800</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -2124,7 +2124,7 @@ a <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">Executor</span> executor = <span class="predefined-type">Executors</span>.newFixedThreadPool(<span class="integer">8</span>);
-JdbiExecutor jdbiExecutor = JdbiExecutor.create(jdbi, executor);</code></pre>
+JdbiExecutor jdbiExecutor = JdbiExecutor.create(h2Extension.getJdbi(), executor);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2143,7 +2143,7 @@ as we do to <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="
 
 <span class="comment">// wait for stage to complete (don't do this in production code!)</span>
 futureResult.toCompletableFuture().join();
-assertThat(handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select name from contacts where id = 3</span><span class="delimiter">&quot;</span></span>)
+assertThat(h2Extension.getSharedHandle().createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">select name from contacts where id = 3</span><span class="delimiter">&quot;</span></span>)
     .mapTo(<span class="predefined-type">String</span>.class)
     .list()).contains(<span class="string"><span class="delimiter">&quot;</span><span class="content">Erin</span><span class="delimiter">&quot;</span></span>);</code></pre>
 </div>
@@ -12309,7 +12309,7 @@ return types, or on <code>@SqlBatch</code> parameters.</p>
 <div id="footer">
 <div id="footer-text">
 Version 3.38.0-SNAPSHOT<br>
-Last updated 02/27/2023 19:33 -0800
+Last updated 03/02/2023 09:58 -0800
 </div>
 </div>
 </body>
