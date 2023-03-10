@@ -12,6 +12,7 @@ org.jdbi.v3.core.collector
 org.jdbi.v3.core.config
 org.jdbi.v3.core.enums
 org.jdbi.v3.core.extension
+org.jdbi.v3.core.extension.annotation
 org.jdbi.v3.core.generic
 org.jdbi.v3.core.h2
 org.jdbi.v3.core.interceptor
