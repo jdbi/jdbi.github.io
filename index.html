@@ -534,7 +534,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.38.0-rc2-SNAPSHOT,</span>
-<span id="revdate">04/02/2023 15:03 -0700</span>
+<span id="revdate">04/09/2023 19:16 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -706,7 +706,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_mapping_array_types">12.3. Mapping array types</a></li>
 </ul>
 </li>
-<li><a href="#_sql_objects">13. SQL Objects</a>
+<li><a href="#sql-objects">13. SQL Objects</a>
 <ul class="sectlevel2">
 <li><a href="#_sql_method_annotations">13.1. SQL Method annotations</a>
 <ul class="sectlevel3">
@@ -835,50 +835,78 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_like_clauses_with_parameters">17.2. LIKE clauses with Parameters</a></li>
 </ul>
 </li>
-<li><a href="#_advanced_topics_2">18. Advanced Topics</a>
+<li><a href="#_the_extension_framework">18. The Extension Framework</a>
 <ul class="sectlevel2">
-<li><a href="#_high_availability">18.1. High Availability</a></li>
-<li><a href="#compiling_with_parameter_names">18.2. Compiling with Parameter Names</a>
+<li><a href="#_using_jdbi_extensions">18.1. Using Jdbi extensions</a></li>
+<li><a href="#_how_an_extension_works">18.2. How an extension works</a>
 <ul class="sectlevel3">
-<li><a href="#_maven_setup">18.2.1. Maven Setup</a></li>
-<li><a href="#_intellij_idea_setup">18.2.2. IntelliJ IDEA setup</a></li>
-<li><a href="#_eclipse_setup">18.2.3. Eclipse Setup</a></li>
+<li><a href="#_jdbi_and_handle_extension_methods">18.2.1. Jdbi and Handle extension methods</a></li>
 </ul>
 </li>
-<li><a href="#_working_with_generic_types">18.3. Working with Generic Types</a>
+<li><a href="#_extension_framework_sdk">18.3. Extension framework SDK</a>
 <ul class="sectlevel3">
-<li><a href="#_generictype">18.3.1. GenericType</a></li>
-<li><a href="#_the_generictypes_helper">18.3.2. The GenericTypes helper</a></li>
+<li><a href="#_extensions_configuration_class">18.3.1. <code>Extensions</code> configuration class</a></li>
+<li><a href="#_extensionfactory">18.3.2. ExtensionFactory</a></li>
+<li><a href="#_extensionhandler_and_extensionhandlerfactory">18.3.3. ExtensionHandler and ExtensionHandlerFactory</a></li>
+<li><a href="#_extensionhandlercustomizer">18.3.4. ExtensionHandlerCustomizer</a></li>
+<li><a href="#_configcustomizer_and_configcustomizerfactory">18.3.5. ConfigCustomizer and ConfigCustomizerFactory</a></li>
 </ul>
 </li>
-<li><a href="#_namedargumentfinder">18.4. NamedArgumentFinder</a></li>
-<li><a href="#_jdbiconfig">18.5. JdbiConfig</a>
+<li><a href="#_annotations">18.4. Annotations</a>
 <ul class="sectlevel3">
-<li><a href="#_creating_a_custom_jdbiconfig_type">18.5.1. Creating a custom JdbiConfig type</a></li>
+<li><a href="#_useextensionhandler">18.4.1. <code>@UseExtensionHandler</code></a></li>
+<li><a href="#_useextensionhandlercustomizer">18.4.2. UseExtensionHandlerCustomizer</a></li>
+<li><a href="#_useextensionconfigurer">18.4.3. UseExtensionConfigurer</a></li>
 </ul>
 </li>
-<li><a href="#_jdbiplugin">18.6. JdbiPlugin</a></li>
-<li><a href="#_statementcontext">18.7. StatementContext</a></li>
-<li><a href="#user-defined-annotations">18.8. User-defined Annotations</a>
-<ul class="sectlevel3">
-<li><a href="#_statement_customizing_annotations">18.8.1. Statement Customizing Annotations</a></li>
-<li><a href="#_configuration_annotations">18.8.2. Configuration Annotations</a></li>
-<li><a href="#_method_decorating_annotations">18.8.3. Method Decorating Annotations</a></li>
+<li><a href="#_extensionmetadata">18.5. ExtensionMetadata</a></li>
+<li><a href="#_on_demand_extensions">18.6. On-demand extensions</a></li>
 </ul>
 </li>
-<li><a href="#_templateengine">18.9. TemplateEngine</a></li>
-<li><a href="#_sqlparser">18.10. SqlParser</a></li>
-<li><a href="#_sqllogger">18.11. SqlLogger</a></li>
-<li><a href="#_resultproducer">18.12. ResultProducer</a></li>
-<li><a href="#_generator">18.13. Generator</a></li>
-</ul>
-</li>
-<li><a href="#_appendix">19. Appendix</a>
+<li><a href="#_advanced_topics_2">19. Advanced Topics</a>
 <ul class="sectlevel2">
-<li><a href="#_best_practices">19.1. Best Practices</a></li>
-<li><a href="#_api_reference">19.2. API Reference</a></li>
-<li><a href="#_related_projects">19.3. Related Projects</a></li>
-<li><a href="#_upgrading_from_v2_to_v3">19.4. Upgrading from v2 to v3</a></li>
+<li><a href="#_high_availability">19.1. High Availability</a></li>
+<li><a href="#compiling_with_parameter_names">19.2. Compiling with Parameter Names</a>
+<ul class="sectlevel3">
+<li><a href="#_maven_setup">19.2.1. Maven Setup</a></li>
+<li><a href="#_intellij_idea_setup">19.2.2. IntelliJ IDEA setup</a></li>
+<li><a href="#_eclipse_setup">19.2.3. Eclipse Setup</a></li>
+</ul>
+</li>
+<li><a href="#_working_with_generic_types">19.3. Working with Generic Types</a>
+<ul class="sectlevel3">
+<li><a href="#_generictype">19.3.1. GenericType</a></li>
+<li><a href="#_the_generictypes_helper">19.3.2. The GenericTypes helper</a></li>
+</ul>
+</li>
+<li><a href="#_namedargumentfinder">19.4. NamedArgumentFinder</a></li>
+<li><a href="#_jdbiconfig">19.5. JdbiConfig</a>
+<ul class="sectlevel3">
+<li><a href="#_creating_a_custom_jdbiconfig_type">19.5.1. Creating a custom JdbiConfig type</a></li>
+</ul>
+</li>
+<li><a href="#_jdbiplugin">19.6. JdbiPlugin</a></li>
+<li><a href="#_statementcontext">19.7. StatementContext</a></li>
+<li><a href="#user-defined-annotations">19.8. User-defined Annotations</a>
+<ul class="sectlevel3">
+<li><a href="#_statement_customizing_annotations">19.8.1. Statement Customizing Annotations</a></li>
+<li><a href="#_configuration_annotations">19.8.2. Configuration Annotations</a></li>
+<li><a href="#_method_decorating_annotations">19.8.3. Method Decorating Annotations</a></li>
+</ul>
+</li>
+<li><a href="#_templateengine">19.9. TemplateEngine</a></li>
+<li><a href="#_sqlparser">19.10. SqlParser</a></li>
+<li><a href="#_sqllogger">19.11. SqlLogger</a></li>
+<li><a href="#_resultproducer">19.12. ResultProducer</a></li>
+<li><a href="#_generator">19.13. Generator</a></li>
+</ul>
+</li>
+<li><a href="#_appendix">20. Appendix</a>
+<ul class="sectlevel2">
+<li><a href="#_best_practices">20.1. Best Practices</a></li>
+<li><a href="#_api_reference">20.2. API Reference</a></li>
+<li><a href="#_related_projects">20.3. Related Projects</a></li>
+<li><a href="#_upgrading_from_v2_to_v3">20.4. Upgrading from v2 to v3</a></li>
 </ul>
 </li>
 </ul>
@@ -1500,7 +1528,7 @@ assertThat(users).containsExactly(
 <div class="sect2">
 <h3 id="_declarative_api"><a class="anchor" href="#_declarative_api"></a><a class="link" href="#_declarative_api">3.2. Declarative API</a></h3>
 <div class="paragraph">
-<p>The <a href="#_sql_objects">SQL Object extension</a> is an additional module, which provides a declarative API.</p>
+<p>The <a href="#sql-objects">SQL Object extension</a> is an additional module, which provides a declarative API.</p>
 </div>
 <div class="paragraph">
 <p>Define the SQL to execute and the shape of the results by creating  an annotated Java interface.</p>
@@ -1555,7 +1583,7 @@ assertThat(userNames).containsExactly(
 </div>
 </div>
 <div class="paragraph">
-<p>See the <a href="#_sql_objects">chapter on SQL objects</a> for more details about the declarative API. The declarative API uses the <a href="#_core_api_concepts">fluent API</a> "under the hood" and the two styles can be mixed.</p>
+<p>See the <a href="#sql-objects">chapter on SQL objects</a> for more details about the declarative API. The declarative API uses the <a href="#_core_api_concepts">fluent API</a> "under the hood" and the two styles can be mixed.</p>
 </div>
 </div>
 </div>
@@ -5897,7 +5925,7 @@ configuration objects.</p>
 <td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>true</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Whether Jdbi is allowed to create proxy instances for classes (as extension and on-demand reference). This is useful for debugging when using the generator to create java classes for sql objects.</p>
+<p>Whether Jdbi is allowed to create <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Proxy.html" target="_blank" rel="noopener">proxy </a> instances for classes (as extension and on-demand reference). This is useful for debugging when using the generator to create java classes for sql objects.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -6587,7 +6615,7 @@ Array columns can be mapped to any container type registered with the
 </div>
 </div>
 <div class="sect1">
-<h2 id="_sql_objects"><a class="anchor" href="#_sql_objects"></a><a class="link" href="#_sql_objects">13. SQL Objects</a></h2>
+<h2 id="sql-objects"><a class="anchor" href="#sql-objects"></a><a class="link" href="#sql-objects">13. SQL Objects</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>SQL Objects are a declarative-style extension to the fluent-style Core APIs. SQL Objects are implemented as an extension to the core API using the Extension API.</p>
@@ -11683,10 +11711,1286 @@ Check the string concatenation syntax of your database before doing this.
 </div>
 </div>
 <div class="sect1">
-<h2 id="_advanced_topics_2"><a class="anchor" href="#_advanced_topics_2"></a><a class="link" href="#_advanced_topics_2">18. Advanced Topics</a></h2>
+<h2 id="_the_extension_framework"><a class="anchor" href="#_the_extension_framework"></a><a class="link" href="#_the_extension_framework">18. The Extension Framework</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Jdbi core code provides a rich, programmatic interface for
+database operations. It is possible to extend this core by writing
+extensions that plug into the Jdbi core framework and provide new
+functionality.</p>
+</div>
+<div class="paragraph">
+<p>Jdbi ships with the <a href="#sql-objects">SQLObject plugin</a>, which offers
+declarative use of Jdbi by placing annotations on interface methods.</p>
+</div>
+<div class="paragraph">
+<p>The Extension framework functionality is generic and supports any type
+of extension that can be registered with the Jdbi core.</p>
+</div>
+<div class="sect2">
+<h3 id="_using_jdbi_extensions"><a class="anchor" href="#_using_jdbi_extensions"></a><a class="link" href="#_using_jdbi_extensions">18.1. Using Jdbi extensions</a></h3>
+<div class="paragraph">
+<p>Using an extension type with Jdbi is straightforward. The
+<a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> class offers the
+<a href="./apidocs/org/jdbi/v3/core/Jdbi.html#withExtension(java.lang.Class,org.jdbi.v3.core.extension.ExtensionCallback)" target="_blank" rel="noopener">Jdbi#withExtension</a>
+and
+<a href="./apidocs/org/jdbi/v3/core/Jdbi.html#useExtension(java.lang.Class,org.jdbi.v3.core.extension.ExtensionConsumer)" target="_blank" rel="noopener">Jdbi#useExtension</a>
+methods to execute extension code.</p>
+</div>
+<div class="paragraph">
+<p>On-demand extension can be created with the
+<a href="./apidocs/org/jdbi/v3/core/Jdbi.html#onDemand(java.lang.Class)" target="_blank" rel="noopener">Jdbi#onDemand</a>.</p>
+</div>
+<div class="paragraph">
+<p>Finally, extension can be used directly with an existing <a href="./apidocs/org/jdbi/v3/core/Handle.html" target="_blank" rel="noopener">Handle</a> object by calling
+<a href="./apidocs/org/jdbi/v3/core/Handle.html#attach(java.lang.Class)" target="_blank" rel="noopener">Handle#attach</a>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="type">interface</span> <span class="class">SomethingDao</span> {
+    <span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO something (id, name) VALUES (:s.id, :s.name)</span><span class="delimiter">&quot;</span></span>)
+    <span class="type">int</span> insert(<span class="annotation">@BindBean</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">s</span><span class="delimiter">&quot;</span></span>) Something s);
+
+    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT id, name FROM something WHERE id = ?</span><span class="delimiter">&quot;</span></span>)
+    Optional&lt;Something&gt; findSomething(<span class="type">int</span> id);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This is an extension type for the <a href="#sql-objects">SQL Object extension</a>
+which uses annotations to identify functionality, however this is
+implementation specific. If any of the SQL method annotations
+(<a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlBatch.html" target="_blank" rel="noopener">@SqlBatch</a>,
+<a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlCall.html" target="_blank" rel="noopener">@SqlCall</a>,
+<a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlQuery.html" target="_blank" rel="noopener">@SqlQuery</a>,
+<a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlScript.html" target="_blank" rel="noopener">@SqlScript</a> and
+<a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlUpdate.html" target="_blank" rel="noopener">@SqlUpdate</a>) is
+present on either the type or any method, the SQL Object extension will
+be used.</p>
+</div>
+<div class="paragraph">
+<p>Now the
+<a href="./apidocs/org/jdbi/v3/core/Jdbi.html#withExtension(java.lang.Class,org.jdbi.v3.core.extension.ExtensionCallback)" target="_blank" rel="noopener">Jdbi#withExtension</a>
+and
+<a href="./apidocs/org/jdbi/v3/core/Jdbi.html#useExtension(java.lang.Class,org.jdbi.v3.core.extension.ExtensionConsumer)" target="_blank" rel="noopener">Jdbi#useExtension</a>
+methods are used to access SQLObject functionality:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">jdbi.useExtension(SomethingDao.class, dao -&gt; {
+    dao.insert(<span class="keyword">new</span> Something(<span class="integer">1</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">apple</span><span class="delimiter">&quot;</span></span>));
+});
+
+Optional&lt;Something&gt; result = jdbi.withExtension(SomethingDao.class, dao -&gt; dao.findSomething(<span class="integer">1</span>));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If a handle has already been created, an extension type can be
+directly attached with the <a href="./apidocs/org/jdbi/v3/core/Handle.html#attach(java.lang.Class)" target="_blank" rel="noopener">Handle#attach</a> method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">SomethingDao dao = handle.attach(SomethingDao.class);
+Optional&lt;Something&gt; result = dao.findSomething(<span class="integer">1</span>);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_how_an_extension_works"><a class="anchor" href="#_how_an_extension_works"></a><a class="link" href="#_how_an_extension_works">18.2. How an extension works</a></h3>
+<div class="paragraph">
+<p><em>Any interface class can be an extension type.</em> There is nothing special to an extension type unless an extension requires some specific information (e.g. annotations present or specific naming).</p>
+</div>
+<div class="paragraph">
+<p>Extensions should document which information is needed
+that allows the extension framework to determine that a specific interface class  represents an extension type that is accepted by the extension.</p>
+</div>
+<div class="paragraph">
+<p>When calling one of the extension methods
+(<a href="./apidocs/org/jdbi/v3/core/Jdbi.html#withExtension(java.lang.Class,org.jdbi.v3.core.extension.ExtensionCallback)" target="_blank" rel="noopener">Jdbi#withExtension</a>,
+<a href="./apidocs/org/jdbi/v3/core/Jdbi.html#useExtension(java.lang.Class,org.jdbi.v3.core.extension.ExtensionConsumer)" target="_blank" rel="noopener">Jdbi#useExtension</a>
+and <a href="./apidocs/org/jdbi/v3/core/Handle.html#attach(java.lang.Class)" target="_blank" rel="noopener">Handle#attach</a>) with the extension type as a parameter, they return
+an implementation of the extension.</p>
+</div>
+<div class="paragraph">
+<p>Calling any of these methods selects an <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionFactory.html" target="_blank" rel="noopener">ExtensionFactory</a> which handles the extension type and provides the implementation. Extension factories must be registered ahead of time with the Jdbi core
+using the <a href="./apidocs/org/jdbi/v3/core/extension/Extensions.html#register(org.jdbi.v3.core.extension.ExtensionFactory)" target="_blank" rel="noopener">Extensions#register()</a> method.</p>
+</div>
+<div class="paragraph">
+<p>The extension factory then creates an <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionMetadata.html" target="_blank" rel="noopener">ExtensionMetadata</a> object that
+contains information about each method on the extension type:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Which <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionHandler.html" target="_blank" rel="noopener">ExtensionHandler</a> to invoke for each method</p>
+</li>
+<li>
+<p>All <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionHandlerCustomizer.html" target="_blank" rel="noopener">ExtensionHandlerCustomizer</a> instances that change the behavior of the extension handler</p>
+</li>
+<li>
+<p><a href="./apidocs/org/jdbi/v3/core/extension/ConfigCustomizer.html" target="_blank" rel="noopener">ConfigCustomizer</a> instances to apply when an extension handler is invoked</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Extension metadata exists per extension type and is created only once
+and then reused.</p>
+</div>
+<div class="paragraph">
+<p>Jdbi usually returns a <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Proxy.html" target="_blank" rel="noopener">Java proxy</a> object to user code which in turn
+executes the extension handlers. This proxy object contains
+ExtensionHandlerInvoker instances for each method on the extension
+type. Each instance manages the objects specific to the invocation
+(<a href="./apidocs/org/jdbi/v3/core/Handle.html" target="_blank" rel="noopener">Handle</a>, <a href="./apidocs/org/jdbi/v3/core/config/ConfigRegistry.html" target="_blank" rel="noopener">configuration</a>) and then executes the extension handler.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>                                                         +--------------------------+
+User code --&gt; [registers ExtensionFactory with Jdbi] --&gt; | Extensions Config object |
+   |                                                     +--------------------------+
+   |
+   |                                          +------------------+
+   | ---&gt; [calls Jdbi.use/withExtension] ---&gt; | ExtensionFactory |
+   |                                          +------------------+
+   |                                                 |             +-------------------+             +------------------+
+   |                                                 +---&gt; creates | ExtensionMetadata | --&gt; defines | ExtensionHandler |
+   |                                                 |             +-------------------+             +------------------+
+   |                                                 |                                                       ^
+   |                                                 |                                                       |
+   |                                                 |                                                       | matches
+   |                                                 |                                                       |
+   |                                                 |                                                       |
+   |                                                 |             +-------------------+              +-------------------------+
+   |                                                 +---&gt; creates | Java proxy object | --&gt; contains | ExtensionHandlerInvoker |
+   | &lt;------- [return to user code] &lt;----------------------------- +-------------------+              +-------------------------+
+   |
+   |
+   |
+   |
+   |                                        +-------------------+              +-------------------------+
+   | --&gt; [invoke extension type method] --&gt; | Java proxy object | --&gt; executes | ExtensionHandlerInvoker |
+   |                                        +-------------------+              +-------------------------+
+   |                                                                                       |
+   |                                                                                       | invokes with Handle
+   |                                                                                       | and Configuration
+   |                                                                                       v
+   |                                                                            +------------------+
+   | &lt;---- [ return result to user code] &lt;------------------------------------- | ExtensionHandler |
+                                                                                +------------------+</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><a href="./apidocs/org/jdbi/v3/core/extension/ExtensionHandler.html" target="_blank" rel="noopener">ExtensionHandler</a>, <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionHandlerCustomizer.html" target="_blank" rel="noopener">ExtensionHandlerCustomizer</a> and <a href="./apidocs/org/jdbi/v3/core/extension/ConfigCustomizer.html" target="_blank" rel="noopener">ConfigCustomizer</a> are the three main extension framework objects that extensions implement:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>An <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionHandler.html" target="_blank" rel="noopener">ExtensionHandler</a> object is created by an
+<a href="./apidocs/org/jdbi/v3/core/extension/ExtensionHandlerFactory.html" target="_blank" rel="noopener">ExtensionHandlerFactory</a> which can be registered either globally
+(with the <a href="./apidocs/org/jdbi/v3/core/extension/Extensions.html" target="_blank" rel="noopener">Extensions configuration</a>) and then applies to all
+extensions or with the <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionFactory.html" target="_blank" rel="noopener">ExtensionFactory</a> itself (and then only
+applies to extension types that are handled by that specific
+factory). It is also possible to specify extension handlers through annotations.</p>
+</li>
+<li>
+<p><a href="./apidocs/org/jdbi/v3/core/extension/ExtensionHandlerCustomizer.html" target="_blank" rel="noopener">ExtensionHandlerCustomizer</a> objects can modify the behavior of an
+extension handler. They are registered
+globally or with the <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionFactory.html" target="_blank" rel="noopener">ExtensionFactory</a>. They can also be specified through annotations.</p>
+</li>
+<li>
+<p><a href="./apidocs/org/jdbi/v3/core/extension/ConfigCustomizer.html" target="_blank" rel="noopener">ConfigCustomizer</a> objects are created by a ConfigCustomizerFactory and modify the configuration that is
+used when an extension handler is executed. ConfigCustomizerFactory instances are
+registered globally or with the <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionFactory.html" target="_blank" rel="noopener">ExtensionFactory</a>. Config customization can also be specified through annotations.</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="_jdbi_and_handle_extension_methods"><a class="anchor" href="#_jdbi_and_handle_extension_methods"></a><a class="link" href="#_jdbi_and_handle_extension_methods">18.2.1. Jdbi and Handle extension methods</a></h4>
+<div class="paragraph">
+<p>The main difference between using the Jdbi extension methods
+(Jdbi#withExtension and Jdbi#useExtension) and the <a href="./apidocs/org/jdbi/v3/core/Handle.html#attach(java.lang.Class)" target="_blank" rel="noopener">Handle#attach</a>
+method is the lifecycle of the <a href="./apidocs/org/jdbi/v3/core/Handle.html" target="_blank" rel="noopener">Handle</a> object (and the database connection).</p>
+</div>
+<div class="paragraph">
+<p>For the <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> related methods, a new <a href="./apidocs/org/jdbi/v3/core/Handle.html" target="_blank" rel="noopener">Handle</a> object is created and used
+within the callback. The handle is closed (all its resources are
+released and the database connection is closed) when the callback
+ends.</p>
+</div>
+<div class="paragraph">
+<p>When attaching an extension type to an existing <a href="./apidocs/org/jdbi/v3/core/Handle.html" target="_blank" rel="noopener">Handle</a> by calling
+<a href="./apidocs/org/jdbi/v3/core/Handle.html#attach(java.lang.Class)" target="_blank" rel="noopener">Handle#attach</a>, no new Handle is created. Any extension method will use
+the Handle (and the database connection) that it was attached to. When
+the Handle is closed, all resources related to the extension object
+will also be released.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_extension_framework_sdk"><a class="anchor" href="#_extension_framework_sdk"></a><a class="link" href="#_extension_framework_sdk">18.3. Extension framework SDK</a></h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This chapter is intended for developers that want to write a new
+extension for Jdbi and need to understand the Extension framework
+details. Unless you plan to write an actual extension, there is no
+need to understand this chapter in detail.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>This chapter lists all the classes that make up the extension
+framework, their function and how to use them when writing a new
+extension. Not all pieces are needed for every extension. All examples
+in this chapter use the <a href="#sql-objects">SQLObject extension</a> as
+reference.</p>
+</div>
+<div class="sect3">
+<h4 id="_extensions_configuration_class"><a class="anchor" href="#_extensions_configuration_class"></a><a class="link" href="#_extensions_configuration_class">18.3.1. <code>Extensions</code> configuration class</a></h4>
+<div class="paragraph">
+<p>The <a href="./apidocs/org/jdbi/v3/core/extension/Extensions.html" target="_blank" rel="noopener">Extensions</a> class is the configuration object for the extension framework. It
+contains a registry for extension factories and global extension
+objects (ExtensionHandlerFactory, <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionHandlerCustomizer.html" target="_blank" rel="noopener">ExtensionHandlerCustomizer</a> and
+ConfigCustomizerFactory).</p>
+</div>
+<div class="paragraph">
+<p>Any extension object registered here will be applied to all
+extensions, independent of which extension factory is ultimately
+chosen to process an extension type.</p>
+</div>
+<div class="paragraph">
+<p>By default, the following extension objects are globally registered
+and can not be removed. These are always processed last:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>An extension handler factory for interface default methods. These are wrapped in an ExtensionHandler but then the default implementation is called.</p>
+</li>
+<li>
+<p>An extension handler factory for the <code>@UseExtensionHandler</code> annotation.</p>
+</li>
+<li>
+<p>An extension handler customizer for the <code>@UseExtensionHandlerCustomizer</code> annotation.</p>
+</li>
+<li>
+<p>A config customizer factory for the <code>@UseExtensionConfigurer</code> annotation.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Order matters with extension objects. Extension factory specific
+objects are applied first, then the globally registered
+objects. However, any user registered object is used before the any of
+the default objects.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_extensionfactory"><a class="anchor" href="#_extensionfactory"></a><a class="link" href="#_extensionfactory">18.3.2. ExtensionFactory</a></h4>
+<div class="paragraph">
+<p>This is the core piece for any extension. An <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionFactory.html" target="_blank" rel="noopener">ExtensionFactory</a> object
+provides all the specific pieces that make up the extension
+functionality.</p>
+</div>
+<div class="paragraph">
+<p>The only method that must be implemented in this interface is
+<a href="./apidocs/org/jdbi/v3/core/extension/ExtensionFactory.html#accepts(java.lang.Class)" target="_blank" rel="noopener">ExtensionFactory#accepts()</a>. If this method returns <code>true</code>, then the
+given extension type is handled by this factory. E.g. the SQL Object
+factory accepts any interface that has at least one SQL annotation on
+the class itself or a method.</p>
+</div>
+<div class="paragraph">
+<p>Any extension factory can also provide specific extension objects
+(ExtensionHandlerFactory, <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionHandlerCustomizer.html" target="_blank" rel="noopener">ExtensionHandlerCustomizer</a> and
+ConfigCustomizerFactory) which are only applied when the factory has
+accepted an extension type. The extension factory provides a getter for
+each extension object that returns a Collection. By default, each
+returns an empty collection.</p>
+</div>
+<div class="sect4">
+<h5 id="_standard_methods"><a class="anchor" href="#_standard_methods"></a><a class="link" href="#_standard_methods">Standard methods</a></h5>
+<div class="paragraph">
+<p>When the extension framework returns an implementation of an extension
+type, it usually returns a <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Proxy.html" target="_blank" rel="noopener">Java proxy</a> object which will intercept any
+method defined on the extension type and invoke the corresponing
+extension handler.</p>
+</div>
+<div class="paragraph">
+<p>In addition to the methods defined by the extension type, the following methods will also be provided:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Object#toString returns "Jdbi extension proxy for &lt;extension type&gt;"</p>
+</li>
+<li>
+<p>Object#equals and Object#hashCode where each instance is only equal to itself.</p>
+</li>
+<li>
+<p>Object#finalize has no effect.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>With the exception of Object#finalize, each method can be overridden by the extension type (e.g. through a interface default method).</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_non_virtual_factories"><a class="anchor" href="#_non_virtual_factories"></a><a class="link" href="#_non_virtual_factories">Non-virtual factories</a></h5>
+<div class="paragraph">
+<p>Normally, a factory will use extension handlers to provide
+functionality when an extension type method is called. Only the
+<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Proxy.html" target="_blank" rel="noopener">proxy</a> object created by the extension framework is an implementation
+of the extension type. This is a <em>virtual</em> factory (because there is no
+actual object implementing the interface), and it is the default. The
+<a href="#sql-objects">SQL Object extension</a> is an example of a virtual factory because it
+never creates an actual implementation of the extension types but
+dispatches any method calls to a specific handler to execute SQL
+operations.</p>
+</div>
+<div class="paragraph">
+<p>The extension framework supports another type, which is called
+<em>non-virtual</em>. These factories actually produce a backing object that
+implements the extension type.</p>
+</div>
+<div class="paragraph">
+<p>Jdbi provides an annotation processor that can create java
+implementations of extension types. Jdbi provides another extension factory is included which is a non-virtual
+factory which will return these implementations for extension types. This factory (GeneratorSqlObjectFactory) will use the
+concrete implementation class to back any extension type method and
+call methods on the implementation class.</p>
+</div>
+<div class="paragraph">
+<p>This is an example of a non-virtual factory that provides an implementation
+for a specific extension type:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="directive">static</span> <span class="type">class</span> <span class="class">NonVirtualExtensionFactory</span> <span class="directive">implements</span> ExtensionFactory {
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="predefined-type">Set</span>&lt;FactoryFlag&gt; getFactoryFlags() {
+        <span class="keyword">return</span> <span class="predefined-type">EnumSet</span>.of(NON_VIRTUAL_FACTORY); <i class="conum" data-value="1"></i><b>(1)</b>
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="type">boolean</span> accepts(<span class="predefined-type">Class</span>&lt;?&gt; extensionType) {
+        <span class="keyword">return</span> extensionType == NonVirtualDao.class;
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> &lt;E&gt; E attach(<span class="predefined-type">Class</span>&lt;E&gt; extensionType, HandleSupplier handleSupplier) {
+        <span class="keyword">return</span> (E) <span class="keyword">new</span> NonVirtualDaoImpl(handleSupplier); <i class="conum" data-value="2"></i><b>(2)</b>
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>An extension factory declares itself non-virtual by returning the <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionFactory.FactoryFlag.html#NO_VIRTUAL_FACTORY" target="_blank" rel="noopener"><code>NON_VIRTUAL_FACTORY</code></a> flag on the <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionFactory.html#getFactoryFlags()" target="_blank" rel="noopener">ExtensionFactory#getFactoryFlags()</a>
+method.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The extension framework calls the <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionFactory.html#attach(java.lang.Class,org.jdbi.v3.core.extension.HandleSupplier)" target="_blank" rel="noopener">ExtensionFactory#attach()</a> method
+with the current extension type and a handle supplier. The factory is
+expected to return an instance of the extension type. Methods on the
+instance will be wrapped in extension handlers and a proxy object is
+returned to the caller.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_extensions_without_java_proxy_objects"><a class="anchor" href="#_extensions_without_java_proxy_objects"></a><a class="link" href="#_extensions_without_java_proxy_objects">Extensions without Java proxy objects</a></h5>
+<div class="paragraph">
+<p>A drawback of the standard extension factories is, that returning a
+<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Proxy.html" target="_blank" rel="noopener">Java proxy</a> object limits factory functionality and is incompatible with some use cases (e.g. using GraalVM for native compilation).</p>
+</div>
+<div class="paragraph">
+<p>A factory can return the
+<a href="./apidocs/org/jdbi/v3/core/extension/ExtensionFactory.FactoryFlag.html#DONT_USE_PROXY" target="_blank" rel="noopener"><code>DONT_USE_PROXY</code></a> flag on the <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionFactory.html#getFactoryFlags()" target="_blank" rel="noopener">ExtensionFactory#getFactoryFlags()</a> method to signal that
+the extension framework should return the backing object as-is.</p>
+</div>
+<div class="paragraph">
+<p>This is an example of a factory that supports abstract classes in addition to interfaces:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">abstract</span> <span class="directive">static</span> <span class="type">class</span> <span class="class">AbstractDao</span> {
+
+    <span class="directive">public</span> <span class="directive">abstract</span> Optional&lt;Something&gt; findSomething(<span class="type">int</span> id);
+
+    Something findFirstSomething() {
+        <span class="keyword">return</span> findSomething(<span class="integer">1</span>).orElseGet(Assertions::fail);
+    }
+}
+
+<span class="directive">public</span> <span class="directive">static</span> <span class="type">class</span> <span class="class">DontUseProxyExtensionFactory</span> <span class="directive">implements</span> ExtensionFactory {
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="predefined-type">Set</span>&lt;FactoryFlag&gt; getFactoryFlags() {
+        <span class="keyword">return</span> <span class="predefined-type">EnumSet</span>.of(DONT_USE_PROXY); <i class="conum" data-value="1"></i><b>(1)</b>
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="type">boolean</span> accepts(<span class="predefined-type">Class</span>&lt;?&gt; extensionType) {
+        <span class="keyword">return</span> extensionType == AbstractDao.class;
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> &lt;E&gt; E attach(<span class="predefined-type">Class</span>&lt;E&gt; extensionType, HandleSupplier handleSupplier) {
+        <span class="keyword">return</span> (E) <span class="keyword">new</span> DaoImpl(handleSupplier); <i class="conum" data-value="2"></i><b>(2)</b>
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>An extension factory declares that it supports abstract classes by
+passing the <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionFactory.FactoryFlag.html#DONT_USE_PROXY" target="_blank" rel="noopener"><code>DONT_USE_PROXY</code></a> flag on the
+<a href="./apidocs/org/jdbi/v3/core/extension/ExtensionFactory.html#getFactoryFlags()" target="_blank" rel="noopener">ExtensionFactory#getFactoryFlags()</a> method. Using this flag also
+implies the <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionFactory.FactoryFlag.html#NO_VIRTUAL_FACTORY" target="_blank" rel="noopener"><code>NON_VIRTUAL_FACTORY</code></a> flag.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The extension framework calls the <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionFactory.html#attach(java.lang.Class,org.jdbi.v3.core.extension.HandleSupplier)" target="_blank" rel="noopener">ExtensionFactory#attach()</a> method
+with the current extension type and a handle supplier. The factory is
+expected to return an instance of the extension type. Unlike a non-virtual
+factory, this instance is returned "as-is" to the caller. This bypasses the creation of the proxy object and extension handlers are not invoked by the extension framework.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_extensionhandler_and_extensionhandlerfactory"><a class="anchor" href="#_extensionhandler_and_extensionhandlerfactory"></a><a class="link" href="#_extensionhandler_and_extensionhandlerfactory">18.3.3. ExtensionHandler and ExtensionHandlerFactory</a></h4>
+<div class="paragraph">
+<p><a href="./apidocs/org/jdbi/v3/core/extension/ExtensionHandler.html" target="_blank" rel="noopener">ExtensionHandler</a> objects are the main place for extension
+functionality. Each method on an extension type is mapped to an
+extension handler. Extension handlers are executed by calling the
+ExtensionHandler#invoke() method.</p>
+</div>
+<div class="paragraph">
+<p>This is an example of an Extension handler that provides a value
+whenever a method on the extension type is called.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="directive">static</span> <span class="type">class</span> <span class="class">TestExtensionHandler</span> <span class="directive">implements</span> ExtensionHandler {
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="predefined-type">Object</span> invoke(HandleSupplier handleSupplier, <span class="predefined-type">Object</span> target, <span class="predefined-type">Object</span>... args) {
+        <span class="keyword">return</span> <span class="keyword">new</span> Something((<span class="type">int</span>) args[<span class="integer">0</span>], (<span class="predefined-type">String</span>) args[<span class="integer">1</span>]);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Extension handlers are not shared, so every method maps onto a
+separate instance. The ExtensionHandlerFactory interface provides the
+ExtensionHandlerFactory#accepts method which is called for each method
+that needs to be mapped. If an ExtensionHandlerFactory accepts a
+method, the createExtensionHandler method is called which returns an
+extension handler instance.</p>
+</div>
+<div class="paragraph">
+<p>This is an extension handler factory that returns an extension handler
+when called for a method called <code>getSomething</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="directive">static</span> <span class="type">class</span> <span class="class">TestExtensionHandlerFactory</span> <span class="directive">implements</span> ExtensionHandlerFactory {
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="type">boolean</span> accepts(<span class="predefined-type">Class</span>&lt;?&gt; extensionType, <span class="predefined-type">Method</span> method) {
+        <span class="keyword">return</span> method.getName().equals(<span class="string"><span class="delimiter">&quot;</span><span class="content">getSomething</span><span class="delimiter">&quot;</span></span>);
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> Optional&lt;ExtensionHandler&gt; createExtensionHandler(<span class="predefined-type">Class</span>&lt;?&gt; extensionType, <span class="predefined-type">Method</span> method) {
+        <span class="keyword">return</span> Optional.of(<span class="keyword">new</span> TestExtensionHandler());
+    }
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The createExtensionHandler method returns an
+Optional&lt;ExtensionHandler&gt; for backwards compatibility reasons. While
+it is legal for a factory to accept a method on an extension type and
+then return an Optional.empty() object, it is discouraged in new code.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>To use an exception handler with an actual extension type, its factory
+could be registered as a global extension handler factory or added to
+the specific extension factory. Here is an example of a extension
+factory and the corresponding extension type:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="directive">static</span> <span class="type">class</span> <span class="class">TestExtensionFactory</span> <span class="directive">implements</span> ExtensionFactory {
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="type">boolean</span> accepts(<span class="predefined-type">Class</span>&lt;?&gt; extensionType) {
+        <span class="keyword">return</span> extensionType == ExtensionType.class;
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="predefined-type">Collection</span>&lt;ExtensionHandlerFactory&gt; getExtensionHandlerFactories(ConfigRegistry config) {
+        <span class="keyword">return</span> <span class="predefined-type">Collections</span>.singleton(<span class="keyword">new</span> TestExtensionHandlerFactory());
+    }
+}
+
+<span class="type">interface</span> <span class="class">ExtensionType</span> {
+    Something getSomething(<span class="type">int</span> id, <span class="predefined-type">String</span> name);
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_extensionhandlercustomizer"><a class="anchor" href="#_extensionhandlercustomizer"></a><a class="link" href="#_extensionhandlercustomizer">18.3.4. ExtensionHandlerCustomizer</a></h4>
+<div class="paragraph">
+<p><a href="./apidocs/org/jdbi/v3/core/extension/ExtensionHandlerCustomizer.html" target="_blank" rel="noopener">ExtensionHandlerCustomizer</a> objects can modify extension handler execution. They can be placed on specific methods or globally registered.</p>
+</div>
+<div class="paragraph">
+<p>An example in the <a href="#sql-objects">SQL object extension</a> is the <code>@Transaction</code> annotation. If this annotation is
+present, multiple SQL operations are wrapped into a transaction,
+otherwise not.</p>
+</div>
+<div class="paragraph">
+<p>Here is an example for a extension handler customizer that logs every
+method handler invocation. It gets registered as a global extension
+handler customizer with the <a href="./apidocs/org/jdbi/v3/core/extension/Extensions.html" target="_blank" rel="noopener">Extensions configuration object</a> and will
+then log every method invocation on a SQL object.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This is example code. Jdbi actually offers better logging facilities
+with SqlLogger and the SqlStatements#setSqlLogger method.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">    jdbi.configure(Extensions.class, e -&gt;
+            e.registerHandlerCustomizer(<span class="keyword">new</span> LoggingExtensionHandlerCustomizer())); <i class="conum" data-value="1"></i><b>(1)</b>
+
+<span class="directive">static</span> <span class="type">class</span> <span class="class">LoggingExtensionHandlerCustomizer</span> <span class="directive">implements</span> ExtensionHandlerCustomizer {
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> ExtensionHandler customize(ExtensionHandler handler, <span class="predefined-type">Class</span>&lt;?&gt; extensionType, <span class="predefined-type">Method</span> method) {
+        <span class="keyword">return</span> (handleSupplier, target, args) -&gt; {
+            LOG.info(format(<span class="string"><span class="delimiter">&quot;</span><span class="content">Entering %s on %s</span><span class="delimiter">&quot;</span></span>, method, extensionType.getSimpleName()));
+            <span class="keyword">try</span> {
+                <span class="keyword">return</span> handler.invoke(handleSupplier, target, args);
+            } <span class="keyword">finally</span> {
+                LOG.info(format(<span class="string"><span class="delimiter">&quot;</span><span class="content">Leaving %s on %s</span><span class="delimiter">&quot;</span></span>, method, extensionType.getSimpleName()));
+            }
+        };
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Register as a global <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionHandlerCustomizer.html" target="_blank" rel="noopener">ExtensionHandlerCustomizer</a> instance to log
+every method invocation.</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<a href="./apidocs/org/jdbi/v3/core/extension/ExtensionHandlerCustomizer.html" target="_blank" rel="noopener">ExtensionHandlerCustomizer</a> instances usually wrap or replace an
+existing extension handler. They need to be stateless themselves and
+only modify or operate on the <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionHandler.html" target="_blank" rel="noopener">ExtensionHandler</a> object that was passed
+into the customize() method.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_configcustomizer_and_configcustomizerfactory"><a class="anchor" href="#_configcustomizer_and_configcustomizerfactory"></a><a class="link" href="#_configcustomizer_and_configcustomizerfactory">18.3.5. ConfigCustomizer and ConfigCustomizerFactory</a></h4>
+<div class="paragraph">
+<p><a href="./apidocs/org/jdbi/v3/core/extension/ConfigCustomizer.html" target="_blank" rel="noopener">ConfigCustomizer</a> instances modify the configuration object that is used when an extension type method is invoked.</p>
+</div>
+<div class="paragraph">
+<p>When an extension handler is invoked, it receives a specific
+configuration object. This configuration object is passed to all extension handler customizers and the extension handler itself.</p>
+</div>
+<div class="paragraph">
+<p>It is possible to modify the configuration for all methods on an  extension type or just specific methods. For that purpose,
+config customizers are created by ConfigCustomizerFactory
+instances. The extension framework calls the  ConfigCustomizerFactory#forExtensionType and
+ConfigCustomizerType#forExtensionMethod for every registered factory invoking the extension handler.</p>
+</div>
+<div class="paragraph">
+<p>This is an example for a global configuration customizer that registers a
+specific rowmapper for all methods on every extension type.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">    jdbi.configure(Extensions.class, e -&gt;
+            e.registerConfigCustomizerFactory(<span class="keyword">new</span> SomethingMapperConfigCustomizerFactory())); <i class="conum" data-value="1"></i><b>(1)</b>
+
+<span class="directive">static</span> <span class="type">class</span> <span class="class">SomethingMapperConfigCustomizerFactory</span> <span class="directive">implements</span> ConfigCustomizerFactory {
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="predefined-type">Collection</span>&lt;ConfigCustomizer&gt; forExtensionType(<span class="predefined-type">Class</span>&lt;?&gt; extensionType) {
+        <span class="keyword">return</span> <span class="predefined-type">Collections</span>.singleton(
+                config -&gt; config.get(RowMappers.class).register(<span class="keyword">new</span> SomethingMapper()) <i class="conum" data-value="2"></i><b>(2)</b>
+        );
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Registers as a global <a href="./apidocs/org/jdbi/v3/core/extension/ConfigCustomizer.html" target="_blank" rel="noopener">ConfigCustomizer</a> instance for every extension type.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Register the <code>SomethingMapper</code> to the configuraion of every extension handler.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_annotations"><a class="anchor" href="#_annotations"></a><a class="link" href="#_annotations">18.4. Annotations</a></h3>
+<div class="paragraph">
+<p>Jdbi extensions like the SQL Object extension use annotations on the
+extension types to provide functionality. It is possible to implement
+a large part of the functionality as annotation handlers.</p>
+</div>
+<div class="paragraph">
+<p>The extension framework offers meta-annotation to configure
+<a href="./apidocs/org/jdbi/v3/core/extension/ExtensionHandler.html" target="_blank" rel="noopener">ExtensionHandler</a>s and <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionHandlerCustomizer.html" target="_blank" rel="noopener">ExtensionHandlerCustomizer</a>s directly and an
+another meta-annotation for ExtensionConfigurer which allows
+configuration modification similar to <a href="./apidocs/org/jdbi/v3/core/extension/ConfigCustomizer.html" target="_blank" rel="noopener">ConfigCustomizer</a>).</p>
+</div>
+<div class="paragraph">
+<p>Meta-annotations are used on actual annotation classes to mark those
+for processing by the extension framework.</p>
+</div>
+<div class="sect3">
+<h4 id="_useextensionhandler"><a class="anchor" href="#_useextensionhandler"></a><a class="link" href="#_useextensionhandler">18.4.1. <code>@UseExtensionHandler</code></a></h4>
+<div class="paragraph">
+<p>The <code>@UseExtensionHandler</code> meta-annotation marks another annotation to configure an extension handler. The annotation must be placed on a method in an extension type, therefore annotations that are marked with the
+<code>@Use<a href="./apidocs/org/jdbi/v3/core/extension/ExtensionHandler.html" target="_blank" rel="noopener">ExtensionHandler</a></code> should use the <code>@Target({ElementType.METHOD})</code>
+annotation to limit their scope.</p>
+</div>
+<div class="paragraph">
+<p>The extension framework always processes annotations that have been
+marked with <code>@UseExtensionHandler</code>. It supports constructors on the
+extension handler that either take no arguments, take just the Method
+object for the method that the annotation resides on or take both the
+extension type and the Method object.</p>
+</div>
+<div class="paragraph">
+<p>When using the <code>@UseExtensionHandler</code> annotation, the
+<code>UseExtensionHandler#id()</code> method should return an id specific to the
+extension that should process the annotation. The corresponding
+factory should also ensure that only annotations with the correct id
+are processed. This allows multiple extensions that use annotations to
+coexist.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Even though multiple extensions can co-exist, they can not share an
+extension type.  Every extension type will only get extension handlers
+associated with a single factory. It is not possible to have an
+extension type where methods are processed by extension handlers that
+are annotated with annotations that use different id values. Any
+extension handler must be provided either by annotations that match
+the id value of the <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionFactory.html" target="_blank" rel="noopener">ExtensionFactory</a>, an ExtensionHandlerFactory that
+was provided by the extension factory or a global extension handler
+factory.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>All SQL method annotations in the <a href="#sql-objects">Jdbi SQL Object</a> extension are marked
+with this annotation to provide their respective extension handlers.</p>
+</div>
+<div class="paragraph">
+<p>This is an example of an annotation that provides the handler for the
+<code>getSomething</code> method on an extension type:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">    jdbi.configure(Extensions.class, extensions -&gt;  <i class="conum" data-value="1"></i><b>(1)</b>
+            extensions.register(extensionType -&gt;
+                    Stream.of(extensionType.getMethods())
+                            .anyMatch(method -&gt;
+                                    Stream.of(method.getAnnotations())
+                                            .map(annotation -&gt; annotation.annotationType()
+                                                    .getAnnotation(UseExtensionHandler.class)) <i class="conum" data-value="2"></i><b>(2)</b>
+                                            .anyMatch(a -&gt; a != <span class="predefined-constant">null</span> &amp;&amp; <span class="string"><span class="delimiter">&quot;</span><span class="content">test</span><span class="delimiter">&quot;</span></span>.equals(a.id())) <i class="conum" data-value="3"></i><b>(3)</b>
+                            )));
+
+<span class="type">interface</span> <span class="class">ExtensionType</span> {
+
+    <span class="annotation">@SomethingAnnotation</span> <i class="conum" data-value="4"></i><b>(4)</b>
+    Something getSomething(<span class="type">int</span> id, <span class="predefined-type">String</span> name);
+}
+
+<span class="annotation">@Retention</span>(<span class="predefined-type">RetentionPolicy</span>.RUNTIME)
+<span class="annotation">@Target</span>({<span class="predefined-type">ElementType</span>.METHOD}) <i class="conum" data-value="5"></i><b>(5)</b>
+<span class="annotation">@UseExtensionHandler</span>(id = <span class="string"><span class="delimiter">&quot;</span><span class="content">test</span><span class="delimiter">&quot;</span></span>, <i class="conum" data-value="6"></i><b>(6)</b>
+        value = SomethingExtensionHandler.class) <i class="conum" data-value="7"></i><b>(7)</b>
+<span class="annotation">@interface</span> SomethingAnnotation {}
+
+<span class="directive">public</span> <span class="directive">static</span> <span class="type">class</span> <span class="class">SomethingExtensionHandler</span> <span class="directive">implements</span> ExtensionHandler {
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="predefined-type">Object</span> invoke(HandleSupplier handleSupplier, <span class="predefined-type">Object</span> target, <span class="predefined-type">Object</span>... args) {
+        <span class="keyword">return</span> <span class="keyword">new</span> Something((<span class="type">int</span>) args[<span class="integer">0</span>], (<span class="predefined-type">String</span>) args[<span class="integer">1</span>]);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>An extension factory that implements only the <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionFactory.html#accepts(java.lang.Class)" target="_blank" rel="noopener">ExtensionFactory#accepts()</a>
+method can be written as a lambda.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Find any annotation that has the <code>@UseExtensionHandler</code>
+annotation.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Ensure that the annotation uses the <code>test</code> id value.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>The specific annotation provides the extension handler to the
+<code>getSomething</code> method.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>The custom annotation targets only methods.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>The <code>test</code> id value ensures that the registered factory will
+accept the extension type. Any extension type must be accepted by a
+factory even if the factory itself does not process the extension type
+or provide any explicit extension objects.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>There is no ExtensionHandlerFactory necessary (the extension
+framework provides a generic factory that processes the annotations
+and creates the extension handlers).</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_useextensionhandlercustomizer"><a class="anchor" href="#_useextensionhandlercustomizer"></a><a class="link" href="#_useextensionhandlercustomizer">18.4.2. UseExtensionHandlerCustomizer</a></h4>
+<div class="paragraph">
+<p>The <code>@UseExtensionHandlerCustomizer</code> meta-annotation marks another
+annotation as providing an <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionHandlerCustomizer.html" target="_blank" rel="noopener">ExtensionHandlerCustomizer</a> instance.</p>
+</div>
+<div class="paragraph">
+<p>Extension handler customizers can be defined for all methods in an
+extension type by adding an annotation that uses the
+<code>@UseExtensionHandlerCustomizer</code> annotation to the extension type
+itself or for specific methods by adding the annotation to a method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Retention</span>(<span class="predefined-type">RetentionPolicy</span>.RUNTIME)
+<span class="annotation">@Target</span>({<span class="predefined-type">ElementType</span>.METHOD, <span class="predefined-type">ElementType</span>.TYPE}) <i class="conum" data-value="1"></i><b>(1)</b>
+<span class="annotation">@UseExtensionHandlerCustomizer</span>(
+        value = LoggingExtensionHandlerCustomizer.class)
+<span class="annotation">@interface</span> LogThis {}
+
+<span class="type">interface</span> <span class="class">MethodExtensionType</span> {
+
+    <span class="annotation">@LogThis</span>
+    <span class="annotation">@SomethingAnnotation</span>
+    Something getSomething(<span class="type">int</span> id, <span class="predefined-type">String</span> name);
+}
+
+<span class="annotation">@LogThis</span>
+<span class="type">interface</span> <span class="class">InstanceExtensionType</span> {
+
+    <span class="annotation">@SomethingAnnotation</span>
+    Something getSomething(<span class="type">int</span> id, <span class="predefined-type">String</span> name);
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>An annotation that uses the <code>@UseExtensionHandlerCustomizer</code>
+annotation can be placed on a method or the extension type itself.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The extension framework always processes annotations that have been
+marked with <code>@UseExtensionHandlerCustomizer</code>. It supports constructors
+on the extension handler customizer that either take no arguments,
+take just the Method object for the method that the annotation resides
+on or take both the extension type and the Method object.</p>
+</div>
+<div class="paragraph">
+<p>This is an example for an annotation that provides a handler
+customizer which logs method entry and exit for any extension handler:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="directive">static</span> <span class="type">class</span> <span class="class">LoggingExtensionHandlerCustomizer</span> <span class="directive">implements</span> ExtensionHandlerCustomizer {
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> ExtensionHandler customize(ExtensionHandler handler, <span class="predefined-type">Class</span>&lt;?&gt; extensionType, <span class="predefined-type">Method</span> method) {
+        <span class="keyword">return</span> (handleSupplier, target, args) -&gt; {
+            LOG.info(format(<span class="string"><span class="delimiter">&quot;</span><span class="content">Entering %s on %s</span><span class="delimiter">&quot;</span></span>, method, extensionType.getSimpleName()));
+            <span class="keyword">try</span> {
+                <span class="keyword">return</span> handler.invoke(handleSupplier, target, args);
+            } <span class="keyword">finally</span> {
+                LOG.info(format(<span class="string"><span class="delimiter">&quot;</span><span class="content">Leaving %s on %s</span><span class="delimiter">&quot;</span></span>, method, extensionType.getSimpleName()));
+            }
+        };
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Extension handler customizer objects are not tied to a specific
+extension factory, they can be mixed. This is an example where SQL
+Object method annotations are used with the logging annotation:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="type">interface</span> <span class="class">SomethingDao</span> {
+
+    <span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO something (id, name) VALUES (:s.id, :s.name)</span><span class="delimiter">&quot;</span></span>)
+    <span class="type">int</span> insert(<span class="annotation">@BindBean</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">s</span><span class="delimiter">&quot;</span></span>) Something s);
+
+    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT id, name FROM something WHERE id = ?</span><span class="delimiter">&quot;</span></span>)
+    <span class="annotation">@LogThis</span>
+    Optional&lt;Something&gt; findSomething(<span class="type">int</span> id);
+}</code></pre>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_extensionhandlercustomizationorder"><a class="anchor" href="#_extensionhandlercustomizationorder"></a><a class="link" href="#_extensionhandlercustomizationorder">ExtensionHandlerCustomizationOrder</a></h5>
+<div class="paragraph">
+<p>When multiple extension customizers are used on the same extension
+type method, the order in which they are applied is undefined. If a
+specific order is required (e.g. because one customization depends on
+another), the <code>@ExtensionHandlerCustomizationOrder</code> annotation can be
+used to enforce a specific order.</p>
+</div>
+<div class="paragraph">
+<p>The annotation orders the extension customizers from outermost to
+innermost (outermost is called first).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="type">interface</span> <span class="class">OrderedCustomizers</span> {
+    <span class="annotation">@Bar</span>
+    <span class="annotation">@Foo</span>
+    <span class="annotation">@ExtensionHandlerCustomizationOrder</span>({Foo.class, Bar.class}) <i class="conum" data-value="1"></i><b>(1)</b>
+    <span class="type">void</span> execute();
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The annotation ensures that the <code>Foo</code> extension customizer is called first, then the <code>Bar</code> extension customizer. Otherwise the order is undefined.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_useextensionconfigurer"><a class="anchor" href="#_useextensionconfigurer"></a><a class="link" href="#_useextensionconfigurer">18.4.3. UseExtensionConfigurer</a></h4>
+<div class="paragraph">
+<p>The <code>@UseExtensionConfigurer</code> annotation marks another annotation as
+providing an ExtensionConfigurer instance.</p>
+</div>
+<div class="paragraph">
+<p>Similar to extension handler customizers configurers can be defined
+for all methods in an extension type or just specific methods
+depending on where the <code>@UseExtensionConfigurer</code> annotation is
+used. The interface offers two methods,
+ExtensionConfigurer#configureForType and
+ExtensionConfigurer#configureForMethod which are called depending on
+the position of the annotation. Their use is similar to the ConfigCustomizerFactory#forMethod and ConfigCustomizerFactory#forType.</p>
+</div>
+<div class="paragraph">
+<p>The <a href="#sql-objects">SQL Object extension</a> implements all per-method and per-class
+registration of specific objects (e.g. <code>@RegisterColumnMapper</code> or
+<code>@RegisterRowMapper</code>) through ExtensionConfigurer objects which in turn create <a href="./apidocs/org/jdbi/v3/core/extension/ConfigCustomizer.html" target="_blank" rel="noopener">ConfigCustomizer</a> instances.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If an ExtensionConfigurer should behave the same way independent of
+its position, the implementation should extend
+SimpleExtensionConfigurer and implement the
+SimpleExtendsionConfigurer#configure() method.
+sionHandlerCustomizerAnnotationTest
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>This is an example of an extension customizer annotation that adds a
+specific row mapper:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Retention</span>(<span class="predefined-type">RetentionPolicy</span>.RUNTIME)
+<span class="annotation">@Target</span>({<span class="predefined-type">ElementType</span>.METHOD, <span class="predefined-type">ElementType</span>.TYPE})
+<span class="annotation">@UseExtensionConfigurer</span>(value = SomethingMapperExtensionConfigurer.class) <i class="conum" data-value="1"></i><b>(1)</b>
+<span class="annotation">@interface</span> RegisterSomethingMapper {}
+
+<span class="type">interface</span> <span class="class">SomethingDao</span> {
+
+    <span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO something (id, name) VALUES (:s.id, :s.name)</span><span class="delimiter">&quot;</span></span>)
+    <span class="type">int</span> insert(<span class="annotation">@BindBean</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">s</span><span class="delimiter">&quot;</span></span>) Something s);
+
+    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT id, name FROM something WHERE id = ?</span><span class="delimiter">&quot;</span></span>)
+    <span class="annotation">@RegisterSomethingMapper</span> <i class="conum" data-value="2"></i><b>(2)</b>
+    Optional&lt;Something&gt; findSomething(<span class="type">int</span> id);
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>define the ExtensionConfigurer class in the annotation</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>add the custom annotation to a method in a SQL Object extension
+type</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The extension framework always processes annotations that have been
+marked with <code>@UseExtensionConfigurer</code>. An implementation of the
+ExtensionConfigurer must provide a no-arguments constructor.</p>
+</div>
+<div class="paragraph">
+<p>This is the implementation of the extension configurer for the
+<code>@RegisterSomethingMapper</code> annotation:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="directive">static</span> <span class="type">class</span> <span class="class">SomethingMapperExtensionConfigurer</span> <span class="directive">extends</span> SimpleExtensionConfigurer { <i class="conum" data-value="1"></i><b>(1)</b>
+
+    <span class="annotation">@Override</span>
+    <span class="directive">protected</span> <span class="type">void</span> configure(ConfigRegistry config, <span class="predefined-type">Annotation</span> annotation, <span class="predefined-type">Class</span>&lt;?&gt; extensionType) {
+        config.get(RowMappers.class).register(<span class="keyword">new</span> SomethingMapper());
+    }
+}
+
+<span class="directive">static</span> <span class="type">class</span> <span class="class">SomethingMapper</span> <span class="directive">implements</span> <span class="predefined-type">RowMapper</span>&lt;Something&gt; {
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> Something map(<span class="predefined-type">ResultSet</span> rs, StatementContext ctx) <span class="directive">throws</span> <span class="exception">SQLException</span> {
+        <span class="keyword">return</span> <span class="keyword">new</span> Something(
+                rs.getInt(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>),
+                rs.getString(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>)
+        );
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The implementation extends SimpleExtensionConfigurer as it should
+behave the same when used on a method or a type.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Similar to extension handler customizer objects, extension configurers
+are also not tied to a specific extension factory, they can be
+mixed. In the example above, a custom extension configurer is used in
+combination with the <a href="#sql-objects">SQL Object extension</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_extensionmetadata"><a class="anchor" href="#_extensionmetadata"></a><a class="link" href="#_extensionmetadata">18.5. ExtensionMetadata</a></h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Interacting directly with the <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionMetadata.html" target="_blank" rel="noopener">ExtensionMetadata</a> and
+ExtensionHandlerInvoker is a very advanced use case when writing very
+specific extension code. For most extensions, all metadata
+interactions are handled by the framework directly.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>For every extension type that is processed by the framework, an
+<a href="./apidocs/org/jdbi/v3/core/extension/ExtensionMetadata.html" target="_blank" rel="noopener">ExtensionMetadata</a> object is created. It collects all the information
+that is required to create the <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Proxy.html" target="_blank" rel="noopener">java proxy</a> object:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>extension handlers for each method on the extension type including optional extension handler customizers.</p>
+</li>
+<li>
+<p>instance config customizers which are applied to all methods on the extension type</p>
+</li>
+<li>
+<p>method specific config customizers</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Extension metadata is created using a builder when an
+extension type is processed for the first time. It is possible for an
+<a href="./apidocs/org/jdbi/v3/core/extension/ExtensionFactory.html" target="_blank" rel="noopener">ExtensionFactory</a> to participate in the metadata creation. E.g. the SQL
+Object extension uses this to add extension handlers for the SqlObject
+interface methods.</p>
+</div>
+<div class="paragraph">
+<p>If an extension factory wants to participate, it needs to implement
+the <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionFactory.html#buildExtensionMetaData(org.jdbi.v3.core.extension.ExtensionMetadata.Builder)" target="_blank" rel="noopener">ExtensionFactory#buildExtensionMetadata()</a> method which is called
+with the extension metadata builder right before the actual metadata
+object is created. See the ExtensionMetadata.Builder documentation for
+all available methods.</p>
+</div>
+<div class="paragraph">
+<p>Metadata for an extension type can be retrieved from the <a href="./apidocs/org/jdbi/v3/core/extension/Extensions.html" target="_blank" rel="noopener">Extensions
+configuration object</a> by calling Extensions#findMetadata().</p>
+</div>
+<div class="paragraph">
+<p>The metadata object can create ExtensionHandlerInvoker instances for
+all methods on an extension type. An extension handler invoker binds
+the actual extension handler instance to a specific configuration object (and
+the config customizers applied to that configuration object)
+together.</p>
+</div>
+<div class="paragraph">
+<p>The main use case is within an extension type implementation class as
+it requires a HandlerSupplier instance which is available when the
+<a href="./apidocs/org/jdbi/v3/core/extension/ExtensionFactory.html#attach(java.lang.Class,org.jdbi.v3.core.extension.HandleSupplier)" target="_blank" rel="noopener">ExtensionFactory#attach()</a> method is called. By creating extension
+handler invokers and metadata manually, an implementation can sidestep
+all the proxy logic and e.g. directly wire up method invocation or
+redirect invocations from one method to another. The jdbi generator
+uses this mechanism to create implementation classes that do not need
+the java proxy logic (which is problematic with GraalVM).</p>
+</div>
+<div class="paragraph">
+<p>This is an example of creating and calling an extension handler
+invoker directly:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Test</span>
+<span class="directive">public</span> <span class="type">void</span> testIdOne() {
+    Something idOne = jdbi.withExtension(ExtensionType.class, ExtensionType::getIdOne);
+    assertThat(idOne).isEqualTo(<span class="keyword">new</span> Something(<span class="integer">1</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">apple</span><span class="delimiter">&quot;</span></span>));
+}
+
+<span class="type">interface</span> <span class="class">ExtensionType</span> {
+
+    Something getSomething(<span class="type">int</span> id, <span class="predefined-type">String</span> name);
+
+    Something getIdOne();  <i class="conum" data-value="1"></i><b>(1)</b>
+}
+
+<span class="directive">public</span> <span class="directive">static</span> <span class="type">class</span> <span class="class">TestExtensionFactory</span> <span class="directive">implements</span> ExtensionFactory {
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="type">boolean</span> accepts(<span class="predefined-type">Class</span>&lt;?&gt; extensionType) {
+        <span class="keyword">return</span> extensionType == ExtensionType.class;
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> &lt;E&gt; E attach(<span class="predefined-type">Class</span>&lt;E&gt; extensionType, HandleSupplier handleSupplier) {
+        <span class="keyword">return</span> (E) <span class="keyword">new</span> ExtensionTypeImpl(handleSupplier); <i class="conum" data-value="2"></i><b>(2)</b>
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="predefined-type">Set</span>&lt;FactoryFlag&gt; getFactoryFlags() {
+        <span class="keyword">return</span> <span class="predefined-type">EnumSet</span>.of(DONT_USE_PROXY); <i class="conum" data-value="3"></i><b>(3)</b>
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="predefined-type">Collection</span>&lt;ExtensionHandlerFactory&gt; getExtensionHandlerFactories(ConfigRegistry config) {
+        <span class="keyword">return</span> <span class="predefined-type">Collections</span>.singleton(<span class="keyword">new</span> TestExtensionHandlerFactory()); <i class="conum" data-value="4"></i><b>(4)</b>
+    }
+}
+
+<span class="directive">public</span> <span class="directive">static</span> <span class="type">class</span> <span class="class">TestExtensionHandlerFactory</span> <span class="directive">implements</span> ExtensionHandlerFactory {
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="type">boolean</span> accepts(<span class="predefined-type">Class</span>&lt;?&gt; extensionType, <span class="predefined-type">Method</span> method) {
+        <span class="keyword">return</span> method.getName().equals(<span class="string"><span class="delimiter">&quot;</span><span class="content">getSomething</span><span class="delimiter">&quot;</span></span>);  <i class="conum" data-value="5"></i><b>(5)</b>
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> Optional&lt;ExtensionHandler&gt; createExtensionHandler(<span class="predefined-type">Class</span>&lt;?&gt; extensionType, <span class="predefined-type">Method</span> method) {
+        <span class="keyword">return</span> Optional.of((handleSupplier, target, args) -&gt; <span class="keyword">new</span> Something((<span class="type">int</span>) args[<span class="integer">0</span>], (<span class="predefined-type">String</span>) args[<span class="integer">1</span>]));
+    }
+}
+
+<span class="directive">static</span> <span class="type">class</span> <span class="class">ExtensionTypeImpl</span> <span class="directive">implements</span> ExtensionType {
+
+    <span class="directive">private</span> <span class="directive">final</span> ExtensionHandlerInvoker getSomethingInvoker;
+
+    <span class="directive">private</span> ExtensionTypeImpl(HandleSupplier handleSupplier) {
+
+        ConfigRegistry config = handleSupplier.getConfig();
+        ExtensionMetadata extensionTypeMetadata = config.get(Extensions.class)
+                .findMetadata(ExtensionType.class, <span class="keyword">new</span> TestExtensionFactory()); <i class="conum" data-value="6"></i><b>(6)</b>
+
+        <span class="local-variable">this</span>.getSomethingInvoker = extensionTypeMetadata.createExtensionHandlerInvoker(<span class="local-variable">this</span>,
+                JdbiClassUtils.methodLookup(ExtensionType.class, <span class="string"><span class="delimiter">&quot;</span><span class="content">getSomething</span><span class="delimiter">&quot;</span></span>, <span class="type">int</span>.class, <span class="predefined-type">String</span>.class), <i class="conum" data-value="7"></i><b>(7)</b>
+                handleSupplier, config);
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> Something getSomething(<span class="type">int</span> id, <span class="predefined-type">String</span> name) {
+        <span class="keyword">return</span> (Something) getSomethingInvoker.invoke(id, name);
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> Something getIdOne() {
+        <span class="keyword">return</span> (Something) getSomethingInvoker.invoke(<span class="integer">1</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">apple</span><span class="delimiter">&quot;</span></span>); <i class="conum" data-value="8"></i><b>(8)</b>
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>This is a test that invokes the <code>getIdOne</code> method on an extension
+type. This method takes no parameters and returns a constant.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The corresponding extension factory, which accepts the
+<code>ExtensionType</code> class and returns an implementation of the extension
+type.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The extension factory requests that the framework returns the
+implementation as is and not wrap it into extension handlers.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>The extension factory also provides a specific handler factory
+which provides the actual implementation.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>The extension handler factory only accepts the <code>getSomething</code>
+method, it does <strong>not</strong> create an extension handler for <code>getIdOne</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>The extension type implementation retrieves the metadata for the
+<code>ExtensionType</code> class. It uses the custom extension factory if
+necessary. This call is usually done by the extension framework
+internally but can be done manually.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>The extension type creates an extension handler invoker for the
+<code>getSomething</code> method. This is handled by the custom extension handler
+factory.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>The <code>getIdOne</code> method now invokes the extension handler for the
+<code>getSomething</code> method and passes it constant values.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_on_demand_extensions"><a class="anchor" href="#_on_demand_extensions"></a><a class="link" href="#_on_demand_extensions">18.6. On-demand extensions</a></h3>
+
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_advanced_topics_2"><a class="anchor" href="#_advanced_topics_2"></a><a class="link" href="#_advanced_topics_2">19. Advanced Topics</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_high_availability"><a class="anchor" href="#_high_availability"></a><a class="link" href="#_high_availability">18.1. High Availability</a></h3>
+<h3 id="_high_availability"><a class="anchor" href="#_high_availability"></a><a class="link" href="#_high_availability">19.1. High Availability</a></h3>
 <div class="paragraph">
 <p>Jdbi can be combined with connection pools and high-availability features in your database driver.
 We&#8217;ve used <a href="https://github.com/brettwooldridge/HikariCP" target="_blank" rel="noopener">HikariCP</a> in combination
@@ -11717,7 +13021,7 @@ and a smaller pool of writers that go only to a single host, you currently shoul
 </div>
 </div>
 <div class="sect2">
-<h3 id="compiling_with_parameter_names"><a class="anchor" href="#compiling_with_parameter_names"></a><a class="link" href="#compiling_with_parameter_names">18.2. Compiling with Parameter Names</a></h3>
+<h3 id="compiling_with_parameter_names"><a class="anchor" href="#compiling_with_parameter_names"></a><a class="link" href="#compiling_with_parameter_names">19.2. Compiling with Parameter Names</a></h3>
 <div class="paragraph">
 <p>By default, the Java compiler does not write parameter names of constructors and
 methods to class files. At runtime, reflectively asking for parameter names
@@ -11762,7 +13066,7 @@ these annotations is removed&#8201;&#8212;&#8201;Jdbi automatically uses the met
 </div>
 </div>
 <div class="sect3">
-<h4 id="_maven_setup"><a class="anchor" href="#_maven_setup"></a><a class="link" href="#_maven_setup">18.2.1. Maven Setup</a></h4>
+<h4 id="_maven_setup"><a class="anchor" href="#_maven_setup"></a><a class="link" href="#_maven_setup">19.2.1. Maven Setup</a></h4>
 <div class="paragraph">
 <p>Configure the <code>maven-compiler-plugin</code> in your POM:</p>
 </div>
@@ -11781,7 +13085,7 @@ these annotations is removed&#8201;&#8212;&#8201;Jdbi automatically uses the met
 </div>
 </div>
 <div class="sect3">
-<h4 id="_intellij_idea_setup"><a class="anchor" href="#_intellij_idea_setup"></a><a class="link" href="#_intellij_idea_setup">18.2.2. IntelliJ IDEA setup</a></h4>
+<h4 id="_intellij_idea_setup"><a class="anchor" href="#_intellij_idea_setup"></a><a class="link" href="#_intellij_idea_setup">19.2.2. IntelliJ IDEA setup</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -11803,7 +13107,7 @@ these annotations is removed&#8201;&#8212;&#8201;Jdbi automatically uses the met
 </div>
 </div>
 <div class="sect3">
-<h4 id="_eclipse_setup"><a class="anchor" href="#_eclipse_setup"></a><a class="link" href="#_eclipse_setup">18.2.3. Eclipse Setup</a></h4>
+<h4 id="_eclipse_setup"><a class="anchor" href="#_eclipse_setup"></a><a class="link" href="#_eclipse_setup">19.2.3. Eclipse Setup</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -11821,12 +13125,12 @@ method parameters (usable via reflection)."</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_working_with_generic_types"><a class="anchor" href="#_working_with_generic_types"></a><a class="link" href="#_working_with_generic_types">18.3. Working with Generic Types</a></h3>
+<h3 id="_working_with_generic_types"><a class="anchor" href="#_working_with_generic_types"></a><a class="link" href="#_working_with_generic_types">19.3. Working with Generic Types</a></h3>
 <div class="paragraph">
 <p>Jdbi provides utility classes to make it easier to work with Java generic types.</p>
 </div>
 <div class="sect3">
-<h4 id="_generictype"><a class="anchor" href="#_generictype"></a><a class="link" href="#_generictype">18.3.1. GenericType</a></h4>
+<h4 id="_generictype"><a class="anchor" href="#_generictype"></a><a class="link" href="#_generictype">19.3.1. GenericType</a></h4>
 <div class="paragraph">
 <p><a href="./apidocs/org/jdbi/v3/core/generic/GenericType.html" target="_blank" rel="noopener">GenericType</a> represents a generic
 type signature that can be passed around in a type-safe way.</p>
@@ -11858,7 +13162,7 @@ to represent generics in Java.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_the_generictypes_helper"><a class="anchor" href="#_the_generictypes_helper"></a><a class="link" href="#_the_generictypes_helper">18.3.2. The GenericTypes helper</a></h4>
+<h4 id="_the_generictypes_helper"><a class="anchor" href="#_the_generictypes_helper"></a><a class="link" href="#_the_generictypes_helper">19.3.2. The GenericTypes helper</a></h4>
 <div class="paragraph">
 <p><a href="./apidocs/org/jdbi/v3/core/generic/GenericTypes.html" target="_blank" rel="noopener">GenericTypes</a> provides methods
 for working with Java generic types signatures.</p>
@@ -11935,7 +13239,7 @@ cannot be resolved, or the types have nothing to do with each other:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_namedargumentfinder"><a class="anchor" href="#_namedargumentfinder"></a><a class="link" href="#_namedargumentfinder">18.4. NamedArgumentFinder</a></h3>
+<h3 id="_namedargumentfinder"><a class="anchor" href="#_namedargumentfinder"></a><a class="link" href="#_namedargumentfinder">19.4. NamedArgumentFinder</a></h3>
 <div class="paragraph">
 <p>The <a href="./apidocs/org/jdbi/v3/core/argument/NamedArgumentFinder" target="_blank" rel="noopener">NamedArgumentFinder</a>
 interface, as its name suggests, finds arguments by name from some source.
@@ -11978,7 +13282,7 @@ methods are just creating and binding custom implementations of
 </div>
 </div>
 <div class="sect2">
-<h3 id="_jdbiconfig"><a class="anchor" href="#_jdbiconfig"></a><a class="link" href="#_jdbiconfig">18.5. JdbiConfig</a></h3>
+<h3 id="_jdbiconfig"><a class="anchor" href="#_jdbiconfig"></a><a class="link" href="#_jdbiconfig">19.5. JdbiConfig</a></h3>
 <div class="paragraph">
 <p>Configuration is managed by the
 <a href="./apidocs/org/jdbi/v3/core/config/ConfigRegistry.html">ConfigRegistry</a> class.
@@ -12070,7 +13374,7 @@ registered mappings for later use during query execution.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_creating_a_custom_jdbiconfig_type"><a class="anchor" href="#_creating_a_custom_jdbiconfig_type"></a><a class="link" href="#_creating_a_custom_jdbiconfig_type">18.5.1. Creating a custom JdbiConfig type</a></h4>
+<h4 id="_creating_a_custom_jdbiconfig_type"><a class="anchor" href="#_creating_a_custom_jdbiconfig_type"></a><a class="link" href="#_creating_a_custom_jdbiconfig_type">19.5.1. Creating a custom JdbiConfig type</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -12114,7 +13418,7 @@ ReflectionMappers config class to keep common configuration.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_jdbiplugin"><a class="anchor" href="#_jdbiplugin"></a><a class="link" href="#_jdbiplugin">18.6. JdbiPlugin</a></h3>
+<h3 id="_jdbiplugin"><a class="anchor" href="#_jdbiplugin"></a><a class="link" href="#_jdbiplugin">19.6. JdbiPlugin</a></h3>
 <div class="paragraph">
 <p>JdbiPlugin can be used to bundle bulk configuration.
 Plugins may be installed explicitly via <code>Jdbi.installPlugin(JdbiPlugin)</code>, or
@@ -12146,7 +13450,7 @@ for static analysis tools about what code is or is not used.
 </div>
 </div>
 <div class="sect2">
-<h3 id="_statementcontext"><a class="anchor" href="#_statementcontext"></a><a class="link" href="#_statementcontext">18.7. StatementContext</a></h3>
+<h3 id="_statementcontext"><a class="anchor" href="#_statementcontext"></a><a class="link" href="#_statementcontext">19.7. StatementContext</a></h3>
 <div class="paragraph">
 <p>The <a href="./apidocs/org/jdbi/v3/core/statement/StatementContext.html" target="_blank" rel="noopener">StatementContext</a> class holds the state for all <a href="#_statement_types">statements</a>. It is a stateful object that should not be shared between threads. It may be used by different threads as long as this happens sequentially.</p>
 </div>
@@ -12158,7 +13462,7 @@ for static analysis tools about what code is or is not used.
 </div>
 </div>
 <div class="sect2">
-<h3 id="user-defined-annotations"><a class="anchor" href="#user-defined-annotations"></a><a class="link" href="#user-defined-annotations">18.8. User-defined Annotations</a></h3>
+<h3 id="user-defined-annotations"><a class="anchor" href="#user-defined-annotations"></a><a class="link" href="#user-defined-annotations">19.8. User-defined Annotations</a></h3>
 <div class="paragraph">
 <p>SQL Object is designed to be extended with user-defined annotations. In fact,
 most of the annotations provided in Jdbi are wired up with the approach
@@ -12193,7 +13497,7 @@ call in a <code>handle.inTransaction()</code> call.</p>
 section below and follow the guide to set it up.</p>
 </div>
 <div class="sect3">
-<h4 id="_statement_customizing_annotations"><a class="anchor" href="#_statement_customizing_annotations"></a><a class="link" href="#_statement_customizing_annotations">18.8.1. Statement Customizing Annotations</a></h4>
+<h4 id="_statement_customizing_annotations"><a class="anchor" href="#_statement_customizing_annotations"></a><a class="link" href="#_statement_customizing_annotations">19.8.1. Statement Customizing Annotations</a></h4>
 <div class="paragraph">
 <p>SQL statement customizing annotations are used to apply some change to the
 <a href="./apidocs/org/jdbi/v3/core/statement/SqlStatement.html" target="_blank" rel="noopener">SqlStatement</a> associated
@@ -12369,7 +13673,7 @@ in your SQL statement than by using <code>@MaxRows</code>.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_configuration_annotations"><a class="anchor" href="#_configuration_annotations"></a><a class="link" href="#_configuration_annotations">18.8.2. Configuration Annotations</a></h4>
+<h4 id="_configuration_annotations"><a class="anchor" href="#_configuration_annotations"></a><a class="link" href="#_configuration_annotations">19.8.2. Configuration Annotations</a></h4>
 <div class="paragraph">
 <p>Configuration annotations are used to apply some change to the
 <a href="./apidocs/org/jdbi/v3/core/config/ConfigRegistry.html" target="_blank" rel="noopener">ConfigRegistry</a> associated with
@@ -12530,7 +13834,7 @@ annotation to your <code>@RegisterColumnMapper</code> annotation type. This tell
 </div>
 </div>
 <div class="sect3">
-<h4 id="_method_decorating_annotations"><a class="anchor" href="#_method_decorating_annotations"></a><a class="link" href="#_method_decorating_annotations">18.8.3. Method Decorating Annotations</a></h4>
+<h4 id="_method_decorating_annotations"><a class="anchor" href="#_method_decorating_annotations"></a><a class="link" href="#_method_decorating_annotations">19.8.3. Method Decorating Annotations</a></h4>
 <div class="paragraph">
 <p>Method decorating annotations are used to enhance a SQL Object method with
 additional (or substitute) behavior.</p>
@@ -12682,7 +13986,7 @@ the result may already be cached.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_templateengine"><a class="anchor" href="#_templateengine"></a><a class="link" href="#_templateengine">18.9. TemplateEngine</a></h3>
+<h3 id="_templateengine"><a class="anchor" href="#_templateengine"></a><a class="link" href="#_templateengine">19.9. TemplateEngine</a></h3>
 <div class="paragraph">
 <p>Jdbi uses a <a href="./apidocs/org/jdbi/v3/core/statement/TemplateEngine.html" target="_blank" rel="noopener">TemplateEngine</a>
 implementation to render templates into SQL. Template engines take a SQL
@@ -12755,7 +14059,7 @@ which renders templates using the <a href="https://www.stringtemplate.org/" targ
 </div>
 </div>
 <div class="sect2">
-<h3 id="_sqlparser"><a class="anchor" href="#_sqlparser"></a><a class="link" href="#_sqlparser">18.10. SqlParser</a></h3>
+<h3 id="_sqlparser"><a class="anchor" href="#_sqlparser"></a><a class="link" href="#_sqlparser">19.10. SqlParser</a></h3>
 <div class="paragraph">
 <p>After the SQL template has been rendered, Jdbi uses a
 <a href="./apidocs/org/jdbi/v3/core/statement/SqlParser.html" target="_blank" rel="noopener">SqlParser</a> to parse out any named
@@ -12832,7 +14136,7 @@ jdbi.setParser(parser);</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_sqllogger"><a class="anchor" href="#_sqllogger"></a><a class="link" href="#_sqllogger">18.11. SqlLogger</a></h3>
+<h3 id="_sqllogger"><a class="anchor" href="#_sqllogger"></a><a class="link" href="#_sqllogger">19.11. SqlLogger</a></h3>
 <div class="paragraph">
 <p>The <a href="./apidocs/org/jdbi/v3/core/statement/SqlLogger.html" target="_blank" rel="noopener">SqlLogger</a> interface
 is called before and after executing each statement,
@@ -12846,7 +14150,7 @@ implementation that logs all executed statements for debugging.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_resultproducer"><a class="anchor" href="#_resultproducer"></a><a class="link" href="#_resultproducer">18.12. ResultProducer</a></h3>
+<h3 id="_resultproducer"><a class="anchor" href="#_resultproducer"></a><a class="link" href="#_resultproducer">19.12. ResultProducer</a></h3>
 <div class="paragraph">
 <p>A <strong>ResultProducer</strong> takes a lazily supplied <strong>PreparedStatement</strong> and
 produces a result.  The most common producer path, <strong>execute()</strong>,
@@ -12879,22 +14183,22 @@ that the context is closed eventually to release database resources.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_generator"><a class="anchor" href="#_generator"></a><a class="link" href="#_generator">18.13. Generator</a></h3>
+<h3 id="_generator"><a class="anchor" href="#_generator"></a><a class="link" href="#_generator">19.13. Generator</a></h3>
 <div class="paragraph">
 <p>Jdbi includes an experimental SqlObject code generator.  If you include the
 <code>jdbi3-generator</code> artifact as an annotation processor and annotate your SqlObject
 definitions with <code>@GenerateSqlObject</code>, the generator will produce an implementing
-class and avoid using <code>Proxy</code> instances.  This may be useful for <code>graal-native</code>
+class and avoids using <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Proxy.html" target="_blank" rel="noopener">Java proxy</a> instances.  This may be useful for <code>graal-native</code>
 compilation.</p>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_appendix"><a class="anchor" href="#_appendix"></a><a class="link" href="#_appendix">19. Appendix</a></h2>
+<h2 id="_appendix"><a class="anchor" href="#_appendix"></a><a class="link" href="#_appendix">20. Appendix</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_best_practices"><a class="anchor" href="#_best_practices"></a><a class="link" href="#_best_practices">19.1. Best Practices</a></h3>
+<h3 id="_best_practices"><a class="anchor" href="#_best_practices"></a><a class="link" href="#_best_practices">20.1. Best Practices</a></h3>
 <div class="ulist">
 <ul>
 <li>
@@ -12918,7 +14222,7 @@ to be sure it made a difference.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_api_reference"><a class="anchor" href="#_api_reference"></a><a class="link" href="#_api_reference">19.2. API Reference</a></h3>
+<h3 id="_api_reference"><a class="anchor" href="#_api_reference"></a><a class="link" href="#_api_reference">20.2. API Reference</a></h3>
 <div class="ulist">
 <ul>
 <li>
@@ -12934,7 +14238,7 @@ to be sure it made a difference.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_related_projects"><a class="anchor" href="#_related_projects"></a><a class="link" href="#_related_projects">19.3. Related Projects</a></h3>
+<h3 id="_related_projects"><a class="anchor" href="#_related_projects"></a><a class="link" href="#_related_projects">20.3. Related Projects</a></h3>
 <div class="paragraph">
 <p><a href="https://github.com/opentable/otj-pg-embedded" target="_blank" rel="noopener">Embedded Postgres</a>
 makes testing against a real database quick and easy.</p>
@@ -12953,7 +14257,7 @@ here!</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_upgrading_from_v2_to_v3"><a class="anchor" href="#_upgrading_from_v2_to_v3"></a><a class="link" href="#_upgrading_from_v2_to_v3">19.4. Upgrading from v2 to v3</a></h3>
+<h3 id="_upgrading_from_v2_to_v3"><a class="anchor" href="#_upgrading_from_v2_to_v3"></a><a class="link" href="#_upgrading_from_v2_to_v3">20.4. Upgrading from v2 to v3</a></h3>
 <div class="paragraph">
 <p>Already using Jdbi v2?</p>
 </div>
@@ -13146,7 +14450,7 @@ return types, or on <code>@SqlBatch</code> parameters.</p>
 <div id="footer">
 <div id="footer-text">
 Version 3.38.0-rc2-SNAPSHOT<br>
-Last updated 04/02/2023 15:03 -0700
+Last updated 04/09/2023 19:16 -0700
 </div>
 </div>
 </body>
