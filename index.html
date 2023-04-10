@@ -534,7 +534,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.38.0-rc2-SNAPSHOT,</span>
-<span id="revdate">04/09/2023 19:16 -0700</span>
+<span id="revdate">04/09/2023 20:31 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -847,7 +847,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <ul class="sectlevel3">
 <li><a href="#_extensions_configuration_class">18.3.1. <code>Extensions</code> configuration class</a></li>
 <li><a href="#_extensionfactory">18.3.2. ExtensionFactory</a></li>
-<li><a href="#_extensionhandler_and_extensionhandlerfactory">18.3.3. ExtensionHandler and ExtensionHandlerFactory</a></li>
+<li><a href="#_extension_handlers_and_their_factories">18.3.3. Extension handlers and their factories</a></li>
 <li><a href="#_extensionhandlercustomizer">18.3.4. ExtensionHandlerCustomizer</a></li>
 <li><a href="#_configcustomizer_and_configcustomizerfactory">18.3.5. ConfigCustomizer and ConfigCustomizerFactory</a></li>
 </ul>
@@ -11843,40 +11843,9 @@ ExtensionHandlerInvoker instances for each method on the extension
 type. Each instance manages the objects specific to the invocation
 (<a href="./apidocs/org/jdbi/v3/core/Handle.html" target="_blank" rel="noopener">Handle</a>, <a href="./apidocs/org/jdbi/v3/core/config/ConfigRegistry.html" target="_blank" rel="noopener">configuration</a>) and then executes the extension handler.</p>
 </div>
-<div class="listingblock">
+<div class="imageblock">
 <div class="content">
-<pre>                                                         +--------------------------+
-User code --&gt; [registers ExtensionFactory with Jdbi] --&gt; | Extensions Config object |
-   |                                                     +--------------------------+
-   |
-   |                                          +------------------+
-   | ---&gt; [calls Jdbi.use/withExtension] ---&gt; | ExtensionFactory |
-   |                                          +------------------+
-   |                                                 |             +-------------------+             +------------------+
-   |                                                 +---&gt; creates | ExtensionMetadata | --&gt; defines | ExtensionHandler |
-   |                                                 |             +-------------------+             +------------------+
-   |                                                 |                                                       ^
-   |                                                 |                                                       |
-   |                                                 |                                                       | matches
-   |                                                 |                                                       |
-   |                                                 |                                                       |
-   |                                                 |             +-------------------+              +-------------------------+
-   |                                                 +---&gt; creates | Java proxy object | --&gt; contains | ExtensionHandlerInvoker |
-   | &lt;------- [return to user code] &lt;----------------------------- +-------------------+              +-------------------------+
-   |
-   |
-   |
-   |
-   |                                        +-------------------+              +-------------------------+
-   | --&gt; [invoke extension type method] --&gt; | Java proxy object | --&gt; executes | ExtensionHandlerInvoker |
-   |                                        +-------------------+              +-------------------------+
-   |                                                                                       |
-   |                                                                                       | invokes with Handle
-   |                                                                                       | and Configuration
-   |                                                                                       v
-   |                                                                            +------------------+
-   | &lt;---- [ return result to user code] &lt;------------------------------------- | ExtensionHandler |
-                                                                                +------------------+</pre>
+<img src="images/diag-8d4ed3f9494355bc0fcef8c74be183e3.png" alt="Diagram" width="1330" height="518">
 </div>
 </div>
 <div class="paragraph">
@@ -11955,7 +11924,7 @@ reference.</p>
 <div class="paragraph">
 <p>The <a href="./apidocs/org/jdbi/v3/core/extension/Extensions.html" target="_blank" rel="noopener">Extensions</a> class is the configuration object for the extension framework. It
 contains a registry for extension factories and global extension
-objects (ExtensionHandlerFactory, <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionHandlerCustomizer.html" target="_blank" rel="noopener">ExtensionHandlerCustomizer</a> and
+objects (<a href="./apidocs/org/jdbi/v3/core/extension/ExtensionHandlerFactory.html" target="_blank" rel="noopener">ExtensionHandlerFactory</a>, <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionHandlerCustomizer.html" target="_blank" rel="noopener">ExtensionHandlerCustomizer</a> and
 ConfigCustomizerFactory).</p>
 </div>
 <div class="paragraph">
@@ -12015,7 +11984,7 @@ the class itself or a method.</p>
 </div>
 <div class="paragraph">
 <p>Any extension factory can also provide specific extension objects
-(ExtensionHandlerFactory, <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionHandlerCustomizer.html" target="_blank" rel="noopener">ExtensionHandlerCustomizer</a> and
+(<a href="./apidocs/org/jdbi/v3/core/extension/ExtensionHandlerFactory.html" target="_blank" rel="noopener">ExtensionHandlerFactory</a>, <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionHandlerCustomizer.html" target="_blank" rel="noopener">ExtensionHandlerCustomizer</a> and
 ConfigCustomizerFactory) which are only applied when the factory has
 accepted an extension type. The extension factory provides a getter for
 each extension object that returns a Collection. By default, each
@@ -12182,7 +12151,7 @@ factory, this instance is returned "as-is" to the caller. This bypasses the crea
 </div>
 </div>
 <div class="sect3">
-<h4 id="_extensionhandler_and_extensionhandlerfactory"><a class="anchor" href="#_extensionhandler_and_extensionhandlerfactory"></a><a class="link" href="#_extensionhandler_and_extensionhandlerfactory">18.3.3. ExtensionHandler and ExtensionHandlerFactory</a></h4>
+<h4 id="_extension_handlers_and_their_factories"><a class="anchor" href="#_extension_handlers_and_their_factories"></a><a class="link" href="#_extension_handlers_and_their_factories">18.3.3. Extension handlers and their factories</a></h4>
 <div class="paragraph">
 <p><a href="./apidocs/org/jdbi/v3/core/extension/ExtensionHandler.html" target="_blank" rel="noopener">ExtensionHandler</a> objects are the main place for extension
 functionality. Each method on an extension type is mapped to an
@@ -12205,9 +12174,9 @@ whenever a method on the extension type is called.</p>
 </div>
 <div class="paragraph">
 <p>Extension handlers are not shared, so every method maps onto a
-separate instance. The ExtensionHandlerFactory interface provides the
+separate instance. The <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionHandlerFactory.html" target="_blank" rel="noopener">ExtensionHandlerFactory</a> interface provides the
 ExtensionHandlerFactory#accepts method which is called for each method
-that needs to be mapped. If an ExtensionHandlerFactory accepts a
+that needs to be mapped. If a factory accepts a
 method, the createExtensionHandler method is called which returns an
 extension handler instance.</p>
 </div>
@@ -12447,9 +12416,7 @@ associated with a single factory. It is not possible to have an
 extension type where methods are processed by extension handlers that
 are annotated with annotations that use different id values. Any
 extension handler must be provided either by annotations that match
-the id value of the <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionFactory.html" target="_blank" rel="noopener">ExtensionFactory</a>, an ExtensionHandlerFactory that
-was provided by the extension factory or a global extension handler
-factory.
+the id value of the <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionFactory.html" target="_blank" rel="noopener">ExtensionFactory</a> or an extension handler factory.
 </td>
 </tr>
 </table>
@@ -12529,9 +12496,7 @@ or provide any explicit extension objects.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="7"></i><b>7</b></td>
-<td>There is no ExtensionHandlerFactory necessary (the extension
-framework provides a generic factory that processes the annotations
-and creates the extension handlers).</td>
+<td>The annotation provides the extension handler class. An instance of this class is created by the extension framework, no specific extension handler factory is needed.</td>
 </tr>
 </table>
 </div>
@@ -14450,7 +14415,7 @@ return types, or on <code>@SqlBatch</code> parameters.</p>
 <div id="footer">
 <div id="footer-text">
 Version 3.38.0-rc2-SNAPSHOT<br>
-Last updated 04/09/2023 19:16 -0700
+Last updated 04/09/2023 20:31 -0700
 </div>
 </div>
 </body>
