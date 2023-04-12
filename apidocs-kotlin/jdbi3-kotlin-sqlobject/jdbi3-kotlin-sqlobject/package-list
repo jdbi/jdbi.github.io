@@ -29,10 +29,12 @@ $dokka.location:org.jdbi.v3.sqlobject.kotlin/RegisterKotlinMapper/prefix/#/Point
 $dokka.location:org.jdbi.v3.sqlobject.kotlin/RegisterKotlinMapper/value/#/PointingToDeclaration/jdbi3-kotlin-sqlobject/org.jdbi.v3.sqlobject.kotlin/-register-kotlin-mapper/value.html
 $dokka.location:org.jdbi.v3.sqlobject.kotlin/RegisterKotlinMapperImpl///PointingToDeclaration/jdbi3-kotlin-sqlobject/org.jdbi.v3.sqlobject.kotlin/-register-kotlin-mapper-impl/index.html
 $dokka.location:org.jdbi.v3.sqlobject.kotlin/RegisterKotlinMapperImpl/RegisterKotlinMapperImpl/#/PointingToDeclaration/jdbi3-kotlin-sqlobject/org.jdbi.v3.sqlobject.kotlin/-register-kotlin-mapper-impl/-register-kotlin-mapper-impl.html
+$dokka.location:org.jdbi.v3.sqlobject.kotlin/RegisterKotlinMapperImpl/configure/#org.jdbi.v3.core.config.ConfigRegistry#kotlin.Annotation#java.lang.Class[*]/PointingToDeclaration/jdbi3-kotlin-sqlobject/org.jdbi.v3.sqlobject.kotlin/-register-kotlin-mapper-impl/configure.html
 $dokka.location:org.jdbi.v3.sqlobject.kotlin/RegisterKotlinMappers///PointingToDeclaration/jdbi3-kotlin-sqlobject/org.jdbi.v3.sqlobject.kotlin/-register-kotlin-mappers/index.html
 $dokka.location:org.jdbi.v3.sqlobject.kotlin/RegisterKotlinMappers/RegisterKotlinMappers/#kotlin.Array[org.jdbi.v3.sqlobject.kotlin.RegisterKotlinMapper]/PointingToDeclaration/jdbi3-kotlin-sqlobject/org.jdbi.v3.sqlobject.kotlin/-register-kotlin-mappers/-register-kotlin-mappers.html
 $dokka.location:org.jdbi.v3.sqlobject.kotlin/RegisterKotlinMappers/value/#/PointingToDeclaration/jdbi3-kotlin-sqlobject/org.jdbi.v3.sqlobject.kotlin/-register-kotlin-mappers/value.html
 $dokka.location:org.jdbi.v3.sqlobject.kotlin/RegisterKotlinMappersImpl///PointingToDeclaration/jdbi3-kotlin-sqlobject/org.jdbi.v3.sqlobject.kotlin/-register-kotlin-mappers-impl/index.html
 $dokka.location:org.jdbi.v3.sqlobject.kotlin/RegisterKotlinMappersImpl/RegisterKotlinMappersImpl/#/PointingToDeclaration/jdbi3-kotlin-sqlobject/org.jdbi.v3.sqlobject.kotlin/-register-kotlin-mappers-impl/-register-kotlin-mappers-impl.html
+$dokka.location:org.jdbi.v3.sqlobject.kotlin/RegisterKotlinMappersImpl/configure/#org.jdbi.v3.core.config.ConfigRegistry#kotlin.Annotation#java.lang.Class[*]/PointingToDeclaration/jdbi3-kotlin-sqlobject/org.jdbi.v3.sqlobject.kotlin/-register-kotlin-mappers-impl/configure.html
 org.jdbi.v3.sqlobject.kotlin
 
