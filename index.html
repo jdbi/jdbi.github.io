@@ -534,7 +534,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.38.0-rc3-SNAPSHOT,</span>
-<span id="revdate">04/13/2023 18:14 -0700</span>
+<span id="revdate">04/13/2023 18:30 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -1150,13 +1150,13 @@ features.</p>
 </div>
 <div class="sect4">
 <h5 id="_testing_support"><a class="anchor" href="#_testing_support"></a><a class="link" href="#_testing_support">Testing support</a></h5>
-<div class="dlist">
+<div class="dlist glossary">
 <dl>
-<dt class="hdlist1">jdbi3-testing</dt>
+<dt>jdbi3-testing</dt>
 <dd>
 <p>Testing framework support. Currently, only supports JUnit4 and JUnit5.</p>
 </dd>
-<dt class="hdlist1">jdbi3-testcontainers</dt>
+<dt>jdbi3-testcontainers</dt>
 <dd>
 <p>Support for arbitrary databases running in <a href="https://testcontainers.org/" target="_blank" rel="noopener">Testcontainers</a>. Currently, only supports JUnit 5.</p>
 </dd>
@@ -1288,13 +1288,13 @@ While Oracle support is considered part of Jdbi, the actual library is developed
 </div>
 <div class="sect4">
 <h5 id="_cache_support"><a class="anchor" href="#_cache_support"></a><a class="link" href="#_cache_support">Cache support</a></h5>
-<div class="dlist">
+<div class="dlist glossary">
 <dl>
-<dt class="hdlist1">jdbi3-caffeine-cache</dt>
+<dt>jdbi3-caffeine-cache</dt>
 <dd>
 <p>Use the <a href="https://github.com/ben-manes/caffeine" target="_blank" rel="noopener">Caffeine</a> caching library for SQL template and parse caching.</p>
 </dd>
-<dt class="hdlist1">jdbi3-noop-cache</dt>
+<dt>jdbi3-noop-cache</dt>
 <dd>
 <p>Turn off SQL template and parse caching for testing and debugging.</p>
 </dd>
@@ -2225,7 +2225,7 @@ and makes sure calls are made on a specific thread pool.</p>
 <div class="paragraph">
 <p>To create a <a href="./apidocs/org/jdbi/v3/core/async/JdbiExecutor.html" target="_blank" rel="noopener">JdbiExcecutor</a> instance, we first need to create
 a <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instance (see <a href="#_the_jdbi_class">The Jdbi class</a>). Then pass that instance into
-<a href="./apidocs/org/jdbi/v3/core/async/JdbiExecutor.html#create(org.jdbi.v3.core.Jdbi,java.util.concurrent.Executor)">JdbiExecutor.create</a>:</p>
+<a href="./apidocs/org/jdbi/v3/core/async/JdbiExecutor.html#create(org.jdbi.v3.core.Jdbi,java.util.concurrent.Executor)" target="_blank" rel="noopener">JdbiExecutor.create()</a>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2235,7 +2235,7 @@ JdbiExecutor jdbiExecutor = JdbiExecutor.create(h2Extension.getJdbi(), executor)
 </div>
 <div class="paragraph">
 <p>It is important to size the executor to the specific implementation.
-See <a href="./apidocs/org/jdbi/v3/core/async/JdbiExecutor.html#create(org.jdbi.v3.core.Jdbi,java.util.concurrent.Executor)">here</a> for some hints.</p>
+See <a href="./apidocs/org/jdbi/v3/core/async/JdbiExecutor.html#create(org.jdbi.v3.core.Jdbi,java.util.concurrent.Executor)" target="_blank" rel="noopener">here</a> for some hints.</p>
 </div>
 <div class="paragraph">
 <p>To use the <code>jdbiExecutor</code>, we make similar calls to <a href="./apidocs/org/jdbi/v3/core/async/JdbiExecutor.html" target="_blank" rel="noopener">JdbiExcecutor</a>
@@ -5789,7 +5789,7 @@ default behavior or add in extensions to handle additional database types.</p>
 </div>
 <div class="paragraph">
 <p>Configuration is managed by the
-<a href="./apidocs/org/jdbi/v3/core/config/ConfigRegistry.html">ConfigRegistry</a> class.
+<a href="./apidocs/org/jdbi/v3/core/config/ConfigRegistry.html" target="_blank" rel="noopener">ConfigRegistry</a> class.
 Each Jdbi object that represents a distinct database context (for
 example, <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> itself, a
 <a href="./apidocs/org/jdbi/v3/core/Handle.html" target="_blank" rel="noopener">Handle</a> instance, or an attached
@@ -8189,7 +8189,7 @@ the callback returns.</p>
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>This requires the dao class to extend the <a href="./apidocs/org/jdbi/v3/sqlobject/transaction/Transactional.html">Transactional</a> interface to provide the <a href="./apidocs/org/jdbi/v3/sqlobject/transaction/Transactional.html#useTransaction(org.jdbi.v3.sqlobject.transaction.TransactionalConsumer)" target="_blank" rel="noopener">useTransaction</a> method.</td>
+<td>This requires the dao class to extend the <a href="./apidocs/org/jdbi/v3/sqlobject/transaction/Transactional.html" target="_blank" rel="noopener"><code>Transactional</code></a> interface to provide the <a href="./apidocs/org/jdbi/v3/sqlobject/transaction/Transactional.html#useTransaction(org.jdbi.v3.sqlobject.transaction.TransactionalConsumer)" target="_blank" rel="noopener">useTransaction</a> method.</td>
 </tr>
 </table>
 </div>
@@ -8733,7 +8733,7 @@ separately querying after the insert completes.</p>
 a <code>String</code> could be <code>varchar</code> plaintext, <code>nvarchar</code> text, <code>json</code> data, etc, all with different handling requirements.</p>
 </div>
 <div class="paragraph">
-<p><a href="./apidocs/org/jdbi/v3/core/qualifier/QualifiedType.html">QualifiedType</a> allows you to add such context to a Java type:</p>
+<p><a href="./apidocs/org/jdbi/v3/core/qualifier/QualifiedType.html" target="_blank" rel="noopener">QualifiedType</a> allows you to add such context to a Java type:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9123,7 +9123,7 @@ config.setSqlParser(<span class="keyword">new</span> ColonPrefixSqlParser(custom
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-If the underlying cache library exposes per-cache statistics, these can be accessed through the <a href="./apidocs/org/jdbi/v3//core/statement/SqlStatements.html#cacheStats()" target="_blank" rel="noopener">SqlStatements#cacheStats()</a> and <a href="https://./apidocs/org/jdbi/v3/core/statement/CachingSqlParser.html#cacheStats()">CachingSqlParser#cacheStats()</a> methods.
+If the underlying cache library exposes per-cache statistics, these can be accessed through the <a href="./apidocs/org/jdbi/v3//core/statement/SqlStatements.html#cacheStats()" target="_blank" rel="noopener">SqlStatements#cacheStats()</a> and <a href="https://./apidocs/org/jdbi/v3/core/statement/CachingSqlParser.html#cacheStats()" target="_blank" rel="noopener">CachingSqlParser#cacheStats()</a> methods.
 </td>
 </tr>
 </table>
@@ -9150,7 +9150,7 @@ The official test support from Jdbi is in the <code>jdbi-testing</code> package.
 <div class="sect2">
 <h3 id="_junit_4"><a class="anchor" href="#_junit_4"></a><a class="link" href="#_junit_4">15.1. JUnit 4</a></h3>
 <div class="paragraph">
-<p>The <code>jdbi3-testing</code> artifact provides <a href="./apidocs/org/jdbi/v3/testing/JdbiRule.html">JdbiRule</a>
+<p>The <code>jdbi3-testing</code> artifact provides <a href="./apidocs/org/jdbi/v3/testing/JdbiRule.html" target="_blank" rel="noopener">JdbiRule</a>
 class which implements <a href="https://junit.org/junit4/javadoc/latest/org/junit/rules/TestRule.html" target="_blank" rel="noopener">TestRule</a> and can be used with the <a href="https://junit.org/junit4/javadoc/latest/org/junit/Rule.html" target="_blank" rel="noopener">Rule</a> and <a href="https://junit.org/junit4/javadoc/latest/org/junit/ClassRule.html" target="_blank" rel="noopener">ClassRule</a> annotations.</p>
 </div>
 <div class="paragraph">
@@ -9234,7 +9234,7 @@ class which implements <a href="https://junit.org/junit4/javadoc/latest/org/juni
 </div>
 </div>
 <div class="paragraph">
-<p>The instances injected are the same instances as returned by <a href="./apidocs/org/jdbi/v3/testing/junit5/JdbiExtension.html#getJdbi()">getJdbi()</a> and <a href="./apidocs/org/jdbi/v3/testing/junit5/JdbiExtension.html#getSharedHandle()">getSharedHandle()</a>.</p>
+<p>The instances injected are the same instances as returned by <a href="./apidocs/org/jdbi/v3/testing/junit5/JdbiExtension.html#getJdbi()" target="_blank" rel="noopener">getJdbi()</a> and <a href="./apidocs/org/jdbi/v3/testing/junit5/JdbiExtension.html#getSharedHandle()" target="_blank" rel="noopener">getSharedHandle()</a>.</p>
 </div>
 <div class="paragraph">
 <p>Currently supported databases:</p>
@@ -9309,13 +9309,13 @@ extension.withCredentials(<span class="string"><span class="delimiter">&quot;</s
 <div class="ulist">
 <ul>
 <li>
-<p><a href="./apidocs/org/jdbi/v3/testing/junit5/JdbiPostgresExtension.html" target="_blank" rel="noopener">JdbiPostgresExtension</a> manages a local database on the host. It uses the <a href="https://pg-embedded.softwareforge.de/">pg-embedded</a> library that can spin up Postgres instances on various OS and architectures. This is the fastest way to get to a Postgres instance. Most of the Jdbi test classes that use Postgres use this extension.</p>
+<p><a href="./apidocs/org/jdbi/v3/testing/junit5/JdbiPostgresExtension.html" target="_blank" rel="noopener">JdbiPostgresExtension</a> manages a local database on the host. It uses the <a href="https://pg-embedded.softwareforge.de/" target="_blank" rel="noopener">pg-embedded</a> library that can spin up Postgres instances on various OS and architectures. This is the fastest way to get to a Postgres instance. Most of the Jdbi test classes that use Postgres use this extension.</p>
 </li>
 <li>
 <p><a href="./apidocs/org/jdbi/v3/testing/junit5/JdbiExternalPostgresExtension.html" target="_blank" rel="noopener">JdbiExternalPostgresExtension</a> supports an external Postgres database and can run tests against any local or remote database.</p>
 </li>
 <li>
-<p><a href="./apidocs/org/jdbi/v3/testing/junit5/JdbiOtjPostgresExtension.html" target="_blank" rel="noopener">JdbiOtjPostgresExtension</a> supports the <a href="https://github.com/opentable/otj-pg-embedded">OpenTable Java Embedded PostgreSQL component</a>.</p>
+<p><a href="./apidocs/org/jdbi/v3/testing/junit5/JdbiOtjPostgresExtension.html" target="_blank" rel="noopener">JdbiOtjPostgresExtension</a> supports the <a href="https://github.com/opentable/otj-pg-embedded" target="_blank" rel="noopener">OpenTable Java Embedded PostgreSQL component</a>.</p>
 </li>
 </ul>
 </div>
@@ -10678,7 +10678,7 @@ not nullable and the value absent in the result set.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Ensure the Kotlin compiler&#8217;s <a href="https://kotlinlang.org/docs/reference/using-maven.html#attributes-specific-for-jvm">JVM target version</a> is set to at least 1.8:</p>
+<p>Ensure the Kotlin compiler&#8217;s <a href="https://kotlinlang.org/docs/reference/using-maven.html#attributes-specific-for-jvm" target="_blank" rel="noopener">JVM target version</a> is set to at least 1.8:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13290,7 +13290,7 @@ separate config registry instance.</p>
 </div>
 <div class="paragraph">
 <p>A context implements the
-<a href="./apidocs/org/jdbi/v3/core/config/Configurable.html">Configurable</a> interface
+<a href="./apidocs/org/jdbi/v3/core/config/Configurable.html" target="_blank" rel="noopener">Configurable</a> interface
 which allows modification of its configuration as well as retrieving
 the current context&#8217;s configuration for use by Jdbi core or
 extensions.</p>
@@ -13308,7 +13308,7 @@ as <a href="./apidocs/org/jdbi/v3/sqlobject/SqlObject.html" target="_blank" rel=
 </div>
 <div class="paragraph">
 <p>The configuration itself is stored in implementations of the
-<a href="./apidocs/org/jdbi/v3/core/config/JdbiConfig.html">JdbiConfig</a> interface.
+<a href="./apidocs/org/jdbi/v3/core/config/JdbiConfig.html" target="_blank" rel="noopener">JdbiConfig</a> interface.
 Each implementation must adhere to the contract of the interface; in
 particular it must have a public no-argument constructor that provides
 useful defaults and an implementation of the
@@ -13323,7 +13323,7 @@ not.</p>
 <div class="paragraph">
 <p>Many of Jdbi&#8217;s core features, for example argument or mapper
 registries, are simply implementations of
-<a href="./apidocs/org/jdbi/v3/core/config/JdbiConfig.html">JdbiConfig</a> that store the
+<a href="./apidocs/org/jdbi/v3/core/config/JdbiConfig.html" target="_blank" rel="noopener">JdbiConfig</a> that store the
 registered mappings for later use during query execution.</p>
 </div>
 <div class="listingblock">
@@ -13923,7 +13923,7 @@ return types, or on <code>@SqlBatch</code> parameters.</p>
 <div id="footer">
 <div id="footer-text">
 Version 3.38.0-rc3-SNAPSHOT<br>
-Last updated 04/13/2023 18:14 -0700
+Last updated 04/13/2023 18:30 -0700
 </div>
 </div>
 </body>
