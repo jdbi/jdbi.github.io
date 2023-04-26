@@ -533,13 +533,13 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div id="header">
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
-<span id="revnumber">version 3.38.0-rc4-SNAPSHOT,</span>
-<span id="revdate">04/25/2023 23:33 -0700</span>
+<span id="revnumber">version 3.38.0,</span>
+<span id="revdate">04/25/2023 23:41 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_development_documentation_3_38_0_rc4_snapshot">Development documentation (3.38.0-rc4-SNAPSHOT)</a>
+<li><a href="#_development_documentation_3_38_0">Development documentation (3.38.0)</a>
 <ul class="sectlevel2">
 <li><a href="#_release_documentation">Release documentation</a></li>
 </ul>
@@ -944,7 +944,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </div>
 </div>
 <div class="sect1">
-<h2 id="_development_documentation_3_38_0_rc4_snapshot"><a class="anchor" href="#_development_documentation_3_38_0_rc4_snapshot"></a><a class="link" href="#_development_documentation_3_38_0_rc4_snapshot">Development documentation (3.38.0-rc4-SNAPSHOT)</a></h2>
+<h2 id="_development_documentation_3_38_0"><a class="anchor" href="#_development_documentation_3_38_0"></a><a class="link" href="#_development_documentation_3_38_0">Development documentation (3.38.0)</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>This is the documentation for the current development state of Jdbi. All information in here reflects the current state of development on the <code>master</code> branch and is subject to change until it has been released as a numbered version.</p>
@@ -969,6 +969,9 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h3 id="_release_documentation"><a class="anchor" href="#_release_documentation"></a><a class="link" href="#_release_documentation">Release documentation</a></h3>
 <div class="ulist">
 <ul>
+<li>
+<p><a href="https://jdbi.org/releases/3.38.0" target="_blank" rel="noopener">Release 3.38.0 - 2023-04-25</a></p>
+</li>
 <li>
 <p><a href="https://jdbi.org/releases/3.37.1" target="_blank" rel="noopener">Release 3.37.1 - 2023-02-08</a></p>
 </li>
@@ -1365,7 +1368,7 @@ While Oracle support is considered part of Jdbi, the actual library is developed
     <span class="tag">&lt;dependency&gt;</span>
         <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
         <span class="tag">&lt;artifactId&gt;</span>jdbi3-core<span class="tag">&lt;/artifactId&gt;</span>
-        <span class="tag">&lt;version&gt;</span>3.38.0-rc4-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+        <span class="tag">&lt;version&gt;</span>3.38.0<span class="tag">&lt;/version&gt;</span>
     <span class="tag">&lt;/dependency&gt;</span>
 <span class="tag">&lt;/dependencies&gt;</span></code></pre>
 </div>
@@ -1376,7 +1379,7 @@ While Oracle support is considered part of Jdbi, the actual library is developed
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
-    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-core:3.38.0-rc4-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-core:3.38.0</span><span class="delimiter">&quot;</span></span>)
 }</code></pre>
 </div>
 </div>
@@ -1397,7 +1400,7 @@ While Oracle support is considered part of Jdbi, the actual library is developed
             <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
             <span class="tag">&lt;artifactId&gt;</span>jdbi3-bom<span class="tag">&lt;/artifactId&gt;</span>
             <span class="tag">&lt;type&gt;</span>pom<span class="tag">&lt;/type&gt;</span>
-            <span class="tag">&lt;version&gt;</span>3.38.0-rc4-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+            <span class="tag">&lt;version&gt;</span>3.38.0<span class="tag">&lt;/version&gt;</span>
             <span class="tag">&lt;scope&gt;</span>import<span class="tag">&lt;/scope&gt;</span>
         <span class="tag">&lt;/dependency&gt;</span>
     <span class="tag">&lt;/dependencies&gt;</span>
@@ -1427,7 +1430,7 @@ While Oracle support is considered part of Jdbi, the actual library is developed
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
     <span class="comment">// Load bill of materials (BOM) for Jdbi.</span>
-    implementation(platform(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-bom:3.38.0-rc4-SNAPSHOT</span><span class="delimiter">&quot;</span></span>))
+    implementation(platform(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-bom:3.38.0</span><span class="delimiter">&quot;</span></span>))
 }</code></pre>
 </div>
 </div>
@@ -6765,7 +6768,7 @@ Array columns can be mapped to any container type registered with the
     <span class="tag">&lt;dependency&gt;</span>
         <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
         <span class="tag">&lt;artifactId&gt;</span>jdbi3-sqlobject<span class="tag">&lt;/artifactId&gt;</span>
-        <span class="tag">&lt;version&gt;</span>3.38.0-rc4-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+        <span class="tag">&lt;version&gt;</span>3.38.0<span class="tag">&lt;/version&gt;</span>
     <span class="tag">&lt;/dependency&gt;</span>
 <span class="tag">&lt;/dependencies&gt;</span></code></pre>
 </div>
@@ -6776,7 +6779,7 @@ Array columns can be mapped to any container type registered with the
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
-    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-sqlobject:3.38.0-rc4-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-sqlobject:3.38.0</span><span class="delimiter">&quot;</span></span>)
 }</code></pre>
 </div>
 </div>
@@ -7685,7 +7688,7 @@ When using <a href="https://docs.oracle.com/javase/8/docs/api/java/util/function
 <div class="sect3">
 <h4 id="_mapping_arguments_to_defined_attributes"><a class="anchor" href="#_mapping_arguments_to_defined_attributes"></a><a class="link" href="#_mapping_arguments_to_defined_attributes">13.3.5. Mapping arguments to defined attributes</a></h4>
 <div class="paragraph">
-<p>The Jdbi core framework supports attributes that can be used anywhere in the SQL statement or that can control <a href="#query_templating">Query template rendering</a>. The <a href="./apidocs/org/jdbi/v3/sqlobject/customizer/Define.html" target="_blank" rel="noopener">@Define</a> annotation provides this functionality for the SQL Object extension:</p>
+<p>The Jdbi core framework supports attributes that can be used anywhere in the SQL statement or that can control <a href="#query-templating">Query template rendering</a>. The <a href="./apidocs/org/jdbi/v3/sqlobject/customizer/Define.html" target="_blank" rel="noopener">@Define</a> annotation provides this functionality for the SQL Object extension:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -8905,11 +8908,11 @@ result:</p>
 <p>All of the above examples assume a one-to-one key/value relationship.</p>
 </div>
 <div class="paragraph">
-<p>What if there is a one-to-many relationship? <a href="#google_guava">Google Guava</a> provides a <code>Multimap</code>
+<p>What if there is a one-to-many relationship? <a href="#google-guava">Google Guava</a> provides a <code>Multimap</code>
 type, which supports mapping multiple values per key.</p>
 </div>
 <div class="paragraph">
-<p>First, follow the instructions in the <a href="#google_guava">Google Guava</a> section to install the
+<p>First, follow the instructions in the <a href="#google-guava">Google Guava</a> section to install the
 <a href="./apidocs/org/jdbi/v3/guava/GuavaPlugin.html" target="_blank" rel="noopener">GuavaPlugin</a>.</p>
 </div>
 <div class="paragraph">
@@ -14776,8 +14779,8 @@ return types, or on <a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlBatch.
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 3.38.0-rc4-SNAPSHOT<br>
-Last updated 04/25/2023 23:33 -0700
+Version 3.38.0<br>
+Last updated 04/25/2023 23:41 -0700
 </div>
 </div>
 </body>
