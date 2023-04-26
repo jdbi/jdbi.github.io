@@ -534,7 +534,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.38.0-rc4-SNAPSHOT,</span>
-<span id="revdate">04/25/2023 21:25 -0700</span>
+<span id="revdate">04/25/2023 23:33 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -1843,13 +1843,11 @@ assertThat(users).containsExactly(
 </div>
 </div>
 <div class="paragraph">
-<p>To get a single row from a query, there are a few possible methods to use,
-depending on the number of rows that might be in the result set.</p>
+<p>There are many different methods to collect results from a query.</p>
 </div>
 <div class="paragraph">
-<p>Call <code>one()</code> when you expect the result to contain exactly one row. Returns
-<code>null</code> only if the returned row maps to <code>null</code>. Throws an exception if the
-result has zero or multiple rows.</p>
+<p>Use the <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#one()" target="_blank" rel="noopener">ResultIterable#one()</a> method returns when you expect the result to contain exactly one row. This method returns
+<code>null</code> only if the returned row maps to <code>null</code> and throws an exception if the result has zero or multiple rows.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1859,9 +1857,8 @@ result has zero or multiple rows.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Call <code>findOne()</code> when you expect the result to contain zero or one row. Returns
-<a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html#empty--" target="_blank" rel="noopener">Optional.empty()</a> if there are no rows, or one row that maps to <code>null</code>. Throws
-an exception if the result has multiple rows.</p>
+<p>Use the <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#findOne()" target="_blank" rel="noopener">ResultIterable#findOne()</a> method when you expect the result to contain zero or one row. Returns
+<a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html#empty--" target="_blank" rel="noopener">Optional.empty()</a> if there are no rows, or one row that maps to <code>null</code> and throws  an exception if the result has multiple rows.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1871,9 +1868,8 @@ an exception if the result has multiple rows.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Call <code>first()</code> when you expect the result to contain at least one row. Returns
-<code>null</code> if the first row maps to <code>null</code>. Throws an exception if the result has
-zero rows.</p>
+<p>Use the <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#first()" target="_blank" rel="noopener">ResultIterable#first()</a> method when you expect the result to contain at least one row. Returns
+<code>null</code> if the first row maps to <code>null</code>. and throws an exception if the result has  zero rows.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1883,7 +1879,7 @@ zero rows.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Call <code>findFirst()</code> when the result may contain any number of rows. Returns
+<p>Use the <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#findFirst()" target="_blank" rel="noopener">ResultIterable#findFirst()</a> method when the result may contain any number of rows. Returns
 <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html#empty--" target="_blank" rel="noopener">Optional.empty()</a> if there are no rows, or the first row maps to <code>null</code>.</p>
 </div>
 <div class="listingblock">
@@ -1894,28 +1890,106 @@ zero rows.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Multiple result rows can be returned in a list:</p>
+<p>Multiple result rows can be returned in a list or a set:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt; name = handle
-    .createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT title FROM films WHERE genre = :genre ORDER BY title</span><span class="delimiter">&quot;</span></span>)
-    .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">genre</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Action</span><span class="delimiter">&quot;</span></span>)
-    .mapTo(<span class="predefined-type">String</span>.class)
-    .list();</code></pre>
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt; names = <span class="local-variable">this</span>.handle
+        .createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT title FROM films WHERE genre = :genre ORDER BY title</span><span class="delimiter">&quot;</span></span>)
+        .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">genre</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Action</span><span class="delimiter">&quot;</span></span>)
+        .mapTo(<span class="predefined-type">String</span>.class)
+        .list();
+
+<span class="predefined-type">Set</span>&lt;<span class="predefined-type">String</span>&gt; names = handle
+        .createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT title FROM films WHERE genre = :genre ORDER BY title</span><span class="delimiter">&quot;</span></span>)
+        .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">genre</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Action</span><span class="delimiter">&quot;</span></span>)
+        .mapTo(<span class="predefined-type">String</span>.class)
+        .set();</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>For other collections, use <code>collect()</code> with a
-<a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Collector.html" target="_blank" rel="noopener">collector</a>:</p>
+<p>Use the <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#list()" target="_blank" rel="noopener">ResultIterable#list()</a> and Use the <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#set()" target="_blank" rel="noopener">ResultIterable#set()</a> methods use the default implementations from the collections framework.</p>
+</div>
+<div class="paragraph">
+<p>For more control over the set and list types, use the <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#collectIntoList()" target="_blank" rel="noopener">ResultIterable#collectIntoList()</a> and <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#collectIntoSet()" target="_blank" rel="noopener">ResultIterable#collectIntoSet()</a> methods which use the <a href="./apidocs/org/jdbi/v3/core/collector/JdbiCollectors.html" target="_blank" rel="noopener">JdbiCollectors</a> configuration object to retrieve the collection types for <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html" target="_blank" rel="noopener">List</a> and <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Set.html" target="_blank" rel="noopener">Set</a>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">Set</span>&lt;<span class="predefined-type">String</span>&gt; name = handle
-    .createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT title FROM films WHERE genre = :genre ORDER BY title</span><span class="delimiter">&quot;</span></span>)
-    .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">genre</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Action</span><span class="delimiter">&quot;</span></span>)
-    .mapTo(<span class="predefined-type">String</span>.class)
-    .collect(Collectors.toSet());</code></pre>
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt; names = handle
+        .registerCollector(<span class="predefined-type">List</span>.class, Collectors.toCollection(<span class="predefined-type">LinkedList</span>::<span class="keyword">new</span>))
+        .createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT title FROM films WHERE genre = :genre ORDER BY title</span><span class="delimiter">&quot;</span></span>)
+        .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">genre</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Action</span><span class="delimiter">&quot;</span></span>)
+        .mapTo(<span class="predefined-type">String</span>.class)
+        .collectIntoList();
+
+<span class="predefined-type">Set</span>&lt;<span class="predefined-type">String</span>&gt; names = handle
+        .registerCollector(<span class="predefined-type">Set</span>.class, Collectors.toCollection(<span class="predefined-type">LinkedHashSet</span>::<span class="keyword">new</span>))
+        .createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT title FROM films WHERE genre = :genre ORDER BY title</span><span class="delimiter">&quot;</span></span>)
+        .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">genre</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Action</span><span class="delimiter">&quot;</span></span>)
+        .mapTo(<span class="predefined-type">String</span>.class)
+        .collectIntoSet();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The  <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#collectInto(java.lang.reflect.Type)" target="_blank" rel="noopener">ResultIterable#collectInto()</a> methods allows specifying a container type directly:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt; names = handle
+        .createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT title FROM films WHERE genre = :genre ORDER BY title</span><span class="delimiter">&quot;</span></span>)
+        .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">genre</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Action</span><span class="delimiter">&quot;</span></span>)
+        .mapTo(<span class="predefined-type">String</span>.class)
+        .collectInto(<span class="predefined-type">List</span>.class); <i class="conum" data-value="1"></i><b>(1)</b>
+
+<span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt; names = handle
+        .createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT title FROM films WHERE genre = :genre ORDER BY title</span><span class="delimiter">&quot;</span></span>)
+        .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">genre</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Action</span><span class="delimiter">&quot;</span></span>)
+        .mapTo(<span class="predefined-type">String</span>.class)
+        .collectInto(GenericTypes.parameterizeClass(<span class="predefined-type">List</span>.class, <span class="predefined-type">String</span>.class)); <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>collect into a raw collection type</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>collect into a parameterized generic type</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>For other collections, use <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#collect(java.util.stream.Collector)" target="_blank" rel="noopener">ResultIterable#collect()</a> with a
+<a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Collector.html" target="_blank" rel="noopener">collector</a> or <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#toCollection(java.util.function.Supplier)" target="_blank" rel="noopener">ResultIterable#toCollection()</a> with a collection supplier:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">Set</span>&lt;<span class="predefined-type">String</span>&gt; names = handle
+        .createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT title FROM films WHERE genre = :genre ORDER BY title</span><span class="delimiter">&quot;</span></span>)
+        .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">genre</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Action</span><span class="delimiter">&quot;</span></span>)
+        .mapTo(<span class="predefined-type">String</span>.class)
+        .collect(Collectors.toSet());
+
+<span class="predefined-type">Set</span>&lt;<span class="predefined-type">String</span>&gt; names = handle
+        .createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT title FROM films WHERE genre = :genre ORDER BY title</span><span class="delimiter">&quot;</span></span>)
+        .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">genre</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Action</span><span class="delimiter">&quot;</span></span>)
+        .mapTo(<span class="predefined-type">String</span>.class)
+        .toCollection(() -&gt; <span class="keyword">new</span> <span class="predefined-type">LinkedHashSet</span>&lt;&gt;());</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#collectToMap(java.util.function.Function,java.util.function.Function)" target="_blank" rel="noopener">ResultIterable#collectToMap()</a> method allows collecting results directly into a <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html" target="_blank" rel="noopener">Map</a>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">Map</span>&lt;<span class="predefined-type">Integer</span>, <span class="predefined-type">String</span>&gt; names = handle
+        .registerRowMapper(Movie.class, ConstructorMapper.of(Movie.class))
+        .createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT * FROM films WHERE genre = :genre ORDER BY title</span><span class="delimiter">&quot;</span></span>)
+        .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">genre</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Action</span><span class="delimiter">&quot;</span></span>)
+        .mapTo(Movie.class)
+        .collectToMap(Movie::id, Movie::title);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1923,25 +1997,63 @@ zero rows.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">handle.createQuery(
-    <span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT title FROM films WHERE genre = :genre ORDER BY title</span><span class="delimiter">&quot;</span></span>)
-    .mapTo(<span class="predefined-type">String</span>.class)
-    .useStream(stream -&gt; {
-        <span class="comment">// do stuff with stream</span>
-    });</code></pre>
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt; names = <span class="keyword">new</span> <span class="predefined-type">ArrayList</span>&lt;&gt;();
+handle.createQuery(
+                <span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT title FROM films WHERE genre = :genre ORDER BY title</span><span class="delimiter">&quot;</span></span>)
+        .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">genre</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Action</span><span class="delimiter">&quot;</span></span>)
+        .mapTo(<span class="predefined-type">String</span>.class)
+        .useStream(stream -&gt; stream.forEach(names::add)); <i class="conum" data-value="1"></i><b>(1)</b>
+
+<span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt; names = <span class="keyword">new</span> <span class="predefined-type">ArrayList</span>&lt;&gt;();
+<span class="keyword">try</span> (Stream&lt;<span class="predefined-type">String</span>&gt; stream = handle.createQuery(
+                <span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT title FROM films WHERE genre = :genre ORDER BY title</span><span class="delimiter">&quot;</span></span>)
+        .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">genre</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Action</span><span class="delimiter">&quot;</span></span>)
+        .mapTo(<span class="predefined-type">String</span>.class)
+        .stream()) { <i class="conum" data-value="2"></i><b>(2)</b>
+
+    stream.forEach(names::add);
+}</code></pre>
 </div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#useStream(org.jdbi.v3.core.result.StreamConsumer)" target="_blank" rel="noopener">ResultIterable#useStream()</a> and <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#withStream(org.jdbi.v3.core.result.StreamCallback)" target="_blank" rel="noopener">ResultIterable#withStream()</a> provide a callback with a managed stream object.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td><a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#stream()" target="_blank" rel="noopener">ResultIterable#stream()</a> provides a stream that must be managed by user code</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Equivalent methods for iterators exist as well.</p>
 </div>
 <div class="paragraph">
 <p>Thus far, all examples have shown a <code>String</code> result type. Of course, you can
-map to many other data types:</p>
+map to many other data types such as an integer:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">LocalDate releaseDate = handle
-    .createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT release_date FROM films WHERE name = :name</span><span class="delimiter">&quot;</span></span>)
-    .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Star Wars: A New Hope</span><span class="delimiter">&quot;</span></span>)
-    .mapTo(LocalDate.class)
-    .one();</code></pre>
+<pre class="CodeRay highlight"><code data-lang="java"><span class="type">int</span> releaseDate = handle
+        .createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT release_year FROM films WHERE title = :title</span><span class="delimiter">&quot;</span></span>)
+        .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">title</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">The Dark Knight</span><span class="delimiter">&quot;</span></span>)
+        .mapTo(<span class="predefined-type">Integer</span>.class)
+        .one();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or a complex, custom type:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">Movie movie = handle
+        .registerRowMapper(Movie.class, ConstructorMapper.of(Movie.class))
+        .createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT * FROM films WHERE id = :id</span><span class="delimiter">&quot;</span></span>)
+        .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">1</span>)
+        .mapTo(Movie.class)
+        .one();</code></pre>
 </div>
 </div>
 </div>
@@ -4704,7 +4816,7 @@ happen behind the scenes:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Consult the <code>JdbiCollectors</code> registry to obtain a
+<p>Consult the <a href="./apidocs/org/jdbi/v3/core/collector/JdbiCollectors.html" target="_blank" rel="noopener">JdbiCollectors</a> registry to obtain a
 <a href="./apidocs/org/jdbi/v3/core/collector/CollectorFactory.html" target="_blank" rel="noopener">CollectorFactory</a> which
  supports the given container type.</p>
 </li>
@@ -6625,7 +6737,7 @@ a regular <a href="./apidocs/org/jdbi/v3/core/mapper/ColumnMapper.html" target="
 </td>
 <td class="content">
 Array columns can be mapped to any container type registered with the
-<code>JdbiCollectors</code> registry. E.g. a <code>VARCHAR[]</code> may be mapped to an
+<a href="./apidocs/org/jdbi/v3/core/collector/JdbiCollectors.html" target="_blank" rel="noopener">JdbiCollectors</a> registry. E.g. a <code>VARCHAR[]</code> may be mapped to an
 <code>ImmutableList&lt;String&gt;</code> if the Guava plugin is installed.
 </td>
 </tr>
@@ -14665,7 +14777,7 @@ return types, or on <a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlBatch.
 <div id="footer">
 <div id="footer-text">
 Version 3.38.0-rc4-SNAPSHOT<br>
-Last updated 04/25/2023 21:25 -0700
+Last updated 04/25/2023 23:33 -0700
 </div>
 </div>
 </body>
