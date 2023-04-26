@@ -534,7 +534,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.38.1-SNAPSHOT,</span>
-<span id="revdate">04/26/2023 00:06 -0700</span>
+<span id="revdate">04/26/2023 15:03 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -14175,7 +14175,8 @@ method that is invoked when a configuration registry is cloned.</p>
 <div class="paragraph">
 <p>Configuration should be set on a context before that context is used,
 and not changed later. Some configuration classes may be thread-safe but most are
-not.</p>
+not. Configuration objects should be implemented so that they are cheap to copy,
+for example the base ones use copy-on-write collections.</p>
 </div>
 <div class="paragraph">
 <p>Many of Jdbi&#8217;s core features, for example argument or mapper
@@ -14780,7 +14781,7 @@ return types, or on <a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlBatch.
 <div id="footer">
 <div id="footer-text">
 Version 3.38.1-SNAPSHOT<br>
-Last updated 04/26/2023 00:06 -0700
+Last updated 04/26/2023 15:03 -0700
 </div>
 </div>
 </body>
