@@ -534,7 +534,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.38.1-SNAPSHOT,</span>
-<span id="revdate">04/26/2023 15:03 -0700</span>
+<span id="revdate">04/29/2023 16:56 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -7357,7 +7357,7 @@ will iterate the elements in 'a,b,c,d,&#8230;&#8203;' form.</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-This annotation requires you to use a template placeholder (using the <code>&lt;field&gt;</code> notation when using the default template engine), similar to the <a href="./apidocs/org/jdbi/v3/core/statement/SqlStatement.html#bindList(java.lang.String,java.lang.Iterable)" target="_blank" rel="noopener">SqlStatement#bindList()</a> method.
+This annotation requires you to use a template placeholder (using the <code>&lt;field&gt;</code> notation when using the default template engine), similar to the <a href="./apidocs/org/jdbi/v3/core/statement/SqlStatement.html#bindList(java.lang.String,java.lang.Iterable)" target="_blank" rel="noopener">SqlStatement#bindList()</a> method. Templates placeholders are incompatible with batch operations such as`PreparedBatch` as they are evaluated only once and the evaluated statement is cached. If subsequent batch executions use an iterable object with a different size, the number of placeholders and arguments will not match. If the database supports array types, it is strongly recommended to use <code>bindArray()</code> with a SQL array instead of the <code>bindList()</code> method.
 </td>
 </tr>
 </table>
@@ -14781,7 +14781,7 @@ return types, or on <a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlBatch.
 <div id="footer">
 <div id="footer-text">
 Version 3.38.1-SNAPSHOT<br>
-Last updated 04/26/2023 15:03 -0700
+Last updated 04/29/2023 16:56 -0700
 </div>
 </div>
 </body>
