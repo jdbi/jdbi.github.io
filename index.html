@@ -534,7 +534,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.38.3-SNAPSHOT,</span>
-<span id="revdate">05/07/2023 18:37 -0700</span>
+<span id="revdate">05/08/2023 22:27 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -822,11 +822,12 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_jodatime">16.6. JodaTime</a></li>
 <li><a href="#_google_guice">16.7. Google Guice</a>
 <ul class="sectlevel3">
-<li><a href="#_definition_modules">16.7.1. Definition modules</a></li>
-<li><a href="#_using_guice_injection_in_jdbi_classes">16.7.2. Using Guice injection in Jdbi classes</a></li>
-<li><a href="#_jdbi_customization_using_guice">16.7.3. Jdbi customization using Guice</a></li>
-<li><a href="#_element_configuration_modules">16.7.4. Element configuration modules</a></li>
-<li><a href="#_advanced_topics">16.7.5. Advanced Topics</a></li>
+<li><a href="#_jsr_330_vs_jee_9_annotations">16.7.1. JSR 330 vs. JEE 9+ annotations</a></li>
+<li><a href="#_definition_modules">16.7.2. Definition modules</a></li>
+<li><a href="#_using_guice_injection_in_jdbi_classes">16.7.3. Using Guice injection in Jdbi classes</a></li>
+<li><a href="#_jdbi_customization_using_guice">16.7.4. Jdbi customization using Guice</a></li>
+<li><a href="#_element_configuration_modules">16.7.5. Element configuration modules</a></li>
+<li><a href="#_advanced_topics">16.7.6. Advanced Topics</a></li>
 </ul>
 </li>
 <li><a href="#_jpa">16.8. JPA</a></li>
@@ -10695,7 +10696,7 @@ Guice support is experimental.
 </table>
 </div>
 <div class="paragraph">
-<p>The Guice module adds support for configuring and injecting <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instances in applications and services that use the <a href="https://github.com/google/guice/wiki" target="_blank" rel="noopener">Google Guice </a> dependency injection framework.</p>
+<p>The Guice module adds support for configuring and injecting <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instances in applications and services that use the <a href="https://github.com/google/guice/wiki" target="_blank" rel="noopener">Google Guice</a> dependency injection framework.</p>
 </div>
 <div class="paragraph">
 <p>Guice support for Jdbi is split into two module types:</p>
@@ -10703,10 +10704,10 @@ Guice support is experimental.
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Jdbi definition modules</strong> extend the <a href="./apidocs/org/jdbi/v3/guice/AbstractJdbiDefinitionModule.html" target="_blank" rel="noopener">AbstractJdbiDefinitionModule</a> class. Each of these modules creates a new <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instance which is exposed into the Guice binding process using an annotation.</p>
+<p><strong>A Jdbi definition module</strong> extends the <a href="./apidocs/org/jdbi/v3/guice/AbstractJdbiDefinitionModule.html" target="_blank" rel="noopener">AbstractJdbiDefinitionModule</a> class. Each of these modules creates a new <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instance which is exposed into the Guice binding process using an annotation.</p>
 </li>
 <li>
-<p><strong>Jdbi element configuration modules</strong> extend the <a href="./apidocs/org/jdbi/v3/guice/AbstractJdbiConfigurationModule.html" target="_blank" rel="noopener">AbstractJdbiConfigurationModule</a>. These modules contribute elements that are referenced in Jdbi definition modules.</p>
+<p><strong>A Jdbi element configuration module</strong> extends the <a href="./apidocs/org/jdbi/v3/guice/AbstractJdbiConfigurationModule.html" target="_blank" rel="noopener">AbstractJdbiConfigurationModule</a>. These modules contribute elements that are referenced in Jdbi definition modules.</p>
 </li>
 </ul>
 </div>
@@ -10723,7 +10724,16 @@ Jdbi definition modules are by far more common. Element configuration modules ar
 </table>
 </div>
 <div class="sect3">
-<h4 id="_definition_modules"><a class="anchor" href="#_definition_modules"></a><a class="link" href="#_definition_modules">16.7.1. Definition modules</a></h4>
+<h4 id="_jsr_330_vs_jee_9_annotations"><a class="anchor" href="#_jsr_330_vs_jee_9_annotations"></a><a class="link" href="#_jsr_330_vs_jee_9_annotations">16.7.1. JSR 330 vs. JEE 9+ annotations</a></h4>
+<div class="paragraph">
+<p>For a long time, Java used the <a href="https://javax-inject.github.io/javax-inject/" target="_blank" rel="noopener">JSR-330</a> annotations in the <code>javax.inject</code> namespace to define dependency injections. The <a href="https://jakarta.ee/release/9/" target="_blank" rel="noopener">Java Enterprise Edition 9</a> specification updated the dependency injection specification to <a href="https://jakarta.ee/specifications/dependency-injection/2.0/" target="_blank" rel="noopener">version 2.0</a>, which changed the namespace to <code>jakarta.inject</code>.</p>
+</div>
+<div class="paragraph">
+<p>The <code>jdbi3-guice</code> module supports all Google Guice releases since 5.x including 6.x (which uses <code>javax.inject</code> annotations) and 7.x (which uses <code>jakarta.inject</code>).</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_definition_modules"><a class="anchor" href="#_definition_modules"></a><a class="link" href="#_definition_modules">16.7.2. Definition modules</a></h4>
 <div class="paragraph">
 <p>Every <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instance is defined in its own Guice module which extends the <a href="./apidocs/org/jdbi/v3/guice/AbstractJdbiDefinitionModule.html" target="_blank" rel="noopener">AbstractJdbiDefinitionModule</a> base class.</p>
 </div>
@@ -10866,7 +10876,7 @@ A Jdbi definition module requires that a DataSource object is bound within Guice
 </div>
 </div>
 <div class="sect3">
-<h4 id="_using_guice_injection_in_jdbi_classes"><a class="anchor" href="#_using_guice_injection_in_jdbi_classes"></a><a class="link" href="#_using_guice_injection_in_jdbi_classes">16.7.2. Using Guice injection in Jdbi classes</a></h4>
+<h4 id="_using_guice_injection_in_jdbi_classes"><a class="anchor" href="#_using_guice_injection_in_jdbi_classes"></a><a class="link" href="#_using_guice_injection_in_jdbi_classes">16.7.3. Using Guice injection in Jdbi classes</a></h4>
 <div class="paragraph">
 <p>The Jdbi related guice modules store the various related elements (mappers, codecs etc.) using <a href="https://github.com/google/guice/wiki/Multibindings" target="_blank" rel="noopener">Multibindings</a>. As a result, it is not possible to use injection directly when constructing mapper instances.</p>
 </div>
@@ -11006,7 +11016,7 @@ Injector inj = Guice.createInjector(
 </div>
 </div>
 <div class="sect3">
-<h4 id="_jdbi_customization_using_guice"><a class="anchor" href="#_jdbi_customization_using_guice"></a><a class="link" href="#_jdbi_customization_using_guice">16.7.3. Jdbi customization using Guice</a></h4>
+<h4 id="_jdbi_customization_using_guice"><a class="anchor" href="#_jdbi_customization_using_guice"></a><a class="link" href="#_jdbi_customization_using_guice">16.7.4. Jdbi customization using Guice</a></h4>
 <div class="paragraph">
 <p>Many Jdbi specific settings can be configured through the <code>bindXXX()</code> methods available on Jdbi modules (row mappers, column mappers, codecs, plugins etc.)</p>
 </div>
@@ -11048,7 +11058,7 @@ Injector inj = Guice.createInjector(
 </div>
 </div>
 <div class="sect3">
-<h4 id="_element_configuration_modules"><a class="anchor" href="#_element_configuration_modules"></a><a class="link" href="#_element_configuration_modules">16.7.4. Element configuration modules</a></h4>
+<h4 id="_element_configuration_modules"><a class="anchor" href="#_element_configuration_modules"></a><a class="link" href="#_element_configuration_modules">16.7.5. Element configuration modules</a></h4>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -11126,7 +11136,7 @@ Definition modules are Guice private modules and anything defined within them wi
 </div>
 </div>
 <div class="sect3">
-<h4 id="_advanced_topics"><a class="anchor" href="#_advanced_topics"></a><a class="link" href="#_advanced_topics">16.7.5. Advanced Topics</a></h4>
+<h4 id="_advanced_topics"><a class="anchor" href="#_advanced_topics"></a><a class="link" href="#_advanced_topics">16.7.6. Advanced Topics</a></h4>
 <div class="sect4">
 <h5 id="_exposing_additional_bindings"><a class="anchor" href="#_exposing_additional_bindings"></a><a class="link" href="#_exposing_additional_bindings">Exposing additional bindings</a></h5>
 <div class="paragraph">
@@ -14781,7 +14791,7 @@ return types, or on <a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlBatch.
 <div id="footer">
 <div id="footer-text">
 Version 3.38.3-SNAPSHOT<br>
-Last updated 05/07/2023 18:37 -0700
+Last updated 05/08/2023 22:27 -0700
 </div>
 </div>
 </body>
