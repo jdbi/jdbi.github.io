@@ -534,7 +534,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.38.3-SNAPSHOT,</span>
-<span id="revdate">05/08/2023 22:27 -0700</span>
+<span id="revdate">05/11/2023 14:49 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -12368,9 +12368,17 @@ up to that index will be used.</p>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>Currently Vavr &gt;= 0.9.0 is supported and tested. The plugin pulls a supported version of
-Vavr and is ready to be used. As with other plugins: install through a <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instance or use auto install.</p>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Vavr introduced binary incompatibilities between 0.10.x and 1.0.0-alpha. The Jdbi plugin only supports 0.9.x and 0.10.x and requires recompilation for vavr 1.0.0.
+</td>
+</tr>
+</table>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14791,7 +14799,7 @@ return types, or on <a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlBatch.
 <div id="footer">
 <div id="footer-text">
 Version 3.38.3-SNAPSHOT<br>
-Last updated 05/08/2023 22:27 -0700
+Last updated 05/11/2023 14:49 -0700
 </div>
 </div>
 </body>
