@@ -534,7 +534,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.38.4-SNAPSHOT,</span>
-<span id="revdate">06/07/2023 20:49 -0700</span>
+<span id="revdate">06/08/2023 22:36 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -6066,13 +6066,19 @@ configuration objects.</p>
 </table></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/core/extension/Extensions.html" target="_blank" rel="noopener">Extensions</a></p></td>
+<td class="tableblock halign-left valign-top" rowspan="2"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/core/extension/Extensions.html" target="_blank" rel="noopener">Extensions</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">allowProxy</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>true</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Whether Jdbi is allowed to create <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Proxy.html" target="_blank" rel="noopener">proxy </a> instances for classes (as extension and on-demand reference). This is useful for debugging when using the generator to create java classes for sql objects.</p>
 </div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">failFast</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If set to <code>true</code>, extension objects with misconfigured methods will fail at first use of any method. Default is to fail when a misconfigured method is used.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/core/Handles.html" target="_blank" rel="noopener">Handles</a></p></td>
@@ -14808,7 +14814,7 @@ return types, or on <a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlBatch.
 <div id="footer">
 <div id="footer-text">
 Version 3.38.4-SNAPSHOT<br>
-Last updated 06/07/2023 20:49 -0700
+Last updated 06/08/2023 22:36 -0700
 </div>
 </div>
 </body>
