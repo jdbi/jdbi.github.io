@@ -534,7 +534,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.38.4-SNAPSHOT,</span>
-<span id="revdate">06/13/2023 19:24 -0700</span>
+<span id="revdate">06/14/2023 12:41 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -745,8 +745,6 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_registerbeanmapper">13.5.5. @RegisterBeanMapper</a></li>
 <li><a href="#_registerconstructormapper">13.5.6. @RegisterConstructorMapper</a></li>
 <li><a href="#_registerfieldmapper">13.5.7. @RegisterFieldMapper</a></li>
-<li><a href="#_registercollectorfactory">13.5.8. @RegisterCollectorFactory</a></li>
-<li><a href="#_registercollectorfactory_2">13.5.9. @RegisterCollectorFactory</a></li>
 </ul>
 </li>
 <li><a href="#_other_sql_object_annotations">13.6. Other SQL Object annotations</a>
@@ -758,8 +756,9 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_singlevalue">13.6.5. @SingleValue</a></li>
 <li><a href="#_annotations_for_mapkv_results">13.6.6. Annotations for Map&lt;K,V&gt; Results</a></li>
 <li><a href="#_userowreducer">13.6.7. @UseRowReducer</a></li>
-<li><a href="#_other_sql_object_annotations_2">13.6.8. Other SQL Object annotations</a></li>
-<li><a href="#_annotations_and_inheritance">13.6.9. Annotations and Inheritance</a></li>
+<li><a href="#_registercollector_and_registercollectorfactory">13.6.8. @RegisterCollector and @RegisterCollectorFactory</a></li>
+<li><a href="#_other_sql_object_annotations_2">13.6.9. Other SQL Object annotations</a></li>
+<li><a href="#_annotations_and_inheritance">13.6.10. Annotations and Inheritance</a></li>
 </ul>
 </li>
 <li><a href="#_combining_sql_object_and_the_core_api">13.7. Combining SQL Object and the core API</a>
@@ -8491,19 +8490,6 @@ the same type or method to register multiple constructor mappers.
 </table>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_registercollectorfactory"><a class="anchor" href="#_registercollectorfactory"></a><a class="link" href="#_registercollectorfactory">13.5.8. @RegisterCollectorFactory</a></h4>
-<div class="paragraph">
-<p>Convenience annotation to register a <code>CollectorFactory</code> for this SqlObject method. See <a href="#_collectors">Collectors</a> for more details.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_registercollectorfactory_2"><a class="anchor" href="#_registercollectorfactory_2"></a><a class="link" href="#_registercollectorfactory_2">13.5.9. @RegisterCollectorFactory</a></h4>
-<div class="paragraph">
-<p>Convenience annotation to register a <code>Collector</code> for this SqlObject method. The element and result types are inferred from
-the concrete <code>Collector&lt;Element, ?, Result&gt;</code> implementation&#8217;s type parameters. See <a href="#_collectors">Collectors</a> for more details.</p>
-</div>
-</div>
 </div>
 <div class="sect2">
 <h3 id="_other_sql_object_annotations"><a class="anchor" href="#_other_sql_object_annotations"></a><a class="link" href="#_other_sql_object_annotations">13.6. Other SQL Object annotations</a></h3>
@@ -9106,7 +9092,87 @@ and adding it to the folder.</td>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_other_sql_object_annotations_2"><a class="anchor" href="#_other_sql_object_annotations_2"></a><a class="link" href="#_other_sql_object_annotations_2">13.6.8. Other SQL Object annotations</a></h4>
+<h4 id="_registercollector_and_registercollectorfactory"><a class="anchor" href="#_registercollector_and_registercollectorfactory"></a><a class="link" href="#_registercollector_and_registercollectorfactory">13.6.8. @RegisterCollector and @RegisterCollectorFactory</a></h4>
+<div class="paragraph">
+<p>Convenience annotations to register a <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Collector.html" target="_blank" rel="noopener">Collector</a> for a SqlObject method.</p>
+</div>
+<div class="paragraph">
+<p><a href="./apidocs/org/jdbi/v3/sqlobject/config/RegisterCollectorFactory.html" target="_blank" rel="noopener">@RegisterCollectorFactory</a> allows registration of a factory that returns a collector instance and <a href="./apidocs/org/jdbi/v3/sqlobject/config/RegisterCollector.html" target="_blank" rel="noopener">@RegisterCollector</a> registers a collector implementation:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">RegisterCollectorDao</span> {
+    <span class="annotation">@RegisterCollector</span>(StringConcatCollector.class)
+    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select i from i order by i asc</span><span class="delimiter">&quot;</span></span>)
+    <span class="predefined-type">String</span> selectWithCollector();
+
+    <span class="annotation">@RegisterCollectorFactory</span>(StringConcatCollectorFactory.class)
+    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select i from i order by i asc</span><span class="delimiter">&quot;</span></span>)
+    <span class="predefined-type">String</span> selectWithCollectorFactory();
+}
+
+<span class="type">class</span> <span class="class">StringConcatCollectorFactory</span> <span class="directive">implements</span> CollectorFactory {
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="type">boolean</span> accepts(<span class="predefined-type">Type</span> containerType) {
+        <span class="keyword">return</span> containerType == <span class="predefined-type">String</span>.class;
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> Optional&lt;<span class="predefined-type">Type</span>&gt; elementType(<span class="predefined-type">Type</span> containerType) {
+        <span class="keyword">return</span> Optional.of(<span class="predefined-type">Integer</span>.class);
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> Collector&lt;<span class="predefined-type">Integer</span>, <span class="predefined-type">List</span>&lt;<span class="predefined-type">Integer</span>&gt;, <span class="predefined-type">String</span>&gt; build(<span class="predefined-type">Type</span> containerType) {
+        <span class="keyword">return</span> Collector.of(
+            <span class="predefined-type">ArrayList</span>::<span class="keyword">new</span>,
+            <span class="predefined-type">List</span>::add,
+            (x, y) -&gt; {
+                x.addAll(y);
+                <span class="keyword">return</span> x;
+            },
+            i -&gt; i.stream().map(<span class="predefined-type">Object</span>::toString).collect(Collectors.joining(<span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>)));
+    }
+}
+
+<span class="type">class</span> <span class="class">StringConcatCollector</span> <span class="directive">implements</span> Collector&lt;<span class="predefined-type">Integer</span>, <span class="predefined-type">List</span>&lt;<span class="predefined-type">Integer</span>&gt;, <span class="predefined-type">String</span>&gt; {
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> Supplier&lt;<span class="predefined-type">List</span>&lt;<span class="predefined-type">Integer</span>&gt;&gt; supplier() {
+        <span class="keyword">return</span> <span class="predefined-type">ArrayList</span>::<span class="keyword">new</span>;
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> BiConsumer&lt;<span class="predefined-type">List</span>&lt;<span class="predefined-type">Integer</span>&gt;, <span class="predefined-type">Integer</span>&gt; accumulator() {
+        <span class="keyword">return</span> <span class="predefined-type">List</span>::add;
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> BinaryOperator&lt;<span class="predefined-type">List</span>&lt;<span class="predefined-type">Integer</span>&gt;&gt; combiner() {
+        <span class="keyword">return</span> (a, b) -&gt; {
+            a.addAll(b);
+            <span class="keyword">return</span> a;
+        };
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> Function&lt;<span class="predefined-type">List</span>&lt;<span class="predefined-type">Integer</span>&gt;, <span class="predefined-type">String</span>&gt; finisher() {
+        <span class="keyword">return</span> i -&gt; i.stream().map(<span class="predefined-type">Object</span>::toString).collect(Collectors.joining(<span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>));
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="predefined-type">Set</span>&lt;Characteristics&gt; characteristics() {
+        <span class="keyword">return</span> <span class="predefined-type">Collections</span>.emptySet();
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The element and result types are inferred from the concrete <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Collector.html" target="_blank" rel="noopener">Collector&lt;Element, ?, Result&gt;</a> implementation&#8217;s type parameters. See <a href="#_collectors">Collectors</a> for more details.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_other_sql_object_annotations_2"><a class="anchor" href="#_other_sql_object_annotations_2"></a><a class="link" href="#_other_sql_object_annotations_2">13.6.9. Other SQL Object annotations</a></h4>
 <div class="paragraph">
 <p>Jdbi provides many additional annotations out of the box:</p>
 </div>
@@ -9157,7 +9223,7 @@ provides annotations for transaction management in a SQL object. See
 </div>
 </div>
 <div class="sect3">
-<h4 id="_annotations_and_inheritance"><a class="anchor" href="#_annotations_and_inheritance"></a><a class="link" href="#_annotations_and_inheritance">13.6.9. Annotations and Inheritance</a></h4>
+<h4 id="_annotations_and_inheritance"><a class="anchor" href="#_annotations_and_inheritance"></a><a class="link" href="#_annotations_and_inheritance">13.6.10. Annotations and Inheritance</a></h4>
 <div class="paragraph">
 <p>SQL Objects inherit methods and annotations from the interfaces they extend:</p>
 </div>
@@ -9672,7 +9738,7 @@ query.bindByType(<span class="string"><span class="delimiter">&quot;</span><span
 </td>
 <td class="content">
 Jdbi chooses factories to handle values by <strong>exactly matching</strong> their <em>qualifiers</em>. It&#8217;s up to the
-factory implementations to discriminate on the <em>type</em> of the value afterwards.
+factory implementations to discriminate on the <em>type</em> of the value afterward.
 </td>
 </tr>
 </table>
@@ -12949,7 +13015,7 @@ implementations that ensure that each instance is only equal to itself.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>All methods except <code>finalize()</code> can be overridden by the extension type (e.g. through a <em>interface default method</em>).</p>
+<p>All methods except <code>finalize()</code> can be overridden by the extension type (e.g. through an <em>interface default method</em>).</p>
 </div>
 </div>
 <div class="sect4">
@@ -13216,7 +13282,7 @@ and will augment any extension handler, or they can be provided by an extension 
 method.</p>
 </div>
 <div class="paragraph">
-<p>Here is an example for a extension handler customizer that logs every method handler invocation. It gets registered as a global extension handler customizer
+<p>Here is an example for an extension handler customizer that logs every method handler invocation. It gets registered as a global extension handler customizer
 with the <a href="./apidocs/org/jdbi/v3/core/extension/Extensions.html" target="_blank" rel="noopener">Extensions configuration object</a> and will then log every method invocation on an extension type.</p>
 </div>
 <div class="listingblock">
@@ -13504,7 +13570,7 @@ be placed on a method or the extension type itself.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>The extension handler customizer is only applied to a annotated method.</td>
+<td>The extension handler customizer is only applied to an annotated method.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
@@ -13595,7 +13661,7 @@ applied but its position is undefined. It is recommended to list all applicable 
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>The annotation ensures that the <code>Foo</code> extension customizer is called first, then the <code>Bar</code> extension customizer. Otherwise the order is undefined.</td>
+<td>The annotation ensures that the <code>Foo</code> extension customizer is called first, then the <code>Bar</code> extension customizer. Otherwise, the order is undefined.</td>
 </tr>
 </table>
 </div>
@@ -14829,7 +14895,7 @@ return types, or on <a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlBatch.
 <div id="footer">
 <div id="footer-text">
 Version 3.38.4-SNAPSHOT<br>
-Last updated 06/13/2023 19:24 -0700
+Last updated 06/14/2023 12:41 -0700
 </div>
 </div>
 </body>
