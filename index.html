@@ -534,7 +534,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.38.4-SNAPSHOT,</span>
-<span id="revdate">06/16/2023 14:07 -0700</span>
+<span id="revdate">06/16/2023 16:18 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -9704,7 +9704,7 @@ a <code>String</code> could be <code>varchar</code> plaintext, <code>nvarchar</c
 </div>
 </div>
 <div class="paragraph">
-<p>This <code>QualifiedType</code> still represents the <code>String</code> <em>type</em>, but <em>qualified</em> with the <code>@Json</code> annotation.
+<p>This <code>QualifiedType</code> still represents the <code>String</code> <em>type</em>, but <em>qualified</em> with the <a href="./apidocs/org/jdbi/v3/json/Json.html" target="_blank" rel="noopener">@Json</a> annotation.
 It can be used in a way similar to <a href="#_generictype">GenericType</a>, to make components
 handling values (mainly <code>ArgumentFactories</code> and <code>ColumnMapperFactories</code>) perform their work differently,
 and to have the values handled by different implementations altogether:</p>
@@ -9721,7 +9721,7 @@ and to have the values handled by different implementations altogether:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Once registered, this <code>@Json</code> qualified factory will receive <strong>only</strong> <code>@Json String</code> values.
+<p>Once registered, this <a href="./apidocs/org/jdbi/v3/json/Json.html" target="_blank" rel="noopener">@Json</a> qualified factory will receive <strong>only</strong> <code>@Json String</code> values.
 Other factories <em>not</em> qualified as such will <strong>not</strong> receive this value:</p>
 </div>
 <div class="listingblock">
@@ -10445,7 +10445,7 @@ instance:</p>
 <div class="sect2">
 <h3 id="jdbi3-json"><a class="anchor" href="#jdbi3-json"></a><a class="link" href="#jdbi3-json">16.3. JSON</a></h3>
 <div class="paragraph">
-<p>The <code>jdbi3-json</code> module adds a <code>@Json</code> type qualifier that allows to store arbitrary Java objects as JSON data in your database.</p>
+<p>The <code>jdbi3-json</code> module adds a <a href="./apidocs/org/jdbi/v3/json/Json.html" target="_blank" rel="noopener">@Json</a> type qualifier that allows to store arbitrary Java objects as JSON data in your database.</p>
 </div>
 <div class="paragraph">
 <p>The actual JSON (de)serialization code is not included. For that, you must install a backing plugin (see below).</p>
@@ -11896,6 +11896,14 @@ lombok.copyableAnnotations += org.jdbi.v3.core.mapper.reflect.JdbiConstructor</c
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java">lombok.copyableAnnotations += org.jdbi.v3.postgres.HStore</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When using any of the Json mappers (<a href="#_jackson_2">Jackson 2</a>, <a href="#_gson_2">Gson 2</a> or <a href="#_moshi">Moshi</a> ) with lombok, the <a href="./apidocs/org/jdbi/v3/json/Json.html" target="_blank" rel="noopener">@Json</a> annotation must also be added to the lombok config file, otherwise Jdbi can not map json columns to lombok bean properties:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">lombok.copyableAnnotations += org.jdbi.v3.json.Json</code></pre>
 </div>
 </div>
 </div>
@@ -14895,7 +14903,7 @@ return types, or on <a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlBatch.
 <div id="footer">
 <div id="footer-text">
 Version 3.38.4-SNAPSHOT<br>
-Last updated 06/16/2023 14:07 -0700
+Last updated 06/16/2023 16:18 -0700
 </div>
 </div>
 </body>
