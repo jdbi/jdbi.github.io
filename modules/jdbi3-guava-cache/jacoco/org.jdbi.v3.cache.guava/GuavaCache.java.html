@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang=""><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GuavaCache.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jdbi3 guava cache</a> &gt; <a href="index.source.html" class="el_package">org.jdbi.v3.cache.guava</a> &gt; <span class="el_source">GuavaCache.java</span></div><h1>GuavaCache.java</h1><pre class="source lang-java linenums">/*
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.jdbi.v3.cache.guava;
+
+import java.util.Optional;
+import java.util.concurrent.ExecutionException;
+
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheStats;
+import com.google.common.util.concurrent.UncheckedExecutionException;
+import org.jdbi.v3.core.cache.JdbiCache;
+import org.jdbi.v3.core.cache.JdbiCacheLoader;
+
+/**
+ * Cache implementation using the guava {@link Cache} object.
+ *
+ * @param &lt;K&gt; The key type.
+ * @param &lt;V&gt; The value type.
+ */
+public final class GuavaCache&lt;K, V&gt; implements JdbiCache&lt;K, V&gt; {
+
+    private final Cache&lt;K, Optional&lt;V&gt;&gt; cache;
+
+<span class="fc" id="L36">    GuavaCache(CacheBuilder&lt;Object, Object&gt; cacheBuilder) {</span>
+<span class="fc" id="L37">        this.cache = cacheBuilder.build();</span>
+<span class="fc" id="L38">    }</span>
+
+    @Override
+    public V get(K key) {
+<span class="nc" id="L42">        throw new UnsupportedOperationException();</span>
+    }
+
+    @Override
+    public V getWithLoader(K key, JdbiCacheLoader&lt;K, V&gt; loader) {
+        try {
+<span class="fc" id="L48">            Optional&lt;V&gt; value = cache.get(key, () -&gt; Optional.ofNullable(loader.create(key)));</span>
+
+<span class="pc bpc" id="L50" title="1 of 2 branches missed.">            if (!value.isPresent()) {</span>
+                // remove the cached null value again
+<span class="nc" id="L52">                cache.invalidate(key);</span>
+            }
+
+<span class="fc" id="L55">            return value.orElse(null);</span>
+<span class="nc" id="L56">        } catch (ExecutionException e) {</span>
+<span class="nc" id="L57">            throw new UncheckedExecutionException(e);</span>
+        }
+    }
+
+    @Override
+    public CacheStats getStats() {
+<span class="fc" id="L63">        return cache.stats();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>
