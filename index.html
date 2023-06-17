@@ -533,13 +533,13 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div id="header">
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
-<span id="revnumber">version 3.38.4-SNAPSHOT,</span>
-<span id="revdate">06/16/2023 22:09 -0700</span>
+<span id="revnumber">version 3.40.0-SNAPSHOT,</span>
+<span id="revdate">06/17/2023 15:23 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_development_documentation_3_38_4_snapshot">Development documentation (3.38.4-SNAPSHOT)</a>
+<li><a href="#_development_documentation_3_40_0_snapshot">Development documentation (3.40.0-SNAPSHOT)</a>
 <ul class="sectlevel2">
 <li><a href="#_release_documentation">Release documentation</a></li>
 </ul>
@@ -558,10 +558,11 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_getting_started">2.3. Getting started</a>
 <ul class="sectlevel3">
 <li><a href="#_jdbi_modules_overview">2.3.1. Jdbi modules overview</a></li>
-<li><a href="#_build_tools">2.3.2. Build tools</a></li>
-<li><a href="#_alpha_and_beta_annotations">2.3.3. @Alpha and @Beta Annotations</a></li>
-<li><a href="#_internal_packages">2.3.4. Internal packages</a></li>
-<li><a href="#_mixing_jdbi_component_versions">2.3.5. Mixing Jdbi component versions</a></li>
+<li><a href="#_external_modules">2.3.2. External modules</a></li>
+<li><a href="#_build_tools">2.3.3. Build tools</a></li>
+<li><a href="#_alpha_and_beta_annotations">2.3.4. @Alpha and @Beta Annotations</a></li>
+<li><a href="#_internal_packages">2.3.5. Internal packages</a></li>
+<li><a href="#_mixing_jdbi_component_versions">2.3.6. Mixing Jdbi component versions</a></li>
 </ul>
 </li>
 </ul>
@@ -946,7 +947,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </div>
 </div>
 <div class="sect1">
-<h2 id="_development_documentation_3_38_4_snapshot"><a class="anchor" href="#_development_documentation_3_38_4_snapshot"></a><a class="link" href="#_development_documentation_3_38_4_snapshot">Development documentation (3.38.4-SNAPSHOT)</a></h2>
+<h2 id="_development_documentation_3_40_0_snapshot"><a class="anchor" href="#_development_documentation_3_40_0_snapshot"></a><a class="link" href="#_development_documentation_3_40_0_snapshot">Development documentation (3.40.0-SNAPSHOT)</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>This is the documentation for the current development state of Jdbi. All information in here reflects the current state of development on the <code>master</code> branch and is subject to change until it has been released as a numbered version.</p>
@@ -971,6 +972,12 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h3 id="_release_documentation"><a class="anchor" href="#_release_documentation"></a><a class="link" href="#_release_documentation">Release documentation</a></h3>
 <div class="ulist">
 <ul>
+<li>
+<p><a href="https://jdbi.org/releases/3.39.1" target="_blank" rel="noopener">Release 3.39.1 - 2023-07-17</a> - <strong>This is the last release of Jdbi to support Java 8!</strong></p>
+</li>
+<li>
+<p><a href="https://jdbi.org/releases/3.39.0" target="_blank" rel="noopener">Release 3.39.0 - 2023-07-17</a></p>
+</li>
 <li>
 <p><a href="https://jdbi.org/releases/3.38.3" target="_blank" rel="noopener">Release 3.38.3 - 2023-06-05</a></p>
 </li>
@@ -1340,7 +1347,23 @@ While Oracle support is considered part of Jdbi, the actual library is developed
 <dd>
 <p>Turn off SQL template and parse caching for testing and debugging.</p>
 </dd>
+<dt>jdbi3-guava-cache</dt>
+<dd>
+<p>Use the <a href="https://github.com/google/guava/wiki/CachesExplained" target="_blank" rel="noopener">Guava Cache</a> caching library for SQL template and parse caching.</p>
+</dd>
 </dl>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The guava caching module is considered experimental.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect4">
@@ -1366,7 +1389,55 @@ While Oracle support is considered part of Jdbi, the actual library is developed
 </div>
 </div>
 <div class="sect3">
-<h4 id="_build_tools"><a class="anchor" href="#_build_tools"></a><a class="link" href="#_build_tools">2.3.2. Build tools</a></h4>
+<h4 id="_external_modules"><a class="anchor" href="#_external_modules"></a><a class="link" href="#_external_modules">2.3.2. External modules</a></h4>
+<div class="paragraph">
+<p>The following modules are maintained outside the main Jdbi tree:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 50.0002%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Module</th>
+<th class="tableblock halign-left valign-top">Source</th>
+<th class="tableblock halign-left valign-top">Javadocs</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">jdbi3-oracle12</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/jdbi/jdbi3-oracle12/" target="_blank" rel="noopener">Github</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://jdbi.org/modules/jdbi3-oracle12/apidocs/" target="_blank" rel="noopener">Javadoc</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Support for Oracle 12 and beyond.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">jdbi3-guava-cache</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/jdbi/jdbi3-guava-cache/" target="_blank" rel="noopener">Github</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://jdbi.org/modules/jdbi3-guava-cache/apidocs/" target="_blank" rel="noopener">Javadoc</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Experimental support for the Guava cache library.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The additional modules are usually released in sync with the main release. If any of the links above for a release version do not resolve, it may be possible that a release was omitted by accident. In that case, please file an issue on the <a href="https://github.com/jdbi/jdbi/issues" target="_blank" rel="noopener">Bug Tracker</a>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_build_tools"><a class="anchor" href="#_build_tools"></a><a class="link" href="#_build_tools">2.3.3. Build tools</a></h4>
 <div class="paragraph">
 <p>All Jdbi modules are available through <a href="https://search.maven.org" target="_blank" rel="noopener">Maven Central</a>, so any project that uses a dependency management tool (Apache Maven, Gradle, sbt, leiningen, Apache Ivy etc.) can access these.</p>
 </div>
@@ -1379,7 +1450,7 @@ While Oracle support is considered part of Jdbi, the actual library is developed
     <span class="tag">&lt;dependency&gt;</span>
         <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
         <span class="tag">&lt;artifactId&gt;</span>jdbi3-core<span class="tag">&lt;/artifactId&gt;</span>
-        <span class="tag">&lt;version&gt;</span>3.38.4-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+        <span class="tag">&lt;version&gt;</span>3.40.0-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
     <span class="tag">&lt;/dependency&gt;</span>
 <span class="tag">&lt;/dependencies&gt;</span></code></pre>
 </div>
@@ -1390,7 +1461,7 @@ While Oracle support is considered part of Jdbi, the actual library is developed
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
-    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-core:3.38.4-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-core:3.40.0-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
 }</code></pre>
 </div>
 </div>
@@ -1411,7 +1482,7 @@ While Oracle support is considered part of Jdbi, the actual library is developed
             <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
             <span class="tag">&lt;artifactId&gt;</span>jdbi3-bom<span class="tag">&lt;/artifactId&gt;</span>
             <span class="tag">&lt;type&gt;</span>pom<span class="tag">&lt;/type&gt;</span>
-            <span class="tag">&lt;version&gt;</span>3.38.4-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+            <span class="tag">&lt;version&gt;</span>3.40.0-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
             <span class="tag">&lt;scope&gt;</span>import<span class="tag">&lt;/scope&gt;</span>
         <span class="tag">&lt;/dependency&gt;</span>
     <span class="tag">&lt;/dependencies&gt;</span>
@@ -1441,7 +1512,7 @@ While Oracle support is considered part of Jdbi, the actual library is developed
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
     <span class="comment">// Load bill of materials (BOM) for Jdbi.</span>
-    implementation(platform(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-bom:3.38.4-SNAPSHOT</span><span class="delimiter">&quot;</span></span>))
+    implementation(platform(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-bom:3.40.0-SNAPSHOT</span><span class="delimiter">&quot;</span></span>))
 }</code></pre>
 </div>
 </div>
@@ -1460,7 +1531,7 @@ While Oracle support is considered part of Jdbi, the actual library is developed
 </div>
 </div>
 <div class="sect3">
-<h4 id="_alpha_and_beta_annotations"><a class="anchor" href="#_alpha_and_beta_annotations"></a><a class="link" href="#_alpha_and_beta_annotations">2.3.3. @Alpha and @Beta Annotations</a></h4>
+<h4 id="_alpha_and_beta_annotations"><a class="anchor" href="#_alpha_and_beta_annotations"></a><a class="link" href="#_alpha_and_beta_annotations">2.3.4. @Alpha and @Beta Annotations</a></h4>
 <div class="paragraph">
 <p>The <a href="./apidocs/org/jdbi/v3/meta/Alpha.html" target="_blank" rel="noopener">@Alpha</a> and <a href="./apidocs/org/jdbi/v3/meta/Beta.html" target="_blank" rel="noopener">@Beta</a> annotations mark APIs as unstable. Each of these annotations signifies that a public API (public class, method or field) is subject to incompatible changes, or even removal, in a future release. Any API bearing these annotations is exempt from any compatibility guarantees.</p>
 </div>
@@ -1491,13 +1562,13 @@ Add <code>Alpha</code> and <code>Beta</code> to your IDE&#8217;s "unstable API u
 </div>
 </div>
 <div class="sect3">
-<h4 id="_internal_packages"><a class="anchor" href="#_internal_packages"></a><a class="link" href="#_internal_packages">2.3.4. Internal packages</a></h4>
+<h4 id="_internal_packages"><a class="anchor" href="#_internal_packages"></a><a class="link" href="#_internal_packages">2.3.5. Internal packages</a></h4>
 <div class="paragraph">
 <p>Any class in a package that is marked as <code>internal</code> (contains the word "internal") is not a part of the public API and may change in a backwards incompatible way. These classes and interfaces may be used across the Jdbi code base and can change (or be removed) without deprecation or announcement.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_mixing_jdbi_component_versions"><a class="anchor" href="#_mixing_jdbi_component_versions"></a><a class="link" href="#_mixing_jdbi_component_versions">2.3.5. Mixing Jdbi component versions</a></h4>
+<h4 id="_mixing_jdbi_component_versions"><a class="anchor" href="#_mixing_jdbi_component_versions"></a><a class="link" href="#_mixing_jdbi_component_versions">2.3.6. Mixing Jdbi component versions</a></h4>
 <div class="paragraph">
 <p>There is no guarantee that Jdbi components of different versions (e.g. <code>jdbi3-core</code> version 1.2.3 and <code>jdbi-sqlobject</code> version 1.3.1) work together. Jdbi versioning is the <strong>public API</strong> exposed to consumers. All Jdbi components used in a project or service should use the same version. See the section on <a href="#_build_tools">Build tools</a> on how to use the BOM module to provide consistent versions for all components.</p>
 </div>
@@ -2822,7 +2893,7 @@ Optional&lt;User&gt; user = stream.findFirst(); <i class="conum" data-value="3">
 <div class="sect3">
 <h4 id="_attaching_statements_to_the_handle_lifecycle"><a class="anchor" href="#_attaching_statements_to_the_handle_lifecycle"></a><a class="link" href="#_attaching_statements_to_the_handle_lifecycle">5.3.4. Attaching statements to the handle lifecycle</a></h4>
 <div class="paragraph">
-<p>An elegant way to manage resources is attaching the statement to the handle lifecycle. Calling the <code>attachToHandleForCleanup()</code> method, which is available on <a href="#_statement_types">SQL statements</a>, associates the statement with the handle. When the handle is closed, all attached statements that have not been cleaned up yet, will also be released.</p>
+<p>An elegant way to manage resources is attaching the statement to the handle lifecycle. Calling the <a href="./apidocs/org/jdbi/v3/core/statement/SqlStatement.html#attachToHandleForCleanup()" target="_blank" rel="noopener">attachToHandleForCleanup()</a> method, which is available on <a href="#_statement_types">SQL statements</a>, associates the statement with the handle. When the handle is closed, all attached statements that have not been cleaned up yet, will also be released.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4873,18 +4944,6 @@ fails, an exception is thrown.
 <div class="sect1">
 <h2 id="_codecs"><a class="anchor" href="#_codecs"></a><a class="link" href="#_codecs">8. Codecs</a></h2>
 <div class="sectionbody">
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The Codec API is still unstable and may change.
-</td>
-</tr>
-</table>
-</div>
 <div class="paragraph">
 <p>A codec is a replacement for registering an argument and a column mapper for a type. It is responsible for serializing a typed value into a database column and creating a type from a database column.</p>
 </div>
@@ -6785,7 +6844,7 @@ Array columns can be mapped to any container type registered with the
     <span class="tag">&lt;dependency&gt;</span>
         <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
         <span class="tag">&lt;artifactId&gt;</span>jdbi3-sqlobject<span class="tag">&lt;/artifactId&gt;</span>
-        <span class="tag">&lt;version&gt;</span>3.38.4-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+        <span class="tag">&lt;version&gt;</span>3.40.0-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
     <span class="tag">&lt;/dependency&gt;</span>
 <span class="tag">&lt;/dependencies&gt;</span></code></pre>
 </div>
@@ -6796,7 +6855,7 @@ Array columns can be mapped to any container type registered with the
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
-    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-sqlobject:3.38.4-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-sqlobject:3.40.0-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
 }</code></pre>
 </div>
 </div>
@@ -10779,18 +10838,6 @@ configure the new <code>bindPojo</code> (or <code>@BindPojo</code>) binders:</p>
 </div>
 <div class="sect2">
 <h3 id="_google_guice"><a class="anchor" href="#_google_guice"></a><a class="link" href="#_google_guice">16.7. Google Guice</a></h3>
-<div class="admonitionblock caution">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-caution" title="Caution"></i>
-</td>
-<td class="content">
-Guice support is experimental.
-</td>
-</tr>
-</table>
-</div>
 <div class="paragraph">
 <p>The Guice module adds support for configuring and injecting <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instances in applications and services that use the <a href="https://github.com/google/guice/wiki" target="_blank" rel="noopener">Google Guice</a> dependency injection framework.</p>
 </div>
@@ -14902,8 +14949,8 @@ return types, or on <a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlBatch.
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 3.38.4-SNAPSHOT<br>
-Last updated 06/16/2023 22:09 -0700
+Version 3.40.0-SNAPSHOT<br>
+Last updated 06/17/2023 15:23 -0700
 </div>
 </div>
 </body>
