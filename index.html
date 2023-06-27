@@ -534,7 +534,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.40.0-SNAPSHOT,</span>
-<span id="revdate">06/26/2023 14:31 -0700</span>
+<span id="revdate">06/26/2023 21:26 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -1041,7 +1041,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h2 id="_introduction_to_jdbi_3"><a class="anchor" href="#_introduction_to_jdbi_3"></a><a class="link" href="#_introduction_to_jdbi_3">1. Introduction to Jdbi 3</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong>Jdbi provides convenient, idiomatic, access to relational data in Java.</strong> Jdbi 3 is the third major release, which introduces enhanced support for Java 8, countless refinements to the design and implementation, and enhanced support for modular development through plugins and extensions.</p>
+<p><strong>Jdbi provides convenient, idiomatic, access to relational data in Java.</strong> Jdbi 3 is the third major release, which introduces enhanced support for modern Java, countless refinements to the design and implementation, and enhanced support for modular development through plugins and extensions.</p>
 </div>
 <div class="paragraph">
 <p><strong>Jdbi is built on top of JDBC.</strong> If your data source has a JDBC driver, you can use it with Jdbi. It improves JDBC&#8217;s low-level interface, providing a more natural API that is easy to bind to your domain data types.</p>
@@ -1143,23 +1143,19 @@ Already using Jdbi v2? See <a href="#_upgrading_from_v2_to_v3">Upgrading from v2
 <div class="sect2">
 <h3 id="_jvm_version_compatibility"><a class="anchor" href="#_jvm_version_compatibility"></a><a class="link" href="#_jvm_version_compatibility">2.2. JVM version compatibility</a></h3>
 <div class="paragraph">
-<p>Jdbi runs on all Java versions 8 or later. 11 or later is required to build. All releases are built with the latest LTS version of Java using Java 8 bytecode compatibility.</p>
+<p>Jdbi runs on all Java versions 11 or later. All releases are built with the latest LTS version of Java using Java 11 bytecode compatibility.</p>
 </div>
-<div class="admonitionblock caution">
+<div class="admonitionblock important">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-caution" title="Caution"></i>
+<i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-Java 8 has been deprecated for a while now. While there is no cutoff date yet to drop JDK 8 support,
-it will go away. We are already require JDK 11+ to build and run all the tests.
+Jdbi ended support for Java 8 with version 3.39. There are occasional backports of security relevant things or major bugs but as of version 3.40.0, JDK 11+ is required.
 </td>
 </tr>
 </table>
-</div>
-<div class="paragraph">
-<p>In order to run on JDK 8, some dependencies, such as <a href="https://github.com/ben-manes/caffeine" target="_blank" rel="noopener">the caffeine caching library</a> need to be explicitly version managed to a version that is supported on JDK 8.</p>
 </div>
 </div>
 <div class="sect2">
@@ -2283,8 +2279,7 @@ and end up with logs that say nothing other than</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Jdbi will attempt to rewrite such nextExceptions into "suppressed exceptions"
-(new in Java 8) so that your logs are more helpful:</p>
+<p>Jdbi will rewrite such exceptions into "suppressed exceptions" so that your logs are more helpful:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3443,8 +3438,7 @@ the <a href="./apidocs/org/jdbi/v3/core/argument/ArgumentFactory.html" target="_
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Since <code>Argument</code> is a functional interface, it can be implemented as a
-simple lambda expression.</td>
+<td>Since <code>Argument</code> is a functional interface, it can be implemented as a lambda expression.</td>
 </tr>
 </table>
 </div>
@@ -3849,8 +3843,7 @@ interface, which maps a column from the current row of a JDBC
 <a href="https://docs.oracle.com/javase/8/docs/api/java/sql/ResultSet.html" target="_blank" rel="noopener">ResultSet</a> to a mapped type.</p>
 </div>
 <div class="paragraph">
-<p>Since <a href="./apidocs/org/jdbi/v3/core/mapper/ColumnMapper.html" target="_blank" rel="noopener">ColumnMapper</a> is a functional interface, they can be provided inline to a
-query using a lambda expression:</p>
+<p>Since <a href="./apidocs/org/jdbi/v3/core/mapper/ColumnMapper.html" target="_blank" rel="noopener">ColumnMapper</a> is a functional interface, they can be provided inline to a query using a lambda expression:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11697,11 +11690,11 @@ not nullable and the value absent in the result set.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Ensure the Kotlin compiler&#8217;s <a href="https://kotlinlang.org/docs/reference/using-maven.html#attributes-specific-for-jvm" target="_blank" rel="noopener">JVM target version</a> is set to at least 1.8:</p>
+<p>Ensure the Kotlin compiler&#8217;s <a href="https://kotlinlang.org/docs/reference/using-maven.html#attributes-specific-for-jvm" target="_blank" rel="noopener">JVM target version</a> is set to at least 11:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;kotlin.compiler.jvmTarget&gt;</span>1.8<span class="tag">&lt;/kotlin.compiler.jvmTarget&gt;</span></code></pre>
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;kotlin.compiler.jvmTarget&gt;</span>11<span class="tag">&lt;/kotlin.compiler.jvmTarget&gt;</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -12002,7 +11995,7 @@ to get the returned DML.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The plugin configures mappings for the Java 8 <a href="https://docs.oracle.com/javase/8/docs/api/java/time/package-summary.html" target="_blank" rel="noopener">java.time</a> types like
+<p>The plugin configures mappings for <a href="https://docs.oracle.com/javase/8/docs/api/java/time/package-summary.html" target="_blank" rel="noopener">java.time</a> types like
 <a href="https://docs.oracle.com/javase/8/docs/api/java/time/Instant.html" target="_blank" rel="noopener">Instant</a> or <a href="https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html" target="_blank" rel="noopener">Duration</a>, <a href="https://docs.oracle.com/javase/8/docs/api/java/net/InetAddress.html" target="_blank" rel="noopener">InetAddress</a>, <a href="https://docs.oracle.com/javase/8/docs/api/java/util/UUID.html" target="_blank" rel="noopener">UUID</a>, typed enums, and <a href="#postgres-hstore">hstore</a>.</p>
 </div>
 <div class="paragraph">
@@ -13525,8 +13518,7 @@ value that is specific for the extension factory that should process the annotat
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>An extension factory that implements only the <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionFactory.html#accepts(java.lang.Class)" target="_blank" rel="noopener">ExtensionFactory#accepts()</a>
-method can be written as a lambda.</td>
+<td>An extension factory that implements only the <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionFactory.html#accepts(java.lang.Class)" target="_blank" rel="noopener">ExtensionFactory#accepts()</a> method can be written as a lambda.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
@@ -14950,7 +14942,7 @@ return types, or on <a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlBatch.
 <div id="footer">
 <div id="footer-text">
 Version 3.40.0-SNAPSHOT<br>
-Last updated 06/26/2023 14:31 -0700
+Last updated 06/26/2023 21:26 -0700
 </div>
 </div>
 </body>
