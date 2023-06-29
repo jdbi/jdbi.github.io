@@ -534,7 +534,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.40.0-SNAPSHOT,</span>
-<span id="revdate">06/27/2023 21:04 -0700</span>
+<span id="revdate">06/28/2023 22:36 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -1791,7 +1791,7 @@ and then map any results into Java objects.</p>
 <p>Handles and all attached query objects such as <a href="./apidocs/org/jdbi/v3/core/statement/Batch.html" target="_blank" rel="noopener">Batch</a>, <a href="./apidocs/org/jdbi/v3/core/statement/Call.html" target="_blank" rel="noopener">Call</a>, <a href="./apidocs/org/jdbi/v3/core/statement/Query.html" target="_blank" rel="noopener">Query</a>, <a href="./apidocs/org/jdbi/v3/core/statement/Script.html" target="_blank" rel="noopener">Script</a> and <a href="./apidocs/org/jdbi/v3/core/statement/Update.html" target="_blank" rel="noopener">Update</a> should be used by a single thread and are <strong>not thread-safe</strong>.</p>
 </div>
 <div class="paragraph">
-<p>They may be used by multiple threads as long as there is coordination that only one thread at a time is accessing them. Managing Handles and query objects across threads is error-prone and should not be avoided.</p>
+<p>They may be used by multiple threads as long as there is coordination that only one thread at a time is accessing them. Managing Handles and query objects across threads is error-prone and should be avoided.</p>
 </div>
 <div class="sect3">
 <h4 id="_obtaining_a_managed_handle"><a class="anchor" href="#_obtaining_a_managed_handle"></a><a class="link" href="#_obtaining_a_managed_handle">4.2.1. Obtaining a managed handle</a></h4>
@@ -14942,7 +14942,7 @@ return types, or on <a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlBatch.
 <div id="footer">
 <div id="footer-text">
 Version 3.40.0-SNAPSHOT<br>
-Last updated 06/27/2023 21:04 -0700
+Last updated 06/28/2023 22:36 -0700
 </div>
 </div>
 </body>
