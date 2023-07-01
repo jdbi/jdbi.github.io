@@ -534,7 +534,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.40.0-SNAPSHOT,</span>
-<span id="revdate">06/30/2023 16:56 -0700</span>
+<span id="revdate">07/01/2023 15:11 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -13747,8 +13747,29 @@ is called when the annotation is placed on an extension type method</p>
 <a href="./apidocs/org/jdbi/v3/core/extension/ConfigCustomizerFactory.html#forExtensionMethod(java.lang.Class,java.lang.reflect.Method)" target="_blank" rel="noopener">ConfigCustomizerFactory#forExtensionMethod()</a>.</p>
 </div>
 <div class="paragraph">
-<p>The extension framework processes all annotations that use this meta-annotation. It will instantiate the extension configurer by locating a no-arguments
-constructor. If this can not be found, an exception will be thrown.</p>
+<p>The extension framework processes all annotations that use this meta-annotation.</p>
+</div>
+<div class="paragraph">
+<p>It will instantiate the extension configurer by locating</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>a constructor that takes the annotation, the extension type, and a method object</p>
+</li>
+<li>
+<p>a constructor that takes the annotation and the extension type</p>
+</li>
+<li>
+<p>a constructor that takes the annotation only</p>
+</li>
+<li>
+<p>a no-argument constructor</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If none can be found, an exception will be thrown.</p>
 </div>
 <div class="paragraph">
 <p>This is an example of an extension configurer annotation that adds a specific <a href="#_row_mappers">row mapper</a>:</p>
@@ -14942,7 +14963,7 @@ return types, or on <a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlBatch.
 <div id="footer">
 <div id="footer-text">
 Version 3.40.0-SNAPSHOT<br>
-Last updated 06/30/2023 16:56 -0700
+Last updated 07/01/2023 15:11 -0700
 </div>
 </div>
 </body>
