@@ -534,7 +534,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.40.0-SNAPSHOT,</span>
-<span id="revdate">07/01/2023 15:41 -0700</span>
+<span id="revdate">07/01/2023 17:18 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -3130,14 +3130,14 @@ Mixing named and positional arguments is not allowed, as it would become confusi
 <p>java.util: <code>Date</code>, <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html" target="_blank" rel="noopener">Optional</a> (around any other supported type), and <code>UUID</code></p>
 </li>
 <li>
-<p><code>java.util.Collection</code> and Java arrays (stored as SQL arrays). Some
-additional setup may be required depending on the type of array element.</p>
+<p><code>java.util.Collection</code> and Java arrays (stored as SQL arrays).
+Some additional setup may be required depending on the type of array element.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>You can also configure Jdbi to support additional argument types. More on that
-later.</p>
+<p>You can also configure Jdbi to support additional argument types.
+More on that later.</p>
 </div>
 </div>
 <div class="sect2">
@@ -4216,29 +4216,34 @@ columns to camelCase field/argument/property names.</p>
 <div class="sect3">
 <h4 id="_supported_property_annotations"><a class="anchor" href="#_supported_property_annotations"></a><a class="link" href="#_supported_property_annotations">7.6.1. Supported property annotations</a></h4>
 <div class="paragraph">
-<p>Reflection mappers support the following annotations. Unless otherwise noted, all annotations are supported on bean getters and setters for the <code>BeanMapper</code>, constructor parameters for the <code>ConstructorMapper</code> and bean fields for the <code>FieldMapper</code>.</p>
+<p>Reflection mappers support the following annotations.
+Unless otherwise noted, all annotations are supported on bean getters and setters for the <code>BeanMapper</code>, constructor parameters for the <code>ConstructorMapper</code> and bean fields for the <code>FieldMapper</code>.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>@ColumnName</code> allows explicit naming of the column that is mapped to
-the specific attribute.</p>
+<p><a href="./apidocs/org/jdbi/v3/core/mapper/reflect/ColumnName.html" target="_blank" rel="noopener">@ColumnName</a> allows explicit naming of the column that is mapped to the specific attribute.</p>
 </li>
 <li>
-<p><code>@Nested</code> for nested beans. Without this annotation, any attribute is treated as mappable from a single column. This annotation creates
-a mapper for the nested bean. There is a limitation that only one type of mapper can be nested at a time; <code>BeanMapper</code> will create
-another <code>BeanMapper</code>, <code>ConstructorMapper</code> will create another <code>ConstructorMapper</code> etc. <code>@Nested</code> supports an optional prefix for
-all attributes in the nested bean (<code>@Nested("prefix")</code>).</p>
+<p><a href="./apidocs/org/jdbi/v3/core/mapper/Nested.html" target="_blank" rel="noopener">@Nested</a> for nested beans.
+Without this annotation, any attribute is treated as mappable from a single column.
+This annotation creates a mapper for the nested bean.
+There is a limitation that only one type of mapper can be nested at a time; <code>BeanMapper</code> will create another <code>BeanMapper</code>, <code>ConstructorMapper</code> will create another <code>ConstructorMapper</code> etc. <a href="./apidocs/org/jdbi/v3/core/mapper/Nested.html" target="_blank" rel="noopener">@Nested</a> supports an optional prefix for all attributes in the nested bean (<code>@Nested("prefix")</code>).</p>
 </li>
 <li>
-<p><code>@PropagateNull</code> on a given attribute propagates a null value for a specific attribute up. So if the attribute or column is null, the whole bean will be discarded and a null value will be used instead of the bean itself. This annotation can also be used on the bean
-class with a column name that must be present in the result set. When used on an attribute, no value must be set.</p>
+<p><code>@PropagateNull</code> on a given attribute propagates a null value for a specific attribute up.
+So if the attribute or column is null, the whole bean will be discarded and a null value will be used instead of the bean itself.
+This annotation can also be used on the bean class with a column name that must be present in the result set.
+When used on an attribute, no value must be set.</p>
 </li>
 <li>
-<p><code>@Nullable</code> for <code>ConstructorMapper</code> arguments. If no column is mapped onto a specific constructor argument, don&#8217;t fail but use <code>null</code> as value. Any annotation called <code>Nullable</code> is accepted.</p>
+<p><code>@Nullable</code> for <code>ConstructorMapper</code> arguments.
+If no column is mapped onto a specific constructor argument, don&#8217;t fail but use <code>null</code> as value.</p>
 </li>
 <li>
-<p><code>@JdbiProperty(map=false)</code> allows configuring whether a discovered property is mapped in results. Turn the <code>map</code> value off, and the property discovery mechanism will ignore it. This used to be called <code>@Unmappable</code>.</p>
+<p><code>@JdbiProperty(map=false)</code> allows configuring whether a discovered property is mapped in results.
+Turn the <code>map</code> value off, and the property discovery mechanism will ignore it.
+This used to be called <code>@Unmappable</code>.</p>
 </li>
 </ul>
 </div>
@@ -4249,12 +4254,55 @@ class with a column name that must be present in the result set. When used on an
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The <code>@ColumnName</code> annotation only applies while mapping SQL data into Java
-objects. When binding object properties (e.g. with <code>bindBean()</code>), bind the
-property name (<code>:id</code>) rather than the column name (<code>:user_id</code>).
+The <a href="./apidocs/org/jdbi/v3/core/mapper/reflect/ColumnName.html" target="_blank" rel="noopener">@ColumnName</a> annotation only applies while mapping SQL data into Java objects.
+When binding object properties (e.g. with <code>bindBean()</code>), bind the property name (<code>:id</code>) rather than the column name (<code>:user_id</code>).
 </td>
 </tr>
 </table>
+</div>
+<div class="sect4">
+<h5 id="_using_nullable_annotations"><a class="anchor" href="#_using_nullable_annotations"></a><a class="link" href="#_using_nullable_annotations">Using <code>@Nullable</code> annotations</a></h5>
+<div class="paragraph">
+<p>Jdbi accepts any annotation that is named <code>Nullable</code> to mark a field or method as nullable.</p>
+</div>
+<div class="paragraph">
+<p>These are popular choices:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>jakarta.annotation.Nullable</code>&#8201;&#8212;&#8201;<a href="https://search.maven.org/artifact/jakarta.annotation/jakarta.annotation-api" target="_blank" rel="noopener">jakarta annotation-api</a></p>
+</li>
+<li>
+<p><code>javax.annotation.Nullable</code>&#8201;&#8212;&#8201;<a href="https://search.maven.org/artifact/com.google.code.findbugs/jsr305" target="_blank" rel="noopener">findbugs jsr305</a></p>
+</li>
+<li>
+<p><code>edu.umd.cs.findbugs.annotations.Nullable</code>&#8201;&#8212;&#8201;<a href="https://search.maven.org/artifact/com.github.spotbugs/spotbugs-annotations" target="_blank" rel="noopener">Spotbugs annotations</a></p>
+</li>
+<li>
+<p><code>org.jetbrains.annotations.Nullable</code>&#8201;&#8212;&#8201;<a href="https://search.maven.org/artifact/org.jetbrains/annotations" target="_blank" rel="noopener">Jetbrains annotations</a></p>
+</li>
+<li>
+<p><code>org.checkerframework.checker.nullness.qual.Nullable</code>&#8201;&#8212;&#8201;<a href="https://search.maven.org/artifact/org.checkerframework/checker-qual" target="_blank" rel="noopener">checker framework</a></p>
+</li>
+<li>
+<p><code>org.springframework.lang.Nullable</code>&#8201;&#8212;&#8201;<a href="https://search.maven.org/artifact/org.springframework/spring-core" target="_blank" rel="noopener">Spring Framework</a></p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+To allow Jdbi to discover the <code>@Nullable</code> annotation at runtime, it must use <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/annotation/RetentionPolicy.html#RUNTIME" target="_blank" rel="noopener">RetentionPolicy.RUNTIME</a>.
+When in doubt, prefer the <a href="https://jakarta.ee/specifications/platform/10/apidocs/jakarta/annotation/nullable" target="_blank" rel="noopener">Jakarta variant</a>!.
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 <div class="sect3">
@@ -4275,7 +4323,7 @@ these names to select columns.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Otherwise, the names can be explictly set with the <code>@ColumnName</code>
+<p>Otherwise, the names can be explictly set with the <a href="./apidocs/org/jdbi/v3/core/mapper/reflect/ColumnName.html" target="_blank" rel="noopener">@ColumnName</a>
 annotation on each constructor parameter:</p>
 </div>
 <div class="listingblock">
@@ -4368,7 +4416,7 @@ use.</p>
 </div>
 <div class="paragraph">
 <p>For legacy column names that don&#8217;t match up to property names, use the
-<code>@ColumnName</code> annotation to provide an exact column name.</p>
+<a href="./apidocs/org/jdbi/v3/core/mapper/reflect/ColumnName.html" target="_blank" rel="noopener">@ColumnName</a> annotation to provide an exact column name.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4379,7 +4427,7 @@ use.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Nested constructor-injected types can be mapped using the <code>@Nested</code> annotation:</p>
+<p>Nested constructor-injected types can be mapped using the <a href="./apidocs/org/jdbi/v3/core/mapper/Nested.html" target="_blank" rel="noopener">@Nested</a> annotation:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4412,8 +4460,7 @@ use.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>@Nested</code> annotation has an optional <code>value()</code> attribute, which can be used
-to apply a column name prefix to each nested constructor parameter:</p>
+<p>The <a href="./apidocs/org/jdbi/v3/core/mapper/Nested.html" target="_blank" rel="noopener">@Nested</a> annotation has an optional <code>value()</code> attribute, which can be used to apply a column name prefix to each nested constructor parameter:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4435,12 +4482,10 @@ to apply a column name prefix to each nested constructor parameter:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>By default, ConstructorMapper expects the result set to contain columns to map
-every constructor parameter, and will throw an exception if any parameters
-cannot be mapped.</p>
+<p>By default, ConstructorMapper expects the result set to contain columns to map every constructor parameter, and will throw an exception if any parameters cannot be mapped.</p>
 </div>
 <div class="paragraph">
-<p>Parameters annotated <code>@Nullable</code> may be omitted from the result set, in which
+<p>Parameters annotated <code>@Nullable</code> (see <a href="#_using_nullable_annotations">Using <code>@Nullable</code> annotations</a>) may be omitted from the result set, in which
 <code>ConstructorMapper</code> will pass <code>null</code> to the constructor for that parameter.</p>
 </div>
 <div class="listingblock">
@@ -4456,22 +4501,8 @@ cannot be mapped.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>In this example, the <code>id</code> and <code>name</code> columns must be present in the result set,
-but <code>passwordHash</code> and <code>address</code> are optional. If they are present, they will
-be mapped. Otherwise,</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Any <code>@Nullable</code> annotation from any package may be used.
-<code>javax.annotation.Nullable</code> is a good choice.
-</td>
-</tr>
-</table>
+<p>In this example, the <code>id</code> and <code>name</code> columns must be present in the result set, but <code>passwordHash</code> and <code>address</code> are optional.
+If they are present, they will be mapped.</p>
 </div>
 </div>
 <div class="sect3">
@@ -4568,7 +4599,7 @@ handle.registerRowMapper(JoinRowMapper.forTypes(ContactBean.class, PhoneBean.cla
 </div>
 <div class="paragraph">
 <p>For legacy column names that don&#8217;t match up to property names, use the
-<code>@ColumnName</code> annotation to provide an exact column name.</p>
+<a href="./apidocs/org/jdbi/v3/core/mapper/reflect/ColumnName.html" target="_blank" rel="noopener">@ColumnName</a> annotation to provide an exact column name.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4583,11 +4614,11 @@ handle.registerRowMapper(JoinRowMapper.forTypes(ContactBean.class, PhoneBean.cla
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>@ColumnName</code> annotation can be placed on either the getter or setter
-method. If conflicting annotations exist, then Annotations on the setter are preferred.</p>
+<p>The <a href="./apidocs/org/jdbi/v3/core/mapper/reflect/ColumnName.html" target="_blank" rel="noopener">@ColumnName</a> annotation can be placed on either the getter or setter method.
+If conflicting annotations exist, then Annotations on the setter are preferred.</p>
 </div>
 <div class="paragraph">
-<p>Nested Java Bean types can be mapped using the <code>@Nested</code> annotation:</p>
+<p>Nested Java Bean types can be mapped using the <a href="./apidocs/org/jdbi/v3/core/mapper/Nested.html" target="_blank" rel="noopener">@Nested</a> annotation:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4618,8 +4649,8 @@ method. If conflicting annotations exist, then Annotations on the setter are pre
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>The <code>@Nested</code> annotation can be placed on either the getter or setter
-method. The setter is preferred.</td>
+<td>The <a href="./apidocs/org/jdbi/v3/core/mapper/Nested.html" target="_blank" rel="noopener">@Nested</a> annotation can be placed on either the getter or setter method.
+The setter is preferred.</td>
 </tr>
 </table>
 </div>
@@ -4634,8 +4665,7 @@ method. The setter is preferred.</td>
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>@Nested</code> annotation has an optional <code>value()</code> attribute, which can be used
-to apply a column name prefix to each nested bean property:</p>
+<p>The <a href="./apidocs/org/jdbi/v3/core/mapper/Nested.html" target="_blank" rel="noopener">@Nested</a> annotation has an optional <code>value()</code> attribute, which can be used to apply a column name prefix to each nested bean property:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4660,8 +4690,7 @@ to apply a column name prefix to each nested bean property:</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<code>@Nested</code> properties are left unmodified (i.e. null) if the result set has no
-columns matching any properties of the nested object.
+<a href="./apidocs/org/jdbi/v3/core/mapper/Nested.html" target="_blank" rel="noopener">@Nested</a> properties are left unmodified (i.e. null) if the result set has no columns matching any properties of the nested object.
 </td>
 </tr>
 </table>
@@ -4716,7 +4745,7 @@ handle.registerRowMapper(JoinRowMapper.forTypes(Contact.class, Phone.class);
 </div>
 <div class="paragraph">
 <p>For legacy column names that don&#8217;t match up to field names, use the
-<code>@ColumnName</code> annotation to provide an exact column name:</p>
+<a href="./apidocs/org/jdbi/v3/core/mapper/reflect/ColumnName.html" target="_blank" rel="noopener">@ColumnName</a> annotation to provide an exact column name:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4729,7 +4758,7 @@ handle.registerRowMapper(JoinRowMapper.forTypes(Contact.class, Phone.class);
 </div>
 </div>
 <div class="paragraph">
-<p>Nested field-mapped types can be mapped using the <code>@Nested</code> annotation:</p>
+<p>Nested field-mapped types can be mapped using the <a href="./apidocs/org/jdbi/v3/core/mapper/Nested.html" target="_blank" rel="noopener">@Nested</a> annotation:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4760,8 +4789,7 @@ handle.registerRowMapper(JoinRowMapper.forTypes(Contact.class, Phone.class);
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>@Nested</code> annotation has an optional <code>value()</code> attribute, which can be used
-to apply a column name prefix to each nested field:</p>
+<p>The <a href="./apidocs/org/jdbi/v3/core/mapper/Nested.html" target="_blank" rel="noopener">@Nested</a> annotation has an optional <code>value()</code> attribute, which can be used to apply a column name prefix to each nested field:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4791,8 +4819,7 @@ to apply a column name prefix to each nested field:</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<code>@Nested</code> fields are left unmodified (i.e. null) if the result set has no
-columns matching any fields of the nested object.
+<a href="./apidocs/org/jdbi/v3/core/mapper/Nested.html" target="_blank" rel="noopener">@Nested</a> fields are left unmodified (i.e. null) if the result set has no columns matching any fields of the nested object.
 </td>
 </tr>
 </table>
@@ -11706,9 +11733,7 @@ not nullable and the value absent in the result set.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The Kotlin mapper also supports <code>@ColumnName</code> annotation that allows to specify
-name for a property or parameter explicitly, as well as the <code>@Nested</code> annotation
-that allows mapping nested Kotlin objects.</p>
+<p>The Kotlin mapper also supports <a href="./apidocs/org/jdbi/v3/core/mapper/reflect/ColumnName.html" target="_blank" rel="noopener">@ColumnName</a> annotation that allows to specify name for a property or parameter explicitly, as well as the <a href="./apidocs/org/jdbi/v3/core/mapper/Nested.html" target="_blank" rel="noopener">@Nested</a> annotation that allows mapping nested Kotlin objects.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -11730,9 +11755,8 @@ for qualifiers on constrictor parameters, getter, setters, and setter parameters
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The <code>@ColumnName</code> annotation only applies while mapping SQL data into Java
-objects. When binding object properties (e.g. with <code>bindBean()</code>), bind the
-property name (<code>:id</code>) rather than the column name (<code>:user_id</code>).
+The <a href="./apidocs/org/jdbi/v3/core/mapper/reflect/ColumnName.html" target="_blank" rel="noopener">@ColumnName</a> annotation only applies while mapping SQL data into Java objects.
+When binding object properties (e.g. with <code>bindBean()</code>), bind the property name (<code>:id</code>) rather than the column name (<code>:user_id</code>).
 </td>
 </tr>
 </table>
@@ -14963,7 +14987,7 @@ return types, or on <a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlBatch.
 <div id="footer">
 <div id="footer-text">
 Version 3.40.0-SNAPSHOT<br>
-Last updated 07/01/2023 15:41 -0700
+Last updated 07/01/2023 17:18 -0700
 </div>
 </div>
 </body>
