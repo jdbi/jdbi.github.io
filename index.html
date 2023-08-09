@@ -534,7 +534,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.40.1-SNAPSHOT,</span>
-<span id="revdate">08/02/2023 14:03 -0700</span>
+<span id="revdate">08/08/2023 18:38 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -13189,7 +13189,7 @@ must use the <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionFactory.Fact
 
     <span class="annotation">@Override</span>
     <span class="directive">public</span> &lt;E&gt; E attach(<span class="predefined-type">Class</span>&lt;E&gt; extensionType, HandleSupplier handleSupplier) {
-        <span class="keyword">return</span> (E) <span class="keyword">new</span> DaoImpl(handleSupplier); <i class="conum" data-value="2"></i><b>(2)</b>
+        <span class="keyword">return</span> extensionType.cast(<span class="keyword">new</span> DaoImpl(handleSupplier)); <i class="conum" data-value="2"></i><b>(2)</b>
     }
 }</code></pre>
 </div>
@@ -13963,7 +13963,7 @@ logic (which is problematic with <a href="https://docs.oracle.com/en/graalvm/ent
         ExtensionMetadata extensionMetadata = handleSupplier.getConfig() <i class="conum" data-value="2"></i><b>(2)</b>
                 .get(Extensions.class).findMetadata(extensionType, <span class="local-variable">this</span>);
 
-        <span class="keyword">return</span> (E) <span class="keyword">new</span> ExtensionTypeImpl(extensionMetadata, handleSupplier); <i class="conum" data-value="3"></i><b>(3)</b>
+        <span class="keyword">return</span> extensionType.cast(<span class="keyword">new</span> ExtensionTypeImpl(extensionMetadata, handleSupplier)); <i class="conum" data-value="3"></i><b>(3)</b>
     }
 
     <span class="annotation">@Override</span>
@@ -14990,7 +14990,7 @@ return types, or on <a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlBatch.
 <div id="footer">
 <div id="footer-text">
 Version 3.40.1-SNAPSHOT<br>
-Last updated 08/02/2023 14:03 -0700
+Last updated 08/08/2023 18:38 -0700
 </div>
 </div>
 </body>
