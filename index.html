@@ -534,7 +534,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.40.1-SNAPSHOT,</span>
-<span id="revdate">08/09/2023 22:03 -0700</span>
+<span id="revdate">08/10/2023 09:01 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -923,6 +923,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_sqllogger">19.10. SqlLogger</a></li>
 <li><a href="#_resultproducer">19.11. ResultProducer</a></li>
 <li><a href="#generator">19.12. Jdbi SQL object code generator</a></li>
+<li><a href="#_handlecallbackdecorator">19.13. HandleCallbackDecorator</a></li>
 </ul>
 </li>
 <li><a href="#_appendix">20. Appendix</a>
@@ -14732,6 +14733,65 @@ generator will produce an implementing class and avoids using
 This may be useful for <code>graal-native</code> compilation.</p>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_handlecallbackdecorator"><a class="anchor" href="#_handlecallbackdecorator"></a><a class="link" href="#_handlecallbackdecorator">19.13. HandleCallbackDecorator</a></h3>
+<div class="paragraph">
+<p>Jdbi allows specifying a decorator that can be applied to all callbacks passed to
+<a href="./apidocs/org/jdbi/v3/core/Jdbi.html#useHandle(org.jdbi.v3.core.HandleConsumer)" target="_blank" rel="noopener">useHandle</a>,
+<a href="./apidocs/org/jdbi/v3/core/Jdbi.html#withHandle(org.jdbi.v3.core.HandleCallback)" target="_blank" rel="noopener">withHandle</a>,
+<a href="./apidocs/org/jdbi/v3/core/Jdbi.html#useTransaction(org.jdbi.v3.core.HandleConsumer)" target="_blank" rel="noopener">useTransaction</a>,
+or <a href="./apidocs/org/jdbi/v3/core/Jdbi.html#inTransaction(org.jdbi.v3.core.HandleCallback)" target="_blank" rel="noopener">inTransaction</a>.
+This is for use-cases where you need to perform an action on all callbacks used in
+Jdbi. For instance, you might want to have global retries whether a transaction is used
+or not. Jdbi already provides retry handlers for transactions but you might want to retry auto-commit
+(non-transaction) queries as well. E.g.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">ExampleJdbiPlugin</span>
+        <span class="directive">implements</span> JdbiPlugin, HandleCallbackDecorator
+{
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="type">void</span> customizeJdbi(Jdbi jdbi)
+    {
+        jdbi.setHandleCallbackDecorator(<span class="local-variable">this</span>);
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> &lt;R, X <span class="directive">extends</span> <span class="exception">Exception</span>&gt; HandleCallback&lt;R, X&gt; decorate(HandleCallback&lt;R, X&gt; callback)
+    {
+        <span class="keyword">return</span> handle -&gt; {
+            <span class="keyword">try</span> {
+                <span class="keyword">if</span> (handle.getConnection().getAutoCommit()) {
+                    <span class="comment">// do retries for auto-commit</span>
+                    <span class="keyword">return</span> withRetry(handle, callback);
+                }
+            }
+            <span class="keyword">catch</span> (<span class="exception">SQLException</span> e) {
+                <span class="keyword">throw</span> <span class="keyword">new</span> ConnectionException(e);
+            }
+
+            <span class="comment">// all others get standard behavior</span>
+            <span class="keyword">return</span> callback.withHandle(handle);
+        };
+    }
+
+    <span class="directive">private</span> &lt;R, X <span class="directive">extends</span> <span class="exception">Exception</span>&gt; R withRetry(Handle handle, HandleCallback&lt;R, X&gt; callback)
+            <span class="directive">throws</span> X
+    {
+        <span class="keyword">while</span> (<span class="predefined-constant">true</span>) {
+            <span class="keyword">try</span> {
+                <span class="keyword">return</span> callback.withHandle(handle);
+            }
+            <span class="keyword">catch</span> (<span class="exception">Exception</span> last) {
+                <span class="comment">// custom auto-commit retry behavior goes here</span>
+            }
+        }
+    }
+}</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -14990,7 +15050,7 @@ return types, or on <a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlBatch.
 <div id="footer">
 <div id="footer-text">
 Version 3.40.1-SNAPSHOT<br>
-Last updated 08/09/2023 22:03 -0700
+Last updated 08/10/2023 09:01 -0700
 </div>
 </div>
 </body>
