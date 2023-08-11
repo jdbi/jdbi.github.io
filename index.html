@@ -530,13 +530,13 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div id="header">
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
-<span id="revnumber">version 3.40.1-SNAPSHOT,</span>
-<span id="revdate">08/11/2023 15:19 -0700</span>
+<span id="revnumber">version 3.41.0-rc2-SNAPSHOT,</span>
+<span id="revdate">08/11/2023 15:34 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_development_documentation_3_40_1_snapshot">Development documentation (3.40.1-SNAPSHOT)</a>
+<li><a href="#_development_documentation_3_41_0_rc2_snapshot">Development documentation (3.41.0-rc2-SNAPSHOT)</a>
 <ul class="sectlevel2">
 <li><a href="#_release_documentation">Release documentation</a></li>
 </ul>
@@ -945,7 +945,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </div>
 </div>
 <div class="sect1">
-<h2 id="_development_documentation_3_40_1_snapshot"><a class="anchor" href="#_development_documentation_3_40_1_snapshot"></a><a class="link" href="#_development_documentation_3_40_1_snapshot">Development documentation (3.40.1-SNAPSHOT)</a></h2>
+<h2 id="_development_documentation_3_41_0_rc2_snapshot"><a class="anchor" href="#_development_documentation_3_41_0_rc2_snapshot"></a><a class="link" href="#_development_documentation_3_41_0_rc2_snapshot">Development documentation (3.41.0-rc2-SNAPSHOT)</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>This is the documentation for the current development state of Jdbi. All information in here reflects the current state of development on the <code>master</code> branch and is subject to change until it has been released as a numbered version.</p>
@@ -1447,7 +1447,7 @@ The additional modules are usually released in sync with the main release. If an
     <span class="tag">&lt;dependency&gt;</span>
         <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
         <span class="tag">&lt;artifactId&gt;</span>jdbi3-core<span class="tag">&lt;/artifactId&gt;</span>
-        <span class="tag">&lt;version&gt;</span>3.40.1-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+        <span class="tag">&lt;version&gt;</span>3.41.0-rc2-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
     <span class="tag">&lt;/dependency&gt;</span>
 <span class="tag">&lt;/dependencies&gt;</span></code></pre>
 </div>
@@ -1458,7 +1458,7 @@ The additional modules are usually released in sync with the main release. If an
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
-    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-core:3.40.1-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-core:3.41.0-rc2-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
 }</code></pre>
 </div>
 </div>
@@ -1479,7 +1479,7 @@ The additional modules are usually released in sync with the main release. If an
             <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
             <span class="tag">&lt;artifactId&gt;</span>jdbi3-bom<span class="tag">&lt;/artifactId&gt;</span>
             <span class="tag">&lt;type&gt;</span>pom<span class="tag">&lt;/type&gt;</span>
-            <span class="tag">&lt;version&gt;</span>3.40.1-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+            <span class="tag">&lt;version&gt;</span>3.41.0-rc2-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
             <span class="tag">&lt;scope&gt;</span>import<span class="tag">&lt;/scope&gt;</span>
         <span class="tag">&lt;/dependency&gt;</span>
     <span class="tag">&lt;/dependencies&gt;</span>
@@ -1509,7 +1509,7 @@ The additional modules are usually released in sync with the main release. If an
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
     <span class="comment">// Load bill of materials (BOM) for Jdbi.</span>
-    implementation(platform(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-bom:3.40.1-SNAPSHOT</span><span class="delimiter">&quot;</span></span>))
+    implementation(platform(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-bom:3.41.0-rc2-SNAPSHOT</span><span class="delimiter">&quot;</span></span>))
 }</code></pre>
 </div>
 </div>
@@ -6865,7 +6865,7 @@ Array columns can be mapped to any container type registered with the
     <span class="tag">&lt;dependency&gt;</span>
         <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
         <span class="tag">&lt;artifactId&gt;</span>jdbi3-sqlobject<span class="tag">&lt;/artifactId&gt;</span>
-        <span class="tag">&lt;version&gt;</span>3.40.1-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+        <span class="tag">&lt;version&gt;</span>3.41.0-rc2-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
     <span class="tag">&lt;/dependency&gt;</span>
 <span class="tag">&lt;/dependencies&gt;</span></code></pre>
 </div>
@@ -6876,7 +6876,7 @@ Array columns can be mapped to any container type registered with the
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
-    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-sqlobject:3.40.1-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-sqlobject:3.41.0-rc2-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
 }</code></pre>
 </div>
 </div>
@@ -15046,8 +15046,8 @@ return types, or on <a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlBatch.
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 3.40.1-SNAPSHOT<br>
-Last updated 08/11/2023 15:19 -0700
+Version 3.41.0-rc2-SNAPSHOT<br>
+Last updated 08/11/2023 15:34 -0700
 </div>
 </div>
 </body>
