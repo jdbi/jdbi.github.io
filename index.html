@@ -531,7 +531,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.41.1-SNAPSHOT,</span>
-<span id="revdate">08/31/2023 21:26 -0700</span>
+<span id="revdate">09/01/2023 11:53 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -2739,7 +2739,7 @@ User user = jdbi.withHandle(handle -&gt; { <i class="conum" data-value="2"></i><
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>returns a object implementing <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html" target="_blank" rel="noopener">ResultIterable</a></td>
+<td>returns an object implementing <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html" target="_blank" rel="noopener">ResultIterable</a></td>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
@@ -3077,6 +3077,9 @@ parameters by name:</p>
                     .one();</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>Names can contain alphanumeric characters, dot and dash (<code>.</code> and <code>-</code>).</p>
+</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -3084,7 +3087,8 @@ parameters by name:</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-This <code>:foo</code> syntax is default behavior that can be changed; see the <code>ColonPrefixSqlParser</code> class. Jdbi alternatively provides support for <code>#foo</code> syntax out-of-the-box, and you can create your own as well.
+By default, Jbdi uses the see the <a href="./apidocs/org/jdbi/v3/core/statement/ColonPrefixSqlParser.html" target="_blank" rel="noopener">ColonPrefixSqlParser</a> that understands
+the  <code>:foo</code> syntax. This can be changed if the colon is problematic in the SQL dialect used. Jdbi includes support for an alternate <code>#foo</code> syntax out-of-the-box using the <a href="./apidocs/org/jdbi/v3/core/statement/HashPrefixSqlParser.html" target="_blank" rel="noopener">HashPrefixSqlParser</a>. It is also possible to create custom parsers for named arguments.
 </td>
 </tr>
 </table>
@@ -3542,7 +3546,7 @@ query using a lambda expression:</p>
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-There are three different types being used in the above example. <code>Query</code>,
+There are three different types being used in the above example. <a href="./apidocs/org/jdbi/v3/core/statement/Query.html" target="_blank" rel="noopener">Query</a>,
 returned by <code>Handle.createQuery()</code>, implements the <code>ResultBearing</code> interface.
 The <code>ResultBearing.map()</code> method takes a <a href="./apidocs/org/jdbi/v3/core/mapper/RowMapper.html" target="_blank" rel="noopener">RowMapper&lt;T&gt;</a> and returns a
 <code>ResultIterable&lt;T&gt;</code>. Finally, <code>ResultBearing.list()</code> collects each row in the
@@ -9776,7 +9780,7 @@ separately querying after the insert completes.</p>
 <h3 id="_qualified_types"><a class="anchor" href="#_qualified_types"></a><a class="link" href="#_qualified_types">14.2. Qualified Types</a></h3>
 <div class="paragraph">
 <p>Sometimes the same Java object can correspond to multiple data types in a database. For example,
-a <code>String</code> could be <code>varchar</code> plaintext, <code>nvarchar</code> text, <code>json</code> data, etc, all with different handling requirements.</p>
+a <code>String</code> could be <code>varchar</code> plaintext, <code>nvarchar</code> text, <code>json</code> data, etc., all with different handling requirements.</p>
 </div>
 <div class="paragraph">
 <p><a href="./apidocs/org/jdbi/v3/core/qualifier/QualifiedType.html" target="_blank" rel="noopener">QualifiedType</a> allows you to add such context to a Java type:</p>
@@ -9923,7 +9927,7 @@ and setter parameters.</p>
 <p>Binding query parameters, as described above, is excellent for sending a static set of parameters to the database engine.  Binding ensures that the parameterized query string (<code>... where foo = ?</code>) is transmitted to the database without allowing hostile parameter values to inject SQL.</p>
 </div>
 <div class="paragraph">
-<p>Bound parameters are not always enough. Sometimes a query needs complicated or structural changes before being executed, and parameters just don&#8217;t cut it. Templating (using a <code>TemplateEngine</code>) allows you to alter a query&#8217;s content with general String manipulations.</p>
+<p>Bound parameters are not always enough. Sometimes a query needs complicated or structural changes before being executed, and parameters just don&#8217;t cut it. Templating (using a <a href="./apidocs/org/jdbi/v3/core/statement/TemplateEngine.html" target="_blank" rel="noopener">TemplateEngine</a>) allows you to alter a query&#8217;s content with general String manipulations.</p>
 </div>
 <div class="paragraph">
 <p>Typical uses for templating are optional or repeating segments (conditions and loops), complex variables such as comma-separated lists for IN clauses, and variable substitution for non-bindable SQL elements (like table names). Unlike <em>argument binding</em>, the <em>rendering</em> of <em>attributes</em> performed by TemplateEngines is <strong>not</strong> SQL-aware. Since they perform generic String manipulations, TemplateEngines can easily produce horribly mangled or subtly defective queries if you don&#8217;t use them carefully.</p>
@@ -11992,7 +11996,7 @@ lombok.copyableAnnotations += org.jdbi.v3.core.mapper.reflect.JdbiConstructor</c
 </div>
 </div>
 <div class="paragraph">
-<p>Then, use the <code>OracleReturning</code> class with an <code>Update</code> or <code>PreparedBatch</code>
+<p>Then, use the <code>OracleReturning</code> class with an <a href="./apidocs/org/jdbi/v3/core/statement/Update.html" target="_blank" rel="noopener">Update</a> or <code>PreparedBatch</code>
 to get the returned DML.</p>
 </div>
 </div>
@@ -14534,8 +14538,7 @@ template string and the <code>StatementContext</code> as input, and produce a pa
 SQL string as output.</p>
 </div>
 <div class="paragraph">
-<p>Out of the box, Jdbi is configured to use <a href="./apidocs/org/jdbi/v3/core/statement/DefinedAttributeTemplateEngine.html" target="_blank" rel="noopener">DefinedAttributeTemplateEngine</a>,
-which replaces angle-bracked tokens like <code>&lt;name&gt;</code> in your SQL statements with
+<p>Out of the box, Jdbi is configured to use <a href="./apidocs/org/jdbi/v3/core/statement/DefinedAttributeTemplateEngine.html" target="_blank" rel="noopener">DefinedAttributeTemplateEngine</a>, which replaces angle-bracked tokens like <code>&lt;name&gt;</code> in SQL statements with
 the string value of the named attribute:</p>
 </div>
 <div class="listingblock">
@@ -14565,9 +14568,8 @@ the <code>columns</code> attribute is defined as <code>"id, name"</code>.
 </table>
 </div>
 <div class="paragraph">
-<p>Any custom template engine can be used. Simply implement the <code>TemplateEngine</code>
-interface, then call <code>setTemplateEngine()</code> on the <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a>, <a href="./apidocs/org/jdbi/v3/core/Handle.html" target="_blank" rel="noopener">Handle</a>, or on a SQL
-statement like <code>Update</code> or <code>Query</code>:</p>
+<p>Jdbi supports custom template engines through the <a href="./apidocs/org/jdbi/v3/core/statement/TemplateEngine.html" target="_blank" rel="noopener">TemplateEngine</a>
+interface. By calling <a href="./apidocs/org/jdbi/v3/core/config/Configurable.html#setTemplateEngine(org.jdbi.v3.core.statement.TemplateEngine)" target="_blank" rel="noopener">Configurable#setTemplateEngine()</a> method on the <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a>, <a href="./apidocs/org/jdbi/v3/core/Handle.html" target="_blank" rel="noopener">Handle</a>, or any SQL statement like <a href="./apidocs/org/jdbi/v3/core/statement/Update.html" target="_blank" rel="noopener">Update</a> or <a href="./apidocs/org/jdbi/v3/core/statement/Query.html" target="_blank" rel="noopener">Query</a>, the template engine used to render SQL can be changed:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14601,14 +14603,11 @@ which renders templates using the <a href="https://www.stringtemplate.org/" targ
 <div class="sect2">
 <h3 id="_sqlparser"><a class="anchor" href="#_sqlparser"></a><a class="link" href="#_sqlparser">19.9. SqlParser</a></h3>
 <div class="paragraph">
-<p>After the SQL template has been rendered, Jdbi uses a
-<a href="./apidocs/org/jdbi/v3/core/statement/SqlParser.html" target="_blank" rel="noopener">SqlParser</a> to parse out any named
-parameters from the SQL statement. This Produces a <code>ParsedSql</code> object, which
-contains all the information Jdbi needs to bind parameters and execute your SQL
-statement.</p>
+<p>After the SQL template has been rendered, Jdbi uses a <a href="./apidocs/org/jdbi/v3/core/statement/SqlParser.html" target="_blank" rel="noopener">SqlParser</a> to parse out any named parameters from the SQL statement. This Produces a <a href="./apidocs/org/jdbi/v3/core/statement/ParsedSql.html" target="_blank" rel="noopener">ParsedSql</a> object, which
+contains all the information Jdbi needs to bind parameters and execute the SQL statement.</p>
 </div>
 <div class="paragraph">
-<p>Out of the box, Jdbi is configured to use <code>ColonPrefixSqlParser</code>, which
+<p>Out of the box, Jdbi is configured to use <a href="./apidocs/org/jdbi/v3/core/statement/ColonPrefixSqlParser.html" target="_blank" rel="noopener">ColonPrefixSqlParser</a>, which
 recognizes colon-prefixed named parameters, e.g. <code>:name</code>.</p>
 </div>
 <div class="listingblock">
@@ -14620,9 +14619,12 @@ recognizes colon-prefixed named parameters, e.g. <code>:name</code>.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Jdbi also provides <code>HashPrefixSqlParser</code>, which recognizes hash-prefixed
-parameters, e.g. <code>#hashtag</code>. Use this parser by calling <code>setSqlParser()</code> on the
-<a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a>, <a href="./apidocs/org/jdbi/v3/core/Handle.html" target="_blank" rel="noopener">Handle</a>, or any SQL statement such as <code>Query</code> or <code>Update</code>.</p>
+<p>Jdbi also provides <a href="./apidocs/org/jdbi/v3/core/statement/HashPrefixSqlParser.html" target="_blank" rel="noopener">HashPrefixSqlParser</a>, which recognizes hash-prefixed
+parameters, e.g. <code>#hashtag</code>. Other custom parsers implement the <a href="./apidocs/org/jdbi/v3/core/statement/SqlParser.html" target="_blank" rel="noopener">SqlParser</a>
+interface.</p>
+</div>
+<div class="paragraph">
+<p>By calling <a href="./apidocs/org/jdbi/v3/core/config/Configurable.html#setSqlParser(org.jdbi.v3.core.statement.SqlParser)" target="_blank" rel="noopener">Configurable#setSqlParser()</a> method on the <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a>, <a href="./apidocs/org/jdbi/v3/core/Handle.html" target="_blank" rel="noopener">Handle</a>, or any SQL statement like <a href="./apidocs/org/jdbi/v3/core/statement/Update.html" target="_blank" rel="noopener">Update</a> or <a href="./apidocs/org/jdbi/v3/core/statement/Query.html" target="_blank" rel="noopener">Query</a>, the parser used to define named arguments can be changed:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14633,18 +14635,8 @@ parameters, e.g. <code>#hashtag</code>. Use this parser by calling <code>setSqlP
       .execute();</code></pre>
 </div>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The default parsers recognize any Java identifier as a parameter or attribute name.
-Even some strange cases like emoji are allowed, although the Jdbi authors encourage appropriate discretion 🧐.
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>The default parsers recognize any Java identifier and additionally the dot and dash (<code>.</code> and <code>-</code>) as a valid characters in a parameter or attribute name. Even some strange cases like emoji are allowed, although the Jdbi authors encourage appropriate discretion 🧐.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -14658,21 +14650,6 @@ since JDBC drivers wouldn&#8217;t let you bind parameters there anyway.
 </td>
 </tr>
 </table>
-</div>
-<div class="paragraph">
-<p>For you fearless adventurers who have read the
-<a href="https://www.amazon.com/Compilers-Principles-Techniques-Tools-2nd/dp/0321486811" target="_blank" rel="noopener">Dragon book</a>,
-any custom SQL parser can be used. Simply implement the <code>SqlParser</code> interface,
-then set it on the Jdbi, Handle, or SQL statement:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">SqlParser parser = (sql, ctx) -&gt; {
-    <span class="comment">// ...</span>
-};
-
-jdbi.setParser(parser);</code></pre>
-</div>
 </div>
 </div>
 <div class="sect2">
@@ -14743,7 +14720,7 @@ This may be useful for <code>graal-native</code> compilation.</p>
 or <a href="./apidocs/org/jdbi/v3/core/Jdbi.html#inTransaction(org.jdbi.v3.core.HandleCallback)" target="_blank" rel="noopener">inTransaction</a>.
 This is for use-cases where you need to perform an action on all callbacks used in
 Jdbi. For instance, you might want to have global retries whether a transaction is used
-or not. Jdbi already provides retry handlers for transactions but you might want to retry auto-commit
+or not. Jdbi already provides retry handlers for transactions, but you might want to retry auto-commit
 (non-transaction) queries as well. E.g.</p>
 </div>
 <div class="listingblock">
@@ -14902,7 +14879,7 @@ here!</p>
 <p><code>DBIException</code> &#8594; <code>JdbiException</code></p>
 </li>
 <li>
-<p><code>Handle.select(String, &#8230;&#8203;)</code> now returns a <code>Query</code> for further method
+<p><code>Handle.select(String, &#8230;&#8203;)</code> now returns a <a href="./apidocs/org/jdbi/v3/core/statement/Query.html" target="_blank" rel="noopener">Query</a> for further method
 chaining, instead of a <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html" target="_blank" rel="noopener">List&lt;Map&lt;String, Object&gt;&gt;</a>. Call
 <code>Handle.select(sql, &#8230;&#8203;).mapToMap().list()</code> for the same effect as v2.</p>
 </li>
@@ -14941,7 +14918,7 @@ from <code>RowMapper</code>--the current row number can be retrieved directly fr
 <p><code>ResultColumnMapperFactory</code> &#8594; <a href="./apidocs/org/jdbi/v3/core/mapper/ColumnMapperFactory.html" target="_blank" rel="noopener">ColumnMapperFactory</a></p>
 </li>
 <li>
-<p><code>Query</code> no longer maps to <code>Map&lt;String, Object&gt;</code> by default. Call
+<p><a href="./apidocs/org/jdbi/v3/core/statement/Query.html" target="_blank" rel="noopener">Query</a> no longer maps to <code>Map&lt;String, Object&gt;</code> by default. Call
 <code>Query.mapToMap()</code>, <code>.mapToBean(type)</code>, <code>.map(mapper)</code> or <code>.mapTo(type)</code>.</p>
 </li>
 <li>
@@ -14969,7 +14946,7 @@ receive the actual SQL string now. A similar concept, <code>SqlLocator</code> wa
 but is specific to SQL Object.</p>
 </li>
 <li>
-<p><code>StatementRewriter</code> refactored into <code>TemplateEngine</code>, and <code>SqlParser</code>.</p>
+<p><code>StatementRewriter</code> refactored into <a href="./apidocs/org/jdbi/v3/core/statement/TemplateEngine.html" target="_blank" rel="noopener">TemplateEngine</a>, and <a href="./apidocs/org/jdbi/v3/core/statement/SqlParser.html" target="_blank" rel="noopener">SqlParser</a>.</p>
 </li>
 <li>
 <p>StringTemplate no longer required to process <code>&lt;name&gt;</code>-style tokens in SQL.</p>
@@ -15050,7 +15027,7 @@ return types, or on <a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlBatch.
 <div id="footer">
 <div id="footer-text">
 Version 3.41.1-SNAPSHOT<br>
-Last updated 08/31/2023 21:26 -0700
+Last updated 09/01/2023 11:53 -0700
 </div>
 </div>
 </body>
