@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<licensePluginReport goal="CHECK" timestamp="1694195271374">
+    <module artifactId="jdbi3-guava-cache" groupId="org.jdbi" version="3.41.2-SNAPSHOT"/>
+    <files>
+        <file path="pom.xml" result="PRESENT"/>
+        <file path="src/it/settings.xml" result="PRESENT"/>
+        <file path="src/it/test-guava-cache/invoker.properties" result="PRESENT"/>
+        <file path="src/it/test-guava-cache/pom.xml" result="PRESENT"/>
+        <file path="src/main/java/org/jdbi/v3/cache/guava/GuavaCache.java" result="PRESENT"/>
+        <file path="src/main/java/org/jdbi/v3/cache/guava/GuavaCacheBuilder.java" result="PRESENT"/>
+        <file path="src/main/java/org/jdbi/v3/cache/guava/GuavaCachePlugin.java" result="PRESENT"/>
+        <file path="src/main/java/org/jdbi/v3/cache/guava/GuavaLoadingCache.java" result="PRESENT"/>
+        <file path="src/main/java/org/jdbi/v3/cache/guava/package-info.java" result="PRESENT"/>
+        <file path="src/test/java/org/jdbi/v3/cache/guava/GuavaCacheTest.java" result="PRESENT"/>
+        <file path="src/test/java/org/jdbi/v3/cache/guava/JdbiUsesGuavaCacheTest.java" result="PRESENT"/>
+    </files>
+</licensePluginReport>
