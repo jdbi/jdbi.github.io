@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<licensePluginReport goal="CHECK" timestamp="1694196180722">
-    <module artifactId="jdbi3-guava-cache" groupId="org.jdbi" version="3.41.0"/>
+<licensePluginReport goal="CHECK" timestamp="1695357338886">
+    <module artifactId="jdbi3-guava-cache" groupId="org.jdbi" version="3.41.3-SNAPSHOT"/>
     <files>
         <file path="pom.xml" result="PRESENT"/>
         <file path="src/it/settings.xml" result="PRESENT"/>
