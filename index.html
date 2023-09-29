@@ -531,7 +531,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.41.3-SNAPSHOT,</span>
-<span id="revdate">09/25/2023 12:30 -0700</span>
+<span id="revdate">09/29/2023 10:10 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -3153,6 +3153,22 @@ Some additional setup may be required depending on the type of array element.</p
 </li>
 </ul>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The binding and mapping method for enum values
+can be controlled via the <a href="./apidocs/org/jdbi/v3/core/enums/Enums.html" target="_blank" rel="noopener">Enums</a> config,
+as well as the annotations <a href="./apidocs/org/jdbi/v3/core/enums/EnumByName.html" target="_blank" rel="noopener">@EnumByName</a>,
+<a href="./apidocs/org/jdbi/v3/core/enums/EnumByOrdinal.html" target="_blank" rel="noopener">@EnumByOrdinal</a>, and
+<a href="./apidocs/org/jdbi/v3/core/enums/DatabaseValue.html" target="_blank" rel="noopener">@DatabaseValue</a>.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>You can also configure Jdbi to support additional argument types.
 More on that later.</p>
@@ -3985,8 +4001,9 @@ additional setup may be required depending on the type of array element&#8212;&#
 <td class="content">
 The binding and mapping method for enum values
 can be controlled via the <a href="./apidocs/org/jdbi/v3/core/enums/Enums.html" target="_blank" rel="noopener">Enums</a> config,
-as well as the <a href="./apidocs/org/jdbi/v3/core/enums/EnumByName.html" target="_blank" rel="noopener">EnumByName</a> and
-<a href="./apidocs/org/jdbi/v3/core/enums/EnumByOrdinal.html" target="_blank" rel="noopener">EnumByOrdinal</a> annotations.
+as well as the annotations <a href="./apidocs/org/jdbi/v3/core/enums/EnumByName.html" target="_blank" rel="noopener">@EnumByName</a>,
+<a href="./apidocs/org/jdbi/v3/core/enums/EnumByOrdinal.html" target="_blank" rel="noopener">@EnumByOrdinal</a>, and
+<a href="./apidocs/org/jdbi/v3/core/enums/DatabaseValue.html" target="_blank" rel="noopener">@DatabaseValue</a>.
 </td>
 </tr>
 </table>
@@ -15037,7 +15054,7 @@ return types, or on <a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlBatch.
 <div id="footer">
 <div id="footer-text">
 Version 3.41.3-SNAPSHOT<br>
-Last updated 09/25/2023 12:30 -0700
+Last updated 09/29/2023 10:10 -0700
 </div>
 </div>
 </body>
