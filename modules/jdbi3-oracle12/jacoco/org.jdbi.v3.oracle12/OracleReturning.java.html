@@ -52,7 +52,7 @@ public class OracleReturning {
     private OracleReturning() {}
 
     public static ReturnParameters returnParameters() {
-<span class="nc" id="L55">        return new ReturnParameters();</span>
+<span class="fc" id="L55">        return new ReturnParameters();</span>
     }
 
     /**
@@ -63,14 +63,14 @@ public class OracleReturning {
      * @see OraclePreparedStatement#getReturnResultSet()
      */
     public static ResultProducer&lt;ResultBearing&gt; returningDml() {
-<span class="nc" id="L66">        return (supplier, ctx) -&gt; ResultProducers.createResultBearing(supplier, statement -&gt; unwrapOracleStatement(statement).getReturnResultSet(), ctx);</span>
+<span class="fc" id="L66">        return (supplier, ctx) -&gt; ResultProducers.createResultBearing(supplier, statement -&gt; unwrapOracleStatement(statement).getReturnResultSet(), ctx);</span>
     }
 
     private static OraclePreparedStatement unwrapOracleStatement(Statement stmt) throws SQLException {
-<span class="nc bnc" id="L70" title="All 2 branches missed.">        if (!stmt.isWrapperFor(OraclePreparedStatement.class)) {</span>
+<span class="pc bpc" id="L70" title="1 of 2 branches missed.">        if (!stmt.isWrapperFor(OraclePreparedStatement.class)) {</span>
 <span class="nc" id="L71">            throw new IllegalStateException(&quot;Statement is not an instance of, nor a wrapper of, OraclePreparedStatement&quot;);</span>
         }
-<span class="nc" id="L73">        return stmt.unwrap(OraclePreparedStatement.class);</span>
+<span class="fc" id="L73">        return stmt.unwrap(OraclePreparedStatement.class);</span>
     }
 
     static class ReturnParam implements Argument {
@@ -79,44 +79,44 @@ public class OracleReturning {
         private final int index;
         private final int oracleType;
 
-<span class="nc" id="L82">        ReturnParam(String name, int oracleType) {</span>
-<span class="nc" id="L83">            this.name = name;</span>
-<span class="nc" id="L84">            this.index = -1;</span>
-<span class="nc" id="L85">            this.oracleType = oracleType;</span>
-<span class="nc" id="L86">        }</span>
+<span class="fc" id="L82">        ReturnParam(String name, int oracleType) {</span>
+<span class="fc" id="L83">            this.name = name;</span>
+<span class="fc" id="L84">            this.index = -1;</span>
+<span class="fc" id="L85">            this.oracleType = oracleType;</span>
+<span class="fc" id="L86">        }</span>
 
-<span class="nc" id="L88">        ReturnParam(int index, int oracleType) {</span>
-<span class="nc" id="L89">            this.name = null;</span>
-<span class="nc" id="L90">            this.index = index;</span>
-<span class="nc" id="L91">            this.oracleType = oracleType;</span>
-<span class="nc" id="L92">        }</span>
+<span class="fc" id="L88">        ReturnParam(int index, int oracleType) {</span>
+<span class="fc" id="L89">            this.name = null;</span>
+<span class="fc" id="L90">            this.index = index;</span>
+<span class="fc" id="L91">            this.oracleType = oracleType;</span>
+<span class="fc" id="L92">        }</span>
 
         @Override
         public void apply(int position, PreparedStatement statement, StatementContext ctx) throws SQLException {
-<span class="nc" id="L96">            unwrapOracleStatement(statement).registerReturnParameter(position, oracleType);</span>
-<span class="nc" id="L97">        }</span>
+<span class="fc" id="L96">            unwrapOracleStatement(statement).registerReturnParameter(position, oracleType);</span>
+<span class="fc" id="L97">        }</span>
 
         void bind(Binding binding) {
-<span class="nc bnc" id="L100" title="All 2 branches missed.">            if (name == null) {</span>
-<span class="nc" id="L101">                binding.addPositional(index, this);</span>
+<span class="fc bfc" id="L100" title="All 2 branches covered.">            if (name == null) {</span>
+<span class="fc" id="L101">                binding.addPositional(index, this);</span>
             } else {
-<span class="nc" id="L103">                binding.addNamed(name, this);</span>
+<span class="fc" id="L103">                binding.addNamed(name, this);</span>
             }
-<span class="nc" id="L105">        }</span>
+<span class="fc" id="L105">        }</span>
     }
 
     public static class ReturnParameters implements StatementCustomizer {
 
-<span class="nc" id="L110">        private final List&lt;ReturnParam&gt; returnParams = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L110">        private final List&lt;ReturnParam&gt; returnParams = new ArrayList&lt;&gt;();</span>
 
-<span class="nc" id="L112">        ReturnParameters() {}</span>
+<span class="fc" id="L112">        ReturnParameters() {}</span>
 
         @Override
         public void beforeBinding(PreparedStatement stmt, StatementContext ctx) throws SQLException {
-<span class="nc bnc" id="L116" title="All 2 branches missed.">            for (ReturnParam returnParam : returnParams) {</span>
-<span class="nc" id="L117">                returnParam.bind(ctx.getBinding());</span>
-<span class="nc" id="L118">            }</span>
-<span class="nc" id="L119">        }</span>
+<span class="fc bfc" id="L116" title="All 2 branches covered.">            for (ReturnParam returnParam : returnParams) {</span>
+<span class="fc" id="L117">                returnParam.bind(ctx.getBinding());</span>
+<span class="fc" id="L118">            }</span>
+<span class="fc" id="L119">        }</span>
 
         /**
          * Registers a return parameter on the Oracle prepared statement.
@@ -126,8 +126,8 @@ public class OracleReturning {
          * @return The same instance, for method chaining
          */
         public ReturnParameters register(int index, int oracleType) {
-<span class="nc" id="L129">            returnParams.add(new ReturnParam(index, oracleType));</span>
-<span class="nc" id="L130">            return this;</span>
+<span class="fc" id="L129">            returnParams.add(new ReturnParam(index, oracleType));</span>
+<span class="fc" id="L130">            return this;</span>
         }
 
         /**
@@ -138,8 +138,8 @@ public class OracleReturning {
          * @return The same instance, for method chaining
          */
         public ReturnParameters register(String name, int oracleType) {
-<span class="nc" id="L141">            returnParams.add(new ReturnParam(name, oracleType));</span>
-<span class="nc" id="L142">            return this;</span>
+<span class="fc" id="L141">            returnParams.add(new ReturnParam(name, oracleType));</span>
+<span class="fc" id="L142">            return this;</span>
         }
     }
 }

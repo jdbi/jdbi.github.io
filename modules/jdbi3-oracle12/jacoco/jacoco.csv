@@ -1,4 +1,4 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-jdbi3 oracle12,org.jdbi.v3.oracle12,OracleReturning.ReturnParam,46,0,2,0,16,0,5,0,4,0
-jdbi3 oracle12,org.jdbi.v3.oracle12,OracleReturning.ReturnParameters,47,0,2,0,10,0,5,0,4,0
-jdbi3 oracle12,org.jdbi.v3.oracle12,OracleReturning,29,0,2,0,5,0,6,0,5,0
+jdbi3 oracle12,org.jdbi.v3.oracle12,OracleReturning.ReturnParam,0,46,0,2,0,16,0,5,0,4
+jdbi3 oracle12,org.jdbi.v3.oracle12,OracleReturning.ReturnParameters,0,47,0,2,0,10,0,5,0,4
+jdbi3 oracle12,org.jdbi.v3.oracle12,OracleReturning,5,24,1,1,1,4,1,5,0,5
