@@ -531,7 +531,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.42.0-SNAPSHOT,</span>
-<span id="revdate">10/02/2023 21:37 -0700</span>
+<span id="revdate">10/07/2023 10:41 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -4208,7 +4208,7 @@ Generally, Jdbi will automatically perform boxing and unboxing as appropriate wh
 it encounters wrapper types.</p>
 </div>
 <div class="paragraph">
-<p>By default, SQL <code>null</code> mapped to a primitive type will adopt the Java default value.
+<p>By default, SQL <code>null</code> mapped to a primitive type will adopt the JDBC default value.
 This may be disabled by configuring
 <code>jdbi.getConfig(ColumnMappers.class).setCoalesceNullPrimitivesToDefaults(false)</code>.</p>
 </div>
@@ -6155,7 +6155,7 @@ configuration objects.</p>
 <td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>true</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Uses the driver default value for primitive types if a SQL NULL value was returned by the database. The exact value used is specific to the database driver.</p>
+<p>Uses the JDBC default value for primitive types if a SQL NULL value was returned by the database.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -15057,7 +15057,7 @@ return types, or on <a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlBatch.
 <div id="footer">
 <div id="footer-text">
 Version 3.42.0-SNAPSHOT<br>
-Last updated 10/02/2023 21:37 -0700
+Last updated 10/07/2023 10:41 -0700
 </div>
 </div>
 </body>
