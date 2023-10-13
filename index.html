@@ -531,7 +531,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.42.0-SNAPSHOT,</span>
-<span id="revdate">10/07/2023 10:41 -0700</span>
+<span id="revdate">10/13/2023 14:37 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -725,7 +725,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_mapping_arguments_to_positional_parameters">13.3.1. Mapping arguments to positional parameters</a></li>
 <li><a href="#mapping-arguments">13.3.2. Mapping arguments to named parameters</a></li>
 <li><a href="#_mapping_arguments_to_java_parameter_names">13.3.3. Mapping arguments to Java parameter names</a></li>
-<li><a href="#_consumer_arguments">13.3.4. Consumer arguments</a></li>
+<li><a href="#_consumer_and_function_arguments">13.3.4. Consumer and Function arguments</a></li>
 <li><a href="#_mapping_arguments_to_defined_attributes">13.3.5. Mapping arguments to defined attributes</a></li>
 </ul>
 </li>
@@ -7727,12 +7727,14 @@ When using <a href="https://docs.oracle.com/en/java/javase/14/language/records.h
 </div>
 </div>
 <div class="sect3">
-<h4 id="_consumer_arguments"><a class="anchor" href="#_consumer_arguments"></a><a class="link" href="#_consumer_arguments">13.3.4. Consumer arguments</a></h4>
+<h4 id="_consumer_and_function_arguments"><a class="anchor" href="#_consumer_and_function_arguments"></a><a class="link" href="#_consumer_and_function_arguments">13.3.4. Consumer and Function arguments</a></h4>
+<div class="sect4">
+<h5 id="_consumer_arguments"><a class="anchor" href="#_consumer_arguments"></a><a class="link" href="#_consumer_arguments">Consumer arguments</a></h5>
 <div class="paragraph">
-<p>In addition to the regular method arguments for a SQL Object method, it is possible to use a single <a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/Consumer.html" target="_blank" rel="noopener">Consumer&lt;T&gt;</a> argument in addition to other arguments.</p>
+<p>In addition to the regular method arguments for a SQL Object method, it is possible to use a single <a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/Consumer.html" target="_blank" rel="noopener">Consumer&lt;T&gt;</a> or <a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/Function.html" target="_blank" rel="noopener">Function&lt;T&gt;</a> argument in addition to other arguments.</p>
 </div>
 <div class="paragraph">
-<p>Consumer arguments are actually a special return type for SQL operations. They can be used to consume the results from a SQL operation with a callback instead of returning a value from the method.</p>
+<p>A consumer argument is a special return type for SQL operations. They can be used to consume the results from a SQL operation with a callback instead of returning a value from the method.</p>
 </div>
 <div class="paragraph">
 <p>Any SQL operation method that wants to use a consumer argument <strong>must</strong> return <code>void</code>. It can declare only a single consumer argument, but can have additional regular method arguments. The consumer argument can be in any position in the argument list. .</p>
@@ -7792,6 +7794,28 @@ When using <a href="https://docs.oracle.com/javase/8/docs/api/java/util/function
 </td>
 </tr>
 </table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_function_arguments"><a class="anchor" href="#_function_arguments"></a><a class="link" href="#_function_arguments">Function arguments</a></h5>
+<div class="paragraph">
+<p>A function argument can be used to collect or transform the result from a SQL operation. Similar to a consumer argument, it will receive the results of the query. A function argument only supports <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html" target="_blank" rel="noopener">Stream</a>, <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Iterator.html" target="_blank" rel="noopener">Iterator</a> or <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Iterable.html" target="_blank" rel="noopener">Iterable</a> as the function input type. The result type of the function must match the return type of the method itself.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT * FROM users</span><span class="delimiter">&quot;</span></span>)
+<span class="annotation">@RegisterConstructorMapper</span>(User.class)
+<span class="predefined-type">Set</span>&lt;User&gt; mapUsers(Function&lt;Stream&lt;User&gt;, <span class="predefined-type">Set</span>&lt;User&gt;&gt; function); <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The results of the SQL operation are passed as a stream into the Function. It returns a set which is then returned by the method.</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect4">
 <h5 id="sql-call-consumer-arguments"><a class="anchor" href="#sql-call-consumer-arguments"></a><a class="link" href="#sql-call-consumer-arguments"><code>@SqlCall</code> Consumer and Function arguments</a></h5>
@@ -8134,18 +8158,22 @@ Jdbi plugins (e.g. the <a href="./apidocs/org/jdbi/v3/guava/GuavaPlugin.html" ta
 </div>
 </div>
 <div class="sect4">
-<h5 id="_use_consumer_arguments"><a class="anchor" href="#_use_consumer_arguments"></a><a class="link" href="#_use_consumer_arguments">Use consumer arguments</a></h5>
+<h5 id="_use_consumer_or_function_arguments"><a class="anchor" href="#_use_consumer_or_function_arguments"></a><a class="link" href="#_use_consumer_or_function_arguments">Use consumer or function arguments</a></h5>
 <div class="paragraph">
 <p>Using the method return value either directly or through an <em>interface default method</em> has the drawback that the user code to process the cursor-type object must be written within the SQL Object type as it must be executed before closing the <a href="./apidocs/org/jdbi/v3/core/Handle.html" target="_blank" rel="noopener">Handle</a> object.</p>
 </div>
 <div class="paragraph">
-<p>An elegant way to sidestep this problem is using a <a href="#_consumer_arguments">consumer argument</a> to provide a callback:</p>
+<p>An elegant way to sidestep this problem is using a <a href="#_consumer_arguments">consumer argument</a> or a <a href="#Function">function argument</a> to provide a callback:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="type">interface</span> <span class="class">CallbackDao</span> {
     <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT name FROM users</span><span class="delimiter">&quot;</span></span>)
      <span class="type">void</span> getNamesAsStream(Consumer&lt;Stream&lt;<span class="predefined-type">String</span>&gt;&gt; consumer);
+
+    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT name FROM users</span><span class="delimiter">&quot;</span></span>)
+    <span class="predefined-type">Set</span>&lt;<span class="predefined-type">String</span>&gt; getNamesAsSet(Function&lt;Stream&lt;<span class="predefined-type">String</span>&gt;, <span class="predefined-type">Set</span>&lt;<span class="predefined-type">String</span>&gt;&gt; function);
+
 }</code></pre>
 </div>
 </div>
@@ -8155,11 +8183,20 @@ Jdbi plugins (e.g. the <a href="./apidocs/org/jdbi/v3/guava/GuavaPlugin.html" ta
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Test</span>
-<span class="type">void</span> testHandleAttachCallback() {
+<span class="type">void</span> testHandleAttachConsumer() {
     <span class="keyword">try</span> (Handle handle = jdbi.open()) { <i class="conum" data-value="1"></i><b>(1)</b>
         CallbackDao dao = handle.attach(CallbackDao.class);
         <span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt; result = <span class="keyword">new</span> <span class="predefined-type">ArrayList</span>&lt;&gt;();
         dao.getNamesAsStream(stream -&gt; stream.forEach(result::add)); <i class="conum" data-value="2"></i><b>(2)</b>
+        assertThat(result).containsAll(names);
+    }
+}
+
+<span class="annotation">@Test</span>
+<span class="type">void</span> testHandleAttachFunction() {
+    <span class="keyword">try</span> (Handle handle = jdbi.open()) { <i class="conum" data-value="1"></i><b>(1)</b>
+        CallbackDao dao = handle.attach(CallbackDao.class);
+        <span class="predefined-type">Set</span>&lt;<span class="predefined-type">String</span>&gt; result = dao.getNamesAsSet(stream -&gt; stream.collect(Collectors.toSet())); <i class="conum" data-value="2"></i><b>(2)</b>
         assertThat(result).containsAll(names);
     }
 }</code></pre>
@@ -8183,7 +8220,7 @@ Jdbi plugins (e.g. the <a href="./apidocs/org/jdbi/v3/guava/GuavaPlugin.html" ta
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Test</span>
-<span class="type">void</span> testOnDemandCallback() {
+<span class="type">void</span> testOnDemandConsumer() {
     CallbackDao dao = jdbi.onDemand(CallbackDao.class);
     <span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt; result = <span class="keyword">new</span> <span class="predefined-type">ArrayList</span>&lt;&gt;();
     dao.getNamesAsStream(stream -&gt; stream.forEach(result::add));
@@ -8191,10 +8228,25 @@ Jdbi plugins (e.g. the <a href="./apidocs/org/jdbi/v3/guava/GuavaPlugin.html" ta
 }
 
 <span class="annotation">@Test</span>
-<span class="type">void</span> testWithExtensionCallback() {
+<span class="type">void</span> testOnDemandFunction() {
+    CallbackDao dao = jdbi.onDemand(CallbackDao.class);
+    <span class="predefined-type">Set</span>&lt;<span class="predefined-type">String</span>&gt; result = dao.getNamesAsSet(stream -&gt; stream.collect(Collectors.toSet()));
+    assertThat(result).containsAll(names);
+}
+
+<span class="annotation">@Test</span>
+<span class="type">void</span> testWithExtensionConsumer() {
     <span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt; result = <span class="keyword">new</span> <span class="predefined-type">ArrayList</span>&lt;&gt;();
-    jdbi.useExtension(CallbackDao.class, dao -&gt;  <i class="conum" data-value="1"></i><b>(1)</b>
-            dao.getNamesAsStream(stream -&gt; stream.forEach(result::add)));
+    jdbi.useExtension(CallbackDao.class,
+        dao -&gt; dao.getNamesAsStream(stream -&gt; stream.forEach(result::add))); <i class="conum" data-value="1"></i><b>(1)</b>
+    assertThat(result).containsAll(names);
+}
+
+<span class="annotation">@Test</span>
+<span class="type">void</span> testWithExtensionFunction() {
+    <span class="predefined-type">Set</span>&lt;<span class="predefined-type">String</span>&gt; result = jdbi.withExtension(CallbackDao.class,
+        dao -&gt; dao.getNamesAsSet(stream -&gt; stream.collect(Collectors.toSet())));
+
     assertThat(result).containsAll(names);
 }</code></pre>
 </div>
@@ -8214,7 +8266,7 @@ Jdbi plugins (e.g. the <a href="./apidocs/org/jdbi/v3/guava/GuavaPlugin.html" ta
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-While using a consumer argument is a great way to deal with cursor-type objects, there is the drawback that the user code is called while holding the handle (or the database connection) open. If the callback does very expensive or slow processing, this may hold the connection for a very long time.
+While using a consumer or a function argument is a great way to deal with cursor-type objects, there is the drawback that the user code is called while holding the handle (or the database connection) open. If the callback does very expensive or slow processing, this may hold the connection for a very long time.
 </td>
 </tr>
 </table>
@@ -15057,7 +15109,7 @@ return types, or on <a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlBatch.
 <div id="footer">
 <div id="footer-text">
 Version 3.42.0-SNAPSHOT<br>
-Last updated 10/07/2023 10:41 -0700
+Last updated 10/13/2023 14:37 -0700
 </div>
 </div>
 </body>
