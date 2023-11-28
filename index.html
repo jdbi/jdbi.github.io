@@ -531,7 +531,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.42.0-SNAPSHOT,</span>
-<span id="revdate">11/27/2023 18:08 -0800</span>
+<span id="revdate">11/27/2023 18:33 -0800</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -849,8 +849,10 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </li>
 <li><a href="#_spring_5">16.13. Spring 5</a>
 <ul class="sectlevel3">
-<li><a href="#_installing_plugins">16.13.1. Installing Plugins</a></li>
-<li><a href="#_global_attributes">16.13.2. Global Attributes</a></li>
+<li><a href="#_xml_based_configuration">16.13.1. XML-based configuration</a></li>
+<li><a href="#_annotation_based_configuration">16.13.2. Annotation-based configuration</a></li>
+<li><a href="#spring5-jta">16.13.3. Synchronization between Jdbi and JTA</a></li>
+<li><a href="#_jdbi_repositories">16.13.4. Jdbi Repositories</a></li>
 </ul>
 </li>
 <li><a href="#_sqlite">16.14. SQLite</a></li>
@@ -12406,11 +12408,10 @@ for upstream driver documentation.</p>
 <div class="sect2">
 <h3 id="_spring_5"><a class="anchor" href="#_spring_5"></a><a class="link" href="#_spring_5">16.13. Spring 5</a></h3>
 <div class="paragraph">
-<p>This module provides <code>JdbiFactoryBean</code>, a factory bean which sets up a <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a>
-singleton in a Spring 5 (or Spring Boot) application context.</p>
+<p>This module integrates Jdbi and Spring 5 (or Spring Boot), including JTA support.</p>
 </div>
 <div class="paragraph">
-<p>To use this module, add a Maven dependency:</p>
+<p>To use <strong>jdbi-spring5</strong>, add a Maven dependency:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12419,6 +12420,12 @@ singleton in a Spring 5 (or Spring Boot) application context.</p>
     <span class="tag">&lt;artifactId&gt;</span>jdbi3-spring5<span class="tag">&lt;/artifactId&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
+</div>
+<div class="sect3">
+<h4 id="_xml_based_configuration"><a class="anchor" href="#_xml_based_configuration"></a><a class="link" href="#_xml_based_configuration">16.13.1. XML-based configuration</a></h4>
+<div class="paragraph">
+<p>For XML-based configurations the class <a href="./apidocs/org/jdbi/v3/spring5/JdbiFactoryBean.html" target="_blank" rel="noopener">JdbiFactoryBean</a> is made available to set up a
+<a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> singleton in a Spring 5 (or Spring Boot) application context.</p>
 </div>
 <div class="paragraph">
 <p>Then configure the Jdbi factory bean in your Spring container, e.g.:</p>
@@ -12473,7 +12480,7 @@ database, but it can be any JDBC-compatible database.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Configure <code>JdbiFactoryBean</code> using the data source configured earlier.</td>
+<td>Configure <a href="./apidocs/org/jdbi/v3/spring5/JdbiFactoryBean.html" target="_blank" rel="noopener">JdbiFactoryBean</a> using the data source configured earlier.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
@@ -12481,8 +12488,8 @@ database, but it can be any JDBC-compatible database.</td>
 </tr>
 </table>
 </div>
-<div class="sect3">
-<h4 id="_installing_plugins"><a class="anchor" href="#_installing_plugins"></a><a class="link" href="#_installing_plugins">16.13.1. Installing Plugins</a></h4>
+<div class="sect4">
+<h5 id="_installing_plugins"><a class="anchor" href="#_installing_plugins"></a><a class="link" href="#_installing_plugins">Installing Plugins</a></h5>
 <div class="paragraph">
 <p>Plugins may be automatically installed by scanning the classpath for
 <a href="https://docs.oracle.com/javase/11/docs/api/java/util/ServiceLoader.html" target="_blank" rel="noopener">ServiceLoader</a> manifests.</p>
@@ -12529,8 +12536,8 @@ auto-install some plugins and manually install the rest:</p>
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_global_attributes"><a class="anchor" href="#_global_attributes"></a><a class="link" href="#_global_attributes">16.13.2. Global Attributes</a></h4>
+<div class="sect4">
+<h5 id="_global_attributes"><a class="anchor" href="#_global_attributes"></a><a class="link" href="#_global_attributes">Global Attributes</a></h5>
 <div class="paragraph">
 <p>Global defined attributes may be configured on the factory bean:</p>
 </div>
@@ -12544,6 +12551,100 @@ auto-install some plugins and manually install the rest:</p>
     <span class="tag">&lt;/map&gt;</span>
   <span class="tag">&lt;/property&gt;</span>
 <span class="tag">&lt;/bean&gt;</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_annotation_based_configuration"><a class="anchor" href="#_annotation_based_configuration"></a><a class="link" href="#_annotation_based_configuration">16.13.2. Annotation-based configuration</a></h4>
+<div class="paragraph">
+<p>For annotation based configurations you can add the following method in a
+<code>@Configuration</code> class:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Configuration</span>
+<span class="directive">public</span> <span class="type">class</span> <span class="class">JdbiConfiguration</span> {
+    <span class="annotation">@Bean</span>
+    <span class="directive">public</span> Jdbi jdbi(<span class="predefined-type">DataSource</span> ds) {
+        ConnectionFactory cf = <span class="keyword">new</span> SpringConnectionFactory(dataSource); <i class="conum" data-value="1"></i><b>(1)</b>
+        <span class="directive">final</span> Jdbi jdbi = Jdbi.create(cf);
+        <span class="comment">/* additional configuration goes here */</span>
+        <span class="keyword">return</span> jdbi;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>This connection factory will enable <a href="#spring5-jta">JTA support</a>.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="spring5-jta"><a class="anchor" href="#spring5-jta"></a><a class="link" href="#spring5-jta">16.13.3. Synchronization between Jdbi and JTA</a></h4>
+<div class="paragraph">
+<p>If you use Spring and databases, you will most likely also use the Java Transaction API (JTA)
+to manage the transactions. The <code>JdbiUtil</code> utility can be used to obtain <a href="./apidocs/org/jdbi/v3/core/Handle.html" target="_blank" rel="noopener">Handles</a>
+synchronized with Spring&#8217;s JTA, as can be seen in the following fragment:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">Handle handle = JdbiUtil.getHandle(jdbi); <i class="conum" data-value="1"></i><b>(1)</b>
+<span class="keyword">try</span> {
+    <span class="comment">/* Use the handle */</span>
+} <span class="keyword">finally</span> {
+    JdbiUtil.closeIfNeeded(handle); <i class="conum" data-value="2"></i><b>(2)</b>
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Creates or reuses a handle, optionally synchronizing it with the current transaction</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Closes the handle if it is not bound to a Spring transaction.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>This utility will also make sure that the handle is released when it was bound to a Spring transaction
+and that transaction is closed.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_jdbi_repositories"><a class="anchor" href="#_jdbi_repositories"></a><a class="link" href="#_jdbi_repositories">16.13.4. Jdbi Repositories</a></h4>
+<div class="paragraph">
+<p>When using <a href="#sql-objects">SQL objects</a> it might be preferable to have them available for injection.
+This can be realized using the <code>@EnableJdbiRepositories</code> annotation (generally placed on your main class).
+This annotation will enable the detection of SQL objects annotated with <code>@JdbiRepository</code> and create a Spring
+bean for each of them.
+Beans created like this will also synchronize with JTA.</p>
+</div>
+<div class="paragraph">
+<p>Example usage:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@JdbiRepository</span>
+<span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
+    <span class="comment">/* SQL Object functionality goes here */</span>
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Component</span>
+<span class="directive">public</span> <span class="type">class</span> <span class="class">UserService</span> {
+    <span class="annotation">@Autowired</span>
+    <span class="directive">private</span> UserDao userDao;
+}</code></pre>
 </div>
 </div>
 </div>
@@ -15245,7 +15346,7 @@ return types, or on <a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlBatch.
 <div id="footer">
 <div id="footer-text">
 Version 3.42.0-SNAPSHOT<br>
-Last updated 11/27/2023 18:08 -0800
+Last updated 11/27/2023 18:33 -0800
 </div>
 </div>
 </body>
