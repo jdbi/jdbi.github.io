@@ -531,7 +531,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.42.0-SNAPSHOT,</span>
-<span id="revdate">11/27/2023 17:17 -0800</span>
+<span id="revdate">11/27/2023 18:08 -0800</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -833,8 +833,9 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_kotlin">16.9. Kotlin</a>
 <ul class="sectlevel3">
 <li><a href="#_resultset_mapping">16.9.1. ResultSet Mapping</a></li>
-<li><a href="#_sqlobject">16.9.2. SqlObject</a></li>
-<li><a href="#_jackson_json_processing">16.9.3. Jackson JSON Processing</a></li>
+<li><a href="#_coroutine_support">16.9.2. Coroutine support</a></li>
+<li><a href="#_sqlobject">16.9.3. SqlObject</a></li>
+<li><a href="#_jackson_json_processing">16.9.4. Jackson JSON Processing</a></li>
 </ul>
 </li>
 <li><a href="#_lombok">16.10. Lombok</a></li>
@@ -1716,7 +1717,7 @@ assertThat(userNames).containsExactly(
 <p>The <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> class is the main entry point into the library.</p>
 </div>
 <div class="paragraph">
-<p>Each <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instance maintains a set of configuration settings and wraps a JDBC <a href="https://docs.oracle.com/javase/8/docs/api/javax/sql/DataSource.html" target="_blank" rel="noopener">DataSource</a>.</p>
+<p>Each <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instance maintains a set of configuration settings and wraps a JDBC <a href="https://docs.oracle.com/javase/11/docs/api/javax/sql/DataSource.html" target="_blank" rel="noopener">DataSource</a>.</p>
 </div>
 <div class="paragraph">
 <p><a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instances are thread-safe and do not own any database resources.</p>
@@ -1763,7 +1764,7 @@ Jdbi jdbi = Jdbi.create(ds);</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p>from a single <a href="https://docs.oracle.com/javase/8/docs/api/java/sql/Connection.html" target="_blank" rel="noopener">JDBC Connection</a>.</p>
+<p>from a single <a href="https://docs.oracle.com/javase/11/docs/api/java/sql/Connection.html" target="_blank" rel="noopener">JDBC Connection</a>.</p>
 </li>
 </ul>
 </div>
@@ -1792,7 +1793,7 @@ Production code rarely provides a connection object directly to a <a href="./api
 <div class="sect2">
 <h3 id="_handle"><a class="anchor" href="#_handle"></a><a class="link" href="#_handle">4.2. Handle</a></h3>
 <div class="paragraph">
-<p>A <a href="./apidocs/org/jdbi/v3/core/Handle.html" target="_blank" rel="noopener">Handle</a> wraps an active <a href="https://docs.oracle.com/javase/8/docs/api/java/sql/Connection.html" target="_blank" rel="noopener">database connection</a>.</p>
+<p>A <a href="./apidocs/org/jdbi/v3/core/Handle.html" target="_blank" rel="noopener">Handle</a> wraps an active <a href="https://docs.oracle.com/javase/11/docs/api/java/sql/Connection.html" target="_blank" rel="noopener">database connection</a>.</p>
 </div>
 <div class="paragraph">
 <p>Handle instances are created by a <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instance to provide a database connection e.g. for a single HTTP request or event callback). Handles are intended to be short-lived and must be closed to release the database connection and possible other resources.</p>
@@ -1868,7 +1869,7 @@ You may notice the "consumer" vs "callback" naming pattern in a few  places in J
 </div>
 </div>
 <div class="paragraph">
-<p>An unmanaged handle must be used when a stateful object should be passed to the calling code. Stateful objects are iterators and streams that do not collect data ahead of time in memory but provide a data stream from the database through the <a href="https://docs.oracle.com/javase/8/docs/api/java/sql/Connection.html" target="_blank" rel="noopener">JDBC Connection</a> to the calling code. Using a callback does not work here because the connection would be closed before the calling code can consume the data.</p>
+<p>An unmanaged handle must be used when a stateful object should be passed to the calling code. Stateful objects are iterators and streams that do not collect data ahead of time in memory but provide a data stream from the database through the <a href="https://docs.oracle.com/javase/11/docs/api/java/sql/Connection.html" target="_blank" rel="noopener">JDBC Connection</a> to the calling code. Using a callback does not work here because the connection would be closed before the calling code can consume the data.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1956,7 +1957,7 @@ assertThat(users).containsExactly(
 </div>
 <div class="paragraph">
 <p>Use the <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#findOne()" target="_blank" rel="noopener">ResultIterable#findOne()</a> method when you expect the result to contain zero or one row. Returns
-<a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html#empty--" target="_blank" rel="noopener">Optional.empty()</a> if there are no rows, or one row that maps to <code>null</code> and throws  an exception if the result has multiple rows.</p>
+<a href="https://docs.oracle.com/javase/11/docs/api/java/util/Optional.html#empty--" target="_blank" rel="noopener">Optional.empty()</a> if there are no rows, or one row that maps to <code>null</code> and throws  an exception if the result has multiple rows.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1978,7 +1979,7 @@ assertThat(users).containsExactly(
 </div>
 <div class="paragraph">
 <p>Use the <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#findFirst()" target="_blank" rel="noopener">ResultIterable#findFirst()</a> method when the result may contain any number of rows. Returns
-<a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html#empty--" target="_blank" rel="noopener">Optional.empty()</a> if there are no rows, or the first row maps to <code>null</code>.</p>
+<a href="https://docs.oracle.com/javase/11/docs/api/java/util/Optional.html#empty--" target="_blank" rel="noopener">Optional.empty()</a> if there are no rows, or the first row maps to <code>null</code>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2009,7 +2010,7 @@ assertThat(users).containsExactly(
 <p>Use the <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#list()" target="_blank" rel="noopener">ResultIterable#list()</a> and Use the <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#set()" target="_blank" rel="noopener">ResultIterable#set()</a> methods use the default implementations from the collections framework.</p>
 </div>
 <div class="paragraph">
-<p>For more control over the set and list types, use the <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#collectIntoList()" target="_blank" rel="noopener">ResultIterable#collectIntoList()</a> and <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#collectIntoSet()" target="_blank" rel="noopener">ResultIterable#collectIntoSet()</a> methods which use the <a href="./apidocs/org/jdbi/v3/core/collector/JdbiCollectors.html" target="_blank" rel="noopener">JdbiCollectors</a> configuration object to retrieve the collection types for <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html" target="_blank" rel="noopener">List</a> and <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Set.html" target="_blank" rel="noopener">Set</a>:</p>
+<p>For more control over the set and list types, use the <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#collectIntoList()" target="_blank" rel="noopener">ResultIterable#collectIntoList()</a> and <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#collectIntoSet()" target="_blank" rel="noopener">ResultIterable#collectIntoSet()</a> methods which use the <a href="./apidocs/org/jdbi/v3/core/collector/JdbiCollectors.html" target="_blank" rel="noopener">JdbiCollectors</a> configuration object to retrieve the collection types for <a href="https://docs.oracle.com/javase/11/docs/api/java/util/List.html" target="_blank" rel="noopener">List</a> and <a href="https://docs.oracle.com/javase/11/docs/api/java/util/Set.html" target="_blank" rel="noopener">Set</a>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2060,7 +2061,7 @@ assertThat(users).containsExactly(
 </div>
 <div class="paragraph">
 <p>For other collections, use <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#collect(java.util.stream.Collector)" target="_blank" rel="noopener">ResultIterable#collect()</a> with a
-<a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Collector.html" target="_blank" rel="noopener">collector</a> or <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#toCollection(java.util.function.Supplier)" target="_blank" rel="noopener">ResultIterable#toCollection()</a> with a collection supplier:</p>
+<a href="https://docs.oracle.com/javase/11/docs/api/java/util/stream/Collector.html" target="_blank" rel="noopener">collector</a> or <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#toCollection(java.util.function.Supplier)" target="_blank" rel="noopener">ResultIterable#toCollection()</a> with a collection supplier:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2078,7 +2079,7 @@ assertThat(users).containsExactly(
 </div>
 </div>
 <div class="paragraph">
-<p>The <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#collectToMap(java.util.function.Function,java.util.function.Function)" target="_blank" rel="noopener">ResultIterable#collectToMap()</a> method allows collecting results directly into a <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html" target="_blank" rel="noopener">Map</a>:</p>
+<p>The <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#collectToMap(java.util.function.Function,java.util.function.Function)" target="_blank" rel="noopener">ResultIterable#collectToMap()</a> method allows collecting results directly into a <a href="https://docs.oracle.com/javase/11/docs/api/java/util/Map.html" target="_blank" rel="noopener">Map</a>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2213,7 +2214,7 @@ those counts are then returned in an <code>int[]</code> array.  In common cases 
 <div class="paragraph">
 <p>Some database drivers might return special values in conditions where modification counts are not available.
 See the
-<a href="https://docs.oracle.com/javase/8/docs/api/java/sql/Statement.html#executeBatch--" target="_blank" rel="noopener">executeBatch</a> documentation for details.</p>
+<a href="https://docs.oracle.com/javase/11/docs/api/java/sql/Statement.html#executeBatch--" target="_blank" rel="noopener">executeBatch</a> documentation for details.</p>
 </div>
 </div>
 <div class="sect3">
@@ -2284,7 +2285,7 @@ Exception types of the day.</p>
 </div>
 <div class="paragraph">
 <p>So SQLException has a bespoke
-<a href="https://docs.oracle.com/javase/8/docs/api/java/sql/SQLException.html#getNextException--" target="_blank" rel="noopener">getNextException</a>
+<a href="https://docs.oracle.com/javase/11/docs/api/java/sql/SQLException.html#getNextException--" target="_blank" rel="noopener">getNextException</a>
 chain to represent the causes of a batch failure. Unfortunately, by default
 most logging libraries do not print these exceptions out, pushing their
 handling into your code. It is very common to forget to handle this situation
@@ -2434,7 +2435,7 @@ can be executed in a single <strong>Batch</strong> or individually.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Many methods on the <a href="https://docs.oracle.com/javase/8/docs/api/java/sql/DatabaseMetaData.html" target="_blank" rel="noopener">DatabaseMetaData</a> return a <a href="https://docs.oracle.com/javase/8/docs/api/java/sql/ResultSet.html" target="_blank" rel="noopener">ResultSet</a>. These can be used with the <code>queryMetadata</code> method that returns a <a href="#_resultbearing">ResultBearing</a>.</p>
+<p>Many methods on the <a href="https://docs.oracle.com/javase/11/docs/api/java/sql/DatabaseMetaData.html" target="_blank" rel="noopener">DatabaseMetaData</a> return a <a href="https://docs.oracle.com/javase/11/docs/api/java/sql/ResultSet.html" target="_blank" rel="noopener">ResultSet</a>. These can be used with the <code>queryMetadata</code> method that returns a <a href="#_resultbearing">ResultBearing</a>.</p>
 </div>
 <div class="paragraph">
 <p>All Jdbi <a href="#_row_mappers">Row Mappers</a> and <a href="#_column_mappers">Column Mappers</a> are available to map these results:</p>
@@ -2453,8 +2454,8 @@ can be executed in a single <strong>Batch</strong> or individually.</p>
 <div class="paragraph">
 <p>Calling Jdbc and by extension Jdbi is inherently a blocking operation.
 In asynchronous applications
-(where results are returned as a <a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletionStage.html" target="_blank" rel="noopener">CompletionStage</a>
-or a <a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html" target="_blank" rel="noopener">CompletableFuture</a>)
+(where results are returned as a <a href="https://docs.oracle.com/javase/11/docs/api/java/util/concurrent/CompletionStage.html" target="_blank" rel="noopener">CompletionStage</a>
+or a <a href="https://docs.oracle.com/javase/11/docs/api/java/util/concurrent/CompletableFuture.html" target="_blank" rel="noopener">CompletableFuture</a>)
 it is very important never to block on threads that the caller doesn&#8217;t control. For this, there is the
 <a href="./apidocs/org/jdbi/v3/core/async/JdbiExecutor.html" target="_blank" rel="noopener">JdbiExcecutor</a> class that wraps around a <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instance
 and makes sure calls are made on a specific thread pool.</p>
@@ -2546,7 +2547,7 @@ assertThatException().isThrownBy(() -&gt; result.hasNext());</code></pre>
 <h2 id="_resource_management"><a class="anchor" href="#_resource_management"></a><a class="link" href="#_resource_management">5. Resource Management</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>JDBC operations involve stateful objects: <a href="https://docs.oracle.com/javase/8/docs/api/java/sql/Connection.html" target="_blank" rel="noopener">Connection</a>, <a href="https://docs.oracle.com/javase/8/docs/api/java/sql/PreparedStatement.html" target="_blank" rel="noopener">PreparedStatement</a> and <a href="https://docs.oracle.com/javase/8/docs/api/java/sql/ResultSet.html" target="_blank" rel="noopener">ResultSet</a> are the most common ones. Jdbi understands the lifecycle of these objects and can often fully manage them.</p>
+<p>JDBC operations involve stateful objects: <a href="https://docs.oracle.com/javase/11/docs/api/java/sql/Connection.html" target="_blank" rel="noopener">Connection</a>, <a href="https://docs.oracle.com/javase/11/docs/api/java/sql/PreparedStatement.html" target="_blank" rel="noopener">PreparedStatement</a> and <a href="https://docs.oracle.com/javase/11/docs/api/java/sql/ResultSet.html" target="_blank" rel="noopener">ResultSet</a> are the most common ones. Jdbi understands the lifecycle of these objects and can often fully manage them.</p>
 </div>
 <div class="paragraph">
 <p>Within Jdbi, two types of stateful objects exist that need to be managed: <a href="#_handle">Handle</a> objects and all <a href="#_statement_types">Statement objects</a>.</p>
@@ -2679,7 +2680,7 @@ User user = jdbi.withHandle(handle -&gt; { <i class="conum" data-value="2"></i><
 <div class="sect3">
 <h4 id="_explicit_statement_resource_management"><a class="anchor" href="#_explicit_statement_resource_management"></a><a class="link" href="#_explicit_statement_resource_management">5.3.1. Explicit statement resource management</a></h4>
 <div class="paragraph">
-<p>All <a href="#_statement_types">SQL statement types</a> implement the <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/AutoCloseable.html" target="_blank" rel="noopener">AutoCloseable</a> interface and can be used in a <em>try-with-resources</em> block. This is the recommended way to manually manage statements, and it ensures that all resources are properly released when they are no longer needed. The <em>try-with-resources</em> pattern ensures that the <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/AutoCloseable.html#close--" target="_blank" rel="noopener">close()</a> method on the SQL statement is called which releases the resources.</p>
+<p>All <a href="#_statement_types">SQL statement types</a> implement the <a href="https://docs.oracle.com/javase/11/docs/api/java/lang/AutoCloseable.html" target="_blank" rel="noopener">AutoCloseable</a> interface and can be used in a <em>try-with-resources</em> block. This is the recommended way to manually manage statements, and it ensures that all resources are properly released when they are no longer needed. The <em>try-with-resources</em> pattern ensures that the <a href="https://docs.oracle.com/javase/11/docs/api/java/lang/AutoCloseable.html#close--" target="_blank" rel="noopener">close()</a> method on the SQL statement is called which releases the resources.</p>
 </div>
 <div class="paragraph">
 <p>Create, execute and release 100,000 update statements:</p>
@@ -2770,7 +2771,7 @@ User user = jdbi.withHandle(handle -&gt; { <i class="conum" data-value="2"></i><
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-This code that works well as long as nothing goes awry! If an unmanaged SQL statement operation fails halfway through (e.g. with a connection timeout or a database problem), then <strong>resources will not be cleanup up by Jdbi</strong>. This may lead to resource leaks that are difficult to find or reproduce. Some JDBC drivers will also clean up resources that they hand out (such as <a href="https://docs.oracle.com/javase/8/docs/api/java/sql/PreparedStatement.html" target="_blank" rel="noopener">JDBC statements </a> or <a href="https://docs.oracle.com/javase/8/docs/api/java/sql/ResultSet.html" target="_blank" rel="noopener">ResultSet</a> objects) when a connection is closed. In these situations, resources may be released eventually when the handle is closed (which also closes the JDBC connection). This is highly driver dependent and should not be relied upon.
+This code that works well as long as nothing goes awry! If an unmanaged SQL statement operation fails halfway through (e.g. with a connection timeout or a database problem), then <strong>resources will not be cleanup up by Jdbi</strong>. This may lead to resource leaks that are difficult to find or reproduce. Some JDBC drivers will also clean up resources that they hand out (such as <a href="https://docs.oracle.com/javase/11/docs/api/java/sql/PreparedStatement.html" target="_blank" rel="noopener">JDBC statements </a> or <a href="https://docs.oracle.com/javase/11/docs/api/java/sql/ResultSet.html" target="_blank" rel="noopener">ResultSet</a> objects) when a connection is closed. In these situations, resources may be released eventually when the handle is closed (which also closes the JDBC connection). This is highly driver dependent and should not be relied upon.
 </td>
 </tr>
 </table>
@@ -2797,10 +2798,10 @@ Just using an iterator or stream may not be enough to actually stream data witho
 <p>For these use cases, Jdbi offers the <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#stream()" target="_blank" rel="noopener">stream()</a> and <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#iterator()" target="_blank" rel="noopener">iterator()</a> methods, which return lazy-loading objects that return data from the database row by row. These objects are stateful and must be managed.</p>
 </div>
 <div class="paragraph">
-<p>The <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html" target="_blank" rel="noopener">stream</a> and <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Iterator.html" target="_blank" rel="noopener">iterator</a> objects provided by Jdbi will release all their resources when the data stream from the database is exhausted or when an instance is explicitly closed. Standard Java <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html" target="_blank" rel="noopener">Streams</a> support the <em>try-with-resources</em> pattern directly; the <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#iterator()" target="_blank" rel="noopener">iterator()</a> method returns a <a href="./apidocs/org/jdbi/v3/core/result/ResultIterator.html" target="_blank" rel="noopener">ResultIterator</a> object which extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/AutoCloseable.html" target="_blank" rel="noopener">AutoCloseable</a>.</p>
+<p>The <a href="https://docs.oracle.com/javase/11/docs/api/java/util/stream/Stream.html" target="_blank" rel="noopener">stream</a> and <a href="https://docs.oracle.com/javase/11/docs/api/java/util/Iterator.html" target="_blank" rel="noopener">iterator</a> objects provided by Jdbi will release all their resources when the data stream from the database is exhausted or when an instance is explicitly closed. Standard Java <a href="https://docs.oracle.com/javase/11/docs/api/java/util/stream/Stream.html" target="_blank" rel="noopener">Streams</a> support the <em>try-with-resources</em> pattern directly; the <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#iterator()" target="_blank" rel="noopener">iterator()</a> method returns a <a href="./apidocs/org/jdbi/v3/core/result/ResultIterator.html" target="_blank" rel="noopener">ResultIterator</a> object which extends <a href="https://docs.oracle.com/javase/11/docs/api/java/lang/AutoCloseable.html" target="_blank" rel="noopener">AutoCloseable</a>.</p>
 </div>
 <div class="paragraph">
-<p>When using a stream or iterator, <strong>either</strong> the statement <strong>or</strong> the result object <strong>must</strong> be managed. Calling <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/AutoCloseable.html#close--" target="_blank" rel="noopener">close()</a> on either the statement or the stream/iterator will terminate the operation and release all resources.</p>
+<p>When using a stream or iterator, <strong>either</strong> the statement <strong>or</strong> the result object <strong>must</strong> be managed. Calling <a href="https://docs.oracle.com/javase/11/docs/api/java/lang/AutoCloseable.html#close--" target="_blank" rel="noopener">close()</a> on either the statement or the stream/iterator will terminate the operation and release all resources.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3148,7 +3149,7 @@ Mixing named and positional arguments is not allowed, as it would become confusi
 <code>OffsetDateTime</code>, <code>ZonedDateTime</code>, and <code>ZoneId</code></p>
 </li>
 <li>
-<p>java.util: <code>Date</code>, <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html" target="_blank" rel="noopener">Optional</a> (around any other supported type), and <code>UUID</code></p>
+<p>java.util: <code>Date</code>, <a href="https://docs.oracle.com/javase/11/docs/api/java/util/Optional.html" target="_blank" rel="noopener">Optional</a> (around any other supported type), and <code>UUID</code></p>
 </li>
 <li>
 <p><code>java.util.Collection</code> and Java arrays (stored as SQL arrays).
@@ -3194,7 +3195,7 @@ More on that later.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>You can bind multiple arguments at once from the entries of a <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html" target="_blank" rel="noopener">Map</a>:</p>
+<p>You can bind multiple arguments at once from the entries of a <a href="https://docs.oracle.com/javase/11/docs/api/java/util/Map.html" target="_blank" rel="noopener">Map</a>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3208,7 +3209,7 @@ handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><s
 </div>
 </div>
 <div class="paragraph">
-<p>You can bind multiple values at once, from either a <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html" target="_blank" rel="noopener">List&lt;T&gt;</a> or a vararg:</p>
+<p>You can bind multiple values at once, from either a <a href="https://docs.oracle.com/javase/11/docs/api/java/util/List.html" target="_blank" rel="noopener">List&lt;T&gt;</a> or a vararg:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3469,9 +3470,9 @@ the <a href="./apidocs/org/jdbi/v3/core/argument/ArgumentFactory.html" target="_
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>The JDBC <a href="https://docs.oracle.com/javase/8/docs/api/java/sql/Types.html" target="_blank" rel="noopener">SQL type constant</a> to use when
+<td>The JDBC <a href="https://docs.oracle.com/javase/11/docs/api/java/sql/Types.html" target="_blank" rel="noopener">SQL type constant</a> to use when
  binding UUIDs. Jdbi needs this in order to bind UUID values of <code>null</code>. See
-<a href="https://docs.oracle.com/javase/8/docs/api/java/sql/PreparedStatement.html#setNull-int-int-" target="_blank" rel="noopener">PreparedStatement.setNull(int,int)</a></td>
+<a href="https://docs.oracle.com/javase/11/docs/api/java/sql/PreparedStatement.html#setNull-int-int-" target="_blank" rel="noopener">PreparedStatement.setNull(int,int)</a></td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
@@ -3510,7 +3511,7 @@ to convert a bound object into an <code>Argument</code>.</p>
 <div class="paragraph">
 <p>Later, when the statement is executed, each <code>Argument</code> located during binding
 is applied to the JDBC
-<a href="https://docs.oracle.com/javase/8/docs/api/java/sql/PreparedStatement.html" target="_blank" rel="noopener">PreparedStatement</a>.</p>
+<a href="https://docs.oracle.com/javase/11/docs/api/java/sql/PreparedStatement.html" target="_blank" rel="noopener">PreparedStatement</a>.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -3554,7 +3555,7 @@ two types of mappers:</p>
 <div class="paragraph">
 <p><a href="./apidocs/org/jdbi/v3/core/mapper/RowMapper.html" target="_blank" rel="noopener">RowMapper</a> is a functional
 interface, which maps the current row of a JDBC
-<a href="https://docs.oracle.com/javase/8/docs/api/java/sql/ResultSet.html" target="_blank" rel="noopener">ResultSet</a> to a mapped type. Row
+<a href="https://docs.oracle.com/javase/11/docs/api/java/sql/ResultSet.html" target="_blank" rel="noopener">ResultSet</a> to a mapped type. Row
 mappers are invoked once for each row in the result set.</p>
 </div>
 <div class="paragraph">
@@ -3579,7 +3580,7 @@ There are three different types being used in the above example. <a href="./apid
 returned by <code>Handle.createQuery()</code>, implements the <code>ResultBearing</code> interface.
 The <code>ResultBearing.map()</code> method takes a <a href="./apidocs/org/jdbi/v3/core/mapper/RowMapper.html" target="_blank" rel="noopener">RowMapper&lt;T&gt;</a> and returns a
 <code>ResultIterable&lt;T&gt;</code>. Finally, <code>ResultBearing.list()</code> collects each row in the
-result set into a <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html" target="_blank" rel="noopener">List&lt;T&gt;</a>.
+result set into a <a href="https://docs.oracle.com/javase/11/docs/api/java/util/List.html" target="_blank" rel="noopener">List&lt;T&gt;</a>.
 </td>
 </tr>
 </table>
@@ -3713,7 +3714,7 @@ mappers registered for both <code>L</code> and <code>R</code>.</p>
 <div class="paragraph">
 <p>The <code>build</code> method accepts a mapped type, and a config registry. It may return
 <code>Optional.of(someMapper)</code> if it knows how to map that type, or
-<a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html#empty--" target="_blank" rel="noopener">Optional.empty()</a> otherwise.</p>
+<a href="https://docs.oracle.com/javase/11/docs/api/java/util/Optional.html#empty--" target="_blank" rel="noopener">Optional.empty()</a> otherwise.</p>
 </div>
 <div class="paragraph">
 <p>First we check whether the mapped type is a <code>Pair</code>:</p>
@@ -3788,9 +3789,9 @@ and right types.</p>
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-You may have noticed that although this method can return <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html" target="_blank" rel="noopener">Optional</a>, we are
+You may have noticed that although this method can return <a href="https://docs.oracle.com/javase/11/docs/api/java/util/Optional.html" target="_blank" rel="noopener">Optional</a>, we are
 throwing an exception if we can&#8217;t find the left- or right-hand mappers. We have
-found this to be a best practice: return <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html#empty--" target="_blank" rel="noopener">Optional.empty()</a> if the factory
+found this to be a best practice: return <a href="https://docs.oracle.com/javase/11/docs/api/java/util/Optional.html#empty--" target="_blank" rel="noopener">Optional.empty()</a> if the factory
 knows nothing about the mapped type (<code>Pair</code>, in this case). If it knows the
 mapped type but is missing some configuration to make it work (e.g. mappers not
 registered for <code>L</code> or <code>R</code> parameter) it is more helpful to throw an exception
@@ -3877,7 +3878,7 @@ The <code>GenericType</code> utility class is discussed in <a href="#_working_wi
 <div class="paragraph">
 <p><a href="./apidocs/org/jdbi/v3/core/mapper/ColumnMapper.html" target="_blank" rel="noopener">ColumnMapper</a> is a functional
 interface, which maps a column from the current row of a JDBC
-<a href="https://docs.oracle.com/javase/8/docs/api/java/sql/ResultSet.html" target="_blank" rel="noopener">ResultSet</a> to a mapped type.</p>
+<a href="https://docs.oracle.com/javase/11/docs/api/java/sql/ResultSet.html" target="_blank" rel="noopener">ResultSet</a> to a mapped type.</p>
 </div>
 <div class="paragraph">
 <p>Since <a href="./apidocs/org/jdbi/v3/core/mapper/ColumnMapper.html" target="_blank" rel="noopener">ColumnMapper</a> is a functional interface, they can be provided inline to a query using a lambda expression:</p>
@@ -4055,10 +4056,10 @@ mapper is registered for <code>T</code>.</p>
 <div class="paragraph">
 <p>The <code>build</code> method accepts a mapped type, and a config registry. It may return
 <code>Optional.of(someMapper)</code> if it knows how to map that type, or
-<a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html#empty--" target="_blank" rel="noopener">Optional.empty()</a> otherwise.</p>
+<a href="https://docs.oracle.com/javase/11/docs/api/java/util/Optional.html#empty--" target="_blank" rel="noopener">Optional.empty()</a> otherwise.</p>
 </div>
 <div class="paragraph">
-<p>First, we check whether the mapped type is an <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html" target="_blank" rel="noopener">Optional</a>:</p>
+<p>First, we check whether the mapped type is an <a href="https://docs.oracle.com/javase/11/docs/api/java/util/Optional.html" target="_blank" rel="noopener">Optional</a>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4123,10 +4124,10 @@ type.</p>
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-You may have noticed that although this method can return <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html" target="_blank" rel="noopener">Optional</a>, we&#8217;re
+You may have noticed that although this method can return <a href="https://docs.oracle.com/javase/11/docs/api/java/util/Optional.html" target="_blank" rel="noopener">Optional</a>, we&#8217;re
 throwing an exception if we can&#8217;t find a mapper for the embedded type. We&#8217;ve
-found this to be a best practice: return <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html#empty--" target="_blank" rel="noopener">Optional.empty()</a> if the factory knows
-nothing about the mapped type (<a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html" target="_blank" rel="noopener">Optional</a>, in this case). If it knows the mapped
+found this to be a best practice: return <a href="https://docs.oracle.com/javase/11/docs/api/java/util/Optional.html#empty--" target="_blank" rel="noopener">Optional.empty()</a> if the factory knows
+nothing about the mapped type (<a href="https://docs.oracle.com/javase/11/docs/api/java/util/Optional.html" target="_blank" rel="noopener">Optional</a>, in this case). If it knows the mapped
 type but is missing some configuration to make it work (e.g. no mapper
 registered for tye <code>T</code> parameter) it is more helpful to throw an exception with
 an informative message, so users can diagnose <em>why</em> the mapper is not working as
@@ -4335,7 +4336,7 @@ When binding object properties (e.g. with <code>bindBean()</code>), bind the pro
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-To allow Jdbi to discover the <code>@Nullable</code> annotation at runtime, it must use <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/annotation/RetentionPolicy.html#RUNTIME" target="_blank" rel="noopener">RetentionPolicy.RUNTIME</a>.
+To allow Jdbi to discover the <code>@Nullable</code> annotation at runtime, it must use <a href="https://docs.oracle.com/javase/11/docs/api/java/lang/annotation/RetentionPolicy.html#RUNTIME" target="_blank" rel="noopener">RetentionPolicy.RUNTIME</a>.
 When in doubt, prefer the <a href="https://jakarta.ee/specifications/platform/10/apidocs/jakarta/annotation/nullable" target="_blank" rel="noopener">Jakarta variant</a>!.
 </td>
 </tr>
@@ -4940,7 +4941,7 @@ values per key.</p>
 <a href="./apidocs/org/jdbi/v3/guava/GuavaPlugin.html" target="_blank" rel="noopener">GuavaPlugin</a> into Jdbi.</p>
 </div>
 <div class="paragraph">
-<p>Then, simply ask for a <code>Multimap</code> instead of a <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html" target="_blank" rel="noopener">Map</a>:</p>
+<p>Then, simply ask for a <code>Multimap</code> instead of a <a href="https://docs.oracle.com/javase/11/docs/api/java/util/Map.html" target="_blank" rel="noopener">Map</a>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4972,7 +4973,7 @@ container type signature. In the above example, the element type of
 <p>Obtain a mapper for that element type from the mapping registry.</p>
 </li>
 <li>
-<p>Obtain a <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Collector.html" target="_blank" rel="noopener">Collector</a> for the
+<p>Obtain a <a href="https://docs.oracle.com/javase/11/docs/api/java/util/stream/Collector.html" target="_blank" rel="noopener">Collector</a> for the
 container type from the <code>CollectorFactory</code>.</p>
 </li>
 <li>
@@ -5200,7 +5201,7 @@ Counter restoredCounter = jdbi.withHandle(h -&gt; h.createQuery(<span class="str
 <h2 id="_results"><a class="anchor" href="#_results"></a><a class="link" href="#_results">9. Results</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>A number of operations return data from the database through a JDBC <a href="https://docs.oracle.com/javase/8/docs/api/java/sql/ResultSet.html" target="_blank" rel="noopener">ResultSet</a>:</p>
+<p>A number of operations return data from the database through a JDBC <a href="https://docs.oracle.com/javase/11/docs/api/java/sql/ResultSet.html" target="_blank" rel="noopener">ResultSet</a>:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -5216,14 +5217,14 @@ Counter restoredCounter = jdbi.withHandle(h -&gt; h.createQuery(<span class="str
 </ul>
 </div>
 <div class="paragraph">
-<p>The JDBC <a href="https://docs.oracle.com/javase/8/docs/api/java/sql/ResultSet.html" target="_blank" rel="noopener">ResultSet</a> class can do simple mapping to Java primitives
+<p>The JDBC <a href="https://docs.oracle.com/javase/11/docs/api/java/sql/ResultSet.html" target="_blank" rel="noopener">ResultSet</a> class can do simple mapping to Java primitives
 and built in classes, but the API is often cumbersome to use.</p>
 </div>
 <div class="paragraph">
 <p>Jdbi offers many ways to process and map these responses onto other objects using configurable mapping, including the ability to register custom mappers for rows  and columns.</p>
 </div>
 <div class="paragraph">
-<p>A <a href="./apidocs/org/jdbi/v3/core/mapper/RowMapper.html" target="_blank" rel="noopener">RowMapper</a> converts a row of a <a href="https://docs.oracle.com/javase/8/docs/api/java/sql/ResultSet.html" target="_blank" rel="noopener">ResultSet</a> into a result object.</p>
+<p>A <a href="./apidocs/org/jdbi/v3/core/mapper/RowMapper.html" target="_blank" rel="noopener">RowMapper</a> converts a row of a <a href="https://docs.oracle.com/javase/11/docs/api/java/sql/ResultSet.html" target="_blank" rel="noopener">ResultSet</a> into a result object.</p>
 </div>
 <div class="paragraph">
 <p>A <a href="./apidocs/org/jdbi/v3/core/mapper/ColumnMapper.html" target="_blank" rel="noopener">ColumnMapper</a> converts a single column&#8217;s value into a Java object. It can be
@@ -5234,8 +5235,8 @@ build more complex <a href="./apidocs/org/jdbi/v3/core/mapper/RowMapper.html" ta
 <p>The mapper is selected based on the declared result type of your query.</p>
 </div>
 <div class="paragraph">
-<p>Jdbi iterates over the rows in the <a href="https://docs.oracle.com/javase/8/docs/api/java/sql/ResultSet.html" target="_blank" rel="noopener">ResultSet</a> and presents the mapped results
-to you in a container such as a <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html" target="_blank" rel="noopener">List</a>, <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html" target="_blank" rel="noopener">Stream</a>, <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html" target="_blank" rel="noopener">Optional</a>, or <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Iterator.html" target="_blank" rel="noopener">Iterator</a>.</p>
+<p>Jdbi iterates over the rows in the <a href="https://docs.oracle.com/javase/11/docs/api/java/sql/ResultSet.html" target="_blank" rel="noopener">ResultSet</a> and presents the mapped results
+to you in a container such as a <a href="https://docs.oracle.com/javase/11/docs/api/java/util/List.html" target="_blank" rel="noopener">List</a>, <a href="https://docs.oracle.com/javase/11/docs/api/java/util/stream/Stream.html" target="_blank" rel="noopener">Stream</a>, <a href="https://docs.oracle.com/javase/11/docs/api/java/util/Optional.html" target="_blank" rel="noopener">Optional</a>, or <a href="https://docs.oracle.com/javase/11/docs/api/java/util/Iterator.html" target="_blank" rel="noopener">Iterator</a>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5277,7 +5278,7 @@ to you in a container such as a <a href="https://docs.oracle.com/javase/8/docs/a
 </div>
 </div>
 <div class="paragraph">
-<p>Jdbi operations that involve a <a href="https://docs.oracle.com/javase/8/docs/api/java/sql/ResultSet.html" target="_blank" rel="noopener">ResultSet</a> are defined and executed in multiple steps:</p>
+<p>Jdbi operations that involve a <a href="https://docs.oracle.com/javase/11/docs/api/java/sql/ResultSet.html" target="_blank" rel="noopener">ResultSet</a> are defined and executed in multiple steps:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5339,10 +5340,10 @@ to you in a container such as a <a href="https://docs.oracle.com/javase/8/docs/a
 <p><code>map()</code> operations using a RowMapper, ColumnMapper or RowViewMapper instance.</p>
 </li>
 <li>
-<p><code>mapTo()</code> operations using a type definition. The matching mapper is retrieved from the RowMappers registry. Supports <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Type.html" target="_blank" rel="noopener">regular Java Types</a>, <a href="#_generictype">Generic Types</a> and <a href="#_qualified_types">Qualified Types</a>.</p>
+<p><code>mapTo()</code> operations using a type definition. The matching mapper is retrieved from the RowMappers registry. Supports <a href="https://docs.oracle.com/javase/11/docs/api/java/lang/reflect/Type.html" target="_blank" rel="noopener">regular Java Types</a>, <a href="#_generictype">Generic Types</a> and <a href="#_qualified_types">Qualified Types</a>.</p>
 </li>
 <li>
-<p><code>mapToMap()</code> operations where the key is the (lower-cased) column name and the value is the column value. Supports <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Type.html" target="_blank" rel="noopener">regular Java Types</a>, <a href="#_generictype">Generic Types</a> and <a href="#_qualified_types">Qualified Types</a> for the values. The value mapper is retrieved from the RowMappers registry.</p>
+<p><code>mapToMap()</code> operations where the key is the (lower-cased) column name and the value is the column value. Supports <a href="https://docs.oracle.com/javase/11/docs/api/java/lang/reflect/Type.html" target="_blank" rel="noopener">regular Java Types</a>, <a href="#_generictype">Generic Types</a> and <a href="#_qualified_types">Qualified Types</a> for the values. The value mapper is retrieved from the RowMappers registry.</p>
 </li>
 <li>
 <p><code>mapToBean()</code> maps to a mutable bean instance with that provides setters to set values. For each column name, the corresponding setter is called.</p>
@@ -5400,7 +5401,7 @@ same as mapTo(User.class).collect(toList())</p>
 <p>A <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html" target="_blank" rel="noopener">ResultIterable</a> represents a result set which has been mapped to a specific type, e.g. a <code>ResultIterable&lt;User&gt;</code>.</p>
 </div>
 <div class="paragraph">
-<p>Almost all operations on the <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html" target="_blank" rel="noopener">ResultIterable</a> interface are <em>terminal</em> operations. When they finish, they close and release all resources, especially the <a href="https://docs.oracle.com/javase/8/docs/api/java/sql/ResultSet.html" target="_blank" rel="noopener">ResultSet</a> and <a href="https://docs.oracle.com/javase/8/docs/api/java/sql/PreparedStatement.html" target="_blank" rel="noopener">PreparedStatement</a> objects.</p>
+<p>Almost all operations on the <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html" target="_blank" rel="noopener">ResultIterable</a> interface are <em>terminal</em> operations. When they finish, they close and release all resources, especially the <a href="https://docs.oracle.com/javase/11/docs/api/java/sql/ResultSet.html" target="_blank" rel="noopener">ResultSet</a> and <a href="https://docs.oracle.com/javase/11/docs/api/java/sql/PreparedStatement.html" target="_blank" rel="noopener">PreparedStatement</a> objects.</p>
 </div>
 <div class="paragraph">
 <p>See <a href="#statement-resource-management">Statement resource management</a> for more details on how resources are released and should be managed.</p>
@@ -5438,7 +5439,7 @@ multiple rows are encountered, it will throw <code>IllegalStateException</code>.
 </div>
 <div class="paragraph">
 <p><code>ResultIterable.findOne()</code> returns an <code>Optional&lt;T&gt;</code> of the only row in the
-result set, or <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html#empty--" target="_blank" rel="noopener">Optional.empty()</a> if no rows are returned.</p>
+result set, or <a href="https://docs.oracle.com/javase/11/docs/api/java/util/Optional.html#empty--" target="_blank" rel="noopener">Optional.empty()</a> if no rows are returned.</p>
 </div>
 <div class="paragraph">
 <p><code>ResultIterable.first()</code> returns the first row in the result set. If zero
@@ -5452,10 +5453,10 @@ any.</p>
 <div class="sect3">
 <h4 id="_stream"><a class="anchor" href="#_stream"></a><a class="link" href="#_stream">9.2.2. Stream</a></h4>
 <div class="paragraph">
-<p><strong>Stream</strong> integration allows you to use a <a href="./apidocs/org/jdbi/v3/core/mapper/RowMapper.html" target="_blank" rel="noopener">RowMapper</a> to adapt a <a href="https://docs.oracle.com/javase/8/docs/api/java/sql/ResultSet.html" target="_blank" rel="noopener">ResultSet</a> into  the Java Streams framework. The stream will lazily fetch rows from the database as necessary.</p>
+<p><strong>Stream</strong> integration allows you to use a <a href="./apidocs/org/jdbi/v3/core/mapper/RowMapper.html" target="_blank" rel="noopener">RowMapper</a> to adapt a <a href="https://docs.oracle.com/javase/11/docs/api/java/sql/ResultSet.html" target="_blank" rel="noopener">ResultSet</a> into  the Java Streams framework. The stream will lazily fetch rows from the database as necessary.</p>
 </div>
 <div class="paragraph">
-<p>The <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#stream()" target="_blank" rel="noopener">stream()</a> method returns a <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html" target="_blank" rel="noopener">Stream&lt;T&gt;</a>. This is not a terminal operation and the stream must be closed to release any database resources held. See <a href="#resources-with-streams-iterators">Resources with Streams and Iterators</a> for more details.</p>
+<p>The <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#stream()" target="_blank" rel="noopener">stream()</a> method returns a <a href="https://docs.oracle.com/javase/11/docs/api/java/util/stream/Stream.html" target="_blank" rel="noopener">Stream&lt;T&gt;</a>. This is not a terminal operation and the stream must be closed to release any database resources held. See <a href="#resources-with-streams-iterators">Resources with Streams and Iterators</a> for more details.</p>
 </div>
 <div class="paragraph">
 <p>The <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#withStream(org.jdbi.v3.core.result.StreamCallback)" target="_blank" rel="noopener">withStream()</a> and <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.htmll#useStream(org.jdbi.v3.core.result.StreamConsumer)" target="_blank" rel="noopener">useStream()</a> methods pass the Stream into a callback.</p>
@@ -5527,12 +5528,12 @@ single remains, and then return that.</p>
 <div class="sect3">
 <h4 id="_resultsetscanner"><a class="anchor" href="#_resultsetscanner"></a><a class="link" href="#_resultsetscanner">9.2.6. ResultSetScanner</a></h4>
 <div class="paragraph">
-<p>The <strong>ResultSetScanner</strong> interface accepts a lazily-provided <a href="https://docs.oracle.com/javase/8/docs/api/java/sql/ResultSet.html" target="_blank" rel="noopener">ResultSet</a>
+<p>The <strong>ResultSetScanner</strong> interface accepts a lazily-provided <a href="https://docs.oracle.com/javase/11/docs/api/java/sql/ResultSet.html" target="_blank" rel="noopener">ResultSet</a>
 and produces the result Jdbi returns from statement execution.</p>
 </div>
 <div class="paragraph">
 <p>Most of the above operations are implemented in terms of <strong>ResultSetScanner</strong>.
-The Scanner has ownership of the <a href="https://docs.oracle.com/javase/8/docs/api/java/sql/ResultSet.html" target="_blank" rel="noopener">ResultSet</a> and may advance or seek it.</p>
+The Scanner has ownership of the <a href="https://docs.oracle.com/javase/11/docs/api/java/sql/ResultSet.html" target="_blank" rel="noopener">ResultSet</a> and may advance or seek it.</p>
 </div>
 <div class="paragraph">
 <p>The return value ends up being the final result of statement execution.</p>
@@ -5647,7 +5648,7 @@ columns, whereas the <code>Phone</code> mapper will only map <code>p_id</code>, 
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Use an empty <a href="https://docs.oracle.com/javase/8/docs/api/java/util/LinkedHashMap.html" target="_blank" rel="noopener">LinkedHashMap</a>
+<td>Use an empty <a href="https://docs.oracle.com/javase/11/docs/api/java/util/LinkedHashMap.html" target="_blank" rel="noopener">LinkedHashMap</a>
 as the accumulator seed, mapped by contact ID. <code>LinkedHashMap</code> is a good
 accumulator when selecting multiple master records, since it has fast
 storage and lookup while preserving insertion order (which helps honor
@@ -5676,7 +5677,7 @@ contact ID keys. So we call <code>Map.values()</code> to get a <code>Collection&
 </tr>
 <tr>
 <td><i class="conum" data-value="7"></i><b>7</b></td>
-<td>Collect the contacts into a <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html" target="_blank" rel="noopener">List&lt;Contact&gt;</a>.</td>
+<td>Collect the contacts into a <a href="https://docs.oracle.com/javase/11/docs/api/java/util/List.html" target="_blank" rel="noopener">List&lt;Contact&gt;</a>.</td>
 </tr>
 </table>
 </div>
@@ -5728,7 +5729,7 @@ yield the result objects in the same order they were inserted.</td>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
 <td>This <code>reduceRows()</code> invocation produces a <code>Stream&lt;Contact&gt;</code> (i.e. from
 <code>map.values().stream()</code>. In this example, we collect the elements into a
-list, but we could call any <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html" target="_blank" rel="noopener">Stream</a> method here.</td>
+list, but we could call any <a href="https://docs.oracle.com/javase/11/docs/api/java/util/stream/Stream.html" target="_blank" rel="noopener">Stream</a> method here.</td>
 </tr>
 </table>
 </div>
@@ -5768,7 +5769,7 @@ to map the <code>my_value</code> column of the current row to a <code>MyValueTyp
 <div class="paragraph">
 <p><a href="./apidocs/org/jdbi/v3/core/result/ResultBearing.html#reduceResultSet-U-org.jdbi.v3.core.result.ResultSetAccumulator-" target="_blank" rel="noopener">ResultBearing.reduceResultSet()</a>
 is a low-level API similar to <code>reduceRows()</code>, except it provides direct access
-to the JDBC <a href="https://docs.oracle.com/javase/8/docs/api/java/sql/ResultSet.html" target="_blank" rel="noopener">ResultSet</a> instead of a <code>RowView</code> for each row.</p>
+to the JDBC <a href="https://docs.oracle.com/javase/11/docs/api/java/sql/ResultSet.html" target="_blank" rel="noopener">ResultSet</a> instead of a <code>RowView</code> for each row.</p>
 </div>
 <div class="paragraph">
 <p>This method can provide superior performance compared to <code>reduceRows()</code>, at the
@@ -6146,7 +6147,7 @@ configuration objects.</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">untypedNullArgument</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/core/argument/Argument.html" target="_blank" rel="noopener">Argument</a></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/core/argument/NullArgument.html" target="_blank" rel="noopener">NullArgument</a> using <a href="https://docs.oracle.com/javase/8/docs/api/java/sql/Types.html#OTHER" target="_blank" rel="noopener">Types.OTHER</a>.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/core/argument/NullArgument.html" target="_blank" rel="noopener">NullArgument</a> using <a href="https://docs.oracle.com/javase/11/docs/api/java/sql/Types.html#OTHER" target="_blank" rel="noopener">Types.OTHER</a>.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">This argument instance is invoked when a <code>null</code> value is assigned to an argument whose type is unknown (this can happen in some corner cases).</p></td>
 </tr>
 <tr>
@@ -6189,7 +6190,7 @@ configuration objects.</p>
 <td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>true</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Whether Jdbi is allowed to create <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Proxy.html" target="_blank" rel="noopener">proxy </a> instances for classes (as extension and on-demand reference). This is useful for debugging when using the generator to create java classes for sql objects.</p>
+<p>Whether Jdbi is allowed to create <a href="https://docs.oracle.com/javase/11/docs/api/java/lang/reflect/Proxy.html" target="_blank" rel="noopener">proxy </a> instances for classes (as extension and on-demand reference). This is useful for debugging when using the generator to create java classes for sql objects.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -6211,7 +6212,7 @@ transaction is rolled back and an exception is thrown when the Handle is closed.
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/core/mapper/MapMappers.html" target="_blank" rel="noopener">MapMappers</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">caseChange</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/UnaryOperator.html" target="_blank" rel="noopener">UnaryOperator&lt;String&gt;</a></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://docs.oracle.com/javase/11/docs/api/java/util/function/UnaryOperator.html" target="_blank" rel="noopener">UnaryOperator&lt;String&gt;</a></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/core/mapper/CaseStrategy.html#LOCALE_LOWER" target="_blank" rel="noopener">LOCALE_LOWER</a></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Defines the strategy for mapping the database column names to key names. Available strategies are:</p>
@@ -6245,13 +6246,13 @@ transaction is rolled back and an exception is thrown when the Handle is closed.
 </tbody>
 </table>
 <div class="paragraph">
-<p>Custom strategies can be set by implementing <a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/UnaryOperator.html" target="_blank" rel="noopener">UnaryOperator&lt;String&gt;</a> with custom code.</p>
+<p>Custom strategies can be set by implementing <a href="https://docs.oracle.com/javase/11/docs/api/java/util/function/UnaryOperator.html" target="_blank" rel="noopener">UnaryOperator&lt;String&gt;</a> with custom code.</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" rowspan="2"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/core/mapper/reflect/ReflectionMappers.html" target="_blank" rel="noopener">ReflectionMappers</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">caseChange</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/UnaryOperator.html" target="_blank" rel="noopener">UnaryOperator&lt;String&gt;</a></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://docs.oracle.com/javase/11/docs/api/java/util/function/UnaryOperator.html" target="_blank" rel="noopener">UnaryOperator&lt;String&gt;</a></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/core/mapper/CaseStrategy.html#LOCALE_LOWER" target="_blank" rel="noopener">LOCALE_LOWER</a></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Defines the strategy for mapping the database column names to key names. Available strategies are:</p>
@@ -6285,7 +6286,7 @@ transaction is rolled back and an exception is thrown when the Handle is closed.
 </tbody>
 </table>
 <div class="paragraph">
-<p>Custom strategies can be set by implementing <a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/UnaryOperator.html" target="_blank" rel="noopener">UnaryOperator&lt;String&gt;</a> with custom code.</p>
+<p>Custom strategies can be set by implementing <a href="https://docs.oracle.com/javase/11/docs/api/java/util/function/UnaryOperator.html" target="_blank" rel="noopener">UnaryOperator&lt;String&gt;</a> with custom code.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -6314,13 +6315,13 @@ transaction is rolled back and an exception is thrown when the Handle is closed.
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">onFailure</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/Consumer.html" target="_blank" rel="noopener">Consumer&lt;List&lt;Exception&gt;&gt;</a></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://docs.oracle.com/javase/11/docs/api/java/util/function/Consumer.html" target="_blank" rel="noopener">Consumer&lt;List&lt;Exception&gt;&gt;</a></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">&lt;unset&gt;</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Is called whenever a serialization failure occurs. Can be used e.g. for logging.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">onSuccess</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/Consumer.html" target="_blank" rel="noopener">Consumer&lt;List&lt;Exception&gt;&gt;</a></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://docs.oracle.com/javase/11/docs/api/java/util/function/Consumer.html" target="_blank" rel="noopener">Consumer&lt;List&lt;Exception&gt;&gt;</a></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">&lt;unset&gt;</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Is called once a transaction successfully finishes with any exception that has happened during the transaction execution.</p></td>
 </tr>
@@ -6346,11 +6347,11 @@ transaction is rolled back and an exception is thrown when the Handle is closed.
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/core/array/SqlArrayArgumentStrategy.html#SQL_ARRAY" target="_blank" rel="noopener">SQL_ARRAY</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">create a SQL array using <a href="https://docs.oracle.com/javase/8/docs/api/java/sql/Connection.html#createArrayOf-java.lang.String-java.lang.Object:A-" target="_blank" rel="noopener">Connection#createArrayOf</a> and call <a href="https://docs.oracle.com/javase/8/docs/api/java/sql/PreparedStatement.html#setArray-int-java.sql.Array-" target="_blank" rel="noopener">PreparedStatement#setArray</a>. This is the default and any modern JDBC driver should support it.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">create a SQL array using <a href="https://docs.oracle.com/javase/11/docs/api/java/sql/Connection.html#createArrayOf-java.lang.String-java.lang.Object:A-" target="_blank" rel="noopener">Connection#createArrayOf</a> and call <a href="https://docs.oracle.com/javase/11/docs/api/java/sql/PreparedStatement.html#setArray-int-java.sql.Array-" target="_blank" rel="noopener">PreparedStatement#setArray</a>. This is the default and any modern JDBC driver should support it.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/core/array/SqlArrayArgumentStrategy.html#OBJECT_ARRAY" target="_blank" rel="noopener">OBJECT_ARRAY</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">call <a href="https://docs.oracle.com/javase/8/docs/api/java/sql/PreparedStatement.html#setObject-int-java.lang.Object-" target="_blank" rel="noopener">PreparedStatement#setObject</a> and assume that the driver can handle this.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">call <a href="https://docs.oracle.com/javase/11/docs/api/java/sql/PreparedStatement.html#setObject-int-java.lang.Object-" target="_blank" rel="noopener">PreparedStatement#setObject</a> and assume that the driver can handle this.</p></td>
 </tr>
 </tbody>
 </table></div></td>
@@ -6375,7 +6376,7 @@ If this setting is <code>true</code>, then statements are attached by default.</
 <td class="tableblock halign-left valign-top"><p class="tableblock">queryTimeout</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">Integer</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">&lt;unset&gt;</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the query timeout value in seconds. This value is used to call <a href="https://docs.oracle.com/javase/8/docs/api/java/sql/Statement.html#setQueryTimeout-int-" target="_blank" rel="noopener">Statement#setQueryTimeout</a>. Enforcement of the timeout depends on the JDBC driver.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the query timeout value in seconds. This value is used to call <a href="https://docs.oracle.com/javase/11/docs/api/java/sql/Statement.html#setQueryTimeout-int-" target="_blank" rel="noopener">Statement#setQueryTimeout</a>. Enforcement of the timeout depends on the JDBC driver.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">sqlParser</p></td>
@@ -6569,7 +6570,7 @@ ignored.</p></td>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/sqlobject/customizer/TimestampedConfig.html" target="_blank" rel="noopener">TimestampedConfig</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">timezone</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://docs.oracle.com/javase/8/docs/api/java/time/ZoneId.html" target="_blank" rel="noopener">ZoneId</a></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://docs.oracle.com/javase/11/docs/api/java/time/ZoneId.html" target="_blank" rel="noopener">ZoneId</a></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">system zone id</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Sets the timezone for the <a href="./apidocs/org/jdbi/v3/sqlobject/customizer/Timestamped.html" target="_blank" rel="noopener">@Timestamped</a> annotation.</p>
@@ -6630,7 +6631,7 @@ ignored.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">deserializationView</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html" target="_blank" rel="noopener">Class&lt;?&gt;</a></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://docs.oracle.com/javase/11/docs/api/java/lang/Class.html" target="_blank" rel="noopener">Class&lt;?&gt;</a></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">&lt;unset&gt;</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Sets a view (see <a href="https://javadoc.io/static/com.fasterxml.jackson.core/jackson-annotations/2.10.5/com/fasterxml/jackson/annotation/JsonView.html" target="_blank" rel="noopener">@JsonView</a>) for deserialization. Can be used to limit the values read when mapping a json column.</p>
@@ -6638,7 +6639,7 @@ ignored.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">serializationView</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html" target="_blank" rel="noopener">Class&lt;?&gt;</a></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://docs.oracle.com/javase/11/docs/api/java/lang/Class.html" target="_blank" rel="noopener">Class&lt;?&gt;</a></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">&lt;unset&gt;</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Sets a view (see <a href="https://javadoc.io/static/com.fasterxml.jackson.core/jackson-annotations/2.10.5/com/fasterxml/jackson/annotation/JsonView.html" target="_blank" rel="noopener">@JsonView</a>) for serialization. Can be used to limit the values written when using a json argument.</p>
@@ -6646,7 +6647,7 @@ ignored.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">view</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html" target="_blank" rel="noopener">Class&lt;?&gt;</a></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://docs.oracle.com/javase/11/docs/api/java/lang/Class.html" target="_blank" rel="noopener">Class&lt;?&gt;</a></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">&lt;unset&gt;</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Sets a view (see <a href="https://javadoc.io/static/com.fasterxml.jackson.core/jackson-annotations/2.10.5/com/fasterxml/jackson/annotation/JsonView.html" target="_blank" rel="noopener">@JsonView</a>) for serialization and deserialization. Can be used to limit the values read and written by json arguments and mappers.</p>
@@ -7014,7 +7015,7 @@ an implementation based on the annotations and methods you declared.</p>
 <p>Use the <a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlUpdate.html" target="_blank" rel="noopener">@SqlUpdate</a> annotation for operations that modify data (i.e. inserts, updates, deletes).</p>
 </div>
 <div class="paragraph">
-<p>This is an example that uses <a href="https://docs.oracle.com/javase/8/docs/api/java/sql/PreparedStatement.html" target="_blank" rel="noopener">PreparedStatement</a> placeholders (<code>?</code>) for arguments:</p>
+<p>This is an example that uses <a href="https://docs.oracle.com/javase/11/docs/api/java/sql/PreparedStatement.html" target="_blank" rel="noopener">PreparedStatement</a> placeholders (<code>?</code>) for arguments:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -7446,7 +7447,7 @@ for operations with no result. These methods take a callback (or a lambda object
 </table>
 </div>
 <div class="paragraph">
-<p>This matches the <a href="https://docs.oracle.com/javase/8/docs/api/java/sql/PreparedStatement.html" target="_blank" rel="noopener">PreparedStatement</a> way of binding arguments to a statement. Jdbi binds the arguments as the correct types and convert them if necessary.</p>
+<p>This matches the <a href="https://docs.oracle.com/javase/11/docs/api/java/sql/PreparedStatement.html" target="_blank" rel="noopener">PreparedStatement</a> way of binding arguments to a statement. Jdbi binds the arguments as the correct types and convert them if necessary.</p>
 </div>
 </div>
 <div class="sect3">
@@ -7506,7 +7507,7 @@ This annotation requires you to use a template placeholder (using the <code>&lt;
 <div class="sect4">
 <h5 id="_bind_map_instances_with_bindmap"><a class="anchor" href="#_bind_map_instances_with_bindmap"></a><a class="link" href="#_bind_map_instances_with_bindmap">Bind map instances with @BindMap</a></h5>
 <div class="paragraph">
-<p>Entries from a <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html" target="_blank" rel="noopener">Map</a> can be bound using the <a href="./apidocs/org/jdbi/v3/sqlobject/customizer/BindMap.html" target="_blank" rel="noopener">@BindMap</a> annotation. Each entry from the map is bound as a named parameter using the map key as the name and the map value as the value. Jdbi will bind the values as the correct types and convert them if necessary:</p>
+<p>Entries from a <a href="https://docs.oracle.com/javase/11/docs/api/java/util/Map.html" target="_blank" rel="noopener">Map</a> can be bound using the <a href="./apidocs/org/jdbi/v3/sqlobject/customizer/BindMap.html" target="_blank" rel="noopener">@BindMap</a> annotation. Each entry from the map is bound as a named parameter using the map key as the name and the map value as the value. Jdbi will bind the values as the correct types and convert them if necessary:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -7731,7 +7732,7 @@ When using <a href="https://docs.oracle.com/en/java/javase/14/language/records.h
 <div class="sect4">
 <h5 id="_consumer_arguments"><a class="anchor" href="#_consumer_arguments"></a><a class="link" href="#_consumer_arguments">Consumer arguments</a></h5>
 <div class="paragraph">
-<p>In addition to the regular method arguments for a SQL Object method, it is possible to use a single <a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/Consumer.html" target="_blank" rel="noopener">Consumer&lt;T&gt;</a> or <a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/Function.html" target="_blank" rel="noopener">Function&lt;T&gt;</a> argument in addition to other arguments.</p>
+<p>In addition to the regular method arguments for a SQL Object method, it is possible to use a single <a href="https://docs.oracle.com/javase/11/docs/api/java/util/function/Consumer.html" target="_blank" rel="noopener">Consumer&lt;T&gt;</a> or <a href="https://docs.oracle.com/javase/11/docs/api/java/util/function/Function.html" target="_blank" rel="noopener">Function&lt;T&gt;</a> argument in addition to other arguments.</p>
 </div>
 <div class="paragraph">
 <p>A consumer argument is a special return type for SQL operations. They can be used to consume the results from a SQL operation with a callback instead of returning a value from the method.</p>
@@ -7740,7 +7741,7 @@ When using <a href="https://docs.oracle.com/en/java/javase/14/language/records.h
 <p>Any SQL operation method that wants to use a consumer argument <strong>must</strong> return <code>void</code>. It can declare only a single consumer argument, but can have additional regular method arguments. The consumer argument can be in any position in the argument list. .</p>
 </div>
 <div class="paragraph">
-<p>Unless the type <code>T</code> is a <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html" target="_blank" rel="noopener">Stream</a>, <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Iterator.html" target="_blank" rel="noopener">Iterator</a> or <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Iterable.html" target="_blank" rel="noopener">Iterable</a>, the consumer is executed once for each row in the result set. The static type of parameter <code>T</code> determines the row type.</p>
+<p>Unless the type <code>T</code> is a <a href="https://docs.oracle.com/javase/11/docs/api/java/util/stream/Stream.html" target="_blank" rel="noopener">Stream</a>, <a href="https://docs.oracle.com/javase/11/docs/api/java/util/Iterator.html" target="_blank" rel="noopener">Iterator</a> or <a href="https://docs.oracle.com/javase/11/docs/api/java/lang/Iterable.html" target="_blank" rel="noopener">Iterable</a>, the consumer is executed once for each row in the result set. The static type of parameter <code>T</code> determines the row type.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -7766,7 +7767,7 @@ When using <a href="https://docs.oracle.com/en/java/javase/14/language/records.h
 </table>
 </div>
 <div class="paragraph">
-<p>If the consumer implements <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html" target="_blank" rel="noopener">Stream</a>, <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Iterator.html" target="_blank" rel="noopener">Iterator</a> or <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Iterable.html" target="_blank" rel="noopener">Iterable</a>, then the consumer is executed once with the corresponding object holding the results. The static type of parameter <code>T</code> determines the mapped row type here as well. If the result set is empty, the SQL Object framework may not call the consumer or may call it with an empty result object.</p>
+<p>If the consumer implements <a href="https://docs.oracle.com/javase/11/docs/api/java/util/stream/Stream.html" target="_blank" rel="noopener">Stream</a>, <a href="https://docs.oracle.com/javase/11/docs/api/java/util/Iterator.html" target="_blank" rel="noopener">Iterator</a> or <a href="https://docs.oracle.com/javase/11/docs/api/java/lang/Iterable.html" target="_blank" rel="noopener">Iterable</a>, then the consumer is executed once with the corresponding object holding the results. The static type of parameter <code>T</code> determines the mapped row type here as well. If the result set is empty, the SQL Object framework may not call the consumer or may call it with an empty result object.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -7790,7 +7791,7 @@ When using <a href="https://docs.oracle.com/en/java/javase/14/language/records.h
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-When using <a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/Consumer.html" target="_blank" rel="noopener">Consumer&lt;Iterable&gt;</a> as a consumer argument, the <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Iterable.html" target="_blank" rel="noopener">Iterable</a> object passed into the consumer is <strong>NOT</strong> a general-purpose Iterable as it supports only a single invocation of the <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Iterable.html#iterator--" target="_blank" rel="noopener">Iterable#iterator()</a> method. Invoking it the iterator method again to obtain a second or subsequent iterator may throw <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/IllegalStateException.html" target="_blank" rel="noopener">IllegalStateException</a>.
+When using <a href="https://docs.oracle.com/javase/11/docs/api/java/util/function/Consumer.html" target="_blank" rel="noopener">Consumer&lt;Iterable&gt;</a> as a consumer argument, the <a href="https://docs.oracle.com/javase/11/docs/api/java/lang/Iterable.html" target="_blank" rel="noopener">Iterable</a> object passed into the consumer is <strong>NOT</strong> a general-purpose Iterable as it supports only a single invocation of the <a href="https://docs.oracle.com/javase/11/docs/api/java/lang/Iterable.html#iterator--" target="_blank" rel="noopener">Iterable#iterator()</a> method. Invoking it the iterator method again to obtain a second or subsequent iterator may throw <a href="https://docs.oracle.com/javase/11/docs/api/java/lang/IllegalStateException.html" target="_blank" rel="noopener">IllegalStateException</a>.
 </td>
 </tr>
 </table>
@@ -7799,7 +7800,7 @@ When using <a href="https://docs.oracle.com/javase/8/docs/api/java/util/function
 <div class="sect4">
 <h5 id="_function_arguments"><a class="anchor" href="#_function_arguments"></a><a class="link" href="#_function_arguments">Function arguments</a></h5>
 <div class="paragraph">
-<p>A function argument can be used to collect or transform the result from a SQL operation. Similar to a consumer argument, it will receive the results of the query. A function argument only supports <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html" target="_blank" rel="noopener">Stream</a>, <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Iterator.html" target="_blank" rel="noopener">Iterator</a> or <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Iterable.html" target="_blank" rel="noopener">Iterable</a> as the function input type. The result type of the function must match the return type of the method itself.</p>
+<p>A function argument can be used to collect or transform the result from a SQL operation. Similar to a consumer argument, it will receive the results of the query. A function argument only supports <a href="https://docs.oracle.com/javase/11/docs/api/java/util/stream/Stream.html" target="_blank" rel="noopener">Stream</a>, <a href="https://docs.oracle.com/javase/11/docs/api/java/util/Iterator.html" target="_blank" rel="noopener">Iterator</a> or <a href="https://docs.oracle.com/javase/11/docs/api/java/lang/Iterable.html" target="_blank" rel="noopener">Iterable</a> as the function input type. The result type of the function must match the return type of the method itself.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -7831,10 +7832,10 @@ When using <a href="https://docs.oracle.com/javase/8/docs/api/java/util/function
 <p>declare <code>void</code> or <a href="./apidocs/org/jdbi/v3/core/statement/OutParameters.html" target="_blank" rel="noopener">OutParameters</a> as its return type.</p>
 </li>
 <li>
-<p>declare <code>void</code> as its return type and have a single <a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/Consumer.html" target="_blank" rel="noopener">Consumer&lt;OutParameters&gt;</a> consumer argument</p>
+<p>declare <code>void</code> as its return type and have a single <a href="https://docs.oracle.com/javase/11/docs/api/java/util/function/Consumer.html" target="_blank" rel="noopener">Consumer&lt;OutParameters&gt;</a> consumer argument</p>
 </li>
 <li>
-<p>declare an arbitrary type <code>T</code> as return type and have a single <a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/Function.html" target="_blank" rel="noopener">Function&lt;OutParameters, T&gt;</a> function argument</p>
+<p>declare an arbitrary type <code>T</code> as return type and have a single <a href="https://docs.oracle.com/javase/11/docs/api/java/util/function/Function.html" target="_blank" rel="noopener">Function&lt;OutParameters, T&gt;</a> function argument</p>
 </li>
 </ul>
 </div>
@@ -7937,8 +7938,8 @@ When using <a href="https://docs.oracle.com/javase/8/docs/api/java/util/function
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Methods may return <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html" target="_blank" rel="noopener">Optional</a> values. If the query returns no rows (or if the value in the row is <code>null</code>),
-<a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html#empty--" target="_blank" rel="noopener">Optional.empty()</a> is returned instead of <code>null</code>.  SQL Object throws an exception if query returns more than one
+<td>Methods may return <a href="https://docs.oracle.com/javase/11/docs/api/java/util/Optional.html" target="_blank" rel="noopener">Optional</a> values. If the query returns no rows (or if the value in the row is <code>null</code>),
+<a href="https://docs.oracle.com/javase/11/docs/api/java/util/Optional.html#empty--" target="_blank" rel="noopener">Optional.empty()</a> is returned instead of <code>null</code>.  SQL Object throws an exception if query returns more than one
 row.</td>
 </tr>
 <tr>
@@ -7973,7 +7974,7 @@ Jdbi plugins (e.g. the <a href="./apidocs/org/jdbi/v3/guava/GuavaPlugin.html" ta
 <p>SQL Object method may return
 <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html" target="_blank" rel="noopener">ResultIterable</a>,
 <a href="./apidocs/org/jdbi/v3/core/result/ResultIterator.html" target="_blank" rel="noopener">ResultIterator</a> or
-<a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html" target="_blank" rel="noopener">Stream</a> types. Each of these return values represents a cursor-type object that requires an active <a href="./apidocs/org/jdbi/v3/core/Handle.html" target="_blank" rel="noopener">Handle</a> object with a database connection <a href="#resources-with-streams-iterators">to support streaming results</a>.</p>
+<a href="https://docs.oracle.com/javase/11/docs/api/java/util/stream/Stream.html" target="_blank" rel="noopener">Stream</a> types. Each of these return values represents a cursor-type object that requires an active <a href="./apidocs/org/jdbi/v3/core/Handle.html" target="_blank" rel="noopener">Handle</a> object with a database connection <a href="#resources-with-streams-iterators">to support streaming results</a>.</p>
 </div>
 <div class="paragraph">
 <p>All SQL object type methods are subject to the <a href="#extension-handle-lifecycle">extension framework Handle lifecycle</a>. When the <a href="./apidocs/org/jdbi/v3/core/Handle.html" target="_blank" rel="noopener">Handle</a> object is closed, the database connection and the corresponding stream or iterator is closed as well.</p>
@@ -8070,7 +8071,7 @@ Jdbi plugins (e.g. the <a href="./apidocs/org/jdbi/v3/guava/GuavaPlugin.html" ta
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Calling the <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html#collect-java.util.stream.Collector-" target="_blank" rel="noopener">Stream#collect()</a> method on the returned stream causes a <a href="./apidocs/org/jdbi/v3/core/result/ResultSetException.html" target="_blank" rel="noopener">ResultSetException</a>.</td>
+<td>Calling the <a href="https://docs.oracle.com/javase/11/docs/api/java/util/stream/Stream.html#collect-java.util.stream.Collector-" target="_blank" rel="noopener">Stream#collect()</a> method on the returned stream causes a <a href="./apidocs/org/jdbi/v3/core/result/ResultSetException.html" target="_blank" rel="noopener">ResultSetException</a>.</td>
 </tr>
 </table>
 </div>
@@ -8097,7 +8098,7 @@ Jdbi plugins (e.g. the <a href="./apidocs/org/jdbi/v3/guava/GuavaPlugin.html" ta
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Calling the <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html#collect-java.util.stream.Collector-" target="_blank" rel="noopener">Stream#collect()</a> method on the returned stream causes a <a href="./apidocs/org/jdbi/v3/core/result/ResultSetException.html" target="_blank" rel="noopener">ResultSetException</a>.</td>
+<td>Calling the <a href="https://docs.oracle.com/javase/11/docs/api/java/util/stream/Stream.html#collect-java.util.stream.Collector-" target="_blank" rel="noopener">Stream#collect()</a> method on the returned stream causes a <a href="./apidocs/org/jdbi/v3/core/result/ResultSetException.html" target="_blank" rel="noopener">ResultSetException</a>.</td>
 </tr>
 </table>
 </div>
@@ -8931,7 +8932,7 @@ load SQL statements.</p>
 <div class="sect3">
 <h4 id="_timestamped"><a class="anchor" href="#_timestamped"></a><a class="link" href="#_timestamped">13.6.4. @Timestamped</a></h4>
 <div class="paragraph">
-<p>You can annotate any statement with <a href="./apidocs/org/jdbi/v3/sqlobject/customizer/Timestamped.html" target="_blank" rel="noopener">@Timestamped</a> to bind an <a href="https://docs.oracle.com/javase/8/docs/api/java/time/OffsetDateTime.html" target="_blank" rel="noopener">OffsetDateTime</a> object representing the current time as <code>now</code>:</p>
+<p>You can annotate any statement with <a href="./apidocs/org/jdbi/v3/sqlobject/customizer/Timestamped.html" target="_blank" rel="noopener">@Timestamped</a> to bind an <a href="https://docs.oracle.com/javase/11/docs/api/java/time/OffsetDateTime.html" target="_blank" rel="noopener">OffsetDateTime</a> object representing the current time as <code>now</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -8974,12 +8975,12 @@ load SQL statements.</p>
 <h4 id="_singlevalue"><a class="anchor" href="#_singlevalue"></a><a class="link" href="#_singlevalue">13.6.5. @SingleValue</a></h4>
 <div class="paragraph">
 <p>Sometimes, when using advanced SQL features like Arrays, a container type such as
-<code>int[]</code> or <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html" target="_blank" rel="noopener">List&lt;Integer&gt;</a> can ambiguously mean either "a single SQL int[]" or
+<code>int[]</code> or <a href="https://docs.oracle.com/javase/11/docs/api/java/util/List.html" target="_blank" rel="noopener">List&lt;Integer&gt;</a> can ambiguously mean either "a single SQL int[]" or
 "a ResultSet of int".</p>
 </div>
 <div class="paragraph">
 <p>Since arrays are not commonly used in normalized schemas, SQL Object assumes by
-default that you are collecting a <a href="https://docs.oracle.com/javase/8/docs/api/java/sql/ResultSet.html" target="_blank" rel="noopener">ResultSet</a> into a container object. You can
+default that you are collecting a <a href="https://docs.oracle.com/javase/11/docs/api/java/sql/ResultSet.html" target="_blank" rel="noopener">ResultSet</a> into a container object. You can
 annotate a return type as <a href="./apidocs/org/jdbi/v3/sqlobject/SingleValue.html" target="_blank" rel="noopener">@SingleValue</a> to override this.</p>
 </div>
 <div class="paragraph">
@@ -8995,9 +8996,9 @@ annotate a return type as <a href="./apidocs/org/jdbi/v3/sqlobject/SingleValue.h
 </div>
 </div>
 <div class="paragraph">
-<p>Normally, Jdbi would interpret <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html" target="_blank" rel="noopener">List&lt;String&gt;</a> to mean that the mapped type is
+<p>Normally, Jdbi would interpret <a href="https://docs.oracle.com/javase/11/docs/api/java/util/List.html" target="_blank" rel="noopener">List&lt;String&gt;</a> to mean that the mapped type is
 <code>String</code>, and to collect all result rows into a list. The <a href="./apidocs/org/jdbi/v3/sqlobject/SingleValue.html" target="_blank" rel="noopener">@SingleValue</a>
-annotation causes Jdbi to treat <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html" target="_blank" rel="noopener">List&lt;String&gt;</a> as the mapped type instead.</p>
+annotation causes Jdbi to treat <a href="https://docs.oracle.com/javase/11/docs/api/java/util/List.html" target="_blank" rel="noopener">List&lt;String&gt;</a> as the mapped type instead.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -9006,8 +9007,8 @@ annotation causes Jdbi to treat <a href="https://docs.oracle.com/javase/8/docs/a
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-It&#8217;s tempting to use the <a href="./apidocs/org/jdbi/v3/sqlobject/SingleValue.html" target="_blank" rel="noopener">@SingleValue</a> annotation on an <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html" target="_blank" rel="noopener">Optional&lt;T&gt;</a> type , but usually this is not needed.
-<a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html" target="_blank" rel="noopener">Optional&lt;T&gt;</a> is implemented as a container of zero-or-one elements.  Adding <a href="./apidocs/org/jdbi/v3/sqlobject/SingleValue.html" target="_blank" rel="noopener">@SingleValue</a> implies that the database itself has a column of a type like <code>optional&lt;varchar&gt;</code>.
+It&#8217;s tempting to use the <a href="./apidocs/org/jdbi/v3/sqlobject/SingleValue.html" target="_blank" rel="noopener">@SingleValue</a> annotation on an <a href="https://docs.oracle.com/javase/11/docs/api/java/util/Optional.html" target="_blank" rel="noopener">Optional&lt;T&gt;</a> type , but usually this is not needed.
+<a href="https://docs.oracle.com/javase/11/docs/api/java/util/Optional.html" target="_blank" rel="noopener">Optional&lt;T&gt;</a> is implemented as a container of zero-or-one elements.  Adding <a href="./apidocs/org/jdbi/v3/sqlobject/SingleValue.html" target="_blank" rel="noopener">@SingleValue</a> implies that the database itself has a column of a type like <code>optional&lt;varchar&gt;</code>.
 </td>
 </tr>
 </table>
@@ -9034,7 +9035,7 @@ It&#8217;s tempting to use the <a href="./apidocs/org/jdbi/v3/sqlobject/SingleVa
 <div class="paragraph">
 <p>SQL Object methods may return <code>Map&lt;K,V&gt;</code> types (see <a href="#mapentry-mapping">Map.Entry mapping</a> in
 the Core API). In this scenario, each row is mapped to a <code>Map.Entry&lt;K,V&gt;</code>,
-and the entries for each row are collected into a single <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html" target="_blank" rel="noopener">Map</a> instance.</p>
+and the entries for each row are collected into a single <a href="https://docs.oracle.com/javase/11/docs/api/java/util/Map.html" target="_blank" rel="noopener">Map</a> instance.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -9102,7 +9103,7 @@ type, which supports mapping multiple values per key.</p>
 <a href="./apidocs/org/jdbi/v3/guava/GuavaPlugin.html" target="_blank" rel="noopener">GuavaPlugin</a>.</p>
 </div>
 <div class="paragraph">
-<p>Then, simply specify a <code>Multimap</code> return type instead of <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html" target="_blank" rel="noopener">Map</a>:</p>
+<p>Then, simply specify a <code>Multimap</code> return type instead of <a href="https://docs.oracle.com/javase/11/docs/api/java/util/Map.html" target="_blank" rel="noopener">Map</a>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9114,8 +9115,8 @@ Multimap&lt;User, Phone&gt; getMultimap();</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>All the examples so far have been <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html" target="_blank" rel="noopener">Map</a> types where each row in the result set
-is a single <code>Map.Entry</code>. However, what if the <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html" target="_blank" rel="noopener">Map</a> we want to return is
+<p>All the examples so far have been <a href="https://docs.oracle.com/javase/11/docs/api/java/util/Map.html" target="_blank" rel="noopener">Map</a> types where each row in the result set
+is a single <code>Map.Entry</code>. However, what if the <a href="https://docs.oracle.com/javase/11/docs/api/java/util/Map.html" target="_blank" rel="noopener">Map</a> we want to return is
 actually a single row or even a single column?</p>
 </div>
 <div class="paragraph">
@@ -9136,7 +9137,7 @@ changed via the <code>MapMappers</code> config class.
 </table>
 </div>
 <div class="paragraph">
-<p>By default, SQL Object treats <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html" target="_blank" rel="noopener">Map</a> return types as a collection of <code>Map.Entry</code>
+<p>By default, SQL Object treats <a href="https://docs.oracle.com/javase/11/docs/api/java/util/Map.html" target="_blank" rel="noopener">Map</a> return types as a collection of <code>Map.Entry</code>
 values. Use the <a href="./apidocs/org/jdbi/v3/sqlobject/SingleValue.html" target="_blank" rel="noopener">@SingleValue</a> annotation to override this, so that the return
 type is treated as a single value instead of a collection:</p>
 </div>
@@ -9263,7 +9264,7 @@ and adding it to the folder.</td>
 <div class="sect3">
 <h4 id="_registercollector_and_registercollectorfactory"><a class="anchor" href="#_registercollector_and_registercollectorfactory"></a><a class="link" href="#_registercollector_and_registercollectorfactory">13.6.8. @RegisterCollector and @RegisterCollectorFactory</a></h4>
 <div class="paragraph">
-<p>Convenience annotations to register a <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Collector.html" target="_blank" rel="noopener">Collector</a> for a SqlObject method.</p>
+<p>Convenience annotations to register a <a href="https://docs.oracle.com/javase/11/docs/api/java/util/stream/Collector.html" target="_blank" rel="noopener">Collector</a> for a SqlObject method.</p>
 </div>
 <div class="paragraph">
 <p><a href="./apidocs/org/jdbi/v3/sqlobject/config/RegisterCollectorFactory.html" target="_blank" rel="noopener">@RegisterCollectorFactory</a> allows registration of a factory that returns a collector instance and <a href="./apidocs/org/jdbi/v3/sqlobject/config/RegisterCollector.html" target="_blank" rel="noopener">@RegisterCollector</a> registers a collector implementation:</p>
@@ -9337,7 +9338,7 @@ and adding it to the folder.</td>
 </div>
 </div>
 <div class="paragraph">
-<p>The element and result types are inferred from the concrete <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Collector.html" target="_blank" rel="noopener">Collector&lt;Element, ?, Result&gt;</a> implementation&#8217;s type parameters. See <a href="#_collectors">Collectors</a> for more details.</p>
+<p>The element and result types are inferred from the concrete <a href="https://docs.oracle.com/javase/11/docs/api/java/util/stream/Collector.html" target="_blank" rel="noopener">Collector&lt;Element, ?, Result&gt;</a> implementation&#8217;s type parameters. See <a href="#_collectors">Collectors</a> for more details.</p>
 </div>
 </div>
 <div class="sect3">
@@ -9986,7 +9987,7 @@ and setter parameters.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>on parameters of type <a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/Consumer.html" target="_blank" rel="noopener">Consumer&lt;T&gt;</a>, qualifiers are applied to the <code>T</code>.</p>
+<p>on parameters of type <a href="https://docs.oracle.com/javase/11/docs/api/java/util/function/Consumer.html" target="_blank" rel="noopener">Consumer&lt;T&gt;</a>, qualifiers are applied to the <code>T</code>.</p>
 </li>
 </ul>
 </div>
@@ -10549,7 +10550,7 @@ extension.withCredentials(<span class="string"><span class="delimiter">&quot;</s
 <div class="ulist">
 <ul>
 <li>
-<p><code>Optional&lt;T&gt;</code> - registers an argument and mapper. Supports <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html" target="_blank" rel="noopener">Optional</a> for any
+<p><code>Optional&lt;T&gt;</code> - registers an argument and mapper. Supports <a href="https://docs.oracle.com/javase/11/docs/api/java/util/Optional.html" target="_blank" rel="noopener">Optional</a> for any
 wrapped type <code>T</code> for which a mapper / argument factory is registered.</p>
 </li>
 <li>
@@ -11815,7 +11816,7 @@ not nullable and the value absent in the result set.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Then install the plugin into the <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instance:</p>
+<p>Then install the <a href="./apidocs-kotlin/jdbi3-kotlin/jdbi3-kotlin/org.jdbi.v3.core.kotlin/-kotlin-plugin/" target="_blank" rel="noopener">Kotlin Plugin</a> into the <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instance:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11912,7 +11913,142 @@ val things = qry.bind(&quot;id&quot;, brian.id).mapTo&lt;Thing&gt;.list()</code>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_sqlobject"><a class="anchor" href="#_sqlobject"></a><a class="link" href="#_sqlobject">16.9.2. SqlObject</a></h4>
+<h4 id="_coroutine_support"><a class="anchor" href="#_coroutine_support"></a><a class="link" href="#_coroutine_support">16.9.2. Coroutine support</a></h4>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Coroutine support is very much experimental and not yet proven. If you find a bug or see a problem, please file a <a href="https://github.com/jdbi/jdbi/issues">bug report</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Kotlin offers a <a href="https://kotlinlang.org/docs/coroutines-overview.html" target="_blank" rel="noopener">coroutine extension</a> to support asynchronous programming on the Kotlin platform.</p>
+</div>
+<div class="paragraph">
+<p>Coroutines work similar to "green threads" where operations are mapped onto a thread pool and may be executed on multiple threads. This clashes with the internal model that Jdbi uses to manage Handles (which is by default local to each thread).</p>
+</div>
+<div class="paragraph">
+<p>The Kotlin module offers support for coroutines with Jdbi. It allows handles to move across thread boundaries and
+allows seamless use of handles in coroutines.</p>
+</div>
+<div class="paragraph">
+<p>Coroutine support is disabled by default and is activated by passing the <code>enableCoroutineSupport = true</code> property to the constructor of the <a href="./apidocs-kotlin/jdbi3-kotlin/jdbi3-kotlin/org.jdbi.v3.core.kotlin/-kotlin-plugin/" target="_blank" rel="noopener">Kotlin Plugin</a>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="kotlin">val jdbi = Jdbi.create( ... )
+    .installPlugin(KotlinPlugin(enableCoroutineSupport = true))
+
+jdbi.inTransactionUnchecked { transactionHandle -&gt;
+    runBlocking(jdbi.inCoroutineContext()) { <i class="conum" data-value="1"></i><b>(1)</b>
+        withContext(Dispatchers.Default + jdbi.inCoroutineContext(transactionHandle)) { <i class="conum" data-value="2"></i><b>(2)</b>
+            launch () {
+                jdbi.useHandleUnchecked { handle -&gt; <i class="conum" data-value="3"></i><b>(3)</b>
+                    ...
+                }
+            }
+        }
+
+        launch(Dispatchers.Default) { <i class="conum" data-value="4"></i><b>(4)</b>
+            jdbi.useHandleUnchecked { handle -&gt; <i class="conum" data-value="5"></i><b>(5)</b>
+                ...
+            }
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>calling the <a href="./apidocs-kotlin/jdbi3-kotlin/jdbi3-kotlin/org.jdbi.v3.core.kotlin/in-coroutine-context.html" target="_blank" rel="noopener">Jdbi#inCoroutineContext()</a> extension method without a parameter disconnects the coroutine scope from any existing thread local elements.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>calling the <a href="./apidocs-kotlin/jdbi3-kotlin/jdbi3-kotlin/org.jdbi.v3.core.kotlin/in-coroutine-context.html" target="_blank" rel="noopener">Jdbi#inCoroutineContext()</a> extension method with a handle object uses this handle for all coroutines in this scope.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>calling Jdbi methods within the coroutine scope will use the handle that was provided above.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Launching a coroutine without an explicitly attached handle works as well, in this case, a new handle gets created</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>The handle here is a newly created handle that only exists within the jdbi callback.</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Coroutines that are executed in parallel by different threads at the same time will get the same handle as they share the same coroutine context. While the Handle object can be shared by multiple threads (if the underlying connection object supports it), they are designed
+to be used by "one thread at a time" so additional coordination is required in this case.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Coroutines are also supported for extension objects such as the <a href="#sql-objects">SQL Object extension</a>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="kotlin">val jdbi = Jdbi.create( ... )
+    .installPlugin(KotlinPlugin(enableCoroutineSupport = true))
+    .installPlugin(SqlObjectPlugin())
+
+data class Something(
+    val id: Int,
+    val name: String
+)
+
+@RegisterKotlinMapper(Something::class)
+interface SomethingDao : SqlObject {
+    @SqlUpdate(&quot;insert into something (id, name) values (:id, :name)&quot;)
+    fun insert(@BindKotlin something: Something)
+
+    @SqlQuery(&quot;select id, name from something where id=:id&quot;)
+    fun findById(@Bind(&quot;id&quot;) id: Int): Something
+}
+
+jdbi.withExtensionUnchecked(SomethingDao::class) { dao -&gt;
+    runBlocking(Dispatchers.IO + jdbi.inCoroutineContext()) {
+        coroutineScope {
+            insertSomething(dao)
+
+            val first = selectSomething(dao, 1)
+            delay(1000L)
+        }
+
+        val second = selectSomething(dao, 2)
+    }
+}
+
+private suspend fun insertSomething(dao: SomethingDao): Unit = coroutineScope {
+    dao.insert(Something(1, &quot;first name&quot;))
+    dao.insert(Something(2, &quot;second name&quot;))
+}
+
+private suspend fun selectSomething(dao: SomethingDao, id: Int): Something = coroutineScope {
+    dao.findById(id)
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_sqlobject"><a class="anchor" href="#_sqlobject"></a><a class="link" href="#_sqlobject">16.9.3. SqlObject</a></h4>
 <div class="paragraph">
 <p>The <strong>jdbi3-kotlin-sqlobject</strong> plugin adds automatic parameter binding by name
 for Kotlin methods in SqlObjects as well as support for Kotlin default methods.</p>
@@ -11979,7 +12115,7 @@ fun testDao() {
 </div>
 </div>
 <div class="sect3">
-<h4 id="_jackson_json_processing"><a class="anchor" href="#_jackson_json_processing"></a><a class="link" href="#_jackson_json_processing">16.9.3. Jackson JSON Processing</a></h4>
+<h4 id="_jackson_json_processing"><a class="anchor" href="#_jackson_json_processing"></a><a class="link" href="#_jackson_json_processing">16.9.4. Jackson JSON Processing</a></h4>
 <div class="paragraph">
 <p>Jackson needs a specialized ObjectMapper instance in order to understand deserialization
 of Kotlin types. Make sure to configure your Jackson plugin:</p>
@@ -12109,8 +12245,8 @@ to get the returned DML.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The plugin configures mappings for <a href="https://docs.oracle.com/javase/8/docs/api/java/time/package-summary.html" target="_blank" rel="noopener">java.time</a> types like
-<a href="https://docs.oracle.com/javase/8/docs/api/java/time/Instant.html" target="_blank" rel="noopener">Instant</a> or <a href="https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html" target="_blank" rel="noopener">Duration</a>, <a href="https://docs.oracle.com/javase/8/docs/api/java/net/InetAddress.html" target="_blank" rel="noopener">InetAddress</a>, <a href="https://docs.oracle.com/javase/8/docs/api/java/util/UUID.html" target="_blank" rel="noopener">UUID</a>, typed enums, and <a href="#postgres-hstore">hstore</a>.</p>
+<p>The plugin configures mappings for <a href="https://docs.oracle.com/javase/11/docs/api/java/time/package-summary.html" target="_blank" rel="noopener">java.time</a> types like
+<a href="https://docs.oracle.com/javase/11/docs/api/java/time/Instant.html" target="_blank" rel="noopener">Instant</a> or <a href="https://docs.oracle.com/javase/11/docs/api/java/time/Duration.html" target="_blank" rel="noopener">Duration</a>, <a href="https://docs.oracle.com/javase/11/docs/api/java/net/InetAddress.html" target="_blank" rel="noopener">InetAddress</a>, <a href="https://docs.oracle.com/javase/11/docs/api/java/util/UUID.html" target="_blank" rel="noopener">UUID</a>, typed enums, and <a href="#postgres-hstore">hstore</a>.</p>
 </div>
 <div class="paragraph">
 <p>It also configures SQL array type support for <code>int</code>, <code>long</code>, <code>float</code>, <code>double</code>,
@@ -12162,7 +12298,7 @@ and vice versa argument factory:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>By default, SQL Object treats <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html" target="_blank" rel="noopener">Map</a> return types as a collection of <code>Map.Entry</code>
+<p>By default, SQL Object treats <a href="https://docs.oracle.com/javase/11/docs/api/java/util/Map.html" target="_blank" rel="noopener">Map</a> return types as a collection of <code>Map.Entry</code>
 values. Use the <a href="./apidocs/org/jdbi/v3/sqlobject/SingleValue.html" target="_blank" rel="noopener">@SingleValue</a> annotation to override this, so that the return
 type is treated as a single value instead of a collection:</p>
 </div>
@@ -12182,7 +12318,7 @@ type is treated as a single value instead of a collection:</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The default variant to install the plugin adds unqualified mappings of raw <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html" target="_blank" rel="noopener">Map</a> types from and to the <code>hstore</code> Postgres data type. There are situations where this interferes with other mappings of maps. It is recommended to always use the variant with the <code>@HStore</code> qualified type.
+The default variant to install the plugin adds unqualified mappings of raw <a href="https://docs.oracle.com/javase/11/docs/api/java/util/Map.html" target="_blank" rel="noopener">Map</a> types from and to the <code>hstore</code> Postgres data type. There are situations where this interferes with other mappings of maps. It is recommended to always use the variant with the <code>@HStore</code> qualified type.
 </td>
 </tr>
 </table>
@@ -12349,7 +12485,7 @@ database, but it can be any JDBC-compatible database.</td>
 <h4 id="_installing_plugins"><a class="anchor" href="#_installing_plugins"></a><a class="link" href="#_installing_plugins">16.13.1. Installing Plugins</a></h4>
 <div class="paragraph">
 <p>Plugins may be automatically installed by scanning the classpath for
-<a href="https://docs.oracle.com/javase/8/docs/api/java/util/ServiceLoader.html" target="_blank" rel="noopener">ServiceLoader</a> manifests.</p>
+<a href="https://docs.oracle.com/javase/11/docs/api/java/util/ServiceLoader.html" target="_blank" rel="noopener">ServiceLoader</a> manifests.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12598,10 +12734,10 @@ Given that for the wrapped type <code>T</code> a Mapper is registered.</p>
 <li>
 <p>Return Vavr collection types from queries. Supported are <code>Seq&lt;T&gt;</code>, <code>Set&lt;T&gt;</code>,
 <code>Map&lt;K, T&gt;</code> and <code>Multimap&lt;K, T&gt;</code> as well as all subtypes thereof.
-It is possible to collect into a <code>Traversable&lt;T&gt;</code>, in this case a <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html" target="_blank" rel="noopener">List&lt;T&gt;</a>
+It is possible to collect into a <code>Traversable&lt;T&gt;</code>, in this case a <a href="https://docs.oracle.com/javase/11/docs/api/java/util/List.html" target="_blank" rel="noopener">List&lt;T&gt;</a>
 will be returned.
 For all interface types a sensible default implementation will be used
-(e.q. <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html" target="_blank" rel="noopener">List&lt;T&gt;</a> for <code>Seq&lt;T&gt;</code>). Furthermore <code>Multimap&lt;K, T&gt;</code>s are backed by a <code>Seq&lt;T&gt;</code>
+(e.q. <a href="https://docs.oracle.com/javase/11/docs/api/java/util/List.html" target="_blank" rel="noopener">List&lt;T&gt;</a> for <code>Seq&lt;T&gt;</code>). Furthermore <code>Multimap&lt;K, T&gt;</code>s are backed by a <code>Seq&lt;T&gt;</code>
 as default value container.</p>
 </li>
 <li>
@@ -12952,7 +13088,7 @@ Optional&lt;Something&gt; result = dao.findSomething(<span class="integer">1</sp
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The <a href="./apidocs/org/jdbi/v3/core/Jdbi.html#onDemand(java.lang.Class)" target="_blank" rel="noopener">Jdbi#onDemand()</a> uses a <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Proxy.html" target="_blank" rel="noopener">Java proxy</a> object to provide
+The <a href="./apidocs/org/jdbi/v3/core/Jdbi.html#onDemand(java.lang.Class)" target="_blank" rel="noopener">Jdbi#onDemand()</a> uses a <a href="https://docs.oracle.com/javase/11/docs/api/java/lang/reflect/Proxy.html" target="_blank" rel="noopener">Java proxy</a> object to provide
 the on-demand handle object. Java proxies only support Java interface classes as extension types and may not be compatible with
 <a href="https://docs.oracle.com/en/graalvm/enterprise/21/docs/reference-manual/native-image/DynamicProxy/" target="_blank" rel="noopener">GraalVM</a> when creating native code.
 </td>
@@ -13020,7 +13156,7 @@ method on the extension type:</p>
 <p>Extension metadata is created once for each extension type and then reused.</p>
 </div>
 <div class="paragraph">
-<p>Jdbi usually returns a <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Proxy.html" target="_blank" rel="noopener">Java proxy</a> object to user code. Calling a method on that proxy will invoke per-method extension handlers. For each extension handler, objects specific to the invocation
+<p>Jdbi usually returns a <a href="https://docs.oracle.com/javase/11/docs/api/java/lang/reflect/Proxy.html" target="_blank" rel="noopener">Java proxy</a> object to user code. Calling a method on that proxy will invoke per-method extension handlers. For each extension handler, objects specific to the invocation
 (<a href="./apidocs/org/jdbi/v3/core/Handle.html" target="_blank" rel="noopener">Handle</a>, <a href="./apidocs/org/jdbi/v3/core/config/ConfigRegistry.html" target="_blank" rel="noopener">configuration</a>) are managed separately .</p>
 </div>
 <div class="imageblock">
@@ -13156,7 +13292,7 @@ getters that a factory can implement.  By default, each returns an empty collect
 <div class="sect4">
 <h5 id="_java_object_methods"><a class="anchor" href="#_java_object_methods"></a><a class="link" href="#_java_object_methods">Java Object methods</a></h5>
 <div class="paragraph">
-<p>When the extension framework returns an implementation of an extension type, it usually returns a <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Proxy.html" target="_blank" rel="noopener">Java proxy</a>
+<p>When the extension framework returns an implementation of an extension type, it usually returns a <a href="https://docs.oracle.com/javase/11/docs/api/java/lang/reflect/Proxy.html" target="_blank" rel="noopener">Java proxy</a>
 object which will invoke an extension handler for every method on the extension type.</p>
 </div>
 <div class="paragraph">
@@ -13165,14 +13301,14 @@ object which will invoke an extension handler for every method on the extension 
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#toString--" target="_blank" rel="noopener">Object#toString()</a> returns "Jdbi extension proxy for <em>&lt;extension type&gt;</em>"</p>
+<p><a href="https://docs.oracle.com/javase/11/docs/api/java/lang/Object.html#toString--" target="_blank" rel="noopener">Object#toString()</a> returns "Jdbi extension proxy for <em>&lt;extension type&gt;</em>"</p>
 </li>
 <li>
-<p><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#equals-java.lang.Object-" target="_blank" rel="noopener">Object#equals()</a> and <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#hashCode--" target="_blank" rel="noopener">Object#hashCode()</a>
+<p><a href="https://docs.oracle.com/javase/11/docs/api/java/lang/Object.html#equals-java.lang.Object-" target="_blank" rel="noopener">Object#equals()</a> and <a href="https://docs.oracle.com/javase/11/docs/api/java/lang/Object.html#hashCode--" target="_blank" rel="noopener">Object#hashCode()</a>
 implementations that ensure that each instance is only equal to itself.</p>
 </li>
 <li>
-<p><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#finalize--" target="_blank" rel="noopener">Object#finalize()</a> has no effect.</p>
+<p><a href="https://docs.oracle.com/javase/11/docs/api/java/lang/Object.html#finalize--" target="_blank" rel="noopener">Object#finalize()</a> has no effect.</p>
 </li>
 </ul>
 </div>
@@ -13184,7 +13320,7 @@ implementations that ensure that each instance is only equal to itself.</p>
 <h5 id="_non_virtual_factories"><a class="anchor" href="#_non_virtual_factories"></a><a class="link" href="#_non_virtual_factories">Non-virtual factories</a></h5>
 <div class="paragraph">
 <p>Normally, a factory will use extension handlers to provide functionality when an extension type method is called and a
-<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Proxy.html" target="_blank" rel="noopener">Java proxy</a> object is returned as an implementation of the extension type. This is a <em>virtual</em>
+<a href="https://docs.oracle.com/javase/11/docs/api/java/lang/reflect/Proxy.html" target="_blank" rel="noopener">Java proxy</a> object is returned as an implementation of the extension type. This is a <em>virtual</em>
 factory (because there is no actual object implementing the interface). Extension factories are by default virtual factories.</p>
 </div>
 <div class="paragraph">
@@ -13238,7 +13374,7 @@ in extension handlers and a proxy object is returned to the caller.</td>
 <div class="sect4">
 <h5 id="_extensions_without_java_proxy_objects"><a class="anchor" href="#_extensions_without_java_proxy_objects"></a><a class="link" href="#_extensions_without_java_proxy_objects">Extensions without Java proxy objects</a></h5>
 <div class="paragraph">
-<p>A drawback of the standard extension factories is that returning a <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Proxy.html" target="_blank" rel="noopener">Java proxy</a> object limits factory functionality
+<p>A drawback of the standard extension factories is that returning a <a href="https://docs.oracle.com/javase/11/docs/api/java/lang/reflect/Proxy.html" target="_blank" rel="noopener">Java proxy</a> object limits factory functionality
 and is incompatible with some use cases (e.g. <a href="https://docs.oracle.com/en/graalvm/enterprise/21/docs/reference-manual/native-image/DynamicProxy/" target="_blank" rel="noopener">using GraalVM
 for native compilation</a>).</p>
 </div>
@@ -13379,8 +13515,8 @@ method is called, which should return an extension handler instance.</p>
 <div class="paragraph">
 <p>The
 <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionHandlerFactory.html#createExtensionHandler(java.lang.Class,java.lang.reflect.Method)" target="_blank" rel="noopener">ExtensionHandlerFactory#createExtensionHandler()</a>
-method returns an <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html" target="_blank" rel="noopener">Optional&lt;ExtensionHandler&gt;</a> object for backwards compatibility reasons. While it is legal for a
-factory to accept a method on an extension type and then return an <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html#empty--" target="_blank" rel="noopener">Optional.empty()</a> object, it is discouraged
+method returns an <a href="https://docs.oracle.com/javase/11/docs/api/java/util/Optional.html" target="_blank" rel="noopener">Optional&lt;ExtensionHandler&gt;</a> object for backwards compatibility reasons. While it is legal for a
+factory to accept a method on an extension type and then return an <a href="https://docs.oracle.com/javase/11/docs/api/java/util/Optional.html#empty--" target="_blank" rel="noopener">Optional.empty()</a> object, it is discouraged
 in new code.</p>
 </div>
 <div class="admonitionblock note">
@@ -13567,7 +13703,7 @@ extension handler.</p>
 </div>
 <div class="paragraph">
 <p>These annotations must be placed on a method in an extension type, therefore annotations that are marked with the meta-annotation should use the
-<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/annotation/Target.html" target="_blank" rel="noopener">@Target({ElementType.METHOD})</a> annotation to limit their scope.</p>
+<a href="https://docs.oracle.com/javase/11/docs/api/java/lang/annotation/Target.html" target="_blank" rel="noopener">@Target({ElementType.METHOD})</a> annotation to limit their scope.</p>
 </div>
 <div class="paragraph">
 <p>The extension framework processes all annotations that use this meta-annotation. It will instantiate the extension handler by locating</p>
@@ -13976,7 +14112,7 @@ code. For most extensions, all metadata interactions are handled by the framewor
 </div>
 <div class="paragraph">
 <p>For every extension type that is processed by the framework, an <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionMetadata.html" target="_blank" rel="noopener">ExtensionMetadata</a> object is created. It
-collects all the information that is required to create the <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Proxy.html" target="_blank" rel="noopener">java proxy</a> object:</p>
+collects all the information that is required to create the <a href="https://docs.oracle.com/javase/11/docs/api/java/lang/reflect/Proxy.html" target="_blank" rel="noopener">java proxy</a> object:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -14306,7 +14442,7 @@ type signature that can be passed around in a type-safe way.</p>
 </div>
 <div class="paragraph">
 <p>The <code>GenericType.getType()</code> returns the raw
-<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Type.html" target="_blank" rel="noopener">java.lang.reflect.Type</a> object used
+<a href="https://docs.oracle.com/javase/11/docs/api/java/lang/reflect/Type.html" target="_blank" rel="noopener">java.lang.reflect.Type</a> object used
 to represent generics in Java.</p>
 </div>
 </div>
@@ -14376,7 +14512,7 @@ GenericTypes.findGenericParameter(listOfInteger, <span class="predefined-type">C
 </div>
 </div>
 <div class="paragraph">
-<p>Note that this method will return <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html#empty--" target="_blank" rel="noopener">Optional.empty()</a> if the type parameter
+<p>Note that this method will return <a href="https://docs.oracle.com/javase/11/docs/api/java/util/Optional.html#empty--" target="_blank" rel="noopener">Optional.empty()</a> if the type parameter
 cannot be resolved, or the types have nothing to do with each other:</p>
 </div>
 <div class="listingblock">
@@ -14751,9 +14887,9 @@ implementation that logs all executed statements for debugging.</p>
 <div class="sect2">
 <h3 id="_resultproducer"><a class="anchor" href="#_resultproducer"></a><a class="link" href="#_resultproducer">19.11. ResultProducer</a></h3>
 <div class="paragraph">
-<p>A <strong>ResultProducer</strong> takes a lazily supplied <a href="https://docs.oracle.com/javase/8/docs/api/java/sql/PreparedStatement.html" target="_blank" rel="noopener">PreparedStatement</a> and
+<p>A <strong>ResultProducer</strong> takes a lazily supplied <a href="https://docs.oracle.com/javase/11/docs/api/java/sql/PreparedStatement.html" target="_blank" rel="noopener">PreparedStatement</a> and
 produces a result.  The most common producer path, <strong>execute()</strong>,
-retrieves the <a href="https://docs.oracle.com/javase/8/docs/api/java/sql/ResultSet.html" target="_blank" rel="noopener">ResultSet</a> over the query results and then uses a
+retrieves the <a href="https://docs.oracle.com/javase/11/docs/api/java/sql/ResultSet.html" target="_blank" rel="noopener">ResultSet</a> over the query results and then uses a
 <strong>ResultSetScanner</strong> or higher level mapper to produce results.</p>
 </div>
 <div class="paragraph">
@@ -14788,7 +14924,7 @@ that the context is closed eventually to release database resources.</p>
 include the <code>jdbi3-generator</code> artifact as an annotation processor and
 annotate your SqlObject definitions with <code>@GenerateSqlObject</code>, the
 generator will produce an implementing class and avoids using
-<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Proxy.html" target="_blank" rel="noopener">Java proxy</a> instances.
+<a href="https://docs.oracle.com/javase/11/docs/api/java/lang/reflect/Proxy.html" target="_blank" rel="noopener">Java proxy</a> instances.
 This may be useful for <code>graal-native</code> compilation.</p>
 </div>
 </div>
@@ -14962,7 +15098,7 @@ here!</p>
 </li>
 <li>
 <p><code>Handle.select(String, &#8230;&#8203;)</code> now returns a <a href="./apidocs/org/jdbi/v3/core/statement/Query.html" target="_blank" rel="noopener">Query</a> for further method
-chaining, instead of a <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html" target="_blank" rel="noopener">List&lt;Map&lt;String, Object&gt;&gt;</a>. Call
+chaining, instead of a <a href="https://docs.oracle.com/javase/11/docs/api/java/util/List.html" target="_blank" rel="noopener">List&lt;Map&lt;String, Object&gt;&gt;</a>. Call
 <code>Handle.select(sql, &#8230;&#8203;).mapToMap().list()</code> for the same effect as v2.</p>
 </li>
 <li>
@@ -14983,7 +15119,7 @@ handle arguments and mappers for generic types.</p>
 </li>
 <li>
 <p>Argument and mapper factories now have a single <code>build()</code> method that returns
-an <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html" target="_blank" rel="noopener">Optional</a>, instead of separate <code>accepts()</code> and <code>build()</code> methods.</p>
+an <a href="https://docs.oracle.com/javase/11/docs/api/java/util/Optional.html" target="_blank" rel="noopener">Optional</a>, instead of separate <code>accepts()</code> and <code>build()</code> methods.</p>
 </li>
 <li>
 <p><code>ResultSetMapper</code> &#8594; <a href="./apidocs/org/jdbi/v3/core/mapper/RowMapper.html" target="_blank" rel="noopener">RowMapper</a>. The row index parameter was also removed
@@ -15109,7 +15245,7 @@ return types, or on <a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlBatch.
 <div id="footer">
 <div id="footer-text">
 Version 3.42.0-SNAPSHOT<br>
-Last updated 11/27/2023 17:17 -0800
+Last updated 11/27/2023 18:08 -0800
 </div>
 </div>
 </body>

@@ -6,6 +6,7 @@ $dokka.location:org.jdbi.v3.core.kotlin//bindKotlin/org.jdbi.v3.core.statement.S
 $dokka.location:org.jdbi.v3.core.kotlin//configure/org.jdbi.v3.core.config.Configurable[TypeParam(bounds=[org.jdbi.v3.core.config.Configurable[^]])]#kotlin.reflect.KClass[TypeParam(bounds=[org.jdbi.v3.core.config.JdbiConfig[^]])]#java.util.function.Consumer[TypeParam(bounds=[org.jdbi.v3.core.config.JdbiConfig[^]])]/PointingToDeclaration/jdbi3-kotlin/org.jdbi.v3.core.kotlin/configure.html
 $dokka.location:org.jdbi.v3.core.kotlin//getConfig/org.jdbi.v3.core.statement.StatementContext#kotlin.reflect.KClass[TypeParam(bounds=[org.jdbi.v3.core.config.JdbiConfig[^]])]/PointingToDeclaration/jdbi3-kotlin/org.jdbi.v3.core.kotlin/get-config.html
 $dokka.location:org.jdbi.v3.core.kotlin//getQualifiers/#kotlin.Array[kotlin.reflect.KAnnotatedElement?]/PointingToDeclaration/jdbi3-kotlin/org.jdbi.v3.core.kotlin/get-qualifiers.html
+$dokka.location:org.jdbi.v3.core.kotlin//inCoroutineContext/org.jdbi.v3.core.Jdbi#org.jdbi.v3.core.Handle?/PointingToDeclaration/jdbi3-kotlin/org.jdbi.v3.core.kotlin/in-coroutine-context.html
 $dokka.location:org.jdbi.v3.core.kotlin//inTransactionUnchecked/org.jdbi.v3.core.Jdbi#kotlin.Function1[org.jdbi.v3.core.Handle,TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/jdbi3-kotlin/org.jdbi.v3.core.kotlin/in-transaction-unchecked.html
 $dokka.location:org.jdbi.v3.core.kotlin//inTransactionUnchecked/org.jdbi.v3.core.Jdbi#org.jdbi.v3.core.transaction.TransactionIsolationLevel#kotlin.Function1[org.jdbi.v3.core.Handle,TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/jdbi3-kotlin/org.jdbi.v3.core.kotlin/in-transaction-unchecked.html
 $dokka.location:org.jdbi.v3.core.kotlin//isKotlinClass/java.lang.Class[*]#/PointingToDeclaration/jdbi3-kotlin/org.jdbi.v3.core.kotlin/is-kotlin-class.html
@@ -33,7 +34,7 @@ $dokka.location:org.jdbi.v3.core.kotlin/KotlinMapperFactory///PointingToDeclarat
 $dokka.location:org.jdbi.v3.core.kotlin/KotlinMapperFactory/KotlinMapperFactory/#/PointingToDeclaration/jdbi3-kotlin/org.jdbi.v3.core.kotlin/-kotlin-mapper-factory/-kotlin-mapper-factory.html
 $dokka.location:org.jdbi.v3.core.kotlin/KotlinMapperFactory/build/#java.lang.reflect.Type#org.jdbi.v3.core.config.ConfigRegistry/PointingToDeclaration/jdbi3-kotlin/org.jdbi.v3.core.kotlin/-kotlin-mapper-factory/build.html
 $dokka.location:org.jdbi.v3.core.kotlin/KotlinPlugin///PointingToDeclaration/jdbi3-kotlin/org.jdbi.v3.core.kotlin/-kotlin-plugin/index.html
-$dokka.location:org.jdbi.v3.core.kotlin/KotlinPlugin/KotlinPlugin/#kotlin.Boolean/PointingToDeclaration/jdbi3-kotlin/org.jdbi.v3.core.kotlin/-kotlin-plugin/-kotlin-plugin.html
+$dokka.location:org.jdbi.v3.core.kotlin/KotlinPlugin/KotlinPlugin/#kotlin.Boolean#kotlin.Boolean/PointingToDeclaration/jdbi3-kotlin/org.jdbi.v3.core.kotlin/-kotlin-plugin/-kotlin-plugin.html
 $dokka.location:org.jdbi.v3.core.kotlin/KotlinPlugin/customizeJdbi/#org.jdbi.v3.core.Jdbi/PointingToDeclaration/jdbi3-kotlin/org.jdbi.v3.core.kotlin/-kotlin-plugin/customize-jdbi.html
 org.jdbi.v3.core.kotlin
 
