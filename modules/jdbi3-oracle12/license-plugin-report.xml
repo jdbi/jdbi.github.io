@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<licensePluginReport goal="CHECK" timestamp="1701288282204">
-    <module artifactId="jdbi3-oracle12" groupId="org.jdbi" version="3.42.0-SNAPSHOT"/>
+<licensePluginReport goal="CHECK" timestamp="1701288471956">
+    <module artifactId="jdbi3-oracle12" groupId="org.jdbi" version="3.42.1-SNAPSHOT"/>
     <files>
         <file path="pom.xml" result="PRESENT"/>
         <file path="src/main/java/org/jdbi/v3/oracle12/OracleReturning.java" result="PRESENT"/>
