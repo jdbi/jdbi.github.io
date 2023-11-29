@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<licensePluginReport goal="CHECK" timestamp="1701287129499">
+<licensePluginReport goal="CHECK" timestamp="1701288121208">
     <module artifactId="jdbi3-guava-cache" groupId="org.jdbi" version="3.42.1-SNAPSHOT"/>
     <files>
         <file path="pom.xml" result="PRESENT"/>
