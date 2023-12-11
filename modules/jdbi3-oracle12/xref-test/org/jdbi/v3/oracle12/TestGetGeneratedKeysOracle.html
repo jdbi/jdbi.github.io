@@ -53,55 +53,57 @@
 <a class="jxr_linenumber" name="L45" href="#L45">45</a>  @EnabledOnOs(architectures = {<span class="jxr_string">"x86_64"</span>, <span class="jxr_string">"amd64"</span>})
 <a class="jxr_linenumber" name="L46" href="#L46">46</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> TestGetGeneratedKeysOracle {
 <a class="jxr_linenumber" name="L47" href="#L47">47</a>  
-<a class="jxr_linenumber" name="L48" href="#L48">48</a>      @Container
-<a class="jxr_linenumber" name="L49" href="#L49">49</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> OracleContainer oc = <strong class="jxr_keyword">new</strong> OracleContainer(<span class="jxr_string">"gvenzl/oracle-xe:slim-faststart"</span>);
-<a class="jxr_linenumber" name="L50" href="#L50">50</a>  
-<a class="jxr_linenumber" name="L51" href="#L51">51</a>      @RegisterExtension
-<a class="jxr_linenumber" name="L52" href="#L52">52</a>      <strong class="jxr_keyword">public</strong> JdbiExtension oracleExtension = JdbiTestcontainersExtension.instance(oc)
-<a class="jxr_linenumber" name="L53" href="#L53">53</a>              .withPlugin(<strong class="jxr_keyword">new</strong> SqlObjectPlugin());
-<a class="jxr_linenumber" name="L54" href="#L54">54</a>  
-<a class="jxr_linenumber" name="L55" href="#L55">55</a>      @BeforeEach
-<a class="jxr_linenumber" name="L56" href="#L56">56</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> beforeEach() {
-<a class="jxr_linenumber" name="L57" href="#L57">57</a>          Handle handle = oracleExtension.getSharedHandle();
-<a class="jxr_linenumber" name="L58" href="#L58">58</a>          handle.execute(
-<a class="jxr_linenumber" name="L59" href="#L59">59</a>                  <span class="jxr_string">"create sequence something_id_sequence INCREMENT BY 1 START WITH 100"</span>);
+<a class="jxr_linenumber" name="L48" href="#L48">48</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String CONTAINER_VERSION = <span class="jxr_string">"gvenzl/oracle-xe:"</span> + System.getProperty(<span class="jxr_string">"oracle.container.version"</span>, <span class="jxr_string">"slim-faststart"</span>);
+<a class="jxr_linenumber" name="L49" href="#L49">49</a>  
+<a class="jxr_linenumber" name="L50" href="#L50">50</a>      @Container
+<a class="jxr_linenumber" name="L51" href="#L51">51</a>      <strong class="jxr_keyword">static</strong> OracleContainer oc = <strong class="jxr_keyword">new</strong> OracleContainer(CONTAINER_VERSION);
+<a class="jxr_linenumber" name="L52" href="#L52">52</a>  
+<a class="jxr_linenumber" name="L53" href="#L53">53</a>      @RegisterExtension
+<a class="jxr_linenumber" name="L54" href="#L54">54</a>      <strong class="jxr_keyword">public</strong> JdbiExtension oracleExtension = JdbiTestcontainersExtension.instance(oc)
+<a class="jxr_linenumber" name="L55" href="#L55">55</a>              .withPlugin(<strong class="jxr_keyword">new</strong> SqlObjectPlugin());
+<a class="jxr_linenumber" name="L56" href="#L56">56</a>  
+<a class="jxr_linenumber" name="L57" href="#L57">57</a>      @BeforeEach
+<a class="jxr_linenumber" name="L58" href="#L58">58</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> beforeEach() {
+<a class="jxr_linenumber" name="L59" href="#L59">59</a>          Handle handle = oracleExtension.getSharedHandle();
 <a class="jxr_linenumber" name="L60" href="#L60">60</a>          handle.execute(
-<a class="jxr_linenumber" name="L61" href="#L61">61</a>                  <span class="jxr_string">"create table something (name varchar(200), id int, constraint something_id primary key (id))"</span>);
-<a class="jxr_linenumber" name="L62" href="#L62">62</a>      }
-<a class="jxr_linenumber" name="L63" href="#L63">63</a>  
-<a class="jxr_linenumber" name="L64" href="#L64">64</a>      <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L65" href="#L65">65</a>  <em class="jxr_javadoccomment">     * Oracle needs to be queried by index and not id (like {@code DefaultGeneratedKeyMapper}</em>
-<a class="jxr_linenumber" name="L66" href="#L66">66</a>  <em class="jxr_javadoccomment">     * does).</em>
-<a class="jxr_linenumber" name="L67" href="#L67">67</a>  <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L68" href="#L68">68</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">class</strong> OracleGeneratedKeyMapper <strong class="jxr_keyword">implements</strong> RowMapper&lt;Long&gt; {
-<a class="jxr_linenumber" name="L69" href="#L69">69</a>  
-<a class="jxr_linenumber" name="L70" href="#L70">70</a>          @Override
-<a class="jxr_linenumber" name="L71" href="#L71">71</a>          <strong class="jxr_keyword">public</strong> Long map(ResultSet r, StatementContext ctx) <strong class="jxr_keyword">throws</strong> SQLException {
-<a class="jxr_linenumber" name="L72" href="#L72">72</a>              <strong class="jxr_keyword">return</strong> r.getLong(1);
-<a class="jxr_linenumber" name="L73" href="#L73">73</a>          }
-<a class="jxr_linenumber" name="L74" href="#L74">74</a>      }
-<a class="jxr_linenumber" name="L75" href="#L75">75</a>  
-<a class="jxr_linenumber" name="L76" href="#L76">76</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">interface</strong> DAO {
+<a class="jxr_linenumber" name="L61" href="#L61">61</a>                  <span class="jxr_string">"create sequence something_id_sequence INCREMENT BY 1 START WITH 100"</span>);
+<a class="jxr_linenumber" name="L62" href="#L62">62</a>          handle.execute(
+<a class="jxr_linenumber" name="L63" href="#L63">63</a>                  <span class="jxr_string">"create table something (name varchar(200), id int, constraint something_id primary key (id))"</span>);
+<a class="jxr_linenumber" name="L64" href="#L64">64</a>      }
+<a class="jxr_linenumber" name="L65" href="#L65">65</a>  
+<a class="jxr_linenumber" name="L66" href="#L66">66</a>      <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L67" href="#L67">67</a>  <em class="jxr_javadoccomment">     * Oracle needs to be queried by index and not id (like {@code DefaultGeneratedKeyMapper}</em>
+<a class="jxr_linenumber" name="L68" href="#L68">68</a>  <em class="jxr_javadoccomment">     * does).</em>
+<a class="jxr_linenumber" name="L69" href="#L69">69</a>  <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="L70" href="#L70">70</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">class</strong> OracleGeneratedKeyMapper <strong class="jxr_keyword">implements</strong> RowMapper&lt;Long&gt; {
+<a class="jxr_linenumber" name="L71" href="#L71">71</a>  
+<a class="jxr_linenumber" name="L72" href="#L72">72</a>          @Override
+<a class="jxr_linenumber" name="L73" href="#L73">73</a>          <strong class="jxr_keyword">public</strong> Long map(ResultSet r, StatementContext ctx) <strong class="jxr_keyword">throws</strong> SQLException {
+<a class="jxr_linenumber" name="L74" href="#L74">74</a>              <strong class="jxr_keyword">return</strong> r.getLong(1);
+<a class="jxr_linenumber" name="L75" href="#L75">75</a>          }
+<a class="jxr_linenumber" name="L76" href="#L76">76</a>      }
 <a class="jxr_linenumber" name="L77" href="#L77">77</a>  
-<a class="jxr_linenumber" name="L78" href="#L78">78</a>          @SqlUpdate(<span class="jxr_string">"insert into something (name, id) values (:name, something_id_sequence.nextval)"</span>)
-<a class="jxr_linenumber" name="L79" href="#L79">79</a>          @GetGeneratedKeys(<span class="jxr_string">"id"</span>)
-<a class="jxr_linenumber" name="L80" href="#L80">80</a>          <strong class="jxr_keyword">long</strong> insert(@Bind(<span class="jxr_string">"name"</span>) String name);
-<a class="jxr_linenumber" name="L81" href="#L81">81</a>  
-<a class="jxr_linenumber" name="L82" href="#L82">82</a>          @SqlQuery(<span class="jxr_string">"select name from something where id = :id"</span>)
-<a class="jxr_linenumber" name="L83" href="#L83">83</a>          String findNameById(@Bind <strong class="jxr_keyword">long</strong> id);
-<a class="jxr_linenumber" name="L84" href="#L84">84</a>      }
-<a class="jxr_linenumber" name="L85" href="#L85">85</a>  
-<a class="jxr_linenumber" name="L86" href="#L86">86</a>      @Test
-<a class="jxr_linenumber" name="L87" href="#L87">87</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testGetGeneratedKeys() <strong class="jxr_keyword">throws</strong> Exception {
-<a class="jxr_linenumber" name="L88" href="#L88">88</a>          oracleExtension.getJdbi().useExtension(DAO.<strong class="jxr_keyword">class</strong>, dao -&gt; {
-<a class="jxr_linenumber" name="L89" href="#L89">89</a>              Long fooId = dao.insert(<span class="jxr_string">"Foo"</span>);
-<a class="jxr_linenumber" name="L90" href="#L90">90</a>              <strong class="jxr_keyword">long</strong> barId = dao.insert(<span class="jxr_string">"Bar"</span>);
-<a class="jxr_linenumber" name="L91" href="#L91">91</a>  
-<a class="jxr_linenumber" name="L92" href="#L92">92</a>              assertThat(dao.findNameById(fooId)).isEqualTo(<span class="jxr_string">"Foo"</span>);
-<a class="jxr_linenumber" name="L93" href="#L93">93</a>              assertThat(dao.findNameById(barId)).isEqualTo(<span class="jxr_string">"Bar"</span>);
-<a class="jxr_linenumber" name="L94" href="#L94">94</a>          });
-<a class="jxr_linenumber" name="L95" href="#L95">95</a>      }
-<a class="jxr_linenumber" name="L96" href="#L96">96</a>  }
+<a class="jxr_linenumber" name="L78" href="#L78">78</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">interface</strong> DAO {
+<a class="jxr_linenumber" name="L79" href="#L79">79</a>  
+<a class="jxr_linenumber" name="L80" href="#L80">80</a>          @SqlUpdate(<span class="jxr_string">"insert into something (name, id) values (:name, something_id_sequence.nextval)"</span>)
+<a class="jxr_linenumber" name="L81" href="#L81">81</a>          @GetGeneratedKeys(<span class="jxr_string">"id"</span>)
+<a class="jxr_linenumber" name="L82" href="#L82">82</a>          <strong class="jxr_keyword">long</strong> insert(@Bind(<span class="jxr_string">"name"</span>) String name);
+<a class="jxr_linenumber" name="L83" href="#L83">83</a>  
+<a class="jxr_linenumber" name="L84" href="#L84">84</a>          @SqlQuery(<span class="jxr_string">"select name from something where id = :id"</span>)
+<a class="jxr_linenumber" name="L85" href="#L85">85</a>          String findNameById(@Bind <strong class="jxr_keyword">long</strong> id);
+<a class="jxr_linenumber" name="L86" href="#L86">86</a>      }
+<a class="jxr_linenumber" name="L87" href="#L87">87</a>  
+<a class="jxr_linenumber" name="L88" href="#L88">88</a>      @Test
+<a class="jxr_linenumber" name="L89" href="#L89">89</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testGetGeneratedKeys() <strong class="jxr_keyword">throws</strong> Exception {
+<a class="jxr_linenumber" name="L90" href="#L90">90</a>          oracleExtension.getJdbi().useExtension(DAO.<strong class="jxr_keyword">class</strong>, dao -&gt; {
+<a class="jxr_linenumber" name="L91" href="#L91">91</a>              Long fooId = dao.insert(<span class="jxr_string">"Foo"</span>);
+<a class="jxr_linenumber" name="L92" href="#L92">92</a>              <strong class="jxr_keyword">long</strong> barId = dao.insert(<span class="jxr_string">"Bar"</span>);
+<a class="jxr_linenumber" name="L93" href="#L93">93</a>  
+<a class="jxr_linenumber" name="L94" href="#L94">94</a>              assertThat(dao.findNameById(fooId)).isEqualTo(<span class="jxr_string">"Foo"</span>);
+<a class="jxr_linenumber" name="L95" href="#L95">95</a>              assertThat(dao.findNameById(barId)).isEqualTo(<span class="jxr_string">"Bar"</span>);
+<a class="jxr_linenumber" name="L96" href="#L96">96</a>          });
+<a class="jxr_linenumber" name="L97" href="#L97">97</a>      }
+<a class="jxr_linenumber" name="L98" href="#L98">98</a>  }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2023. All rights reserved.</div>
