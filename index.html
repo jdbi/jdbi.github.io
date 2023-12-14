@@ -531,7 +531,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.42.1-SNAPSHOT,</span>
-<span id="revdate">12/13/2023 08:26 -0800</span>
+<span id="revdate">12/13/2023 20:40 -0800</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -1937,7 +1937,10 @@ When using <a href="./apidocs/org/jdbi/v3/core/Jdbi.html#open()" target="_blank"
 <p><a href="./apidocs/org/jdbi/v3/core/statement/Call.html" target="_blank" rel="noopener">Call</a> - execute a stored procedure. See <a href="./apidocs/org/jdbi/v3/core/Handle.html#createCall(java.lang.CharSequence)" target="_blank" rel="noopener">createCall</a></p>
 </li>
 <li>
-<p><a href="./apidocs/org/jdbi/v3/core/statement/Script.html" target="_blank" rel="noopener">Script</a> - a SQL script containing multiple statements separated by <code>;</code> that is executed as a batch. See <a href="./apidocs/org/jdbi/v3/core/Handle.html#createScript(java.lang.CharSequence)" target="_blank" rel="noopener">createScript</a></p>
+<p><a href="./apidocs/org/jdbi/v3/core/statement/Script.html" target="_blank" rel="noopener">Script</a> - a SQL script containing multiple statements separated by <code>;</code> that is executed as a batch. See also <a href="./apidocs/org/jdbi/v3/core/Handle.html#createScript(java.lang.CharSequence)" target="_blank" rel="noopener">createScript</a></p>
+</li>
+<li>
+<p><a href="./apidocs/org/jdbi/v3/core/statement/Metadata.html" target="_blank" rel="noopener">Metadata</a> - SQL Metadata access.</p>
 </li>
 </ul>
 </div>
@@ -2436,6 +2439,32 @@ can be executed in a single <strong>Batch</strong> or individually.</p>
 
     assertThat(results).containsExactly(<span class="integer">1</span>, <span class="integer">1</span>);
 }</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Script parsing uses a generic SQL parser and creates separate statements. Depending on the database and its driver, there are small differences in how the script needs to be parsed. The most notorious issue is whether the parsed statements need to retain a trailing semicolon or not. Some databases (e.g. Oracle) require the trailing semicolon while others (e.g. MySQL) actually report a syntax error if it is present. As we can not please everyone equally, there is the <a href="./apidocs/org/jdbi/v3/core/statement/SqlStatements.html#setScriptStatementsNeedSemicolon(boolean)" target="_blank" rel="noopener">setScriptStatementsNeedSemicolon()</a> switch, which controls this behavior. By default, Jdbi <strong>retains the semicolon if present</strong>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Turning off the trailing semicolons for databases that have problems with it:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">jdbi.withHandle(h -&gt; {
+    <span class="comment">// turn off trailing semicolons for script statements</span>
+    h.getConfig(SqlStatements.class).setScriptStatementsNeedSemicolon(<span class="predefined-constant">false</span>);
+    <span class="keyword">return</span> h.createScript(ClasspathSqlLocator.removingComments()
+            .getResource(<span class="string"><span class="delimiter">&quot;</span><span class="content">scripts/mysql-script.sql</span><span class="delimiter">&quot;</span></span>))
+        .execute();
+    });</code></pre>
 </div>
 </div>
 </div>
@@ -6376,7 +6405,7 @@ transaction is rolled back and an exception is thrown when the Handle is closed.
 </table></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" rowspan="7"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/core/statement/SqlStatements.html" target="_blank" rel="noopener">SqlStatements</a></p></td>
+<td class="tableblock halign-left valign-top" rowspan="8"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/core/statement/SqlStatements.html" target="_blank" rel="noopener">SqlStatements</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">attachAllStatementsForCleanup</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>false</code></p></td>
@@ -6396,6 +6425,12 @@ If this setting is <code>true</code>, then statements are attached by default.</
 <td class="tableblock halign-center valign-top"><p class="tableblock">Integer</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">&lt;unset&gt;</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Sets the query timeout value in seconds. This value is used to call <a href="https://docs.oracle.com/javase/11/docs/api/java/sql/Statement.html#setQueryTimeout-int-" target="_blank" rel="noopener">Statement#setQueryTimeout</a>. Enforcement of the timeout depends on the JDBC driver.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">scriptStatementsNeedSemicolon</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>true</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Controls whether the statements parsed in a <a href="./apidocs/org/jdbi/v3/core/statements/Script.html" target="_blank" rel="noopener">Script</a> object have trailing semicolons or not. This fixes some issues with specific JDBC drivers (e.g. MySQL when using <code>rewriteBatchedStatements=true</code>).</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">sqlParser</p></td>
@@ -15363,7 +15398,7 @@ return types, or on <a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlBatch.
 <div id="footer">
 <div id="footer-text">
 Version 3.42.1-SNAPSHOT<br>
-Last updated 12/13/2023 08:26 -0800
+Last updated 12/13/2023 20:40 -0800
 </div>
 </div>
 </body>
