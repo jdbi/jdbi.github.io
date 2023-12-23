@@ -531,7 +531,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.42.1-SNAPSHOT,</span>
-<span id="revdate">12/23/2023 13:40 -0800</span>
+<span id="revdate">12/23/2023 14:01 -0800</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -762,7 +762,8 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </li>
 <li><a href="#_combining_sql_object_and_the_core_api">13.7. Combining SQL Object and the core API</a>
 <ul class="sectlevel3">
-<li><a href="#_using_default_methods_with_the_sqlobject_mixin">13.7.1. Using default Methods with the <code>SqlObject</code> mixin</a></li>
+<li><a href="#sqlobject-mixin">13.7.1. Getting access to the handle with the <code>SqlObject</code> mixin</a></li>
+<li><a href="#_using_default_methods">13.7.2. Using default Methods</a></li>
 </ul>
 </li>
 <li><a href="#_sql_object_transactions">13.8. SQL Object Transactions</a>
@@ -9629,7 +9630,7 @@ This is most useful for SQL object instances that get passed from other code, ha
 </table>
 </div>
 <div class="sect3">
-<h4 id="_using_default_methods_with_the_sqlobject_mixin"><a class="anchor" href="#_using_default_methods_with_the_sqlobject_mixin"></a><a class="link" href="#_using_default_methods_with_the_sqlobject_mixin">13.7.1. Using default Methods with the <code>SqlObject</code> mixin</a></h4>
+<h4 id="sqlobject-mixin"><a class="anchor" href="#sqlobject-mixin"></a><a class="link" href="#sqlobject-mixin">13.7.1. Getting access to the handle with the <code>SqlObject</code> mixin</a></h4>
 <div class="paragraph">
 <p>Occasionally a use case comes up where SQL Method annotations don&#8217;t fit. In these situations, it is possible to "drop down" to the Core API using interface
 <code>default</code> methods and the <a href="./apidocs/org/jdbi/v3/sqlobject/SqlObject.html" target="_blank" rel="noopener">SqlObject</a> mixin interface:</p>
@@ -9645,7 +9646,80 @@ This is most useful for SQL object instances that get passed from other code, ha
 </div>
 </div>
 <div class="paragraph">
-<p>Default methods can also be used to group multiple SQL operations into a single method call:</p>
+<p>The <a href="./apidocs/org/jdbi/v3/core/Handle.html" target="_blank" rel="noopener">Handle</a> can be used for most operations available in the fluent API.</p>
+</div>
+<div class="paragraph">
+<p>A handle should only be obtained in this way for very specific reasons, and it is a good practice to restrain the use of the handle to code within a Dao class (e.g. a default method). If fluent code and declarative code needs to be mixed, moving from fluent to declarative should be preferred.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+A very notable exception is modifying the configuration of the handle. When a SQL object is created, every method on the SQL object gets its own, distinct configuration object. Calling any configuration modification method (any <code>set*</code> or <code>register*</code> method from the <a href="./apidocs/org/jdbi/v3/core/config/Configurable.html" target="_blank" rel="noopener">Configurable</a> interface) will modify <strong>only</strong> the configuration object for the <a href="./apidocs/org/jdbi/v3/sqlobject/SqlObject.html#getHandle()" target="_blank" rel="noopener">getHandle()</a> method but not for any other method.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The following code example <strong>DOES NOT WORK!</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Test</span>
+<span class="directive">public</span> <span class="type">void</span> testSqlObjectHandleConfigDoesNotWork() {
+    <span class="predefined-type">List</span>&lt;Sulu&gt; sulus = <span class="predefined-type">Arrays</span>.asList(
+        <span class="keyword">new</span> Sulu(<span class="integer">1</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">George</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Takei</span><span class="delimiter">&quot;</span></span>),
+        <span class="keyword">new</span> Sulu(<span class="integer">2</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">John</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Cho</span><span class="delimiter">&quot;</span></span>));
+
+    db.useExtension(SuluDao.class, s -&gt; {
+        Handle h = s.getHandle();
+        <span class="comment">// THIS DOES NOT WORK! The argument factory is only</span>
+        <span class="comment">// registered for the getHandle() method, not</span>
+        <span class="comment">// for the insertSulus() method!</span>
+        h.registerArgument(<span class="keyword">new</span> SuluArgumentFactory());
+        <span class="comment">// This call results in an exception that no argument</span>
+        <span class="comment">// factory for the Sulu data type could be found!</span>
+        dao.insertSulus(sulus);
+    }
+}
+
+<span class="directive">public</span> <span class="type">interface</span> <span class="class">SuluDao</span> <span class="directive">extends</span> SqlObject {
+    <span class="annotation">@SqlBatch</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into something (id, name) values (:bean.id, :sulu)</span><span class="delimiter">&quot;</span></span>)
+    <span class="type">void</span> insertSulus(<span class="annotation">@Bind</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">sulu</span><span class="delimiter">&quot;</span></span>) <span class="annotation">@BindBean</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">bean</span><span class="delimiter">&quot;</span></span>) <span class="predefined-type">List</span>&lt;Sulu&gt; sulus);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The code above can be rewritten to move from fluent to declarative API:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">void</span> testMixFluentAndSqlObject() {
+    <span class="predefined-type">List</span>&lt;Sulu&gt; sulus = <span class="predefined-type">Arrays</span>.asList(
+        <span class="keyword">new</span> Sulu(<span class="integer">1</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">George</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Takei</span><span class="delimiter">&quot;</span></span>),
+        <span class="keyword">new</span> Sulu(<span class="integer">2</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">John</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Cho</span><span class="delimiter">&quot;</span></span>));
+
+    db.withHandle(h -&gt; {
+        <span class="comment">// register the argument with the handle before attaching</span>
+        <span class="comment">// the dao to the handle</span>
+        h.registerArgument(<span class="keyword">new</span> SuluArgumentFactory());
+        SuluDao dao = h.attach(SuluDao.class);
+        <span class="comment">// all methods on the dao have received the configuration with the</span>
+        <span class="comment">// argument factory</span>
+        dao.insertSulus(sulus);
+        <span class="keyword">return</span> <span class="predefined-constant">null</span>;
+    });
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_using_default_methods"><a class="anchor" href="#_using_default_methods"></a><a class="link" href="#_using_default_methods">13.7.2. Using default Methods</a></h4>
+<div class="paragraph">
+<p>Default methods can be used to group multiple SQL operations into a single method call:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9834,6 +9908,18 @@ transaction isolation level:</p>
     }
 }</code></pre>
 </div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The <a href="./apidocs/org/jdbi/v3/sqlobject/transaction/Transactional.html" target="_blank" rel="noopener">Transactional</a> interface  has the same constraints as the <a href="#sqlobject-mixin">SQLObject</a> mixin. Especially modifying the configuration by obtaining a handle using <a href="./apidocs/org/jdbi/v3/sqlobject/SqlObject.html#getHandle()" target="_blank" rel="noopener">getHandle()</a> and then calling any <code>set*</code> or <code>register*</code> method from the <a href="./apidocs/org/jdbi/v3/core/config/Configurable.html" target="_blank" rel="noopener">Configurable</a> interface is not supported and will modify only the configuration for the <a href="./apidocs/org/jdbi/v3/sqlobject/SqlObject.html#getHandle()" target="_blank" rel="noopener">getHandle()</a> method.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -10217,7 +10303,7 @@ ClasspathSqlLocator.removingComments().locate(<span class="string"><span class="
 <div class="paragraph">
 <p>Each piece of core or extension that wishes to participate in
 configuration defines a configuration class, for example the <code>SqlStatements</code>
-class stores SqlStatement related configuration.  Then, on any <code>Configurable</code> context
+class stores SqlStatement related configuration.  Then, on any <a href="./apidocs/org/jdbi/v3/core/config/Configurable.html" target="_blank" rel="noopener">Configurable</a> context
 (like a <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> or <a href="./apidocs/org/jdbi/v3/core/Handle.html" target="_blank" rel="noopener">Handle</a>) you can change configuration in a type safe way:</p>
 </div>
 <div class="listingblock">
@@ -15398,7 +15484,7 @@ return types, or on <a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlBatch.
 <div id="footer">
 <div id="footer-text">
 Version 3.42.1-SNAPSHOT<br>
-Last updated 12/23/2023 13:40 -0800
+Last updated 12/23/2023 14:01 -0800
 </div>
 </div>
 </body>
