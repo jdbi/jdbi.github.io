@@ -531,7 +531,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.42.1-SNAPSHOT,</span>
-<span id="revdate">12/28/2023 09:48 -0800</span>
+<span id="revdate">01/02/2024 21:52 -0800</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -603,7 +603,8 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_explicit_statement_resource_management">5.3.1. Explicit statement resource management</a></li>
 <li><a href="#_implicit_statement_resource_cleanup">5.3.2. Implicit statement resource cleanup</a></li>
 <li><a href="#resources-with-streams-iterators">5.3.3. Resources with Streams and Iterators</a></li>
-<li><a href="#_attaching_statements_to_the_handle_lifecycle">5.3.4. Attaching statements to the handle lifecycle</a></li>
+<li><a href="#_outparameters_return_values_for_stored_procedures">5.3.4. OutParameters return values for stored procedures</a></li>
+<li><a href="#_attaching_statements_to_the_handle_lifecycle">5.3.5. Attaching statements to the handle lifecycle</a></li>
 </ul>
 </li>
 </ul>
@@ -726,7 +727,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_mapping_arguments_to_positional_parameters">13.3.1. Mapping arguments to positional parameters</a></li>
 <li><a href="#mapping-arguments">13.3.2. Mapping arguments to named parameters</a></li>
 <li><a href="#_mapping_arguments_to_java_parameter_names">13.3.3. Mapping arguments to Java parameter names</a></li>
-<li><a href="#_consumer_and_function_arguments">13.3.4. Consumer and Function arguments</a></li>
+<li><a href="#consumer-and-function-arguments">13.3.4. Consumer and Function arguments</a></li>
 <li><a href="#_mapping_arguments_to_defined_attributes">13.3.5. Mapping arguments to defined attributes</a></li>
 </ul>
 </li>
@@ -870,9 +871,9 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </li>
 <li><a href="#extension-framework">18. The Extension Framework</a>
 <ul class="sectlevel2">
-<li><a href="#_using_jdbi_extensions">18.1. Using Jdbi extensions</a>
+<li><a href="#using-jdbi-extensions">18.1. Using Jdbi extensions</a>
 <ul class="sectlevel3">
-<li><a href="#_on_demand_extensions">18.1.1. On-demand extensions</a></li>
+<li><a href="#on-demand-extension">18.1.1. On-demand extensions</a></li>
 <li><a href="#extension-handle-lifecycle">18.1.2. Handle lifecycle for extensions</a></li>
 </ul>
 </li>
@@ -2334,10 +2335,20 @@ Suppressed: org.postgresql.util.PSQLException: ERROR: duplicate key value violat
 <div class="sect3">
 <h4 id="_stored_procedure_calls"><a class="anchor" href="#_stored_procedure_calls"></a><a class="link" href="#_stored_procedure_calls">4.3.5. Stored Procedure Calls</a></h4>
 <div class="paragraph">
-<p>A <strong>Call</strong> invokes a database stored procedure.</p>
+<p>A <strong>Call</strong> invokes a database stored procedure. Stored procedures execute on the database and take input and output parameters.</p>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s assume an existing stored procedure as an example:</p>
+<p>Most databases solely support input and output parameters. Input parameters can be mapped using the standard Jdbi
+mechanisms for parameters, while output values are returned using <a href="./apidocs/org/jdbi/v3/core/statement/OutParameters.html" target="_blank" rel="noopener">OutParameters</a> objects.</p>
+</div>
+<div class="paragraph">
+<p>Some databases do not support all SQL types as out parameters but use a mechanism similar to a query and
+return a <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.sql/java/sql/ResultSet.html" target="_blank" rel="noopener">ResultSet</a> object.</p>
+</div>
+<div class="sect4">
+<h5 id="_using_outparameters_to_access_database_return_values"><a class="anchor" href="#_using_outparameters_to_access_database_return_values"></a><a class="link" href="#_using_outparameters_to_access_database_return_values">Using OutParameters to access database return values</a></h5>
+<div class="paragraph">
+<p>This is an example for a PostgreSQL stored procedure. PostgreSQL (and most other databases) stored procedures use <code>IN</code> parameters to pass values into the procedure and <code>OUT</code> parameters to return values.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2353,9 +2364,8 @@ Suppressed: org.postgresql.util.PSQLException: ERROR: duplicate key value violat
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">OutParameters result = handle
-    .createCall(<span class="string"><span class="delimiter">&quot;</span><span class="content">{:sum = call add(:a, :b)}</span><span class="delimiter">&quot;</span></span>) <i class="conum" data-value="1"></i><b>(1)</b>
-        .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">a</span><span class="delimiter">&quot;</span></span>, <span class="integer">13</span>) <i class="conum" data-value="2"></i><b>(2)</b>
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">try</span> (Call call = handle.createCall(<span class="string"><span class="delimiter">&quot;</span><span class="content">{:sum = call add(:a, :b)}</span><span class="delimiter">&quot;</span></span>)) { <i class="conum" data-value="1"></i><b>(1)</b>
+    OutParameters result = call.bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">a</span><span class="delimiter">&quot;</span></span>, <span class="integer">13</span>) <i class="conum" data-value="2"></i><b>(2)</b>
         .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">b</span><span class="delimiter">&quot;</span></span>, <span class="integer">9</span>) <i class="conum" data-value="2"></i><b>(2)</b>
         .registerOutParameter(<span class="string"><span class="delimiter">&quot;</span><span class="content">sum</span><span class="delimiter">&quot;</span></span>, <span class="predefined-type">Types</span>.INTEGER)  <i class="conum" data-value="3"></i><b>(3)</b> <i class="conum" data-value="4"></i><b>(4)</b>
         .invoke(); <i class="conum" data-value="5"></i><b>(5)</b></code></pre>
@@ -2394,10 +2404,8 @@ procedure itself.</td>
 <div class="paragraph">
 <p>Invoking the stored procedure returns an
 <a href="./apidocs/org/jdbi/v3/core/statement/OutParameters.html" target="_blank" rel="noopener">OutParameters</a> object, which
-contains the value(s) returned from the stored procedure call.</p>
-</div>
-<div class="paragraph">
-<p>Now we can extract the result(s) from <a href="./apidocs/org/jdbi/v3/core/statement/OutParameters.html" target="_blank" rel="noopener">OutParameters</a>:</p>
+contains the value(s) returned from the stored procedure call and the results can
+be extracted from it:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2405,11 +2413,16 @@ contains the value(s) returned from the stored procedure call.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>It is possible to return open cursors as a result-like object by declaring it
-as <code>Types.REF_CURSOR</code> and then inspecting it via <code>OutParameters.getRowSet()</code>.
-Usually this must be done in a transaction, and the results must be consumed
-before closing the statement by processing it using the <code>Call.invoke(Consumer)</code>
-or <code>Call.invoke(Function)</code> callback style.</p>
+<p>It is possible to access open cursors as a result set objects by declaring them
+as <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.sql/java/sql/Types.html#REF_CURSOR" target="_blank" rel="noopener">Types.REF_CURSOR</a> and then using <a href="./apidocs/org/jdbi/v3/core/statement/OutParameters.html#getRowSet(int)" target="_blank" rel="noopener">OutParameters#getRowSet()</a> to access them as <a href="./apidocs/org/jdbi/v3/core/result/ResultBearing.html" target="_blank" rel="noopener">ResultBearing</a> objects. This requires  support from the JDBC driver for the database and is not supported by all databases. Please consult the documentation for the database driver first before filing a bug.</p>
+</div>
+<div class="paragraph">
+<p>Results must be consumed before closing the statement because closing it will also close all resources and result sets associated with it.</p>
+</div>
+<div class="paragraph">
+<p>The <a href="./apidocs/org/jdbi/v3/core/statement/OutParameters.html" target="_blank" rel="noopener">OutParameters</a> object can either be returned from the Call using <a href="./apidocs/org/jdbi/v3/core/statement/Call.html#invoke()" target="_blank" rel="noopener">Call#invoke()</a> or it can be processed as
+a consumer argument with <a href="./apidocs/org/jdbi/v3/core/statement/Call.html#invoke(java.util.function.Consumer)" target="_blank" rel="noopener">Call#invoke(Consumer)</a> or a function argument with
+<a href="./apidocs/org/jdbi/v3/core/statement/Call.html#invoke(java.util.function.Function)" target="_blank" rel="noopener">Call#invoke(Function)</a>.</p>
 </div>
 <div class="admonitionblock warning">
 <table>
@@ -2419,11 +2432,79 @@ or <code>Call.invoke(Function)</code> callback style.</p>
 </td>
 <td class="content">
 Due to design constraints within JDBC, the parameter data types available
-through <a href="./apidocs/org/jdbi/v3/core/statement/OutParameters.html" target="_blank" rel="noopener">OutParameters</a> is limited to those types supported directly by JDBC.
-This cannot be expanded through e.g. mapper registration.
+through <a href="./apidocs/org/jdbi/v3/core/statement/OutParameters.html" target="_blank" rel="noopener">OutParameters</a> are limited to those types supported directly by JDBC. This cannot be expanded through e.g. mapper registration.
 </td>
 </tr>
 </table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_using_a_resultset_for_procedure_output_values"><a class="anchor" href="#_using_a_resultset_for_procedure_output_values"></a><a class="link" href="#_using_a_resultset_for_procedure_output_values">Using a ResultSet for procedure output values</a></h5>
+<div class="paragraph">
+<p>Some database drivers might return a <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.sql/java/sql/ResultSet.html" target="_blank" rel="noopener">ResultSet</a> containing the results of a stored procedure. This result set is available as a <a href="./apidocs/org/jdbi/v3/core/result/ResultBearing.html" target="_blank" rel="noopener">ResultBearing</a> object by calling <a href="./apidocs/org/jdbi/v3/core/statement/OutParameters.html#getResultSet()" target="_blank" rel="noopener">OutParameters#getResultSet()</a>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+While returning a result set from a procedure call is supported in the JDBC standard, it is pretty uncommon and only very few databases support it. The most prominent one is the JDBC driver for MS SQLServer. Most databases will either return null or an empty result set; in this case the <a href="./apidocs/org/jdbi/v3/core/statement/OutParameters.html#getResultSet()" target="_blank" rel="noopener">OutParameters#getResultSet()</a> will return an empty <a href="./apidocs/org/jdbi/v3/core/result/ResultBearing.html" target="_blank" rel="noopener">ResultBearing</a> object.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>This is the equivalent procedure from above for MS SQLServer using a result set:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="sql"><span class="class">CREATE</span> <span class="type">PROCEDURE</span> mssql_add
+    <span class="variable">@a</span> <span class="predefined-type">INT</span>,
+    <span class="variable">@b</span> <span class="predefined-type">INT</span>
+<span class="keyword">AS</span>
+<span class="class">BEGIN</span>
+  <span class="class">SELECT</span> <span class="variable">@a</span> + <span class="variable">@b</span>;
+<span class="keyword">END</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To access data from this procedure, it retrieves the result set using <a href="./apidocs/org/jdbi/v3/core/statement/OutParameters.html#getResultSet()" target="_blank" rel="noopener">OutParameters#getResultSet()</a>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">try</span> (Call call = h.createCall(<span class="string"><span class="delimiter">&quot;</span><span class="content">{call mssql_add(:a, :b)}</span><span class="delimiter">&quot;</span></span>)) {
+    call.bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">a</span><span class="delimiter">&quot;</span></span>, <span class="integer">13</span>)
+        .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">b</span><span class="delimiter">&quot;</span></span>, <span class="integer">9</span>);
+    OutParameters output = call.invoke();
+
+    <span class="type">int</span> sum = output.getResultSet() <i class="conum" data-value="1"></i><b>(1)</b>
+        .mapTo(<span class="predefined-type">Integer</span>.class) <i class="conum" data-value="2"></i><b>(2)</b>
+        .one();
+
+    assertThat(sum).isEqualTo(<span class="integer">22</span>);
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Retrieve the output from the procedure using a result set.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Map the first column in the result set to an integer value.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>It may not be necessary to use a result set if the JDBC driver also supports OUT parameters. However, e.g. MS SQL Server does not allow <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.sql/java/sql/Types.html#REF_CURSOR" target="_blank" rel="noopener">Types.REF_CURSOR</a> as OUT parameters and requires the use of a result set.</p>
+</div>
+<div class="paragraph">
+<p>It is possible to mix OUT parameters and a result set. In this case, the result set should be consumed before accessing any out parameters as the database driver might invalidate the result set when accessing out parameters.</p>
+</div>
 </div>
 </div>
 <div class="sect3">
@@ -2953,7 +3034,104 @@ Optional&lt;User&gt; user = stream.findFirst(); <i class="conum" data-value="3">
 </div>
 </div>
 <div class="sect3">
-<h4 id="_attaching_statements_to_the_handle_lifecycle"><a class="anchor" href="#_attaching_statements_to_the_handle_lifecycle"></a><a class="link" href="#_attaching_statements_to_the_handle_lifecycle">5.3.4. Attaching statements to the handle lifecycle</a></h4>
+<h4 id="_outparameters_return_values_for_stored_procedures"><a class="anchor" href="#_outparameters_return_values_for_stored_procedures"></a><a class="link" href="#_outparameters_return_values_for_stored_procedures">5.3.4. OutParameters return values for stored procedures</a></h4>
+<div class="paragraph">
+<p>Interacting with stored procedures generally involves passing values back and forth from database. Jdbi uses <a href="./apidocs/org/jdbi/v3/core/statement/OutParameters.html" target="_blank" rel="noopener">OutParameters</a> objects which are returned from the various invoke methods of the <a href="./apidocs/org/jdbi/v3/core/statement/Call.html" target="_blank" rel="noopener">Call</a> object.</p>
+</div>
+<div class="paragraph">
+<p>When using <a href="./apidocs/org/jdbi/v3/core/statement/OutParameters.html" target="_blank" rel="noopener">OutParameters</a> with stored procedures, the <a href="./apidocs/org/jdbi/v3/core/statement/Call.html" target="_blank" rel="noopener">Call</a> statement <strong>must</strong> be managed. Calling <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/AutoCloseable.html#close--" target="_blank" rel="noopener">close()</a> on the statement terminates the operation and release all resources.</p>
+</div>
+<div class="paragraph">
+<p>Closing the stream or iterator associated with an object returned by <a href="./apidocs/org/jdbi/v3/core/statement/OutParameters.html#getResultSet()" target="_blank" rel="noopener">OutParameters#getResultSet()</a> or <a href="./apidocs/org/jdbi/v3/core/statement/OutParameters.html#getRowSet(int)" target="_blank" rel="noopener">OutParameters#getRowSet()</a> is <strong>not</strong> sufficient as the <a href="./apidocs/org/jdbi/v3/core/statement/OutParameters.html" target="_blank" rel="noopener">OutParameters</a> object may hold multiple result sets.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">try</span> (Call call = h.createCall(<span class="string"><span class="delimiter">&quot;</span><span class="content">{call some_procedure()}</span><span class="delimiter">&quot;</span></span>)) {
+    OutParameters output = call.invoke();
+
+    output.getRowSet(<span class="string"><span class="delimiter">&quot;</span><span class="content">result</span><span class="delimiter">&quot;</span></span>) <i class="conum" data-value="1"></i><b>(1)</b>
+        .mapTo(SomeType.class) <i class="conum" data-value="2"></i><b>(2)</b>
+        .useStream(stream -&gt; { ... consume stream ... }); <i class="conum" data-value="3"></i><b>(3)</b>
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Retrieve the cursor for the <code>result</code> parameter</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Map the results onto a data type using a row mapper</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Consume the stream of objects with a consumer argument.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>When the stream terminates, the <a href="./apidocs/org/jdbi/v3/core/statement/Call.html" target="_blank" rel="noopener">Call</a> statement is <strong>not</strong> closed as it may have returned multiple cursor parameters. It must be managed using try-with-resources as shown above.</p>
+</div>
+<div class="paragraph">
+<p><a href="./apidocs/org/jdbi/v3/core/statement/OutParameters.html" target="_blank" rel="noopener">OutParameters</a> objects are cursor-type "live" objects. They require an active statment and any operation that closes and releases the statement will cause future operations on a related <a href="./apidocs/org/jdbi/v3/core/statement/OutParameters.html" target="_blank" rel="noopener">OutParameters</a> object to fail.</p>
+</div>
+<div class="paragraph">
+<p>The following code <strong>does not work</strong>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// DOES NOT WORK!</span>
+OutParameters out  = jdbi.withHandle(handle -&gt; {
+    Call call = handle.createCall(<span class="string"><span class="delimiter">&quot;</span><span class="content">{call some_procedure()}</span><span class="delimiter">&quot;</span></span>);
+    <span class="keyword">return</span> call.invoke(); <i class="conum" data-value="1"></i><b>(1)</b>
+}); <i class="conum" data-value="2"></i><b>(2)</b>
+<span class="predefined-type">String</span> result = out.getString(<span class="string"><span class="delimiter">&quot;</span><span class="content">result</span><span class="delimiter">&quot;</span></span>); <i class="conum" data-value="3"></i><b>(3)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Creates an OutParameter object and returns it from withHandle.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Leaving the callback closes the handle and releases all resources including the statement.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>throws an exception because closing the handle and the statement invalidates the <a href="./apidocs/org/jdbi/v3/core/statement/OutParameters.html" target="_blank" rel="noopener">OutParameters</a> object.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>This can be avoided by either processing the <a href="./apidocs/org/jdbi/v3/core/statement/OutParameters.html" target="_blank" rel="noopener">OutParameters</a> object within the handle callback or by using either the <a href="./apidocs/org/jdbi/v3/core/statement/Call.html#invoke(java.util.function.Consumer)" target="_blank" rel="noopener">Call#invoke(Consumer)</a> or
+<a href="./apidocs/org/jdbi/v3/core/statement/Call.html#invoke(java.util.function.Function)" target="_blank" rel="noopener">Call#invoke(Function)</a> callback methods:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// process the OutParameters within the handle callback</span>
+<span class="predefined-type">String</span> result  = jdbi.withHandle(handle -&gt; {
+    Call call = handle.createCall(<span class="string"><span class="delimiter">&quot;</span><span class="content">{call some_procedure()}</span><span class="delimiter">&quot;</span></span>);
+    OutParameters out = call.invoke();
+    <span class="keyword">return</span> out.getString(<span class="string"><span class="delimiter">&quot;</span><span class="content">result</span><span class="delimiter">&quot;</span></span>);
+});</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// use a callback method from the Call statement</span>
+<span class="predefined-type">String</span> result  = jdbi.withHandle(handle -&gt; {
+    Call call = handle.createCall(<span class="string"><span class="delimiter">&quot;</span><span class="content">{call some_procedure()}</span><span class="delimiter">&quot;</span></span>);
+    <span class="keyword">return</span> call.invoke(out -&gt; out.getString(<span class="string"><span class="delimiter">&quot;</span><span class="content">result</span><span class="delimiter">&quot;</span></span>));
+});</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_attaching_statements_to_the_handle_lifecycle"><a class="anchor" href="#_attaching_statements_to_the_handle_lifecycle"></a><a class="link" href="#_attaching_statements_to_the_handle_lifecycle">5.3.5. Attaching statements to the handle lifecycle</a></h4>
 <div class="paragraph">
 <p>An elegant way to manage resources is attaching the statement to the handle lifecycle. Calling the <a href="./apidocs/org/jdbi/v3/core/statement/SqlStatement.html#attachToHandleForCleanup()" target="_blank" rel="noopener">attachToHandleForCleanup()</a> method, which is available on <a href="#_statement_types">SQL statements</a>, associates the statement with the handle. When the handle is closed, all attached statements that have not been cleaned up yet, will also be released.</p>
 </div>
@@ -3626,7 +3804,7 @@ query using a lambda expression:</p>
 </td>
 <td class="content">
 There are three different types being used in the above example. <a href="./apidocs/org/jdbi/v3/core/statement/Query.html" target="_blank" rel="noopener">Query</a>,
-returned by <code>Handle.createQuery()</code>, implements the <code>ResultBearing</code> interface.
+returned by <code>Handle.createQuery()</code>, implements the <a href="./apidocs/org/jdbi/v3/core/result/ResultBearing.html" target="_blank" rel="noopener">ResultBearing</a> interface.
 The <code>ResultBearing.map()</code> method takes a <a href="./apidocs/org/jdbi/v3/core/mapper/RowMapper.html" target="_blank" rel="noopener">RowMapper&lt;T&gt;</a> and returns a
 <code>ResultIterable&lt;T&gt;</code>. Finally, <code>ResultBearing.list()</code> collects each row in the
 result set into a <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html" target="_blank" rel="noopener">List&lt;T&gt;</a>.
@@ -7252,26 +7430,44 @@ rows changed by a statement, or the number matched by the query (regardless of w
 <a href="./apidocs/org/jdbi/v3/core/statement/OutParameters.html" target="_blank" rel="noopener">OutParameters</a> if the stored procedure has any output parameters. Each output parameter must be registered
 with the <a href="./apidocs/org/jdbi/v3/sqlobject/customizer/OutParameter.html" target="_blank" rel="noopener">@OutParameter</a> annotation.</p>
 </div>
+<div class="paragraph">
+<p>Returning an <a href="./apidocs/org/jdbi/v3/core/statement/OutParameters.html" target="_blank" rel="noopener">OutParameters</a> object from an extension method is <strong>incompatible</strong> with <a href="#on-demand-extension">on-demand objects</a>. Any <a href="#using-jdbi-extensions">other extension method</a> can be used to create extension objects that can provide output parameters. Alternatively, it is possible to use <a href="#sql-call-consumer-arguments">consumer or function arguments</a> with on-demand extensions.</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">OrderDao</span> {
+    <span class="comment">// only works with Handle#attach() or Jdbi#withExtension() / Jdbi#useExtension()</span>
     <span class="annotation">@SqlCall</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">{call prepare_order_from_cart(:cartId, :orderId, :orderTotal)}</span><span class="delimiter">&quot;</span></span>)
     <span class="annotation">@OutParameter</span>(name = <span class="string"><span class="delimiter">&quot;</span><span class="content">orderId</span><span class="delimiter">&quot;</span></span>,    sqlType = java.sql.Types.BIGINT)
     <span class="annotation">@OutParameter</span>(name = <span class="string"><span class="delimiter">&quot;</span><span class="content">orderTotal</span><span class="delimiter">&quot;</span></span>, sqlType = java.sql.Types.DECIMAL)
     OutParameters prepareOrderFromCart(<span class="annotation">@Bind</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">cartId</span><span class="delimiter">&quot;</span></span>) <span class="type">long</span> cartId);
+
+    <span class="comment">// using a consumer argument works with any extension method</span>
+    <span class="annotation">@SqlCall</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">{call prepare_order_from_cart(:cartId, :orderId, :orderTotal)}</span><span class="delimiter">&quot;</span></span>)
+    <span class="annotation">@OutParameter</span>(name = <span class="string"><span class="delimiter">&quot;</span><span class="content">orderId</span><span class="delimiter">&quot;</span></span>,    sqlType = java.sql.Types.BIGINT)
+    <span class="annotation">@OutParameter</span>(name = <span class="string"><span class="delimiter">&quot;</span><span class="content">orderTotal</span><span class="delimiter">&quot;</span></span>, sqlType = java.sql.Types.DECIMAL)
+    prepareOrderFromCart(<span class="annotation">@Bind</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">cartId</span><span class="delimiter">&quot;</span></span>) <span class="type">long</span> cartId, Consumer&lt;OutParameters&gt; consumer);
+
+    <span class="comment">// using a function argument also works with any extension method</span>
+    <span class="annotation">@SqlCall</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">{call prepare_order_from_cart(:cartId, :orderId, :orderTotal)}</span><span class="delimiter">&quot;</span></span>)
+    <span class="annotation">@OutParameter</span>(name = <span class="string"><span class="delimiter">&quot;</span><span class="content">orderId</span><span class="delimiter">&quot;</span></span>,    sqlType = java.sql.Types.BIGINT)
+    <span class="annotation">@OutParameter</span>(name = <span class="string"><span class="delimiter">&quot;</span><span class="content">orderTotal</span><span class="delimiter">&quot;</span></span>, sqlType = java.sql.Types.DECIMAL)
+    SomeResult prepareOrderFromCart(<span class="annotation">@Bind</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">cartId</span><span class="delimiter">&quot;</span></span>) <span class="type">long</span> cartId, Function&lt;OutParameters, SomeResult&gt; function);
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>Individual output parameters can be extracted from the
-<a href="./apidocs/org/jdbi/v3/core/statement/OutParameters.html" target="_blank" rel="noopener">OutParameters</a> returned from
-the method:</p>
+<a href="./apidocs/org/jdbi/v3/core/statement/OutParameters.html" target="_blank" rel="noopener">OutParameters</a> object:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">OutParameters outParams = orderDao.prepareOrderFromCart(cartId);
-<span class="type">long</span> orderId = outParams.getLong(<span class="string"><span class="delimiter">&quot;</span><span class="content">orderId</span><span class="delimiter">&quot;</span></span>);
-<span class="type">double</span> orderTotal = outParams.getDouble(<span class="string"><span class="delimiter">&quot;</span><span class="content">orderTotal</span><span class="delimiter">&quot;</span></span>);</code></pre>
+<pre class="CodeRay highlight"><code data-lang="java">db.useExtension(OrderDao.class, orderDao -&gt; {
+    OutParameters outParams = orderDao.prepareOrderFromCart(cartId);
+    <span class="type">long</span> orderId = outParams.getLong(<span class="string"><span class="delimiter">&quot;</span><span class="content">orderId</span><span class="delimiter">&quot;</span></span>);
+    <span class="type">double</span> orderTotal = outParams.getDouble(<span class="string"><span class="delimiter">&quot;</span><span class="content">orderTotal</span><span class="delimiter">&quot;</span></span>);
+    ...
+});</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -7417,6 +7613,9 @@ for operations with no result. These methods take a callback (or a lambda object
 </div>
 <div class="paragraph">
 <p>The performance of on-demand objects depends on the database and database connection pooling. For performance critical operations, it may be better to manage the handle manually and use attached objects.</p>
+</div>
+<div class="paragraph">
+<p>On-demand instances open and close the underlying <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.sql/java/sql/PreparedStatement.html" target="_blank" rel="noopener">PreparedStatement</a> objects for every call to an extension method. They are incompatible with any object or operation that relies on an open statement to retrieve data from the database (e.g. <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java/util/stream/Stream.html" target="_blank" rel="noopener">Stream</a> and <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java/util/Iterator.html" target="_blank" rel="noopener">Iterator</a> for query operations or <a href="./apidocs/org/jdbi/v3/core/statement/OutParameters.html" target="_blank" rel="noopener">OutParameters</a> for call operations). It is possible to use <a href="#consumer-and-function-arguments">consumer or function arguments</a> to process these values as the callback is executed while the statement is still open.</p>
 </div>
 <div class="sect3">
 <h4 id="_interface_default_methods"><a class="anchor" href="#_interface_default_methods"></a><a class="link" href="#_interface_default_methods">13.2.1. Interface default methods</a></h4>
@@ -7783,7 +7982,7 @@ When using <a href="https://docs.oracle.com/en/java/javase/14/language/records.h
 </div>
 </div>
 <div class="sect3">
-<h4 id="_consumer_and_function_arguments"><a class="anchor" href="#_consumer_and_function_arguments"></a><a class="link" href="#_consumer_and_function_arguments">13.3.4. Consumer and Function arguments</a></h4>
+<h4 id="consumer-and-function-arguments"><a class="anchor" href="#consumer-and-function-arguments"></a><a class="link" href="#consumer-and-function-arguments">13.3.4. Consumer and Function arguments</a></h4>
 <div class="sect4">
 <h5 id="_consumer_arguments"><a class="anchor" href="#_consumer_arguments"></a><a class="link" href="#_consumer_arguments">Consumer arguments</a></h5>
 <div class="paragraph">
@@ -13234,7 +13433,7 @@ Jdbi core framework and provide new functionality.</p>
 <p>Jdbi provides the <a href="#sql-objects">SQLObject plugin</a>, which offers a declarative API by placing annotations on interface methods.</p>
 </div>
 <div class="sect2">
-<h3 id="_using_jdbi_extensions"><a class="anchor" href="#_using_jdbi_extensions"></a><a class="link" href="#_using_jdbi_extensions">18.1. Using Jdbi extensions</a></h3>
+<h3 id="using-jdbi-extensions"><a class="anchor" href="#using-jdbi-extensions"></a><a class="link" href="#using-jdbi-extensions">18.1. Using Jdbi extensions</a></h3>
 <div class="paragraph">
 <p><em>Extension types are usually java interface classes.</em> Any interface can be an extension type.</p>
 </div>
@@ -13304,7 +13503,7 @@ Optional&lt;Something&gt; result = dao.findSomething(<span class="integer">1</sp
 <p>The <a href="./apidocs/org/jdbi/v3/core/Jdbi.html#withExtension(java.lang.Class,org.jdbi.v3.core.extension.ExtensionCallback)" target="_blank" rel="noopener">Jdbi#withExtension()</a>, <a href="./apidocs/org/jdbi/v3/core/Jdbi.html#useExtension(java.lang.Class,org.jdbi.v3.core.extension.ExtensionConsumer)" target="_blank" rel="noopener">Jdbi#useExtension()</a> and <a href="./apidocs/org/jdbi/v3/core/Handle.html#attach(java.lang.Class)" target="_blank" rel="noopener">Handle#attach()</a> methods are the most common way to use extension type implementations.</p>
 </div>
 <div class="sect3">
-<h4 id="_on_demand_extensions"><a class="anchor" href="#_on_demand_extensions"></a><a class="link" href="#_on_demand_extensions">18.1.1. On-demand extensions</a></h4>
+<h4 id="on-demand-extension"><a class="anchor" href="#on-demand-extension"></a><a class="link" href="#on-demand-extension">18.1.1. On-demand extensions</a></h4>
 <div class="paragraph">
 <p>An extension type implementation can be acquired by calling the <a href="./apidocs/org/jdbi/v3/core/Jdbi.html#onDemand(java.lang.Class)" target="_blank" rel="noopener">Jdbi#onDemand()</a> method which returns
 an implementation of the extension type that will transparently create a new handle instance when a method on the extension type is called.</p>
@@ -15379,7 +15578,7 @@ from <code>RowMapper</code>--the current row number can be retrieved directly fr
 <code>Query.mapToMap()</code>, <code>.mapToBean(type)</code>, <code>.map(mapper)</code> or <code>.mapTo(type)</code>.</p>
 </li>
 <li>
-<p><code>ResultBearing&lt;T&gt;</code> was refactored into <code>ResultBearing</code> (no generic parameter)
+<p><code>ResultBearing&lt;T&gt;</code> was refactored into <a href="./apidocs/org/jdbi/v3/core/result/ResultBearing.html" target="_blank" rel="noopener">ResultBearing</a> (no generic parameter)
 and <code>ResultIterable&lt;T&gt;</code>. Call <code>.mapTo(type)</code> to get a <code>ResultIterable&lt;T&gt;</code>.</p>
 </li>
 <li>
@@ -15484,7 +15683,7 @@ return types, or on <a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlBatch.
 <div id="footer">
 <div id="footer-text">
 Version 3.42.1-SNAPSHOT<br>
-Last updated 12/28/2023 09:48 -0800
+Last updated 01/02/2024 21:52 -0800
 </div>
 </div>
 </body>
