@@ -531,7 +531,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.44.2-SNAPSHOT,</span>
-<span id="revdate">02/09/2024 14:08 -0800</span>
+<span id="revdate">02/09/2024 14:27 -0800</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -10838,67 +10838,159 @@ extension.withCredentials(<span class="string"><span class="delimiter">&quot;</s
 }</code></pre>
 </div>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The <code>dbContainer</code> object is registered as class level field for sharing between all the tests in the test class <a href="https://junit.org/junit5/docs/current/user-guide/#extensions-registration-programmatic-static-fields" target="_blank" rel="noopener">as described in the JUnit 5 documentation</a>. Some IDEs warn that this field should not be static. <strong>This is a false positive/bug</strong>. Changing <code>dbContainer</code> to an instance field will result in starting and stopping a new database per test which is a significant performance penalty.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>The <a href="./apidocs/org/jdbi/v3/testing/junit5/tc/JdbiTestcontainersExtension.html" target="_blank" rel="noopener">JdbiTestcontainersExtension</a> has built-in support to isolate each test method in a test class. The container can be declared as a static class member which speeds up test execution significantly.</p>
 </div>
 <div class="paragraph">
-<p>There is built-in support for MySQL, MariaDB, TiDB, PostgreSQL, CockroachDB, YugabyteDB, ClickHouse, Oracle XE, Trino and MS SQLServer. It also supports the various compatible flavors (such as PostGIS for PostgreSQL).</p>
+<p>There is built-in support for MySQL, MariaDB, TiDB, PostgreSQL, CockroachDB, YugabyteDB, ClickHouseDB, Oracle XE, Oracle free, Trino and MS SQLServer. It also supports the various compatible flavors (such as PostGIS for PostgreSQL).</p>
+</div>
+<div class="paragraph">
+<p>By default, Jdbi tries to run every test with its own schema instance in a single schema. For database engines that do not support schemas, it will use separate catalogs. For database engines that do not support catalogs or schemas (e.g. MySQL), it will use separate databases.</p>
+</div>
+<div class="paragraph">
+<p>For each database, Jdbi can provide custom user, catalog and schema names and requires one or more SQL statements to initialize an isolated instance for testing.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Supported Testcontainer databases</caption>
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Database</th>
+<th class="tableblock halign-left valign-top">Isolation type</th>
+<th class="tableblock halign-left valign-top">Database User</th>
+<th class="tableblock halign-left valign-top">Catalog/Database name</th>
+<th class="tableblock halign-left valign-top">Schema name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MySQL, MariaDB, TiDB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Catalog</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>root</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(random)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PostgreSQL, CockroachDB, YugabyteDB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Schema</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(default)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>test</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(random)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ClickhouseDB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Catalog</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(default)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(random)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Oracle XE, Oracle free</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Schema</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>system</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(default catalog)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(random)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Trino</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Schema</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(default)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>memory</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(random)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MS SQLServer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Catalog</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sa</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(random)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+<div class="ulist">
+<ul>
+<li>
+<p>Database user <em>(default)</em>: Jdbi uses the default user as returned by the testcontainer class.</p>
+</li>
+<li>
+<p>Isolation type <em>Catalog</em>: A new catalog (or database) is created for each test. The schema name is not used or the database does not support schemas.</p>
+</li>
+<li>
+<p>Isolation type <em>Schema</em>:  A new schema is created in the specified catalog (or database).</p>
+</li>
+<li>
+<p>Catalog or Schema name <em>(random)</em>: Jdbi will create a random name.</p>
+</li>
+</ul>
 </div>
 <div class="sect3">
 <h4 id="_providing_custom_database_information"><a class="anchor" href="#_providing_custom_database_information"></a><a class="link" href="#_providing_custom_database_information">15.3.1. Providing custom database information</a></h4>
 <div class="paragraph">
-<p>The <a href="./apidocs/org/jdbi/v3/testing/junit5/tc/JdbiTestcontainersExtension.html" target="_blank" rel="noopener">JdbiTestcontainersExtension</a> creates a new database or schema (depending on the database engine) for each test. This speeds up test execution. In some cases (e.g. when using a not yet supported database engine or when using a custom docker image), it may be necessary to provide a custom instance of the <a href="./apidocs/org/jdbi/v3/testing/junit5/tc/TestcontainersDatabaseInformation.html" target="_blank" rel="noopener">TestcontainersDatabaseInformation</a> class that describes how to manage a specific database engine.</p>
+<p>While Jdbi makes an effort to support all databases provided by the Testcontainers project that support JDBC, there are some situation when it is necessary to provide additional information:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Using a database that is supported by testcontainer but not yet by Jdbi.</p>
+</li>
+<li>
+<p>Using a custom docker image that is incompatible with the default Jdbi testcontainer support.</p>
+</li>
+<li>
+<p>Require specific behavior in tests that is different from the Jdbi testcontainer support.</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>Here are examples for MySQL and PostgreSQL:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// MySQL has only databases, no schemata. The Jdbi extension creates a new database</span>
-<span class="comment">// for each test method.</span>
-<span class="directive">private</span> <span class="directive">static</span> <span class="directive">final</span> TestcontainersDatabaseInformation MYSQL = TestcontainersDatabaseInformation.of(
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">root</span><span class="delimiter">&quot;</span></span>,  <span class="comment">// Testcontainers provides the 'root' superuser for MySQL instances.</span>
-        <span class="predefined-constant">null</span>,    <span class="comment">// do not override the generated catalog name</span>
-        <span class="predefined-constant">null</span>,    <span class="comment">// do not override the generated schema name (which is not used by MySQL)</span>
-        <span class="comment">// create a new database from the catalog name</span>
-        (catalogName, schemaName) -&gt; format(<span class="string"><span class="delimiter">&quot;</span><span class="content">CREATE DATABASE %s</span><span class="delimiter">&quot;</span></span>, catalogName)
-);
-
-<span class="comment">// PostgreSQL knows about schemata but needs to use the predefined &quot;test&quot; database.</span>
-<span class="comment">// The Jdbi extension creates a new schema for each test method</span>
-<span class="directive">private</span> <span class="directive">static</span> <span class="directive">final</span> TestcontainersDatabaseInformation POSTGRES = TestcontainersDatabaseInformation.of(
-        <span class="predefined-constant">null</span>,   <span class="comment">// Use the default user that testcontainers provides</span>
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">test</span><span class="delimiter">&quot;</span></span>, <span class="comment">// override the generated catalog name with 'test'</span>
-        <span class="predefined-constant">null</span>,   <span class="comment">// do not override the generated schema name</span>
-        <span class="comment">// create a new schema from the schema name</span>
-        (catalogName, schemaName) -&gt; format(<span class="string"><span class="delimiter">&quot;</span><span class="content">CREATE SCHEMA %s</span><span class="delimiter">&quot;</span></span>, schemaName)
-);</code></pre>
-</div>
+<p>The <a href="./apidocs/org/jdbi/v3/testing/junit5/tc/TestcontainersDatabaseInformation.html#of(java.lang.String,java.lang.String,java.lang.String,java.util.function.BiFunction)" target="_blank" rel="noopener">TestcontainersDatabaseInformation#of()</a> method allows creation of custom database information instances which then can be passed into <a href="./apidocs/org/jdbi/v3/testing/junit5/tc/JdbiTestcontainersExtension.html#instance(org.jdbi.v3.testing.junit5.tc.TestcontainersDatabaseInformation,org.testcontainers.containers.JdbcDatabaseContainer)" target="_blank" rel="noopener">JdbiTestcontainersExtension#instance(TestcontainersDatabaseInformation, JdbcDatabaseContainer)</a> to create extensions with custom behavior.</p>
 </div>
 <div class="paragraph">
-<p>See the Javadoc for the <a href="./apidocs/org/jdbi/v3/testing/junit5/tc/TestcontainersDatabaseInformation.html" target="_blank" rel="noopener">TestcontainersDatabaseInformation</a> class for further details.</p>
-</div>
-<div class="paragraph">
-<p>The <a href="./apidocs/org/jdbi/v3/testing/junit5/tc/JdbiTestcontainersExtension.html" target="_blank" rel="noopener">JdbiTestcontainersExtension</a> provides the <a href="./apidocs/org/jdbi/v3/testing/junit5/tc/JdbiTestcontainersExtension.html#instance(org.jdbi.v3.testing.junit5.tc.TestcontainersDatabaseInformation,org.testcontainers.containers.JdbcDatabaseContainer)" target="_blank" rel="noopener">instance(TestcontainersDatabaseInformation, JdbcDatabaseContainer)</a> method which uses a custom database information object:</p>
+<p>This is an example that uses a custom user with a special database image:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Testcontainers</span>
-<span class="type">class</span> <span class="class">TestWithCustomContainer</span> {
+<span class="type">class</span> <span class="class">UseCustomMysqlContainer</span> {
+<span class="directive">private</span> <span class="directive">static</span> <span class="directive">final</span> TestcontainersDatabaseInformation CUSTOM_MYSQL =
+    TestcontainersDatabaseInformation.of(
+            <span class="string"><span class="delimiter">&quot;</span><span class="content">custom_user</span><span class="delimiter">&quot;</span></span>,  <span class="comment">// This user must have privileges to create databases</span>
+            <span class="predefined-constant">null</span>,    <span class="comment">// do not override the generated catalog name</span>
+            <span class="predefined-constant">null</span>,    <span class="comment">// mysql does not know anything about schemas, so this value is ignored</span>
+            <span class="comment">// create a new database from the catalog name</span>
+            (catalogName, schemaName) -&gt; format(<span class="string"><span class="delimiter">&quot;</span><span class="content">CREATE DATABASE %s</span><span class="delimiter">&quot;</span></span>, catalogName)
+    );
+
     <span class="annotation">@Container</span>
-    <span class="directive">static</span> JdbcDatabaseContainer&lt;?&gt; dbContainer = <span class="keyword">new</span> PostgreSQLContainer&lt;&gt;(
-       DockerImageName.parse(<span class="string"><span class="delimiter">&quot;</span><span class="content">custom-image</span><span class="delimiter">&quot;</span></span>).asCompatibleSubstituteFor(<span class="string"><span class="delimiter">&quot;</span><span class="content">postgres</span><span class="delimiter">&quot;</span></span>));
-
-
-    <span class="directive">static</span> <span class="directive">final</span> TestcontainersDatabaseInformation CUSTOM_DATABASE =
-       TestcontainersDatabaseInformation.of( ... custom setup ...);
+    <span class="directive">static</span> JdbcDatabaseContainer&lt;?&gt; dbContainer = <span class="keyword">new</span> MySQLContainer&lt;&gt;(
+       DockerImageName.parse(<span class="string"><span class="delimiter">&quot;</span><span class="content">custom/mysql-image</span><span class="delimiter">&quot;</span></span>).asCompatibleSubstituteFor(<span class="string"><span class="delimiter">&quot;</span><span class="content">mysql</span><span class="delimiter">&quot;</span></span>));
 
     <span class="annotation">@RegisterExtension</span>
-    JdbiExtension extension = JdbiTestcontainersExtension.instance(CUSTOM_DATABASE, dbContainer);
+    JdbiExtension extension = JdbiTestcontainersExtension.instance(CUSTOM_MYSQL, dbContainer);
 
-    <span class="comment">// ... test code using the custom engine</span>
+    <span class="comment">// ... test code using the custom mysql instance</span>
 }</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>The Javadoc for the <a href="./apidocs/org/jdbi/v3/testing/junit5/tc/TestcontainersDatabaseInformation.html" target="_blank" rel="noopener">TestcontainersDatabaseInformation</a> class has additional details on how to create custom <a href="./apidocs/org/jdbi/v3/testing/junit5/tc/JdbiTestcontainersExtension.html" target="_blank" rel="noopener">JdbiTestcontainersExtension</a> instances.</p>
 </div>
 </div>
 </div>
@@ -11423,7 +11515,7 @@ A Jdbi definition module requires that a DataSource object is bound within Guice
 <p>When implementing the <a href="./apidocs/org/jdbi/v3/guice/AbstractJdbiDefinitionModule.html#jdbiBinder()" target="_blank" rel="noopener">configureJdbi()</a> method, a number of convenience methods are available as shown above. These methods return Guice LinkedBindingBuilder instances and allow the full range of bindings that guice supports (classes, instances, providers etc).</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 1. Supported bindings</caption>
+<caption class="title">Table 2. Supported bindings</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -15713,7 +15805,7 @@ return types, or on <a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlBatch.
 <div id="footer">
 <div id="footer-text">
 Version 3.44.2-SNAPSHOT<br>
-Last updated 02/09/2024 14:08 -0800
+Last updated 02/09/2024 14:27 -0800
 </div>
 </div>
 </body>
