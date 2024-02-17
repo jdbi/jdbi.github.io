@@ -95,6 +95,10 @@ loadScripts(document, 'script');</script>
  and drives the <code>mapper</code> and <code>collector</code> processes to
  produce results.</div>
 </div>
+<div class="col-first even-row-color"><a href="#org.jdbi.v3.testing.junit5.tc">org.jdbi.v3.testing.junit5.tc</a></div>
+<div class="col-last even-row-color">
+<div class="block">Jdbi test support for <a href="https://testcontainers.org/">Testcontainer based JDBC containers</a>.</div>
+</div>
 </div>
 <section class="class-uses">
 <ul class="block-list">
@@ -412,6 +416,32 @@ loadScripts(document, 'script');</script>
 <div class="col-second even-row-color"><span class="type-name-label">ResultIterable.</span><code><a href="../../core/result/ResultIterable.html#toCollection(java.util.function.Supplier)" class="member-name-link">toCollection</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Supplier.html" title="class or interface in java.util.function" class="external-link">Supplier</a>&lt;C&gt;&nbsp;supplier)</code></div>
 <div class="col-last even-row-color">
 <div class="block">Collect the results into a collection object similar to <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/stream/Collectors.html#toCollection(java.util.function.Supplier)" title="class or interface in java.util.stream" class="external-link"><code>Collectors.toCollection(Supplier)</code></a>.</div>
+</div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="org.jdbi.v3.testing.junit5.tc">
+<h2>Uses of <a href="../Alpha.html" title="annotation in org.jdbi.v3.meta">Alpha</a> in <a href="../../testing/junit5/tc/package-summary.html">org.jdbi.v3.testing.junit5.tc</a></h2>
+<div class="caption"><span>Methods in <a href="../../testing/junit5/tc/package-summary.html">org.jdbi.v3.testing.junit5.tc</a> with annotations of type <a href="../Alpha.html" title="annotation in org.jdbi.v3.meta">Alpha</a></span></div>
+<div class="summary-table three-column-summary">
+<div class="table-header col-first">Modifier and Type</div>
+<div class="table-header col-second">Method</div>
+<div class="table-header col-last">Description</div>
+<div class="col-first even-row-color"><code>int</code></div>
+<div class="col-second even-row-color"><span class="type-name-label">TestcontainersDatabaseInformation.</span><code><a href="../../testing/junit5/tc/TestcontainersDatabaseInformation.html#getShutdownWaitTimeInSeconds()" class="member-name-link">getShutdownWaitTimeInSeconds</a>()</code></div>
+<div class="col-last even-row-color">
+<div class="block">Returns the time in seconds that a test will wait to shut down the Jdbi extension.</div>
+</div>
+<div class="col-first odd-row-color"><code><a href="../../testing/junit5/tc/JdbiTestcontainersExtension.html" title="class in org.jdbi.v3.testing.junit5.tc">JdbiTestcontainersExtension</a></code></div>
+<div class="col-second odd-row-color"><span class="type-name-label">JdbiTestcontainersExtension.</span><code><a href="../../testing/junit5/tc/JdbiTestcontainersExtension.html#setShutdownWaitTimeInSeconds(int)" class="member-name-link">setShutdownWaitTimeInSeconds</a><wbr>(int&nbsp;seconds)</code></div>
+<div class="col-last odd-row-color">
+<div class="block">Sets the maximum wait time for shutting down the extension.</div>
+</div>
+<div class="col-first even-row-color"><code>void</code></div>
+<div class="col-second even-row-color"><span class="type-name-label">TestcontainersDatabaseInformation.</span><code><a href="../../testing/junit5/tc/TestcontainersDatabaseInformation.html#setShutdownWaitTimeInSeconds(int)" class="member-name-link">setShutdownWaitTimeInSeconds</a><wbr>(int&nbsp;shutdownWaitTimeInSeconds)</code></div>
+<div class="col-last even-row-color">
+<div class="block">Sets the wait time in seconds that a test will wait to shut down the Jdbi extension.</div>
 </div>
 </div>
 </section>

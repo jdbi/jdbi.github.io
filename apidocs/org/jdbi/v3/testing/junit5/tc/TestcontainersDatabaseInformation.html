@@ -132,20 +132,30 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Returns a <a href="TestcontainersDatabaseInformation.html" title="class in org.jdbi.v3.testing.junit5.tc"><code>TestcontainersDatabaseInformation</code></a> instance for a given container instance class.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="TestcontainersDatabaseInformation.html" title="class in org.jdbi.v3.testing.junit5.tc">TestcontainersDatabaseInformation</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#of(java.lang.String,java.lang.String,java.lang.String,java.util.function.BiFunction)" class="member-name-link">of</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;user,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getShutdownWaitTimeInSeconds()" class="member-name-link">getShutdownWaitTimeInSeconds</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the time in seconds that a test will wait to shut down the Jdbi extension.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="TestcontainersDatabaseInformation.html" title="class in org.jdbi.v3.testing.junit5.tc">TestcontainersDatabaseInformation</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#of(java.lang.String,java.lang.String,java.lang.String,java.util.function.BiFunction)" class="member-name-link">of</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;user,
  <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;catalog,
  <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;schema,
  <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/BiFunction.html" title="class or interface in java.util.function" class="external-link">BiFunction</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;createStatement)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Creates a new database information instance that describes a database.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="TestcontainersDatabaseInformation.html" title="class in org.jdbi.v3.testing.junit5.tc">TestcontainersDatabaseInformation</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#ofScript(java.lang.String,java.lang.String,java.lang.String,java.util.function.BiFunction)" class="member-name-link">ofScript</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;user,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="TestcontainersDatabaseInformation.html" title="class in org.jdbi.v3.testing.junit5.tc">TestcontainersDatabaseInformation</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#ofScript(java.lang.String,java.lang.String,java.lang.String,java.util.function.BiFunction)" class="member-name-link">ofScript</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;user,
  <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;catalog,
  <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;schema,
  <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/BiFunction.html" title="class or interface in java.util.function" class="external-link">BiFunction</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&gt;&nbsp;createStatement)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setShutdownWaitTimeInSeconds(int)" class="member-name-link">setShutdownWaitTimeInSeconds</a><wbr>(int&nbsp;shutdownWaitTimeInSeconds)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Sets the wait time in seconds that a test will wait to shut down the Jdbi extension.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
@@ -222,6 +232,37 @@ loadScripts(document, 'script');</script>
                         with the catalog and schema name and must return a list of one or more valid SQL statements.</dd>
 <dt>Returns:</dt>
 <dd>A <a href="TestcontainersDatabaseInformation.html" title="class in org.jdbi.v3.testing.junit5.tc"><code>TestcontainersDatabaseInformation</code></a> object</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getShutdownWaitTimeInSeconds()">
+<h3>getShutdownWaitTimeInSeconds</h3>
+<div class="member-signature"><span class="annotations"><a href="../../../meta/Alpha.html" title="annotation in org.jdbi.v3.meta">@Alpha</a>
+</span><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getShutdownWaitTimeInSeconds</span>()</div>
+<div class="block">Returns the time in seconds that a test will wait to shut down the Jdbi extension.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>The time to wait in seconds to shut down the Jdbi extension. 0 means wait infinitely until the extension has
+ been stopped. This can lead to infinite hangs in test cases and should be used with caution.</dd>
+<dt>Since:</dt>
+<dd>3.45.0</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="setShutdownWaitTimeInSeconds(int)">
+<h3>setShutdownWaitTimeInSeconds</h3>
+<div class="member-signature"><span class="annotations"><a href="../../../meta/Alpha.html" title="annotation in org.jdbi.v3.meta">@Alpha</a>
+</span><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setShutdownWaitTimeInSeconds</span><wbr><span class="parameters">(int&nbsp;shutdownWaitTimeInSeconds)</span></div>
+<div class="block">Sets the wait time in seconds that a test will wait to shut down the Jdbi extension.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>shutdownWaitTimeInSeconds</code> - The wait time in seconds to shut down the Jdbi extension. Can be set to 0 which means that
+                          it will wait infinitely until the extension has shut down. 0 may lead to infinite hangs in tests
+                          and should be used with caution.</dd>
+<dt>Since:</dt>
+<dd>3.45.0</dd>
 </dl>
 </section>
 </li>

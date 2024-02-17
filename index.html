@@ -531,7 +531,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.44.2-SNAPSHOT,</span>
-<span id="revdate">02/17/2024 12:27 -0800</span>
+<span id="revdate">02/17/2024 13:27 -0800</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -803,6 +803,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_using_testcontainers">15.3. Using Testcontainers</a>
 <ul class="sectlevel3">
 <li><a href="#_providing_custom_database_information">15.3.1. Providing custom database information</a></li>
+<li><a href="#_controlling_the_extension_shutdown_timeout">15.3.2. Controlling the extension shutdown timeout</a></li>
 </ul>
 </li>
 </ul>
@@ -10884,7 +10885,7 @@ The <code>dbContainer</code> object is registered as class level field for shari
 <p>The <a href="./apidocs/org/jdbi/v3/testing/junit5/tc/JdbiTestcontainersExtension.html" target="_blank" rel="noopener">JdbiTestcontainersExtension</a> has built-in support to isolate each test method in a test class. The container can be declared as a static class member which speeds up test execution significantly.</p>
 </div>
 <div class="paragraph">
-<p>There is built-in support for MySQL, MariaDB, TiDB, PostgreSQL, CockroachDB, YugabyteDB, ClickHouseDB, Oracle XE, Oracle free, Trino and MS SQLServer. It also supports the various compatible flavors (such as PostGIS for PostgreSQL).</p>
+<p>There is built-in support for MySQL, MariaDB, TiDB, PostgreSQL, CockroachDB, YugabyteDB, ClickHouseDB, Oracle XE, Oracle free, Trino, MS SQLServer and DB2. It also supports the various compatible flavors (such as PostGIS for PostgreSQL).</p>
 </div>
 <div class="paragraph">
 <p>By default, Jdbi tries to run every test with its own schema instance in a single schema. For database engines that do not support schemas, it will use separate catalogs. For database engines that do not support catalogs or schemas (e.g. MySQL), it will use separate databases.</p>
@@ -10952,6 +10953,13 @@ The <code>dbContainer</code> object is registered as class level field for shari
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>sa</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">(random)</p></td>
 <td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DB2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Schema</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(default)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>test</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(random)</p></td>
 </tr>
 </tbody>
 </table>
@@ -11021,6 +11029,31 @@ The <code>dbContainer</code> object is registered as class level field for shari
 </div>
 <div class="paragraph">
 <p>The Javadoc for the <a href="./apidocs/org/jdbi/v3/testing/junit5/tc/TestcontainersDatabaseInformation.html" target="_blank" rel="noopener">TestcontainersDatabaseInformation</a> class has additional details on how to create custom <a href="./apidocs/org/jdbi/v3/testing/junit5/tc/JdbiTestcontainersExtension.html" target="_blank" rel="noopener">JdbiTestcontainersExtension</a> instances.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_controlling_the_extension_shutdown_timeout"><a class="anchor" href="#_controlling_the_extension_shutdown_timeout"></a><a class="link" href="#_controlling_the_extension_shutdown_timeout">15.3.2. Controlling the extension shutdown timeout</a></h4>
+<div class="paragraph">
+<p>Some testcontainer based database may take a long time to create a new schema so when tests run very fast, shutting down the <a href="./apidocs/org/jdbi/v3/testing/junit5/tc/JdbiTestcontainersExtension.html" target="_blank" rel="noopener">JdbiTestcontainersExtension</a> at the end of a test may interrupt this process and log spurious messages in the logs. Those messages are benign and can be safely ignored. If it is necessary (e.g. because there is a "no messages" policy in place at your organization), the shutdown time can be extended by setting the wait time to a higher value than the default of 10 seconds:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@RegisterExtension</span>
+JdbiExtension extension = JdbiTestcontainersExtension.instance(CUSTOM_MYSQL, dbContainer)
+    .setShutdownWaitTimeInSeconds(<span class="integer">20</span>); <span class="comment">// set shutdown wait time to 20 seconds</span></code></pre>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Using a wait time of 0 seconds will wait until all of the internal state has been shutdown completely. This may result in infinite hangs of the tests when shutting down.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -16240,7 +16273,7 @@ return types, or on <a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlBatch.
 <div id="footer">
 <div id="footer-text">
 Version 3.44.2-SNAPSHOT<br>
-Last updated 02/17/2024 12:27 -0800
+Last updated 02/17/2024 13:27 -0800
 </div>
 </div>
 </body>
