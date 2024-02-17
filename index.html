@@ -531,7 +531,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.44.2-SNAPSHOT,</span>
-<span id="revdate">02/16/2024 23:05 -0800</span>
+<span id="revdate">02/16/2024 23:15 -0800</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -927,7 +927,11 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_sqllogger">19.10. SqlLogger</a></li>
 <li><a href="#_resultproducer">19.11. ResultProducer</a></li>
 <li><a href="#generator">19.12. Jdbi SQL object code generator</a></li>
-<li><a href="#_handlecallbackdecorator">19.13. HandleCallbackDecorator</a></li>
+<li><a href="#_handlecallbackdecorator">19.13. HandleCallbackDecorator</a>
+<ul class="sectlevel3">
+<li><a href="#_nesting_callbacks_with_managed_handles_and_transactions">19.13.1. Nesting Callbacks with managed Handles and Transactions</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#_appendix">20. Appendix</a>
@@ -1871,14 +1875,17 @@ assertThat(names).contains(<span class="string"><span class="delimiter">&quot;</
 });</code></pre>
 </div>
 </div>
-<div class="admonitionblock tip">
+<div class="paragraph">
+<p>You may notice the "consumer" vs "callback" naming pattern in a few  places in Jdbi. <code>with-</code> methods return a value and use objects named <code>-Callback</code>. <code>use-</code> methods do not return a value, and use objects named <code>-Consumer</code>. When referring to both type of objects, the term "callback" is used throughout the documentation.</p>
+</div>
+<div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-You may notice the "consumer" vs "callback" naming pattern in a few  places in Jdbi. Callbacks return a value, and are coupled to <code>with-</code> methods. Consumers do not return a value, and are coupled to <code>use-</code> methods.
+The <a href="#_nesting_callbacks_with_managed_handles_and_transactions">Nesting Callbacks with managed Handles and Transactions</a> chapter has more information about nesting callbacks with managed handle objects.
 </td>
 </tr>
 </table>
@@ -6185,6 +6192,18 @@ assertThat(joined).isEqualTo(JoinRowMapperTest.getExpected());</code></pre>
                     .findFirst());
 }</code></pre>
 </div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The <a href="#_nesting_callbacks_with_managed_handles_and_transactions">Nesting Callbacks with managed Handles and Transactions</a> chapter has more information about nesting callbacks with managed handle objects.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
@@ -15546,6 +15565,41 @@ or not. Jdbi already provides retry handlers for transactions, but you might wan
 }</code></pre>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_nesting_callbacks_with_managed_handles_and_transactions"><a class="anchor" href="#_nesting_callbacks_with_managed_handles_and_transactions"></a><a class="link" href="#_nesting_callbacks_with_managed_handles_and_transactions">19.13.1. Nesting Callbacks with managed Handles and Transactions</a></h4>
+<div class="paragraph">
+<p>Jdbi has a number of methods that provide a managed handle or use a managed handle, e.g. <a href="./apidocs/org/jdbi/v3/core/Jdbi.html#withHandle(org.jdbi.v3.core.HandleCallback)" target="_blank" rel="noopener">Jdbi#withHandle()</a>, <a href="./apidocs/org/jdbi/v3/core/Jdbi.html#useHandle(org.jdbi.v3.core.HandleConsumer)" target="_blank" rel="noopener">Jdbi#useHandle()</a>, <a href="./apidocs/org/jdbi/v3/core/Jdbi.html#inTransaction(org.jdbi.v3.core.HandleCallback)" target="_blank" rel="noopener">Jdbi#inTransaction()</a>, <a href="./apidocs/org/jdbi/v3/core/Jdbi.html#useTransaction(org.jdbi.v3.core.HandleConsumer)" target="_blank" rel="noopener">Jdbi#useTransaction()</a>, <a href="./apidocs/org/jdbi/v3/core/Handle.html#inTransaction(org.jdbi.v3.core.HandleCallback)" target="_blank" rel="noopener">Handle#inTransaction()</a>, <a href="./apidocs/org/jdbi/v3/core/Handle.html#useTransaction(org.jdbi.v3.core.HandleConsumer)" target="_blank" rel="noopener">HandleuseTransaction()</a>, <a href="./apidocs/org/jdbi/v3/sqlobject/SqlObject.html#withHandle(org.jdbi.v3.core.HandleCallback)" target="_blank" rel="noopener">SqlObject#withHandle()</a>, <a href="./apidocs/org/jdbi/v3/sqlobject/SqlObject.html#useHandle(org.jdbi.v3.core.HandleConsumer)" target="_blank" rel="noopener">SqlObject#useHandle()</a> and methods that use the <a href="#_sql_object_transactions">SQL Object Transactions</a> annotations.</p>
+</div>
+<div class="paragraph">
+<p>All of these methods use the same underlying mechanism to reuse the handle object if one of these methods is called from another within a callback. In this case, there is <strong>no new handle object or transaction created</strong> but the same Handle object is passed into the nested callback:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">jdbi.useHandle(outerHandle -&gt; {
+    jdbi.useTransaction(nestedHandle -&gt; {
+        jdbi.useHandle(innerHandle -&gt; {
+            <span class="comment">// all three variables (outerHandle, nestedHandle and innerHandle)</span>
+            <span class="comment">// refer to the same object</span>
+            assertThat(innerHandle).isSame(nestedHandle);
+            assertThat(innerHandle).isSame(outerHandleHandle);
+        });
+    });
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Nesting callback methods is possible but should be avoided. Reusing the Handle object in nested calls is based on the thread identity, executing methods asynchronously (on another thread) may lead to surprising results, especially when using a thread pool that may execute code on the main thread (where the nested handle would be reused) or from another thread (where a new handle object would be created). The experimental Kotlin <a href="#_coroutine_support">Coroutine support</a> manages handle objects transparently between threads for co-routines.
+</td>
+</tr>
+</table>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -15805,7 +15859,7 @@ return types, or on <a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlBatch.
 <div id="footer">
 <div id="footer-text">
 Version 3.44.2-SNAPSHOT<br>
-Last updated 02/16/2024 23:05 -0800
+Last updated 02/16/2024 23:15 -0800
 </div>
 </div>
 </body>
