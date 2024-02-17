@@ -531,7 +531,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.44.2-SNAPSHOT,</span>
-<span id="revdate">02/16/2024 23:15 -0800</span>
+<span id="revdate">02/17/2024 12:27 -0800</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -860,8 +860,19 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </ul>
 </li>
 <li><a href="#_sqlite">16.14. SQLite</a></li>
-<li><a href="#stringtemplate4">16.15. StringTemplate 4</a></li>
-<li><a href="#_vavr">16.16. Vavr</a></li>
+<li><a href="#stringtemplate4">16.15. StringTemplate 4</a>
+<ul class="sectlevel3">
+<li><a href="#_using_string_template_for_parsing">16.15.1. Using String template for parsing</a></li>
+<li><a href="#_locating_stringtemplate_files_on_the_class_path">16.15.2. Locating Stringtemplate files on the class path</a></li>
+</ul>
+</li>
+<li><a href="#_apache_freemarker">16.16. Apache Freemarker</a>
+<ul class="sectlevel3">
+<li><a href="#_using_freemarker_for_parsing">16.16.1. Using Freemarker for parsing</a></li>
+<li><a href="#_locating_freemarker_templates_on_the_class_path">16.16.2. Locating Freemarker templates on the class path</a></li>
+</ul>
+</li>
+<li><a href="#_vavr">16.17. Vavr</a></li>
 </ul>
 </li>
 <li><a href="#_cookbook">17. Cookbook</a>
@@ -2261,7 +2272,7 @@ See the
 <div class="sect3">
 <h4 id="_prepared_batches"><a class="anchor" href="#_prepared_batches"></a><a class="link" href="#_prepared_batches">4.3.4. Prepared Batches</a></h4>
 <div class="paragraph">
-<p>A <strong>PreparedBatch</strong> sends one statement to the server with many argument sets.
+<p>A <a href="./apidocs/org/jdbi/v3/core/statement/PreparedBatch.html" target="_blank" rel="noopener">PreparedBatch</a> sends one statement to the server with many argument sets.
 The statement is executed repeatedly, once for each batch of arguments that is <strong>add</strong>-ed to it.</p>
 </div>
 <div class="paragraph">
@@ -3734,7 +3745,7 @@ the <a href="./apidocs/org/jdbi/v3/core/argument/ArgumentFactory.html" target="_
 <h4 id="_using_prepared_arguments_for_batches"><a class="anchor" href="#_using_prepared_arguments_for_batches"></a><a class="link" href="#_using_prepared_arguments_for_batches">6.6.3. Using Prepared Arguments for batches</a></h4>
 <div class="paragraph">
 <p>Traditional argument factories decide to bind based on both the type and actual value of the binding.
-This is very flexible but when binding a large <code>PreparedBatch</code> it incurs a serious performance penalty
+This is very flexible but when binding a large <a href="./apidocs/org/jdbi/v3/core/statement/PreparedBatch.html" target="_blank" rel="noopener">PreparedBatch</a> it incurs a serious performance penalty
 as the entire chain of argument factories must be consulted for each batch of arguments added.
 To address this issue, implement <code>ArgumentFactory.Preparable</code> which promises to handle all values
 of a given <code>Type</code>.  Most built in argument factories now implement the Preparable interface.</p>
@@ -7780,7 +7791,7 @@ will iterate the elements in 'a,b,c,d,&#8230;&#8203;' form.</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-This annotation requires you to use a template placeholder (using the <code>&lt;field&gt;</code> notation when using the default template engine), similar to the <a href="./apidocs/org/jdbi/v3/core/statement/SqlStatement.html#bindList(java.lang.String,java.lang.Iterable)" target="_blank" rel="noopener">SqlStatement#bindList()</a> method. Templates placeholders are incompatible with batch operations such as`PreparedBatch` as they are evaluated only once and the evaluated statement is cached. If subsequent batch executions use an iterable object with a different size, the number of placeholders and arguments will not match. If the database supports array types, it is strongly recommended to use <code>bindArray()</code> with a SQL array instead of the <code>bindList()</code> method.
+This annotation requires you to use a template placeholder (using the <code>&lt;field&gt;</code> notation when using the default template engine), similar to the <a href="./apidocs/org/jdbi/v3/core/statement/SqlStatement.html#bindList(java.lang.String,java.lang.Iterable)" target="_blank" rel="noopener">SqlStatement#bindList()</a> method. Templates placeholders are incompatible with batch operations such as <a href="./apidocs/org/jdbi/v3/core/statement/PreparedBatch.html" target="_blank" rel="noopener">PreparedBatch</a> as they are evaluated only once and the evaluated statement is cached. If subsequent batch executions use an iterable object with a different size, the number of placeholders and arguments will not match. If the database supports array types, it is strongly recommended to use <code>bindArray()</code> with a SQL array instead of the <code>bindList()</code> method.
 </td>
 </tr>
 </table>
@@ -10175,7 +10186,7 @@ The <a href="./apidocs/org/jdbi/v3/sqlobject/transaction/Transactional.html" tar
 <div class="sect2">
 <h3 id="_generated_keys"><a class="anchor" href="#_generated_keys"></a><a class="link" href="#_generated_keys">14.1. Generated Keys</a></h3>
 <div class="paragraph">
-<p>An Update or PreparedBatch may automatically generate keys. These keys
+<p>An Update or <a href="./apidocs/org/jdbi/v3/core/statement/PreparedBatch.html" target="_blank" rel="noopener">PreparedBatch</a> may automatically generate keys. These keys
 are treated separately from normal results. Depending on your database and
 configuration, the entire inserted row may be available.</p>
 </div>
@@ -10678,7 +10689,7 @@ class which implements <a href="https://junit.org/junit4/javadoc/latest/org/juni
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>com.h2database<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>h2<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>2.1.212<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;version&gt;</span>2.1.224<span class="tag">&lt;/version&gt;</span>
     <span class="tag">&lt;scope&gt;</span>test<span class="tag">&lt;/scope&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
@@ -10691,7 +10702,7 @@ class which implements <a href="https://junit.org/junit4/javadoc/latest/org/juni
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>com.opentable.components<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>otj-pg-embedded<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>1.0.1<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;version&gt;</span>1.0.2<span class="tag">&lt;/version&gt;</span>
     <span class="tag">&lt;scope&gt;</span>test<span class="tag">&lt;/scope&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
@@ -11037,14 +11048,28 @@ wrapped type <code>T</code> for which a mapper / argument factory is registered.
 </ul>
 </div>
 <div class="paragraph">
-<p>To use this plugin, add a Maven dependency:</p>
+<p>To use this plugin, add a dependency:</p>
+</div>
+<div class="paragraph">
+<p>For Apache Maven:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>jdbi3-guava<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.44.2-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For Gradle:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-guava:3.44.2-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -11116,14 +11141,28 @@ and <code>varchar</code> columns in H2 and Sqlite.</p>
 <div class="sect3">
 <h4 id="_jackson_2"><a class="anchor" href="#_jackson_2"></a><a class="link" href="#_jackson_2">16.3.1. Jackson 2</a></h4>
 <div class="paragraph">
-<p>This plugin provides JSON backing through Jackson 2.</p>
+<p>This plugin provides JSON backing through Jackson 2. To use it, add a dependency:</p>
+</div>
+<div class="paragraph">
+<p>For Apache Maven:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
-  <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
-  <span class="tag">&lt;artifactId&gt;</span>jdbi3-jackson2<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>jdbi3-jackson2<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.44.2-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For Gradle:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-jackson2:3.44.2-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+}</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -11140,14 +11179,28 @@ jdbi.getConfig(Jackson2Config.class).setView(ApiProperty.class);</code></pre>
 <div class="sect3">
 <h4 id="_gson_2"><a class="anchor" href="#_gson_2"></a><a class="link" href="#_gson_2">16.3.2. Gson 2</a></h4>
 <div class="paragraph">
-<p>This plugin provides JSON backing through Gson 2.</p>
+<p>This plugin provides JSON backing through Gson 2. To use it, add a dependency:</p>
+</div>
+<div class="paragraph">
+<p>For Apache Maven:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
-  <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
-  <span class="tag">&lt;artifactId&gt;</span>jdbi3-gson2<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>jdbi3-gson2<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.44.2-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For Gradle:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-gson2:3.44.2-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+}</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -11161,14 +11214,28 @@ jdbi.getConfig(Gson2Config.class).setGson(myGson);</code></pre>
 <div class="sect3">
 <h4 id="_moshi"><a class="anchor" href="#_moshi"></a><a class="link" href="#_moshi">16.3.3. Moshi</a></h4>
 <div class="paragraph">
-<p>This plugin provides JSON backing through Moshi.</p>
+<p>This plugin provides JSON backing through Moshi. To use it, add a dependency:</p>
+</div>
+<div class="paragraph">
+<p>For Apache Maven:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>jdbi3-moshi<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.44.2-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For Gradle:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-moshi:3.44.2-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+}</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -11404,14 +11471,28 @@ configure the new <code>bindPojo</code> (or <code>@BindPojo</code>) binders:</p>
 <p>This plugin adds support for using joda-time&#8217;s <code>DateTime</code> type.</p>
 </div>
 <div class="paragraph">
-<p>To use this plugin, add a Maven dependency:</p>
+<p>To use this plugin, add a dependency:</p>
+</div>
+<div class="paragraph">
+<p>For Apache Maven:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>jdbi3-jodatime2<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.44.2-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For Gradle:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-jodatime2:3.44.2-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -12221,14 +12302,28 @@ Jdbi. "No problem boss, it already supports JPA annotations, easy-peasy!"</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>To use this plugin, add a Maven dependency:</p>
+<p>To use this plugin, add a dependency:</p>
+</div>
+<div class="paragraph">
+<p>For Apache Maven:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
-  <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
-  <span class="tag">&lt;artifactId&gt;</span>jdbi3-jpa<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>jdbi3-jpa<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.44.2-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For Gradle:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-jpa:3.44.2-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -12273,14 +12368,28 @@ also uses default parameter values in the constructor if the parameter type is
 not nullable and the value absent in the result set.</p>
 </div>
 <div class="paragraph">
-<p>To use this plugin, add a Maven dependency:</p>
+<p>To use this plugin, add a dependency:</p>
+</div>
+<div class="paragraph">
+<p>For Apache Maven:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
-  <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
-  <span class="tag">&lt;artifactId&gt;</span>jdbi3-kotlin<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>jdbi3-kotlin<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.44.2-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For Gradle:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-kotlin:3.44.2-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -12529,12 +12638,29 @@ private suspend fun selectSomething(dao: SomethingDao, id: Int): Something = cor
 <p>The <strong>jdbi3-kotlin-sqlobject</strong> plugin adds automatic parameter binding by name
 for Kotlin methods in SqlObjects as well as support for Kotlin default methods.</p>
 </div>
+<div class="paragraph">
+<p>To use it, add a dependency:</p>
+</div>
+<div class="paragraph">
+<p>For Apache Maven:</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
-  <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
-  <span class="tag">&lt;artifactId&gt;</span>jdbi3-kotlin-sqlobject<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>jdbi3-kotlin-sqlobject<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.44.2-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For Gradle:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-kotlin-sqlobject:3.44.2-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -12679,18 +12805,32 @@ lombok.copyableAnnotations += org.jdbi.v3.core.mapper.reflect.JdbiConstructor</c
 <p>This module adds support for Oracle <code>RETURNING</code> DML expressions.</p>
 </div>
 <div class="paragraph">
-<p>To use this feature, add a Maven dependency:</p>
+<p>To use this feature, add a dependency:</p>
+</div>
+<div class="paragraph">
+<p>For Apache Maven:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
-  <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
-  <span class="tag">&lt;artifactId&gt;</span>jdbi3-oracle12<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>jdbi3-oracle12<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.44.2-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Then, use the <code>OracleReturning</code> class with an <a href="./apidocs/org/jdbi/v3/core/statement/Update.html" target="_blank" rel="noopener">Update</a> or <code>PreparedBatch</code>
+<p>For Gradle:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-oracle12:3.44.2-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then, use the <a href="https://jdbi.org/modules/jdbi3-oracle12/apidocs/org/jdbi/v3/oracle12/OracleReturning.html" target="_blank" rel="noopener">OracleReturning</a> class with an <a href="./apidocs/org/jdbi/v3/core/statement/Update.html" target="_blank" rel="noopener">Update</a> or <a href="./apidocs/org/jdbi/v3/core/statement/PreparedBatch.html" target="_blank" rel="noopener">PreparedBatch</a>
 to get the returned DML.</p>
 </div>
 </div>
@@ -12701,14 +12841,28 @@ to get the returned DML.</p>
 <a href="https://jdbc.postgresql.org/" target="_blank" rel="noopener">PostgreSQL JDBC Driver</a>.</p>
 </div>
 <div class="paragraph">
-<p>To use this feature, add a Maven dependency:</p>
+<p>To use this feature, add a dependency:</p>
+</div>
+<div class="paragraph">
+<p>For Apache Maven:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
-  <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
-  <span class="tag">&lt;artifactId&gt;</span>jdbi3-postgres<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>jdbi3-postgres<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.44.2-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For Gradle:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-postgres:3.44.2-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -12889,14 +13043,28 @@ for upstream driver documentation.</p>
 We currently test with Spring 5 and Spring 6.</p>
 </div>
 <div class="paragraph">
-<p>To use <strong>jdbi-spring5</strong>, add a Maven dependency:</p>
+<p>To use <strong>jdbi-spring5</strong>, add a dependency:</p>
+</div>
+<div class="paragraph">
+<p>For Apache Maven:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>jdbi3-spring5<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.44.2-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For Gradle:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-spring5:3.44.2-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+}</code></pre>
 </div>
 </div>
 <div class="sect3">
@@ -13139,14 +13307,28 @@ with Jdbi.</p>
 supported by driver.</p>
 </div>
 <div class="paragraph">
-<p>To use this plugin, first add a Maven dependency:</p>
+<p>To use this plugin, first add a dependency:</p>
+</div>
+<div class="paragraph">
+<p>For Apache Maven:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
-  <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
-  <span class="tag">&lt;artifactId&gt;</span>jdbi3-sqlite<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>jdbi3-sqlite<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.44.2-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For Gradle:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-sqlite:3.44.2-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -13162,20 +13344,35 @@ supported by driver.</p>
 <div class="sect2">
 <h3 id="stringtemplate4"><a class="anchor" href="#stringtemplate4"></a><a class="link" href="#stringtemplate4">16.15. StringTemplate 4</a></h3>
 <div class="paragraph">
-<p>This module allows you to plug in the <a href="https://www.stringtemplate.org/" target="_blank" rel="noopener">StringTemplate 4</a> templating engine, in
-place of the standard Jdbi templating engine.</p>
+<p>This module allows you to plug in the <a href="https://www.stringtemplate.org/" target="_blank" rel="noopener">StringTemplate 4</a> templating engine, in  place of the standard Jdbi templating engine.</p>
 </div>
 <div class="paragraph">
-<p>To use module plugin, add a Maven dependency:</p>
+<p>String Template is a separate dependency:</p>
+</div>
+<div class="paragraph">
+<p>For Apache Maven:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
-  <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
-  <span class="tag">&lt;artifactId&gt;</span>jdbi3-stringtemplate4<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>jdbi3-stringtemplate4<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.44.2-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>For Gradle:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-stringtemplate4:3.44.2-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+}</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_using_string_template_for_parsing"><a class="anchor" href="#_using_string_template_for_parsing"></a><a class="link" href="#_using_string_template_for_parsing">16.15.1. Using String template for parsing</a></h4>
 <div class="paragraph">
 <p>To use StringTemplate format in SQL statements, set the template engine to <a href="./apidocs/org/jdbi/v3/stringtemplate4/StringTemplateEngine.html" target="_blank" rel="noopener">StringTemplateEngine</a>.</p>
 </div>
@@ -13208,7 +13405,27 @@ you might need to escape some SQL:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Alternatively, SQL templates can be loaded from StringTemplate group files on  the classpath:</p>
+<p>When using SQL Objects, the <a href="./apidocs/org/jdbi/v3/stringtemplate4/UseStringTemplateEngine.html" target="_blank" rel="noopener">@UseStringTemplateEngine</a> annotation activates parsing using StringTemplate:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">com.foo</span>;
+
+<span class="directive">public</span> <span class="type">interface</span> <span class="class">AccountDao</span> {
+    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT id, name </span><span class="delimiter">&quot;</span></span> +
+              <span class="string"><span class="delimiter">&quot;</span><span class="content">FROM account </span><span class="delimiter">&quot;</span></span> +
+              <span class="string"><span class="delimiter">&quot;</span><span class="content">ORDER BY &lt;if(sort)&gt; &lt;sortBy&gt;, &lt;endif&gt; id</span><span class="delimiter">&quot;</span></span>)
+    <span class="annotation">@UseStringTemplateEngine</span>
+    <span class="predefined-type">List</span>&lt;Account&gt; selectAll(<span class="annotation">@Define</span> <span class="type">boolean</span> sort,
+                            <span class="annotation">@Define</span> <span class="predefined-type">String</span> sortBy);
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_locating_stringtemplate_files_on_the_class_path"><a class="anchor" href="#_locating_stringtemplate_files_on_the_class_path"></a><a class="link" href="#_locating_stringtemplate_files_on_the_class_path">16.15.2. Locating Stringtemplate files on the class path</a></h4>
+<div class="paragraph">
+<p>SQL templates can be loaded from StringTemplate group files on the classpath by using the <a href="./apidocs/org/jdbi/v3/stringtemplate4/StringTemplateSqlLocator.html" target="_blank" rel="noopener">StringTemplateSqlLocator</a>:</p>
 </div>
 <div class="listingblock">
 <div class="title">com/foo/AccountDao.sql.stg</div>
@@ -13233,26 +13450,12 @@ selectAll(sort,sortBy) ::= &lt;&lt;
 </div>
 </div>
 <div class="paragraph">
-<p>In SQL Objects, the <code>@UseStringTemplateEngine</code> annotation sets the
-statement locator, similar to first example above.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">com.foo</span>;
-
-<span class="directive">public</span> <span class="type">interface</span> <span class="class">AccountDao</span> {
-    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT id, name </span><span class="delimiter">&quot;</span></span> +
-              <span class="string"><span class="delimiter">&quot;</span><span class="content">FROM account </span><span class="delimiter">&quot;</span></span> +
-              <span class="string"><span class="delimiter">&quot;</span><span class="content">ORDER BY &lt;if(sort)&gt; &lt;sortBy&gt;, &lt;endif&gt; id</span><span class="delimiter">&quot;</span></span>)
-    <span class="annotation">@UseStringTemplateEngine</span>
-    <span class="predefined-type">List</span>&lt;Account&gt; selectAll(<span class="annotation">@Define</span> <span class="type">boolean</span> sort,
-                            <span class="annotation">@Define</span> <span class="predefined-type">String</span> sortBy);
-}</code></pre>
-</div>
+<p>In this example, since the fully qualified class name is <code>com.foo.AccountDao</code>,
+SQL will be loaded from the file <code>com/foo/AccountDao.sql.stg</code> on the
+classpath. In the String template group file, the <code>selectAll</code> group will be located and used for rendering.</p>
 </div>
 <div class="paragraph">
-<p>Alternatively, the <code>@UseStringTemplateSqlLocator</code> annotation sets the statement
-locator, and loads SQL from a StringTemplate group file on the classpath:</p>
+<p>In SQL objects, the <a href="./apidocs/org/jdbi/v3/stringtemplate4/UseStringTemplateSqlLocator.html" target="_blank" rel="noopener">@UseStringTemplateSqlLocator</a> annotation supports loading templates from the classpath:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13267,13 +13470,11 @@ locator, and loads SQL from a StringTemplate group file on the classpath:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>In this example, since the fully qualified class name is <code>com.foo.AccountDao</code>,
-SQL will be loaded from the file <code>com/foo/AccountDao.sql.stg</code> on the
-classpath.</p>
+<p>Here, since the fully qualified class name is <code>com.foo.AccountDao</code>,
+SQL will be rendered by loading the <code>selectAll</code> template from the <code>com/foo/AccountDao.sql.stg</code> String template group file on the  classpath.</p>
 </div>
 <div class="paragraph">
-<p>By default, the template in the group with the same name as the method will be
-used. This can be overridden on the <code>@Sql___</code> annotation:</p>
+<p>By default, the method name is used to locate a template in the template group file. This can be overridden by setting a name in the sql method annotation:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13288,7 +13489,7 @@ used. This can be overridden on the <code>@Sql___</code> annotation:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>In this example, the SQL template will still be loaded from the file
+<p>In this example, the SQL template will still be loaded from the template group file
 <code>com/foo/AccountDao.sql.stg</code> on the classpath, however the <code>listSorted</code>
 template will be used, regardless of the method name.</p>
 </div>
@@ -13297,9 +13498,175 @@ template will be used, regardless of the method name.</p>
 <a href="./apidocs/org/jdbi/v3/stringtemplate4/StringTemplates.html" target="_blank" rel="noopener">StringTemplates</a> configuration class,
 like whether missing attributes are considered an error or not.</p>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The <a href="./apidocs/org/jdbi/v3/stringtemplate4/UseStringTemplateEngine.html" target="_blank" rel="noopener">@UseStringTemplateEngine</a> annotation activates parsing of the value of a SQL method annotation using the String Template engine while the <a href="./apidocs/org/jdbi/v3/stringtemplate4/UseStringTemplateSqlLocator.html" target="_blank" rel="noopener">@UseStringTemplateSqlLocator</a> uses string template group files on the class path to load and parse templates. These annotations are mutually exclusive and the behavior, if these annotations are used simultaneously, is undefined.
+</td>
+</tr>
+</table>
+</div>
+</div>
 </div>
 <div class="sect2">
-<h3 id="_vavr"><a class="anchor" href="#_vavr"></a><a class="link" href="#_vavr">16.16. Vavr</a></h3>
+<h3 id="_apache_freemarker"><a class="anchor" href="#_apache_freemarker"></a><a class="link" href="#_apache_freemarker">16.16. Apache Freemarker</a></h3>
+<div class="paragraph">
+<p>This module allows you to plug in the <a href="https://freemarker.apache.org/" target="_blank" rel="noopener">Apache Freemarker</a> templating engine, in  place of the standard Jdbi templating engine.</p>
+</div>
+<div class="paragraph">
+<p>Freemarker support is a separate module that needs to be added as a dependency:</p>
+</div>
+<div class="paragraph">
+<p>For Apache Maven:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>jdbi3-freemarker<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.44.2-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+<span class="tag">&lt;/dependency&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For Gradle:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-freemarker:3.44.2-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+}</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_using_freemarker_for_parsing"><a class="anchor" href="#_using_freemarker_for_parsing"></a><a class="link" href="#_using_freemarker_for_parsing">16.16.1. Using Freemarker for parsing</a></h4>
+<div class="paragraph">
+<p>To use the Freemarker format in SQL statements, set the template engine to <a href="./apidocs/org/jdbi/v3/freemarker/FreemarkerEngine.html" target="_blank" rel="noopener">FreemarkerEngine</a>.</p>
+</div>
+<div class="paragraph">
+<p>Defined attributes are provided to the Freemarker template engine to render the SQL:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">String</span> sortColumn = <span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>;
+<span class="predefined-type">String</span> sql = <span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT id, name </span><span class="delimiter">&quot;</span></span> +
+             <span class="string"><span class="delimiter">&quot;</span><span class="content">FROM account </span><span class="delimiter">&quot;</span></span> +
+             <span class="string"><span class="delimiter">&quot;</span><span class="content">ORDER BY &lt;#if sort&gt; ${sortBy}, &lt;/#if&gt; id</span><span class="delimiter">&quot;</span></span>;
+
+<span class="predefined-type">List</span>&lt;Account&gt; accounts = handle
+    .createQuery(sql)
+    .setTemplateEngine(FreemarkerEngine.instance())
+    .define(<span class="string"><span class="delimiter">&quot;</span><span class="content">sort</span><span class="delimiter">&quot;</span></span>, <span class="predefined-constant">true</span>)
+    .define(<span class="string"><span class="delimiter">&quot;</span><span class="content">sortBy</span><span class="delimiter">&quot;</span></span>, sortColumn)
+    .mapTo(Account.class)
+    .list();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When using SQL Objects, the <a href="./apidocs/org/jdbi/v3/freemarker/UseFreemarkerEngine.html" target="_blank" rel="noopener">@UseFreemarkerEngine</a> annotation activates parsing using Apache Freemarker.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">com.foo</span>;
+
+<span class="directive">public</span> <span class="type">interface</span> <span class="class">AccountDao</span> {
+    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT id, name </span><span class="delimiter">&quot;</span></span> +
+              <span class="string"><span class="delimiter">&quot;</span><span class="content">FROM account </span><span class="delimiter">&quot;</span></span> +
+              <span class="string"><span class="delimiter">&quot;</span><span class="content">ORDER BY &lt;#if sort&gt; ${sortBy}, &lt;/#if&gt; id</span><span class="delimiter">&quot;</span></span>)
+    <span class="annotation">@UseFreemarkerEngine</span>
+    <span class="predefined-type">List</span>&lt;Account&gt; selectAll(<span class="annotation">@Define</span> <span class="type">boolean</span> sort,
+                            <span class="annotation">@Define</span> <span class="predefined-type">String</span> sortBy);
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_locating_freemarker_templates_on_the_class_path"><a class="anchor" href="#_locating_freemarker_templates_on_the_class_path"></a><a class="link" href="#_locating_freemarker_templates_on_the_class_path">16.16.2. Locating Freemarker templates on the class path</a></h4>
+<div class="paragraph">
+<p>SQL templates can be loaded from files on the classpath by using the <a href="./apidocs/org/jdbi/v3/freemarker/FreemarkerSqlLocator.html" target="_blank" rel="noopener">FreemarkerSqlLocator</a>:</p>
+</div>
+<div class="listingblock">
+<div class="title">com/foo/AccountDao/selectAll.sql.ftl</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="injectedfreemarker">  SELECT id, name FROM account ORDER BY &lt;#if sort&gt; ${sortBy}, &lt;/#if&gt; id</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">FreemarkerSqlLocator locator = <span class="keyword">new</span> FreemarkerSqlLocator(<span class="keyword">new</span> FreemarkerConfig());
+Template template = locator.locate(AccountDao.class, <span class="string"><span class="delimiter">&quot;</span><span class="content">selectAll</span><span class="delimiter">&quot;</span></span>);
+
+<span class="predefined-type">Map</span>&lt;<span class="predefined-type">String</span>, <span class="predefined-type">Object</span>&gt; attributes = <span class="predefined-type">Map</span>.of(
+    <span class="string"><span class="delimiter">&quot;</span><span class="content">sort</span><span class="delimiter">&quot;</span></span>, <span class="predefined-constant">true</span>,
+    <span class="string"><span class="delimiter">&quot;</span><span class="content">sortBy</span><span class="delimiter">&quot;</span></span>, sortColumn);
+
+<span class="directive">final</span> <span class="predefined-type">String</span> sql;
+<span class="keyword">try</span> (<span class="predefined-type">StringWriter</span> writer = <span class="keyword">new</span> <span class="predefined-type">StringWriter</span>()) {
+    template.process(attributes, writer);
+    sql = writer.toString();
+} <span class="keyword">catch</span> (TemplateException | <span class="exception">IOException</span> e) {
+    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">IllegalStateException</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">Failed to render template </span><span class="delimiter">&quot;</span></span> + templateName, e);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In SQL Objects, the <a href="./apidocs/org/jdbi/v3/freemarker/UseFreemarkerSqlLocator.html" target="_blank" rel="noopener">@UseFreemarkerSqlLocator</a> annotation supports loading templates:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">com.foo</span>;
+
+<span class="directive">public</span> <span class="type">interface</span> <span class="class">AccountDao</span> {
+    <span class="annotation">@SqlQuery</span>
+    <span class="annotation">@UseFreemarkerSqlLocator</span>
+    <span class="predefined-type">List</span>&lt;Account&gt; selectAll(<span class="annotation">@Define</span> <span class="type">boolean</span> sort,
+                            <span class="annotation">@Define</span> <span class="predefined-type">String</span> sortBy);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this example, since the fully qualified class name is <code>com.foo.AccountDao</code>,
+SQL will be loaded from the file <code>com/foo/AccountDao/selectAll.sql.ftl</code> on the
+classpath. By default, every template must be a separate file on the class path.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">com.foo</span>;
+
+<span class="directive">public</span> <span class="type">interface</span> <span class="class">AccountDao</span> {
+    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">listSorted</span><span class="delimiter">&quot;</span></span>)
+    <span class="annotation">@UseFreemarkerSqlLocator</span>
+    <span class="predefined-type">List</span>&lt;Account&gt; selectAll(<span class="annotation">@Define</span> <span class="type">boolean</span> sort,
+                            <span class="annotation">@Define</span> <span class="predefined-type">String</span> sortBy);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Setting a value in the SQL operation affects the file loaded. In this example, changing the name to <code>listSorted</code> will load the file <code>com/foo/AccountDao/listSorted.sql.ftl</code> from the classpath.</p>
+</div>
+<div class="paragraph">
+<p>Freemarker has a wealth of configuration options, please see the <a href="https://freemarker.apache.org">Freemarker Website</a> for details.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The <a href="./apidocs/org/jdbi/v3/freemarker/UseFreemarkerEngine.html" target="_blank" rel="noopener">@UseFreemarkerEngine</a> annotation activates parsing of the value of a SQL method annotation using the Freemarker engine while the <a href="./apidocs/org/jdbi/v3/freemarker/UseFreemarkerSqlLocator.html" target="_blank" rel="noopener">@UseFreemarkerSqlLocator</a> uses files on the class path to load and parse FreeMarker templates. These annotations are mutually exclusive and the behavior, if these annotations are used simultaneously, is undefined.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_vavr"><a class="anchor" href="#_vavr"></a><a class="link" href="#_vavr">16.17. Vavr</a></h3>
 <div class="paragraph">
 <p>The Vavr Plugin offers deep integration of Jdbi with the Vavr functional library:</p>
 </div>
@@ -13331,14 +13698,28 @@ up to that index will be used.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>To use the plugin, add a Maven dependency:</p>
+<p>To use the plugin, add a dependency:</p>
+</div>
+<div class="paragraph">
+<p>For Apache Maven:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
-  <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
-  <span class="tag">&lt;artifactId&gt;</span>jdbi3-vavr<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>jdbi3-vavr<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.44.2-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For Gradle:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-vavr:3.44.2-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+}</code></pre>
 </div>
 </div>
 <div class="admonitionblock warning">
@@ -15859,7 +16240,7 @@ return types, or on <a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlBatch.
 <div id="footer">
 <div id="footer-text">
 Version 3.44.2-SNAPSHOT<br>
-Last updated 02/16/2024 23:15 -0800
+Last updated 02/17/2024 12:27 -0800
 </div>
 </div>
 </body>
