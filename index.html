@@ -531,7 +531,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.45.2-SNAPSHOT,</span>
-<span id="revdate">03/14/2024 10:19 -0700</span>
+<span id="revdate">04/15/2024 11:40 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -7498,7 +7498,7 @@ with the <a href="./apidocs/org/jdbi/v3/sqlobject/customizer/OutParameter.html" 
     <span class="annotation">@SqlCall</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">{call prepare_order_from_cart(:cartId, :orderId, :orderTotal)}</span><span class="delimiter">&quot;</span></span>)
     <span class="annotation">@OutParameter</span>(name = <span class="string"><span class="delimiter">&quot;</span><span class="content">orderId</span><span class="delimiter">&quot;</span></span>,    sqlType = java.sql.Types.BIGINT)
     <span class="annotation">@OutParameter</span>(name = <span class="string"><span class="delimiter">&quot;</span><span class="content">orderTotal</span><span class="delimiter">&quot;</span></span>, sqlType = java.sql.Types.DECIMAL)
-    prepareOrderFromCart(<span class="annotation">@Bind</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">cartId</span><span class="delimiter">&quot;</span></span>) <span class="type">long</span> cartId, Consumer&lt;OutParameters&gt; consumer);
+    <span class="type">void</span> prepareOrderFromCart(<span class="annotation">@Bind</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">cartId</span><span class="delimiter">&quot;</span></span>) <span class="type">long</span> cartId, Consumer&lt;OutParameters&gt; consumer);
 
     <span class="comment">// using a function argument also works with any extension method</span>
     <span class="annotation">@SqlCall</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">{call prepare_order_from_cart(:cartId, :orderId, :orderTotal)}</span><span class="delimiter">&quot;</span></span>)
@@ -16279,7 +16279,7 @@ return types, or on <a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlBatch.
 <div id="footer">
 <div id="footer-text">
 Version 3.45.2-SNAPSHOT<br>
-Last updated 03/14/2024 10:19 -0700
+Last updated 04/15/2024 11:40 -0700
 </div>
 </div>
 </body>
