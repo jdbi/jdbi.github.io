@@ -98,6 +98,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">JdbiOpenTelemetryPlugin</span>
 <span class="extends-implements">extends <a href="../core/spi/JdbiPlugin.Singleton.html" title="class in org.jdbi.v3.core.spi">JdbiPlugin.Singleton</a></span></div>
+<div class="block">Enable OpenTelemetry support.
+ Emits a trace span for every statement executed by Jdbi.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -140,9 +142,13 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">JdbiOpenTelemetryPlugin</a>()</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Enable OpenTelemetry support with the global OpenTelemetry instance.</div>
+</div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(io.opentelemetry.api.OpenTelemetry)" class="member-name-link">JdbiOpenTelemetryPlugin</a><wbr>(io.opentelemetry.api.OpenTelemetry&nbsp;telemetry)</code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">Enable OpenTelemetry support with the supplied OpenTelemetry instance.</div>
+</div>
 </div>
 </section>
 </li>
@@ -215,12 +221,18 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;()">
 <h3>JdbiOpenTelemetryPlugin</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">JdbiOpenTelemetryPlugin</span>()</div>
+<div class="block">Enable OpenTelemetry support with the global OpenTelemetry instance.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="&lt;init&gt;(io.opentelemetry.api.OpenTelemetry)">
 <h3>JdbiOpenTelemetryPlugin</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">JdbiOpenTelemetryPlugin</span><wbr><span class="parameters">(io.opentelemetry.api.OpenTelemetry&nbsp;telemetry)</span></div>
+<div class="block">Enable OpenTelemetry support with the supplied OpenTelemetry instance.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>telemetry</code> - the OpenTelemetry to emit spans to</dd>
+</dl>
 </section>
 </li>
 </ul>
