@@ -42,6 +42,7 @@ org.jdbi.v3.opentelemetry
 org.jdbi.v3.oracle12
 org.jdbi.v3.postgis
 org.jdbi.v3.postgres
+org.jdbi.v3.spring
 org.jdbi.v3.spring5
 org.jdbi.v3.sqlite3
 org.jdbi.v3.sqlobject
