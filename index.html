@@ -531,7 +531,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.49.0-SNAPSHOT,</span>
-<span id="revdate">02/27/2025 15:35 -0800</span>
+<span id="revdate">03/26/2025 21:36 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -1004,6 +1004,9 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h3 id="_release_documentation"><a class="anchor" href="#_release_documentation"></a><a class="link" href="#_release_documentation">Release documentation</a></h3>
 <div class="ulist">
 <ul>
+<li>
+<p><a href="https://jdbi.org/releases/3.49.0" target="_blank" rel="noopener">Release 3.49.0 - 2025-03-26</a></p>
+</li>
 <li>
 <p><a href="https://jdbi.org/releases/3.48.0" target="_blank" rel="noopener">Release 3.48.0 - 2025-02-12</a></p>
 </li>
@@ -4594,6 +4597,20 @@ This used to be called <code>@Unmappable</code>.</p>
 <td class="content">
 The <a href="./apidocs/org/jdbi/v3/core/mapper/reflect/ColumnName.html" target="_blank" rel="noopener">@ColumnName</a> annotation only applies while mapping SQL data into Java objects.
 When binding object properties (e.g. with <code>bindBean()</code>), bind the property name (<code>:id</code>) rather than the column name (<code>:user_id</code>).
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<a href="./apidocs/org/jdbi/v3/core/mapper/Nested.html" target="_blank" rel="noopener">@Nested</a> also can be used in combination with <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Optional.html" target="_blank" rel="noopener">Optional</a>.
+When mapping a value <code>@Nested Optional&lt;MyBean&gt;</code> then it will wrapped inside an optional, and will be <code>Optional.empty()</code>
+when <code>MyBean</code> itself would be null (e.g. because <code>@PropagateNull</code> annotation is used on a <code>MyBean</code> field that was null).
 </td>
 </tr>
 </table>
@@ -16356,7 +16373,7 @@ return types, or on <a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlBatch.
 <div id="footer">
 <div id="footer-text">
 Version 3.49.0-SNAPSHOT<br>
-Last updated 02/27/2025 15:35 -0800
+Last updated 03/26/2025 21:36 -0700
 </div>
 </div>
 </body>
