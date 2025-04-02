@@ -37,4 +37,3 @@ $dokka.location:org.jdbi.v3.core.kotlin/KotlinPlugin///PointingToDeclaration/jd
 $dokka.location:org.jdbi.v3.core.kotlin/KotlinPlugin/KotlinPlugin/#kotlin.Boolean#kotlin.Boolean/PointingToDeclaration/jdbi3-kotlin/org.jdbi.v3.core.kotlin/-kotlin-plugin/-kotlin-plugin.html
 $dokka.location:org.jdbi.v3.core.kotlin/KotlinPlugin/customizeJdbi/#org.jdbi.v3.core.Jdbi/PointingToDeclaration/jdbi3-kotlin/org.jdbi.v3.core.kotlin/-kotlin-plugin/customize-jdbi.html
 org.jdbi.v3.core.kotlin
-
