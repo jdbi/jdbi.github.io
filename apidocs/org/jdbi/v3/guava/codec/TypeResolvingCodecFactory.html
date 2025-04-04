@@ -153,7 +153,9 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../../core/codec/CodecFactory.html" title="class in org.jdbi.v3.core.codec">CodecFactory</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#forSingleCodec(org.jdbi.v3.core.qualifier.QualifiedType,org.jdbi.v3.core.codec.Codec)" class="member-name-link">forSingleCodec</a><wbr>(<a href="../../core/qualifier/QualifiedType.html" title="class in org.jdbi.v3.core.qualifier">QualifiedType</a>&lt;?&gt;&nbsp;type,
  <a href="../../core/codec/Codec.html" title="interface in org.jdbi.v3.core.codec">Codec</a>&lt;?&gt;&nbsp;codec)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Creates a <a href="../../core/codec/CodecFactory.html" title="class in org.jdbi.v3.core.codec"><code>CodecFactory</code></a> for a single type.</div>
+</div>
 </div>
 </div>
 </div>
@@ -194,6 +196,10 @@ loadScripts(document, 'script');</script>
 <h3>builder</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="../../core/codec/CodecFactory.Builder.html" title="class in org.jdbi.v3.core.codec">CodecFactory.Builder</a></span>&nbsp;<span class="element-name">builder</span>()</div>
 <div class="block">Returns a builder for fluent API.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>A <a href="../../core/codec/CodecFactory.Builder.html" title="class in org.jdbi.v3.core.codec"><code>CodecFactory.Builder</code></a> instance.</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -201,6 +207,14 @@ loadScripts(document, 'script');</script>
 <h3>forSingleCodec</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="../../core/codec/CodecFactory.html" title="class in org.jdbi.v3.core.codec">CodecFactory</a></span>&nbsp;<span class="element-name">forSingleCodec</span><wbr><span class="parameters">(<a href="../../core/qualifier/QualifiedType.html" title="class in org.jdbi.v3.core.qualifier">QualifiedType</a>&lt;?&gt;&nbsp;type,
  <a href="../../core/codec/Codec.html" title="interface in org.jdbi.v3.core.codec">Codec</a>&lt;?&gt;&nbsp;codec)</span></div>
+<div class="block">Creates a <a href="../../core/codec/CodecFactory.html" title="class in org.jdbi.v3.core.codec"><code>CodecFactory</code></a> for a single type.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>type</code> - The type for which the factory is created.</dd>
+<dd><code>codec</code> - The <a href="../../core/codec/Codec.html" title="interface in org.jdbi.v3.core.codec"><code>Codec</code></a> to use.</dd>
+<dt>Returns:</dt>
+<dd>A new <span class="invalid-tag">invalid input: '{@link /*missing*/}'</span> CodecFactory that will be used if the given type is requested.</dd>
+</dl>
 </section>
 </li>
 </ul>
