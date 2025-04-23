@@ -91,10 +91,11 @@ loadScripts(document, 'script');</script>
 <dd><code><a href="../core/extension/ExtensionHandlerFactory.html" title="interface in org.jdbi.v3.core.extension">ExtensionHandlerFactory</a></code></dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>
+<div class="type-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Deprecated.html#since()" title="class or interface in java.lang" class="external-link">since</a>="3.38.0",
+            <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Deprecated.html#forRemoval()" title="class or interface in java.lang" class="external-link">forRemoval</a>=true)
 </span><span class="modifiers">public interface </span><span class="element-name type-name-label">HandlerFactory</span><span class="extends-implements">
 extends <a href="../core/extension/ExtensionHandlerFactory.html" title="interface in org.jdbi.v3.core.extension">ExtensionHandlerFactory</a></span></div>
-<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated, for removal: This API element is subject to removal in a future version.</span>
 <div class="deprecation-comment">Use <a href="../core/extension/ExtensionHandlerFactory.html" title="interface in org.jdbi.v3.core.extension"><code>ExtensionHandlerFactory</code></a> instances directly.</div>
 </div>
 <div class="block">Creates Handler objects for methods annotated with a specific SQL method annotation, which satisfy the contract of
@@ -125,21 +126,21 @@ extends <a href="../core/extension/ExtensionHandlerFactory.html" title="interfac
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5 method-summary-table-tab6"><code><a href="#accepts(java.lang.Class,java.lang.reflect.Method)" class="member-name-link">accepts</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;extensionType,
  <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/reflect/Method.html" title="class or interface in java.lang.reflect" class="external-link">Method</a>&nbsp;method)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5 method-summary-table-tab6">
-<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+<div class="block"><span class="deprecated-label">Deprecated, for removal: This API element is subject to removal in a future version.</span></div>
 <div class="block">Determines whether the factory can create an <a href="../core/extension/ExtensionHandler.html" title="interface in org.jdbi.v3.core.extension"><code>ExtensionHandler</code></a> for combination of extension type and method.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3 method-summary-table-tab6"><code><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="Handler.html" title="interface in org.jdbi.v3.sqlobject">Handler</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3 method-summary-table-tab6"><code><a href="#buildHandler(java.lang.Class,java.lang.reflect.Method)" class="member-name-link">buildHandler</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;sqlObjectType,
  <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/reflect/Method.html" title="class or interface in java.lang.reflect" class="external-link">Method</a>&nbsp;method)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3 method-summary-table-tab6">
-<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+<div class="block"><span class="deprecated-label">Deprecated, for removal: This API element is subject to removal in a future version.</span></div>
 <div class="block">Returns a <a href="Handler.html" title="interface in org.jdbi.v3.sqlobject"><code>Handler</code></a> instance for executing the given SQL Object method.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5 method-summary-table-tab6"><code>default <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="../core/extension/ExtensionHandler.html" title="interface in org.jdbi.v3.core.extension">ExtensionHandler</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5 method-summary-table-tab6"><code><a href="#createExtensionHandler(java.lang.Class,java.lang.reflect.Method)" class="member-name-link">createExtensionHandler</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;extensionType,
  <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/reflect/Method.html" title="class or interface in java.lang.reflect" class="external-link">Method</a>&nbsp;method)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5 method-summary-table-tab6">
-<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+<div class="block"><span class="deprecated-label">Deprecated, for removal: This API element is subject to removal in a future version.</span></div>
 <div class="block">Returns an <a href="../core/extension/ExtensionHandler.html" title="interface in org.jdbi.v3.core.extension"><code>ExtensionHandler</code></a> instance for a extension type and method combination.</div>
 </div>
 </div>
@@ -161,7 +162,7 @@ extends <a href="../core/extension/ExtensionHandlerFactory.html" title="interfac
 <h3>buildHandler</h3>
 <div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="Handler.html" title="interface in org.jdbi.v3.sqlobject">Handler</a>&gt;</span>&nbsp;<span class="element-name">buildHandler</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;sqlObjectType,
  <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/reflect/Method.html" title="class or interface in java.lang.reflect" class="external-link">Method</a>&nbsp;method)</span></div>
-<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated, for removal: This API element is subject to removal in a future version.</span></div>
 <div class="block">Returns a <a href="Handler.html" title="interface in org.jdbi.v3.sqlobject"><code>Handler</code></a> instance for executing the given SQL Object method.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -177,7 +178,7 @@ extends <a href="../core/extension/ExtensionHandlerFactory.html" title="interfac
 <h3>accepts</h3>
 <div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">accepts</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;extensionType,
  <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/reflect/Method.html" title="class or interface in java.lang.reflect" class="external-link">Method</a>&nbsp;method)</span></div>
-<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated, for removal: This API element is subject to removal in a future version.</span></div>
 <div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../core/extension/ExtensionHandlerFactory.html#accepts(java.lang.Class,java.lang.reflect.Method)">ExtensionHandlerFactory</a></code></span></div>
 <div class="block">Determines whether the factory can create an <a href="../core/extension/ExtensionHandler.html" title="interface in org.jdbi.v3.core.extension"><code>ExtensionHandler</code></a> for combination of extension type and method.</div>
 <dl class="notes">
@@ -196,7 +197,7 @@ extends <a href="../core/extension/ExtensionHandlerFactory.html" title="interfac
 <h3>createExtensionHandler</h3>
 <div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="../core/extension/ExtensionHandler.html" title="interface in org.jdbi.v3.core.extension">ExtensionHandler</a>&gt;</span>&nbsp;<span class="element-name">createExtensionHandler</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;extensionType,
  <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/reflect/Method.html" title="class or interface in java.lang.reflect" class="external-link">Method</a>&nbsp;method)</span></div>
-<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated, for removal: This API element is subject to removal in a future version.</span></div>
 <div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../core/extension/ExtensionHandlerFactory.html#createExtensionHandler(java.lang.Class,java.lang.reflect.Method)">ExtensionHandlerFactory</a></code></span></div>
 <div class="block">Returns an <a href="../core/extension/ExtensionHandler.html" title="interface in org.jdbi.v3.core.extension"><code>ExtensionHandler</code></a> instance for a extension type and method combination.</div>
 <dl class="notes">

@@ -532,7 +532,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.49.2-SNAPSHOT,</span>
-<span id="revdate">04/23/2025 11:56 -0700</span>
+<span id="revdate">04/23/2025 13:54 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -2111,7 +2111,7 @@ assertThat(users).containsExactly(
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt; names = handle
-        .registerCollector(<span class="predefined-type">List</span>.class, Collectors.toCollection(<span class="predefined-type">LinkedList</span>::<span class="keyword">new</span>))
+        .registerCollector(<span class="predefined-type">List</span>.class, Collectors.toCollection(<span class="predefined-type">ArrayList</span>::<span class="keyword">new</span>))
         .createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT title FROM films WHERE genre = :genre ORDER BY title</span><span class="delimiter">&quot;</span></span>)
         .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">genre</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Action</span><span class="delimiter">&quot;</span></span>)
         .mapTo(<span class="predefined-type">String</span>.class)
@@ -2744,7 +2744,7 @@ an iterator, since iteration will call upon the (now closed) handle</p>
 <span class="comment">// wait for stage to complete (don't do this in production code!)</span>
 <span class="predefined-type">Iterator</span>&lt;<span class="predefined-type">String</span>&gt; result = futureResult.toCompletableFuture().join();
 <span class="comment">// result.hasNext() fails because the handle is already closed at this point</span>
-assertThatException().isThrownBy(() -&gt; result.hasNext());</code></pre>
+assertThatException().isThrownBy(result::hasNext);</code></pre>
 </div>
 </div>
 </div>
@@ -16296,7 +16296,7 @@ return types, or on <a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlBatch.
 <div id="footer">
 <div id="footer-text">
 Version 3.49.2-SNAPSHOT<br>
-Last updated 04/23/2025 11:56 -0700
+Last updated 04/23/2025 13:54 -0700
 </div>
 </div>
 </body>

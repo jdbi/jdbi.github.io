@@ -95,11 +95,12 @@ loadScripts(document, 'script');</script>
 <dd>This is a functional interface and can therefore be used as the assignment target for a lambda expression or method reference.</dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>
+<div class="type-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Deprecated.html#since()" title="class or interface in java.lang" class="external-link">since</a>="3.38.0",
+            <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Deprecated.html#forRemoval()" title="class or interface in java.lang" class="external-link">forRemoval</a>=true)
 <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/FunctionalInterface.html" title="class or interface in java.lang" class="external-link">@FunctionalInterface</a>
 </span><span class="modifiers">public interface </span><span class="element-name type-name-label">HandlerDecorator</span><span class="extends-implements">
 extends <a href="../core/extension/ExtensionHandlerCustomizer.html" title="interface in org.jdbi.v3.core.extension">ExtensionHandlerCustomizer</a></span></div>
-<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated, for removal: This API element is subject to removal in a future version.</span>
 <div class="deprecation-comment">Use <a href="../core/extension/ExtensionHandlerCustomizer.html" title="interface in org.jdbi.v3.core.extension"><code>ExtensionHandlerCustomizer</code></a> directly.</div>
 </div>
 <div class="block">Decorates Handler objects with additional behavior.</div>
@@ -131,7 +132,7 @@ extends <a href="../core/extension/ExtensionHandlerCustomizer.html" title="inter
  <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;extensionType,
  <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/reflect/Method.html" title="class or interface in java.lang.reflect" class="external-link">Method</a>&nbsp;method)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5 method-summary-table-tab6">
-<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+<div class="block"><span class="deprecated-label">Deprecated, for removal: This API element is subject to removal in a future version.</span></div>
 <div class="block">Customize an extension handler.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3 method-summary-table-tab6"><code><a href="Handler.html" title="interface in org.jdbi.v3.sqlobject">Handler</a></code></div>
@@ -139,7 +140,7 @@ extends <a href="../core/extension/ExtensionHandlerCustomizer.html" title="inter
  <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;sqlObjectType,
  <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/reflect/Method.html" title="class or interface in java.lang.reflect" class="external-link">Method</a>&nbsp;method)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3 method-summary-table-tab6">
-<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+<div class="block"><span class="deprecated-label">Deprecated, for removal: This API element is subject to removal in a future version.</span></div>
 <div class="block">Decorates the <a href="Handler.html" title="interface in org.jdbi.v3.sqlobject"><code>Handler</code></a> to add or substitute behavior on the given SQL Object method.</div>
 </div>
 </div>
@@ -162,7 +163,7 @@ extends <a href="../core/extension/ExtensionHandlerCustomizer.html" title="inter
 <div class="member-signature"><span class="return-type"><a href="Handler.html" title="interface in org.jdbi.v3.sqlobject">Handler</a></span>&nbsp;<span class="element-name">decorateHandler</span><wbr><span class="parameters">(<a href="Handler.html" title="interface in org.jdbi.v3.sqlobject">Handler</a>&nbsp;base,
  <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;sqlObjectType,
  <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/reflect/Method.html" title="class or interface in java.lang.reflect" class="external-link">Method</a>&nbsp;method)</span></div>
-<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated, for removal: This API element is subject to removal in a future version.</span></div>
 <div class="block">Decorates the <a href="Handler.html" title="interface in org.jdbi.v3.sqlobject"><code>Handler</code></a> to add or substitute behavior on the given SQL Object method. Implementations may
  alternatively return the base handler, e.g. if the conditions for applying a particular decoration are not met.</div>
 <dl class="notes">
@@ -181,7 +182,7 @@ extends <a href="../core/extension/ExtensionHandlerCustomizer.html" title="inter
 <div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="../core/extension/ExtensionHandler.html" title="interface in org.jdbi.v3.core.extension">ExtensionHandler</a></span>&nbsp;<span class="element-name">customize</span><wbr><span class="parameters">(<a href="../core/extension/ExtensionHandler.html" title="interface in org.jdbi.v3.core.extension">ExtensionHandler</a>&nbsp;defaultHandler,
  <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;extensionType,
  <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/reflect/Method.html" title="class or interface in java.lang.reflect" class="external-link">Method</a>&nbsp;method)</span></div>
-<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated, for removal: This API element is subject to removal in a future version.</span></div>
 <div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../core/extension/ExtensionHandlerCustomizer.html#customize(org.jdbi.v3.core.extension.ExtensionHandler,java.lang.Class,java.lang.reflect.Method)">ExtensionHandlerCustomizer</a></code></span></div>
 <div class="block">Customize an extension handler.</div>
 <dl class="notes">
