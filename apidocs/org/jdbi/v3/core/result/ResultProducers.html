@@ -164,14 +164,19 @@ implements <a href="../config/JdbiConfig.html" title="interface in org.jdbi.v3.c
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Result producer that returns a <a href="ResultBearing.html" title="interface in org.jdbi.v3.core.result"><code>ResultBearing</code></a> over the statement-generated keys.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="ResultProducer.html" title="interface in org.jdbi.v3.core.result">ResultProducer</a><wbr>&lt;<a href="ResultBearing.html" title="interface in org.jdbi.v3.core.result">ResultBearing</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#returningResults()" class="member-name-link">returningResults</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="ResultProducer.html" title="interface in org.jdbi.v3.core.result">ResultProducer</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#returningLargeUpdateCount()" class="member-name-link">returningLargeUpdateCount</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Result producer that eagerly executes the statement, returning the large update count</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="ResultProducer.html" title="interface in org.jdbi.v3.core.result">ResultProducer</a><wbr>&lt;<a href="ResultBearing.html" title="interface in org.jdbi.v3.core.result">ResultBearing</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#returningResults()" class="member-name-link">returningResults</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Result producer that returns a <a href="ResultBearing.html" title="interface in org.jdbi.v3.core.result"><code>ResultBearing</code></a> over the statement result rows.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="ResultProducer.html" title="interface in org.jdbi.v3.core.result">ResultProducer</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#returningUpdateCount()" class="member-name-link">returningUpdateCount</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="ResultProducer.html" title="interface in org.jdbi.v3.core.result">ResultProducer</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#returningUpdateCount()" class="member-name-link">returningUpdateCount</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Result producer that eagerly executes the statement, returning the update count</div>
 </div>
 </div>
@@ -220,6 +225,23 @@ implements <a href="../config/JdbiConfig.html" title="interface in org.jdbi.v3.c
 <dd>
 <ul class="tag-list">
 <li><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.sql/java/sql/Statement.html#getUpdateCount()" title="class or interface in java.sql" class="external-link"><code>Statement.getUpdateCount()</code></a></li>
+</ul>
+</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="returningLargeUpdateCount()">
+<h3>returningLargeUpdateCount</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="ResultProducer.html" title="interface in org.jdbi.v3.core.result">ResultProducer</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&gt;</span>&nbsp;<span class="element-name">returningLargeUpdateCount</span>()</div>
+<div class="block">Result producer that eagerly executes the statement, returning the large update count</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>long update count</dd>
+<dt>See Also:</dt>
+<dd>
+<ul class="tag-list-long">
+<li><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.sql/java/sql/Statement.html#getLargeUpdateCount()" title="class or interface in java.sql" class="external-link"><code>Statement.getLargeUpdateCount()</code></a></li>
 </ul>
 </dd>
 </dl>

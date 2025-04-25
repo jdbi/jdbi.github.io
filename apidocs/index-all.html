@@ -2460,6 +2460,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Execute this script as a set of separate statements</div>
 </dd>
+<dt><a href="org/jdbi/v3/core/statement/Update.html#executeLarge()" class="member-name-link">executeLarge()</a> - Method in class org.jdbi.v3.core.statement.<a href="org/jdbi/v3/core/statement/Update.html" title="class in org.jdbi.v3.core.statement">Update</a></dt>
+<dd>
+<div class="block">Executes the statement, returning the large update count.</div>
+</dd>
 <dt><a href="org/jdbi/v3/core/statement/PreparedBatch.html#executePreparedBatch(java.lang.String...)" class="member-name-link">executePreparedBatch(String...)</a> - Method in class org.jdbi.v3.core.statement.<a href="org/jdbi/v3/core/statement/PreparedBatch.html" title="class in org.jdbi.v3.core.statement">PreparedBatch</a></dt>
 <dd>
 <div class="block">Execute the batch and give access to any generated keys returned by the operation.</div>
@@ -6518,6 +6522,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="org/jdbi/v3/core/result/ResultProducers.html#returningGeneratedKeys(java.lang.String...)" class="member-name-link">returningGeneratedKeys(String...)</a> - Static method in class org.jdbi.v3.core.result.<a href="org/jdbi/v3/core/result/ResultProducers.html" title="class in org.jdbi.v3.core.result">ResultProducers</a></dt>
 <dd>
 <div class="block">Result producer that returns a <a href="org/jdbi/v3/core/result/ResultBearing.html" title="interface in org.jdbi.v3.core.result"><code>ResultBearing</code></a> over the statement-generated keys.</div>
+</dd>
+<dt><a href="org/jdbi/v3/core/result/ResultProducers.html#returningLargeUpdateCount()" class="member-name-link">returningLargeUpdateCount()</a> - Static method in class org.jdbi.v3.core.result.<a href="org/jdbi/v3/core/result/ResultProducers.html" title="class in org.jdbi.v3.core.result">ResultProducers</a></dt>
+<dd>
+<div class="block">Result producer that eagerly executes the statement, returning the large update count</div>
 </dd>
 <dt><a href="org/jdbi/v3/core/result/ResultProducers.html#returningResults()" class="member-name-link">returningResults()</a> - Static method in class org.jdbi.v3.core.result.<a href="org/jdbi/v3/core/result/ResultProducers.html" title="class in org.jdbi.v3.core.result">ResultProducers</a></dt>
 <dd>
