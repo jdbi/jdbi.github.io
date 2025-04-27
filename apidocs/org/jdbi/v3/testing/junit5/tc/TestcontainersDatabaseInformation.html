@@ -128,7 +128,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="TestcontainersDatabaseInformation.html" title="class in org.jdbi.v3.testing.junit5.tc">TestcontainersDatabaseInformation</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#forTestcontainerClass(java.lang.Class)" class="member-name-link">forTestcontainerClass</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;? extends <a href="https://javadoc.io/doc/org.testcontainers/jdbc/1.20.6/org/testcontainers/containers/JdbcDatabaseContainer.html" title="class or interface in org.testcontainers.containers" class="external-link">JdbcDatabaseContainer</a>&gt;&nbsp;containerClazz)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#forTestcontainerClass(java.lang.Class)" class="member-name-link">forTestcontainerClass</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;? extends <a href="https://javadoc.io/doc/org.testcontainers/jdbc/1.21.0/org/testcontainers/containers/JdbcDatabaseContainer.html" title="class or interface in org.testcontainers.containers" class="external-link">JdbcDatabaseContainer</a>&gt;&nbsp;containerClazz)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Returns a <a href="TestcontainersDatabaseInformation.html" title="class in org.jdbi.v3.testing.junit5.tc"><code>TestcontainersDatabaseInformation</code></a> instance for a given container instance class.</div>
 </div>
@@ -181,11 +181,11 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="forTestcontainerClass(java.lang.Class)">
 <h3>forTestcontainerClass</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="TestcontainersDatabaseInformation.html" title="class in org.jdbi.v3.testing.junit5.tc">TestcontainersDatabaseInformation</a></span>&nbsp;<span class="element-name">forTestcontainerClass</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;? extends <a href="https://javadoc.io/doc/org.testcontainers/jdbc/1.20.6/org/testcontainers/containers/JdbcDatabaseContainer.html" title="class or interface in org.testcontainers.containers" class="external-link">JdbcDatabaseContainer</a>&gt;&nbsp;containerClazz)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="TestcontainersDatabaseInformation.html" title="class in org.jdbi.v3.testing.junit5.tc">TestcontainersDatabaseInformation</a></span>&nbsp;<span class="element-name">forTestcontainerClass</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;? extends <a href="https://javadoc.io/doc/org.testcontainers/jdbc/1.21.0/org/testcontainers/containers/JdbcDatabaseContainer.html" title="class or interface in org.testcontainers.containers" class="external-link">JdbcDatabaseContainer</a>&gt;&nbsp;containerClazz)</span></div>
 <div class="block">Returns a <a href="TestcontainersDatabaseInformation.html" title="class in org.jdbi.v3.testing.junit5.tc"><code>TestcontainersDatabaseInformation</code></a> instance for a given container instance class.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>containerClazz</code> - A <a href="https://javadoc.io/doc/org.testcontainers/jdbc/1.20.6/org/testcontainers/containers/JdbcDatabaseContainer.html" title="class or interface in org.testcontainers.containers" class="external-link"><code>JdbcDatabaseContainer</code></a> class object. Must not be null.</dd>
+<dd><code>containerClazz</code> - A <a href="https://javadoc.io/doc/org.testcontainers/jdbc/1.21.0/org/testcontainers/containers/JdbcDatabaseContainer.html" title="class or interface in org.testcontainers.containers" class="external-link"><code>JdbcDatabaseContainer</code></a> class object. Must not be null.</dd>
 <dt>Returns:</dt>
 <dd>A <a href="TestcontainersDatabaseInformation.html" title="class in org.jdbi.v3.testing.junit5.tc"><code>TestcontainersDatabaseInformation</code></a> instance describing how to use the database with the <a href="JdbiTestcontainersExtension.html" title="class in org.jdbi.v3.testing.junit5.tc"><code>JdbiTestcontainersExtension</code></a> or null if
  the container class is unknown.</dd>
@@ -203,7 +203,7 @@ loadScripts(document, 'script');</script>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>user</code> - Specify a user that can create a new schema or database. If this parameter is null, the testcontainer specific default user,
-                        returned by <a href="https://javadoc.io/doc/org.testcontainers/jdbc/1.20.6/org/testcontainers/containers/JdbcDatabaseContainer.html#getUsername()" title="class or interface in org.testcontainers.containers" class="external-link"><code>JdbcDatabaseContainer.getUsername()</code></a> is used.</dd>
+                        returned by <a href="https://javadoc.io/doc/org.testcontainers/jdbc/1.21.0/org/testcontainers/containers/JdbcDatabaseContainer.html#getUsername()" title="class or interface in org.testcontainers.containers" class="external-link"><code>JdbcDatabaseContainer.getUsername()</code></a> is used.</dd>
 <dd><code>catalog</code> - Specify a catalog that should be used. This is for databases that do not support creating a new catalog or require a fixed catalog
                         for schema creation (e.g. Trino). If null, use a random catalog identifier.</dd>
 <dd><code>schema</code> - Specify a schema that should be used. This is for databases that do not support schemas but create a new database for each test.
@@ -226,7 +226,7 @@ loadScripts(document, 'script');</script>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>user</code> - Specify a user that can create a new schema or database. If this parameter is null, the testcontainer specific default user,
-                        returned by <a href="https://javadoc.io/doc/org.testcontainers/jdbc/1.20.6/org/testcontainers/containers/JdbcDatabaseContainer.html#getUsername()" title="class or interface in org.testcontainers.containers" class="external-link"><code>JdbcDatabaseContainer.getUsername()</code></a> is used.</dd>
+                        returned by <a href="https://javadoc.io/doc/org.testcontainers/jdbc/1.21.0/org/testcontainers/containers/JdbcDatabaseContainer.html#getUsername()" title="class or interface in org.testcontainers.containers" class="external-link"><code>JdbcDatabaseContainer.getUsername()</code></a> is used.</dd>
 <dd><code>catalog</code> - Specify a catalog that should be used. This is for databases that do not support creating a new catalog or require a fixed catalog
                         for schema creation (e.g. Trino). If null, use a random catalog identifier.</dd>
 <dd><code>schema</code> - Specify a schema that should be used. This is for databases that do not support schemas but create a new database for each test.
