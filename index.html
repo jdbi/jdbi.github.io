@@ -532,7 +532,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.49.4-SNAPSHOT,</span>
-<span id="revdate">05/05/2025 13:54 -0700</span>
+<span id="revdate">05/05/2025 14:48 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -2327,6 +2327,13 @@ The statement is executed repeatedly, once for each batch of arguments that is <
 </div>
 <div class="paragraph">
 <p>The result is again a <code>int[]</code> of modified row count.</p>
+</div>
+<div class="paragraph">
+<p>Please note that the first set of arguments is used to determine the data types of all subsequent batches.
+In particular, if an argument in the first batch is <code>null</code> then Jdbi may guess an "unknown" type which
+is not appropriate for a future non-<code>null</code> argument. Consider using
+<a href="./apidocs/org/jdbi/v3/core/statement/SqlStatement.html#bindByType(int,java.lang.Object,java.lang.reflect.Type)" target="_blank" rel="noopener">SqlStatement.bindByType()</a>
+to ensure Jdbi knows the types of your arguments, even if they may be <code>null</code>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16302,7 +16309,7 @@ return types, or on <a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlBatch.
 <div id="footer">
 <div id="footer-text">
 Version 3.49.4-SNAPSHOT<br>
-Last updated 05/05/2025 13:54 -0700
+Last updated 05/05/2025 14:48 -0700
 </div>
 </div>
 </body>
