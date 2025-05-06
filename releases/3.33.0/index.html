@@ -3458,7 +3458,7 @@ Counter restoredCounter = jdbi.withHandle(h -&gt; h.createQuery(<span class="str
 <div class="sect3">
 <h4 id="_resolving_types"><a class="anchor" href="#_resolving_types"></a><a class="link" href="#_resolving_types">4.6.1. Resolving Types</a></h4>
 <div class="paragraph">
-<p>By using the <code>TypeResolvingCodecFactory</code> from the <a href="./apidocs/org/jdbi/v3/guava/package-summary.html" target="_blank" rel="noopener">guava</a> module, it is possible to use codecs that are registered for subclasses or interface types for concrete classes. This is necessary to e.g. map <a href="https://github.com/google/auto/blob/master/value/userguide/index.md" target="_blank" rel="noopener">Auto Value</a> generated classes to database columns.</p>
+<p>By using the <code>TypeResolvingCodecFactory</code> from the <a href="./apidocs/org/jdbi/v3/guava/package-summary.html" target="_blank" rel="noopener">guava</a> module, it is possible to use codecs that are registered for subclasses or interface types for concrete classes. This is necessary to e.g. map <a href="https://github.com/google/auto/blob/main/value/userguide/index.md" target="_blank" rel="noopener">Auto Value</a> generated classes to database columns.</p>
 </div>
 <div class="paragraph">
 <p>In the following example, there is only a codec for <code>Value&lt;String&gt;</code> registered, but the code uses beans and classes that are concrete implementations (<code>StringBean</code> contains a <code>StringValue</code> and <code>StringValue</code> implements the <code>Value&lt;String&gt;</code> interface). The <code>TypeResolvingCodecFactory</code> will inspect the types to find a codec for an interface or superclass if no perfect match can be found.</p>
@@ -8865,7 +8865,7 @@ The test case serves as a simple example:</p>
 </div>
 <div class="paragraph">
 <p>Please refer to
-<a href="https://jdbc.postgresql.org/documentation/head/binary-data.html" target="_blank" rel="noopener">Pg-JDBC docs</a>
+<a href="https://jdbc.postgresql.org/documentation/binary-data/" target="_blank" rel="noopener">Pg-JDBC docs</a>
 for upstream driver documentation.</p>
 </div>
 </div>
