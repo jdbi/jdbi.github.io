@@ -532,7 +532,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.49.4-SNAPSHOT,</span>
-<span id="revdate">05/05/2025 15:32 -0700</span>
+<span id="revdate">05/05/2025 18:05 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -2020,7 +2020,7 @@ When using <a href="./apidocs/org/jdbi/v3/core/Jdbi.html#open()" target="_blank"
 <p><a href="./apidocs/org/jdbi/v3/core/statement/Script.html" target="_blank" rel="noopener">Script</a> - a SQL script containing multiple statements separated by <code>;</code> that is executed as a batch. See also <a href="./apidocs/org/jdbi/v3/core/Handle.html#createScript(java.lang.CharSequence)" target="_blank" rel="noopener">createScript</a></p>
 </li>
 <li>
-<p><a href="./apidocs/org/jdbi/v3/core/statement/Metadata.html" target="_blank" rel="noopener">Metadata</a> - SQL Metadata access.</p>
+<p><a href="./apidocs/org/jdbi/v3/core/statement/MetaData.html" target="_blank" rel="noopener">MetaData</a> - SQL Metadata access.</p>
 </li>
 </ul>
 </div>
@@ -5449,7 +5449,7 @@ Counter restoredCounter = jdbi.withHandle(h -&gt; h.createQuery(<span class="str
 <div class="sect2">
 <h3 id="_resolving_types"><a class="anchor" href="#_resolving_types"></a><a class="link" href="#_resolving_types">8.1. Resolving Types</a></h3>
 <div class="paragraph">
-<p>By using the <code>TypeResolvingCodecFactory</code> from the <a href="./apidocs/org/jdbi/v3/guava/package-summary.html" target="_blank" rel="noopener">guava</a> module, it is possible to use codecs that are registered for subclasses or interface types for concrete classes. This is necessary to e.g. map <a href="https://github.com/google/auto/blob/master/value/userguide/index.md" target="_blank" rel="noopener">Auto Value</a> generated classes to database columns.</p>
+<p>By using the <code>TypeResolvingCodecFactory</code> from the <a href="./apidocs/org/jdbi/v3/guava/package-summary.html" target="_blank" rel="noopener">guava</a> module, it is possible to use codecs that are registered for subclasses or interface types for concrete classes. This is necessary to e.g. map <a href="https://github.com/google/auto/blob/main/value/userguide/index.md" target="_blank" rel="noopener">Auto Value</a> generated classes to database columns.</p>
 </div>
 <div class="paragraph">
 <p>In the following example, there is only a codec for <code>Value&lt;String&gt;</code> registered, but the code uses beans and classes that are concrete implementations (<code>StringBean</code> contains a <code>StringValue</code> and <code>StringValue</code> implements the <code>Value&lt;String&gt;</code> interface). The <code>TypeResolvingCodecFactory</code> will inspect the types to find a codec for an interface or superclass if no perfect match can be found.</p>
@@ -5784,7 +5784,7 @@ any.</p>
 <p>The <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#stream()" target="_blank" rel="noopener">stream()</a> method returns a <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/stream/Stream.html" target="_blank" rel="noopener">Stream&lt;T&gt;</a>. This is not a terminal operation and the stream must be closed to release any database resources held. See <a href="#resources-with-streams-iterators">Resources with Streams and Iterators</a> for more details.</p>
 </div>
 <div class="paragraph">
-<p>The <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#withStream(org.jdbi.v3.core.result.StreamCallback)" target="_blank" rel="noopener">withStream()</a> and <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.htmll#useStream(org.jdbi.v3.core.result.StreamConsumer)" target="_blank" rel="noopener">useStream()</a> methods pass the Stream into a callback.</p>
+<p>The <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#withStream(org.jdbi.v3.core.result.StreamCallback)" target="_blank" rel="noopener">withStream()</a> and <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#useStream(org.jdbi.v3.core.result.StreamConsumer)" target="_blank" rel="noopener">useStream()</a> methods pass the Stream into a callback.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6719,7 +6719,7 @@ If this setting is <code>true</code>, then statements are attached by default.</
 <td class="tableblock halign-left valign-top"><p class="tableblock">scriptStatementsNeedSemicolon</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>true</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Controls whether the statements parsed in a <a href="./apidocs/org/jdbi/v3/core/statements/Script.html" target="_blank" rel="noopener">Script</a> object have trailing semicolons or not. This fixes some issues with specific JDBC drivers (e.g. MySQL when using <code>rewriteBatchedStatements=true</code>).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Controls whether the statements parsed in a <a href="./apidocs/org/jdbi/v3/core/statement/Script.html" target="_blank" rel="noopener">Script</a> object have trailing semicolons or not. This fixes some issues with specific JDBC drivers (e.g. MySQL when using <code>rewriteBatchedStatements=true</code>).</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">sqlParser</p></td>
@@ -6756,7 +6756,7 @@ If this setting is <code>true</code>, then statements are attached by default.</
 <td class="tableblock halign-center valign-top"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/core/statement/SqlLogger.html" target="_blank" rel="noopener">SqlLogger</a></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">&lt;unset&gt;</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Controls logging around statement execution. A SqlLogger instance receives the statement context before and after query execution and the context and an exception in case of an execution problem.</p>
-<p class="tableblock">Jdbi provides <a href="./apidocs/org/jdbi/v3/core/statement/Slf4jSqlLogger.html" target="_blank" rel="noopener">Slf4jSqlLogger</a> for the popular <a href="https://slf4j.org/" target="_blank" rel="noopener">slf4j</a> logging framework.</p></td>
+<p class="tableblock">Jdbi provides <a href="./apidocs/org/jdbi/v3/core/statement/Slf4JSqlLogger.html" target="_blank" rel="noopener">Slf4JSqlLogger</a> for the popular <a href="https://slf4j.org/" target="_blank" rel="noopener">slf4j</a> logging framework.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">templateEngine</p></td>
@@ -6880,8 +6880,8 @@ ignored.</p></td>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/sqlobject/SqlObjects.html" target="_blank" rel="noopener">SqlObjects</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">sqlLocator</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/sqlobject/SqlLocator.html" target="_blank" rel="noopener">SqlLocator</a></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/sqlobject/AnnotationSqlLocator.html" target="_blank" rel="noopener">AnnotationSqlLocator</a></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/sqlobject/locator/SqlLocator.html" target="_blank" rel="noopener">SqlLocator</a></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/sqlobject/locator/AnnotationSqlLocator.html" target="_blank" rel="noopener">AnnotationSqlLocator</a></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Sets the locator for finding SQL statements. Default is to look for SQL operation annotations.</p>
 </div>
@@ -6895,7 +6895,7 @@ ignored.</p></td>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/sqlobject/AnnotationSqlLocator.html" target="_blank" rel="noopener">AnnotationSqlLocator</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/sqlobject/locator/AnnotationSqlLocator.html" target="_blank" rel="noopener">AnnotationSqlLocator</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Use annotations (
 <a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlBatch.html" target="_blank" rel="noopener">@SqlBatch</a>,
 <a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlCall.html" target="_blank" rel="noopener">@SqlCall</a>,
@@ -6904,7 +6904,7 @@ ignored.</p></td>
 <a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlScript.html" target="_blank" rel="noopener">@SqlScript</a>) to locate SQL statements</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/sqlobject/SqlObjectClasspathSqlLocator.html" target="_blank" rel="noopener">SqlObjectClasspathSqlLocator</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/sqlobject/locator/SqlObjectClasspathSqlLocator.html" target="_blank" rel="noopener">SqlObjectClasspathSqlLocator</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Associates a class or interface with a file located on the classpath (<code>com.foo.Bar#query()</code> becomes <code>com/foo/Bar/query.sql</code>) and loads the SQL from that file. The file may contain comments which are stripped.</p></td>
 </tr>
 </tbody>
@@ -7725,7 +7725,7 @@ for operations with no result. These methods take a callback (or a lambda object
 <p>The performance of on-demand objects depends on the database and database connection pooling. For performance critical operations, it may be better to manage the handle manually and use attached objects.</p>
 </div>
 <div class="paragraph">
-<p>On-demand instances open and close the underlying <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.sql/java/sql/PreparedStatement.html" target="_blank" rel="noopener">PreparedStatement</a> objects for every call to an extension method. They are incompatible with any object or operation that relies on an open statement to retrieve data from the database (e.g. <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java/util/stream/Stream.html" target="_blank" rel="noopener">Stream</a> and <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java/util/Iterator.html" target="_blank" rel="noopener">Iterator</a> for query operations or <a href="./apidocs/org/jdbi/v3/core/statement/OutParameters.html" target="_blank" rel="noopener">OutParameters</a> for call operations). It is possible to use <a href="#consumer-and-function-arguments">consumer or function arguments</a> to process these values as the callback is executed while the statement is still open.</p>
+<p>On-demand instances open and close the underlying <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.sql/java/sql/PreparedStatement.html" target="_blank" rel="noopener">PreparedStatement</a> objects for every call to an extension method. They are incompatible with any object or operation that relies on an open statement to retrieve data from the database (e.g. <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/stream/Stream.html" target="_blank" rel="noopener">Stream</a> and <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Iterator.html" target="_blank" rel="noopener">Iterator</a> for query operations or <a href="./apidocs/org/jdbi/v3/core/statement/OutParameters.html" target="_blank" rel="noopener">OutParameters</a> for call operations). It is possible to use <a href="#consumer-and-function-arguments">consumer or function arguments</a> to process these values as the callback is executed while the statement is still open.</p>
 </div>
 <div class="sect3">
 <h4 id="_interface_default_methods"><a class="anchor" href="#_interface_default_methods"></a><a class="link" href="#_interface_default_methods">13.2.1. Interface default methods</a></h4>
@@ -8528,7 +8528,7 @@ Jdbi plugins (e.g. the <a href="./apidocs/org/jdbi/v3/guava/GuavaPlugin.html" ta
 <p>Using the method return value either directly or through an <em>interface default method</em> has the drawback that the user code to process the cursor-type object must be written within the SQL Object type as it must be executed before closing the <a href="./apidocs/org/jdbi/v3/core/Handle.html" target="_blank" rel="noopener">Handle</a> object.</p>
 </div>
 <div class="paragraph">
-<p>An elegant way to sidestep this problem is using a <a href="#_consumer_arguments">consumer argument</a> or a <a href="#Function">function argument</a> to provide a callback:</p>
+<p>An elegant way to sidestep this problem is using a <a href="#_consumer_arguments">consumer argument</a> or a <a href="#_function_arguments">function argument</a> to provide a callback:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -10716,7 +10716,7 @@ config.setSqlParser(<span class="keyword">new</span> ColonPrefixSqlParser(custom
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-If the underlying cache library exposes per-cache statistics, these can be accessed through the <a href="./apidocs/org/jdbi/v3//core/statement/SqlStatements.html#cacheStats()" target="_blank" rel="noopener">SqlStatements#cacheStats()</a> and <a href="https://./apidocs/org/jdbi/v3/core/statement/CachingSqlParser.html#cacheStats()" target="_blank" rel="noopener">CachingSqlParser#cacheStats()</a> methods.
+If the underlying cache library exposes per-cache statistics, these can be accessed through the <a href="./apidocs/org/jdbi/v3//core/statement/SqlStatements.html#cacheStats()" target="_blank" rel="noopener">SqlStatements#cacheStats()</a> and <a href="./apidocs/org/jdbi/v3/core/statement/CachingSqlParser.html#cacheStats()" target="_blank" rel="noopener">CachingSqlParser#cacheStats()</a> methods.
 </td>
 </tr>
 </table>
@@ -13080,7 +13080,7 @@ The test case serves as a simple example:</p>
 </div>
 <div class="paragraph">
 <p>Please refer to
-<a href="https://jdbc.postgresql.org/documentation/head/binary-data.html" target="_blank" rel="noopener">Pg-JDBC docs</a>
+<a href="https://jdbc.postgresql.org/documentation/head/binary-data/" target="_blank" rel="noopener">Pg-JDBC docs</a>
 for upstream driver documentation.</p>
 </div>
 </div>
@@ -14177,7 +14177,7 @@ method on the extension type:</p>
 <p>All <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionHandlerCustomizer.html" target="_blank" rel="noopener">ExtensionHandlerCustomizer</a> instances that change the behavior of the extension handler</p>
 </li>
 <li>
-<p>Per extension type and per extension type method specific <a href="./apidocs/org/jdbi/v3/core/extension/ConfigCustomizer.html" target="_blank" rel="noopener">ConfigCustomizer</a> instances to apply when an extension handler is invoked</p>
+<p>Per extension type and per extension type method specific <a href="./apidocs/org/jdbi/v3/core/config/ConfigCustomizer.html" target="_blank" rel="noopener">ConfigCustomizer</a> instances to apply when an extension handler is invoked</p>
 </li>
 </ul>
 </div>
@@ -14196,7 +14196,7 @@ method on the extension type:</p>
 <div class="paragraph">
 <p><a href="./apidocs/org/jdbi/v3/core/extension/ExtensionHandler.html" target="_blank" rel="noopener">ExtensionHandler</a>,
 <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionHandlerCustomizer.html" target="_blank" rel="noopener">ExtensionHandlerCustomizer</a> and
-<a href="./apidocs/org/jdbi/v3/core/extension/ConfigCustomizer.html" target="_blank" rel="noopener">ConfigCustomizer</a> are the three main extension framework objects to implement:</p>
+<a href="./apidocs/org/jdbi/v3/core/config/ConfigCustomizer.html" target="_blank" rel="noopener">ConfigCustomizer</a> are the three main extension framework objects to implement:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -14210,7 +14210,7 @@ method on the extension type:</p>
 registered globally or provided by an extension factory. They can also be specified through annotations.</p>
 </li>
 <li>
-<p><a href="./apidocs/org/jdbi/v3/core/extension/ConfigCustomizer.html" target="_blank" rel="noopener">ConfigCustomizer</a> objects are created by a
+<p><a href="./apidocs/org/jdbi/v3/core/config/ConfigCustomizer.html" target="_blank" rel="noopener">ConfigCustomizer</a> objects are created by a
 <a href="./apidocs/org/jdbi/v3/core/extension/ConfigCustomizerFactory.html" target="_blank" rel="noopener">ConfigCustomizerFactory</a> and modify the configuration that is used when an extension handler is
 executed. Factory instances are registered globally or with an extension factory. Config customization
 can also be specified through annotations.</p>
@@ -14466,7 +14466,7 @@ if needed. Unlike a non-virtual factory, this instance is returned <em>as-is</em
 </div>
 <div class="paragraph">
 <p>Jdbi provides <a href="./apidocs/org/jdbi/v3/generator/GenerateSqlObjectProcessor.html" target="_blank" rel="noopener">an annotation processor</a> that creates java implementations of extension types. In addition, it
-provides <a href="./apidocs/org/jdbi/v3/sqlobject/GeneratorSqlObjectFactory.html" target="_blank" rel="noopener">an extension factory</a> which does not use proxy objects and returns these as extension type implementations. Calling a method on the extension type will invoke the methods on the generated classes directly.</p>
+provides an extension factory which does not use proxy objects and returns these as extension type implementations. Calling a method on the extension type will invoke the methods on the generated classes directly.</p>
 </div>
 </div>
 </div>
@@ -14664,7 +14664,7 @@ method.</p>
 <div class="sect3">
 <h4 id="_config_customizers_and_their_factories"><a class="anchor" href="#_config_customizers_and_their_factories"></a><a class="link" href="#_config_customizers_and_their_factories">19.3.5. Config customizers and their factories</a></h4>
 <div class="paragraph">
-<p><a href="./apidocs/org/jdbi/v3/core/extension/ConfigCustomizer.html" target="_blank" rel="noopener">ConfigCustomizer</a> instances modify the <a href="./apidocs/org/jdbi/v3/core/config/ConfigRegistry.html" target="_blank" rel="noopener">configuration
+<p><a href="./apidocs/org/jdbi/v3/core/config/ConfigCustomizer.html" target="_blank" rel="noopener">ConfigCustomizer</a> instances modify the <a href="./apidocs/org/jdbi/v3/core/config/ConfigRegistry.html" target="_blank" rel="noopener">configuration
 registry</a> object which is used when an extension type method is invoked. This configuration object is passed to all extension handler customizers and the
 extension handler itself.</p>
 </div>
@@ -14719,7 +14719,7 @@ functionality directly as annotation related objects without having to provide e
 <p>The extension framework offers <em>meta-annotations</em> to configure <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionHandler.html" target="_blank" rel="noopener">ExtensionHandler</a> and
 <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionHandlerCustomizer.html" target="_blank" rel="noopener">ExtensionHandlerCustomizer</a> instances directly and another <em>meta-annotation</em> to define
 <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionConfigurer.html" target="_blank" rel="noopener">ExtensionConfigurer</a> instances which allows configuration modification similar to
-<a href="./apidocs/org/jdbi/v3/core/extension/ConfigCustomizer.html" target="_blank" rel="noopener">ConfigCustomizer</a>).</p>
+<a href="./apidocs/org/jdbi/v3/core/config/ConfigCustomizer.html" target="_blank" rel="noopener">ConfigCustomizer</a>).</p>
 </div>
 <div class="paragraph">
 <p>Meta-annotations are used to annotate other annotation classes for processing by the extension framework.</p>
@@ -16309,7 +16309,7 @@ return types, or on <a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlBatch.
 <div id="footer">
 <div id="footer-text">
 Version 3.49.4-SNAPSHOT<br>
-Last updated 05/05/2025 15:32 -0700
+Last updated 05/05/2025 18:05 -0700
 </div>
 </div>
 </body>
