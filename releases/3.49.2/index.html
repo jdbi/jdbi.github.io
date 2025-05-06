@@ -7565,7 +7565,7 @@ for operations with no result. These methods take a callback (or a lambda object
 <p>The performance of on-demand objects depends on the database and database connection pooling. For performance critical operations, it may be better to manage the handle manually and use attached objects.</p>
 </div>
 <div class="paragraph">
-<p>On-demand instances open and close the underlying <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.sql/java/sql/PreparedStatement.html" target="_blank" rel="noopener">PreparedStatement</a> objects for every call to an extension method. They are incompatible with any object or operation that relies on an open statement to retrieve data from the database (e.g. <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java/util/stream/Stream.html" target="_blank" rel="noopener">Stream</a> and <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java/util/Iterator.html" target="_blank" rel="noopener">Iterator</a> for query operations or <a href="./apidocs/org/jdbi/v3/core/statement/OutParameters.html" target="_blank" rel="noopener">OutParameters</a> for call operations). It is possible to use <a href="#consumer-and-function-arguments">consumer or function arguments</a> to process these values as the callback is executed while the statement is still open.</p>
+<p>On-demand instances open and close the underlying <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.sql/java/sql/PreparedStatement.html" target="_blank" rel="noopener">PreparedStatement</a> objects for every call to an extension method. They are incompatible with any object or operation that relies on an open statement to retrieve data from the database (e.g. <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/stream/Stream.html" target="_blank" rel="noopener">Stream</a> and <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Iterator.html" target="_blank" rel="noopener">Iterator</a> for query operations or <a href="./apidocs/org/jdbi/v3/core/statement/OutParameters.html" target="_blank" rel="noopener">OutParameters</a> for call operations). It is possible to use <a href="#consumer-and-function-arguments">consumer or function arguments</a> to process these values as the callback is executed while the statement is still open.</p>
 </div>
 <div class="sect3">
 <h4 id="_interface_default_methods"><a class="anchor" href="#_interface_default_methods"></a><a class="link" href="#_interface_default_methods">13.2.1. Interface default methods</a></h4>
@@ -10556,7 +10556,7 @@ config.setSqlParser(<span class="keyword">new</span> ColonPrefixSqlParser(custom
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-If the underlying cache library exposes per-cache statistics, these can be accessed through the <a href="./apidocs/org/jdbi/v3//core/statement/SqlStatements.html#cacheStats()" target="_blank" rel="noopener">SqlStatements#cacheStats()</a> and <a href="https://./apidocs/org/jdbi/v3/core/statement/CachingSqlParser.html#cacheStats()" target="_blank" rel="noopener">CachingSqlParser#cacheStats()</a> methods.
+If the underlying cache library exposes per-cache statistics, these can be accessed through the <a href="./apidocs/org/jdbi/v3//core/statement/SqlStatements.html#cacheStats()" target="_blank" rel="noopener">SqlStatements#cacheStats()</a> and <a href="./apidocs/org/jdbi/v3/core/statement/CachingSqlParser.html#cacheStats()" target="_blank" rel="noopener">CachingSqlParser#cacheStats()</a> methods.
 </td>
 </tr>
 </table>
@@ -14017,7 +14017,7 @@ method on the extension type:</p>
 <p>All <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionHandlerCustomizer.html" target="_blank" rel="noopener">ExtensionHandlerCustomizer</a> instances that change the behavior of the extension handler</p>
 </li>
 <li>
-<p>Per extension type and per extension type method specific <a href="./apidocs/org/jdbi/v3/core/extension/ConfigCustomizer.html" target="_blank" rel="noopener">ConfigCustomizer</a> instances to apply when an extension handler is invoked</p>
+<p>Per extension type and per extension type method specific <a href="./apidocs/org/jdbi/v3/core/config/ConfigCustomizer.html" target="_blank" rel="noopener">ConfigCustomizer</a> instances to apply when an extension handler is invoked</p>
 </li>
 </ul>
 </div>
@@ -14036,7 +14036,7 @@ method on the extension type:</p>
 <div class="paragraph">
 <p><a href="./apidocs/org/jdbi/v3/core/extension/ExtensionHandler.html" target="_blank" rel="noopener">ExtensionHandler</a>,
 <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionHandlerCustomizer.html" target="_blank" rel="noopener">ExtensionHandlerCustomizer</a> and
-<a href="./apidocs/org/jdbi/v3/core/extension/ConfigCustomizer.html" target="_blank" rel="noopener">ConfigCustomizer</a> are the three main extension framework objects to implement:</p>
+<a href="./apidocs/org/jdbi/v3/core/config/ConfigCustomizer.html" target="_blank" rel="noopener">ConfigCustomizer</a> are the three main extension framework objects to implement:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -14050,7 +14050,7 @@ method on the extension type:</p>
 registered globally or provided by an extension factory. They can also be specified through annotations.</p>
 </li>
 <li>
-<p><a href="./apidocs/org/jdbi/v3/core/extension/ConfigCustomizer.html" target="_blank" rel="noopener">ConfigCustomizer</a> objects are created by a
+<p><a href="./apidocs/org/jdbi/v3/core/config/ConfigCustomizer.html" target="_blank" rel="noopener">ConfigCustomizer</a> objects are created by a
 <a href="./apidocs/org/jdbi/v3/core/extension/ConfigCustomizerFactory.html" target="_blank" rel="noopener">ConfigCustomizerFactory</a> and modify the configuration that is used when an extension handler is
 executed. Factory instances are registered globally or with an extension factory. Config customization
 can also be specified through annotations.</p>
@@ -14504,7 +14504,7 @@ method.</p>
 <div class="sect3">
 <h4 id="_config_customizers_and_their_factories"><a class="anchor" href="#_config_customizers_and_their_factories"></a><a class="link" href="#_config_customizers_and_their_factories">19.3.5. Config customizers and their factories</a></h4>
 <div class="paragraph">
-<p><a href="./apidocs/org/jdbi/v3/core/extension/ConfigCustomizer.html" target="_blank" rel="noopener">ConfigCustomizer</a> instances modify the <a href="./apidocs/org/jdbi/v3/core/config/ConfigRegistry.html" target="_blank" rel="noopener">configuration
+<p><a href="./apidocs/org/jdbi/v3/core/config/ConfigCustomizer.html" target="_blank" rel="noopener">ConfigCustomizer</a> instances modify the <a href="./apidocs/org/jdbi/v3/core/config/ConfigRegistry.html" target="_blank" rel="noopener">configuration
 registry</a> object which is used when an extension type method is invoked. This configuration object is passed to all extension handler customizers and the
 extension handler itself.</p>
 </div>
@@ -14559,7 +14559,7 @@ functionality directly as annotation related objects without having to provide e
 <p>The extension framework offers <em>meta-annotations</em> to configure <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionHandler.html" target="_blank" rel="noopener">ExtensionHandler</a> and
 <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionHandlerCustomizer.html" target="_blank" rel="noopener">ExtensionHandlerCustomizer</a> instances directly and another <em>meta-annotation</em> to define
 <a href="./apidocs/org/jdbi/v3/core/extension/ExtensionConfigurer.html" target="_blank" rel="noopener">ExtensionConfigurer</a> instances which allows configuration modification similar to
-<a href="./apidocs/org/jdbi/v3/core/extension/ConfigCustomizer.html" target="_blank" rel="noopener">ConfigCustomizer</a>).</p>
+<a href="./apidocs/org/jdbi/v3/core/config/ConfigCustomizer.html" target="_blank" rel="noopener">ConfigCustomizer</a>).</p>
 </div>
 <div class="paragraph">
 <p>Meta-annotations are used to annotate other annotation classes for processing by the extension framework.</p>
