@@ -2702,7 +2702,7 @@ Optional&lt;User&gt; user = stream.findFirst(); <i class="conum" data-value="3">
 </table>
 </div>
 <div class="paragraph">
-<p>This can be avoided by using one of the callback methods that ResultIterable offers: <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#withIterator(org.jdbi.v3.core.result.IteratorCallback)" target="_blank" rel="noopener">withIterator()</a>, <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#useIterator(org.jdbi.v3.core.result.IteratorConsumer)" target="_blank" rel="noopener">useIterator()</a>, <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#withStream(org.jdbi.v3.core.result.StreamCallback)" target="_blank" rel="noopener">withStream()</a>, <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.htmll#useStream(org.jdbi.v3.core.result.StreamConsumer)" target="_blank" rel="noopener">useStream()</a>. Each of these methods manages the iterator / stream through Jdbi and allow consumption of its contents within a callback:</p>
+<p>This can be avoided by using one of the callback methods that ResultIterable offers: <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#withIterator(org.jdbi.v3.core.result.IteratorCallback)" target="_blank" rel="noopener">withIterator()</a>, <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#useIterator(org.jdbi.v3.core.result.IteratorConsumer)" target="_blank" rel="noopener">useIterator()</a>, <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#withStream(org.jdbi.v3.core.result.StreamCallback)" target="_blank" rel="noopener">withStream()</a>, <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#useStream(org.jdbi.v3.core.result.StreamConsumer)" target="_blank" rel="noopener">useStream()</a>. Each of these methods manages the iterator / stream through Jdbi and allow consumption of its contents within a callback:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5255,7 +5255,7 @@ any.</p>
 <p>The <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#stream()" target="_blank" rel="noopener">stream()</a> method returns a <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html" target="_blank" rel="noopener">Stream&lt;T&gt;</a>. This is not a terminal operation and the stream must be closed to release any database resources held. See <a href="#resources-with-streams-iterators">Resources with Streams and Iterators</a> for more details.</p>
 </div>
 <div class="paragraph">
-<p>The <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#withStream(org.jdbi.v3.core.result.StreamCallback)" target="_blank" rel="noopener">withStream()</a> and <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.htmll#useStream(org.jdbi.v3.core.result.StreamConsumer)" target="_blank" rel="noopener">useStream()</a> methods pass the Stream into a callback.</p>
+<p>The <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#withStream(org.jdbi.v3.core.result.StreamCallback)" target="_blank" rel="noopener">withStream()</a> and <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#useStream(org.jdbi.v3.core.result.StreamConsumer)" target="_blank" rel="noopener">useStream()</a> methods pass the Stream into a callback.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5271,7 +5271,7 @@ any.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>These methods handle closing the stream for the caller. The <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#withStream(org.jdbi.v3.core.result.StreamCallback)" target="_blank" rel="noopener">withStream()</a> method allows passing a result back to the caller, <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.htmll#useStream(org.jdbi.v3.core.result.StreamConsumer)" target="_blank" rel="noopener">useStream()</a> only executed the code in the callback.</p>
+<p>These methods handle closing the stream for the caller. The <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#withStream(org.jdbi.v3.core.result.StreamCallback)" target="_blank" rel="noopener">withStream()</a> method allows passing a result back to the caller, <a href="./apidocs/org/jdbi/v3/core/result/ResultIterable.html#useStream(org.jdbi.v3.core.result.StreamConsumer)" target="_blank" rel="noopener">useStream()</a> only executed the code in the callback.</p>
 </div>
 </div>
 <div class="sect3">
