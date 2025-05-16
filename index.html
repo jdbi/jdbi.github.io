@@ -532,7 +532,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.49.4-SNAPSHOT,</span>
-<span id="revdate">05/15/2025 14:03 -0700</span>
+<span id="revdate">05/16/2025 15:14 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -847,9 +847,10 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_kotlin">17.8. Kotlin</a>
 <ul class="sectlevel3">
 <li><a href="#_resultset_mapping">17.8.1. ResultSet Mapping</a></li>
-<li><a href="#_coroutine_support">17.8.2. Coroutine support</a></li>
+<li><a href="#_kotlin_value_classes">17.8.2. Kotlin Value classes</a></li>
 <li><a href="#_sqlobject">17.8.3. SqlObject</a></li>
-<li><a href="#_jackson_json_processing">17.8.4. Jackson JSON Processing</a></li>
+<li><a href="#_coroutine_support">17.8.4. Coroutine support</a></li>
+<li><a href="#_jackson_json_processing">17.8.5. Jackson JSON Processing</a></li>
 </ul>
 </li>
 <li><a href="#_lombok">17.9. Lombok</a></li>
@@ -12550,7 +12551,145 @@ val things = qry.bind(&quot;id&quot;, brian.id).mapTo&lt;Thing&gt;.list()</code>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_coroutine_support"><a class="anchor" href="#_coroutine_support"></a><a class="link" href="#_coroutine_support">17.8.2. Coroutine support</a></h4>
+<h4 id="_kotlin_value_classes"><a class="anchor" href="#_kotlin_value_classes"></a><a class="link" href="#_kotlin_value_classes">17.8.2. Kotlin Value classes</a></h4>
+<div class="paragraph">
+<p>Jdbi supports Kotlin value classes as long as an appropriate mapper for the underlying data type has been registered. For value types that wrap standard data types such as <code>int</code>, <code>String</code> or <code>UUID</code>, this is normally the case.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="kotlin">@JvmInline
+value class MagicType(val first: String)
+
+val valueType = MagicType(&quot;does this work?&quot;)
+
+// bind a value type as an argument
+handle.createUpdate(&quot;INSERT INTO something(id, first) VALUES(:id, :first)&quot;)
+    .bind(&quot;id&quot;, 1)
+    .bind(&quot;first&quot;, valueType)
+    .execute()
+
+// retrieve a column value as a value type
+val result = handle.createQuery(&quot;SELECT first FROM something&quot;)
+    .mapTo&lt;MagicType&gt;()
+    .single()</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Jdbi will find the appropriate Column mapper and unwrap/wrap the value into the Kotlin value type.</p>
+</div>
+<div class="paragraph">
+<p>This also works with data classes:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="kotlin">@JvmInline
+value class PlanetType(val value: String)
+
+@JvmInline
+value class MoonType(val value: String)
+
+data class MoonOrbit(val id: Int, val planet: PlanetType, val moon: MoonType)
+
+value orbit = MoonOrbit(1, PlanetType(&quot;Saturn&quot;), MoonType(&quot;Titan&quot;))
+
+// create a new moon orbiting a planet
+handle.createUpdate(&quot;INSERT INTO orbits(id, planet, moon) VALUES(:id, :planet, :moon)&quot;)
+    .bindKotlin(orbit)
+    .execute()
+
+// retrieve all moon orbits as a List&lt;MoonOrbit&gt;
+val result = handle.createQuery(&quot;SELECT id, planet, moon FROM orbits&quot;)
+    .mapTo&lt;MoonOrbit&gt;()
+    .list()</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_sqlobject"><a class="anchor" href="#_sqlobject"></a><a class="link" href="#_sqlobject">17.8.3. SqlObject</a></h4>
+<div class="paragraph">
+<p>The <strong>jdbi3-kotlin-sqlobject</strong> plugin adds automatic parameter binding by name
+for Kotlin methods in SqlObjects as well as support for Kotlin default methods.</p>
+</div>
+<div class="paragraph">
+<p>To use it, add a dependency:</p>
+</div>
+<div class="paragraph">
+<p>For Apache Maven:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>jdbi3-kotlin-sqlobject<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.49.4-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+<span class="tag">&lt;/dependency&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For Gradle:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-kotlin-sqlobject:3.49.4-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then install the plugin into the <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instance:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="kotlin">jdbi.installPlugin(KotlinSqlObjectPlugin());</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Parameter binding supports individual primitive types as well as Kotlin or
+JavaBean style objects as a parameter (referenced in binding as
+<code>:paramName.propertyName</code>). No annotations are needed.</p>
+</div>
+<div class="paragraph">
+<p>If you load all Jdbi plugins via <code>Jdbi.installPlugins()</code> this plugin will be
+discovered and registered automatically. Otherwise, you can attach the plugin
+via: <code>Jdbi.installPlugin(KotlinSqlObjectPlugin())</code>.</p>
+</div>
+<div class="paragraph">
+<p>An example from the test class:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="kotlin">interface ThingDao {
+    @SqlUpdate(&quot;insert into something (id, name) values (:something.idAndName.id, :something.idAndName.name)&quot;)
+    fun insert(something: Thing)
+
+    @SqlQuery(&quot;select id, name from something&quot;)
+    fun list(): List&lt;Thing&gt;
+}
+@BeforeEach
+fun setUp() {
+    val dao = h2Extension.jdbi.onDemand&lt;ThingDao&gt;()
+
+    val brian = Thing(IdAndName(1, &quot;Brian&quot;), null)
+    val keith = Thing(IdAndName(2, &quot;Keith&quot;), null)
+
+    dao.insert(brian)
+    dao.insert(keith)
+}
+@Test
+fun testDao() {
+    val dao = h2Extension.jdbi.onDemand&lt;ThingDao&gt;()
+
+    val rs = dao.list()
+
+    assertEquals(2, rs.size.toLong())
+    assertEquals(brian, rs[0])
+    assertEquals(keith, rs[1])
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_coroutine_support"><a class="anchor" href="#_coroutine_support"></a><a class="link" href="#_coroutine_support">17.8.4. Coroutine support</a></h4>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -12685,91 +12824,7 @@ private suspend fun selectSomething(dao: SomethingDao, id: Int): Something = cor
 </div>
 </div>
 <div class="sect3">
-<h4 id="_sqlobject"><a class="anchor" href="#_sqlobject"></a><a class="link" href="#_sqlobject">17.8.3. SqlObject</a></h4>
-<div class="paragraph">
-<p>The <strong>jdbi3-kotlin-sqlobject</strong> plugin adds automatic parameter binding by name
-for Kotlin methods in SqlObjects as well as support for Kotlin default methods.</p>
-</div>
-<div class="paragraph">
-<p>To use it, add a dependency:</p>
-</div>
-<div class="paragraph">
-<p>For Apache Maven:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
-    <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
-    <span class="tag">&lt;artifactId&gt;</span>jdbi3-kotlin-sqlobject<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>3.49.4-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
-<span class="tag">&lt;/dependency&gt;</span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>For Gradle:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
-    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-kotlin-sqlobject:3.49.4-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Then install the plugin into the <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instance:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="kotlin">jdbi.installPlugin(KotlinSqlObjectPlugin());</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Parameter binding supports individual primitive types as well as Kotlin or
-JavaBean style objects as a parameter (referenced in binding as
-<code>:paramName.propertyName</code>). No annotations are needed.</p>
-</div>
-<div class="paragraph">
-<p>If you load all Jdbi plugins via <code>Jdbi.installPlugins()</code> this plugin will be
-discovered and registered automatically. Otherwise, you can attach the plugin
-via: <code>Jdbi.installPlugin(KotlinSqlObjectPlugin())</code>.</p>
-</div>
-<div class="paragraph">
-<p>An example from the test class:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="kotlin">interface ThingDao {
-    @SqlUpdate(&quot;insert into something (id, name) values (:something.idAndName.id, :something.idAndName.name)&quot;)
-    fun insert(something: Thing)
-
-    @SqlQuery(&quot;select id, name from something&quot;)
-    fun list(): List&lt;Thing&gt;
-}
-@BeforeEach
-fun setUp() {
-    val dao = h2Extension.jdbi.onDemand&lt;ThingDao&gt;()
-
-    val brian = Thing(IdAndName(1, &quot;Brian&quot;), null)
-    val keith = Thing(IdAndName(2, &quot;Keith&quot;), null)
-
-    dao.insert(brian)
-    dao.insert(keith)
-}
-@Test
-fun testDao() {
-    val dao = h2Extension.jdbi.onDemand&lt;ThingDao&gt;()
-
-    val rs = dao.list()
-
-    assertEquals(2, rs.size.toLong())
-    assertEquals(brian, rs[0])
-    assertEquals(keith, rs[1])
-}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_jackson_json_processing"><a class="anchor" href="#_jackson_json_processing"></a><a class="link" href="#_jackson_json_processing">17.8.4. Jackson JSON Processing</a></h4>
+<h4 id="_jackson_json_processing"><a class="anchor" href="#_jackson_json_processing"></a><a class="link" href="#_jackson_json_processing">17.8.5. Jackson JSON Processing</a></h4>
 <div class="paragraph">
 <p>Jackson needs a specialized ObjectMapper instance in order to understand deserialization
 of Kotlin types. Make sure to configure your Jackson plugin:</p>
@@ -16309,7 +16364,7 @@ return types, or on <a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlBatch.
 <div id="footer">
 <div id="footer-text">
 Version 3.49.4-SNAPSHOT<br>
-Last updated 05/15/2025 14:03 -0700
+Last updated 05/16/2025 15:14 -0700
 </div>
 </div>
 </body>
