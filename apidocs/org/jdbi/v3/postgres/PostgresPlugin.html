@@ -262,7 +262,8 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="customizeHandle(org.jdbi.v3.core.Handle)">
 <h3>customizeHandle</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../core/Handle.html" title="class in org.jdbi.v3.core">Handle</a></span>&nbsp;<span class="element-name">customizeHandle</span><wbr><span class="parameters">(<a href="../core/Handle.html" title="class in org.jdbi.v3.core">Handle</a>&nbsp;handle)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../core/Handle.html" title="class in org.jdbi.v3.core">Handle</a></span>&nbsp;<span class="element-name">customizeHandle</span><wbr><span class="parameters">(<a href="../core/Handle.html" title="class in org.jdbi.v3.core">Handle</a>&nbsp;handle)</span>
+                       throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.sql/java/sql/SQLException.html" title="class or interface in java.sql" class="external-link">SQLException</a></span></div>
 <div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../core/spi/JdbiPlugin.html#customizeHandle(org.jdbi.v3.core.Handle)">JdbiPlugin</a></code></span></div>
 <div class="block">Configure customizations for a new Handle instance.</div>
 <dl class="notes">
@@ -270,6 +271,8 @@ loadScripts(document, 'script');</script>
 <dd><code>handle</code> - the handle just created</dd>
 <dt>Returns:</dt>
 <dd>the transformed handle</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.sql/java/sql/SQLException.html" title="class or interface in java.sql" class="external-link">SQLException</a></code> - something went wrong with the database</dd>
 </dl>
 </section>
 </li>
