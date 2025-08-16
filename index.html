@@ -532,7 +532,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.50.0-SNAPSHOT,</span>
-<span id="revdate">08/15/2025 18:49 -0700</span>
+<span id="revdate">08/15/2025 20:51 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -14690,9 +14690,9 @@ method.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="directive">static</span> <span class="type">class</span> <span class="class">TestExtensionHandler</span> <span class="directive">implements</span> ExtensionHandler {
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="directive">static</span> <span class="type">class</span> <span class="class">TestExtensionHandler</span> <span class="directive">implements</span> ExtensionHandler.Simple {
     <span class="annotation">@Override</span>
-    <span class="directive">public</span> <span class="predefined-type">Object</span> invoke(HandleSupplier handleSupplier, <span class="predefined-type">Object</span> target, <span class="predefined-type">Object</span>... args) {
+    <span class="directive">public</span> <span class="predefined-type">Object</span> invoke(HandleSupplier handleSupplier, <span class="predefined-type">Object</span>... args) {
         <span class="keyword">return</span> <span class="keyword">new</span> Something((<span class="type">int</span>) args[<span class="integer">0</span>], (<span class="predefined-type">String</span>) args[<span class="integer">1</span>]); <i class="conum" data-value="1"></i><b>(1)</b>
     }
 }</code></pre>
@@ -14829,13 +14829,16 @@ It gets registered as a global extension handler customizer with the <a href="./
 
     <span class="annotation">@Override</span>
     <span class="directive">public</span> ExtensionHandler customize(ExtensionHandler handler, <span class="predefined-type">Class</span>&lt;?&gt; extensionType, <span class="predefined-type">Method</span> method) {
-        <span class="keyword">return</span> (handleSupplier, target, args) -&gt; {
-            LOG.info(format(<span class="string"><span class="delimiter">&quot;</span><span class="content">Entering %s on %s</span><span class="delimiter">&quot;</span></span>, method, extensionType.getSimpleName()));
-            <span class="keyword">try</span> {
-                <span class="keyword">return</span> handler.invoke(handleSupplier, target, args);
-            } <span class="keyword">finally</span> {
-                LOG.info(format(<span class="string"><span class="delimiter">&quot;</span><span class="content">Leaving %s on %s</span><span class="delimiter">&quot;</span></span>, method, extensionType.getSimpleName()));
-            }
+        <span class="keyword">return</span> (config, target) -&gt; {
+            AttachedExtensionHandler delegate = handler.attachTo(config, target);
+            <span class="keyword">return</span> (handleSupplier, args) -&gt; {
+                LOG.info(format(<span class="string"><span class="delimiter">&quot;</span><span class="content">Entering %s on %s</span><span class="delimiter">&quot;</span></span>, method, extensionType.getSimpleName()));
+                <span class="keyword">try</span> {
+                    <span class="keyword">return</span> delegate.invoke(handleSupplier, args);
+                } <span class="keyword">finally</span> {
+                    LOG.info(<span class="string"><span class="delimiter">&quot;</span><span class="content">Leaving {} on {}</span><span class="delimiter">&quot;</span></span>, method, extensionType.getSimpleName());
+                }
+            };
         };
     }
 }</code></pre>
@@ -14991,10 +14994,9 @@ This allows multiple extensions that use annotations to co-exist.</p>
         value = SomethingExtensionHandler.class) <i class="conum" data-value="7"></i><b>(7)</b>
 <span class="annotation">@interface</span> SomethingAnnotation {}
 
-<span class="directive">public</span> <span class="directive">static</span> <span class="type">class</span> <span class="class">SomethingExtensionHandler</span> <span class="directive">implements</span> ExtensionHandler {
-
+<span class="directive">public</span> <span class="directive">static</span> <span class="type">class</span> <span class="class">SomethingExtensionHandler</span> <span class="directive">implements</span> ExtensionHandler.Simple {
     <span class="annotation">@Override</span>
-    <span class="directive">public</span> <span class="predefined-type">Object</span> invoke(HandleSupplier handleSupplier, <span class="predefined-type">Object</span> target, <span class="predefined-type">Object</span>... args) {
+    <span class="directive">public</span> <span class="predefined-type">Object</span> invoke(HandleSupplier handleSupplier, <span class="predefined-type">Object</span>... args) <span class="directive">throws</span> <span class="exception">Exception</span> {
         <span class="keyword">return</span> <span class="keyword">new</span> Something((<span class="type">int</span>) args[<span class="integer">0</span>], (<span class="predefined-type">String</span>) args[<span class="integer">1</span>]);
     }
 }</code></pre>
@@ -15137,13 +15139,16 @@ It will instantiate the extension handler customizer by locating</p>
 
     <span class="annotation">@Override</span>
     <span class="directive">public</span> ExtensionHandler customize(ExtensionHandler handler, <span class="predefined-type">Class</span>&lt;?&gt; extensionType, <span class="predefined-type">Method</span> method) {
-        <span class="keyword">return</span> (handleSupplier, target, args) -&gt; {
-            LOG.info(format(<span class="string"><span class="delimiter">&quot;</span><span class="content">Entering %s on %s</span><span class="delimiter">&quot;</span></span>, method, extensionType.getSimpleName()));
-            <span class="keyword">try</span> {
-                <span class="keyword">return</span> handler.invoke(handleSupplier, target, args);
-            } <span class="keyword">finally</span> {
-                LOG.info(format(<span class="string"><span class="delimiter">&quot;</span><span class="content">Leaving %s on %s</span><span class="delimiter">&quot;</span></span>, method, extensionType.getSimpleName()));
-            }
+        <span class="keyword">return</span> (config, target) -&gt; {
+            AttachedExtensionHandler delegate = handler.attachTo(config, target);
+            <span class="keyword">return</span> (handleSupplier, args) -&gt; {
+                LOG.info(format(<span class="string"><span class="delimiter">&quot;</span><span class="content">Entering %s on %s</span><span class="delimiter">&quot;</span></span>, method, extensionType.getSimpleName()));
+                <span class="keyword">try</span> {
+                    <span class="keyword">return</span> delegate.invoke(handleSupplier, args);
+                } <span class="keyword">finally</span> {
+                    LOG.info(format(<span class="string"><span class="delimiter">&quot;</span><span class="content">Leaving %s on %s</span><span class="delimiter">&quot;</span></span>, method, extensionType.getSimpleName()));
+                }
+            };
         };
     }
 }</code></pre>
@@ -15440,7 +15445,8 @@ The <a href="#generator">jdbi SQL object generator</a> uses this mechanism to cr
 
     <span class="annotation">@Override</span>
     <span class="directive">public</span> Optional&lt;ExtensionHandler&gt; createExtensionHandler(<span class="predefined-type">Class</span>&lt;?&gt; extensionType, <span class="predefined-type">Method</span> method) {
-        <span class="keyword">return</span> Optional.of((handleSupplier, target, args) -&gt; <span class="keyword">new</span> Something((<span class="type">int</span>) args[<span class="integer">0</span>], (<span class="predefined-type">String</span>) args[<span class="integer">1</span>]));
+        <span class="keyword">return</span> Optional.of((ExtensionHandler.Simple)
+                (handleSupplier, args) -&gt; <span class="keyword">new</span> Something((<span class="type">int</span>) args[<span class="integer">0</span>], (<span class="predefined-type">String</span>) args[<span class="integer">1</span>]));
     }
 }
 
@@ -16454,7 +16460,7 @@ The annotation may be used for method return types, or on <a href="./apidocs/org
 <div id="footer">
 <div id="footer-text">
 Version 3.50.0-SNAPSHOT<br>
-Last updated 08/15/2025 18:49 -0700
+Last updated 08/15/2025 20:51 -0700
 </div>
 </div>
 </body>

@@ -411,6 +411,20 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Convenience method to attach an extension (such as a SqlObject) to the shared handle.</div>
 </dd>
+<dt><a href="org/jdbi/v3/core/extension/AttachedExtensionHandler.html" class="type-name-link" title="interface in org.jdbi.v3.core.extension">AttachedExtensionHandler</a> - Interface in <a href="org/jdbi/v3/core/extension/package-summary.html">org.jdbi.v3.core.extension</a></dt>
+<dd>
+<div class="block">Extension handler with a target object attached.</div>
+</dd>
+<dt><a href="org/jdbi/v3/core/extension/ExtensionHandler.html#attachTo(org.jdbi.v3.core.config.ConfigRegistry,java.lang.Object)" class="member-name-link">attachTo(ConfigRegistry, Object)</a> - Method in interface org.jdbi.v3.core.extension.<a href="org/jdbi/v3/core/extension/ExtensionHandler.html" title="interface in org.jdbi.v3.core.extension">ExtensionHandler</a></dt>
+<dd>
+<div class="block">Attach this extension handler to a target instance.</div>
+</dd>
+<dt><a href="org/jdbi/v3/core/extension/ExtensionHandler.Simple.html#attachTo(org.jdbi.v3.core.config.ConfigRegistry,java.lang.Object)" class="member-name-link">attachTo(ConfigRegistry, Object)</a> - Method in interface org.jdbi.v3.core.extension.<a href="org/jdbi/v3/core/extension/ExtensionHandler.Simple.html" title="interface in org.jdbi.v3.core.extension">ExtensionHandler.Simple</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="org/jdbi/v3/sqlobject/Handler.html#attachTo(org.jdbi.v3.core.config.ConfigRegistry,java.lang.Object)" class="member-name-link">attachTo(ConfigRegistry, Object)</a> - Method in interface org.jdbi.v3.sqlobject.<a href="org/jdbi/v3/sqlobject/Handler.html" title="interface in org.jdbi.v3.sqlobject">Handler</a></dt>
+<dd>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
+&nbsp;</dd>
 <dt><a href="org/jdbi/v3/core/statement/Batch.html#attachToHandleForCleanup()" class="member-name-link">attachToHandleForCleanup()</a> - Method in class org.jdbi.v3.core.statement.<a href="org/jdbi/v3/core/statement/Batch.html" title="class in org.jdbi.v3.core.statement">Batch</a></dt>
 <dd>
 <div class="block">Registers with the handle for cleaning when the handle is closed.</div>
@@ -2401,10 +2415,6 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/core/statement/ParsedSql.html#equals(java.lang.Object)" class="member-name-link">equals(Object)</a> - Method in class org.jdbi.v3.core.statement.<a href="org/jdbi/v3/core/statement/ParsedSql.html" title="class in org.jdbi.v3.core.statement">ParsedSql</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="org/jdbi/v3/core/extension/ExtensionHandler.html#EQUALS_HANDLER" class="member-name-link">EQUALS_HANDLER</a> - Static variable in interface org.jdbi.v3.core.extension.<a href="org/jdbi/v3/core/extension/ExtensionHandler.html" title="interface in org.jdbi.v3.core.extension">ExtensionHandler</a></dt>
-<dd>
-<div class="block">Implementation for the <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link"><code>Object.equals(Object)</code></a> method.</div>
-</dd>
 <dt><a href="org/jdbi/v3/commonstext/UseStringSubstitutorTemplateEngine.html#escape()" class="member-name-link">escape()</a> - Element in annotation type org.jdbi.v3.commonstext.<a href="org/jdbi/v3/commonstext/UseStringSubstitutorTemplateEngine.html" title="annotation in org.jdbi.v3.commonstext">UseStringSubstitutorTemplateEngine</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/core/statement/Batch.html#execute()" class="member-name-link">execute()</a> - Method in class org.jdbi.v3.core.statement.<a href="org/jdbi/v3/core/statement/Batch.html" title="class in org.jdbi.v3.core.statement">Batch</a></dt>
@@ -2514,6 +2524,8 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Provides functionality for a single method on an extension object.</div>
 </dd>
+<dt><a href="org/jdbi/v3/core/extension/ExtensionHandler.Simple.html" class="type-name-link" title="interface in org.jdbi.v3.core.extension">ExtensionHandler.Simple</a> - Interface in <a href="org/jdbi/v3/core/extension/package-summary.html">org.jdbi.v3.core.extension</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/core/extension/annotation/ExtensionHandlerCustomizationOrder.html" class="type-name-link" title="annotation in org.jdbi.v3.core.extension.annotation">ExtensionHandlerCustomizationOrder</a> - Annotation Type in <a href="org/jdbi/v3/core/extension/annotation/package-summary.html">org.jdbi.v3.core.extension.annotation</a></dt>
 <dd>
 <div class="block">Determines the order in which extension method decorators are invoked.</div>
@@ -4005,10 +4017,6 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/core/statement/ParsedSql.html#hashCode()" class="member-name-link">hashCode()</a> - Method in class org.jdbi.v3.core.statement.<a href="org/jdbi/v3/core/statement/ParsedSql.html" title="class in org.jdbi.v3.core.statement">ParsedSql</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="org/jdbi/v3/core/extension/ExtensionHandler.html#HASHCODE_HANDLER" class="member-name-link">HASHCODE_HANDLER</a> - Static variable in interface org.jdbi.v3.core.extension.<a href="org/jdbi/v3/core/extension/ExtensionHandler.html" title="interface in org.jdbi.v3.core.extension">ExtensionHandler</a></dt>
-<dd>
-<div class="block">Implementation for the <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link"><code>Object.hashCode()</code></a> method.</div>
-</dd>
 <dt><a href="org/jdbi/v3/core/statement/HashPrefixSqlParser.html" class="type-name-link" title="class in org.jdbi.v3.core.statement">HashPrefixSqlParser</a> - Class in <a href="org/jdbi/v3/core/statement/package-summary.html">org.jdbi.v3.core.statement</a></dt>
 <dd>
 <div class="block">SQL parser which recognizes named parameter tokens of the form
@@ -4233,14 +4241,10 @@ loadScripts(document, 'script');</script>
 <div class="block">Invoke the callable statement and process its <a href="org/jdbi/v3/core/statement/OutParameters.html" title="class in org.jdbi.v3.core.statement"><code>OutParameters</code></a> results,
  returning a computed value of type <code>T</code>.</div>
 </dd>
-<dt><a href="org/jdbi/v3/core/extension/ExtensionHandler.html#invoke(org.jdbi.v3.core.extension.HandleSupplier,java.lang.Object,java.lang.Object...)" class="member-name-link">invoke(HandleSupplier, Object, Object...)</a> - Method in interface org.jdbi.v3.core.extension.<a href="org/jdbi/v3/core/extension/ExtensionHandler.html" title="interface in org.jdbi.v3.core.extension">ExtensionHandler</a></dt>
+<dt><a href="org/jdbi/v3/core/extension/AttachedExtensionHandler.html#invoke(org.jdbi.v3.core.extension.HandleSupplier,java.lang.Object...)" class="member-name-link">invoke(HandleSupplier, Object...)</a> - Method in interface org.jdbi.v3.core.extension.<a href="org/jdbi/v3/core/extension/AttachedExtensionHandler.html" title="interface in org.jdbi.v3.core.extension">AttachedExtensionHandler</a></dt>
 <dd>
-<div class="block">Gets invoked to return a value for the method that this handler was bound to.</div>
+<div class="block">Gets invoked to return a value for the method that this handler was is handling, on the attached target instance.</div>
 </dd>
-<dt><a href="org/jdbi/v3/sqlobject/Handler.html#invoke(org.jdbi.v3.core.extension.HandleSupplier,java.lang.Object,java.lang.Object...)" class="member-name-link">invoke(HandleSupplier, Object, Object...)</a> - Method in interface org.jdbi.v3.sqlobject.<a href="org/jdbi/v3/sqlobject/Handler.html" title="interface in org.jdbi.v3.sqlobject">Handler</a></dt>
-<dd>
-<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
-&nbsp;</dd>
 <dt><a href="org/jdbi/v3/core/extension/HandleSupplier.html#invokeInContext(org.jdbi.v3.core.extension.ExtensionContext,java.util.concurrent.Callable)" class="member-name-link">invokeInContext(ExtensionContext, Callable&lt;V&gt;)</a> - Method in interface org.jdbi.v3.core.extension.<a href="org/jdbi/v3/core/extension/HandleSupplier.html" title="interface in org.jdbi.v3.core.extension">HandleSupplier</a></dt>
 <dd>
 <div class="block">Bind a new <a href="org/jdbi/v3/core/extension/ExtensionContext.html" title="class in org.jdbi.v3.core.extension"><code>ExtensionContext</code></a> to the Handle, invoke the given task, then restore the Handle's extension state.</div>
@@ -5223,10 +5227,6 @@ loadScripts(document, 'script');</script>
 <div class="deprecation-block"><span class="deprecated-label">Deprecated, for removal: This API element is subject to removal in a future version.</span>
 <div class="deprecation-comment">vaguely named in light of new additions, use <a href="org/jdbi/v3/sqlobject/customizer/BindList.EmptyHandling.html#NULL_STRING"><code>BindList.EmptyHandling.NULL_STRING</code></a> instead</div>
 </div>
-</dd>
-<dt><a href="org/jdbi/v3/core/extension/ExtensionHandler.html#NULL_HANDLER" class="member-name-link">NULL_HANDLER</a> - Static variable in interface org.jdbi.v3.core.extension.<a href="org/jdbi/v3/core/extension/ExtensionHandler.html" title="interface in org.jdbi.v3.core.extension">ExtensionHandler</a></dt>
-<dd>
-<div class="block">Handler that only returns null independent of any input parameters.</div>
 </dd>
 <dt><a href="org/jdbi/v3/core/statement/EmptyHandling.html#NULL_KEYWORD" class="member-name-link">NULL_KEYWORD</a> - Enum constant in enum org.jdbi.v3.core.statement.<a href="org/jdbi/v3/core/statement/EmptyHandling.html" title="enum in org.jdbi.v3.core.statement">EmptyHandling</a></dt>
 <dd>
@@ -8432,7 +8432,7 @@ the order they are declared.</div>
 </dl>
 <h2 class="title" id="I:W">W</h2>
 <dl class="index">
-<dt><a href="org/jdbi/v3/core/extension/ExtensionHandler.html#warm(org.jdbi.v3.core.config.ConfigRegistry)" class="member-name-link">warm(ConfigRegistry)</a> - Method in interface org.jdbi.v3.core.extension.<a href="org/jdbi/v3/core/extension/ExtensionHandler.html" title="interface in org.jdbi.v3.core.extension">ExtensionHandler</a></dt>
+<dt><a href="org/jdbi/v3/core/extension/AttachedExtensionHandler.html#warm(org.jdbi.v3.core.config.ConfigRegistry)" class="member-name-link">warm(ConfigRegistry)</a> - Method in interface org.jdbi.v3.core.extension.<a href="org/jdbi/v3/core/extension/AttachedExtensionHandler.html" title="interface in org.jdbi.v3.core.extension">AttachedExtensionHandler</a></dt>
 <dd>
 <div class="block">Called after the method handler is constructed to pre-initialize any important
  configuration data structures.</div>

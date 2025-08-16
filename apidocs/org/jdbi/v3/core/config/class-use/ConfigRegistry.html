@@ -120,21 +120,25 @@ loadScripts(document, 'script');</script>
  <code>java.time</code>, <code>hstore</code>, <code>uuid</code>, and <code>enum</code>
  types when configured with a recent Postgres database server.</div>
 </div>
-<div class="col-first even-row-color"><a href="#org.jdbi.v3.sqlobject.customizer">org.jdbi.v3.sqlobject.customizer</a></div>
+<div class="col-first even-row-color"><a href="#org.jdbi.v3.sqlobject">org.jdbi.v3.sqlobject</a></div>
 <div class="col-last even-row-color">
+<div class="block">SQL Objects</div>
+</div>
+<div class="col-first odd-row-color"><a href="#org.jdbi.v3.sqlobject.customizer">org.jdbi.v3.sqlobject.customizer</a></div>
+<div class="col-last odd-row-color">
 <div class="block">
  The <code>sqlobject.customizer</code> package provides annotations
  that customize the execution of a statement.</div>
 </div>
-<div class="col-first odd-row-color"><a href="#org.jdbi.v3.sqlobject.locator">org.jdbi.v3.sqlobject.locator</a></div>
-<div class="col-last odd-row-color">
+<div class="col-first even-row-color"><a href="#org.jdbi.v3.sqlobject.locator">org.jdbi.v3.sqlobject.locator</a></div>
+<div class="col-last even-row-color">
 <div class="block">
  <code>sqlobject.locator</code> inspects the declared SqlObject and determines
  the statement text to pass off to <code>core.locator</code> for final
  resolution of the statement text.</div>
 </div>
-<div class="col-first even-row-color"><a href="#org.jdbi.v3.vavr">org.jdbi.v3.vavr</a></div>
-<div class="col-last even-row-color">
+<div class="col-first odd-row-color"><a href="#org.jdbi.v3.vavr">org.jdbi.v3.vavr</a></div>
+<div class="col-last odd-row-color">
 <div class="block">
  <code>vavr</code> is a functional programming library for the JVM.</div>
 </div>
@@ -420,6 +424,16 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
+<div class="col-first even-row-color"><code><a href="../../extension/AttachedExtensionHandler.html" title="interface in org.jdbi.v3.core.extension">AttachedExtensionHandler</a></code></div>
+<div class="col-second even-row-color"><span class="type-name-label">ExtensionHandler.</span><code><a href="../../extension/ExtensionHandler.html#attachTo(org.jdbi.v3.core.config.ConfigRegistry,java.lang.Object)" class="member-name-link">attachTo</a><wbr>(<a href="../ConfigRegistry.html" title="class in org.jdbi.v3.core.config">ConfigRegistry</a>&nbsp;config,
+ <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;target)</code></div>
+<div class="col-last even-row-color">
+<div class="block">Attach this extension handler to a target instance.</div>
+</div>
+<div class="col-first odd-row-color"><code>default <a href="../../extension/AttachedExtensionHandler.html" title="interface in org.jdbi.v3.core.extension">AttachedExtensionHandler</a></code></div>
+<div class="col-second odd-row-color"><span class="type-name-label">ExtensionHandler.Simple.</span><code><a href="../../extension/ExtensionHandler.Simple.html#attachTo(org.jdbi.v3.core.config.ConfigRegistry,java.lang.Object)" class="member-name-link">attachTo</a><wbr>(<a href="../ConfigRegistry.html" title="class in org.jdbi.v3.core.config">ConfigRegistry</a>&nbsp;config,
+ <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;target)</code></div>
+<div class="col-last odd-row-color">&nbsp;</div>
 <div class="col-first even-row-color"><code>abstract void</code></div>
 <div class="col-second even-row-color"><span class="type-name-label">SimpleExtensionConfigurer.</span><code><a href="../../extension/SimpleExtensionConfigurer.html#configure(org.jdbi.v3.core.config.ConfigRegistry,java.lang.annotation.Annotation,java.lang.Class)" class="member-name-link">configure</a><wbr>(<a href="../ConfigRegistry.html" title="class in org.jdbi.v3.core.config">ConfigRegistry</a>&nbsp;config,
  <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/annotation/Annotation.html" title="class or interface in java.lang.annotation" class="external-link">Annotation</a>&nbsp;annotation,
@@ -501,7 +515,7 @@ loadScripts(document, 'script');</script>
 <div class="col-second odd-row-color"><span class="type-name-label">Extensions.</span><code><a href="../../extension/Extensions.html#setRegistry(org.jdbi.v3.core.config.ConfigRegistry)" class="member-name-link">setRegistry</a><wbr>(<a href="../ConfigRegistry.html" title="class in org.jdbi.v3.core.config">ConfigRegistry</a>&nbsp;registry)</code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
 <div class="col-first even-row-color"><code>default void</code></div>
-<div class="col-second even-row-color"><span class="type-name-label">ExtensionHandler.</span><code><a href="../../extension/ExtensionHandler.html#warm(org.jdbi.v3.core.config.ConfigRegistry)" class="member-name-link">warm</a><wbr>(<a href="../ConfigRegistry.html" title="class in org.jdbi.v3.core.config">ConfigRegistry</a>&nbsp;config)</code></div>
+<div class="col-second even-row-color"><span class="type-name-label">AttachedExtensionHandler.</span><code><a href="../../extension/AttachedExtensionHandler.html#warm(org.jdbi.v3.core.config.ConfigRegistry)" class="member-name-link">warm</a><wbr>(<a href="../ConfigRegistry.html" title="class in org.jdbi.v3.core.config">ConfigRegistry</a>&nbsp;config)</code></div>
 <div class="col-last even-row-color">
 <div class="block">Called after the method handler is constructed to pre-initialize any important
  configuration data structures.</div>
@@ -764,6 +778,23 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color"><code>void</code></div>
 <div class="col-second even-row-color"><span class="type-name-label">PostgresTypes.</span><code><a href="../../../postgres/PostgresTypes.html#setRegistry(org.jdbi.v3.core.config.ConfigRegistry)" class="member-name-link">setRegistry</a><wbr>(<a href="../ConfigRegistry.html" title="class in org.jdbi.v3.core.config">ConfigRegistry</a>&nbsp;registry)</code></div>
 <div class="col-last even-row-color">&nbsp;</div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="org.jdbi.v3.sqlobject">
+<h2>Uses of <a href="../ConfigRegistry.html" title="class in org.jdbi.v3.core.config">ConfigRegistry</a> in <a href="../../../sqlobject/package-summary.html">org.jdbi.v3.sqlobject</a></h2>
+<div class="caption"><span>Methods in <a href="../../../sqlobject/package-summary.html">org.jdbi.v3.sqlobject</a> with parameters of type <a href="../ConfigRegistry.html" title="class in org.jdbi.v3.core.config">ConfigRegistry</a></span></div>
+<div class="summary-table three-column-summary">
+<div class="table-header col-first">Modifier and Type</div>
+<div class="table-header col-second">Method</div>
+<div class="table-header col-last">Description</div>
+<div class="col-first even-row-color"><code>default <a href="../../extension/AttachedExtensionHandler.html" title="interface in org.jdbi.v3.core.extension">AttachedExtensionHandler</a></code></div>
+<div class="col-second even-row-color"><span class="type-name-label">Handler.</span><code><a href="../../../sqlobject/Handler.html#attachTo(org.jdbi.v3.core.config.ConfigRegistry,java.lang.Object)" class="member-name-link">attachTo</a><wbr>(<a href="../ConfigRegistry.html" title="class in org.jdbi.v3.core.config">ConfigRegistry</a>&nbsp;config,
+ <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;target)</code></div>
+<div class="col-last even-row-color">
+<div class="block"><span class="deprecated-label">Deprecated, for removal: This API element is subject to removal in a future version.</span></div>
+&nbsp;</div>
 </div>
 </section>
 </li>
