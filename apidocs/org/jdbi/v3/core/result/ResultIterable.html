@@ -145,12 +145,12 @@ extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/ja
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Collect the results into a container specified by a collector.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default &lt;R extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;? super <a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;&gt;<br>R</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default &lt;R&gt;&nbsp;R</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#collectInto(java.lang.reflect.Type)" class="member-name-link">collectInto</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/reflect/Type.html" title="class or interface in java.lang.reflect" class="external-link">Type</a>&nbsp;containerType)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Collect the results into a container type.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default &lt;R extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;? super <a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;&gt;<br>R</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default &lt;R&gt;&nbsp;R</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#collectInto(org.jdbi.v3.core.generic.GenericType)" class="member-name-link">collectInto</a><wbr>(<a href="../generic/GenericType.html" title="class in org.jdbi.v3.core.generic">GenericType</a>&lt;R&gt;&nbsp;containerType)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Collect the results into a collection type.</div>
@@ -675,7 +675,7 @@ V&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/
 <section class="detail" id="collectInto(java.lang.reflect.Type)">
 <h3>collectInto</h3>
 <div class="member-signature"><span class="annotations"><a href="../../meta/Alpha.html" title="annotation in org.jdbi.v3.meta">@Alpha</a>
-</span><span class="modifiers">default</span>&nbsp;<span class="type-parameters">&lt;R extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;? super <a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;&gt;</span>&nbsp;<span class="return-type">R</span>&nbsp;<span class="element-name">collectInto</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/reflect/Type.html" title="class or interface in java.lang.reflect" class="external-link">Type</a>&nbsp;containerType)</span></div>
+</span><span class="modifiers">default</span>&nbsp;<span class="type-parameters">&lt;R&gt;</span>&nbsp;<span class="return-type">R</span>&nbsp;<span class="element-name">collectInto</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/reflect/Type.html" title="class or interface in java.lang.reflect" class="external-link">Type</a>&nbsp;containerType)</span></div>
 <div class="block">Collect the results into a container type.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -693,7 +693,7 @@ V&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/
 <section class="detail" id="collectInto(org.jdbi.v3.core.generic.GenericType)">
 <h3>collectInto</h3>
 <div class="member-signature"><span class="annotations"><a href="../../meta/Alpha.html" title="annotation in org.jdbi.v3.meta">@Alpha</a>
-</span><span class="modifiers">default</span>&nbsp;<span class="type-parameters">&lt;R extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;? super <a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;&gt;</span>&nbsp;<span class="return-type">R</span>&nbsp;<span class="element-name">collectInto</span><wbr><span class="parameters">(<a href="../generic/GenericType.html" title="class in org.jdbi.v3.core.generic">GenericType</a>&lt;R&gt;&nbsp;containerType)</span></div>
+</span><span class="modifiers">default</span>&nbsp;<span class="type-parameters">&lt;R&gt;</span>&nbsp;<span class="return-type">R</span>&nbsp;<span class="element-name">collectInto</span><wbr><span class="parameters">(<a href="../generic/GenericType.html" title="class in org.jdbi.v3.core.generic">GenericType</a>&lt;R&gt;&nbsp;containerType)</span></div>
 <div class="block">Collect the results into a collection type.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
