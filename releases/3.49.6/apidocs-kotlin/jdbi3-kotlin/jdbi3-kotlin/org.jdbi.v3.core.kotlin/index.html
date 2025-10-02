@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>org.jdbi.v3.core.kotlin</title>
+    <link href="../../images/logo-icon.svg" rel="icon" type="image/svg">
+    <script>var pathToRoot = "../../";</script>
+    <script>document.documentElement.classList.replace("no-js","js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../styles/style.css" rel="Stylesheet">
+<link href="../../styles/main.css" rel="Stylesheet">
+<link href="../../styles/prism.css" rel="Stylesheet">
+<link href="../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../styles/font-jb-sans-auto.css" rel="Stylesheet">
+<link href="../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../scripts/clipboard.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../ui-kit/ui-kit.min.js" defer="defer"></script>
+<script type="text/javascript" src="../../scripts/symbol-parameters-wrapper_deferred.js" defer="defer"></script>
+</head>
+<body>
+    <div class="root">
+    <nav class="navigation theme-dark" id="navigation-wrapper">
+            <a class="library-name--link" href="../../index.html">
+                    jdbi3-kotlin
+            </a>
+        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle"
+                type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+        </div>
+        <div class="navigation-controls">
+        <div class="filter-section filter-section_loading" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active=""
+                        data-filter="jdbi3-kotlin/JVM">JVM</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
+                        data-role="dropdown-toggle"
+                        aria-controls="platform-tags-listbox"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                        aria-label="Toggle source sets"
+                ></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox">
+                    <div class="dropdown--header"><span>Platform filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close platform filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id="jdbi3-kotlin/JVM"
+                                       data-filter="jdbi3-kotlin/JVM"/>
+                                <span class="checkbox--icon"></span>
+                                JVM
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </div>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button"
+                    type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </nav>
+        <div id="container">
+            <div class="sidebar" id="leftColumn">
+                <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                    <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
+                        data-role="dropdown-listbox">
+                        <div class="dropdown--header">
+                            <span>
+                                    jdbi3-kotlin
+                            </span>
+                            <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                                <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                            </button>
+                        </div>
+                        <div class="sidebar--inner" id="sideMenu"></div>
+                    </ul>
+                    <div class="dropdown--overlay"></div>
+                </div>
+            </div>
+            <div id="main">
+<div class="main-content" data-page-type="package" id="content" pageIds="jdbi3-kotlin::org.jdbi.v3.core.kotlin////PointingToDeclaration//185600128">
+  <div class="breadcrumbs"><a href="../../index.html">jdbi3-kotlin</a><span class="delimiter">/</span><span class="current">org.jdbi.v3.core.kotlin</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Package-level</span></span> <span><span>declarations</span></span></h1>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="TYPE">Types</button><button class="section-tab" data-togglable="FUNCTION,EXTENSION_FUNCTION">Functions</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="TYPE">
+        <h2 class="">Types</h2>
+        <div class="table"><a data-name="2097733154%2FClasslikes%2F185600128" anchor-label="KotlinMapper" id="2097733154%2FClasslikes%2F185600128" data-filterable-set="jdbi3-kotlin/JVM"></a>
+          <div class="table-row" data-filterable-current="jdbi3-kotlin/JVM" data-filterable-set="jdbi3-kotlin/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-kotlin-mapper/index.html"><span>Kotlin</span><wbr></wbr><span><span>Mapper</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2097733154%2FClasslikes%2F185600128"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="jdbi3-kotlin/JVM"><div class="symbol monospace"><span class="token keyword">class </span><a href="-kotlin-mapper/index.html">KotlinMapper</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>kClass<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.reflect/-k-class/index.html">KClass</a><span class="token operator">&lt;</span><span class="token operator">*</span><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">prefix<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator"> = </span><span class="token string">&quot;&quot;</span></span></span><span class="token punctuation">)</span> : <span data-unresolved-link="org.jdbi.v3.core.mapper/RowMapper///PointingToDeclaration/">RowMapper</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt; </span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1199857526%2FClasslikes%2F185600128" anchor-label="KotlinMapperFactory" id="1199857526%2FClasslikes%2F185600128" data-filterable-set="jdbi3-kotlin/JVM"></a>
+          <div class="table-row" data-filterable-current="jdbi3-kotlin/JVM" data-filterable-set="jdbi3-kotlin/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-kotlin-mapper-factory/index.html"><span>Kotlin</span><wbr></wbr><span>Mapper</span><wbr></wbr><span><span>Factory</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1199857526%2FClasslikes%2F185600128"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="jdbi3-kotlin/JVM"><div class="symbol monospace"><span class="token keyword">class </span><a href="-kotlin-mapper-factory/index.html">KotlinMapperFactory</a> : <span data-unresolved-link="org.jdbi.v3.core.mapper/RowMapperFactory///PointingToDeclaration/">RowMapperFactory</span></div><div class="brief "><p class="paragraph">This {@link RowMapperFactory} creates a new, generic {@link KotlinMapper} for every data class used. By installing this factory, any Kotlin data class will have an automatic, implicit row mapper.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-129777296%2FClasslikes%2F185600128" anchor-label="KotlinPlugin" id="-129777296%2FClasslikes%2F185600128" data-filterable-set="jdbi3-kotlin/JVM"></a>
+          <div class="table-row" data-filterable-current="jdbi3-kotlin/JVM" data-filterable-set="jdbi3-kotlin/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-kotlin-plugin/index.html"><span>Kotlin</span><wbr></wbr><span><span>Plugin</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-129777296%2FClasslikes%2F185600128"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="jdbi3-kotlin/JVM"><div class="symbol monospace"><span class="token keyword">class </span><a href="-kotlin-plugin/index.html">KotlinPlugin</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">installKotlinMapperFactory<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span><span class="token punctuation">, </span></span><span class="parameter ">enableCoroutineSupport<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">false</span></span></span><span class="token punctuation">)</span> : <span data-unresolved-link="org.jdbi.v3.core.spi/JdbiPlugin.Singleton///PointingToDeclaration/">JdbiPlugin.Singleton</span></div><div class="brief "><p class="paragraph">Installs Kotlin-specific functionality.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="">Functions</h2>
+        <div class="table"><a data-name="2026462535%2FFunctions%2F185600128" anchor-label="bindKotlin" id="2026462535%2FFunctions%2F185600128" data-filterable-set="jdbi3-kotlin/JVM"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current="jdbi3-kotlin/JVM" data-filterable-set="jdbi3-kotlin/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="bind-kotlin.html"><span>bind</span><wbr></wbr><span><span>Kotlin</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2026462535%2FFunctions%2F185600128"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="jdbi3-kotlin/JVM"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.jdbi.v3.meta/Beta///PointingToDeclaration/"><span class="token annotation builtin">Beta</span></span></div></div><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="bind-kotlin.html">This</a><span class="token operator"> : </span><span data-unresolved-link="org.jdbi.v3.core.statement/SqlStatement///PointingToDeclaration/">SqlStatement</span><span class="token operator">&lt;</span><a href="bind-kotlin.html">This</a><span class="token operator">&gt;</span><span class="token operator">&gt; </span><span data-unresolved-link="org.jdbi.v3.core.statement/SqlStatement///PointingToDeclaration/">SqlStatement</span><span class="token operator">&lt;</span><a href="bind-kotlin.html">This</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="bind-kotlin.html"><span class="token function">bindKotlin</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">obj<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="bind-kotlin.html">This</a></div><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.jdbi.v3.meta/Beta///PointingToDeclaration/"><span class="token annotation builtin">Beta</span></span></div></div><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="bind-kotlin.html">This</a><span class="token operator"> : </span><span data-unresolved-link="org.jdbi.v3.core.statement/SqlStatement///PointingToDeclaration/">SqlStatement</span><span class="token operator">&lt;</span><a href="bind-kotlin.html">This</a><span class="token operator">&gt;</span><span class="token operator">&gt; </span><span data-unresolved-link="org.jdbi.v3.core.statement/SqlStatement///PointingToDeclaration/">SqlStatement</span><span class="token operator">&lt;</span><a href="bind-kotlin.html">This</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="bind-kotlin.html"><span class="token function">bindKotlin</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">prefix<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">obj<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="bind-kotlin.html">This</a></div><div class="brief "><p class="paragraph">Bind all the member properties of a given Kotlin object.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1282974237%2FFunctions%2F185600128" anchor-label="configure" id="-1282974237%2FFunctions%2F185600128" data-filterable-set="jdbi3-kotlin/JVM"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current="jdbi3-kotlin/JVM" data-filterable-set="jdbi3-kotlin/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="configure.html"><span><span>configure</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1282974237%2FFunctions%2F185600128"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="jdbi3-kotlin/JVM"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.jdbi.v3.meta/Beta///PointingToDeclaration/"><span class="token annotation builtin">Beta</span></span></div></div><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="configure.html">This</a><span class="token operator"> : </span><span data-unresolved-link="org.jdbi.v3.core.config/Configurable///PointingToDeclaration/">Configurable</span><span class="token operator">&lt;</span><a href="configure.html">This</a><span class="token operator">&gt;</span><span class="token punctuation">, </span><a href="configure.html">C</a><span class="token operator"> : </span><span data-unresolved-link="org.jdbi.v3.core.config/JdbiConfig///PointingToDeclaration/">JdbiConfig</span><span class="token operator">&lt;</span><a href="configure.html">C</a><span class="token operator">&gt;</span><span class="token operator">&gt; </span><span data-unresolved-link="org.jdbi.v3.core.config/Configurable///PointingToDeclaration/">Configurable</span><span class="token operator">&lt;</span><a href="configure.html">This</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="configure.html"><span class="token function">configure</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">configClass<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.reflect/-k-class/index.html">KClass</a><span class="token operator">&lt;</span><a href="configure.html">C</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">configurer<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Consumer.html">Consumer</a><span class="token operator">&lt;</span><a href="configure.html">C</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="configure.html">This</a></div><div class="brief "><p class="paragraph">Convenience method for <span data-unresolved-link="org.jdbi.v3.core.config/Configurable/configure/#java.lang.Class[TypeParam(bounds=[org.jdbi.v3.core.config.JdbiConfig[^]])]#java.util.function.Consumer[TypeParam(bounds=[org.jdbi.v3.core.config.JdbiConfig[^]])]/PointingToDeclaration/">Configurable.configure</span> using Kotlin class syntax.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-127472200%2FFunctions%2F185600128" anchor-label="getConfig" id="-127472200%2FFunctions%2F185600128" data-filterable-set="jdbi3-kotlin/JVM"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current="jdbi3-kotlin/JVM" data-filterable-set="jdbi3-kotlin/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-config.html"><span>get</span><wbr></wbr><span><span>Config</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-127472200%2FFunctions%2F185600128"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="jdbi3-kotlin/JVM"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="get-config.html">T</a><span class="token operator"> : </span><span data-unresolved-link="org.jdbi.v3.core.config/JdbiConfig///PointingToDeclaration/">JdbiConfig</span><span class="token operator">&lt;</span><a href="get-config.html">T</a><span class="token operator">&gt;</span><span class="token operator">&gt; </span><span data-unresolved-link="org.jdbi.v3.core.statement/StatementContext///PointingToDeclaration/">StatementContext</span><span class="token punctuation">.</span><a href="get-config.html"><span class="token function">getConfig</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">kClass<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.reflect/-k-class/index.html">KClass</a><span class="token operator">&lt;</span><a href="get-config.html">T</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="get-config.html">T</a></div><div class="brief "><p class="paragraph">Convenience helper to use any <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.reflect/-k-class/index.html">KClass</a> for config lookup.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-811931292%2FFunctions%2F185600128" anchor-label="getQualifiers" id="-811931292%2FFunctions%2F185600128" data-filterable-set="jdbi3-kotlin/JVM"></a>
+          <div class="table-row" data-filterable-current="jdbi3-kotlin/JVM" data-filterable-set="jdbi3-kotlin/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-qualifiers.html"><span>get</span><wbr></wbr><span><span>Qualifiers</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-811931292%2FFunctions%2F185600128"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="jdbi3-kotlin/JVM"><div class="symbol monospace"><span class="token keyword">fun </span><a href="get-qualifiers.html"><span class="token function">getQualifiers</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">vararg </span>elements<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.reflect/-k-annotated-element/index.html">KAnnotatedElement</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-set/index.html">Set</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-annotation/index.html">Annotation</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns the set of qualifying annotations on the given Kotlin elements.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="513324009%2FFunctions%2F185600128" anchor-label="inCoroutineContext" id="513324009%2FFunctions%2F185600128" data-filterable-set="jdbi3-kotlin/JVM"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current="jdbi3-kotlin/JVM" data-filterable-set="jdbi3-kotlin/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="in-coroutine-context.html"><span>in</span><wbr></wbr><span>Coroutine</span><wbr></wbr><span><span>Context</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="513324009%2FFunctions%2F185600128"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="jdbi3-kotlin/JVM"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.jdbi.v3.meta/Alpha///PointingToDeclaration/"><span class="token annotation builtin">Alpha</span></span></div></div><span class="token keyword">fun </span><span data-unresolved-link="org.jdbi.v3.core/Jdbi///PointingToDeclaration/">Jdbi</span><span class="token punctuation">.</span><a href="in-coroutine-context.html"><span class="token function">inCoroutineContext</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">handle<span class="token operator">: </span><span data-unresolved-link="org.jdbi.v3.core/Handle///PointingToDeclaration/">Handle</span><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.coroutines/-coroutine-context/-element/index.html">CoroutineContext.Element</a></div><div class="brief "><p class="paragraph">Returns a <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.coroutines/-coroutine-context/-element/index.html">CoroutineContext.Element</a> instance representing this Jdbi object which can be used to manage handles from this Jdbi in a coroutine context.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1531772838%2FFunctions%2F185600128" anchor-label="inTransactionUnchecked" id="-1531772838%2FFunctions%2F185600128" data-filterable-set="jdbi3-kotlin/JVM"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current="jdbi3-kotlin/JVM" data-filterable-set="jdbi3-kotlin/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="in-transaction-unchecked.html"><span>in</span><wbr></wbr><span>Transaction</span><wbr></wbr><span><span>Unchecked</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1531772838%2FFunctions%2F185600128"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="jdbi3-kotlin/JVM"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.jdbi.v3.meta/Alpha///PointingToDeclaration/"><span class="token annotation builtin">Alpha</span></span></div></div><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="in-transaction-unchecked.html">R</a><span class="token operator">&gt; </span><span data-unresolved-link="org.jdbi.v3.core/Jdbi///PointingToDeclaration/">Jdbi</span><span class="token punctuation">.</span><a href="in-transaction-unchecked.html"><span class="token function">inTransactionUnchecked</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">crossinline </span>block<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="org.jdbi.v3.core/Handle///PointingToDeclaration/">Handle</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="in-transaction-unchecked.html">R</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="in-transaction-unchecked.html">R</a></div><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.jdbi.v3.meta/Alpha///PointingToDeclaration/"><span class="token annotation builtin">Alpha</span></span></div></div><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="in-transaction-unchecked.html">R</a><span class="token operator">&gt; </span><span data-unresolved-link="org.jdbi.v3.core/Jdbi///PointingToDeclaration/">Jdbi</span><span class="token punctuation">.</span><a href="in-transaction-unchecked.html"><span class="token function">inTransactionUnchecked</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">level<span class="token operator">: </span><span data-unresolved-link="org.jdbi.v3.core.transaction/TransactionIsolationLevel///PointingToDeclaration/">TransactionIsolationLevel</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">crossinline </span>block<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="org.jdbi.v3.core/Handle///PointingToDeclaration/">Handle</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="in-transaction-unchecked.html">R</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="in-transaction-unchecked.html">R</a></div><div class="brief "><p class="paragraph">Temporary extension function for <span data-unresolved-link="org.jdbi.v3.core/Jdbi/inTransaction/#org.jdbi.v3.core.HandleCallback[TypeParam(bounds=[kotlin.Any]),TypeParam(bounds=[java.lang.Exception])]/PointingToDeclaration/">Jdbi.inTransaction</span>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1945158532%2FFunctions%2F185600128" anchor-label="isKotlinClass" id="-1945158532%2FFunctions%2F185600128" data-filterable-set="jdbi3-kotlin/JVM"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current="jdbi3-kotlin/JVM" data-filterable-set="jdbi3-kotlin/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="is-kotlin-class.html"><span>is</span><wbr></wbr><span>Kotlin</span><wbr></wbr><span><span>Class</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1945158532%2FFunctions%2F185600128"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="jdbi3-kotlin/JVM"><div class="symbol monospace"><span class="token keyword">fun </span><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html">Class</a><span class="token operator">&lt;</span><span class="token operator">*</span><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="is-kotlin-class.html"><span class="token function">isKotlinClass</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Returns true if the <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html">Class</a> object represents a Kotlin class.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="444601738%2FFunctions%2F185600128" anchor-label="mapTo" id="444601738%2FFunctions%2F185600128" data-filterable-set="jdbi3-kotlin/JVM"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current="jdbi3-kotlin/JVM" data-filterable-set="jdbi3-kotlin/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="map-to.html"><span>map</span><wbr></wbr><span><span>To</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="444601738%2FFunctions%2F185600128"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="jdbi3-kotlin/JVM"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="map-to.html">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt; </span><span data-unresolved-link="org.jdbi.v3.core.result/ResultBearing///PointingToDeclaration/">ResultBearing</span><span class="token punctuation">.</span><a href="map-to.html"><span class="token function">mapTo</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="org.jdbi.v3.core.result/ResultIterable///PointingToDeclaration/">ResultIterable</span><span class="token operator">&lt;</span><a href="map-to.html">T</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Use a reified parameter to map the result.</p></div><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="map-to.html">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt; </span><span data-unresolved-link="org.jdbi.v3.core.result/ResultBearing///PointingToDeclaration/">ResultBearing</span><span class="token punctuation">.</span><a href="map-to.html"><span class="token function">mapTo</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">kClass<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.reflect/-k-class/index.html">KClass</a><span class="token operator">&lt;</span><a href="map-to.html">T</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="org.jdbi.v3.core.result/ResultIterable///PointingToDeclaration/">ResultIterable</span><span class="token operator">&lt;</span><a href="map-to.html">T</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Map to a Kotlin class.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1590127281%2FFunctions%2F185600128" anchor-label="useExtension" id="1590127281%2FFunctions%2F185600128" data-filterable-set="jdbi3-kotlin/JVM"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current="jdbi3-kotlin/JVM" data-filterable-set="jdbi3-kotlin/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="use-extension.html"><span>use</span><wbr></wbr><span><span>Extension</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1590127281%2FFunctions%2F185600128"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="jdbi3-kotlin/JVM"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="use-extension.html">E</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token punctuation">, </span><a href="use-extension.html">X</a><span class="token operator"> : </span><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Exception.html">Exception</a><span class="token operator">&gt; </span><span data-unresolved-link="org.jdbi.v3.core/Jdbi///PointingToDeclaration/">Jdbi</span><span class="token punctuation">.</span><a href="use-extension.html"><span class="token function">useExtension</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">extensionType<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.reflect/-k-class/index.html">KClass</a><span class="token operator">&lt;</span><a href="use-extension.html">E</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">callback<span class="token operator">: </span><span data-unresolved-link="org.jdbi.v3.core.extension/ExtensionConsumer///PointingToDeclaration/">ExtensionConsumer</span><span class="token operator">&lt;</span><a href="use-extension.html">E</a><span class="token punctuation">, </span><a href="use-extension.html">X</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">A convenience method which opens an extension of the given type, and yields it to a callback. A handle is opened if needed by the extention, and closed before returning to the caller.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1974776337%2FFunctions%2F185600128" anchor-label="useExtensionUnchecked" id="-1974776337%2FFunctions%2F185600128" data-filterable-set="jdbi3-kotlin/JVM"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current="jdbi3-kotlin/JVM" data-filterable-set="jdbi3-kotlin/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="use-extension-unchecked.html"><span>use</span><wbr></wbr><span>Extension</span><wbr></wbr><span><span>Unchecked</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1974776337%2FFunctions%2F185600128"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="jdbi3-kotlin/JVM"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.jdbi.v3.meta/Alpha///PointingToDeclaration/"><span class="token annotation builtin">Alpha</span></span></div></div><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="use-extension-unchecked.html">E</a><span class="token operator">&gt; </span><span data-unresolved-link="org.jdbi.v3.core/Jdbi///PointingToDeclaration/">Jdbi</span><span class="token punctuation">.</span><a href="use-extension-unchecked.html"><span class="token function">useExtensionUnchecked</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">extensionType<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html">Class</a><span class="token operator">&lt;</span><a href="use-extension-unchecked.html">E</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">crossinline </span>callback<span class="token operator">: </span><span class="token punctuation">(</span><a href="use-extension-unchecked.html">E</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span></div><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.jdbi.v3.meta/Alpha///PointingToDeclaration/"><span class="token annotation builtin">Alpha</span></span></div></div><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="use-extension-unchecked.html">E</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt; </span><span data-unresolved-link="org.jdbi.v3.core/Jdbi///PointingToDeclaration/">Jdbi</span><span class="token punctuation">.</span><a href="use-extension-unchecked.html"><span class="token function">useExtensionUnchecked</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">extensionType<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.reflect/-k-class/index.html">KClass</a><span class="token operator">&lt;</span><a href="use-extension-unchecked.html">E</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">crossinline </span>callback<span class="token operator">: </span><span class="token punctuation">(</span><a href="use-extension-unchecked.html">E</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Temporary extension function for <span data-unresolved-link="org.jdbi.v3.core/Jdbi/useExtension/#java.lang.Class[TypeParam(bounds=[kotlin.Any])]#org.jdbi.v3.core.extension.ExtensionConsumer[TypeParam(bounds=[kotlin.Any]),TypeParam(bounds=[java.lang.Exception])]/PointingToDeclaration/">Jdbi.useExtension</span>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="246963586%2FFunctions%2F185600128" anchor-label="useHandleUnchecked" id="246963586%2FFunctions%2F185600128" data-filterable-set="jdbi3-kotlin/JVM"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current="jdbi3-kotlin/JVM" data-filterable-set="jdbi3-kotlin/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="use-handle-unchecked.html"><span>use</span><wbr></wbr><span>Handle</span><wbr></wbr><span><span>Unchecked</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="246963586%2FFunctions%2F185600128"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="jdbi3-kotlin/JVM"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.jdbi.v3.meta/Alpha///PointingToDeclaration/"><span class="token annotation builtin">Alpha</span></span></div></div><span class="token keyword">inline </span><span class="token keyword">fun </span><span data-unresolved-link="org.jdbi.v3.core/Jdbi///PointingToDeclaration/">Jdbi</span><span class="token punctuation">.</span><a href="use-handle-unchecked.html"><span class="token function">useHandleUnchecked</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">crossinline </span>block<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="org.jdbi.v3.core/Handle///PointingToDeclaration/">Handle</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Temporary extension function for <span data-unresolved-link="org.jdbi.v3.core/Jdbi/useHandle/#org.jdbi.v3.core.HandleConsumer[TypeParam(bounds=[java.lang.Exception])]/PointingToDeclaration/">Jdbi.useHandle</span>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1719194641%2FFunctions%2F185600128" anchor-label="useSequence" id="-1719194641%2FFunctions%2F185600128" data-filterable-set="jdbi3-kotlin/JVM"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current="jdbi3-kotlin/JVM" data-filterable-set="jdbi3-kotlin/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="use-sequence.html"><span>use</span><wbr></wbr><span><span>Sequence</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1719194641%2FFunctions%2F185600128"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="jdbi3-kotlin/JVM"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="use-sequence.html">O</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt; </span><span data-unresolved-link="org.jdbi.v3.core.result/ResultIterable///PointingToDeclaration/">ResultIterable</span><span class="token operator">&lt;</span><a href="use-sequence.html">O</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="use-sequence.html"><span class="token function">useSequence</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><span class="token punctuation">(</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.sequences/-sequence/index.html">Sequence</a><span class="token operator">&lt;</span><a href="use-sequence.html">O</a><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Stream all the rows of the result set out with a <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.sequences/-sequence/index.html">Sequence</a>. Handles closing of the underlying iterator.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1847453638%2FFunctions%2F185600128" anchor-label="useTransactionUnchecked" id="-1847453638%2FFunctions%2F185600128" data-filterable-set="jdbi3-kotlin/JVM"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current="jdbi3-kotlin/JVM" data-filterable-set="jdbi3-kotlin/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="use-transaction-unchecked.html"><span>use</span><wbr></wbr><span>Transaction</span><wbr></wbr><span><span>Unchecked</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1847453638%2FFunctions%2F185600128"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="jdbi3-kotlin/JVM"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.jdbi.v3.meta/Alpha///PointingToDeclaration/"><span class="token annotation builtin">Alpha</span></span></div></div><span class="token keyword">inline </span><span class="token keyword">fun </span><span data-unresolved-link="org.jdbi.v3.core/Jdbi///PointingToDeclaration/">Jdbi</span><span class="token punctuation">.</span><a href="use-transaction-unchecked.html"><span class="token function">useTransactionUnchecked</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">crossinline </span>block<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="org.jdbi.v3.core/Handle///PointingToDeclaration/">Handle</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span></div><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.jdbi.v3.meta/Alpha///PointingToDeclaration/"><span class="token annotation builtin">Alpha</span></span></div></div><span class="token keyword">inline </span><span class="token keyword">fun </span><span data-unresolved-link="org.jdbi.v3.core/Jdbi///PointingToDeclaration/">Jdbi</span><span class="token punctuation">.</span><a href="use-transaction-unchecked.html"><span class="token function">useTransactionUnchecked</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">level<span class="token operator">: </span><span data-unresolved-link="org.jdbi.v3.core.transaction/TransactionIsolationLevel///PointingToDeclaration/">TransactionIsolationLevel</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">crossinline </span>block<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="org.jdbi.v3.core/Handle///PointingToDeclaration/">Handle</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Temporary extension function for <span data-unresolved-link="org.jdbi.v3.core/Jdbi/useTransaction/#org.jdbi.v3.core.HandleConsumer[TypeParam(bounds=[java.lang.Exception])]/PointingToDeclaration/">Jdbi.useTransaction</span>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-782432761%2FFunctions%2F185600128" anchor-label="withExtension" id="-782432761%2FFunctions%2F185600128" data-filterable-set="jdbi3-kotlin/JVM"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current="jdbi3-kotlin/JVM" data-filterable-set="jdbi3-kotlin/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-extension.html"><span>with</span><wbr></wbr><span><span>Extension</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-782432761%2FFunctions%2F185600128"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="jdbi3-kotlin/JVM"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="with-extension.html">E</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token punctuation">, </span><a href="with-extension.html">R</a><span class="token punctuation">, </span><a href="with-extension.html">X</a><span class="token operator"> : </span><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Exception.html">Exception</a><span class="token operator">&gt; </span><span data-unresolved-link="org.jdbi.v3.core/Jdbi///PointingToDeclaration/">Jdbi</span><span class="token punctuation">.</span><a href="with-extension.html"><span class="token function">withExtension</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">extensionType<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.reflect/-k-class/index.html">KClass</a><span class="token operator">&lt;</span><a href="with-extension.html">E</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">callback<span class="token operator">: </span><span data-unresolved-link="org.jdbi.v3.core.extension/ExtensionCallback///PointingToDeclaration/">ExtensionCallback</span><span class="token operator">&lt;</span><a href="with-extension.html">R</a><span class="token punctuation">, </span><a href="with-extension.html">E</a><span class="token punctuation">, </span><a href="with-extension.html">X</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="with-extension.html">R</a></div><div class="brief "><p class="paragraph">A convenience method which opens an extension of the given type, yields it to a callback, and returns the result of the callback. A handle is opened if needed by the extension, and closed before returning to the caller.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1050550109%2FFunctions%2F185600128" anchor-label="withExtensionUnchecked" id="1050550109%2FFunctions%2F185600128" data-filterable-set="jdbi3-kotlin/JVM"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current="jdbi3-kotlin/JVM" data-filterable-set="jdbi3-kotlin/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-extension-unchecked.html"><span>with</span><wbr></wbr><span>Extension</span><wbr></wbr><span><span>Unchecked</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1050550109%2FFunctions%2F185600128"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="jdbi3-kotlin/JVM"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.jdbi.v3.meta/Alpha///PointingToDeclaration/"><span class="token annotation builtin">Alpha</span></span></div></div><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="with-extension-unchecked.html">E</a><span class="token punctuation">, </span><a href="with-extension-unchecked.html">R</a><span class="token operator">&gt; </span><span data-unresolved-link="org.jdbi.v3.core/Jdbi///PointingToDeclaration/">Jdbi</span><span class="token punctuation">.</span><a href="with-extension-unchecked.html"><span class="token function">withExtensionUnchecked</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">extensionType<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html">Class</a><span class="token operator">&lt;</span><a href="with-extension-unchecked.html">E</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">crossinline </span>callback<span class="token operator">: </span><span class="token punctuation">(</span><a href="with-extension-unchecked.html">E</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="with-extension-unchecked.html">R</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="with-extension-unchecked.html">R</a></div><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.jdbi.v3.meta/Alpha///PointingToDeclaration/"><span class="token annotation builtin">Alpha</span></span></div></div><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="with-extension-unchecked.html">E</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token punctuation">, </span><a href="with-extension-unchecked.html">R</a><span class="token operator">&gt; </span><span data-unresolved-link="org.jdbi.v3.core/Jdbi///PointingToDeclaration/">Jdbi</span><span class="token punctuation">.</span><a href="with-extension-unchecked.html"><span class="token function">withExtensionUnchecked</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">extensionType<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.reflect/-k-class/index.html">KClass</a><span class="token operator">&lt;</span><a href="with-extension-unchecked.html">E</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">crossinline </span>callback<span class="token operator">: </span><span class="token punctuation">(</span><a href="with-extension-unchecked.html">E</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="with-extension-unchecked.html">R</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="with-extension-unchecked.html">R</a></div><div class="brief "><p class="paragraph">Temporary extension function for <span data-unresolved-link="org.jdbi.v3.core/Jdbi/withExtension/#java.lang.Class[TypeParam(bounds=[kotlin.Any])]#org.jdbi.v3.core.extension.ExtensionCallback[TypeParam(bounds=[kotlin.Any]),TypeParam(bounds=[kotlin.Any]),TypeParam(bounds=[java.lang.Exception])]/PointingToDeclaration/">Jdbi.withExtension</span>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-18587432%2FFunctions%2F185600128" anchor-label="withHandleUnchecked" id="-18587432%2FFunctions%2F185600128" data-filterable-set="jdbi3-kotlin/JVM"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current="jdbi3-kotlin/JVM" data-filterable-set="jdbi3-kotlin/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-handle-unchecked.html"><span>with</span><wbr></wbr><span>Handle</span><wbr></wbr><span><span>Unchecked</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-18587432%2FFunctions%2F185600128"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="jdbi3-kotlin/JVM"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.jdbi.v3.meta/Alpha///PointingToDeclaration/"><span class="token annotation builtin">Alpha</span></span></div></div><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="with-handle-unchecked.html">R</a><span class="token operator">&gt; </span><span data-unresolved-link="org.jdbi.v3.core/Jdbi///PointingToDeclaration/">Jdbi</span><span class="token punctuation">.</span><a href="with-handle-unchecked.html"><span class="token function">withHandleUnchecked</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">crossinline </span>block<span class="token operator">: </span><span class="token punctuation">(</span><span data-unresolved-link="org.jdbi.v3.core/Handle///PointingToDeclaration/">Handle</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="with-handle-unchecked.html">R</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="with-handle-unchecked.html">R</a></div><div class="brief "><p class="paragraph">Temporary extension function for <span data-unresolved-link="org.jdbi.v3.core/Jdbi/withHandle/#org.jdbi.v3.core.HandleCallback[TypeParam(bounds=[kotlin.Any]),TypeParam(bounds=[java.lang.Exception])]/PointingToDeclaration/">Jdbi.withHandle</span>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+        <span>© 2025 Copyright</span>
+        <span class="pull-right">
+            <span>Generated by </span>
+            <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                <span>dokka</span>
+            </a>
+        </span>
+    </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
