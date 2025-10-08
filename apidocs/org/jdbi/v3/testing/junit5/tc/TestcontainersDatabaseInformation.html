@@ -104,14 +104,14 @@ loadScripts(document, 'script');</script>
  Oracle XE, Oracle Free, TrinoDB and MSSQL Server.
  <br>
  Any of the testcontainer instances for these databases, can be used with <a href="JdbiTestcontainersExtension.html#instance(org.testcontainers.containers.JdbcDatabaseContainer)"><code>JdbiTestcontainersExtension.instance(JdbcDatabaseContainer)</code></a> to create a
- JUnit 5 <a href="https://junit.org/junit5/docs/5.13.3/api/org.junit.jupiter.api/org/junit/jupiter/api/extension/Extension.html" title="class or interface in org.junit.jupiter.api.extension" class="external-link"><code>Extension</code></a> instance that will manage database and schema instances for tests.
+ JUnit 5 <a href="https://docs.junit.org/5.13.3/api/org.junit.jupiter.api/org/junit/jupiter/api/extension/Extension.html" title="class or interface in org.junit.jupiter.api.extension" class="external-link"><code>Extension</code></a> instance that will manage database and schema instances for tests.
  <p></p>
  If a testcontainer class is not supported by Jdbi or the current Jdbi behavior does not match what is required for a test (e.g. schema or user creation), a
  custom <a href="TestcontainersDatabaseInformation.html" title="class in org.jdbi.v3.testing.junit5.tc"><code>TestcontainersDatabaseInformation</code></a> instance can be created using the
  <a href="#of(java.lang.String,java.lang.String,java.lang.String,java.util.function.BiFunction)"><code>of(String, String, String, BiFunction)</code></a> method.
  <br>
  This instance can be passed into the <a href="JdbiTestcontainersExtension.html#instance(org.jdbi.v3.testing.junit5.tc.TestcontainersDatabaseInformation,org.testcontainers.containers.JdbcDatabaseContainer)"><code>JdbiTestcontainersExtension.instance(TestcontainersDatabaseInformation, JdbcDatabaseContainer)</code></a> method to create
- a custom JUnit 5 <a href="https://junit.org/junit5/docs/5.13.3/api/org.junit.jupiter.api/org/junit/jupiter/api/extension/Extension.html" title="class or interface in org.junit.jupiter.api.extension" class="external-link"><code>Extension</code></a>.
+ a custom JUnit 5 <a href="https://docs.junit.org/5.13.3/api/org.junit.jupiter.api/org/junit/jupiter/api/extension/Extension.html" title="class or interface in org.junit.jupiter.api.extension" class="external-link"><code>Extension</code></a>.
  <br></div>
 </section>
 <section class="summary">
