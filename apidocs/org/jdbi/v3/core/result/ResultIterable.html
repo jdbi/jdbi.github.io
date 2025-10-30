@@ -92,7 +92,7 @@ loadScripts(document, 'script');</script>
 </dl>
 <dl class="notes">
 <dt>All Superinterfaces:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Iterable.html" title="class or interface in java.lang" class="external-link">Iterable</a>&lt;T&gt;</code></dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Iterable.html" title="class or interface in java.lang" class="external-link">Iterable</a>&lt;T&gt;</code></dd>
 </dl>
 <dl class="notes">
 <dt>All Known Subinterfaces:</dt>
@@ -103,10 +103,10 @@ loadScripts(document, 'script');</script>
 <dd>This is a functional interface and can therefore be used as the assignment target for a lambda expression or method reference.</dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/FunctionalInterface.html" title="class or interface in java.lang" class="external-link">@FunctionalInterface</a>
+<div class="type-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/FunctionalInterface.html" title="class or interface in java.lang" class="external-link">@FunctionalInterface</a>
 </span><span class="modifiers">public interface </span><span class="element-name type-name-label">ResultIterable&lt;T&gt;</span><span class="extends-implements">
-extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Iterable.html" title="class or interface in java.lang" class="external-link">Iterable</a>&lt;T&gt;</span></div>
-<div class="block">An <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Iterable.html" title="class or interface in java.lang" class="external-link"><code>Iterable</code></a> of values, usually mapped from a <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.sql/java/sql/ResultSet.html" title="class or interface in java.sql" class="external-link"><code>ResultSet</code></a>. Generally, ResultIterables may only
+extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Iterable.html" title="class or interface in java.lang" class="external-link">Iterable</a>&lt;T&gt;</span></div>
+<div class="block">An <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Iterable.html" title="class or interface in java.lang" class="external-link"><code>Iterable</code></a> of values, usually mapped from a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/ResultSet.html" title="class or interface in java.sql" class="external-link"><code>ResultSet</code></a>. Generally, ResultIterables may only
  be traversed once.</div>
 </section>
 <section class="summary">
@@ -141,12 +141,12 @@ extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/ja
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default &lt;R&gt;&nbsp;R</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#collect(java.util.stream.Collector)" class="member-name-link">collect</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/stream/Collector.html" title="class or interface in java.util.stream" class="external-link">Collector</a>&lt;? super <a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>,<wbr>?,<wbr>R&gt;&nbsp;collector)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#collect(java.util.stream.Collector)" class="member-name-link">collect</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/stream/Collector.html" title="class or interface in java.util.stream" class="external-link">Collector</a>&lt;? super <a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>,<wbr>?,<wbr>R&gt;&nbsp;collector)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Collect the results into a container specified by a collector.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default &lt;R&gt;&nbsp;R</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#collectInto(java.lang.reflect.Type)" class="member-name-link">collectInto</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/reflect/Type.html" title="class or interface in java.lang.reflect" class="external-link">Type</a>&nbsp;containerType)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#collectInto(java.lang.reflect.Type)" class="member-name-link">collectInto</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Type.html" title="class or interface in java.lang.reflect" class="external-link">Type</a>&nbsp;containerType)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Collect the results into a container type.</div>
 </div>
@@ -155,35 +155,35 @@ extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/ja
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Collect the results into a collection type.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#collectIntoList()" class="member-name-link">collectIntoList</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
-<div class="block">Returns results in a <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link"><code>List</code></a>.</div>
+<div class="block">Returns results in a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link"><code>List</code></a>.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a><wbr>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a><wbr>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#collectIntoSet()" class="member-name-link">collectIntoSet</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
-<div class="block">Returns results in a <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link"><code>Set</code></a>.</div>
+<div class="block">Returns results in a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link"><code>Set</code></a>.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default &lt;K,<wbr>
-V&gt;&nbsp;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a><wbr>&lt;K,<wbr>V&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#collectToMap(java.util.function.Function,java.util.function.Function)" class="member-name-link">collectToMap</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;? super <a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>,<wbr>? extends K&gt;&nbsp;keyFunction,
- <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;? super <a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>,<wbr>? extends V&gt;&nbsp;valueFunction)</code></div>
+V&gt;&nbsp;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a><wbr>&lt;K,<wbr>V&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#collectToMap(java.util.function.Function,java.util.function.Function)" class="member-name-link">collectToMap</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;? super <a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>,<wbr>? extends K&gt;&nbsp;keyFunction,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;? super <a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>,<wbr>? extends V&gt;&nbsp;valueFunction)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Collect the results into a Map, using the given functions to compute keys and values.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="ResultIterable.html" title="interface in org.jdbi.v3.core.result">ResultIterable</a><wbr>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#filter(java.util.function.Predicate)" class="member-name-link">filter</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Predicate.html" title="class or interface in java.util.function" class="external-link">Predicate</a>&lt;? super <a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;&nbsp;predicate)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#filter(java.util.function.Predicate)" class="member-name-link">filter</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Predicate.html" title="class or interface in java.util.function" class="external-link">Predicate</a>&lt;? super <a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;&nbsp;predicate)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
-<div class="block">Convenience method to filter the <a href="ResultIterable.html" title="interface in org.jdbi.v3.core.result"><code>ResultIterable</code></a> by applying the specified <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Predicate.html" title="class or interface in java.util.function" class="external-link"><code>Predicate</code></a>.<br>
- This method has the look and feel of <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/stream/Stream.html#filter(java.util.function.Predicate)" title="class or interface in java.util.stream" class="external-link"><code>Stream.filter(Predicate)</code></a> without making use of streams.</div>
+<div class="block">Convenience method to filter the <a href="ResultIterable.html" title="interface in org.jdbi.v3.core.result"><code>ResultIterable</code></a> by applying the specified <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Predicate.html" title="class or interface in java.util.function" class="external-link"><code>Predicate</code></a>.<br>
+ This method has the look and feel of <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/stream/Stream.html#filter(java.util.function.Predicate)" title="class or interface in java.util.stream" class="external-link"><code>Stream.filter(Predicate)</code></a> without making use of streams.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#findFirst()" class="member-name-link">findFirst</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Returns the first row in the result set, if present.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#findOne()" class="member-name-link">findOne</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Returns the only row in the result set, if any.</div>
@@ -201,10 +201,10 @@ V&gt;&nbsp;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base
 <div class="block">Returns the first row in the result set.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#forEach(java.util.function.Consumer)" class="member-name-link">forEach</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;? super <a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;&nbsp;action)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#forEach(java.util.function.Consumer)" class="member-name-link">forEach</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;? super <a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;&nbsp;action)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default int</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#forEachWithCount(java.util.function.Consumer)" class="member-name-link">forEachWithCount</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;? super <a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;&nbsp;action)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#forEachWithCount(java.util.function.Consumer)" class="member-name-link">forEachWithCount</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;? super <a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;&nbsp;action)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Performs the specified action on each remaining element and returns the iteration i.e. record count.<br>
  It is often useful (e.g. for logging) to know the record count while processing result sets.</div>
@@ -215,20 +215,20 @@ V&gt;&nbsp;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base
 <div class="block">Stream all the rows of the result set out
  with an <code>Iterator</code>.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#list()" class="member-name-link">list</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
-<div class="block">Returns results in a <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link"><code>List</code></a> using the JDK specific default implementation of <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link"><code>List</code></a> as provided
- by <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/stream/Collectors.html#toList()" title="class or interface in java.util.stream" class="external-link"><code>Collectors.toList()</code></a>.</div>
+<div class="block">Returns results in a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link"><code>List</code></a> using the JDK specific default implementation of <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link"><code>List</code></a> as provided
+ by <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/stream/Collectors.html#toList()" title="class or interface in java.util.stream" class="external-link"><code>Collectors.toList()</code></a>.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default &lt;R&gt;&nbsp;<a href="ResultIterable.html" title="interface in org.jdbi.v3.core.result">ResultIterable</a><wbr>&lt;R&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#map(java.util.function.Function)" class="member-name-link">map</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;? super <a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>,<wbr>? extends R&gt;&nbsp;mapper)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#map(java.util.function.Function)" class="member-name-link">map</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;? super <a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>,<wbr>? extends R&gt;&nbsp;mapper)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Returns a <code>ResultIterable&lt;U&gt;</code> derived from this <code>ResultIterable&lt;T&gt;</code>, by
  transforming elements using the given mapper function.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1"><code>static &lt;T&gt;&nbsp;<a href="ResultIterable.html" title="interface in org.jdbi.v3.core.result">ResultIterable</a><wbr>&lt;T&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1"><code><a href="#of(java.util.function.Supplier,org.jdbi.v3.core.mapper.RowMapper,org.jdbi.v3.core.statement.StatementContext)" class="member-name-link">of</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Supplier.html" title="class or interface in java.util.function" class="external-link">Supplier</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.sql/java/sql/ResultSet.html" title="class or interface in java.sql" class="external-link">ResultSet</a>&gt;&nbsp;resultSetSupplier,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1"><code><a href="#of(java.util.function.Supplier,org.jdbi.v3.core.mapper.RowMapper,org.jdbi.v3.core.statement.StatementContext)" class="member-name-link">of</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Supplier.html" title="class or interface in java.util.function" class="external-link">Supplier</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/ResultSet.html" title="class or interface in java.sql" class="external-link">ResultSet</a>&gt;&nbsp;resultSetSupplier,
  <a href="../mapper/RowMapper.html" title="interface in org.jdbi.v3.core.mapper">RowMapper</a>&lt;T&gt;&nbsp;mapper,
  <a href="../statement/StatementContext.html" title="class in org.jdbi.v3.core.statement">StatementContext</a>&nbsp;ctx)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1">
@@ -246,44 +246,44 @@ V&gt;&nbsp;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default &lt;U&gt;&nbsp;U</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#reduce(U,java.util.function.BiFunction)" class="member-name-link">reduce</a><wbr>(U&nbsp;identity,
- <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/BiFunction.html" title="class or interface in java.util.function" class="external-link">BiFunction</a>&lt;U,<wbr><a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>,<wbr>U&gt;&nbsp;accumulator)</code></div>
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/BiFunction.html" title="class or interface in java.util.function" class="external-link">BiFunction</a>&lt;U,<wbr><a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>,<wbr>U&gt;&nbsp;accumulator)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Reduce the results.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a><wbr>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a><wbr>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#set()" class="member-name-link">set</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
-<div class="block">Returns results in a <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link"><code>Set</code></a> using the JDK specific default implementation of <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link"><code>Set</code></a> as provided
- by <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/stream/Collectors.html#toSet()" title="class or interface in java.util.stream" class="external-link"><code>Collectors.toSet()</code></a>.</div>
+<div class="block">Returns results in a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link"><code>Set</code></a> using the JDK specific default implementation of <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link"><code>Set</code></a> as provided
+ by <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/stream/Collectors.html#toSet()" title="class or interface in java.util.stream" class="external-link"><code>Collectors.toSet()</code></a>.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/stream/Stream.html" title="class or interface in java.util.stream" class="external-link">Stream</a><wbr>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/stream/Stream.html" title="class or interface in java.util.stream" class="external-link">Stream</a><wbr>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#stream()" class="member-name-link">stream</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Returns the stream of results.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default &lt;C extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;&gt;<br>C</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#toCollection(java.util.function.Supplier)" class="member-name-link">toCollection</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Supplier.html" title="class or interface in java.util.function" class="external-link">Supplier</a>&lt;C&gt;&nbsp;supplier)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default &lt;C extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;&gt;<br>C</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#toCollection(java.util.function.Supplier)" class="member-name-link">toCollection</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Supplier.html" title="class or interface in java.util.function" class="external-link">Supplier</a>&lt;C&gt;&nbsp;supplier)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
-<div class="block">Collect the results into a collection object similar to <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/stream/Collectors.html#toCollection(java.util.function.Supplier)" title="class or interface in java.util.stream" class="external-link"><code>Collectors.toCollection(Supplier)</code></a>.</div>
+<div class="block">Collect the results into a collection object similar to <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/stream/Collectors.html#toCollection(java.util.function.Supplier)" title="class or interface in java.util.stream" class="external-link"><code>Collectors.toCollection(Supplier)</code></a>.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default &lt;X extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a>&gt;<br>void</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default &lt;X extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a>&gt;<br>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#useIterator(org.jdbi.v3.core.result.IteratorConsumer)" class="member-name-link">useIterator</a><wbr>(<a href="IteratorConsumer.html" title="interface in org.jdbi.v3.core.result">IteratorConsumer</a>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>,<wbr>X&gt;&nbsp;consumer)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Passes the iterator of results to the consumer.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default &lt;X extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a>&gt;<br>void</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default &lt;X extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a>&gt;<br>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#useStream(org.jdbi.v3.core.result.StreamConsumer)" class="member-name-link">useStream</a><wbr>(<a href="StreamConsumer.html" title="interface in org.jdbi.v3.core.result">StreamConsumer</a>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>,<wbr>X&gt;&nbsp;consumer)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Passes the stream of results to the consumer.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default &lt;R,<wbr>
-X extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a>&gt;<br>R</code></div>
+X extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a>&gt;<br>R</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#withIterator(org.jdbi.v3.core.result.IteratorCallback)" class="member-name-link">withIterator</a><wbr>(<a href="IteratorCallback.html" title="interface in org.jdbi.v3.core.result">IteratorCallback</a>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>,<wbr>R,<wbr>X&gt;&nbsp;callback)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Passes the iterator of results to the callback.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default &lt;R,<wbr>
-X extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a>&gt;<br>R</code></div>
+X extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a>&gt;<br>R</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#withStream(org.jdbi.v3.core.result.StreamCallback)" class="member-name-link">withStream</a><wbr>(<a href="StreamCallback.html" title="interface in org.jdbi.v3.core.result">StreamCallback</a>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>,<wbr>R,<wbr>X&gt;&nbsp;callback)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Passes the stream of results to the callback.</div>
@@ -292,8 +292,8 @@ X extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/
 </div>
 </div>
 <div class="inherited-list">
-<h3 id="methods-inherited-from-class-java.lang.Iterable">Methods inherited from interface&nbsp;java.lang.<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Iterable.html" title="class or interface in java.lang" class="external-link">Iterable</a></h3>
-<code><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Iterable.html#spliterator()" title="class or interface in java.lang" class="external-link">spliterator</a></code></div>
+<h3 id="methods-inherited-from-class-java.lang.Iterable">Methods inherited from interface&nbsp;java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Iterable.html" title="class or interface in java.lang" class="external-link">Iterable</a></h3>
+<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Iterable.html#spliterator()" title="class or interface in java.lang" class="external-link">spliterator</a></code></div>
 </section>
 </li>
 </ul>
@@ -308,7 +308,7 @@ X extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/
 <li>
 <section class="detail" id="of(java.util.function.Supplier,org.jdbi.v3.core.mapper.RowMapper,org.jdbi.v3.core.statement.StatementContext)">
 <h3>of</h3>
-<div class="member-signature"><span class="modifiers">static</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type"><a href="ResultIterable.html" title="interface in org.jdbi.v3.core.result">ResultIterable</a>&lt;T&gt;</span>&nbsp;<span class="element-name">of</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Supplier.html" title="class or interface in java.util.function" class="external-link">Supplier</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.sql/java/sql/ResultSet.html" title="class or interface in java.sql" class="external-link">ResultSet</a>&gt;&nbsp;resultSetSupplier,
+<div class="member-signature"><span class="modifiers">static</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type"><a href="ResultIterable.html" title="interface in org.jdbi.v3.core.result">ResultIterable</a>&lt;T&gt;</span>&nbsp;<span class="element-name">of</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Supplier.html" title="class or interface in java.util.function" class="external-link">Supplier</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/ResultSet.html" title="class or interface in java.sql" class="external-link">ResultSet</a>&gt;&nbsp;resultSetSupplier,
  <a href="../mapper/RowMapper.html" title="interface in org.jdbi.v3.core.mapper">RowMapper</a>&lt;T&gt;&nbsp;mapper,
  <a href="../statement/StatementContext.html" title="class in org.jdbi.v3.core.statement">StatementContext</a>&nbsp;ctx)</span></div>
 <div class="block">Returns a ResultIterable backed by the given result set supplier, mapper, and context.</div>
@@ -348,7 +348,7 @@ X extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/
  closed to release database resources.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Iterable.html#iterator()" title="class or interface in java.lang" class="external-link">iterator</a></code>&nbsp;in interface&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Iterable.html" title="class or interface in java.lang" class="external-link">Iterable</a>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;</code></dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Iterable.html#iterator()" title="class or interface in java.lang" class="external-link">iterator</a></code>&nbsp;in interface&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Iterable.html" title="class or interface in java.lang" class="external-link">Iterable</a>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;</code></dd>
 <dt>Returns:</dt>
 <dd>the results as a streaming Iterator</dd>
 </dl>
@@ -357,7 +357,7 @@ X extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/
 <li>
 <section class="detail" id="useIterator(org.jdbi.v3.core.result.IteratorConsumer)">
 <h3>useIterator</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="type-parameters">&lt;X extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a>&gt;</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">useIterator</span><wbr><span class="parameters">(<a href="IteratorConsumer.html" title="interface in org.jdbi.v3.core.result">IteratorConsumer</a>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>,<wbr>X&gt;&nbsp;consumer)</span>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="type-parameters">&lt;X extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a>&gt;</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">useIterator</span><wbr><span class="parameters">(<a href="IteratorConsumer.html" title="interface in org.jdbi.v3.core.result">IteratorConsumer</a>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>,<wbr>X&gt;&nbsp;consumer)</span>
                                         throws <span class="exceptions">X</span></div>
 <div class="block">Passes the iterator of results to the consumer. Database resources owned by the query are
  released before this method returns.</div>
@@ -373,7 +373,7 @@ X extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/
 <section class="detail" id="withIterator(org.jdbi.v3.core.result.IteratorCallback)">
 <h3>withIterator</h3>
 <div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="type-parameters">&lt;R,<wbr>
-X extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a>&gt;</span>&nbsp;<span class="return-type">R</span>&nbsp;<span class="element-name">withIterator</span><wbr><span class="parameters">(<a href="IteratorCallback.html" title="interface in org.jdbi.v3.core.result">IteratorCallback</a>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>,<wbr>R,<wbr>X&gt;&nbsp;callback)</span>
+X extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a>&gt;</span>&nbsp;<span class="return-type">R</span>&nbsp;<span class="element-name">withIterator</span><wbr><span class="parameters">(<a href="IteratorCallback.html" title="interface in org.jdbi.v3.core.result">IteratorCallback</a>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>,<wbr>R,<wbr>X&gt;&nbsp;callback)</span>
                                          throws <span class="exceptions">X</span></div>
 <div class="block">Passes the iterator of results to the callback. Database resources owned by the query are
  released before this method returns.</div>
@@ -392,7 +392,7 @@ X extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/
 <li>
 <section class="detail" id="map(java.util.function.Function)">
 <h3>map</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="type-parameters">&lt;R&gt;</span>&nbsp;<span class="return-type"><a href="ResultIterable.html" title="interface in org.jdbi.v3.core.result">ResultIterable</a>&lt;R&gt;</span>&nbsp;<span class="element-name">map</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;? super <a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>,<wbr>? extends R&gt;&nbsp;mapper)</span></div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="type-parameters">&lt;R&gt;</span>&nbsp;<span class="return-type"><a href="ResultIterable.html" title="interface in org.jdbi.v3.core.result">ResultIterable</a>&lt;R&gt;</span>&nbsp;<span class="element-name">map</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;? super <a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>,<wbr>? extends R&gt;&nbsp;mapper)</span></div>
 <div class="block">Returns a <code>ResultIterable&lt;U&gt;</code> derived from this <code>ResultIterable&lt;T&gt;</code>, by
  transforming elements using the given mapper function.</div>
 <dl class="notes">
@@ -408,17 +408,17 @@ X extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/
 <li>
 <section class="detail" id="forEach(java.util.function.Consumer)">
 <h3>forEach</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">forEach</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;? super <a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;&nbsp;action)</span></div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">forEach</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;? super <a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;&nbsp;action)</span></div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Iterable.html#forEach(java.util.function.Consumer)" title="class or interface in java.lang" class="external-link">forEach</a></code>&nbsp;in interface&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Iterable.html" title="class or interface in java.lang" class="external-link">Iterable</a>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;</code></dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Iterable.html#forEach(java.util.function.Consumer)" title="class or interface in java.lang" class="external-link">forEach</a></code>&nbsp;in interface&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Iterable.html" title="class or interface in java.lang" class="external-link">Iterable</a>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;</code></dd>
 </dl>
 </section>
 </li>
 <li>
 <section class="detail" id="forEachWithCount(java.util.function.Consumer)">
 <h3>forEachWithCount</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">forEachWithCount</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;? super <a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;&nbsp;action)</span></div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">forEachWithCount</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;? super <a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;&nbsp;action)</span></div>
 <div class="block">Performs the specified action on each remaining element and returns the iteration i.e. record count.<br>
  It is often useful (e.g. for logging) to know the record count while processing result sets.
  <pre>
@@ -448,29 +448,29 @@ X extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/
 <dt>Returns:</dt>
 <dd>the only row in the result set.</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/IllegalStateException.html" title="class or interface in java.lang" class="external-link">IllegalStateException</a></code> - if the result set contains zero or multiple rows</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalStateException.html" title="class or interface in java.lang" class="external-link">IllegalStateException</a></code> - if the result set contains zero or multiple rows</dd>
 </dl>
 </section>
 </li>
 <li>
 <section class="detail" id="findOne()">
 <h3>findOne</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;</span>&nbsp;<span class="element-name">findOne</span>()</div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;</span>&nbsp;<span class="element-name">findOne</span>()</div>
 <div class="block">Returns the only row in the result set, if any. Returns <code>Optional.empty()</code> if zero
  rows are returned, or if the row itself is <code>null</code>.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the only row in the result set, if any.</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/IllegalStateException.html" title="class or interface in java.lang" class="external-link">IllegalStateException</a></code> - if the result set contains multiple rows</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalStateException.html" title="class or interface in java.lang" class="external-link">IllegalStateException</a></code> - if the result set contains multiple rows</dd>
 </dl>
 </section>
 </li>
 <li>
 <section class="detail" id="findOnly()">
 <h3>findOnly</h3>
-<div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Deprecated.html#since()" title="class or interface in java.lang" class="external-link">since</a>="3.8.0",
-            <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Deprecated.html#forRemoval()" title="class or interface in java.lang" class="external-link">forRemoval</a>=true)
+<div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html#since()" title="class or interface in java.lang" class="external-link">since</a>="3.8.0",
+            <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html#forRemoval()" title="class or interface in java.lang" class="external-link">forRemoval</a>=true)
 </span><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="ResultIterable.html" title="type parameter in ResultIterable">T</a></span>&nbsp;<span class="element-name">findOnly</span>()</div>
 <div class="deprecation-block"><span class="deprecated-label">Deprecated, for removal: This API element is subject to removal in a future version.</span>
 <div class="deprecation-comment">use <a href="#one()"><code>one()</code></a> or <a href="#findOne()"><code>findOne()</code></a> instead.</div>
@@ -480,7 +480,7 @@ X extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/
 <dt>Returns:</dt>
 <dd>the object mapped from the singular row in the results</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/IllegalStateException.html" title="class or interface in java.lang" class="external-link">IllegalStateException</a></code> - if zero or multiple rows are returned</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalStateException.html" title="class or interface in java.lang" class="external-link">IllegalStateException</a></code> - if zero or multiple rows are returned</dd>
 </dl>
 </section>
 </li>
@@ -494,14 +494,14 @@ X extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/
 <dt>Returns:</dt>
 <dd>the first row in the result set.</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/IllegalStateException.html" title="class or interface in java.lang" class="external-link">IllegalStateException</a></code> - if zero rows are returned</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalStateException.html" title="class or interface in java.lang" class="external-link">IllegalStateException</a></code> - if zero rows are returned</dd>
 </dl>
 </section>
 </li>
 <li>
 <section class="detail" id="findFirst()">
 <h3>findFirst</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;</span>&nbsp;<span class="element-name">findFirst</span>()</div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;</span>&nbsp;<span class="element-name">findFirst</span>()</div>
 <div class="block">Returns the first row in the result set, if present. Returns <code>Optional.empty()</code> if
  zero rows are returned or the first row is <code>null</code>.</div>
 <dl class="notes">
@@ -513,11 +513,11 @@ X extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/
 <li>
 <section class="detail" id="stream()">
 <h3>stream</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/stream/Stream.html" title="class or interface in java.util.stream" class="external-link">Stream</a>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;</span>&nbsp;<span class="element-name">stream</span>()</div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/stream/Stream.html" title="class or interface in java.util.stream" class="external-link">Stream</a>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;</span>&nbsp;<span class="element-name">stream</span>()</div>
 <div class="block">Returns the stream of results.
 
  <p>
- Note: the returned stream owns database resources, and must be closed via a call to <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/stream/BaseStream.html#close()" title="class or interface in java.util.stream" class="external-link"><code>BaseStream.close()</code></a>, or
+ Note: the returned stream owns database resources, and must be closed via a call to <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/stream/BaseStream.html#close()" title="class or interface in java.util.stream" class="external-link"><code>BaseStream.close()</code></a>, or
  by using the stream in a try-with-resources block:
  </p>
 
@@ -542,7 +542,7 @@ X extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/
 <li>
 <section class="detail" id="useStream(org.jdbi.v3.core.result.StreamConsumer)">
 <h3>useStream</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="type-parameters">&lt;X extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a>&gt;</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">useStream</span><wbr><span class="parameters">(<a href="StreamConsumer.html" title="interface in org.jdbi.v3.core.result">StreamConsumer</a>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>,<wbr>X&gt;&nbsp;consumer)</span>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="type-parameters">&lt;X extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a>&gt;</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">useStream</span><wbr><span class="parameters">(<a href="StreamConsumer.html" title="interface in org.jdbi.v3.core.result">StreamConsumer</a>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>,<wbr>X&gt;&nbsp;consumer)</span>
                                       throws <span class="exceptions">X</span></div>
 <div class="block">Passes the stream of results to the consumer. Database resources owned by the query are
  released before this method returns.</div>
@@ -560,7 +560,7 @@ X extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/
 <section class="detail" id="withStream(org.jdbi.v3.core.result.StreamCallback)">
 <h3>withStream</h3>
 <div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="type-parameters">&lt;R,<wbr>
-X extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a>&gt;</span>&nbsp;<span class="return-type">R</span>&nbsp;<span class="element-name">withStream</span><wbr><span class="parameters">(<a href="StreamCallback.html" title="interface in org.jdbi.v3.core.result">StreamCallback</a>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>,<wbr>R,<wbr>X&gt;&nbsp;callback)</span>
+X extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a>&gt;</span>&nbsp;<span class="return-type">R</span>&nbsp;<span class="element-name">withStream</span><wbr><span class="parameters">(<a href="StreamCallback.html" title="interface in org.jdbi.v3.core.result">StreamCallback</a>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>,<wbr>R,<wbr>X&gt;&nbsp;callback)</span>
                                        throws <span class="exceptions">X</span></div>
 <div class="block">Passes the stream of results to the callback. Database resources owned by the query are
  released before this method returns.</div>
@@ -580,13 +580,13 @@ X extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/
 <li>
 <section class="detail" id="list()">
 <h3>list</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;</span>&nbsp;<span class="element-name">list</span>()</div>
-<div class="block">Returns results in a <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link"><code>List</code></a> using the JDK specific default implementation of <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link"><code>List</code></a> as provided
- by <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/stream/Collectors.html#toList()" title="class or interface in java.util.stream" class="external-link"><code>Collectors.toList()</code></a>. The same limitations apply to the list instance returned from this method.
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;</span>&nbsp;<span class="element-name">list</span>()</div>
+<div class="block">Returns results in a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link"><code>List</code></a> using the JDK specific default implementation of <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link"><code>List</code></a> as provided
+ by <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/stream/Collectors.html#toList()" title="class or interface in java.util.stream" class="external-link"><code>Collectors.toList()</code></a>. The same limitations apply to the list instance returned from this method.
  If more control over the list type is required, use <a href="#toCollection(java.util.function.Supplier)"><code>toCollection(Supplier)</code></a> or see the <a href="#collectIntoList()"><code>collectIntoList()</code></a> method.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>results in a <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link"><code>List</code></a></dd>
+<dd>results in a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link"><code>List</code></a></dd>
 <dt>See Also:</dt>
 <dd>
 <ul class="tag-list">
@@ -600,13 +600,13 @@ X extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/
 <li>
 <section class="detail" id="set()">
 <h3>set</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;</span>&nbsp;<span class="element-name">set</span>()</div>
-<div class="block">Returns results in a <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link"><code>Set</code></a> using the JDK specific default implementation of <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link"><code>Set</code></a> as provided
- by <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/stream/Collectors.html#toSet()" title="class or interface in java.util.stream" class="external-link"><code>Collectors.toSet()</code></a>. The same limitations apply to the set instance returned from this method.
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;</span>&nbsp;<span class="element-name">set</span>()</div>
+<div class="block">Returns results in a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link"><code>Set</code></a> using the JDK specific default implementation of <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link"><code>Set</code></a> as provided
+ by <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/stream/Collectors.html#toSet()" title="class or interface in java.util.stream" class="external-link"><code>Collectors.toSet()</code></a>. The same limitations apply to the set instance returned from this method.
  If more control over the set type is required, use <a href="#toCollection(java.util.function.Supplier)"><code>toCollection(Supplier)</code></a> or see the <a href="#collectIntoSet()"><code>collectIntoSet()</code></a> method.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>results in a <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link"><code>Set</code></a></dd>
+<dd>results in a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link"><code>Set</code></a></dd>
 <dt>Since:</dt>
 <dd>3.38.0</dd>
 <dt>See Also:</dt>
@@ -622,7 +622,7 @@ X extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/
 <li>
 <section class="detail" id="collect(java.util.stream.Collector)">
 <h3>collect</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="type-parameters">&lt;R&gt;</span>&nbsp;<span class="return-type">R</span>&nbsp;<span class="element-name">collect</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/stream/Collector.html" title="class or interface in java.util.stream" class="external-link">Collector</a>&lt;? super <a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>,<wbr>?,<wbr>R&gt;&nbsp;collector)</span></div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="type-parameters">&lt;R&gt;</span>&nbsp;<span class="return-type">R</span>&nbsp;<span class="element-name">collect</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/stream/Collector.html" title="class or interface in java.util.stream" class="external-link">Collector</a>&lt;? super <a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>,<wbr>?,<wbr>R&gt;&nbsp;collector)</span></div>
 <div class="block">Collect the results into a container specified by a collector.</div>
 <dl class="notes">
 <dt>Type Parameters:</dt>
@@ -638,8 +638,8 @@ X extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/
 <section class="detail" id="collectToMap(java.util.function.Function,java.util.function.Function)">
 <h3>collectToMap</h3>
 <div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="type-parameters">&lt;K,<wbr>
-V&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;K,<wbr>V&gt;</span>&nbsp;<span class="element-name">collectToMap</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;? super <a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>,<wbr>? extends K&gt;&nbsp;keyFunction,
- <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;? super <a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>,<wbr>? extends V&gt;&nbsp;valueFunction)</span></div>
+V&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;K,<wbr>V&gt;</span>&nbsp;<span class="element-name">collectToMap</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;? super <a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>,<wbr>? extends K&gt;&nbsp;keyFunction,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;? super <a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>,<wbr>? extends V&gt;&nbsp;valueFunction)</span></div>
 <div class="block">Collect the results into a Map, using the given functions to compute keys and values.</div>
 <dl class="notes">
 <dt>Type Parameters:</dt>
@@ -658,9 +658,9 @@ V&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/
 <li>
 <section class="detail" id="toCollection(java.util.function.Supplier)">
 <h3>toCollection</h3>
-<div class="member-signature"><span class="annotations"><a href="../../meta/Alpha.html" title="annotation in org.jdbi.v3.meta">@Alpha</a>
-</span><span class="modifiers">default</span>&nbsp;<span class="type-parameters">&lt;C extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;&gt;</span>&nbsp;<span class="return-type">C</span>&nbsp;<span class="element-name">toCollection</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Supplier.html" title="class or interface in java.util.function" class="external-link">Supplier</a>&lt;C&gt;&nbsp;supplier)</span></div>
-<div class="block">Collect the results into a collection object similar to <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/stream/Collectors.html#toCollection(java.util.function.Supplier)" title="class or interface in java.util.stream" class="external-link"><code>Collectors.toCollection(Supplier)</code></a>.</div>
+<div class="member-signature"><span class="annotations"><a href="../../meta/Alpha.html" title="annotation interface in org.jdbi.v3.meta">@Alpha</a>
+</span><span class="modifiers">default</span>&nbsp;<span class="type-parameters">&lt;C extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;&gt;</span>&nbsp;<span class="return-type">C</span>&nbsp;<span class="element-name">toCollection</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Supplier.html" title="class or interface in java.util.function" class="external-link">Supplier</a>&lt;C&gt;&nbsp;supplier)</span></div>
+<div class="block">Collect the results into a collection object similar to <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/stream/Collectors.html#toCollection(java.util.function.Supplier)" title="class or interface in java.util.stream" class="external-link"><code>Collectors.toCollection(Supplier)</code></a>.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>supplier</code> - a supplier providing a new empty Collection into which the results will be inserted</dd>
@@ -674,16 +674,16 @@ V&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/
 <li>
 <section class="detail" id="collectInto(java.lang.reflect.Type)">
 <h3>collectInto</h3>
-<div class="member-signature"><span class="annotations"><a href="../../meta/Alpha.html" title="annotation in org.jdbi.v3.meta">@Alpha</a>
-</span><span class="modifiers">default</span>&nbsp;<span class="type-parameters">&lt;R&gt;</span>&nbsp;<span class="return-type">R</span>&nbsp;<span class="element-name">collectInto</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/reflect/Type.html" title="class or interface in java.lang.reflect" class="external-link">Type</a>&nbsp;containerType)</span></div>
+<div class="member-signature"><span class="annotations"><a href="../../meta/Alpha.html" title="annotation interface in org.jdbi.v3.meta">@Alpha</a>
+</span><span class="modifiers">default</span>&nbsp;<span class="type-parameters">&lt;R&gt;</span>&nbsp;<span class="return-type">R</span>&nbsp;<span class="element-name">collectInto</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Type.html" title="class or interface in java.lang.reflect" class="external-link">Type</a>&nbsp;containerType)</span></div>
 <div class="block">Collect the results into a container type.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>containerType</code> - A <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/reflect/Type.html" title="class or interface in java.lang.reflect" class="external-link"><code>Type</code></a> object that must describe a container type</dd>
+<dd><code>containerType</code> - A <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Type.html" title="class or interface in java.lang.reflect" class="external-link"><code>Type</code></a> object that must describe a container type</dd>
 <dt>Returns:</dt>
 <dd>A new collection implementing the container type with all results inserted</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/UnsupportedOperationException.html" title="class or interface in java.lang" class="external-link">UnsupportedOperationException</a></code> - if the implementation does not support this operation</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/UnsupportedOperationException.html" title="class or interface in java.lang" class="external-link">UnsupportedOperationException</a></code> - if the implementation does not support this operation</dd>
 <dt>Since:</dt>
 <dd>3.38.0</dd>
 </dl>
@@ -692,7 +692,7 @@ V&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/
 <li>
 <section class="detail" id="collectInto(org.jdbi.v3.core.generic.GenericType)">
 <h3>collectInto</h3>
-<div class="member-signature"><span class="annotations"><a href="../../meta/Alpha.html" title="annotation in org.jdbi.v3.meta">@Alpha</a>
+<div class="member-signature"><span class="annotations"><a href="../../meta/Alpha.html" title="annotation interface in org.jdbi.v3.meta">@Alpha</a>
 </span><span class="modifiers">default</span>&nbsp;<span class="type-parameters">&lt;R&gt;</span>&nbsp;<span class="return-type">R</span>&nbsp;<span class="element-name">collectInto</span><wbr><span class="parameters">(<a href="../generic/GenericType.html" title="class in org.jdbi.v3.core.generic">GenericType</a>&lt;R&gt;&nbsp;containerType)</span></div>
 <div class="block">Collect the results into a collection type.</div>
 <dl class="notes">
@@ -701,7 +701,7 @@ V&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/
 <dt>Returns:</dt>
 <dd>A new collection implementing the container type with all results inserted</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/UnsupportedOperationException.html" title="class or interface in java.lang" class="external-link">UnsupportedOperationException</a></code> - if the implementation does not support this operation</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/UnsupportedOperationException.html" title="class or interface in java.lang" class="external-link">UnsupportedOperationException</a></code> - if the implementation does not support this operation</dd>
 <dt>Since:</dt>
 <dd>3.38.0</dd>
 </dl>
@@ -710,9 +710,9 @@ V&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/
 <li>
 <section class="detail" id="collectIntoList()">
 <h3>collectIntoList</h3>
-<div class="member-signature"><span class="annotations"><a href="../../meta/Alpha.html" title="annotation in org.jdbi.v3.meta">@Alpha</a>
-</span><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;</span>&nbsp;<span class="element-name">collectIntoList</span>()</div>
-<div class="block">Returns results in a <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link"><code>List</code></a>. The implementation of the list can be changed by registering a <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/stream/Collector.html" title="class or interface in java.util.stream" class="external-link"><code>Collector</code></a>:
+<div class="member-signature"><span class="annotations"><a href="../../meta/Alpha.html" title="annotation interface in org.jdbi.v3.meta">@Alpha</a>
+</span><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;</span>&nbsp;<span class="element-name">collectIntoList</span>()</div>
+<div class="block">Returns results in a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link"><code>List</code></a>. The implementation of the list can be changed by registering a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/stream/Collector.html" title="class or interface in java.util.stream" class="external-link"><code>Collector</code></a>:
  <p>
  <pre><code>
      jdbi.getConfig(JdbiCollectors.class).registerCollector(List.class, Collectors.toCollection(LinkedList::new));
@@ -725,7 +725,7 @@ V&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/
  If no collector is registered, then this method behaves like <a href="#list()"><code>list()</code></a>.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>results in a <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link"><code>List</code></a></dd>
+<dd>results in a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link"><code>List</code></a></dd>
 <dt>Since:</dt>
 <dd>3.38.0</dd>
 <dt>See Also:</dt>
@@ -741,9 +741,9 @@ V&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/
 <li>
 <section class="detail" id="collectIntoSet()">
 <h3>collectIntoSet</h3>
-<div class="member-signature"><span class="annotations"><a href="../../meta/Alpha.html" title="annotation in org.jdbi.v3.meta">@Alpha</a>
-</span><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;</span>&nbsp;<span class="element-name">collectIntoSet</span>()</div>
-<div class="block">Returns results in a <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link"><code>Set</code></a>. The implementation of the set can be changed by registering a <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/stream/Collector.html" title="class or interface in java.util.stream" class="external-link"><code>Collector</code></a>:
+<div class="member-signature"><span class="annotations"><a href="../../meta/Alpha.html" title="annotation interface in org.jdbi.v3.meta">@Alpha</a>
+</span><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;</span>&nbsp;<span class="element-name">collectIntoSet</span>()</div>
+<div class="block">Returns results in a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link"><code>Set</code></a>. The implementation of the set can be changed by registering a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/stream/Collector.html" title="class or interface in java.util.stream" class="external-link"><code>Collector</code></a>:
  <p>
  <pre><code>
      jdbi.getConfig(JdbiCollectors.class).registerCollector(Set.class, Collectors.toCollection(LinkedHashSet::new));
@@ -756,7 +756,7 @@ V&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/
  If no collector is registered, then this method behaves like <a href="#set()"><code>set()</code></a>.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>results in a <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link"><code>Set</code></a></dd>
+<dd>results in a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link"><code>Set</code></a></dd>
 <dt>Since:</dt>
 <dd>3.38.0</dd>
 <dt>See Also:</dt>
@@ -773,7 +773,7 @@ V&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/
 <section class="detail" id="reduce(U,java.util.function.BiFunction)">
 <h3 id="reduce(java.lang.Object,java.util.function.BiFunction)">reduce</h3>
 <div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="type-parameters">&lt;U&gt;</span>&nbsp;<span class="return-type">U</span>&nbsp;<span class="element-name">reduce</span><wbr><span class="parameters">(U&nbsp;identity,
- <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/BiFunction.html" title="class or interface in java.util.function" class="external-link">BiFunction</a>&lt;U,<wbr><a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>,<wbr>U&gt;&nbsp;accumulator)</span></div>
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/BiFunction.html" title="class or interface in java.util.function" class="external-link">BiFunction</a>&lt;U,<wbr><a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>,<wbr>U&gt;&nbsp;accumulator)</span></div>
 <div class="block">Reduce the results.  Using a <code>BiFunction&lt;U, T, U&gt;</code>, repeatedly
  combine query results until only a single value remains.</div>
 <dl class="notes">
@@ -790,9 +790,9 @@ V&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/
 <li>
 <section class="detail" id="filter(java.util.function.Predicate)">
 <h3>filter</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="ResultIterable.html" title="interface in org.jdbi.v3.core.result">ResultIterable</a>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;</span>&nbsp;<span class="element-name">filter</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Predicate.html" title="class or interface in java.util.function" class="external-link">Predicate</a>&lt;? super <a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;&nbsp;predicate)</span></div>
-<div class="block">Convenience method to filter the <a href="ResultIterable.html" title="interface in org.jdbi.v3.core.result"><code>ResultIterable</code></a> by applying the specified <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Predicate.html" title="class or interface in java.util.function" class="external-link"><code>Predicate</code></a>.<br>
- This method has the look and feel of <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/stream/Stream.html#filter(java.util.function.Predicate)" title="class or interface in java.util.stream" class="external-link"><code>Stream.filter(Predicate)</code></a> without making use of streams.<p>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="ResultIterable.html" title="interface in org.jdbi.v3.core.result">ResultIterable</a>&lt;<a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;</span>&nbsp;<span class="element-name">filter</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Predicate.html" title="class or interface in java.util.function" class="external-link">Predicate</a>&lt;? super <a href="ResultIterable.html" title="type parameter in ResultIterable">T</a>&gt;&nbsp;predicate)</span></div>
+<div class="block">Convenience method to filter the <a href="ResultIterable.html" title="interface in org.jdbi.v3.core.result"><code>ResultIterable</code></a> by applying the specified <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Predicate.html" title="class or interface in java.util.function" class="external-link"><code>Predicate</code></a>.<br>
+ This method has the look and feel of <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/stream/Stream.html#filter(java.util.function.Predicate)" title="class or interface in java.util.stream" class="external-link"><code>Stream.filter(Predicate)</code></a> without making use of streams.<p>
 
  Please note that filtering takes place in Java i.e. your client code, <b>not in the database</b>.<br>
  Filtering inside the database will most likely be of higher performance than filtering outside,

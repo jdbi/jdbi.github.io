@@ -95,8 +95,8 @@ loadScripts(document, 'script');</script>
 <dd>This is a functional interface and can therefore be used as the assignment target for a lambda expression or method reference.</dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/FunctionalInterface.html" title="class or interface in java.lang" class="external-link">@FunctionalInterface</a>
-<a href="../../meta/Alpha.html" title="annotation in org.jdbi.v3.meta">@Alpha</a>
+<div class="type-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/FunctionalInterface.html" title="class or interface in java.lang" class="external-link">@FunctionalInterface</a>
+<a href="../../meta/Alpha.html" title="annotation interface in org.jdbi.v3.meta">@Alpha</a>
 </span><span class="modifiers">public interface </span><span class="element-name type-name-label">AttachedExtensionHandler</span></div>
 <div class="block">Extension handler with a target object attached.</div>
 </section>
@@ -113,9 +113,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#invoke(org.jdbi.v3.core.extension.HandleSupplier,java.lang.Object...)" class="member-name-link">invoke</a><wbr>(<a href="HandleSupplier.html" title="interface in org.jdbi.v3.core.extension">HandleSupplier</a>&nbsp;handleSupplier,
- <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>...&nbsp;args)</code></div>
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>...&nbsp;args)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Gets invoked to return a value for the method that this handler was is handling, on the attached target instance.</div>
 </div>
@@ -142,9 +142,9 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="invoke(org.jdbi.v3.core.extension.HandleSupplier,java.lang.Object...)">
 <h3>invoke</h3>
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span>&nbsp;<span class="element-name">invoke</span><wbr><span class="parameters">(<a href="HandleSupplier.html" title="interface in org.jdbi.v3.core.extension">HandleSupplier</a>&nbsp;handleSupplier,
- <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>...&nbsp;args)</span>
-       throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></span></div>
+<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span>&nbsp;<span class="element-name">invoke</span><wbr><span class="parameters">(<a href="HandleSupplier.html" title="interface in org.jdbi.v3.core.extension">HandleSupplier</a>&nbsp;handleSupplier,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>...&nbsp;args)</span>
+       throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></span></div>
 <div class="block">Gets invoked to return a value for the method that this handler was is handling, on the attached target instance.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -153,14 +153,14 @@ loadScripts(document, 'script');</script>
 <dt>Returns:</dt>
 <dd>The return value for the method that was bound to the extension handler. Can be null</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></code> - Any exception from the underlying code</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></code> - Any exception from the underlying code</dd>
 </dl>
 </section>
 </li>
 <li>
 <section class="detail" id="warm(org.jdbi.v3.core.config.ConfigRegistry)">
 <h3>warm</h3>
-<div class="member-signature"><span class="annotations"><a href="../../meta/Beta.html" title="annotation in org.jdbi.v3.meta">@Beta</a>
+<div class="member-signature"><span class="annotations"><a href="../../meta/Beta.html" title="annotation interface in org.jdbi.v3.meta">@Beta</a>
 </span><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">warm</span><wbr><span class="parameters">(<a href="../config/ConfigRegistry.html" title="class in org.jdbi.v3.core.config">ConfigRegistry</a>&nbsp;config)</span></div>
 <div class="block">Called after the method handler is constructed to pre-initialize any important
  configuration data structures.</div>

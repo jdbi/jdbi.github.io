@@ -85,7 +85,7 @@ loadScripts(document, 'script');</script>
 <div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">org.jdbi.v3.core.array</a></div>
 <h1 title="Class SqlArrayTypes" class="title">Class SqlArrayTypes</h1>
 </div>
-<div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
+<div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
 <div class="inheritance">org.jdbi.v3.core.array.SqlArrayTypes</div>
 </div>
 <section class="class-description" id="class-description">
@@ -95,7 +95,7 @@ loadScripts(document, 'script');</script>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">SqlArrayTypes</span>
-<span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
+<span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements <a href="../config/JdbiConfig.html" title="interface in org.jdbi.v3.core.config">JdbiConfig</a>&lt;<a href="SqlArrayTypes.html" title="class in org.jdbi.v3.core.array">SqlArrayTypes</a>&gt;</span></div>
 <div class="block">Configuration class for SQL array binding and mapping.</div>
 </section>
@@ -130,12 +130,12 @@ implements <a href="../config/JdbiConfig.html" title="interface in org.jdbi.v3.c
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns a copy of this configuration object.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="SqlArrayType.html" title="interface in org.jdbi.v3.core.array">SqlArrayType</a>&lt;?&gt;&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#findFor(java.lang.reflect.Type)" class="member-name-link">findFor</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/reflect/Type.html" title="class or interface in java.lang.reflect" class="external-link">Type</a>&nbsp;elementType)</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="SqlArrayType.html" title="interface in org.jdbi.v3.core.array">SqlArrayType</a>&lt;?&gt;&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#findFor(java.lang.reflect.Type)" class="member-name-link">findFor</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Type.html" title="class or interface in java.lang.reflect" class="external-link">Type</a>&nbsp;elementType)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Obtain an <a href="SqlArrayType.html" title="interface in org.jdbi.v3.core.array"><code>SqlArrayType</code></a> for the given array element type in the given context</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="SqlArrayArgumentStrategy.html" title="enum in org.jdbi.v3.core.array">SqlArrayArgumentStrategy</a></code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="SqlArrayArgumentStrategy.html" title="enum class in org.jdbi.v3.core.array">SqlArrayArgumentStrategy</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getArgumentStrategy()" class="member-name-link">getArgumentStrategy</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the strategy used to bind array-type arguments to SQL statements.</div>
@@ -146,8 +146,8 @@ implements <a href="../config/JdbiConfig.html" title="interface in org.jdbi.v3.c
 <div class="block">Returns the <a href="../interceptor/JdbiInterceptionChainHolder.html" title="class in org.jdbi.v3.core.interceptor"><code>JdbiInterceptionChainHolder</code></a> for the SqlArrayType inference.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="SqlArrayTypes.html" title="class in org.jdbi.v3.core.array">SqlArrayTypes</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#register(java.lang.Class,java.lang.String)" class="member-name-link">register</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;elementType,
- <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;sqlTypeName)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#register(java.lang.Class,java.lang.String)" class="member-name-link">register</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;elementType,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;sqlTypeName)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Register an array element type that is supported by the JDBC vendor.</div>
 </div>
@@ -163,7 +163,7 @@ implements <a href="../config/JdbiConfig.html" title="interface in org.jdbi.v3.c
 <div class="block">Register a <a href="SqlArrayTypeFactory.html" title="interface in org.jdbi.v3.core.array"><code>SqlArrayTypeFactory</code></a>.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="SqlArrayTypes.html" title="class in org.jdbi.v3.core.array">SqlArrayTypes</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setArgumentStrategy(org.jdbi.v3.core.array.SqlArrayArgumentStrategy)" class="member-name-link">setArgumentStrategy</a><wbr>(<a href="SqlArrayArgumentStrategy.html" title="enum in org.jdbi.v3.core.array">SqlArrayArgumentStrategy</a>&nbsp;argumentStrategy)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setArgumentStrategy(org.jdbi.v3.core.array.SqlArrayArgumentStrategy)" class="member-name-link">setArgumentStrategy</a><wbr>(<a href="SqlArrayArgumentStrategy.html" title="enum class in org.jdbi.v3.core.array">SqlArrayArgumentStrategy</a>&nbsp;argumentStrategy)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Sets the strategy used when binding array-type arguments to SQL statements.</div>
 </div>
@@ -176,8 +176,8 @@ implements <a href="../config/JdbiConfig.html" title="interface in org.jdbi.v3.c
 </div>
 </div>
 <div class="inherited-list">
-<h3 id="methods-inherited-from-class-java.lang.Object">Methods inherited from class&nbsp;java.lang.<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></h3>
-<code><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a>, <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a>, <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a>, <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
+<h3 id="methods-inherited-from-class-java.lang.Object">Methods inherited from class&nbsp;java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></h3>
+<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
 </section>
 </li>
 </ul>
@@ -206,7 +206,7 @@ implements <a href="../config/JdbiConfig.html" title="interface in org.jdbi.v3.c
 <li>
 <section class="detail" id="getArgumentStrategy()">
 <h3>getArgumentStrategy</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="SqlArrayArgumentStrategy.html" title="enum in org.jdbi.v3.core.array">SqlArrayArgumentStrategy</a></span>&nbsp;<span class="element-name">getArgumentStrategy</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="SqlArrayArgumentStrategy.html" title="enum class in org.jdbi.v3.core.array">SqlArrayArgumentStrategy</a></span>&nbsp;<span class="element-name">getArgumentStrategy</span>()</div>
 <div class="block">Returns the strategy used to bind array-type arguments to SQL statements.</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -217,7 +217,7 @@ implements <a href="../config/JdbiConfig.html" title="interface in org.jdbi.v3.c
 <li>
 <section class="detail" id="setArgumentStrategy(org.jdbi.v3.core.array.SqlArrayArgumentStrategy)">
 <h3>setArgumentStrategy</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="SqlArrayTypes.html" title="class in org.jdbi.v3.core.array">SqlArrayTypes</a></span>&nbsp;<span class="element-name">setArgumentStrategy</span><wbr><span class="parameters">(<a href="SqlArrayArgumentStrategy.html" title="enum in org.jdbi.v3.core.array">SqlArrayArgumentStrategy</a>&nbsp;argumentStrategy)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="SqlArrayTypes.html" title="class in org.jdbi.v3.core.array">SqlArrayTypes</a></span>&nbsp;<span class="element-name">setArgumentStrategy</span><wbr><span class="parameters">(<a href="SqlArrayArgumentStrategy.html" title="enum class in org.jdbi.v3.core.array">SqlArrayArgumentStrategy</a>&nbsp;argumentStrategy)</span></div>
 <div class="block">Sets the strategy used when binding array-type arguments to SQL statements.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -230,14 +230,14 @@ implements <a href="../config/JdbiConfig.html" title="interface in org.jdbi.v3.c
 <li>
 <section class="detail" id="register(java.lang.Class,java.lang.String)">
 <h3>register</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="SqlArrayTypes.html" title="class in org.jdbi.v3.core.array">SqlArrayTypes</a></span>&nbsp;<span class="element-name">register</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;elementType,
- <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;sqlTypeName)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="SqlArrayTypes.html" title="class in org.jdbi.v3.core.array">SqlArrayTypes</a></span>&nbsp;<span class="element-name">register</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;elementType,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;sqlTypeName)</span></div>
 <div class="block">Register an array element type that is supported by the JDBC vendor.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>elementType</code> - the array element type</dd>
 <dd><code>sqlTypeName</code> - the vendor-specific SQL type name for the array type.  This value will be passed to
-                    <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.sql/java/sql/Connection.html#createArrayOf(java.lang.String,java.lang.Object%5B%5D)" title="class or interface in java.sql" class="external-link"><code>Connection.createArrayOf(String, Object[])</code></a> to create SQL arrays.</dd>
+                    <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/Connection.html#createArrayOf(java.lang.String,java.lang.Object%5B%5D)" title="class or interface in java.sql" class="external-link"><code>Connection.createArrayOf(String, Object[])</code></a> to create SQL arrays.</dd>
 <dt>Returns:</dt>
 <dd>this</dd>
 </dl>
@@ -258,7 +258,7 @@ implements <a href="../config/JdbiConfig.html" title="interface in org.jdbi.v3.c
 <dt>Returns:</dt>
 <dd>this</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/UnsupportedOperationException.html" title="class or interface in java.lang" class="external-link">UnsupportedOperationException</a></code> - if the argument is not a concretely parameterized type</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/UnsupportedOperationException.html" title="class or interface in java.lang" class="external-link">UnsupportedOperationException</a></code> - if the argument is not a concretely parameterized type</dd>
 </dl>
 </section>
 </li>
@@ -279,7 +279,7 @@ implements <a href="../config/JdbiConfig.html" title="interface in org.jdbi.v3.c
 <li>
 <section class="detail" id="findFor(java.lang.reflect.Type)">
 <h3>findFor</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="SqlArrayType.html" title="interface in org.jdbi.v3.core.array">SqlArrayType</a>&lt;?&gt;&gt;</span>&nbsp;<span class="element-name">findFor</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/reflect/Type.html" title="class or interface in java.lang.reflect" class="external-link">Type</a>&nbsp;elementType)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="SqlArrayType.html" title="interface in org.jdbi.v3.core.array">SqlArrayType</a>&lt;?&gt;&gt;</span>&nbsp;<span class="element-name">findFor</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Type.html" title="class or interface in java.lang.reflect" class="external-link">Type</a>&nbsp;elementType)</span></div>
 <div class="block">Obtain an <a href="SqlArrayType.html" title="interface in org.jdbi.v3.core.array"><code>SqlArrayType</code></a> for the given array element type in the given context</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -308,7 +308,7 @@ implements <a href="../config/JdbiConfig.html" title="interface in org.jdbi.v3.c
 <li>
 <section class="detail" id="getInferenceInterceptors()">
 <h3>getInferenceInterceptors</h3>
-<div class="member-signature"><span class="annotations"><a href="../../meta/Alpha.html" title="annotation in org.jdbi.v3.meta">@Alpha</a>
+<div class="member-signature"><span class="annotations"><a href="../../meta/Alpha.html" title="annotation interface in org.jdbi.v3.meta">@Alpha</a>
 </span><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../interceptor/JdbiInterceptionChainHolder.html" title="class in org.jdbi.v3.core.interceptor">JdbiInterceptionChainHolder</a>&lt;<a href="SqlArrayType.html" title="interface in org.jdbi.v3.core.array">SqlArrayType</a>&lt;?&gt;,<wbr><a href="SqlArrayTypeFactory.html" title="interface in org.jdbi.v3.core.array">SqlArrayTypeFactory</a>&gt;</span>&nbsp;<span class="element-name">getInferenceInterceptors</span>()</div>
 <div class="block">Returns the <a href="../interceptor/JdbiInterceptionChainHolder.html" title="class in org.jdbi.v3.core.interceptor"><code>JdbiInterceptionChainHolder</code></a> for the SqlArrayType inference. This chain allows registration of custom interceptors to change the standard
  type inference for the <a href="#register(org.jdbi.v3.core.array.SqlArrayType)"><code>register(SqlArrayType)</code></a> method.</div>

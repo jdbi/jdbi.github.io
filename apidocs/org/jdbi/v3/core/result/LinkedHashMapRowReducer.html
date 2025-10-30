@@ -94,17 +94,17 @@ loadScripts(document, 'script');</script>
 </dl>
 <dl class="notes">
 <dt>All Superinterfaces:</dt>
-<dd><code><a href="RowReducer.html" title="interface in org.jdbi.v3.core.result">RowReducer</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;K,<wbr>V&gt;,<wbr>V&gt;</code></dd>
+<dd><code><a href="RowReducer.html" title="interface in org.jdbi.v3.core.result">RowReducer</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;K,<wbr>V&gt;,<wbr>V&gt;</code></dd>
 </dl>
 <dl class="notes">
 <dt>Functional Interface:</dt>
 <dd>This is a functional interface and can therefore be used as the assignment target for a lambda expression or method reference.</dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/FunctionalInterface.html" title="class or interface in java.lang" class="external-link">@FunctionalInterface</a>
+<div class="type-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/FunctionalInterface.html" title="class or interface in java.lang" class="external-link">@FunctionalInterface</a>
 </span><span class="modifiers">public interface </span><span class="element-name type-name-label">LinkedHashMapRowReducer&lt;K,<wbr>V&gt;</span><span class="extends-implements">
-extends <a href="RowReducer.html" title="interface in org.jdbi.v3.core.result">RowReducer</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;K,<wbr>V&gt;,<wbr>V&gt;</span></div>
-<div class="block">A row reducer that uses <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/LinkedHashMap.html" title="class or interface in java.util" class="external-link"><code>LinkedHashMap</code></a> (which preserves insertion order) as a
+extends <a href="RowReducer.html" title="interface in org.jdbi.v3.core.result">RowReducer</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;K,<wbr>V&gt;,<wbr>V&gt;</span></div>
+<div class="block">A row reducer that uses <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/LinkedHashMap.html" title="class or interface in java.util" class="external-link"><code>LinkedHashMap</code></a> (which preserves insertion order) as a
  result container, and returns <code>map.values().stream()</code> as the final result.
 
  <p>Implementors need only implement the <a href="RowReducer.html#accumulate(C,org.jdbi.v3.core.result.RowView)"><code>RowReducer.accumulate(Object, RowView)</code></a> method.</div>
@@ -122,13 +122,13 @@ extends <a href="RowReducer.html" title="interface in org.jdbi.v3.core.result">R
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a><wbr>&lt;<a href="LinkedHashMapRowReducer.html" title="type parameter in LinkedHashMapRowReducer">K</a>,<wbr><a href="LinkedHashMapRowReducer.html" title="type parameter in LinkedHashMapRowReducer">V</a>&gt;</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a><wbr>&lt;<a href="LinkedHashMapRowReducer.html" title="type parameter in LinkedHashMapRowReducer">K</a>,<wbr><a href="LinkedHashMapRowReducer.html" title="type parameter in LinkedHashMapRowReducer">V</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#container()" class="member-name-link">container</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Returns a new, empty result container.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/stream/Stream.html" title="class or interface in java.util.stream" class="external-link">Stream</a><wbr>&lt;<a href="LinkedHashMapRowReducer.html" title="type parameter in LinkedHashMapRowReducer">V</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#stream(java.util.Map)" class="member-name-link">stream</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="LinkedHashMapRowReducer.html" title="type parameter in LinkedHashMapRowReducer">K</a>,<wbr><a href="LinkedHashMapRowReducer.html" title="type parameter in LinkedHashMapRowReducer">V</a>&gt;&nbsp;container)</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/stream/Stream.html" title="class or interface in java.util.stream" class="external-link">Stream</a><wbr>&lt;<a href="LinkedHashMapRowReducer.html" title="type parameter in LinkedHashMapRowReducer">V</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#stream(java.util.Map)" class="member-name-link">stream</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="LinkedHashMapRowReducer.html" title="type parameter in LinkedHashMapRowReducer">K</a>,<wbr><a href="LinkedHashMapRowReducer.html" title="type parameter in LinkedHashMapRowReducer">V</a>&gt;&nbsp;container)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Returns a stream of result elements from the result container.</div>
 </div>
@@ -152,7 +152,7 @@ extends <a href="RowReducer.html" title="interface in org.jdbi.v3.core.result">R
 <li>
 <section class="detail" id="container()">
 <h3>container</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="LinkedHashMapRowReducer.html" title="type parameter in LinkedHashMapRowReducer">K</a>,<wbr><a href="LinkedHashMapRowReducer.html" title="type parameter in LinkedHashMapRowReducer">V</a>&gt;</span>&nbsp;<span class="element-name">container</span>()</div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="LinkedHashMapRowReducer.html" title="type parameter in LinkedHashMapRowReducer">K</a>,<wbr><a href="LinkedHashMapRowReducer.html" title="type parameter in LinkedHashMapRowReducer">V</a>&gt;</span>&nbsp;<span class="element-name">container</span>()</div>
 <div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="RowReducer.html#container()">RowReducer</a></code></span></div>
 <div class="block">Returns a new, empty result container.</div>
 <dl class="notes">
@@ -166,7 +166,7 @@ extends <a href="RowReducer.html" title="interface in org.jdbi.v3.core.result">R
 <li>
 <section class="detail" id="stream(java.util.Map)">
 <h3>stream</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/stream/Stream.html" title="class or interface in java.util.stream" class="external-link">Stream</a>&lt;<a href="LinkedHashMapRowReducer.html" title="type parameter in LinkedHashMapRowReducer">V</a>&gt;</span>&nbsp;<span class="element-name">stream</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="LinkedHashMapRowReducer.html" title="type parameter in LinkedHashMapRowReducer">K</a>,<wbr><a href="LinkedHashMapRowReducer.html" title="type parameter in LinkedHashMapRowReducer">V</a>&gt;&nbsp;container)</span></div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/stream/Stream.html" title="class or interface in java.util.stream" class="external-link">Stream</a>&lt;<a href="LinkedHashMapRowReducer.html" title="type parameter in LinkedHashMapRowReducer">V</a>&gt;</span>&nbsp;<span class="element-name">stream</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="LinkedHashMapRowReducer.html" title="type parameter in LinkedHashMapRowReducer">K</a>,<wbr><a href="LinkedHashMapRowReducer.html" title="type parameter in LinkedHashMapRowReducer">V</a>&gt;&nbsp;container)</span></div>
 <div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="RowReducer.html#stream(C)">RowReducer</a></code></span></div>
 <div class="block">Returns a stream of result elements from the result container.</div>
 <dl class="notes">

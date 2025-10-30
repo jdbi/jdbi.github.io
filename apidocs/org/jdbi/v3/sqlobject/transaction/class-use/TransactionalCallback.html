@@ -71,7 +71,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code>default <a href="../TransactionalCallback.html" title="interface in org.jdbi.v3.sqlobject.transaction">TransactionalCallback</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Void.html" title="class or interface in java.lang" class="external-link">Void</a>,<wbr><a href="../TransactionalConsumer.html" title="type parameter in TransactionalConsumer">T</a>,<wbr><a href="../TransactionalConsumer.html" title="type parameter in TransactionalConsumer">X</a>&gt;</code></div>
+<div class="col-first even-row-color"><code>default <a href="../TransactionalCallback.html" title="interface in org.jdbi.v3.sqlobject.transaction">TransactionalCallback</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Void.html" title="class or interface in java.lang" class="external-link">Void</a>,<wbr><a href="../TransactionalConsumer.html" title="type parameter in TransactionalConsumer">T</a>,<wbr><a href="../TransactionalConsumer.html" title="type parameter in TransactionalConsumer">X</a>&gt;</code></div>
 <div class="col-second even-row-color"><span class="type-name-label">TransactionalConsumer.</span><code><a href="../TransactionalConsumer.html#asCallback()" class="member-name-link">asCallback</a>()</code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 </div>
@@ -81,14 +81,14 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>default &lt;R,<wbr>
-X extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a>&gt;<br>R</code></div>
-<div class="col-second even-row-color"><span class="type-name-label">Transactional.</span><code><a href="../Transactional.html#inTransaction(org.jdbi.v3.core.transaction.TransactionIsolationLevel,org.jdbi.v3.sqlobject.transaction.TransactionalCallback)" class="member-name-link">inTransaction</a><wbr>(<a href="../../../core/transaction/TransactionIsolationLevel.html" title="enum in org.jdbi.v3.core.transaction">TransactionIsolationLevel</a>&nbsp;isolation,
+X extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a>&gt;<br>R</code></div>
+<div class="col-second even-row-color"><span class="type-name-label">Transactional.</span><code><a href="../Transactional.html#inTransaction(org.jdbi.v3.core.transaction.TransactionIsolationLevel,org.jdbi.v3.sqlobject.transaction.TransactionalCallback)" class="member-name-link">inTransaction</a><wbr>(<a href="../../../core/transaction/TransactionIsolationLevel.html" title="enum class in org.jdbi.v3.core.transaction">TransactionIsolationLevel</a>&nbsp;isolation,
  <a href="../TransactionalCallback.html" title="interface in org.jdbi.v3.sqlobject.transaction">TransactionalCallback</a>&lt;R,<wbr><a href="../Transactional.html" title="type parameter in Transactional">This</a>,<wbr>X&gt;&nbsp;callback)</code></div>
 <div class="col-last even-row-color">
 <div class="block">Executes the given callback within a transaction, returning the value returned by the callback.</div>
 </div>
 <div class="col-first odd-row-color"><code>default &lt;R,<wbr>
-X extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a>&gt;<br>R</code></div>
+X extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a>&gt;<br>R</code></div>
 <div class="col-second odd-row-color"><span class="type-name-label">Transactional.</span><code><a href="../Transactional.html#inTransaction(org.jdbi.v3.sqlobject.transaction.TransactionalCallback)" class="member-name-link">inTransaction</a><wbr>(<a href="../TransactionalCallback.html" title="interface in org.jdbi.v3.sqlobject.transaction">TransactionalCallback</a>&lt;R,<wbr><a href="../Transactional.html" title="type parameter in Transactional">This</a>,<wbr>X&gt;&nbsp;callback)</code></div>
 <div class="col-last odd-row-color">
 <div class="block">Executes the given callback within a transaction, returning the value returned by the callback.</div>

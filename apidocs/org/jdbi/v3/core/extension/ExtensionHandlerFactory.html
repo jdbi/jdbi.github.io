@@ -91,7 +91,7 @@ loadScripts(document, 'script');</script>
 <dd><code><a href="../../sqlobject/HandlerFactory.html" title="interface in org.jdbi.v3.sqlobject">HandlerFactory</a></code></dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="annotations"><a href="../../meta/Alpha.html" title="annotation in org.jdbi.v3.meta">@Alpha</a>
+<div class="type-signature"><span class="annotations"><a href="../../meta/Alpha.html" title="annotation interface in org.jdbi.v3.meta">@Alpha</a>
 </span><span class="modifiers">public interface </span><span class="element-name type-name-label">ExtensionHandlerFactory</span></div>
 <div class="block">A factory to create <a href="ExtensionHandler.html" title="interface in org.jdbi.v3.core.extension"><code>ExtensionHandler</code></a> instances.</div>
 </section>
@@ -109,14 +109,14 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#accepts(java.lang.Class,java.lang.reflect.Method)" class="member-name-link">accepts</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;extensionType,
- <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/reflect/Method.html" title="class or interface in java.lang.reflect" class="external-link">Method</a>&nbsp;method)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#accepts(java.lang.Class,java.lang.reflect.Method)" class="member-name-link">accepts</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;extensionType,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Method.html" title="class or interface in java.lang.reflect" class="external-link">Method</a>&nbsp;method)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Determines whether the factory can create an <a href="ExtensionHandler.html" title="interface in org.jdbi.v3.core.extension"><code>ExtensionHandler</code></a> for combination of extension type and method.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="ExtensionHandler.html" title="interface in org.jdbi.v3.core.extension">ExtensionHandler</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#createExtensionHandler(java.lang.Class,java.lang.reflect.Method)" class="member-name-link">createExtensionHandler</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;extensionType,
- <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/reflect/Method.html" title="class or interface in java.lang.reflect" class="external-link">Method</a>&nbsp;method)</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="ExtensionHandler.html" title="interface in org.jdbi.v3.core.extension">ExtensionHandler</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#createExtensionHandler(java.lang.Class,java.lang.reflect.Method)" class="member-name-link">createExtensionHandler</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;extensionType,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Method.html" title="class or interface in java.lang.reflect" class="external-link">Method</a>&nbsp;method)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Returns an <a href="ExtensionHandler.html" title="interface in org.jdbi.v3.core.extension"><code>ExtensionHandler</code></a> instance for a extension type and method combination.</div>
 </div>
@@ -137,8 +137,8 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="accepts(java.lang.Class,java.lang.reflect.Method)">
 <h3>accepts</h3>
-<div class="member-signature"><span class="return-type">boolean</span>&nbsp;<span class="element-name">accepts</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;extensionType,
- <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/reflect/Method.html" title="class or interface in java.lang.reflect" class="external-link">Method</a>&nbsp;method)</span></div>
+<div class="member-signature"><span class="return-type">boolean</span>&nbsp;<span class="element-name">accepts</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;extensionType,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Method.html" title="class or interface in java.lang.reflect" class="external-link">Method</a>&nbsp;method)</span></div>
 <div class="block">Determines whether the factory can create an <a href="ExtensionHandler.html" title="interface in org.jdbi.v3.core.extension"><code>ExtensionHandler</code></a> for combination of extension type and method.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -152,15 +152,15 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="createExtensionHandler(java.lang.Class,java.lang.reflect.Method)">
 <h3>createExtensionHandler</h3>
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="ExtensionHandler.html" title="interface in org.jdbi.v3.core.extension">ExtensionHandler</a>&gt;</span>&nbsp;<span class="element-name">createExtensionHandler</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;extensionType,
- <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/reflect/Method.html" title="class or interface in java.lang.reflect" class="external-link">Method</a>&nbsp;method)</span></div>
+<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="ExtensionHandler.html" title="interface in org.jdbi.v3.core.extension">ExtensionHandler</a>&gt;</span>&nbsp;<span class="element-name">createExtensionHandler</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;extensionType,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Method.html" title="class or interface in java.lang.reflect" class="external-link">Method</a>&nbsp;method)</span></div>
 <div class="block">Returns an <a href="ExtensionHandler.html" title="interface in org.jdbi.v3.core.extension"><code>ExtensionHandler</code></a> instance for a extension type and method combination.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>extensionType</code> - The extension type class</dd>
 <dd><code>method</code> - A method</dd>
 <dt>Returns:</dt>
-<dd>An <a href="ExtensionHandler.html" title="interface in org.jdbi.v3.core.extension"><code>ExtensionHandler</code></a> instance wrapped into an <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link"><code>Optional</code></a>. The optional can be empty. This is necessary to retrofit old code
+<dd>An <a href="ExtensionHandler.html" title="interface in org.jdbi.v3.core.extension"><code>ExtensionHandler</code></a> instance wrapped into an <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link"><code>Optional</code></a>. The optional can be empty. This is necessary to retrofit old code
  that does not have an accept/build code pair but unconditionally tries to build a handler and returns empty if it can not. New code should always
  return <code>Optional.of(extensionHandler}</code> and never return <code>Optional.empty()</code></dd>
 </dl>

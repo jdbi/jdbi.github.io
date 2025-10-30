@@ -79,18 +79,18 @@ loadScripts(document, 'script');</script>
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">org.jdbi.v3.sqlobject.customizer</a></div>
-<h1 title="Annotation Type BindMap" class="title">Annotation Type BindMap</h1>
+<h1 title="Annotation Interface BindMap" class="title">Annotation Interface BindMap</h1>
 </div>
 <section class="class-description" id="class-description">
 <hr>
-<div class="type-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/annotation/Retention.html" title="class or interface in java.lang.annotation" class="external-link">@Retention</a>(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/annotation/RetentionPolicy.html#RUNTIME" title="class or interface in java.lang.annotation" class="external-link">RUNTIME</a>)
-<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/annotation/Target.html" title="class or interface in java.lang.annotation" class="external-link">@Target</a>(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/annotation/ElementType.html#PARAMETER" title="class or interface in java.lang.annotation" class="external-link">PARAMETER</a>)
+<div class="type-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/annotation/Retention.html" title="class or interface in java.lang.annotation" class="external-link">@Retention</a>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/annotation/RetentionPolicy.html#RUNTIME" title="class or interface in java.lang.annotation" class="external-link">RUNTIME</a>)
+<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/annotation/Target.html" title="class or interface in java.lang.annotation" class="external-link">@Target</a>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/annotation/ElementType.html#PARAMETER" title="class or interface in java.lang.annotation" class="external-link">PARAMETER</a>)
 </span><span class="modifiers">public @interface </span><span class="element-name type-name-label">BindMap</span></div>
 <div class="block">Binds the entries of a <code>Map&lt;String, Object&gt;</code> to a SQL statement.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
-<!-- =========== ANNOTATION TYPE OPTIONAL MEMBER SUMMARY =========== -->
+<!-- =========== ANNOTATION INTERFACE OPTIONAL MEMBER SUMMARY =========== -->
 <li>
 <section class="member-summary" id="annotation-interface-optional-element-summary">
 <h2>Optional Element Summary</h2>
@@ -104,12 +104,12 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color">
 <div class="block">Whether to automatically convert map keys to strings.</div>
 </div>
-<div class="col-first odd-row-color"><code><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]</code></div>
+<div class="col-first odd-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]</code></div>
 <div class="col-second odd-row-color"><code><a href="#keys()" class="member-name-link">keys</a></code></div>
 <div class="col-last odd-row-color">
 <div class="block">The set of map keys to bind.</div>
 </div>
-<div class="col-first even-row-color"><code><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-first even-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color"><code><a href="#value()" class="member-name-link">value</a></code></div>
 <div class="col-last even-row-color">
 <div class="block">Prefix to apply to each map key.</div>
@@ -121,7 +121,7 @@ loadScripts(document, 'script');</script>
 </section>
 <section class="details" id="annotation-interface-element-detail">
 <ul class="details-list">
-<!-- ============ ANNOTATION TYPE MEMBER DETAIL =========== -->
+<!-- ============ ANNOTATION INTERFACE MEMBER DETAIL =========== -->
 <li>
 <section class="member-details">
 <h2>Element Details</h2>
@@ -129,7 +129,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="value()">
 <h3>value</h3>
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">value</span></div>
+<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">value</span></div>
 <div class="block">Prefix to apply to each map key. If specified, map keys will be bound as <code>prefix.key</code>.</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -144,7 +144,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="keys()">
 <h3>keys</h3>
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]</span>&nbsp;<span class="element-name">keys</span></div>
+<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]</span>&nbsp;<span class="element-name">keys</span></div>
 <div class="block">The set of map keys to bind. If specified, binds only the specified keys; any keys present in this property but
  absent from the map will be bound as <code>null</code>. If not specified, all map entries are bound.</div>
 <dl class="notes">
@@ -163,7 +163,7 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="return-type">boolean</span>&nbsp;<span class="element-name">convertKeys</span></div>
 <div class="block">Whether to automatically convert map keys to strings.
  If false, <code>Map</code> keys must be strings, or an exception is thrown.
- If true, any object may be the key, and it will be converted with <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link"><code>Object.toString()</code></a>.</div>
+ If true, any object may be the key, and it will be converted with <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link"><code>Object.toString()</code></a>.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>whether keys will be implicitly converted to Strings.</dd>

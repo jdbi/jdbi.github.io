@@ -79,22 +79,22 @@ loadScripts(document, 'script');</script>
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">org.jdbi.v3.spring</a></div>
-<h1 title="Annotation Type JdbiRepository" class="title">Annotation Type JdbiRepository</h1>
+<h1 title="Annotation Interface JdbiRepository" class="title">Annotation Interface JdbiRepository</h1>
 </div>
 <section class="class-description" id="class-description">
 <hr>
-<div class="type-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/annotation/Target.html" title="class or interface in java.lang.annotation" class="external-link">@Target</a>(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/annotation/ElementType.html#TYPE" title="class or interface in java.lang.annotation" class="external-link">TYPE</a>)
-<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/annotation/Retention.html" title="class or interface in java.lang.annotation" class="external-link">@Retention</a>(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/annotation/RetentionPolicy.html#RUNTIME" title="class or interface in java.lang.annotation" class="external-link">RUNTIME</a>)
-<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/annotation/Documented.html" title="class or interface in java.lang.annotation" class="external-link">@Documented</a>
+<div class="type-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/annotation/Target.html" title="class or interface in java.lang.annotation" class="external-link">@Target</a>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/annotation/ElementType.html#TYPE" title="class or interface in java.lang.annotation" class="external-link">TYPE</a>)
+<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/annotation/Retention.html" title="class or interface in java.lang.annotation" class="external-link">@Retention</a>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/annotation/RetentionPolicy.html#RUNTIME" title="class or interface in java.lang.annotation" class="external-link">RUNTIME</a>)
+<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/annotation/Documented.html" title="class or interface in java.lang.annotation" class="external-link">@Documented</a>
 </span><span class="modifiers">public @interface </span><span class="element-name type-name-label">JdbiRepository</span></div>
-<div class="block">When <a href="EnableJdbiRepositories.html" title="annotation in org.jdbi.v3.spring"><code>EnableJdbiRepositories</code></a> is used,
+<div class="block">When <a href="EnableJdbiRepositories.html" title="annotation interface in org.jdbi.v3.spring"><code>EnableJdbiRepositories</code></a> is used,
  detected interfaces with this annotation will be regarded as a jdbi (sql-object) repository
  and are elligible for autowiring. The handle used for the execution is obtained and discarded using <a href="JdbiUtil.html" title="class in org.jdbi.v3.spring"><code>JdbiUtil</code></a>
  and consequently will work in combination with spring managed transactions.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
-<!-- =========== ANNOTATION TYPE OPTIONAL MEMBER SUMMARY =========== -->
+<!-- =========== ANNOTATION INTERFACE OPTIONAL MEMBER SUMMARY =========== -->
 <li>
 <section class="member-summary" id="annotation-interface-optional-element-summary">
 <h2>Optional Element Summary</h2>
@@ -103,12 +103,12 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Optional Element</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-first even-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color"><code><a href="#jdbiQualifier()" class="member-name-link">jdbiQualifier</a></code></div>
 <div class="col-last even-row-color">
 <div class="block">The qualifier (bean name) of the jdbi to use.</div>
 </div>
-<div class="col-first odd-row-color"><code><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-first odd-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color"><code><a href="#value()" class="member-name-link">value</a></code></div>
 <div class="col-last odd-row-color">
 <div class="block">The name of the created bean. if omitted the default naming mechanism is used.</div>
@@ -120,7 +120,7 @@ loadScripts(document, 'script');</script>
 </section>
 <section class="details" id="annotation-interface-element-detail">
 <ul class="details-list">
-<!-- ============ ANNOTATION TYPE MEMBER DETAIL =========== -->
+<!-- ============ ANNOTATION INTERFACE MEMBER DETAIL =========== -->
 <li>
 <section class="member-details">
 <h2>Element Details</h2>
@@ -128,7 +128,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="value()">
 <h3>value</h3>
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">value</span></div>
+<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">value</span></div>
 <div class="block">The name of the created bean. if omitted the default naming mechanism is used.</div>
 <dl class="notes">
 <dt>Default:</dt>
@@ -139,7 +139,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="jdbiQualifier()">
 <h3>jdbiQualifier</h3>
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">jdbiQualifier</span></div>
+<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">jdbiQualifier</span></div>
 <div class="block">The qualifier (bean name) of the jdbi to use. Can be omitted if only one jdbi bean is available.</div>
 <dl class="notes">
 <dt>Default:</dt>

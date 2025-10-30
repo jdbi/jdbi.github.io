@@ -87,7 +87,7 @@ loadScripts(document, 'script');</script>
 </div>
 <section class="class-description" id="class-description">
 <hr>
-<div class="type-signature"><span class="annotations"><a href="../../meta/Alpha.html" title="annotation in org.jdbi.v3.meta">@Alpha</a>
+<div class="type-signature"><span class="annotations"><a href="../../meta/Alpha.html" title="annotation interface in org.jdbi.v3.meta">@Alpha</a>
 </span><span class="modifiers">public interface </span><span class="element-name type-name-label">ConfigCustomizerFactory</span></div>
 <div class="block">Factory interface to create collections of <a href="../config/ConfigCustomizer.html" title="interface in org.jdbi.v3.core.config"><code>ConfigCustomizer</code></a> instances.</div>
 <dl class="notes">
@@ -108,14 +108,14 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a><wbr>&lt;<a href="../config/ConfigCustomizer.html" title="interface in org.jdbi.v3.core.config">ConfigCustomizer</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#forExtensionMethod(java.lang.Class,java.lang.reflect.Method)" class="member-name-link">forExtensionMethod</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;extensionType,
- <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/reflect/Method.html" title="class or interface in java.lang.reflect" class="external-link">Method</a>&nbsp;method)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a><wbr>&lt;<a href="../config/ConfigCustomizer.html" title="interface in org.jdbi.v3.core.config">ConfigCustomizer</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#forExtensionMethod(java.lang.Class,java.lang.reflect.Method)" class="member-name-link">forExtensionMethod</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;extensionType,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Method.html" title="class or interface in java.lang.reflect" class="external-link">Method</a>&nbsp;method)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Creates a collection of <a href="../config/ConfigCustomizer.html" title="interface in org.jdbi.v3.core.config"><code>ConfigCustomizer</code></a> instances for an extension type method.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a><wbr>&lt;<a href="../config/ConfigCustomizer.html" title="interface in org.jdbi.v3.core.config">ConfigCustomizer</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#forExtensionType(java.lang.Class)" class="member-name-link">forExtensionType</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;extensionType)</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a><wbr>&lt;<a href="../config/ConfigCustomizer.html" title="interface in org.jdbi.v3.core.config">ConfigCustomizer</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#forExtensionType(java.lang.Class)" class="member-name-link">forExtensionType</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;extensionType)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Creates a collection of <a href="../config/ConfigCustomizer.html" title="interface in org.jdbi.v3.core.config"><code>ConfigCustomizer</code></a> instances for an extension type.</div>
 </div>
@@ -136,28 +136,28 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="forExtensionType(java.lang.Class)">
 <h3>forExtensionType</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="../config/ConfigCustomizer.html" title="interface in org.jdbi.v3.core.config">ConfigCustomizer</a>&gt;</span>&nbsp;<span class="element-name">forExtensionType</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;extensionType)</span></div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="../config/ConfigCustomizer.html" title="interface in org.jdbi.v3.core.config">ConfigCustomizer</a>&gt;</span>&nbsp;<span class="element-name">forExtensionType</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;extensionType)</span></div>
 <div class="block">Creates a collection of <a href="../config/ConfigCustomizer.html" title="interface in org.jdbi.v3.core.config"><code>ConfigCustomizer</code></a> instances for an extension type.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>extensionType</code> - The extension type</dd>
 <dt>Returns:</dt>
-<dd>A <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link"><code>Collection</code></a> of <a href="../config/ConfigCustomizer.html" title="interface in org.jdbi.v3.core.config"><code>ConfigCustomizer</code></a> objects. Must not be null</dd>
+<dd>A <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link"><code>Collection</code></a> of <a href="../config/ConfigCustomizer.html" title="interface in org.jdbi.v3.core.config"><code>ConfigCustomizer</code></a> objects. Must not be null</dd>
 </dl>
 </section>
 </li>
 <li>
 <section class="detail" id="forExtensionMethod(java.lang.Class,java.lang.reflect.Method)">
 <h3>forExtensionMethod</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="../config/ConfigCustomizer.html" title="interface in org.jdbi.v3.core.config">ConfigCustomizer</a>&gt;</span>&nbsp;<span class="element-name">forExtensionMethod</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;extensionType,
- <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/reflect/Method.html" title="class or interface in java.lang.reflect" class="external-link">Method</a>&nbsp;method)</span></div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="../config/ConfigCustomizer.html" title="interface in org.jdbi.v3.core.config">ConfigCustomizer</a>&gt;</span>&nbsp;<span class="element-name">forExtensionMethod</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;extensionType,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Method.html" title="class or interface in java.lang.reflect" class="external-link">Method</a>&nbsp;method)</span></div>
 <div class="block">Creates a collection of <a href="../config/ConfigCustomizer.html" title="interface in org.jdbi.v3.core.config"><code>ConfigCustomizer</code></a> instances for an extension type method.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>extensionType</code> - The extension type</dd>
 <dd><code>method</code> - The method on the extension type</dd>
 <dt>Returns:</dt>
-<dd>A <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link"><code>Collection</code></a> of <a href="../config/ConfigCustomizer.html" title="interface in org.jdbi.v3.core.config"><code>ConfigCustomizer</code></a> objects. Must not be null</dd>
+<dd>A <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link"><code>Collection</code></a> of <a href="../config/ConfigCustomizer.html" title="interface in org.jdbi.v3.core.config"><code>ConfigCustomizer</code></a> objects. Must not be null</dd>
 </dl>
 </section>
 </li>

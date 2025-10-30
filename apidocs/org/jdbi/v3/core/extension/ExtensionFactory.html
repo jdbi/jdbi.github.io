@@ -95,7 +95,7 @@ loadScripts(document, 'script');</script>
 <dd>This is a functional interface and can therefore be used as the assignment target for a lambda expression or method reference.</dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/FunctionalInterface.html" title="class or interface in java.lang" class="external-link">@FunctionalInterface</a>
+<div class="type-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/FunctionalInterface.html" title="class or interface in java.lang" class="external-link">@FunctionalInterface</a>
 </span><span class="modifiers">public interface </span><span class="element-name type-name-label">ExtensionFactory</span></div>
 <div class="block">Factory interface used to produce Jdbi extension objects. A factory can provide additional
  pieces of information by overriding the various default methods.</div>
@@ -112,7 +112,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Interface</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>static enum&nbsp;</code></div>
-<div class="col-second even-row-color"><code><a href="ExtensionFactory.FactoryFlag.html" class="type-name-link" title="enum in org.jdbi.v3.core.extension">ExtensionFactory.FactoryFlag</a></code></div>
+<div class="col-second even-row-color"><code><a href="ExtensionFactory.FactoryFlag.html" class="type-name-link" title="enum class in org.jdbi.v3.core.extension">ExtensionFactory.FactoryFlag</a></code></div>
 <div class="col-last even-row-color">
 <div class="block">Flags that the factory can return to control aspects of the extension framework.</div>
 </div>
@@ -131,12 +131,12 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#accepts(java.lang.Class)" class="member-name-link">accepts</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;extensionType)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#accepts(java.lang.Class)" class="member-name-link">accepts</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;extensionType)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Returns true if the factory can process the given extension type.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default &lt;E&gt;&nbsp;E</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#attach(java.lang.Class,org.jdbi.v3.core.extension.HandleSupplier)" class="member-name-link">attach</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;E&gt;&nbsp;extensionType,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#attach(java.lang.Class,org.jdbi.v3.core.extension.HandleSupplier)" class="member-name-link">attach</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;E&gt;&nbsp;extensionType,
  <a href="HandleSupplier.html" title="interface in org.jdbi.v3.core.extension">HandleSupplier</a>&nbsp;handleSupplier)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Attaches an extension type.</div>
@@ -147,25 +147,25 @@ loadScripts(document, 'script');</script>
 <div class="block">Receives the <a href="ExtensionMetadata.Builder.html" title="class in org.jdbi.v3.core.extension"><code>ExtensionMetadata.Builder</code></a> when the <a href="ExtensionMetadata.html" title="class in org.jdbi.v3.core.extension"><code>ExtensionMetadata</code></a> object for this extension
  is created.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a><wbr>&lt;<a href="ConfigCustomizerFactory.html" title="interface in org.jdbi.v3.core.extension">ConfigCustomizerFactory</a>&gt;</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a><wbr>&lt;<a href="ConfigCustomizerFactory.html" title="interface in org.jdbi.v3.core.extension">ConfigCustomizerFactory</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#getConfigCustomizerFactories(org.jdbi.v3.core.config.ConfigRegistry)" class="member-name-link">getConfigCustomizerFactories</a><wbr>(<a href="../config/ConfigRegistry.html" title="class in org.jdbi.v3.core.config">ConfigRegistry</a>&nbsp;config)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Returns a collection of <a href="ConfigCustomizerFactory.html" title="interface in org.jdbi.v3.core.extension"><code>ConfigCustomizerFactory</code></a> objects.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a><wbr>&lt;<a href="ExtensionHandlerCustomizer.html" title="interface in org.jdbi.v3.core.extension">ExtensionHandlerCustomizer</a>&gt;</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a><wbr>&lt;<a href="ExtensionHandlerCustomizer.html" title="interface in org.jdbi.v3.core.extension">ExtensionHandlerCustomizer</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#getExtensionHandlerCustomizers(org.jdbi.v3.core.config.ConfigRegistry)" class="member-name-link">getExtensionHandlerCustomizers</a><wbr>(<a href="../config/ConfigRegistry.html" title="class in org.jdbi.v3.core.config">ConfigRegistry</a>&nbsp;config)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Returns a collection of <a href="ExtensionHandlerCustomizer.html" title="interface in org.jdbi.v3.core.extension"><code>ExtensionHandlerCustomizer</code></a> objects.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a><wbr>&lt;<a href="ExtensionHandlerFactory.html" title="interface in org.jdbi.v3.core.extension">ExtensionHandlerFactory</a>&gt;</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a><wbr>&lt;<a href="ExtensionHandlerFactory.html" title="interface in org.jdbi.v3.core.extension">ExtensionHandlerFactory</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#getExtensionHandlerFactories(org.jdbi.v3.core.config.ConfigRegistry)" class="member-name-link">getExtensionHandlerFactories</a><wbr>(<a href="../config/ConfigRegistry.html" title="class in org.jdbi.v3.core.config">ConfigRegistry</a>&nbsp;config)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Returns a collection of <a href="ExtensionHandlerFactory.html" title="interface in org.jdbi.v3.core.extension"><code>ExtensionHandlerFactory</code></a> objects.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a><wbr>&lt;<a href="ExtensionFactory.FactoryFlag.html" title="enum in org.jdbi.v3.core.extension">ExtensionFactory.FactoryFlag</a>&gt;</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a><wbr>&lt;<a href="ExtensionFactory.FactoryFlag.html" title="enum class in org.jdbi.v3.core.extension">ExtensionFactory.FactoryFlag</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#getFactoryFlags()" class="member-name-link">getFactoryFlags</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
-<div class="block">Returns a set of <a href="ExtensionFactory.FactoryFlag.html" title="enum in org.jdbi.v3.core.extension"><code>ExtensionFactory.FactoryFlag</code></a>s that describe the extension factory.</div>
+<div class="block">Returns a set of <a href="ExtensionFactory.FactoryFlag.html" title="enum class in org.jdbi.v3.core.extension"><code>ExtensionFactory.FactoryFlag</code></a>s that describe the extension factory.</div>
 </div>
 </div>
 </div>
@@ -184,7 +184,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="accepts(java.lang.Class)">
 <h3>accepts</h3>
-<div class="member-signature"><span class="return-type">boolean</span>&nbsp;<span class="element-name">accepts</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;extensionType)</span></div>
+<div class="member-signature"><span class="return-type">boolean</span>&nbsp;<span class="element-name">accepts</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;extensionType)</span></div>
 <div class="block">Returns true if the factory can process the given extension type.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -197,7 +197,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="attach(java.lang.Class,org.jdbi.v3.core.extension.HandleSupplier)">
 <h3>attach</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="type-parameters">&lt;E&gt;</span>&nbsp;<span class="return-type">E</span>&nbsp;<span class="element-name">attach</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;E&gt;&nbsp;extensionType,
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="type-parameters">&lt;E&gt;</span>&nbsp;<span class="return-type">E</span>&nbsp;<span class="element-name">attach</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;E&gt;&nbsp;extensionType,
  <a href="HandleSupplier.html" title="interface in org.jdbi.v3.core.extension">HandleSupplier</a>&nbsp;handleSupplier)</span></div>
 <div class="block">Attaches an extension type. This method is not called if <a href="#getFactoryFlags()"><code>getFactoryFlags()</code></a> contains <a href="ExtensionFactory.FactoryFlag.html#NON_VIRTUAL_FACTORY"><code>ExtensionFactory.FactoryFlag.NON_VIRTUAL_FACTORY</code></a>.</div>
 <dl class="notes">
@@ -211,7 +211,7 @@ loadScripts(document, 'script');</script>
 <dt>Returns:</dt>
 <dd>An extension of the given type, attached to the given handle</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if the extension type is not supported by this factory</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if the extension type is not supported by this factory</dd>
 <dt>See Also:</dt>
 <dd>
 <ul class="tag-list">
@@ -224,8 +224,8 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="getExtensionHandlerFactories(org.jdbi.v3.core.config.ConfigRegistry)">
 <h3>getExtensionHandlerFactories</h3>
-<div class="member-signature"><span class="annotations"><a href="../../meta/Alpha.html" title="annotation in org.jdbi.v3.meta">@Alpha</a>
-</span><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="ExtensionHandlerFactory.html" title="interface in org.jdbi.v3.core.extension">ExtensionHandlerFactory</a>&gt;</span>&nbsp;<span class="element-name">getExtensionHandlerFactories</span><wbr><span class="parameters">(<a href="../config/ConfigRegistry.html" title="class in org.jdbi.v3.core.config">ConfigRegistry</a>&nbsp;config)</span></div>
+<div class="member-signature"><span class="annotations"><a href="../../meta/Alpha.html" title="annotation interface in org.jdbi.v3.meta">@Alpha</a>
+</span><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="ExtensionHandlerFactory.html" title="interface in org.jdbi.v3.core.extension">ExtensionHandlerFactory</a>&gt;</span>&nbsp;<span class="element-name">getExtensionHandlerFactories</span><wbr><span class="parameters">(<a href="../config/ConfigRegistry.html" title="class in org.jdbi.v3.core.config">ConfigRegistry</a>&nbsp;config)</span></div>
 <div class="block">Returns a collection of <a href="ExtensionHandlerFactory.html" title="interface in org.jdbi.v3.core.extension"><code>ExtensionHandlerFactory</code></a> objects. These factories are used in
  addition to the factories that have been registered with <a href="Extensions.html#registerHandlerFactory(org.jdbi.v3.core.extension.ExtensionHandlerFactory)"><code>Extensions.registerHandlerFactory(org.jdbi.v3.core.extension.ExtensionHandlerFactory)</code></a>.
  <br>
@@ -243,8 +243,8 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="getExtensionHandlerCustomizers(org.jdbi.v3.core.config.ConfigRegistry)">
 <h3>getExtensionHandlerCustomizers</h3>
-<div class="member-signature"><span class="annotations"><a href="../../meta/Alpha.html" title="annotation in org.jdbi.v3.meta">@Alpha</a>
-</span><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="ExtensionHandlerCustomizer.html" title="interface in org.jdbi.v3.core.extension">ExtensionHandlerCustomizer</a>&gt;</span>&nbsp;<span class="element-name">getExtensionHandlerCustomizers</span><wbr><span class="parameters">(<a href="../config/ConfigRegistry.html" title="class in org.jdbi.v3.core.config">ConfigRegistry</a>&nbsp;config)</span></div>
+<div class="member-signature"><span class="annotations"><a href="../../meta/Alpha.html" title="annotation interface in org.jdbi.v3.meta">@Alpha</a>
+</span><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="ExtensionHandlerCustomizer.html" title="interface in org.jdbi.v3.core.extension">ExtensionHandlerCustomizer</a>&gt;</span>&nbsp;<span class="element-name">getExtensionHandlerCustomizers</span><wbr><span class="parameters">(<a href="../config/ConfigRegistry.html" title="class in org.jdbi.v3.core.config">ConfigRegistry</a>&nbsp;config)</span></div>
 <div class="block">Returns a collection of <a href="ExtensionHandlerCustomizer.html" title="interface in org.jdbi.v3.core.extension"><code>ExtensionHandlerCustomizer</code></a> objects. These customizers are used
  in addition to the customizers that have been registered with <a href="Extensions.html#registerHandlerCustomizer(org.jdbi.v3.core.extension.ExtensionHandlerCustomizer)"><code>Extensions.registerHandlerCustomizer(org.jdbi.v3.core.extension.ExtensionHandlerCustomizer)</code></a>.
  <br>
@@ -262,8 +262,8 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="getConfigCustomizerFactories(org.jdbi.v3.core.config.ConfigRegistry)">
 <h3>getConfigCustomizerFactories</h3>
-<div class="member-signature"><span class="annotations"><a href="../../meta/Alpha.html" title="annotation in org.jdbi.v3.meta">@Alpha</a>
-</span><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="ConfigCustomizerFactory.html" title="interface in org.jdbi.v3.core.extension">ConfigCustomizerFactory</a>&gt;</span>&nbsp;<span class="element-name">getConfigCustomizerFactories</span><wbr><span class="parameters">(<a href="../config/ConfigRegistry.html" title="class in org.jdbi.v3.core.config">ConfigRegistry</a>&nbsp;config)</span></div>
+<div class="member-signature"><span class="annotations"><a href="../../meta/Alpha.html" title="annotation interface in org.jdbi.v3.meta">@Alpha</a>
+</span><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="ConfigCustomizerFactory.html" title="interface in org.jdbi.v3.core.extension">ConfigCustomizerFactory</a>&gt;</span>&nbsp;<span class="element-name">getConfigCustomizerFactories</span><wbr><span class="parameters">(<a href="../config/ConfigRegistry.html" title="class in org.jdbi.v3.core.config">ConfigRegistry</a>&nbsp;config)</span></div>
 <div class="block">Returns a collection of <a href="ConfigCustomizerFactory.html" title="interface in org.jdbi.v3.core.extension"><code>ConfigCustomizerFactory</code></a> objects.
  <br>
  Each factory is called once for every type that is attached by the factory and once for each method in the
@@ -282,7 +282,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="buildExtensionMetadata(org.jdbi.v3.core.extension.ExtensionMetadata.Builder)">
 <h3>buildExtensionMetadata</h3>
-<div class="member-signature"><span class="annotations"><a href="../../meta/Alpha.html" title="annotation in org.jdbi.v3.meta">@Alpha</a>
+<div class="member-signature"><span class="annotations"><a href="../../meta/Alpha.html" title="annotation interface in org.jdbi.v3.meta">@Alpha</a>
 </span><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">buildExtensionMetadata</span><wbr><span class="parameters">(<a href="ExtensionMetadata.Builder.html" title="class in org.jdbi.v3.core.extension">ExtensionMetadata.Builder</a>&nbsp;builder)</span></div>
 <div class="block">Receives the <a href="ExtensionMetadata.Builder.html" title="class in org.jdbi.v3.core.extension"><code>ExtensionMetadata.Builder</code></a> when the <a href="ExtensionMetadata.html" title="class in org.jdbi.v3.core.extension"><code>ExtensionMetadata</code></a> object for this extension
  is created. The factory can add additional method handlers or specific instance and method customizers as needed.
@@ -299,12 +299,12 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="getFactoryFlags()">
 <h3>getFactoryFlags</h3>
-<div class="member-signature"><span class="annotations"><a href="../../meta/Alpha.html" title="annotation in org.jdbi.v3.meta">@Alpha</a>
-</span><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="ExtensionFactory.FactoryFlag.html" title="enum in org.jdbi.v3.core.extension">ExtensionFactory.FactoryFlag</a>&gt;</span>&nbsp;<span class="element-name">getFactoryFlags</span>()</div>
-<div class="block">Returns a set of <a href="ExtensionFactory.FactoryFlag.html" title="enum in org.jdbi.v3.core.extension"><code>ExtensionFactory.FactoryFlag</code></a>s that describe the extension factory.</div>
+<div class="member-signature"><span class="annotations"><a href="../../meta/Alpha.html" title="annotation interface in org.jdbi.v3.meta">@Alpha</a>
+</span><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="ExtensionFactory.FactoryFlag.html" title="enum class in org.jdbi.v3.core.extension">ExtensionFactory.FactoryFlag</a>&gt;</span>&nbsp;<span class="element-name">getFactoryFlags</span>()</div>
+<div class="block">Returns a set of <a href="ExtensionFactory.FactoryFlag.html" title="enum class in org.jdbi.v3.core.extension"><code>ExtensionFactory.FactoryFlag</code></a>s that describe the extension factory.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>A set of <a href="ExtensionFactory.FactoryFlag.html" title="enum in org.jdbi.v3.core.extension"><code>ExtensionFactory.FactoryFlag</code></a> elements. Default is the empty set</dd>
+<dd>A set of <a href="ExtensionFactory.FactoryFlag.html" title="enum class in org.jdbi.v3.core.extension"><code>ExtensionFactory.FactoryFlag</code></a> elements. Default is the empty set</dd>
 <dt>Since:</dt>
 <dd>3.38.0</dd>
 </dl>

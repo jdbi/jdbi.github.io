@@ -56,7 +56,7 @@ loadScripts(document, 'script');</script>
 <li id="contents-package"><a href="#package">Packages</a></li>
 <li id="contents-interface"><a href="#interface">Interfaces</a></li>
 <li id="contents-class"><a href="#class">Classes</a></li>
-<li id="contents-annotation-interface"><a href="#annotation-interface">Annotation Types</a></li>
+<li id="contents-annotation-interface"><a href="#annotation-interface">Annotation Interfaces</a></li>
 <li id="contents-field"><a href="#field">Fields</a></li>
 <li id="contents-method"><a href="#method">Methods</a></li>
 <li id="contents-constructor"><a href="#constructor">Constructors</a></li>
@@ -151,7 +151,7 @@ loadScripts(document, 'script');</script>
 </div>
 <div class="col-summary-item-name even-row-color"><a href="org/jdbi/v3/core/mapper/reflect/ReflectionMapperUtil.html#getColumnNames(java.sql.ResultSet)">org.jdbi.v3.core.mapper.reflect.ReflectionMapperUtil.getColumnNames<wbr>(ResultSet)</a></div>
 <div class="col-last even-row-color">
-<div class="block">Use <a href="org/jdbi/v3/core/mapper/reflect/ReflectionMapperUtil.html#getColumnNames(java.sql.ResultSet,java.util.function.UnaryOperator)"><code>ReflectionMapperUtil.getColumnNames(ResultSet, UnaryOperator)</code></a> and <a href="org/jdbi/v3/core/mapper/CaseStrategy.html" title="enum in org.jdbi.v3.core.mapper"><code>CaseStrategy</code></a> to control name capitalization</div>
+<div class="block">Use <a href="org/jdbi/v3/core/mapper/reflect/ReflectionMapperUtil.html#getColumnNames(java.sql.ResultSet,java.util.function.UnaryOperator)"><code>ReflectionMapperUtil.getColumnNames(ResultSet, UnaryOperator)</code></a> and <a href="org/jdbi/v3/core/mapper/CaseStrategy.html" title="enum class in org.jdbi.v3.core.mapper"><code>CaseStrategy</code></a> to control name capitalization</div>
 </div>
 <div class="col-summary-item-name odd-row-color"><a href="org/jdbi/v3/core/result/ResultIterable.html#findOnly()">org.jdbi.v3.core.result.ResultIterable.findOnly()</a></div>
 <div class="col-last odd-row-color">
@@ -213,7 +213,7 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color">
 <div class="block">Use the <a href="org/jdbi/v3/spring/package-summary.html"><code>org.jdbi.v3.spring</code></a> module with Spring 6.x or newer.</div>
 </div>
-<div class="col-summary-item-name odd-row-color"><a href="org/jdbi/v3/spring5/EnableJdbiRepositories.html" title="annotation in org.jdbi.v3.spring5">org.jdbi.v3.spring5.EnableJdbiRepositories</a></div>
+<div class="col-summary-item-name odd-row-color"><a href="org/jdbi/v3/spring5/EnableJdbiRepositories.html" title="annotation interface in org.jdbi.v3.spring5">org.jdbi.v3.spring5.EnableJdbiRepositories</a></div>
 <div class="col-last odd-row-color">
 <div class="block">Use the <a href="org/jdbi/v3/spring/package-summary.html"><code>org.jdbi.v3.spring</code></a> module with Spring 6.x or newer.</div>
 </div>
@@ -221,7 +221,7 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color">
 <div class="block">Use the <a href="org/jdbi/v3/spring/package-summary.html"><code>org.jdbi.v3.spring</code></a> module with Spring 6.x or newer.</div>
 </div>
-<div class="col-summary-item-name odd-row-color"><a href="org/jdbi/v3/spring5/JdbiRepository.html" title="annotation in org.jdbi.v3.spring5">org.jdbi.v3.spring5.JdbiRepository</a></div>
+<div class="col-summary-item-name odd-row-color"><a href="org/jdbi/v3/spring5/JdbiRepository.html" title="annotation interface in org.jdbi.v3.spring5">org.jdbi.v3.spring5.JdbiRepository</a></div>
 <div class="col-last odd-row-color">
 <div class="block">Use the <a href="org/jdbi/v3/spring/package-summary.html"><code>org.jdbi.v3.spring</code></a> module with Spring 6.x or newer.</div>
 </div>
@@ -245,9 +245,9 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color">
 <div class="block">Use <a href="org/jdbi/v3/core/extension/ExtensionConfigurer.html" title="interface in org.jdbi.v3.core.extension"><code>ExtensionConfigurer</code></a> directly.</div>
 </div>
-<div class="col-summary-item-name odd-row-color"><a href="org/jdbi/v3/sqlobject/config/ConfiguringAnnotation.html" title="annotation in org.jdbi.v3.sqlobject.config">org.jdbi.v3.sqlobject.config.ConfiguringAnnotation</a></div>
+<div class="col-summary-item-name odd-row-color"><a href="org/jdbi/v3/sqlobject/config/ConfiguringAnnotation.html" title="annotation interface in org.jdbi.v3.sqlobject.config">org.jdbi.v3.sqlobject.config.ConfiguringAnnotation</a></div>
 <div class="col-last odd-row-color">
-<div class="block">Use <a href="org/jdbi/v3/core/extension/annotation/UseExtensionConfigurer.html" title="annotation in org.jdbi.v3.core.extension.annotation"><code>UseExtensionConfigurer</code></a>.</div>
+<div class="block">Use <a href="org/jdbi/v3/core/extension/annotation/UseExtensionConfigurer.html" title="annotation interface in org.jdbi.v3.core.extension.annotation"><code>UseExtensionConfigurer</code></a>.</div>
 </div>
 <div class="col-summary-item-name even-row-color"><a href="org/jdbi/v3/sqlobject/customizer/BindList.EmptyHandling.html#define(org.jdbi.v3.core.statement.SqlStatement,java.lang.String)">org.jdbi.v3.sqlobject.customizer.BindList.EmptyHandling.define<wbr>(SqlStatement, String)</a></div>
 <div class="col-last even-row-color">
@@ -257,10 +257,10 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color">
 <div class="block">vaguely named in light of new additions, use <a href="org/jdbi/v3/sqlobject/customizer/BindList.EmptyHandling.html#NULL_STRING"><code>BindList.EmptyHandling.NULL_STRING</code></a> instead</div>
 </div>
-<div class="col-summary-item-name even-row-color"><a href="org/jdbi/v3/sqlobject/DecoratorOrder.html" title="annotation in org.jdbi.v3.sqlobject">org.jdbi.v3.sqlobject.DecoratorOrder</a></div>
+<div class="col-summary-item-name even-row-color"><a href="org/jdbi/v3/sqlobject/DecoratorOrder.html" title="annotation interface in org.jdbi.v3.sqlobject">org.jdbi.v3.sqlobject.DecoratorOrder</a></div>
 <div class="col-last even-row-color">
-<div class="block">Use <a href="org/jdbi/v3/core/extension/annotation/UseExtensionHandlerCustomizer.html" title="annotation in org.jdbi.v3.core.extension.annotation"><code>UseExtensionHandlerCustomizer</code></a> to mark annotations and
- <a href="org/jdbi/v3/core/extension/annotation/ExtensionHandlerCustomizationOrder.html" title="annotation in org.jdbi.v3.core.extension.annotation"><code>ExtensionHandlerCustomizationOrder</code></a> instead.</div>
+<div class="block">Use <a href="org/jdbi/v3/core/extension/annotation/UseExtensionHandlerCustomizer.html" title="annotation interface in org.jdbi.v3.core.extension.annotation"><code>UseExtensionHandlerCustomizer</code></a> to mark annotations and
+ <a href="org/jdbi/v3/core/extension/annotation/ExtensionHandlerCustomizationOrder.html" title="annotation interface in org.jdbi.v3.core.extension.annotation"><code>ExtensionHandlerCustomizationOrder</code></a> instead.</div>
 </div>
 <div class="col-summary-item-name odd-row-color"><a href="org/jdbi/v3/sqlobject/Handler.html" title="interface in org.jdbi.v3.sqlobject">org.jdbi.v3.sqlobject.Handler</a></div>
 <div class="col-last odd-row-color">
@@ -284,14 +284,14 @@ loadScripts(document, 'script');</script>
 <div class="block">Use <a href="org/jdbi/v3/core/extension/ExtensionHandlerFactory.html" title="interface in org.jdbi.v3.core.extension"><code>ExtensionHandlerFactory</code></a> instances that are returned
  from the <a href="org/jdbi/v3/core/extension/ExtensionFactory.html#getExtensionHandlerFactories(org.jdbi.v3.core.config.ConfigRegistry)"><code>ExtensionFactory.getExtensionHandlerFactories(ConfigRegistry)</code></a> method.</div>
 </div>
-<div class="col-summary-item-name even-row-color"><a href="org/jdbi/v3/sqlobject/SqlMethodDecoratingAnnotation.html" title="annotation in org.jdbi.v3.sqlobject">org.jdbi.v3.sqlobject.SqlMethodDecoratingAnnotation</a></div>
+<div class="col-summary-item-name even-row-color"><a href="org/jdbi/v3/sqlobject/SqlMethodDecoratingAnnotation.html" title="annotation interface in org.jdbi.v3.sqlobject">org.jdbi.v3.sqlobject.SqlMethodDecoratingAnnotation</a></div>
 <div class="col-last even-row-color">
-<div class="block">Use <a href="org/jdbi/v3/core/extension/annotation/UseExtensionHandlerCustomizer.html" title="annotation in org.jdbi.v3.core.extension.annotation"><code>UseExtensionHandlerCustomizer</code></a> instead
+<div class="block">Use <a href="org/jdbi/v3/core/extension/annotation/UseExtensionHandlerCustomizer.html" title="annotation interface in org.jdbi.v3.core.extension.annotation"><code>UseExtensionHandlerCustomizer</code></a> instead
  and implement <a href="org/jdbi/v3/core/extension/ExtensionHandlerCustomizer.html" title="interface in org.jdbi.v3.core.extension"><code>ExtensionHandlerCustomizer</code></a> for the value.</div>
 </div>
-<div class="col-summary-item-name odd-row-color"><a href="org/jdbi/v3/sqlobject/SqlOperation.html" title="annotation in org.jdbi.v3.sqlobject">org.jdbi.v3.sqlobject.SqlOperation</a></div>
+<div class="col-summary-item-name odd-row-color"><a href="org/jdbi/v3/sqlobject/SqlOperation.html" title="annotation interface in org.jdbi.v3.sqlobject">org.jdbi.v3.sqlobject.SqlOperation</a></div>
 <div class="col-last odd-row-color">
-<div class="block">Use <a href="org/jdbi/v3/core/extension/annotation/UseExtensionHandler.html" title="annotation in org.jdbi.v3.core.extension.annotation"><code>UseExtensionHandler</code></a> and <a href="org/jdbi/v3/sqlobject/SqlObjectFactory.html#EXTENSION_ID"><code>SqlObjectFactory.EXTENSION_ID</code></a> as the id marker.</div>
+<div class="block">Use <a href="org/jdbi/v3/core/extension/annotation/UseExtensionHandler.html" title="annotation interface in org.jdbi.v3.core.extension.annotation"><code>UseExtensionHandler</code></a> and <a href="org/jdbi/v3/sqlobject/SqlObjectFactory.html#EXTENSION_ID"><code>SqlObjectFactory.EXTENSION_ID</code></a> as the id marker.</div>
 </div>
 <div class="col-summary-item-name even-row-color"><a href="org/jdbi/v3/testing/JdbiRule.html#migrateWithFlyway()">org.jdbi.v3.testing.JdbiRule.migrateWithFlyway()</a></div>
 <div class="col-last even-row-color">
@@ -408,7 +408,7 @@ loadScripts(document, 'script');</script>
 </div>
 <div class="col-summary-item-name odd-row-color"><a href="org/jdbi/v3/core/statement/MessageFormatTemplateEngine.html" title="class in org.jdbi.v3.core.statement">org.jdbi.v3.core.statement.MessageFormatTemplateEngine</a></div>
 <div class="col-last odd-row-color">
-<div class="block"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/text/MessageFormat.html" title="class or interface in java.text" class="external-link"><code>MessageFormat</code></a> formats integers with decimal separators, e.g. <code>1000</code> &rarr; <code>"1,000"</code>. This hindsight realization has led us to discourage its use.</div>
+<div class="block"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/text/MessageFormat.html" title="class or interface in java.text" class="external-link"><code>MessageFormat</code></a> formats integers with decimal separators, e.g. <code>1000</code> &rarr; <code>"1,000"</code>. This hindsight realization has led us to discourage its use.</div>
 </div>
 <div class="col-summary-item-name even-row-color"><a href="org/jdbi/v3/spring5/JdbiFactoryBean.html" title="class in org.jdbi.v3.spring5">org.jdbi.v3.spring5.JdbiFactoryBean</a></div>
 <div class="col-last even-row-color">
@@ -447,35 +447,35 @@ loadScripts(document, 'script');</script>
 <ul class="block-list">
 <li>
 <div id="annotation-interface">
-<div class="caption"><span>Deprecated Annotation Types</span></div>
+<div class="caption"><span>Deprecated Annotation Interfaces</span></div>
 <div class="summary-table two-column-summary">
-<div class="table-header col-first">Annotation Type</div>
+<div class="table-header col-first">Annotation Interface</div>
 <div class="table-header col-last">Description</div>
-<div class="col-summary-item-name even-row-color"><a href="org/jdbi/v3/spring5/EnableJdbiRepositories.html" title="annotation in org.jdbi.v3.spring5">org.jdbi.v3.spring5.EnableJdbiRepositories</a></div>
+<div class="col-summary-item-name even-row-color"><a href="org/jdbi/v3/spring5/EnableJdbiRepositories.html" title="annotation interface in org.jdbi.v3.spring5">org.jdbi.v3.spring5.EnableJdbiRepositories</a></div>
 <div class="col-last even-row-color">
 <div class="block">Use the <a href="org/jdbi/v3/spring/package-summary.html"><code>org.jdbi.v3.spring</code></a> module with Spring 6.x or newer.</div>
 </div>
-<div class="col-summary-item-name odd-row-color"><a href="org/jdbi/v3/spring5/JdbiRepository.html" title="annotation in org.jdbi.v3.spring5">org.jdbi.v3.spring5.JdbiRepository</a></div>
+<div class="col-summary-item-name odd-row-color"><a href="org/jdbi/v3/spring5/JdbiRepository.html" title="annotation interface in org.jdbi.v3.spring5">org.jdbi.v3.spring5.JdbiRepository</a></div>
 <div class="col-last odd-row-color">
 <div class="block">Use the <a href="org/jdbi/v3/spring/package-summary.html"><code>org.jdbi.v3.spring</code></a> module with Spring 6.x or newer.</div>
 </div>
-<div class="col-summary-item-name even-row-color"><a href="org/jdbi/v3/sqlobject/config/ConfiguringAnnotation.html" title="annotation in org.jdbi.v3.sqlobject.config">org.jdbi.v3.sqlobject.config.ConfiguringAnnotation</a></div>
+<div class="col-summary-item-name even-row-color"><a href="org/jdbi/v3/sqlobject/config/ConfiguringAnnotation.html" title="annotation interface in org.jdbi.v3.sqlobject.config">org.jdbi.v3.sqlobject.config.ConfiguringAnnotation</a></div>
 <div class="col-last even-row-color">
-<div class="block">Use <a href="org/jdbi/v3/core/extension/annotation/UseExtensionConfigurer.html" title="annotation in org.jdbi.v3.core.extension.annotation"><code>UseExtensionConfigurer</code></a>.</div>
+<div class="block">Use <a href="org/jdbi/v3/core/extension/annotation/UseExtensionConfigurer.html" title="annotation interface in org.jdbi.v3.core.extension.annotation"><code>UseExtensionConfigurer</code></a>.</div>
 </div>
-<div class="col-summary-item-name odd-row-color"><a href="org/jdbi/v3/sqlobject/DecoratorOrder.html" title="annotation in org.jdbi.v3.sqlobject">org.jdbi.v3.sqlobject.DecoratorOrder</a></div>
+<div class="col-summary-item-name odd-row-color"><a href="org/jdbi/v3/sqlobject/DecoratorOrder.html" title="annotation interface in org.jdbi.v3.sqlobject">org.jdbi.v3.sqlobject.DecoratorOrder</a></div>
 <div class="col-last odd-row-color">
-<div class="block">Use <a href="org/jdbi/v3/core/extension/annotation/UseExtensionHandlerCustomizer.html" title="annotation in org.jdbi.v3.core.extension.annotation"><code>UseExtensionHandlerCustomizer</code></a> to mark annotations and
- <a href="org/jdbi/v3/core/extension/annotation/ExtensionHandlerCustomizationOrder.html" title="annotation in org.jdbi.v3.core.extension.annotation"><code>ExtensionHandlerCustomizationOrder</code></a> instead.</div>
+<div class="block">Use <a href="org/jdbi/v3/core/extension/annotation/UseExtensionHandlerCustomizer.html" title="annotation interface in org.jdbi.v3.core.extension.annotation"><code>UseExtensionHandlerCustomizer</code></a> to mark annotations and
+ <a href="org/jdbi/v3/core/extension/annotation/ExtensionHandlerCustomizationOrder.html" title="annotation interface in org.jdbi.v3.core.extension.annotation"><code>ExtensionHandlerCustomizationOrder</code></a> instead.</div>
 </div>
-<div class="col-summary-item-name even-row-color"><a href="org/jdbi/v3/sqlobject/SqlMethodDecoratingAnnotation.html" title="annotation in org.jdbi.v3.sqlobject">org.jdbi.v3.sqlobject.SqlMethodDecoratingAnnotation</a></div>
+<div class="col-summary-item-name even-row-color"><a href="org/jdbi/v3/sqlobject/SqlMethodDecoratingAnnotation.html" title="annotation interface in org.jdbi.v3.sqlobject">org.jdbi.v3.sqlobject.SqlMethodDecoratingAnnotation</a></div>
 <div class="col-last even-row-color">
-<div class="block">Use <a href="org/jdbi/v3/core/extension/annotation/UseExtensionHandlerCustomizer.html" title="annotation in org.jdbi.v3.core.extension.annotation"><code>UseExtensionHandlerCustomizer</code></a> instead
+<div class="block">Use <a href="org/jdbi/v3/core/extension/annotation/UseExtensionHandlerCustomizer.html" title="annotation interface in org.jdbi.v3.core.extension.annotation"><code>UseExtensionHandlerCustomizer</code></a> instead
  and implement <a href="org/jdbi/v3/core/extension/ExtensionHandlerCustomizer.html" title="interface in org.jdbi.v3.core.extension"><code>ExtensionHandlerCustomizer</code></a> for the value.</div>
 </div>
-<div class="col-summary-item-name odd-row-color"><a href="org/jdbi/v3/sqlobject/SqlOperation.html" title="annotation in org.jdbi.v3.sqlobject">org.jdbi.v3.sqlobject.SqlOperation</a></div>
+<div class="col-summary-item-name odd-row-color"><a href="org/jdbi/v3/sqlobject/SqlOperation.html" title="annotation interface in org.jdbi.v3.sqlobject">org.jdbi.v3.sqlobject.SqlOperation</a></div>
 <div class="col-last odd-row-color">
-<div class="block">Use <a href="org/jdbi/v3/core/extension/annotation/UseExtensionHandler.html" title="annotation in org.jdbi.v3.core.extension.annotation"><code>UseExtensionHandler</code></a> and <a href="org/jdbi/v3/sqlobject/SqlObjectFactory.html#EXTENSION_ID"><code>SqlObjectFactory.EXTENSION_ID</code></a> as the id marker.</div>
+<div class="block">Use <a href="org/jdbi/v3/core/extension/annotation/UseExtensionHandler.html" title="annotation interface in org.jdbi.v3.core.extension.annotation"><code>UseExtensionHandler</code></a> and <a href="org/jdbi/v3/sqlobject/SqlObjectFactory.html#EXTENSION_ID"><code>SqlObjectFactory.EXTENSION_ID</code></a> as the id marker.</div>
 </div>
 </div>
 </div>
@@ -569,7 +569,7 @@ loadScripts(document, 'script');</script>
 </div>
 <div class="col-summary-item-name even-row-color"><a href="org/jdbi/v3/core/mapper/reflect/ReflectionMapperUtil.html#getColumnNames(java.sql.ResultSet)">org.jdbi.v3.core.mapper.reflect.ReflectionMapperUtil.getColumnNames<wbr>(ResultSet)</a></div>
 <div class="col-last even-row-color">
-<div class="block">Use <a href="org/jdbi/v3/core/mapper/reflect/ReflectionMapperUtil.html#getColumnNames(java.sql.ResultSet,java.util.function.UnaryOperator)"><code>ReflectionMapperUtil.getColumnNames(ResultSet, UnaryOperator)</code></a> and <a href="org/jdbi/v3/core/mapper/CaseStrategy.html" title="enum in org.jdbi.v3.core.mapper"><code>CaseStrategy</code></a> to control name capitalization</div>
+<div class="block">Use <a href="org/jdbi/v3/core/mapper/reflect/ReflectionMapperUtil.html#getColumnNames(java.sql.ResultSet,java.util.function.UnaryOperator)"><code>ReflectionMapperUtil.getColumnNames(ResultSet, UnaryOperator)</code></a> and <a href="org/jdbi/v3/core/mapper/CaseStrategy.html" title="enum class in org.jdbi.v3.core.mapper"><code>CaseStrategy</code></a> to control name capitalization</div>
 </div>
 <div class="col-summary-item-name odd-row-color"><a href="org/jdbi/v3/core/result/ResultIterable.html#findOnly()">org.jdbi.v3.core.result.ResultIterable.findOnly()</a></div>
 <div class="col-last odd-row-color">

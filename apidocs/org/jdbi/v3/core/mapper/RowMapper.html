@@ -103,7 +103,7 @@ loadScripts(document, 'script');</script>
 <dd>This is a functional interface and can therefore be used as the assignment target for a lambda expression or method reference.</dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/FunctionalInterface.html" title="class or interface in java.lang" class="external-link">@FunctionalInterface</a>
+<div class="type-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/FunctionalInterface.html" title="class or interface in java.lang" class="external-link">@FunctionalInterface</a>
 </span><span class="modifiers">public interface </span><span class="element-name type-name-label">RowMapper&lt;T&gt;</span></div>
 <div class="block">Maps result set rows to objects.</div>
 <dl class="notes">
@@ -138,13 +138,13 @@ loadScripts(document, 'script');</script>
 <div class="block">Allows for initialization of the row mapper instance within a ConfigRegistry scope.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="RowMapper.html" title="type parameter in RowMapper">T</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#map(java.sql.ResultSet,org.jdbi.v3.core.statement.StatementContext)" class="member-name-link">map</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.sql/java/sql/ResultSet.html" title="class or interface in java.sql" class="external-link">ResultSet</a>&nbsp;rs,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#map(java.sql.ResultSet,org.jdbi.v3.core.statement.StatementContext)" class="member-name-link">map</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/ResultSet.html" title="class or interface in java.sql" class="external-link">ResultSet</a>&nbsp;rs,
  <a href="../statement/StatementContext.html" title="class in org.jdbi.v3.core.statement">StatementContext</a>&nbsp;ctx)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Map the current row of the result set.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="RowMapper.html" title="interface in org.jdbi.v3.core.mapper">RowMapper</a><wbr>&lt;<a href="RowMapper.html" title="type parameter in RowMapper">T</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#specialize(java.sql.ResultSet,org.jdbi.v3.core.statement.StatementContext)" class="member-name-link">specialize</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.sql/java/sql/ResultSet.html" title="class or interface in java.sql" class="external-link">ResultSet</a>&nbsp;rs,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#specialize(java.sql.ResultSet,org.jdbi.v3.core.statement.StatementContext)" class="member-name-link">specialize</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/ResultSet.html" title="class or interface in java.sql" class="external-link">ResultSet</a>&nbsp;rs,
  <a href="../statement/StatementContext.html" title="class in org.jdbi.v3.core.statement">StatementContext</a>&nbsp;ctx)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Returns a specialized row mapper, optimized for the given result set.</div>
@@ -166,9 +166,9 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="map(java.sql.ResultSet,org.jdbi.v3.core.statement.StatementContext)">
 <h3>map</h3>
-<div class="member-signature"><span class="return-type"><a href="RowMapper.html" title="type parameter in RowMapper">T</a></span>&nbsp;<span class="element-name">map</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.sql/java/sql/ResultSet.html" title="class or interface in java.sql" class="external-link">ResultSet</a>&nbsp;rs,
+<div class="member-signature"><span class="return-type"><a href="RowMapper.html" title="type parameter in RowMapper">T</a></span>&nbsp;<span class="element-name">map</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/ResultSet.html" title="class or interface in java.sql" class="external-link">ResultSet</a>&nbsp;rs,
  <a href="../statement/StatementContext.html" title="class in org.jdbi.v3.core.statement">StatementContext</a>&nbsp;ctx)</span>
-throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.sql/java/sql/SQLException.html" title="class or interface in java.sql" class="external-link">SQLException</a></span></div>
+throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/SQLException.html" title="class or interface in java.sql" class="external-link">SQLException</a></span></div>
 <div class="block">Map the current row of the result set.
  This method should not cause the result set to advance; allow Jdbi to do that, please.</div>
 <dl class="notes">
@@ -178,16 +178,16 @@ throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/
 <dt>Returns:</dt>
 <dd>the value to produce for this row</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.sql/java/sql/SQLException.html" title="class or interface in java.sql" class="external-link">SQLException</a></code> - if anything goes wrong go ahead and let this percolate; Jdbi will handle it</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/SQLException.html" title="class or interface in java.sql" class="external-link">SQLException</a></code> - if anything goes wrong go ahead and let this percolate; Jdbi will handle it</dd>
 </dl>
 </section>
 </li>
 <li>
 <section class="detail" id="specialize(java.sql.ResultSet,org.jdbi.v3.core.statement.StatementContext)">
 <h3>specialize</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="RowMapper.html" title="interface in org.jdbi.v3.core.mapper">RowMapper</a>&lt;<a href="RowMapper.html" title="type parameter in RowMapper">T</a>&gt;</span>&nbsp;<span class="element-name">specialize</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.sql/java/sql/ResultSet.html" title="class or interface in java.sql" class="external-link">ResultSet</a>&nbsp;rs,
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="RowMapper.html" title="interface in org.jdbi.v3.core.mapper">RowMapper</a>&lt;<a href="RowMapper.html" title="type parameter in RowMapper">T</a>&gt;</span>&nbsp;<span class="element-name">specialize</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/ResultSet.html" title="class or interface in java.sql" class="external-link">ResultSet</a>&nbsp;rs,
  <a href="../statement/StatementContext.html" title="class in org.jdbi.v3.core.statement">StatementContext</a>&nbsp;ctx)</span>
-                         throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.sql/java/sql/SQLException.html" title="class or interface in java.sql" class="external-link">SQLException</a></span></div>
+                         throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/SQLException.html" title="class or interface in java.sql" class="external-link">SQLException</a></span></div>
 <div class="block">Returns a specialized row mapper, optimized for the given result set.
  <p>
  Before mapping the result set from a SQL statement; Jdbi will first call this method to obtain a specialized
@@ -203,7 +203,7 @@ throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/
 <dt>Returns:</dt>
 <dd>a row mapper equivalent to this one, possibly specialized.</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.sql/java/sql/SQLException.html" title="class or interface in java.sql" class="external-link">SQLException</a></code> - if anything goes wrong go ahead and let this percolate; Jdbi will handle it</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/SQLException.html" title="class or interface in java.sql" class="external-link">SQLException</a></code> - if anything goes wrong go ahead and let this percolate; Jdbi will handle it</dd>
 <dt>See Also:</dt>
 <dd>
 <ul class="tag-list-long">

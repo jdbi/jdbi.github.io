@@ -95,10 +95,10 @@ loadScripts(document, 'script');</script>
 <dd><code><a href="SimpleExtensionConfigurer.html" title="class in org.jdbi.v3.core.extension">SimpleExtensionConfigurer</a></code></dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="annotations"><a href="../../meta/Alpha.html" title="annotation in org.jdbi.v3.meta">@Alpha</a>
+<div class="type-signature"><span class="annotations"><a href="../../meta/Alpha.html" title="annotation interface in org.jdbi.v3.meta">@Alpha</a>
 </span><span class="modifiers">public interface </span><span class="element-name type-name-label">ExtensionConfigurer</span></div>
 <div class="block">Configures <a href="../config/ConfigRegistry.html" title="class in org.jdbi.v3.core.config"><code>ConfigRegistry</code></a> instances. Implementation classes
- are referenced from annotations that are marked with the <a href="annotation/UseExtensionConfigurer.html" title="annotation in org.jdbi.v3.core.extension.annotation"><code>UseExtensionConfigurer</code></a> annotation.
+ are referenced from annotations that are marked with the <a href="annotation/UseExtensionConfigurer.html" title="annotation interface in org.jdbi.v3.core.extension.annotation"><code>UseExtensionConfigurer</code></a> annotation.
  <br>
  Instances of this interface update the configuration used to execute a specific method e.g. to
  register row mapper needed for the execution of the underlying ExtensionHandler.</div>
@@ -122,16 +122,16 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#configureForMethod(org.jdbi.v3.core.config.ConfigRegistry,java.lang.annotation.Annotation,java.lang.Class,java.lang.reflect.Method)" class="member-name-link">configureForMethod</a><wbr>(<a href="../config/ConfigRegistry.html" title="class in org.jdbi.v3.core.config">ConfigRegistry</a>&nbsp;config,
- <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/annotation/Annotation.html" title="class or interface in java.lang.annotation" class="external-link">Annotation</a>&nbsp;annotation,
- <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;extensionType,
- <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/reflect/Method.html" title="class or interface in java.lang.reflect" class="external-link">Method</a>&nbsp;method)</code></div>
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/annotation/Annotation.html" title="class or interface in java.lang.annotation" class="external-link">Annotation</a>&nbsp;annotation,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;extensionType,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Method.html" title="class or interface in java.lang.reflect" class="external-link">Method</a>&nbsp;method)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Configures the config for the given annotation on a extension type method.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#configureForType(org.jdbi.v3.core.config.ConfigRegistry,java.lang.annotation.Annotation,java.lang.Class)" class="member-name-link">configureForType</a><wbr>(<a href="../config/ConfigRegistry.html" title="class in org.jdbi.v3.core.config">ConfigRegistry</a>&nbsp;config,
- <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/annotation/Annotation.html" title="class or interface in java.lang.annotation" class="external-link">Annotation</a>&nbsp;annotation,
- <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;extensionType)</code></div>
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/annotation/Annotation.html" title="class or interface in java.lang.annotation" class="external-link">Annotation</a>&nbsp;annotation,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;extensionType)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Updates configuration for the given annotation on an extension type.</div>
 </div>
@@ -153,8 +153,8 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="configureForType(org.jdbi.v3.core.config.ConfigRegistry,java.lang.annotation.Annotation,java.lang.Class)">
 <h3>configureForType</h3>
 <div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">configureForType</span><wbr><span class="parameters">(<a href="../config/ConfigRegistry.html" title="class in org.jdbi.v3.core.config">ConfigRegistry</a>&nbsp;config,
- <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/annotation/Annotation.html" title="class or interface in java.lang.annotation" class="external-link">Annotation</a>&nbsp;annotation,
- <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;extensionType)</span></div>
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/annotation/Annotation.html" title="class or interface in java.lang.annotation" class="external-link">Annotation</a>&nbsp;annotation,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;extensionType)</span></div>
 <div class="block">Updates configuration for the given annotation on an extension type.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -168,9 +168,9 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="configureForMethod(org.jdbi.v3.core.config.ConfigRegistry,java.lang.annotation.Annotation,java.lang.Class,java.lang.reflect.Method)">
 <h3>configureForMethod</h3>
 <div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">configureForMethod</span><wbr><span class="parameters">(<a href="../config/ConfigRegistry.html" title="class in org.jdbi.v3.core.config">ConfigRegistry</a>&nbsp;config,
- <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/annotation/Annotation.html" title="class or interface in java.lang.annotation" class="external-link">Annotation</a>&nbsp;annotation,
- <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;extensionType,
- <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/reflect/Method.html" title="class or interface in java.lang.reflect" class="external-link">Method</a>&nbsp;method)</span></div>
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/annotation/Annotation.html" title="class or interface in java.lang.annotation" class="external-link">Annotation</a>&nbsp;annotation,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;extensionType,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Method.html" title="class or interface in java.lang.reflect" class="external-link">Method</a>&nbsp;method)</span></div>
 <div class="block">Configures the config for the given annotation on a extension type method.</div>
 <dl class="notes">
 <dt>Parameters:</dt>

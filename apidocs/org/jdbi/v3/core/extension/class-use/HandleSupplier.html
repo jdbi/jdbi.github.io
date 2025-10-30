@@ -109,28 +109,28 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>default &lt;E&gt;&nbsp;E</code></div>
-<div class="col-second even-row-color"><span class="type-name-label">ExtensionFactory.</span><code><a href="../ExtensionFactory.html#attach(java.lang.Class,org.jdbi.v3.core.extension.HandleSupplier)" class="member-name-link">attach</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;E&gt;&nbsp;extensionType,
+<div class="col-second even-row-color"><span class="type-name-label">ExtensionFactory.</span><code><a href="../ExtensionFactory.html#attach(java.lang.Class,org.jdbi.v3.core.extension.HandleSupplier)" class="member-name-link">attach</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;E&gt;&nbsp;extensionType,
  <a href="../HandleSupplier.html" title="interface in org.jdbi.v3.core.extension">HandleSupplier</a>&nbsp;handleSupplier)</code></div>
 <div class="col-last even-row-color">
 <div class="block">Attaches an extension type.</div>
 </div>
 <div class="col-first odd-row-color"><code>&lt;E&gt;&nbsp;<a href="../ExtensionMetadata.ExtensionHandlerInvoker.html" title="class in org.jdbi.v3.core.extension">ExtensionMetadata.ExtensionHandlerInvoker</a></code></div>
 <div class="col-second odd-row-color"><span class="type-name-label">ExtensionMetadata.</span><code><a href="../ExtensionMetadata.html#createExtensionHandlerInvoker(E,java.lang.reflect.Method,org.jdbi.v3.core.extension.HandleSupplier,org.jdbi.v3.core.config.ConfigRegistry)" class="member-name-link">createExtensionHandlerInvoker</a><wbr>(E&nbsp;target,
- <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/reflect/Method.html" title="class or interface in java.lang.reflect" class="external-link">Method</a>&nbsp;method,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Method.html" title="class or interface in java.lang.reflect" class="external-link">Method</a>&nbsp;method,
  <a href="../HandleSupplier.html" title="interface in org.jdbi.v3.core.extension">HandleSupplier</a>&nbsp;handleSupplier,
  <a href="../../config/ConfigRegistry.html" title="class in org.jdbi.v3.core.config">ConfigRegistry</a>&nbsp;config)</code></div>
 <div class="col-last odd-row-color">
 <div class="block">Creates an <a href="../ExtensionMetadata.ExtensionHandlerInvoker.html" title="class in org.jdbi.v3.core.extension"><code>ExtensionMetadata.ExtensionHandlerInvoker</code></a> instance for a specific method.</div>
 </div>
-<div class="col-first even-row-color"><code>&lt;E&gt;&nbsp;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;E&gt;</code></div>
-<div class="col-second even-row-color"><span class="type-name-label">Extensions.</span><code><a href="../Extensions.html#findFor(java.lang.Class,org.jdbi.v3.core.extension.HandleSupplier)" class="member-name-link">findFor</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;E&gt;&nbsp;extensionType,
+<div class="col-first even-row-color"><code>&lt;E&gt;&nbsp;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;E&gt;</code></div>
+<div class="col-second even-row-color"><span class="type-name-label">Extensions.</span><code><a href="../Extensions.html#findFor(java.lang.Class,org.jdbi.v3.core.extension.HandleSupplier)" class="member-name-link">findFor</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;E&gt;&nbsp;extensionType,
  <a href="../HandleSupplier.html" title="interface in org.jdbi.v3.core.extension">HandleSupplier</a>&nbsp;handleSupplier)</code></div>
 <div class="col-last even-row-color">
 <div class="block">Create an extension instance if a factory accepts the extension type.</div>
 </div>
-<div class="col-first odd-row-color"><code><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></div>
+<div class="col-first odd-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></div>
 <div class="col-second odd-row-color"><span class="type-name-label">AttachedExtensionHandler.</span><code><a href="../AttachedExtensionHandler.html#invoke(org.jdbi.v3.core.extension.HandleSupplier,java.lang.Object...)" class="member-name-link">invoke</a><wbr>(<a href="../HandleSupplier.html" title="interface in org.jdbi.v3.core.extension">HandleSupplier</a>&nbsp;handleSupplier,
- <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>...&nbsp;args)</code></div>
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>...&nbsp;args)</code></div>
 <div class="col-last odd-row-color">
 <div class="block">Gets invoked to return a value for the method that this handler was is handling, on the attached target instance.</div>
 </div>
@@ -145,9 +145,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></div>
-<div class="col-second even-row-color"><span class="type-name-label">Handler.</span><code><a href="../../../sqlobject/Handler.html#invoke(java.lang.Object,java.lang.Object%5B%5D,org.jdbi.v3.core.extension.HandleSupplier)" class="member-name-link">invoke</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;target,
- <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>[]&nbsp;args,
+<div class="col-first even-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></div>
+<div class="col-second even-row-color"><span class="type-name-label">Handler.</span><code><a href="../../../sqlobject/Handler.html#invoke(java.lang.Object,java.lang.Object%5B%5D,org.jdbi.v3.core.extension.HandleSupplier)" class="member-name-link">invoke</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;target,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>[]&nbsp;args,
  <a href="../HandleSupplier.html" title="interface in org.jdbi.v3.core.extension">HandleSupplier</a>&nbsp;handleSupplier)</code></div>
 <div class="col-last even-row-color">
 <div class="block"><span class="deprecated-label">Deprecated, for removal: This API element is subject to removal in a future version.</span></div>
