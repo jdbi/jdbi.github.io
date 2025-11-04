@@ -532,7 +532,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.50.0-SNAPSHOT,</span>
-<span id="revdate">11/04/2025 09:55 -0800</span>
+<span id="revdate">11/04/2025 14:30 -0800</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -5979,7 +5979,7 @@ After the last row has been processed,
         })
     .values() <i class="conum" data-value="6"></i><b>(6)</b>
     .stream()
-    .collect(toList()); <i class="conum" data-value="7"></i><b>(7)</b></code></pre>
+    .toList(); <i class="conum" data-value="7"></i><b>(7)</b></code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -6051,7 +6051,7 @@ method makes it easy to reduce these joins into a stream of main elements.</p>
         }
         <i class="conum" data-value="2"></i><b>(2)</b>
     })
-    .collect(toList()); <i class="conum" data-value="3"></i><b>(3)</b></code></pre>
+    .toList(); <i class="conum" data-value="3"></i><b>(3)</b></code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -6142,7 +6142,7 @@ is a low-level API similar to <code>reduceRows()</code>, except it provides dire
         })
     .values()
     .stream()
-    .collect(toList());</code></pre>
+    .toList();</code></pre>
 </div>
 </div>
 </div>
@@ -16479,7 +16479,7 @@ The annotation may be used for method return types, or on <a href="./apidocs/org
 <div id="footer">
 <div id="footer-text">
 Version 3.50.0-SNAPSHOT<br>
-Last updated 11/04/2025 09:55 -0800
+Last updated 11/04/2025 14:30 -0800
 </div>
 </div>
 </body>
