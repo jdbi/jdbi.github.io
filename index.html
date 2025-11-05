@@ -532,7 +532,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.50.0-SNAPSHOT,</span>
-<span id="revdate">11/04/2025 14:30 -0800</span>
+<span id="revdate">11/04/2025 16:13 -0800</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -932,26 +932,26 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_eclipse_setup">20.2.3. Eclipse Setup</a></li>
 </ul>
 </li>
-<li><a href="#_graalvm_native_image">20.3. GraalVM Native Image</a></li>
-<li><a href="#_working_with_generic_types">20.4. Working with Generic Types</a>
+<li><a href="#_working_with_generic_types">20.3. Working with Generic Types</a>
 <ul class="sectlevel3">
-<li><a href="#_generictype">20.4.1. GenericType</a></li>
-<li><a href="#_the_generictypes_helper">20.4.2. The GenericTypes helper</a></li>
+<li><a href="#_generictype">20.3.1. GenericType</a></li>
+<li><a href="#_the_generictypes_helper">20.3.2. The GenericTypes helper</a></li>
 </ul>
 </li>
-<li><a href="#_namedargumentfinder">20.5. NamedArgumentFinder</a></li>
-<li><a href="#_jdbiconfig">20.6. JdbiConfig</a>
+<li><a href="#_namedargumentfinder">20.4. NamedArgumentFinder</a></li>
+<li><a href="#_jdbiconfig">20.5. JdbiConfig</a>
 <ul class="sectlevel3">
-<li><a href="#_creating_a_custom_jdbiconfig_type">20.6.1. Creating a custom JdbiConfig type</a></li>
+<li><a href="#_creating_a_custom_jdbiconfig_type">20.5.1. Creating a custom JdbiConfig type</a></li>
 </ul>
 </li>
-<li><a href="#_jdbiplugin">20.7. JdbiPlugin</a></li>
-<li><a href="#_statementcontext">20.8. StatementContext</a></li>
-<li><a href="#_templateengine">20.9. TemplateEngine</a></li>
-<li><a href="#_sqlparser">20.10. SqlParser</a></li>
-<li><a href="#_sqllogger">20.11. SqlLogger</a></li>
-<li><a href="#_resultproducer">20.12. ResultProducer</a></li>
-<li><a href="#generator">20.13. Jdbi SQL object code generator</a></li>
+<li><a href="#_jdbiplugin">20.6. JdbiPlugin</a></li>
+<li><a href="#_statementcontext">20.7. StatementContext</a></li>
+<li><a href="#_templateengine">20.8. TemplateEngine</a></li>
+<li><a href="#_sqlparser">20.9. SqlParser</a></li>
+<li><a href="#_sqllogger">20.10. SqlLogger</a></li>
+<li><a href="#_resultproducer">20.11. ResultProducer</a></li>
+<li><a href="#generator">20.12. Jdbi SQL object code generator</a></li>
+<li><a href="#_graalvm_native_image">20.13. GraalVM Native Image</a></li>
 <li><a href="#_handlecallbackdecorator">20.14. HandleCallbackDecorator</a>
 <ul class="sectlevel3">
 <li><a href="#_nesting_callbacks_with_managed_handles_and_transactions">20.14.1. Nesting Callbacks with managed Handles and Transactions</a></li>
@@ -15641,32 +15641,12 @@ At runtime, using reflection to find parameter names will return values like "ar
 </div>
 </div>
 <div class="sect2">
-<h3 id="_graalvm_native_image"><a class="anchor" href="#_graalvm_native_image"></a><a class="link" href="#_graalvm_native_image">20.3. GraalVM Native Image</a></h3>
-<div class="paragraph">
-<p>Jdbi supports building as part of a <code>native-image</code> application. If you use SqlObject to implement DAO interfaces,
-you&#8217;ll have to inform Graal ahead of time. For example, you would fill in <code>META-INF/native-image/&lt;groupId&gt;/&lt;artifactId&gt;/reachability-metadata.json</code></p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="json">{
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">reflection</span><span class="delimiter">&quot;</span></span>: [
-    {<span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>:{<span class="key"><span class="delimiter">&quot;</span><span class="content">proxy</span><span class="delimiter">&quot;</span></span>:[<span class="string"><span class="delimiter">&quot;</span><span class="content">com.foo.FooDao</span><span class="delimiter">&quot;</span></span>]}},
-    {<span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>:{<span class="key"><span class="delimiter">&quot;</span><span class="content">proxy</span><span class="delimiter">&quot;</span></span>:[<span class="string"><span class="delimiter">&quot;</span><span class="content">com.bar.BarDao</span><span class="delimiter">&quot;</span></span>]}}
-  ]
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Learn more about <a href="https://www.graalvm.org/reference-manual/native-image/" target="_blank" rel="noopener">GraalVM Native Image</a> and <a href="https://graalvm.github.io/native-build-tools/latest/" target="_blank" rel="noopener">Native Build Tools</a> on their respective websites.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_working_with_generic_types"><a class="anchor" href="#_working_with_generic_types"></a><a class="link" href="#_working_with_generic_types">20.4. Working with Generic Types</a></h3>
+<h3 id="_working_with_generic_types"><a class="anchor" href="#_working_with_generic_types"></a><a class="link" href="#_working_with_generic_types">20.3. Working with Generic Types</a></h3>
 <div class="paragraph">
 <p>Jdbi provides utility classes to make it easier to work with Java generic types.</p>
 </div>
 <div class="sect3">
-<h4 id="_generictype"><a class="anchor" href="#_generictype"></a><a class="link" href="#_generictype">20.4.1. GenericType</a></h4>
+<h4 id="_generictype"><a class="anchor" href="#_generictype"></a><a class="link" href="#_generictype">20.3.1. GenericType</a></h4>
 <div class="paragraph">
 <p><a href="./apidocs/org/jdbi/v3/core/generic/GenericType.html" target="_blank" rel="noopener">GenericType</a> represents a generic type signature that can be passed around in a type-safe way.</p>
 </div>
@@ -15696,7 +15676,7 @@ you&#8217;ll have to inform Graal ahead of time. For example, you would fill in 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_the_generictypes_helper"><a class="anchor" href="#_the_generictypes_helper"></a><a class="link" href="#_the_generictypes_helper">20.4.2. The GenericTypes helper</a></h4>
+<h4 id="_the_generictypes_helper"><a class="anchor" href="#_the_generictypes_helper"></a><a class="link" href="#_the_generictypes_helper">20.3.2. The GenericTypes helper</a></h4>
 <div class="paragraph">
 <p><a href="./apidocs/org/jdbi/v3/core/generic/GenericTypes.html" target="_blank" rel="noopener">GenericTypes</a> provides methods for working with Java generic types signatures.</p>
 </div>
@@ -15768,7 +15748,7 @@ GenericTypes.findGenericParameter(listOfInteger, <span class="predefined-type">C
 </div>
 </div>
 <div class="sect2">
-<h3 id="_namedargumentfinder"><a class="anchor" href="#_namedargumentfinder"></a><a class="link" href="#_namedargumentfinder">20.5. NamedArgumentFinder</a></h3>
+<h3 id="_namedargumentfinder"><a class="anchor" href="#_namedargumentfinder"></a><a class="link" href="#_namedargumentfinder">20.4. NamedArgumentFinder</a></h3>
 <div class="paragraph">
 <p>The <a href="./apidocs/org/jdbi/v3/core/argument/NamedArgumentFinder" target="_blank" rel="noopener">NamedArgumentFinder</a>
 interface, as its name suggests, finds arguments by name from some source.
@@ -15807,7 +15787,7 @@ methods are just creating and binding custom implementations of
 </div>
 </div>
 <div class="sect2">
-<h3 id="_jdbiconfig"><a class="anchor" href="#_jdbiconfig"></a><a class="link" href="#_jdbiconfig">20.6. JdbiConfig</a></h3>
+<h3 id="_jdbiconfig"><a class="anchor" href="#_jdbiconfig"></a><a class="link" href="#_jdbiconfig">20.5. JdbiConfig</a></h3>
 <div class="paragraph">
 <p>Configuration is managed by the
 <a href="./apidocs/org/jdbi/v3/core/config/ConfigRegistry.html" target="_blank" rel="noopener">ConfigRegistry</a> class.
@@ -15885,7 +15865,7 @@ Configuration objects should be implemented so that they are cheap to copy, for 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_creating_a_custom_jdbiconfig_type"><a class="anchor" href="#_creating_a_custom_jdbiconfig_type"></a><a class="link" href="#_creating_a_custom_jdbiconfig_type">20.6.1. Creating a custom JdbiConfig type</a></h4>
+<h4 id="_creating_a_custom_jdbiconfig_type"><a class="anchor" href="#_creating_a_custom_jdbiconfig_type"></a><a class="link" href="#_creating_a_custom_jdbiconfig_type">20.5.1. Creating a custom JdbiConfig type</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -15925,7 +15905,7 @@ E.g. RowMappers registry delegates to ColumnMappers registry, if it does not hav
 </div>
 </div>
 <div class="sect2">
-<h3 id="_jdbiplugin"><a class="anchor" href="#_jdbiplugin"></a><a class="link" href="#_jdbiplugin">20.7. JdbiPlugin</a></h3>
+<h3 id="_jdbiplugin"><a class="anchor" href="#_jdbiplugin"></a><a class="link" href="#_jdbiplugin">20.6. JdbiPlugin</a></h3>
 <div class="paragraph">
 <p>JdbiPlugin can be used to bundle bulk configuration.
 Plugins may be installed explicitly via <code>Jdbi.installPlugin(JdbiPlugin)</code>, or may be installed automagically from the classpath using the ServiceLoader mechanism via <code>installPlugins()</code>.</p>
@@ -15953,7 +15933,7 @@ Code with declared dependencies on the module it uses is more robust to refactor
 </div>
 </div>
 <div class="sect2">
-<h3 id="_statementcontext"><a class="anchor" href="#_statementcontext"></a><a class="link" href="#_statementcontext">20.8. StatementContext</a></h3>
+<h3 id="_statementcontext"><a class="anchor" href="#_statementcontext"></a><a class="link" href="#_statementcontext">20.7. StatementContext</a></h3>
 <div class="paragraph">
 <p>The <a href="./apidocs/org/jdbi/v3/core/statement/StatementContext.html" target="_blank" rel="noopener">StatementContext</a> class holds the state for all <a href="#_statement_types">statements</a>.
 It is a stateful object that should not be shared between threads.
@@ -15968,7 +15948,7 @@ They rarely need to make changes to it.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_templateengine"><a class="anchor" href="#_templateengine"></a><a class="link" href="#_templateengine">20.9. TemplateEngine</a></h3>
+<h3 id="_templateengine"><a class="anchor" href="#_templateengine"></a><a class="link" href="#_templateengine">20.8. TemplateEngine</a></h3>
 <div class="paragraph">
 <p>Jdbi uses a <a href="./apidocs/org/jdbi/v3/core/statement/TemplateEngine.html" target="_blank" rel="noopener">TemplateEngine</a>
 implementation to render templates into SQL.
@@ -16040,7 +16020,7 @@ Depending on the implementation, defined attributes may be resolved at parse tim
 </div>
 </div>
 <div class="sect2">
-<h3 id="_sqlparser"><a class="anchor" href="#_sqlparser"></a><a class="link" href="#_sqlparser">20.10. SqlParser</a></h3>
+<h3 id="_sqlparser"><a class="anchor" href="#_sqlparser"></a><a class="link" href="#_sqlparser">20.9. SqlParser</a></h3>
 <div class="paragraph">
 <p>After the SQL template has been rendered, Jdbi uses a <a href="./apidocs/org/jdbi/v3/core/statement/SqlParser.html" target="_blank" rel="noopener">SqlParser</a> to parse out any named parameters from the SQL statement.
 This Produces a <a href="./apidocs/org/jdbi/v3/core/statement/ParsedSql.html" target="_blank" rel="noopener">ParsedSql</a> object, which contains all the information Jdbi needs to bind parameters and execute the SQL statement.</p>
@@ -16091,7 +16071,7 @@ The default parsers try to ignore parameter-like constructions inside string lit
 </div>
 </div>
 <div class="sect2">
-<h3 id="_sqllogger"><a class="anchor" href="#_sqllogger"></a><a class="link" href="#_sqllogger">20.11. SqlLogger</a></h3>
+<h3 id="_sqllogger"><a class="anchor" href="#_sqllogger"></a><a class="link" href="#_sqllogger">20.10. SqlLogger</a></h3>
 <div class="paragraph">
 <p>The <a href="./apidocs/org/jdbi/v3/core/statement/SqlLogger.html" target="_blank" rel="noopener">SqlLogger</a> interface is called before and after executing each statement, and given the current <code>StatementContext</code>, to log any relevant information desired:
 mainly the query in various compilation stages, attributes and bindings, and important timestamps.</p>
@@ -16102,7 +16082,7 @@ implementation that logs all executed statements for debugging.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_resultproducer"><a class="anchor" href="#_resultproducer"></a><a class="link" href="#_resultproducer">20.12. ResultProducer</a></h3>
+<h3 id="_resultproducer"><a class="anchor" href="#_resultproducer"></a><a class="link" href="#_resultproducer">20.11. ResultProducer</a></h3>
 <div class="paragraph">
 <p>A <strong>ResultProducer</strong> takes a lazily supplied <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/PreparedStatement.html" target="_blank" rel="noopener">PreparedStatement</a> and produces a result.
 The most common producer path, <strong>execute()</strong>, retrieves the <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/ResultSet.html" target="_blank" rel="noopener">ResultSet</a> over the query results and then uses a
@@ -16132,11 +16112,46 @@ The most common producer path, <strong>execute()</strong>, retrieves the <a href
 </div>
 </div>
 <div class="sect2">
-<h3 id="generator"><a class="anchor" href="#generator"></a><a class="link" href="#generator">20.13. Jdbi SQL object code generator</a></h3>
+<h3 id="generator"><a class="anchor" href="#generator"></a><a class="link" href="#generator">20.12. Jdbi SQL object code generator</a></h3>
 <div class="paragraph">
 <p>Jdbi includes an experimental SqlObject code generator.
 If you include the <code>jdbi3-generator</code> artifact as an annotation processor and annotate your SqlObject definitions with <code>@GenerateSqlObject</code>, the generator will produce an implementing class and avoids using
 <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Proxy.html" target="_blank" rel="noopener">Java proxy</a> instances.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_graalvm_native_image"><a class="anchor" href="#_graalvm_native_image"></a><a class="link" href="#_graalvm_native_image">20.13. GraalVM Native Image</a></h3>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Java native is still very much under development. The current Jdbi support is only for GraalVM 25 or newer as the metadata format has changed between the last LTS (Java 21) and the current LTS (Java 25). Jdbi only supports Java 25+.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Jdbi supports building as part of a <code>native-image</code> application. If you use SqlObject to implement DAO interfaces,
+you&#8217;ll have to inform the Graal VM ahead of time (during the image build process).</p>
+</div>
+<div class="paragraph">
+<p>For example, you would fill in <code>META-INF/native-image/&lt;groupId&gt;/&lt;artifactId&gt;/reachability-metadata.json</code></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="json">{
+  <span class="key"><span class="delimiter">&quot;</span><span class="content">reflection</span><span class="delimiter">&quot;</span></span>: [
+    {<span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>:{<span class="key"><span class="delimiter">&quot;</span><span class="content">proxy</span><span class="delimiter">&quot;</span></span>:[<span class="string"><span class="delimiter">&quot;</span><span class="content">com.foo.FooDao</span><span class="delimiter">&quot;</span></span>]}},
+    {<span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>:{<span class="key"><span class="delimiter">&quot;</span><span class="content">proxy</span><span class="delimiter">&quot;</span></span>:[<span class="string"><span class="delimiter">&quot;</span><span class="content">com.bar.BarDao</span><span class="delimiter">&quot;</span></span>]}}
+  ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Learn more about <a href="https://www.graalvm.org/reference-manual/native-image/" target="_blank" rel="noopener">GraalVM Native Image</a> and <a href="https://graalvm.github.io/native-build-tools/latest/" target="_blank" rel="noopener">Native Build Tools</a> on their respective websites.</p>
 </div>
 </div>
 <div class="sect2">
@@ -16479,7 +16494,7 @@ The annotation may be used for method return types, or on <a href="./apidocs/org
 <div id="footer">
 <div id="footer-text">
 Version 3.50.0-SNAPSHOT<br>
-Last updated 11/04/2025 14:30 -0800
+Last updated 11/04/2025 16:13 -0800
 </div>
 </div>
 </body>
