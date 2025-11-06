@@ -531,13 +531,13 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div id="header">
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
-<span id="revnumber">version 3.50.1-SNAPSHOT,</span>
-<span id="revdate">11/06/2025 08:07 -0800</span>
+<span id="revnumber">version 3.51.0-SNAPSHOT,</span>
+<span id="revdate">11/06/2025 10:27 -0800</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_development_documentation_3_50_1_snapshot">Development documentation (3.50.1-SNAPSHOT)</a>
+<li><a href="#_development_documentation_3_51_0_snapshot">Development documentation (3.51.0-SNAPSHOT)</a>
 <ul class="sectlevel2">
 <li><a href="#_release_documentation">Release documentation</a></li>
 </ul>
@@ -981,7 +981,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </div>
 </div>
 <div class="sect1">
-<h2 id="_development_documentation_3_50_1_snapshot"><a class="anchor" href="#_development_documentation_3_50_1_snapshot"></a><a class="link" href="#_development_documentation_3_50_1_snapshot">Development documentation (3.50.1-SNAPSHOT)</a></h2>
+<h2 id="_development_documentation_3_51_0_snapshot"><a class="anchor" href="#_development_documentation_3_51_0_snapshot"></a><a class="link" href="#_development_documentation_3_51_0_snapshot">Development documentation (3.51.0-SNAPSHOT)</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>This is the documentation for the current development state of Jdbi.
@@ -1592,7 +1592,7 @@ In that case, please file an issue on the <a href="https://github.com/jdbi/jdbi/
     <span class="tag">&lt;dependency&gt;</span>
         <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
         <span class="tag">&lt;artifactId&gt;</span>jdbi3-core<span class="tag">&lt;/artifactId&gt;</span>
-        <span class="tag">&lt;version&gt;</span>3.50.1-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+        <span class="tag">&lt;version&gt;</span>3.51.0-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
     <span class="tag">&lt;/dependency&gt;</span>
 <span class="tag">&lt;/dependencies&gt;</span></code></pre>
 </div>
@@ -1603,7 +1603,7 @@ In that case, please file an issue on the <a href="https://github.com/jdbi/jdbi/
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
-    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-core:3.50.1-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-core:3.51.0-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
 }</code></pre>
 </div>
 </div>
@@ -1625,7 +1625,7 @@ There is no guarantee that mixing versions will work.</p>
             <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
             <span class="tag">&lt;artifactId&gt;</span>jdbi3-bom<span class="tag">&lt;/artifactId&gt;</span>
             <span class="tag">&lt;type&gt;</span>pom<span class="tag">&lt;/type&gt;</span>
-            <span class="tag">&lt;version&gt;</span>3.50.1-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+            <span class="tag">&lt;version&gt;</span>3.51.0-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
             <span class="tag">&lt;scope&gt;</span>import<span class="tag">&lt;/scope&gt;</span>
         <span class="tag">&lt;/dependency&gt;</span>
     <span class="tag">&lt;/dependencies&gt;</span>
@@ -1655,7 +1655,7 @@ There is no guarantee that mixing versions will work.</p>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
     <span class="comment">// Load bill of materials (BOM) for Jdbi.</span>
-    implementation(platform(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-bom:3.50.1-SNAPSHOT</span><span class="delimiter">&quot;</span></span>))
+    implementation(platform(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-bom:3.51.0-SNAPSHOT</span><span class="delimiter">&quot;</span></span>))
 }</code></pre>
 </div>
 </div>
@@ -7252,7 +7252,7 @@ SQL Objects are implemented as an extension to the core API using the
     <span class="tag">&lt;dependency&gt;</span>
         <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
         <span class="tag">&lt;artifactId&gt;</span>jdbi3-sqlobject<span class="tag">&lt;/artifactId&gt;</span>
-        <span class="tag">&lt;version&gt;</span>3.50.1-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+        <span class="tag">&lt;version&gt;</span>3.51.0-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
     <span class="tag">&lt;/dependency&gt;</span>
 <span class="tag">&lt;/dependencies&gt;</span></code></pre>
 </div>
@@ -7263,7 +7263,7 @@ SQL Objects are implemented as an extension to the core API using the
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
-    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-sqlobject:3.50.1-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-sqlobject:3.51.0-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
 }</code></pre>
 </div>
 </div>
@@ -11259,7 +11259,7 @@ Supports <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/j
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>jdbi3-guava<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>3.50.1-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.51.0-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
@@ -11269,7 +11269,7 @@ Supports <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/j
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
-    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-guava:3.50.1-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-guava:3.51.0-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
 }</code></pre>
 </div>
 </div>
@@ -11350,7 +11350,7 @@ You do <strong>not</strong> need to install it yourself or include the <code>jdb
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>jdbi3-jackson2<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>3.50.1-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.51.0-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
@@ -11360,7 +11360,7 @@ You do <strong>not</strong> need to install it yourself or include the <code>jdb
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
-    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-jackson2:3.50.1-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-jackson2:3.51.0-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
 }</code></pre>
 </div>
 </div>
@@ -11388,7 +11388,7 @@ jdbi.getConfig(Jackson2Config.class).setView(ApiProperty.class);</code></pre>
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>jdbi3-gson2<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>3.50.1-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.51.0-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
@@ -11398,7 +11398,7 @@ jdbi.getConfig(Jackson2Config.class).setView(ApiProperty.class);</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
-    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-gson2:3.50.1-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-gson2:3.51.0-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
 }</code></pre>
 </div>
 </div>
@@ -11424,7 +11424,7 @@ To use it, add a dependency:</p>
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>jdbi3-moshi<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>3.50.1-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.51.0-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
@@ -11434,7 +11434,7 @@ To use it, add a dependency:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
-    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-moshi:3.50.1-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-moshi:3.51.0-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
 }</code></pre>
 </div>
 </div>
@@ -11605,7 +11605,7 @@ We do support the configurable <code>get</code>, <code>is</code>, and <code>set<
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>jdbi3-jodatime2<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>3.50.1-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.51.0-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
@@ -11615,7 +11615,7 @@ We do support the configurable <code>get</code>, <code>is</code>, and <code>set<
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
-    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-jodatime2:3.50.1-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-jodatime2:3.51.0-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
 }</code></pre>
 </div>
 </div>
@@ -12469,7 +12469,7 @@ This can be done by using a custom annotation for both the Jdbi element configur
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>jdbi3-jpa<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>3.50.1-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.51.0-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
@@ -12479,7 +12479,7 @@ This can be done by using a custom annotation for both the Jdbi element configur
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
-    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-jpa:3.50.1-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-jpa:3.51.0-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
 }</code></pre>
 </div>
 </div>
@@ -12535,7 +12535,7 @@ Default parameter values in the constructor are used if the parameter type is no
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>jdbi3-kotlin<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>3.50.1-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.51.0-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
@@ -12545,7 +12545,7 @@ Default parameter values in the constructor are used if the parameter type is no
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
-    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-kotlin:3.50.1-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-kotlin:3.51.0-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
 }</code></pre>
 </div>
 </div>
@@ -12595,8 +12595,7 @@ When binding object properties (e.g. with <a href="./apidocs/org/jdbi/v3/core/st
 </table>
 </div>
 <div class="paragraph">
-<p>If you load all Jdbi plugins via <code>Jdbi.installPlugins()</code> this plugin will be discovered and registered automatically.
-Otherwise, you can attach it using
+<p>You can install Kotlin support like:
 <code>Jdbi.installPlugin(KotlinPlugin())</code>.</p>
 </div>
 <div class="paragraph">
@@ -12771,7 +12770,7 @@ val result = handle.createQuery(&quot;SELECT id, planet, moon FROM orbits&quot;)
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>jdbi3-kotlin-sqlobject<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>3.50.1-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.51.0-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
@@ -12781,7 +12780,7 @@ val result = handle.createQuery(&quot;SELECT id, planet, moon FROM orbits&quot;)
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
-    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-kotlin-sqlobject:3.50.1-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-kotlin-sqlobject:3.51.0-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
 }</code></pre>
 </div>
 </div>
@@ -12799,8 +12798,7 @@ val result = handle.createQuery(&quot;SELECT id, planet, moon FROM orbits&quot;)
 No annotations are needed.</p>
 </div>
 <div class="paragraph">
-<p>If you load all Jdbi plugins via <code>Jdbi.installPlugins()</code> this plugin will be discovered and registered automatically.
-Otherwise, you can attach the plugin via: <code>Jdbi.installPlugin(KotlinSqlObjectPlugin())</code>.</p>
+<p>You can install this plugin via: <code>Jdbi.installPlugin(KotlinSqlObjectPlugin())</code>.</p>
 </div>
 <div class="paragraph">
 <p>An example from the test class:</p>
@@ -13074,7 +13072,7 @@ lombok.copyableAnnotations += org.jdbi.v3.core.mapper.reflect.JdbiConstructor</c
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>jdbi3-oracle12<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>3.50.1-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.51.0-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
@@ -13084,7 +13082,7 @@ lombok.copyableAnnotations += org.jdbi.v3.core.mapper.reflect.JdbiConstructor</c
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
-    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-oracle12:3.50.1-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-oracle12:3.51.0-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
 }</code></pre>
 </div>
 </div>
@@ -13110,7 +13108,7 @@ to get the returned DML.</p>
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>jdbi3-postgres<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>3.50.1-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.51.0-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
@@ -13120,7 +13118,7 @@ to get the returned DML.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
-    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-postgres:3.50.1-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-postgres:3.51.0-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
 }</code></pre>
 </div>
 </div>
@@ -13311,7 +13309,7 @@ It integrates Jdbi and Spring / Spring Boot, including JTA support.</p>
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>jdbi3-spring<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>3.50.1-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.51.0-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
@@ -13321,7 +13319,7 @@ It integrates Jdbi and Spring / Spring Boot, including JTA support.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
-    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-spring:3.50.1-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-spring:3.51.0-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
 }</code></pre>
 </div>
 </div>
@@ -13420,19 +13418,7 @@ Alternatively, use standard JSR-330 <code>@Inject</code> annotations on the targ
 <div class="sect4">
 <h5 id="_installing_plugins"><a class="anchor" href="#_installing_plugins"></a><a class="link" href="#_installing_plugins">Installing Plugins</a></h5>
 <div class="paragraph">
-<p>Plugins may be automatically installed by scanning the classpath for
-<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ServiceLoader.html" target="_blank" rel="noopener">ServiceLoader</a> manifests.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;bean</span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">jdbi</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi.v3.spring.JdbiFactoryBean</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
-  ...
-  <span class="tag">&lt;property</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">autoInstallPlugins</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">value</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">true</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
-<span class="tag">&lt;/bean&gt;</span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Plugins may also be installed explicitly:</p>
+<p>Plugins may be installed:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13442,23 +13428,6 @@ Alternatively, use standard JSR-330 <code>@Inject</code> annotations on the targ
     <span class="tag">&lt;list&gt;</span>
       <span class="tag">&lt;bean</span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi.v3.sqlobject.SqlObjectPlugin</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
       <span class="tag">&lt;bean</span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi.v3.guava.GuavaPlugin</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
-    <span class="tag">&lt;/list&gt;</span>
-  <span class="tag">&lt;/property&gt;</span>
-<span class="tag">&lt;/bean&gt;</span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Not all plugins are automatically installable.
-In these situations, you can auto-install some plugins and manually install the rest:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;bean</span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">jdbi</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi.v3.spring.JdbiFactoryBean</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
-  ...
-  <span class="tag">&lt;property</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">autoInstallPlugins</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">value</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">true</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
-  <span class="tag">&lt;property</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">plugins</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
-    <span class="tag">&lt;list&gt;</span>
-      <span class="tag">&lt;bean</span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi.v3.core.h2.H2DatabasePlugin</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
     <span class="tag">&lt;/list&gt;</span>
   <span class="tag">&lt;/property&gt;</span>
 <span class="tag">&lt;/bean&gt;</span></code></pre>
@@ -13595,7 +13564,7 @@ Beans created like this will also synchronize with JTA.</p>
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>jdbi3-sqlite<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>3.50.1-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.51.0-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
@@ -13605,7 +13574,7 @@ Beans created like this will also synchronize with JTA.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
-    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-sqlite:3.50.1-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-sqlite:3.51.0-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
 }</code></pre>
 </div>
 </div>
@@ -13635,7 +13604,7 @@ Beans created like this will also synchronize with JTA.</p>
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>jdbi3-stringtemplate4<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>3.50.1-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.51.0-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
@@ -13645,7 +13614,7 @@ Beans created like this will also synchronize with JTA.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
-    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-stringtemplate4:3.50.1-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-stringtemplate4:3.51.0-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
 }</code></pre>
 </div>
 </div>
@@ -13805,7 +13774,7 @@ These annotations are mutually exclusive and the behavior, if these annotations 
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>jdbi3-freemarker<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>3.50.1-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.51.0-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
@@ -13815,7 +13784,7 @@ These annotations are mutually exclusive and the behavior, if these annotations 
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
-    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-freemarker:3.50.1-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-freemarker:3.51.0-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
 }</code></pre>
 </div>
 </div>
@@ -13987,7 +13956,7 @@ If you select more columns than the arity of the projection the columns up to th
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>jdbi3-vavr<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>3.50.1-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.51.0-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
@@ -13997,7 +13966,7 @@ If you select more columns than the arity of the projection the columns up to th
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
-    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-vavr:3.50.1-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-vavr:3.51.0-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
 }</code></pre>
 </div>
 </div>
@@ -15911,7 +15880,7 @@ E.g. RowMappers registry delegates to ColumnMappers registry, if it does not hav
 <h3 id="_jdbiplugin"><a class="anchor" href="#_jdbiplugin"></a><a class="link" href="#_jdbiplugin">20.6. JdbiPlugin</a></h3>
 <div class="paragraph">
 <p>JdbiPlugin can be used to bundle bulk configuration.
-Plugins may be installed explicitly via <code>Jdbi.installPlugin(JdbiPlugin)</code>, or may be installed automagically from the classpath using the ServiceLoader mechanism via <code>installPlugins()</code>.</p>
+Plugins should be installed via <code>Jdbi.installPlugin(JdbiPlugin)</code>.</p>
 </div>
 <div class="paragraph">
 <p>Jars may provide a file in <code>META-INF/services/org.jdbi.v3.core.spi.JdbiPlugin</code>
@@ -16496,8 +16465,8 @@ The annotation may be used for method return types, or on <a href="./apidocs/org
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 3.50.1-SNAPSHOT<br>
-Last updated 11/06/2025 08:07 -0800
+Version 3.51.0-SNAPSHOT<br>
+Last updated 11/06/2025 10:27 -0800
 </div>
 </div>
 </body>
