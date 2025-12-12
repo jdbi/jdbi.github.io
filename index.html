@@ -532,7 +532,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.51.1-SNAPSHOT,</span>
-<span id="revdate">12/10/2025 16:03 -0800</span>
+<span id="revdate">12/12/2025 09:53 -0800</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -13510,7 +13510,7 @@ Alternatively, use standard JSR-330 <code>@Inject</code> annotations on the targ
 <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Configuration</span>
 <span class="directive">public</span> <span class="type">class</span> <span class="class">JdbiConfiguration</span> {
     <span class="annotation">@Bean</span>
-    <span class="directive">public</span> Jdbi jdbi(<span class="predefined-type">DataSource</span> ds) {
+    <span class="directive">public</span> Jdbi jdbi(<span class="predefined-type">DataSource</span> dataSource) {
         ConnectionFactory cf = <span class="keyword">new</span> SpringConnectionFactory(dataSource); <i class="conum" data-value="1"></i><b>(1)</b>
         <span class="directive">final</span> Jdbi jdbi = Jdbi.create(cf);
         <span class="comment">/* additional configuration goes here */</span>
@@ -16513,7 +16513,7 @@ The annotation may be used for method return types, or on <a href="./apidocs/org
 <div id="footer">
 <div id="footer-text">
 Version 3.51.1-SNAPSHOT<br>
-Last updated 12/10/2025 16:03 -0800
+Last updated 12/12/2025 09:53 -0800
 </div>
 </div>
 </body>
