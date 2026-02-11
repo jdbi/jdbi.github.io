@@ -70,6 +70,8 @@ loadScripts(document, 'script');</script>
 <li><a href="#getSerializationView()" tabindex="0">getSerializationView()</a></li>
 <li><a href="#setDeserializationView(java.lang.Class)" tabindex="0">setDeserializationView(Class)</a></li>
 <li><a href="#getDeserializationView()" tabindex="0">getDeserializationView()</a></li>
+<li><a href="#setUseStaticType(boolean)" tabindex="0">setUseStaticType(boolean)</a></li>
+<li><a href="#isUseStaticType()" tabindex="0">isUseStaticType()</a></li>
 <li><a href="#createCopy()" tabindex="0">createCopy()</a></li>
 </ol>
 </li>
@@ -142,20 +144,28 @@ implements <a href="../core/config/JdbiConfig.html" title="interface in org.jdbi
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the current <code>@JsonView</code> used for serialization.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Jackson2Config.html" title="class in org.jdbi.v3.jackson2">Jackson2Config</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setDeserializationView(java.lang.Class)" class="member-name-link">setDeserializationView</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;deserializationView)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isUseStaticType()" class="member-name-link">isUseStaticType</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Jackson2Config.html" title="class in org.jdbi.v3.jackson2">Jackson2Config</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setDeserializationView(java.lang.Class)" class="member-name-link">setDeserializationView</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;deserializationView)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Set the <code>@JsonView</code> used to deserialize.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Jackson2Config.html" title="class in org.jdbi.v3.jackson2">Jackson2Config</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setMapper(com.fasterxml.jackson.databind.ObjectMapper)" class="member-name-link">setMapper</a><wbr>(com.fasterxml.jackson.databind.ObjectMapper&nbsp;mapper)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Jackson2Config.html" title="class in org.jdbi.v3.jackson2">Jackson2Config</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setMapper(com.fasterxml.jackson.databind.ObjectMapper)" class="member-name-link">setMapper</a><wbr>(com.fasterxml.jackson.databind.ObjectMapper&nbsp;mapper)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Set the <code>ObjectMapper</code> to use for json conversion.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Jackson2Config.html" title="class in org.jdbi.v3.jackson2">Jackson2Config</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setSerializationView(java.lang.Class)" class="member-name-link">setSerializationView</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;serializationView)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Jackson2Config.html" title="class in org.jdbi.v3.jackson2">Jackson2Config</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setSerializationView(java.lang.Class)" class="member-name-link">setSerializationView</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;serializationView)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Set the <code>@JsonView</code> used to serialize.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Jackson2Config.html" title="class in org.jdbi.v3.jackson2">Jackson2Config</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setUseStaticType(boolean)" class="member-name-link">setUseStaticType</a><wbr>(boolean&nbsp;useStaticType)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Use static type provided for serialization.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Jackson2Config.html" title="class in org.jdbi.v3.jackson2">Jackson2Config</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setView(java.lang.Class)" class="member-name-link">setView</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;view)</code></div>
@@ -293,6 +303,34 @@ implements <a href="../core/config/JdbiConfig.html" title="interface in org.jdbi
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the current <code>@JsonView</code> used for deserialization.</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="setUseStaticType(boolean)">
+<h3>setUseStaticType</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Jackson2Config.html" title="class in org.jdbi.v3.jackson2">Jackson2Config</a></span>&nbsp;<span class="element-name">setUseStaticType</span><wbr><span class="parameters">(boolean&nbsp;useStaticType)</span></div>
+<div class="block">Use static type provided for serialization. Better performance and supports generic container types,
+but inhibits discovery of custom polymorphic types.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>useStaticType</code> - whether to prefer using static type information</dd>
+<dt>Returns:</dt>
+<dd>this</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="isUseStaticType()">
+<h3>isUseStaticType</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isUseStaticType</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>whether Jackson prefers to use the static type instaed of dynamic type</dd>
 </dl>
 </div>
 </section>
