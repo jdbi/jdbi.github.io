@@ -532,7 +532,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.51.1-SNAPSHOT,</span>
-<span id="revdate">02/11/2026 18:14 -0800</span>
+<span id="revdate">02/14/2026 18:50 -0800</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -12538,6 +12538,46 @@ This can be done by using a custom annotation for both the Jdbi element configur
 </div>
 </div>
 <div class="paragraph">
+<p>Annotate your entity with JPA annotations:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">import</span> <span class="include">javax.persistence.Column</span>;
+<span class="keyword">import</span> <span class="include">javax.persistence.Entity</span>;
+
+<span class="annotation">@Entity</span>
+<span class="directive">public</span> <span class="type">class</span> <span class="class">Something</span> {
+    <span class="annotation">@Column</span> <span class="directive">private</span> <span class="type">int</span> id;
+    <span class="annotation">@Column</span> <span class="directive">private</span> <span class="predefined-type">String</span> name;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The entity type will be automatically mapped when querying:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">Something result = handle.select(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from Something where id = ?</span><span class="delimiter">&quot;</span></span>, id)
+    .mapTo(Something.class)
+    .one();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Use <a href="./apidocs/org/jdbi/v3/jpa/BindJpa.html" target="_blank" rel="noopener">@BindJpa</a> instead of <code>@BindBean</code> to bind annotated classes in SQL Object interfaces:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">SomethingDAO</span> {
+
+    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select * from Something where id = :id</span><span class="delimiter">&quot;</span></span>)
+    Something get(<span class="annotation">@Bind</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>) <span class="type">long</span> id);
+
+    <span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">update something set name = :s.name where id = :s.id</span><span class="delimiter">&quot;</span></span>)
+    <span class="type">void</span> update(<span class="annotation">@BindJpa</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">s</span><span class="delimiter">&quot;</span></span>) Something something);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
 <p>Honestly though&#8230;&#8203; just tear off the bandage and switch to Jdbi proper.</p>
 </div>
 </div>
@@ -16513,7 +16553,7 @@ The annotation may be used for method return types, or on <a href="./apidocs/org
 <div id="footer">
 <div id="footer-text">
 Version 3.51.1-SNAPSHOT<br>
-Last updated 02/11/2026 18:14 -0800
+Last updated 02/14/2026 18:50 -0800
 </div>
 </div>
 </body>
