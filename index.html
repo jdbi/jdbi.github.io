@@ -532,7 +532,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.52.0-SNAPSHOT,</span>
-<span id="revdate">02/15/2026 16:36 -0800</span>
+<span id="revdate">02/16/2026 21:52 -0800</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -754,16 +754,17 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_other_sql_object_annotations">13.6. Other SQL Object annotations</a>
 <ul class="sectlevel3">
 <li><a href="#_definition">13.6.1. @Definition</a></li>
-<li><a href="#sqlupdate-getgeneratedkeys">13.6.2. @GetGeneratedKeys</a></li>
-<li><a href="#sqllocator">13.6.3. @SqlLocator</a></li>
-<li><a href="#_createsqlobject">13.6.4. @CreateSqlObject</a></li>
-<li><a href="#_timestamped">13.6.5. @Timestamped</a></li>
-<li><a href="#_singlevalue">13.6.6. @SingleValue</a></li>
-<li><a href="#_annotations_for_mapkv_results">13.6.7. Annotations for Map&lt;K,V&gt; Results</a></li>
-<li><a href="#_userowreducer">13.6.8. @UseRowReducer</a></li>
-<li><a href="#_registercollector_and_registercollectorfactory">13.6.9. @RegisterCollector and @RegisterCollectorFactory</a></li>
-<li><a href="#_other_sql_object_annotations_2">13.6.10. Other SQL Object annotations</a></li>
-<li><a href="#_annotations_and_inheritance">13.6.11. Annotations and Inheritance</a></li>
+<li><a href="#_definelist">13.6.2. @DefineList</a></li>
+<li><a href="#sqlupdate-getgeneratedkeys">13.6.3. @GetGeneratedKeys</a></li>
+<li><a href="#sqllocator">13.6.4. @SqlLocator</a></li>
+<li><a href="#_createsqlobject">13.6.5. @CreateSqlObject</a></li>
+<li><a href="#_timestamped">13.6.6. @Timestamped</a></li>
+<li><a href="#_singlevalue">13.6.7. @SingleValue</a></li>
+<li><a href="#_annotations_for_mapkv_results">13.6.8. Annotations for Map&lt;K,V&gt; Results</a></li>
+<li><a href="#_userowreducer">13.6.9. @UseRowReducer</a></li>
+<li><a href="#_registercollector_and_registercollectorfactory">13.6.10. @RegisterCollector and @RegisterCollectorFactory</a></li>
+<li><a href="#_other_sql_object_annotations_2">13.6.11. Other SQL Object annotations</a></li>
+<li><a href="#_annotations_and_inheritance">13.6.12. Annotations and Inheritance</a></li>
 </ul>
 </li>
 <li><a href="#_combining_sql_object_and_the_core_api">13.7. Combining SQL Object and the core API</a>
@@ -9099,7 +9100,64 @@ The value will default to the result of calling the method or getting the field.
 </div>
 </div>
 <div class="sect3">
-<h4 id="sqlupdate-getgeneratedkeys"><a class="anchor" href="#sqlupdate-getgeneratedkeys"></a><a class="link" href="#sqlupdate-getgeneratedkeys">13.6.2. @GetGeneratedKeys</a></h4>
+<h4 id="_definelist"><a class="anchor" href="#_definelist"></a><a class="link" href="#_definelist">13.6.2. @DefineList</a></h4>
+<div class="paragraph">
+<p>The <a href="./apidocs/org/jdbi/v3/sqlobject/customizer/DefineList.html" target="_blank" rel="noopener">@DefineList</a> annotation converts an array or <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" target="_blank" rel="noopener">List</a> argument into a comma-separated string and defines it as a template attribute.
+This is useful for dynamically specifying column names or other SQL fragments that cannot be used as bound parameters.</p>
+</div>
+<div class="paragraph">
+<p><code>@DefineList</code> uses a template placeholder (the <code>&lt;name&gt;</code> notation) similar to <a href="./apidocs/org/jdbi/v3/sqlobject/customizer/Define.html" target="_blank" rel="noopener">@Define</a>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
+    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">select &lt;columns&gt; from &lt;table&gt; where id = :id</span><span class="delimiter">&quot;</span></span>)
+    Something findById(<span class="annotation">@DefineList</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">columns</span><span class="delimiter">&quot;</span></span>) <span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt; columns,
+                       <span class="annotation">@Define</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">table</span><span class="delimiter">&quot;</span></span>) <span class="predefined-type">String</span> table,
+                       <span class="annotation">@Bind</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>) <span class="type">long</span> id);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It can be combined with <a href="./apidocs/org/jdbi/v3/sqlobject/customizer/BindList.html" target="_blank" rel="noopener">@BindList</a> to dynamically define both the column list and the values:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
+    <span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into &lt;table&gt; (&lt;columns&gt;) values (&lt;values&gt;)</span><span class="delimiter">&quot;</span></span>)
+    <span class="type">void</span> insert(<span class="annotation">@Define</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">table</span><span class="delimiter">&quot;</span></span>) <span class="predefined-type">String</span> table,
+                <span class="annotation">@DefineList</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">columns</span><span class="delimiter">&quot;</span></span>) <span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt; columns,
+                <span class="annotation">@BindList</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">values</span><span class="delimiter">&quot;</span></span>) <span class="predefined-type">List</span>&lt;<span class="predefined-type">Object</span>&gt; values);
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Unlike bound parameters, defined attributes are inserted directly into the SQL statement without escaping or sanitization. <strong>Passing untrusted input through <code>@DefineList</code> may make your application vulnerable to SQL injection.</strong> Only use values that are under application control such as column or table names defined in code.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+An empty list or <code>null</code> elements in the list will result in an <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" target="_blank" rel="noopener">IllegalArgumentException</a>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="sqlupdate-getgeneratedkeys"><a class="anchor" href="#sqlupdate-getgeneratedkeys"></a><a class="link" href="#sqlupdate-getgeneratedkeys">13.6.3. @GetGeneratedKeys</a></h4>
 <div class="paragraph">
 <p>Some SQL statements will cause data to be generated on your behalf at the database, e.g. a table with an auto-generated primary key, or a primary key selected from a sequence.
 The <a href="./apidocs/org/jdbi/v3/sqlobject/statement/GetGeneratedKeys.html" target="_blank" rel="noopener">@GetGeneratedKeys</a> annotation may be used to return the keys generated from the SQL statement:</p>
@@ -9219,7 +9277,7 @@ See <a href="#postgres-getgeneratedkeys">PostgreSQL</a> for more details.
 </div>
 </div>
 <div class="sect3">
-<h4 id="sqllocator"><a class="anchor" href="#sqllocator"></a><a class="link" href="#sqllocator">13.6.3. @SqlLocator</a></h4>
+<h4 id="sqllocator"><a class="anchor" href="#sqllocator"></a><a class="link" href="#sqllocator">13.6.4. @SqlLocator</a></h4>
 <div class="paragraph">
 <p>When SQL statements grow in complexity, it may be cumbersome to provide the statements as Java strings in the SQL method annotations.</p>
 </div>
@@ -9303,7 +9361,7 @@ This can be controlled with the <code>stripComments</code> annotation attribute.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_createsqlobject"><a class="anchor" href="#_createsqlobject"></a><a class="link" href="#_createsqlobject">13.6.4. @CreateSqlObject</a></h4>
+<h4 id="_createsqlobject"><a class="anchor" href="#_createsqlobject"></a><a class="link" href="#_createsqlobject">13.6.5. @CreateSqlObject</a></h4>
 <div class="paragraph">
 <p>Use the <a href="./apidocs/org/jdbi/v3/sqlobject/CreateSqlObject.html" target="_blank" rel="noopener">@CreateSqlObject</a> annotation to reuse a SQL Object type within another object.</p>
 </div>
@@ -9368,7 +9426,7 @@ This can be controlled with the <code>stripComments</code> annotation attribute.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_timestamped"><a class="anchor" href="#_timestamped"></a><a class="link" href="#_timestamped">13.6.5. @Timestamped</a></h4>
+<h4 id="_timestamped"><a class="anchor" href="#_timestamped"></a><a class="link" href="#_timestamped">13.6.6. @Timestamped</a></h4>
 <div class="paragraph">
 <p>You can annotate any statement with <a href="./apidocs/org/jdbi/v3/sqlobject/customizer/Timestamped.html" target="_blank" rel="noopener">@Timestamped</a> to bind an <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/OffsetDateTime.html" target="_blank" rel="noopener">OffsetDateTime</a> object representing the current time as <code>now</code>:</p>
 </div>
@@ -9410,7 +9468,7 @@ This can be controlled with the <code>stripComments</code> annotation attribute.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_singlevalue"><a class="anchor" href="#_singlevalue"></a><a class="link" href="#_singlevalue">13.6.6. @SingleValue</a></h4>
+<h4 id="_singlevalue"><a class="anchor" href="#_singlevalue"></a><a class="link" href="#_singlevalue">13.6.7. @SingleValue</a></h4>
 <div class="paragraph">
 <p>Sometimes, when using advanced SQL features like Arrays, a container type such as
 <code>int[]</code> or <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" target="_blank" rel="noopener">List&lt;Integer&gt;</a> can ambiguously mean either "a single SQL int[]" or "a ResultSet of int".</p>
@@ -9471,7 +9529,7 @@ This is especially useful for <a href="./apidocs/org/jdbi/v3/sqlobject/statement
 </div>
 </div>
 <div class="sect3">
-<h4 id="_annotations_for_mapkv_results"><a class="anchor" href="#_annotations_for_mapkv_results"></a><a class="link" href="#_annotations_for_mapkv_results">13.6.7. Annotations for Map&lt;K,V&gt; Results</a></h4>
+<h4 id="_annotations_for_mapkv_results"><a class="anchor" href="#_annotations_for_mapkv_results"></a><a class="link" href="#_annotations_for_mapkv_results">13.6.8. Annotations for Map&lt;K,V&gt; Results</a></h4>
 <div class="paragraph">
 <p>SQL Object methods may return <code>Map&lt;K,V&gt;</code> types (see <a href="#mapentry-mapping">Map.Entry mapping</a> in the Core API).
 In this scenario, each row is mapped to a <code>Map.Entry&lt;K,V&gt;</code>, and the entries for each row are collected into a single <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" target="_blank" rel="noopener">Map</a> instance.</p>
@@ -9609,7 +9667,7 @@ See <a href="#postgres-hstore">hstore</a> for more information.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_userowreducer"><a class="anchor" href="#_userowreducer"></a><a class="link" href="#_userowreducer">13.6.8. @UseRowReducer</a></h4>
+<h4 id="_userowreducer"><a class="anchor" href="#_userowreducer"></a><a class="link" href="#_userowreducer">13.6.9. @UseRowReducer</a></h4>
 <div class="paragraph">
 <p><a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlQuery.html" target="_blank" rel="noopener">@SqlQuery</a> methods that use join queries may reduce main-detail joins into one or more main-level objects.
 See <a href="#_resultbearing_reducerows">ResultBearing.reduceRows()</a> for an introduction to row reducers.</p>
@@ -9688,7 +9746,7 @@ These mappers are used indirectly by the row reducer in the
 </div>
 </div>
 <div class="sect3">
-<h4 id="_registercollector_and_registercollectorfactory"><a class="anchor" href="#_registercollector_and_registercollectorfactory"></a><a class="link" href="#_registercollector_and_registercollectorfactory">13.6.9. @RegisterCollector and @RegisterCollectorFactory</a></h4>
+<h4 id="_registercollector_and_registercollectorfactory"><a class="anchor" href="#_registercollector_and_registercollectorfactory"></a><a class="link" href="#_registercollector_and_registercollectorfactory">13.6.10. @RegisterCollector and @RegisterCollectorFactory</a></h4>
 <div class="paragraph">
 <p>Convenience annotations to register a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/stream/Collector.html" target="_blank" rel="noopener">Collector</a> for a SqlObject method.</p>
 </div>
@@ -9769,7 +9827,7 @@ See <a href="#_collectors">Collectors</a> for more details.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_other_sql_object_annotations_2"><a class="anchor" href="#_other_sql_object_annotations_2"></a><a class="link" href="#_other_sql_object_annotations_2">13.6.10. Other SQL Object annotations</a></h4>
+<h4 id="_other_sql_object_annotations_2"><a class="anchor" href="#_other_sql_object_annotations_2"></a><a class="link" href="#_other_sql_object_annotations_2">13.6.11. Other SQL Object annotations</a></h4>
 <div class="paragraph">
 <p>Jdbi provides many additional annotations out of the box:</p>
 </div>
@@ -9817,7 +9875,7 @@ See the
 </div>
 </div>
 <div class="sect3">
-<h4 id="_annotations_and_inheritance"><a class="anchor" href="#_annotations_and_inheritance"></a><a class="link" href="#_annotations_and_inheritance">13.6.11. Annotations and Inheritance</a></h4>
+<h4 id="_annotations_and_inheritance"><a class="anchor" href="#_annotations_and_inheritance"></a><a class="link" href="#_annotations_and_inheritance">13.6.12. Annotations and Inheritance</a></h4>
 <div class="paragraph">
 <p>SQL Objects inherit methods and annotations from the interfaces they extend:</p>
 </div>
@@ -16553,7 +16611,7 @@ The annotation may be used for method return types, or on <a href="./apidocs/org
 <div id="footer">
 <div id="footer-text">
 Version 3.52.0-SNAPSHOT<br>
-Last updated 02/15/2026 16:36 -0800
+Last updated 02/16/2026 21:52 -0800
 </div>
 </div>
 </body>
