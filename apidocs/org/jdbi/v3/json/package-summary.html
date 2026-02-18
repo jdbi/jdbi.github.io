@@ -63,6 +63,15 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="horizontal-scroll">
 <div class="package-signature">package <span class="element-name">org.jdbi.v3.json</span></div>
+<section class="package-description" id="package-description">
+<div class="block"><p>
+JSON mapping SPI and the <a href="Json.html" title="annotation interface in org.jdbi.v3.json"><code>Json</code></a> qualifier.
+The <a href="JsonPlugin.html" title="class in org.jdbi.v3.json"><code>JsonPlugin</code></a> registers argument and column
+mapper factories for <code>@Json</code> qualified types. A concrete JSON
+library implementation (such as Gson, Jackson, or Moshi) must be
+installed to provide the actual serialization.
+</p></div>
+</section>
 </div>
 <section class="summary">
 <ul class="summary-list">

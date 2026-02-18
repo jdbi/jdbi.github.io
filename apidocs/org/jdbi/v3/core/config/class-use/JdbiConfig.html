@@ -87,7 +87,11 @@ The <code>config</code> classes define a configuration registry starting from
 each <code>Jdbi</code> instance.</div>
 </div>
 <div class="col-first odd-row-color"><a href="#org.jdbi.v3.core.enums">org.jdbi.v3.core.enums</a></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">
+Configuration and annotations for binding and mapping Java
+<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Enum.html" title="class or interface in java.lang" class="external-link"><code>Enum</code></a> types.</div>
+</div>
 <div class="col-first even-row-color"><a href="#org.jdbi.v3.core.extension">org.jdbi.v3.core.extension</a></div>
 <div class="col-last even-row-color">
 <div class="block">
@@ -101,7 +105,12 @@ instances.</div>
 <code>mapper</code>s take the JDBC ResultSet and produce Java results.</div>
 </div>
 <div class="col-first even-row-color"><a href="#org.jdbi.v3.core.mapper.immutables">org.jdbi.v3.core.mapper.immutables</a></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">
+Support for mapping to and from
+<a href="https://immutables.github.io">Immutables</a> generated value
+types.</div>
+</div>
 <div class="col-first odd-row-color"><a href="#org.jdbi.v3.core.mapper.reflect">org.jdbi.v3.core.mapper.reflect</a></div>
 <div class="col-last odd-row-color">
 <div class="block">
@@ -110,7 +119,10 @@ construct result types using techniques like constructor injection
 or JavaBeans setters.</div>
 </div>
 <div class="col-first even-row-color"><a href="#org.jdbi.v3.core.qualifier">org.jdbi.v3.core.qualifier</a></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">
+Qualified types add context to Java types for database mapping.</div>
+</div>
 <div class="col-first odd-row-color"><a href="#org.jdbi.v3.core.result">org.jdbi.v3.core.result</a></div>
 <div class="col-last odd-row-color">
 <div class="block">
@@ -136,13 +148,28 @@ The <code>transaction</code> package implements the strategy
 <code>freemarker</code> provides advanced string template processing.</div>
 </div>
 <div class="col-first odd-row-color"><a href="#org.jdbi.v3.gson2">org.jdbi.v3.gson2</a></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">
+JSON support using the <a href="https://github.com/google/gson">Gson</a>
+library.</div>
+</div>
 <div class="col-first even-row-color"><a href="#org.jdbi.v3.jackson2">org.jdbi.v3.jackson2</a></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">
+JSON support using the
+<a href="https://github.com/FasterXML/jackson">Jackson 2</a> library.</div>
+</div>
 <div class="col-first odd-row-color"><a href="#org.jdbi.v3.json">org.jdbi.v3.json</a></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">
+JSON mapping SPI and the <a href="../../../json/Json.html" title="annotation interface in org.jdbi.v3.json"><code>Json</code></a> qualifier.</div>
+</div>
 <div class="col-first even-row-color"><a href="#org.jdbi.v3.moshi">org.jdbi.v3.moshi</a></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">
+JSON support using the
+<a href="https://github.com/square/moshi">Moshi</a> library.</div>
+</div>
 <div class="col-first odd-row-color"><a href="#org.jdbi.v3.postgres">org.jdbi.v3.postgres</a></div>
 <div class="col-last odd-row-color">
 <div class="block">

@@ -197,7 +197,7 @@ assume you'll return an instance of <a href="NullArgument.html" title="class in 
 <div class="member-signature"><span class="modifiers">static</span>&nbsp;<span class="return-type"><a href="QualifiedArgumentFactory.html" title="interface in org.jdbi.v3.core.argument">QualifiedArgumentFactory</a></span>&nbsp;<span class="element-name">adapt</span><wbr><span class="parameters">(<a href="../config/ConfigRegistry.html" title="class in org.jdbi.v3.core.config">ConfigRegistry</a>&nbsp;config,
  <a href="ArgumentFactory.html" title="interface in org.jdbi.v3.core.argument">ArgumentFactory</a>&nbsp;factory)</span></div>
 <div class="block">Adapts an <a href="ArgumentFactory.html" title="interface in org.jdbi.v3.core.argument"><code>ArgumentFactory</code></a> into a QualifiedArgumentFactory. The returned factory only
-matches qualified types with zero qualifiers.</div>
+matches qualified types with exactly the same qualifiers as annotated on the factory itself.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>config</code> - the ConfigRegistry</dd>
@@ -213,7 +213,7 @@ matches qualified types with zero qualifiers.</div>
 <div class="member-signature"><span class="modifiers">static</span>&nbsp;<span class="return-type"><a href="QualifiedArgumentFactory.Preparable.html" title="interface in org.jdbi.v3.core.argument">QualifiedArgumentFactory.Preparable</a></span>&nbsp;<span class="element-name">adapt</span><wbr><span class="parameters">(<a href="../config/ConfigRegistry.html" title="class in org.jdbi.v3.core.config">ConfigRegistry</a>&nbsp;config,
  <a href="ArgumentFactory.Preparable.html" title="interface in org.jdbi.v3.core.argument">ArgumentFactory.Preparable</a>&nbsp;factory)</span></div>
 <div class="block">Adapts an <a href="ArgumentFactory.Preparable.html" title="interface in org.jdbi.v3.core.argument"><code>ArgumentFactory.Preparable</code></a> into a QualifiedArgumentFactory.Preparable.
-The returned factory only matches qualified types with zero qualifiers.</div>
+The returned factory only matches qualified types with exactly the same qualifiers as annotated on the factory itself.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>factory</code> - the factory to adapt</dd>
