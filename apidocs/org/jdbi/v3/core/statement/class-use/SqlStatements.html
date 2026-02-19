@@ -109,53 +109,58 @@ to drive statement execution.</div>
 <div class="block">Defines attributes for each key/value pair in the Map.</div>
 </div>
 <div class="col-first odd-row-color"><code><a href="../SqlStatements.html" title="class in org.jdbi.v3.core.statement">SqlStatements</a></code></div>
-<div class="col-second odd-row-color"><span class="type-name-label">SqlStatements.</span><code><a href="../SqlStatements.html#setJfrParamMaxLength(int)" class="member-name-link">setJfrParamMaxLength</a><wbr>(int&nbsp;jfrParamMaxLength)</code></div>
+<div class="col-second odd-row-color"><span class="type-name-label">SqlStatements.</span><code><a href="../SqlStatements.html#setIncludeBindingsInTelemetry(boolean)" class="member-name-link">setIncludeBindingsInTelemetry</a><wbr>(boolean&nbsp;includeBindingsInTelemetry)</code></div>
 <div class="col-last odd-row-color">
-<div class="block">When recording JFR events, the maximum length of rendered parameters to store in the event record.</div>
+<div class="block">Toggle whether to include potentially sensitive bindins in telemetry data.</div>
 </div>
 <div class="col-first even-row-color"><code><a href="../SqlStatements.html" title="class in org.jdbi.v3.core.statement">SqlStatements</a></code></div>
-<div class="col-second even-row-color"><span class="type-name-label">SqlStatements.</span><code><a href="../SqlStatements.html#setJfrSqlMaxLength(int)" class="member-name-link">setJfrSqlMaxLength</a><wbr>(int&nbsp;jfrSqlMaxLength)</code></div>
+<div class="col-second even-row-color"><span class="type-name-label">SqlStatements.</span><code><a href="../SqlStatements.html#setJfrParamMaxLength(int)" class="member-name-link">setJfrParamMaxLength</a><wbr>(int&nbsp;jfrParamMaxLength)</code></div>
 <div class="col-last even-row-color">
-<div class="block">When recording JFR events, the maximum length of rendered SQL to store in the event record.</div>
+<div class="block">When recording JFR events, the maximum length of rendered parameters to store in the event record.</div>
 </div>
 <div class="col-first odd-row-color"><code><a href="../SqlStatements.html" title="class in org.jdbi.v3.core.statement">SqlStatements</a></code></div>
-<div class="col-second odd-row-color"><span class="type-name-label">SqlStatements.</span><code><a href="../SqlStatements.html#setQueryTimeout(java.lang.Integer)" class="member-name-link">setQueryTimeout</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;seconds)</code></div>
+<div class="col-second odd-row-color"><span class="type-name-label">SqlStatements.</span><code><a href="../SqlStatements.html#setJfrSqlMaxLength(int)" class="member-name-link">setJfrSqlMaxLength</a><wbr>(int&nbsp;jfrSqlMaxLength)</code></div>
 <div class="col-last odd-row-color">
+<div class="block">When recording JFR events, the maximum length of rendered SQL to store in the event record.</div>
+</div>
+<div class="col-first even-row-color"><code><a href="../SqlStatements.html" title="class in org.jdbi.v3.core.statement">SqlStatements</a></code></div>
+<div class="col-second even-row-color"><span class="type-name-label">SqlStatements.</span><code><a href="../SqlStatements.html#setQueryTimeout(java.lang.Integer)" class="member-name-link">setQueryTimeout</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;seconds)</code></div>
+<div class="col-last even-row-color">
 <div class="block">Jdbi does not implement its own timeout mechanism: it simply calls <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/Statement.html#setQueryTimeout(int)" title="class or interface in java.sql" class="external-link"><code>Statement.setQueryTimeout(int)</code></a>, leaving timeout handling to your jdbc
 driver.</div>
 </div>
-<div class="col-first even-row-color"><code><a href="../SqlStatements.html" title="class in org.jdbi.v3.core.statement">SqlStatements</a></code></div>
-<div class="col-second even-row-color"><span class="type-name-label">SqlStatements.</span><code><a href="../SqlStatements.html#setSqlLogger(org.jdbi.v3.core.statement.SqlLogger)" class="member-name-link">setSqlLogger</a><wbr>(<a href="../SqlLogger.html" title="interface in org.jdbi.v3.core.statement">SqlLogger</a>&nbsp;sqlLogger)</code></div>
-<div class="col-last even-row-color">
+<div class="col-first odd-row-color"><code><a href="../SqlStatements.html" title="class in org.jdbi.v3.core.statement">SqlStatements</a></code></div>
+<div class="col-second odd-row-color"><span class="type-name-label">SqlStatements.</span><code><a href="../SqlStatements.html#setSqlLogger(org.jdbi.v3.core.statement.SqlLogger)" class="member-name-link">setSqlLogger</a><wbr>(<a href="../SqlLogger.html" title="interface in org.jdbi.v3.core.statement">SqlLogger</a>&nbsp;sqlLogger)</code></div>
+<div class="col-last odd-row-color">
 <div class="block">Sets a <a href="../SqlLogger.html" title="interface in org.jdbi.v3.core.statement"><code>SqlLogger</code></a> instance to log all SQL operations.</div>
 </div>
-<div class="col-first odd-row-color"><code><a href="../SqlStatements.html" title="class in org.jdbi.v3.core.statement">SqlStatements</a></code></div>
-<div class="col-second odd-row-color"><span class="type-name-label">SqlStatements.</span><code><a href="../SqlStatements.html#setSqlParser(org.jdbi.v3.core.statement.SqlParser)" class="member-name-link">setSqlParser</a><wbr>(<a href="../SqlParser.html" title="interface in org.jdbi.v3.core.statement">SqlParser</a>&nbsp;sqlParser)</code></div>
-<div class="col-last odd-row-color">
+<div class="col-first even-row-color"><code><a href="../SqlStatements.html" title="class in org.jdbi.v3.core.statement">SqlStatements</a></code></div>
+<div class="col-second even-row-color"><span class="type-name-label">SqlStatements.</span><code><a href="../SqlStatements.html#setSqlParser(org.jdbi.v3.core.statement.SqlParser)" class="member-name-link">setSqlParser</a><wbr>(<a href="../SqlParser.html" title="interface in org.jdbi.v3.core.statement">SqlParser</a>&nbsp;sqlParser)</code></div>
+<div class="col-last even-row-color">
 <div class="block">Sets the <a href="../SqlParser.html" title="interface in org.jdbi.v3.core.statement"><code>SqlParser</code></a> used to parse parameters in SQL statements
 executed by Jdbi.</div>
 </div>
-<div class="col-first even-row-color"><code><a href="../SqlStatements.html" title="class in org.jdbi.v3.core.statement">SqlStatements</a></code></div>
-<div class="col-second even-row-color"><span class="type-name-label">SqlStatements.</span><code><a href="../SqlStatements.html#setTemplateCache(org.jdbi.v3.core.cache.JdbiCacheBuilder)" class="member-name-link">setTemplateCache</a><wbr>(<a href="../../cache/JdbiCacheBuilder.html" title="interface in org.jdbi.v3.core.cache">JdbiCacheBuilder</a>&nbsp;cacheBuilder)</code></div>
-<div class="col-last even-row-color">
+<div class="col-first odd-row-color"><code><a href="../SqlStatements.html" title="class in org.jdbi.v3.core.statement">SqlStatements</a></code></div>
+<div class="col-second odd-row-color"><span class="type-name-label">SqlStatements.</span><code><a href="../SqlStatements.html#setTemplateCache(org.jdbi.v3.core.cache.JdbiCacheBuilder)" class="member-name-link">setTemplateCache</a><wbr>(<a href="../../cache/JdbiCacheBuilder.html" title="interface in org.jdbi.v3.core.cache">JdbiCacheBuilder</a>&nbsp;cacheBuilder)</code></div>
+<div class="col-last odd-row-color">
 <div class="block">Sets the cache used to avoid repeatedly parsing SQL statements.</div>
 </div>
-<div class="col-first odd-row-color"><code><a href="../SqlStatements.html" title="class in org.jdbi.v3.core.statement">SqlStatements</a></code></div>
-<div class="col-second odd-row-color"><span class="type-name-label">SqlStatements.</span><code><a href="../SqlStatements.html#setTemplateEngine(org.jdbi.v3.core.statement.TemplateEngine)" class="member-name-link">setTemplateEngine</a><wbr>(<a href="../TemplateEngine.html" title="interface in org.jdbi.v3.core.statement">TemplateEngine</a>&nbsp;templateEngine)</code></div>
-<div class="col-last odd-row-color">
+<div class="col-first even-row-color"><code><a href="../SqlStatements.html" title="class in org.jdbi.v3.core.statement">SqlStatements</a></code></div>
+<div class="col-second even-row-color"><span class="type-name-label">SqlStatements.</span><code><a href="../SqlStatements.html#setTemplateEngine(org.jdbi.v3.core.statement.TemplateEngine)" class="member-name-link">setTemplateEngine</a><wbr>(<a href="../TemplateEngine.html" title="interface in org.jdbi.v3.core.statement">TemplateEngine</a>&nbsp;templateEngine)</code></div>
+<div class="col-last even-row-color">
 <div class="block">Sets the <a href="../TemplateEngine.html" title="interface in org.jdbi.v3.core.statement"><code>TemplateEngine</code></a> used to render SQL for all
 <a href="../SqlStatement.html" title="class in org.jdbi.v3.core.statement"><code>SQL statements</code></a> executed by Jdbi.</div>
 </div>
-<div class="col-first even-row-color"><code><a href="../SqlStatements.html" title="class in org.jdbi.v3.core.statement">SqlStatements</a></code></div>
-<div class="col-second even-row-color"><span class="type-name-label">SqlStatements.</span><code><a href="../SqlStatements.html#setTimingCollector(org.jdbi.v3.core.statement.TimingCollector)" class="member-name-link">setTimingCollector</a><wbr>(<a href="../TimingCollector.html" title="interface in org.jdbi.v3.core.statement">TimingCollector</a>&nbsp;timingCollector)</code></div>
-<div class="col-last even-row-color">
+<div class="col-first odd-row-color"><code><a href="../SqlStatements.html" title="class in org.jdbi.v3.core.statement">SqlStatements</a></code></div>
+<div class="col-second odd-row-color"><span class="type-name-label">SqlStatements.</span><code><a href="../SqlStatements.html#setTimingCollector(org.jdbi.v3.core.statement.TimingCollector)" class="member-name-link">setTimingCollector</a><wbr>(<a href="../TimingCollector.html" title="interface in org.jdbi.v3.core.statement">TimingCollector</a>&nbsp;timingCollector)</code></div>
+<div class="col-last odd-row-color">
 <div class="block"><span class="deprecated-label">Deprecated, for removal: This API element is subject to removal in a future version.</span>
 <div class="deprecation-comment">use <a href="../SqlStatements.html#setSqlLogger(org.jdbi.v3.core.statement.SqlLogger)"><code>SqlStatements.setSqlLogger(SqlLogger)</code></a> instead</div>
 </div>
 </div>
-<div class="col-first odd-row-color"><code><a href="../SqlStatements.html" title="class in org.jdbi.v3.core.statement">SqlStatements</a></code></div>
-<div class="col-second odd-row-color"><span class="type-name-label">SqlStatements.</span><code><a href="../SqlStatements.html#setUnusedBindingAllowed(boolean)" class="member-name-link">setUnusedBindingAllowed</a><wbr>(boolean&nbsp;unusedBindingAllowed)</code></div>
-<div class="col-last odd-row-color">
+<div class="col-first even-row-color"><code><a href="../SqlStatements.html" title="class in org.jdbi.v3.core.statement">SqlStatements</a></code></div>
+<div class="col-second even-row-color"><span class="type-name-label">SqlStatements.</span><code><a href="../SqlStatements.html#setUnusedBindingAllowed(boolean)" class="member-name-link">setUnusedBindingAllowed</a><wbr>(boolean&nbsp;unusedBindingAllowed)</code></div>
+<div class="col-last even-row-color">
 <div class="block">Sets whether or not an exception should be thrown when any arguments are given to a query but not actually used in it.</div>
 </div>
 </div>
