@@ -532,7 +532,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.52.0-SNAPSHOT,</span>
-<span id="revdate">02/17/2026 18:06 -0800</span>
+<span id="revdate">02/18/2026 23:03 -0800</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -782,7 +782,11 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_miscellaneous">14. Miscellaneous</a>
 <ul class="sectlevel2">
 <li><a href="#_generated_keys">14.1. Generated Keys</a></li>
-<li><a href="#_qualified_types">14.2. Qualified Types</a></li>
+<li><a href="#_qualified_types">14.2. Qualified Types</a>
+<ul class="sectlevel3">
+<li><a href="#_creating_custom_qualifiers">14.2.1. Creating custom qualifiers</a></li>
+</ul>
+</li>
 <li><a href="#query-templating">14.3. Query Templating</a>
 <ul class="sectlevel3">
 <li><a href="#_classpathsqllocator">14.3.1. ClasspathSqlLocator</a></li>
@@ -10513,6 +10517,99 @@ respectively, instead of the usual <code>varchar</code>.</p>
 </li>
 </ul>
 </div>
+<div class="sect3">
+<h4 id="_creating_custom_qualifiers"><a class="anchor" href="#_creating_custom_qualifiers"></a><a class="link" href="#_creating_custom_qualifiers">14.2.1. Creating custom qualifiers</a></h4>
+<div class="paragraph">
+<p>A custom qualifier is a user-defined annotation that is meta-annotated with <a href="./apidocs/org/jdbi/v3/core/qualifier/Qualifier.html" target="_blank" rel="noopener">@Qualifier</a>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Retention</span>(<span class="predefined-type">RetentionPolicy</span>.RUNTIME)
+<span class="annotation">@Qualifier</span>
+<span class="directive">public</span> <span class="annotation">@interface</span> Reversed {}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To handle qualified values, create an <a href="./apidocs/org/jdbi/v3/core/argument/ArgumentFactory.html" target="_blank" rel="noopener">ArgumentFactory</a> and/or a <a href="./apidocs/org/jdbi/v3/core/mapper/ColumnMapper.html" target="_blank" rel="noopener">ColumnMapper</a> annotated with the qualifier.
+Jdbi matches factories to values by their qualifier annotations:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Reversed</span> <i class="conum" data-value="1"></i><b>(1)</b>
+<span class="directive">public</span> <span class="type">class</span> <span class="class">ReversedStringArgumentFactory</span> <span class="directive">extends</span> AbstractArgumentFactory&lt;<span class="predefined-type">String</span>&gt; {
+    <span class="directive">public</span> ReversedStringArgumentFactory() {
+        <span class="local-variable">super</span>(<span class="predefined-type">Types</span>.VARCHAR);
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">protected</span> Argument build(<span class="predefined-type">String</span> value, ConfigRegistry config) {
+        <span class="keyword">return</span> (pos, stmt, ctx) -&gt; stmt.setString(pos, Reverser.reverse(value));
+    }
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Reversed</span> <i class="conum" data-value="1"></i><b>(1)</b>
+<span class="directive">public</span> <span class="type">class</span> <span class="class">ReversedStringMapper</span> <span class="directive">implements</span> ColumnMapper&lt;<span class="predefined-type">String</span>&gt; {
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="predefined-type">String</span> map(<span class="predefined-type">ResultSet</span> r, <span class="type">int</span> columnNumber, StatementContext ctx) <span class="directive">throws</span> <span class="exception">SQLException</span> {
+        <span class="keyword">return</span> Reverser.reverse(r.getString(columnNumber));
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The qualifier annotation on the factory and mapper class tells Jdbi that these handle <code>@Reversed</code> qualified <code>String</code> values.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Register the factories and use them with <a href="./apidocs/org/jdbi/v3/core/qualifier/QualifiedType.html" target="_blank" rel="noopener">QualifiedType</a>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">h2Extension.getJdbi()
+    .registerArgument(<span class="keyword">new</span> ReversedStringArgumentFactory())
+    .registerColumnMapper(<span class="keyword">new</span> ReversedStringMapper())
+    .useHandle(handle -&gt; {
+        QualifiedType&lt;<span class="predefined-type">String</span>&gt; reversedString =
+            QualifiedType.of(<span class="predefined-type">String</span>.class).with(Reversed.class);
+
+        handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO something (id, name) VALUES (1, :name)</span><span class="delimiter">&quot;</span></span>)
+            .bindByType(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">abc</span><span class="delimiter">&quot;</span></span>, reversedString) <i class="conum" data-value="1"></i><b>(1)</b>
+            .execute();
+
+        <span class="comment">// the value is stored reversed in the database</span>
+        <span class="predefined-type">String</span> raw = handle.select(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT name FROM something</span><span class="delimiter">&quot;</span></span>)
+            .mapTo(<span class="predefined-type">String</span>.class)
+            .one();
+        assertThat(raw).isEqualTo(<span class="string"><span class="delimiter">&quot;</span><span class="content">cba</span><span class="delimiter">&quot;</span></span>);
+
+        <span class="comment">// mapping with the qualified type reverses it back</span>
+        <span class="predefined-type">String</span> name = handle.select(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT name FROM something</span><span class="delimiter">&quot;</span></span>)
+            .mapTo(reversedString) <i class="conum" data-value="2"></i><b>(2)</b>
+            .one();
+        assertThat(name).isEqualTo(<span class="string"><span class="delimiter">&quot;</span><span class="content">abc</span><span class="delimiter">&quot;</span></span>);
+    });</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Bind the value using <code>bindByType</code> with the qualified type so the <code>@Reversed</code> factory is selected.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Map the result using the qualified type so the <code>@Reversed</code> mapper is selected.</td>
+</tr>
+</table>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="query-templating"><a class="anchor" href="#query-templating"></a><a class="link" href="#query-templating">14.3. Query Templating</a></h3>
@@ -16568,7 +16665,7 @@ The annotation may be used for method return types, or on <a href="./apidocs/org
 <div id="footer">
 <div id="footer-text">
 Version 3.52.0-SNAPSHOT<br>
-Last updated 02/17/2026 18:06 -0800
+Last updated 02/18/2026 23:03 -0800
 </div>
 </div>
 </body>

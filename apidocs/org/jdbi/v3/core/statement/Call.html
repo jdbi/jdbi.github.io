@@ -309,7 +309,8 @@ returning a computed value of type <code>T</code>.</div>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Call.html" title="class in org.jdbi.v3.core.statement">Call</a></span>&nbsp;<span class="element-name">registerOutParameter</span><wbr><span class="parameters">(int&nbsp;position,
  int&nbsp;sqlType,
  <a href="CallableStatementMapper.html" title="interface in org.jdbi.v3.core.statement">CallableStatementMapper</a>&nbsp;mapper)</span></div>
-<div class="block">Register a positional output parameter.</div>
+<div class="block">Register a positional output parameter. For INOUT parameters, call <a href="SqlStatement.html#bind(int,java.lang.Object)"><code>SqlStatement.bind(int, Object)</code></a> before this method;
+the existing binding will be captured and sent as the input value.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>position</code> - the parameter position (zero-based)</dd>
@@ -345,7 +346,8 @@ returning a computed value of type <code>T</code>.</div>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Call.html" title="class in org.jdbi.v3.core.statement">Call</a></span>&nbsp;<span class="element-name">registerOutParameter</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name,
  int&nbsp;sqlType,
  <a href="CallableStatementMapper.html" title="interface in org.jdbi.v3.core.statement">CallableStatementMapper</a>&nbsp;mapper)</span></div>
-<div class="block">Register a named output parameter.</div>
+<div class="block">Register a named output parameter. For INOUT parameters, call <a href="SqlStatement.html#bind(java.lang.String,java.lang.Object)"><code>SqlStatement.bind(String, Object)</code></a> before this method;
+the existing binding will be captured and sent as the input value.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>name</code> - the parameter name</dd>
