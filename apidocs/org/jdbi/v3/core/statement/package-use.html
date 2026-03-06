@@ -371,72 +371,76 @@ name for each position (if applicable).</div>
 <div class="col-last odd-row-color">
 <div class="block">Represents a number of SQL statements delimited by semicolon which will be executed in order in a batch statement.</div>
 </div>
-<div class="col-first even-row-color"><a href="class-use/SqlLogger.html#org.jdbi.v3.core.statement">SqlLogger</a></div>
+<div class="col-first even-row-color"><a href="class-use/SqlExceptionHandler.html#org.jdbi.v3.core.statement">SqlExceptionHandler</a></div>
 <div class="col-last even-row-color">
+<div class="block">Handler for exceptions thrown while executing SQL statements.</div>
+</div>
+<div class="col-first odd-row-color"><a href="class-use/SqlLogger.html#org.jdbi.v3.core.statement">SqlLogger</a></div>
+<div class="col-last odd-row-color">
 <div class="block">SqlLoggers receive query data before and after a query is executed, and after an exception is thrown by a bad query.</div>
 </div>
-<div class="col-first odd-row-color"><a href="class-use/SqlParser.html#org.jdbi.v3.core.statement">SqlParser</a></div>
-<div class="col-last odd-row-color">
+<div class="col-first even-row-color"><a href="class-use/SqlParser.html#org.jdbi.v3.core.statement">SqlParser</a></div>
+<div class="col-last even-row-color">
 <div class="block">Parses the named parameters out of an SQL statement, and returns the
 <a href="ParsedSql.html" title="class in org.jdbi.v3.core.statement"><code>ParsedSql</code></a> containing the JDBC-ready SQL statement, along with the
 type of parameters used (named or positional), the number, and the parameter
 name for each position (if applicable).</div>
 </div>
-<div class="col-first even-row-color"><a href="class-use/SqlStatement.html#org.jdbi.v3.core.statement">SqlStatement</a></div>
-<div class="col-last even-row-color">
+<div class="col-first odd-row-color"><a href="class-use/SqlStatement.html#org.jdbi.v3.core.statement">SqlStatement</a></div>
+<div class="col-last odd-row-color">
 <div class="block">This class provides the common functions between <code>Query</code> and
 <code>Update</code>.</div>
 </div>
-<div class="col-first odd-row-color"><a href="class-use/SqlStatements.html#org.jdbi.v3.core.statement">SqlStatements</a></div>
-<div class="col-last odd-row-color">
+<div class="col-first even-row-color"><a href="class-use/SqlStatements.html#org.jdbi.v3.core.statement">SqlStatements</a></div>
+<div class="col-last even-row-color">
 <div class="block">Configuration holder for <a href="SqlStatement.html" title="class in org.jdbi.v3.core.statement"><code>SqlStatement</code></a>s.</div>
 </div>
-<div class="col-first even-row-color"><a href="class-use/StatementBuilder.html#org.jdbi.v3.core.statement">StatementBuilder</a></div>
-<div class="col-last even-row-color">
+<div class="col-first odd-row-color"><a href="class-use/StatementBuilder.html#org.jdbi.v3.core.statement">StatementBuilder</a></div>
+<div class="col-last odd-row-color">
 <div class="block">Used to convert translated SQL into a prepared statement.</div>
 </div>
-<div class="col-first odd-row-color"><a href="class-use/StatementBuilderFactory.html#org.jdbi.v3.core.statement">StatementBuilderFactory</a></div>
-<div class="col-last odd-row-color">
+<div class="col-first even-row-color"><a href="class-use/StatementBuilderFactory.html#org.jdbi.v3.core.statement">StatementBuilderFactory</a></div>
+<div class="col-last even-row-color">
 <div class="block">Used to specify how prepared statements are built.</div>
 </div>
-<div class="col-first even-row-color"><a href="class-use/StatementContext.html#org.jdbi.v3.core.statement">StatementContext</a></div>
-<div class="col-last even-row-color">
+<div class="col-first odd-row-color"><a href="class-use/StatementContext.html#org.jdbi.v3.core.statement">StatementContext</a></div>
+<div class="col-last odd-row-color">
 <div class="block">The statement context provides access to statement-local configuration.</div>
 </div>
-<div class="col-first odd-row-color"><a href="class-use/StatementContextListener.html#org.jdbi.v3.core.statement">StatementContextListener</a></div>
-<div class="col-last odd-row-color">
+<div class="col-first even-row-color"><a href="class-use/StatementContextListener.html#org.jdbi.v3.core.statement">StatementContextListener</a></div>
+<div class="col-last even-row-color">
 <div class="block">Listener interface for the <a href="StatementContext.html" title="class in org.jdbi.v3.core.statement"><code>StatementContext</code></a>.</div>
 </div>
-<div class="col-first even-row-color"><a href="class-use/StatementCustomizer.html#org.jdbi.v3.core.statement">StatementCustomizer</a></div>
-<div class="col-last even-row-color">
+<div class="col-first odd-row-color"><a href="class-use/StatementCustomizer.html#org.jdbi.v3.core.statement">StatementCustomizer</a></div>
+<div class="col-last odd-row-color">
 <div class="block">Allows tweaking of statement behaviour.</div>
 </div>
-<div class="col-first odd-row-color"><a href="class-use/StatementException.html#org.jdbi.v3.core.statement">StatementException</a></div>
-<div class="col-last odd-row-color">
+<div class="col-first even-row-color"><a href="class-use/StatementException.html#org.jdbi.v3.core.statement">StatementException</a></div>
+<div class="col-last even-row-color">
 <div class="block">Superclass for exceptions thrown while trying to execute a statement.</div>
 </div>
-<div class="col-first even-row-color"><a href="class-use/StatementExceptions.html#org.jdbi.v3.core.statement">StatementExceptions</a></div>
-<div class="col-last even-row-color">
+<div class="col-first odd-row-color"><a href="class-use/StatementExceptions.html#org.jdbi.v3.core.statement">StatementExceptions</a></div>
+<div class="col-last odd-row-color">
 <div class="block">Configuration for <a href="StatementException.html" title="class in org.jdbi.v3.core.statement"><code>StatementException</code></a> and subclasses behavior.</div>
 </div>
-<div class="col-first odd-row-color"><a href="class-use/StatementExceptions.MessageRendering.html#org.jdbi.v3.core.statement">StatementExceptions.MessageRendering</a></div>
-<div class="col-last odd-row-color">
+<div class="col-first even-row-color"><a href="class-use/StatementExceptions.MessageRendering.html#org.jdbi.v3.core.statement">StatementExceptions.MessageRendering</a></div>
+<div class="col-last even-row-color">
 <div class="block">Control exception message generation.</div>
 </div>
-<div class="col-first even-row-color"><a href="class-use/TemplateEngine.html#org.jdbi.v3.core.statement">TemplateEngine</a></div>
-<div class="col-last even-row-color">
+<div class="col-first odd-row-color"><a href="class-use/TemplateEngine.html#org.jdbi.v3.core.statement">TemplateEngine</a></div>
+<div class="col-last odd-row-color">
 <div class="block">Renders an SQL statement from a template.</div>
 </div>
-<div class="col-first odd-row-color"><a href="class-use/TemplateEngine.Parsing.html#org.jdbi.v3.core.statement">TemplateEngine.Parsing</a></div>
-<div class="col-last odd-row-color">&nbsp;</div>
-<div class="col-first even-row-color"><a href="class-use/TimingCollector.html#org.jdbi.v3.core.statement">TimingCollector</a></div>
-<div class="col-last even-row-color">
+<div class="col-first even-row-color"><a href="class-use/TemplateEngine.Parsing.html#org.jdbi.v3.core.statement">TemplateEngine.Parsing</a></div>
+<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-first odd-row-color"><a href="class-use/TimingCollector.html#org.jdbi.v3.core.statement">TimingCollector</a></div>
+<div class="col-last odd-row-color">
 <div class="block"><span class="deprecated-label">Deprecated, for removal: This API element is subject to removal in a future version.</span>
 <div class="deprecation-comment">Use <a href="SqlLogger.html" title="interface in org.jdbi.v3.core.statement"><code>SqlLogger</code></a> instead.</div>
 </div>
 </div>
-<div class="col-first odd-row-color"><a href="class-use/Update.html#org.jdbi.v3.core.statement">Update</a></div>
-<div class="col-last odd-row-color">
+<div class="col-first even-row-color"><a href="class-use/Update.html#org.jdbi.v3.core.statement">Update</a></div>
+<div class="col-last even-row-color">
 <div class="block">Used for INSERT, UPDATE, and DELETE statements</div>
 </div>
 </div>

@@ -189,6 +189,10 @@ then clear the current binding.</div>
 <dd>
 <div class="block">Provides a means for custom statement modification.</div>
 </dd>
+<dt><a href="org/jdbi/v3/core/statement/SqlStatements.html#addExceptionHandler(org.jdbi.v3.core.statement.SqlExceptionHandler)" class="member-name-link">addExceptionHandler(SqlExceptionHandler)</a> - Method in class org.jdbi.v3.core.statement.<a href="org/jdbi/v3/core/statement/SqlStatements.html" title="class in org.jdbi.v3.core.statement">SqlStatements</a></dt>
+<dd>
+<div class="block">Add a callback used when statement execution throws SQLException.</div>
+</dd>
 <dt><a href="org/jdbi/v3/core/extension/ExtensionMetadata.Builder.html#addExtensionHandlerCustomizer(org.jdbi.v3.core.extension.ExtensionHandlerCustomizer)" class="member-name-link">addExtensionHandlerCustomizer(ExtensionHandlerCustomizer)</a> - Method in class org.jdbi.v3.core.extension.<a href="org/jdbi/v3/core/extension/ExtensionMetadata.Builder.html" title="class in org.jdbi.v3.core.extension">ExtensionMetadata.Builder</a></dt>
 <dd>
 <div class="block">Adds an <a href="org/jdbi/v3/core/extension/ExtensionHandlerCustomizer.html" title="interface in org.jdbi.v3.core.extension"><code>ExtensionHandlerCustomizer</code></a> that will be used to customize extension handlers when the <a href="org/jdbi/v3/core/extension/ExtensionMetadata.Builder.html#build()"><code>ExtensionMetadata.Builder.build()</code></a>} method is called.</div>
@@ -3921,6 +3925,10 @@ or a new one otherwise.</div>
 </dd>
 <dt><a href="org/jdbi/v3/core/h2/H2DatabasePlugin.html#%3Cinit%3E()" class="member-name-link">H2DatabasePlugin()</a> - Constructor for class org.jdbi.v3.core.h2.<a href="org/jdbi/v3/core/h2/H2DatabasePlugin.html" title="class in org.jdbi.v3.core.h2">H2DatabasePlugin</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="org/jdbi/v3/core/statement/SqlExceptionHandler.html#handle(java.sql.SQLException)" class="member-name-link">handle(SQLException)</a> - Method in interface org.jdbi.v3.core.statement.<a href="org/jdbi/v3/core/statement/SqlExceptionHandler.html" title="interface in org.jdbi.v3.core.statement">SqlExceptionHandler</a></dt>
+<dd>
+<div class="block">Take action based on a SQLException thrown during statement execution.</div>
+</dd>
 <dt><a href="org/jdbi/v3/core/Handle.html" class="type-name-link" title="class in org.jdbi.v3.core">Handle</a> - Class in <a href="org/jdbi/v3/core/package-summary.html">org.jdbi.v3.core</a></dt>
 <dd>
 <div class="block">This represents a connection to the database system.</div>
@@ -6472,6 +6480,12 @@ or for a method.</div>
 </dd>
 <dt><a href="org/jdbi/v3/sqlobject/config/RegisterRowMappers.html" class="type-name-link" title="annotation interface in org.jdbi.v3.sqlobject.config">RegisterRowMappers</a> - Annotation Interface in <a href="org/jdbi/v3/sqlobject/config/package-summary.html">org.jdbi.v3.sqlobject.config</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="org/jdbi/v3/sqlobject/config/RegisterSqlExceptionHandler.html" class="type-name-link" title="annotation interface in org.jdbi.v3.sqlobject.config">RegisterSqlExceptionHandler</a> - Annotation Interface in <a href="org/jdbi/v3/sqlobject/config/package-summary.html">org.jdbi.v3.sqlobject.config</a></dt>
+<dd>
+<div class="block">Register a SQLException handler in the context of a SQL Object type or method.</div>
+</dd>
+<dt><a href="org/jdbi/v3/sqlobject/config/RegisterSqlExceptionHandlers.html" class="type-name-link" title="annotation interface in org.jdbi.v3.sqlobject.config">RegisterSqlExceptionHandlers</a> - Annotation Interface in <a href="org/jdbi/v3/sqlobject/config/package-summary.html">org.jdbi.v3.sqlobject.config</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/core/Handle.html#release(java.lang.String)" class="member-name-link">release(String)</a> - Method in class org.jdbi.v3.core.<a href="org/jdbi/v3/core/Handle.html" title="class in org.jdbi.v3.core">Handle</a></dt>
 <dd>
 <div class="deprecation-block"><span class="deprecated-label">Deprecated, for removal: This API element is subject to removal in a future version.</span>
@@ -7397,6 +7411,10 @@ Jdbi usage.</div>
 <dd>
 <div class="block">Support for stored proc invocation.</div>
 </dd>
+<dt><a href="org/jdbi/v3/core/statement/SqlExceptionHandler.html" class="type-name-link" title="interface in org.jdbi.v3.core.statement">SqlExceptionHandler</a> - Interface in <a href="org/jdbi/v3/core/statement/package-summary.html">org.jdbi.v3.core.statement</a></dt>
+<dd>
+<div class="block">Handler for exceptions thrown while executing SQL statements.</div>
+</dd>
 <dt><a href="org/jdbi/v3/testing/JdbiRule.html#sqlite()" class="member-name-link">sqlite()</a> - Static method in class org.jdbi.v3.testing.<a href="org/jdbi/v3/testing/JdbiRule.html" title="class in org.jdbi.v3.testing">JdbiRule</a></dt>
 <dd>
 <div class="block">Create a JdbiRule with an in-memory Sqlite database instance.</div>
@@ -8276,6 +8294,12 @@ to the <a href="org/jdbi/v3/spring5/EnableJdbiRepositories.html#basePackages()">
 <dt><a href="org/jdbi/v3/sqlobject/config/RegisterRowMapperFactory.html#value()" class="member-name-link">value()</a> - Element in annotation interface org.jdbi.v3.sqlobject.config.<a href="org/jdbi/v3/sqlobject/config/RegisterRowMapperFactory.html" title="annotation interface in org.jdbi.v3.sqlobject.config">RegisterRowMapperFactory</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/sqlobject/config/RegisterRowMappers.html#value()" class="member-name-link">value()</a> - Element in annotation interface org.jdbi.v3.sqlobject.config.<a href="org/jdbi/v3/sqlobject/config/RegisterRowMappers.html" title="annotation interface in org.jdbi.v3.sqlobject.config">RegisterRowMappers</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="org/jdbi/v3/sqlobject/config/RegisterSqlExceptionHandler.html#value()" class="member-name-link">value()</a> - Element in annotation interface org.jdbi.v3.sqlobject.config.<a href="org/jdbi/v3/sqlobject/config/RegisterSqlExceptionHandler.html" title="annotation interface in org.jdbi.v3.sqlobject.config">RegisterSqlExceptionHandler</a></dt>
+<dd>
+<div class="block">The exception handler class to register</div>
+</dd>
+<dt><a href="org/jdbi/v3/sqlobject/config/RegisterSqlExceptionHandlers.html#value()" class="member-name-link">value()</a> - Element in annotation interface org.jdbi.v3.sqlobject.config.<a href="org/jdbi/v3/sqlobject/config/RegisterSqlExceptionHandlers.html" title="annotation interface in org.jdbi.v3.sqlobject.config">RegisterSqlExceptionHandlers</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/sqlobject/config/UseEnumStrategy.html#value()" class="member-name-link">value()</a> - Element in annotation interface org.jdbi.v3.sqlobject.config.<a href="org/jdbi/v3/sqlobject/config/UseEnumStrategy.html" title="annotation interface in org.jdbi.v3.sqlobject.config">UseEnumStrategy</a></dt>
 <dd>&nbsp;</dd>

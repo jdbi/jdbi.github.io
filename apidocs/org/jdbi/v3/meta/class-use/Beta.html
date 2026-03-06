@@ -126,14 +126,21 @@ The <code>postgres</code> plugin provides improved support for
 <code>java.time</code>, <code>hstore</code>, <code>uuid</code>, and <code>enum</code>
 types when configured with a recent Postgres database server.</div>
 </div>
-<div class="col-first even-row-color"><a href="#org.jdbi.v3.sqlobject.customizer">org.jdbi.v3.sqlobject.customizer</a></div>
+<div class="col-first even-row-color"><a href="#org.jdbi.v3.sqlobject.config">org.jdbi.v3.sqlobject.config</a></div>
 <div class="col-last even-row-color">
+<div class="block">
+The <code>sqlobject.config</code> package defines configuration annotations
+that modify the <code>Jdbi</code> configuration used as the context for executing
+SqlObject methods, such as registering handled types.</div>
+</div>
+<div class="col-first odd-row-color"><a href="#org.jdbi.v3.sqlobject.customizer">org.jdbi.v3.sqlobject.customizer</a></div>
+<div class="col-last odd-row-color">
 <div class="block">
 The <code>sqlobject.customizer</code> package provides annotations
 that customize the execution of a statement.</div>
 </div>
-<div class="col-first odd-row-color"><a href="#org.jdbi.v3.testing.junit5.tc">org.jdbi.v3.testing.junit5.tc</a></div>
-<div class="col-last odd-row-color">
+<div class="col-first even-row-color"><a href="#org.jdbi.v3.testing.junit5.tc">org.jdbi.v3.testing.junit5.tc</a></div>
+<div class="col-last even-row-color">
 <div class="block">Jdbi test support for <a href="https://testcontainers.org/">Testcontainer based JDBC containers</a>.</div>
 </div>
 </div>
@@ -344,13 +351,18 @@ configuration data structures.</div>
 <div class="table-header col-second">Interface</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>interface&nbsp;</code></div>
-<div class="col-second even-row-color"><code><a href="../../core/statement/StatementContextListener.html" class="type-name-link" title="interface in org.jdbi.v3.core.statement">StatementContextListener</a></code></div>
+<div class="col-second even-row-color"><code><a href="../../core/statement/SqlExceptionHandler.html" class="type-name-link" title="interface in org.jdbi.v3.core.statement">SqlExceptionHandler</a></code></div>
 <div class="col-last even-row-color">
+<div class="block">Handler for exceptions thrown while executing SQL statements.</div>
+</div>
+<div class="col-first odd-row-color"><code>interface&nbsp;</code></div>
+<div class="col-second odd-row-color"><code><a href="../../core/statement/StatementContextListener.html" class="type-name-link" title="interface in org.jdbi.v3.core.statement">StatementContextListener</a></code></div>
+<div class="col-last odd-row-color">
 <div class="block">Listener interface for the <a href="../../core/statement/StatementContext.html" title="class in org.jdbi.v3.core.statement"><code>StatementContext</code></a>.</div>
 </div>
-<div class="col-first odd-row-color"><code>class&nbsp;</code></div>
-<div class="col-second odd-row-color"><code><a href="../../core/statement/StatementExceptions.html" class="type-name-link" title="class in org.jdbi.v3.core.statement">StatementExceptions</a></code></div>
-<div class="col-last odd-row-color">
+<div class="col-first even-row-color"><code>class&nbsp;</code></div>
+<div class="col-second even-row-color"><code><a href="../../core/statement/StatementExceptions.html" class="type-name-link" title="class in org.jdbi.v3.core.statement">StatementExceptions</a></code></div>
+<div class="col-last even-row-color">
 <div class="block">Configuration for <a href="../../core/statement/StatementException.html" title="class in org.jdbi.v3.core.statement"><code>StatementException</code></a> and subclasses behavior.</div>
 </div>
 </div>
@@ -359,110 +371,115 @@ configuration data structures.</div>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code><a href="../../core/statement/SqlStatement.html#type-param-This" title="type parameter in SqlStatement">This</a></code></div>
-<div class="col-second even-row-color"><span class="type-name-label">SqlStatement.</span><code><a href="../../core/statement/SqlStatement.html#bindPojo(java.lang.Object)" class="member-name-link">bindPojo</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;pojo)</code></div>
+<div class="col-first even-row-color"><code><a href="../../core/statement/SqlStatements.html" title="class in org.jdbi.v3.core.statement">SqlStatements</a></code></div>
+<div class="col-second even-row-color"><span class="type-name-label">SqlStatements.</span><code><a href="../../core/statement/SqlStatements.html#addExceptionHandler(org.jdbi.v3.core.statement.SqlExceptionHandler)" class="member-name-link">addExceptionHandler</a><wbr>(<a href="../../core/statement/SqlExceptionHandler.html" title="interface in org.jdbi.v3.core.statement">SqlExceptionHandler</a>&nbsp;handler)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Binds named parameters from object properties on the argument.</div>
+<div class="block">Add a callback used when statement execution throws SQLException.</div>
 </div>
 <div class="col-first odd-row-color"><code><a href="../../core/statement/SqlStatement.html#type-param-This" title="type parameter in SqlStatement">This</a></code></div>
-<div class="col-second odd-row-color"><span class="type-name-label">SqlStatement.</span><code><a href="../../core/statement/SqlStatement.html#bindPojo(java.lang.Object,java.lang.reflect.Type)" class="member-name-link">bindPojo</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;pojo,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Type.html" title="class or interface in java.lang.reflect" class="external-link">Type</a>&nbsp;type)</code></div>
+<div class="col-second odd-row-color"><span class="type-name-label">SqlStatement.</span><code><a href="../../core/statement/SqlStatement.html#bindPojo(java.lang.Object)" class="member-name-link">bindPojo</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;pojo)</code></div>
 <div class="col-last odd-row-color">
 <div class="block">Binds named parameters from object properties on the argument.</div>
 </div>
 <div class="col-first even-row-color"><code><a href="../../core/statement/SqlStatement.html#type-param-This" title="type parameter in SqlStatement">This</a></code></div>
-<div class="col-second even-row-color"><span class="type-name-label">SqlStatement.</span><code><a href="../../core/statement/SqlStatement.html#bindPojo(java.lang.Object,org.jdbi.v3.core.generic.GenericType)" class="member-name-link">bindPojo</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;pojo,
- <a href="../../core/generic/GenericType.html" title="class in org.jdbi.v3.core.generic">GenericType</a>&lt;?&gt;&nbsp;type)</code></div>
+<div class="col-second even-row-color"><span class="type-name-label">SqlStatement.</span><code><a href="../../core/statement/SqlStatement.html#bindPojo(java.lang.Object,java.lang.reflect.Type)" class="member-name-link">bindPojo</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;pojo,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Type.html" title="class or interface in java.lang.reflect" class="external-link">Type</a>&nbsp;type)</code></div>
 <div class="col-last even-row-color">
 <div class="block">Binds named parameters from object properties on the argument.</div>
 </div>
 <div class="col-first odd-row-color"><code><a href="../../core/statement/SqlStatement.html#type-param-This" title="type parameter in SqlStatement">This</a></code></div>
-<div class="col-second odd-row-color"><span class="type-name-label">SqlStatement.</span><code><a href="../../core/statement/SqlStatement.html#bindPojo(java.lang.String,java.lang.Object)" class="member-name-link">bindPojo</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix,
+<div class="col-second odd-row-color"><span class="type-name-label">SqlStatement.</span><code><a href="../../core/statement/SqlStatement.html#bindPojo(java.lang.Object,org.jdbi.v3.core.generic.GenericType)" class="member-name-link">bindPojo</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;pojo,
+ <a href="../../core/generic/GenericType.html" title="class in org.jdbi.v3.core.generic">GenericType</a>&lt;?&gt;&nbsp;type)</code></div>
+<div class="col-last odd-row-color">
+<div class="block">Binds named parameters from object properties on the argument.</div>
+</div>
+<div class="col-first even-row-color"><code><a href="../../core/statement/SqlStatement.html#type-param-This" title="type parameter in SqlStatement">This</a></code></div>
+<div class="col-second even-row-color"><span class="type-name-label">SqlStatement.</span><code><a href="../../core/statement/SqlStatement.html#bindPojo(java.lang.String,java.lang.Object)" class="member-name-link">bindPojo</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;pojo)</code></div>
-<div class="col-last odd-row-color">
-<div class="block">Binds named parameters from object properties on the bean argument, with the given prefix.</div>
-</div>
-<div class="col-first even-row-color"><code><a href="../../core/statement/SqlStatement.html#type-param-This" title="type parameter in SqlStatement">This</a></code></div>
-<div class="col-second even-row-color"><span class="type-name-label">SqlStatement.</span><code><a href="../../core/statement/SqlStatement.html#bindPojo(java.lang.String,java.lang.Object,java.lang.reflect.Type)" class="member-name-link">bindPojo</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;pojo,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Type.html" title="class or interface in java.lang.reflect" class="external-link">Type</a>&nbsp;type)</code></div>
 <div class="col-last even-row-color">
 <div class="block">Binds named parameters from object properties on the bean argument, with the given prefix.</div>
 </div>
 <div class="col-first odd-row-color"><code><a href="../../core/statement/SqlStatement.html#type-param-This" title="type parameter in SqlStatement">This</a></code></div>
-<div class="col-second odd-row-color"><span class="type-name-label">SqlStatement.</span><code><a href="../../core/statement/SqlStatement.html#bindPojo(java.lang.String,java.lang.Object,org.jdbi.v3.core.generic.GenericType)" class="member-name-link">bindPojo</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix,
+<div class="col-second odd-row-color"><span class="type-name-label">SqlStatement.</span><code><a href="../../core/statement/SqlStatement.html#bindPojo(java.lang.String,java.lang.Object,java.lang.reflect.Type)" class="member-name-link">bindPojo</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;pojo,
- <a href="../../core/generic/GenericType.html" title="class in org.jdbi.v3.core.generic">GenericType</a>&lt;?&gt;&nbsp;type)</code></div>
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Type.html" title="class or interface in java.lang.reflect" class="external-link">Type</a>&nbsp;type)</code></div>
 <div class="col-last odd-row-color">
 <div class="block">Binds named parameters from object properties on the bean argument, with the given prefix.</div>
 </div>
-<div class="col-first even-row-color"><code>&lt;T&gt;&nbsp;T</code></div>
-<div class="col-second even-row-color"><span class="type-name-label">CachingSqlParser.</span><code><a href="../../core/statement/CachingSqlParser.html#cacheStats()" class="member-name-link">cacheStats</a>()</code></div>
+<div class="col-first even-row-color"><code><a href="../../core/statement/SqlStatement.html#type-param-This" title="type parameter in SqlStatement">This</a></code></div>
+<div class="col-second even-row-color"><span class="type-name-label">SqlStatement.</span><code><a href="../../core/statement/SqlStatement.html#bindPojo(java.lang.String,java.lang.Object,org.jdbi.v3.core.generic.GenericType)" class="member-name-link">bindPojo</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;pojo,
+ <a href="../../core/generic/GenericType.html" title="class in org.jdbi.v3.core.generic">GenericType</a>&lt;?&gt;&nbsp;type)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Returns cache statistics for the internal sql parser cache.</div>
+<div class="block">Binds named parameters from object properties on the bean argument, with the given prefix.</div>
 </div>
 <div class="col-first odd-row-color"><code>&lt;T&gt;&nbsp;T</code></div>
-<div class="col-second odd-row-color"><span class="type-name-label">SqlStatements.</span><code><a href="../../core/statement/SqlStatements.html#cacheStats()" class="member-name-link">cacheStats</a>()</code></div>
+<div class="col-second odd-row-color"><span class="type-name-label">CachingSqlParser.</span><code><a href="../../core/statement/CachingSqlParser.html#cacheStats()" class="member-name-link">cacheStats</a>()</code></div>
 <div class="col-last odd-row-color">
+<div class="block">Returns cache statistics for the internal sql parser cache.</div>
+</div>
+<div class="col-first even-row-color"><code>&lt;T&gt;&nbsp;T</code></div>
+<div class="col-second even-row-color"><span class="type-name-label">SqlStatements.</span><code><a href="../../core/statement/SqlStatements.html#cacheStats()" class="member-name-link">cacheStats</a>()</code></div>
+<div class="col-last even-row-color">
 <div class="block">Returns cache statistics for the internal template cache.</div>
 </div>
-<div class="col-first even-row-color"><code><a href="../../core/statement/SqlStatement.html#type-param-This" title="type parameter in SqlStatement">This</a></code></div>
-<div class="col-second even-row-color"><span class="type-name-label">SqlStatement.</span><code><a href="../../core/statement/SqlStatement.html#defineNamedBindings()" class="member-name-link">defineNamedBindings</a>()</code></div>
-<div class="col-last even-row-color">
+<div class="col-first odd-row-color"><code><a href="../../core/statement/SqlStatement.html#type-param-This" title="type parameter in SqlStatement">This</a></code></div>
+<div class="col-second odd-row-color"><span class="type-name-label">SqlStatement.</span><code><a href="../../core/statement/SqlStatement.html#defineNamedBindings()" class="member-name-link">defineNamedBindings</a>()</code></div>
+<div class="col-last odd-row-color">
 <div class="block">Define all bound arguments that don't already have a definition with a boolean indicating their presence.</div>
 </div>
-<div class="col-first odd-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color"><span class="type-name-label">StatementContext.</span><code><a href="../../core/statement/StatementContext.html#describeJdbiStatementType()" class="member-name-link">describeJdbiStatementType</a>()</code></div>
-<div class="col-last odd-row-color">
+<div class="col-first even-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color"><span class="type-name-label">StatementContext.</span><code><a href="../../core/statement/StatementContext.html#describeJdbiStatementType()" class="member-name-link">describeJdbiStatementType</a>()</code></div>
+<div class="col-last even-row-color">
 <div class="block">Returns the type of the statement that owns this statement context as a descriptive string.</div>
 </div>
-<div class="col-first even-row-color"><code>boolean</code></div>
-<div class="col-second even-row-color"><span class="type-name-label">SqlStatements.</span><code><a href="../../core/statement/SqlStatements.html#getIncludeBindingsInTelemetry()" class="member-name-link">getIncludeBindingsInTelemetry</a>()</code></div>
-<div class="col-last even-row-color">
+<div class="col-first odd-row-color"><code>boolean</code></div>
+<div class="col-second odd-row-color"><span class="type-name-label">SqlStatements.</span><code><a href="../../core/statement/SqlStatements.html#getIncludeBindingsInTelemetry()" class="member-name-link">getIncludeBindingsInTelemetry</a>()</code></div>
+<div class="col-last odd-row-color">
 <div class="block">Toggle whether to include potentially sensitive bindins in telemetry data.</div>
 </div>
-<div class="col-first odd-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Type.html" title="class or interface in java.lang.reflect" class="external-link">Type</a></code></div>
-<div class="col-second odd-row-color"><span class="type-name-label">StatementContext.</span><code><a href="../../core/statement/StatementContext.html#getJdbiStatementType()" class="member-name-link">getJdbiStatementType</a>()</code></div>
-<div class="col-last odd-row-color">
+<div class="col-first even-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Type.html" title="class or interface in java.lang.reflect" class="external-link">Type</a></code></div>
+<div class="col-second even-row-color"><span class="type-name-label">StatementContext.</span><code><a href="../../core/statement/StatementContext.html#getJdbiStatementType()" class="member-name-link">getJdbiStatementType</a>()</code></div>
+<div class="col-last even-row-color">
 <div class="block">Inspect the type of the statement that owns this statement context.</div>
 </div>
-<div class="col-first even-row-color"><code>int</code></div>
-<div class="col-second even-row-color"><span class="type-name-label">SqlStatements.</span><code><a href="../../core/statement/SqlStatements.html#getJfrParamMaxLength()" class="member-name-link">getJfrParamMaxLength</a>()</code></div>
-<div class="col-last even-row-color">
+<div class="col-first odd-row-color"><code>int</code></div>
+<div class="col-second odd-row-color"><span class="type-name-label">SqlStatements.</span><code><a href="../../core/statement/SqlStatements.html#getJfrParamMaxLength()" class="member-name-link">getJfrParamMaxLength</a>()</code></div>
+<div class="col-last odd-row-color">
 <div class="block">When recording JFR events, the maximum length of rendered parameters to store in the event record.</div>
 </div>
-<div class="col-first odd-row-color"><code>int</code></div>
-<div class="col-second odd-row-color"><span class="type-name-label">SqlStatements.</span><code><a href="../../core/statement/SqlStatements.html#getJfrSqlMaxLength()" class="member-name-link">getJfrSqlMaxLength</a>()</code></div>
-<div class="col-last odd-row-color">
+<div class="col-first even-row-color"><code>int</code></div>
+<div class="col-second even-row-color"><span class="type-name-label">SqlStatements.</span><code><a href="../../core/statement/SqlStatements.html#getJfrSqlMaxLength()" class="member-name-link">getJfrSqlMaxLength</a>()</code></div>
+<div class="col-last even-row-color">
 <div class="block">When recording JFR events, the maximum length of rendered SQL to store in the event record.</div>
 </div>
-<div class="col-first even-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a></code></div>
-<div class="col-second even-row-color"><span class="type-name-label">SqlStatements.</span><code><a href="../../core/statement/SqlStatements.html#getQueryTimeout()" class="member-name-link">getQueryTimeout</a>()</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><code>void</code></div>
-<div class="col-second odd-row-color"><span class="type-name-label">SqlStatements.</span><code><a href="../../core/statement/SqlStatements.html#setAttachAllStatementsForCleanup(boolean)" class="member-name-link">setAttachAllStatementsForCleanup</a><wbr>(boolean&nbsp;attachAllStatementsForCleanup)</code></div>
-<div class="col-last odd-row-color">
+<div class="col-first odd-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a></code></div>
+<div class="col-second odd-row-color"><span class="type-name-label">SqlStatements.</span><code><a href="../../core/statement/SqlStatements.html#getQueryTimeout()" class="member-name-link">getQueryTimeout</a>()</code></div>
+<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-first even-row-color"><code>void</code></div>
+<div class="col-second even-row-color"><span class="type-name-label">SqlStatements.</span><code><a href="../../core/statement/SqlStatements.html#setAttachAllStatementsForCleanup(boolean)" class="member-name-link">setAttachAllStatementsForCleanup</a><wbr>(boolean&nbsp;attachAllStatementsForCleanup)</code></div>
+<div class="col-last even-row-color">
 <div class="block">Sets whether all statements created will automatically attached to the corresponding <a href="../../core/Handle.html" title="class in org.jdbi.v3.core"><code>Handle</code></a> object automatically.</div>
 </div>
-<div class="col-first even-row-color"><code><a href="../../core/statement/SqlStatements.html" title="class in org.jdbi.v3.core.statement">SqlStatements</a></code></div>
-<div class="col-second even-row-color"><span class="type-name-label">SqlStatements.</span><code><a href="../../core/statement/SqlStatements.html#setJfrParamMaxLength(int)" class="member-name-link">setJfrParamMaxLength</a><wbr>(int&nbsp;jfrParamMaxLength)</code></div>
-<div class="col-last even-row-color">
+<div class="col-first odd-row-color"><code><a href="../../core/statement/SqlStatements.html" title="class in org.jdbi.v3.core.statement">SqlStatements</a></code></div>
+<div class="col-second odd-row-color"><span class="type-name-label">SqlStatements.</span><code><a href="../../core/statement/SqlStatements.html#setJfrParamMaxLength(int)" class="member-name-link">setJfrParamMaxLength</a><wbr>(int&nbsp;jfrParamMaxLength)</code></div>
+<div class="col-last odd-row-color">
 <div class="block">When recording JFR events, the maximum length of rendered parameters to store in the event record.</div>
 </div>
-<div class="col-first odd-row-color"><code><a href="../../core/statement/SqlStatements.html" title="class in org.jdbi.v3.core.statement">SqlStatements</a></code></div>
-<div class="col-second odd-row-color"><span class="type-name-label">SqlStatements.</span><code><a href="../../core/statement/SqlStatements.html#setJfrSqlMaxLength(int)" class="member-name-link">setJfrSqlMaxLength</a><wbr>(int&nbsp;jfrSqlMaxLength)</code></div>
-<div class="col-last odd-row-color">
+<div class="col-first even-row-color"><code><a href="../../core/statement/SqlStatements.html" title="class in org.jdbi.v3.core.statement">SqlStatements</a></code></div>
+<div class="col-second even-row-color"><span class="type-name-label">SqlStatements.</span><code><a href="../../core/statement/SqlStatements.html#setJfrSqlMaxLength(int)" class="member-name-link">setJfrSqlMaxLength</a><wbr>(int&nbsp;jfrSqlMaxLength)</code></div>
+<div class="col-last even-row-color">
 <div class="block">When recording JFR events, the maximum length of rendered SQL to store in the event record.</div>
 </div>
-<div class="col-first even-row-color"><code><a href="../../core/statement/SqlStatements.html" title="class in org.jdbi.v3.core.statement">SqlStatements</a></code></div>
-<div class="col-second even-row-color"><span class="type-name-label">SqlStatements.</span><code><a href="../../core/statement/SqlStatements.html#setQueryTimeout(java.lang.Integer)" class="member-name-link">setQueryTimeout</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;seconds)</code></div>
-<div class="col-last even-row-color">
+<div class="col-first odd-row-color"><code><a href="../../core/statement/SqlStatements.html" title="class in org.jdbi.v3.core.statement">SqlStatements</a></code></div>
+<div class="col-second odd-row-color"><span class="type-name-label">SqlStatements.</span><code><a href="../../core/statement/SqlStatements.html#setQueryTimeout(java.lang.Integer)" class="member-name-link">setQueryTimeout</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;seconds)</code></div>
+<div class="col-last odd-row-color">
 <div class="block">Jdbi does not implement its own timeout mechanism: it simply calls <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/Statement.html#setQueryTimeout(int)" title="class or interface in java.sql" class="external-link"><code>Statement.setQueryTimeout(int)</code></a>, leaving timeout handling to your jdbc
 driver.</div>
 </div>
-<div class="col-first odd-row-color"><code><a href="../../core/statement/SqlStatements.html" title="class in org.jdbi.v3.core.statement">SqlStatements</a></code></div>
-<div class="col-second odd-row-color"><span class="type-name-label">SqlStatements.</span><code><a href="../../core/statement/SqlStatements.html#setTemplateCache(org.jdbi.v3.core.cache.JdbiCacheBuilder)" class="member-name-link">setTemplateCache</a><wbr>(<a href="../../core/cache/JdbiCacheBuilder.html" title="interface in org.jdbi.v3.core.cache">JdbiCacheBuilder</a>&nbsp;cacheBuilder)</code></div>
-<div class="col-last odd-row-color">
+<div class="col-first even-row-color"><code><a href="../../core/statement/SqlStatements.html" title="class in org.jdbi.v3.core.statement">SqlStatements</a></code></div>
+<div class="col-second even-row-color"><span class="type-name-label">SqlStatements.</span><code><a href="../../core/statement/SqlStatements.html#setTemplateCache(org.jdbi.v3.core.cache.JdbiCacheBuilder)" class="member-name-link">setTemplateCache</a><wbr>(<a href="../../core/cache/JdbiCacheBuilder.html" title="interface in org.jdbi.v3.core.cache">JdbiCacheBuilder</a>&nbsp;cacheBuilder)</code></div>
+<div class="col-last even-row-color">
 <div class="block">Sets the cache used to avoid repeatedly parsing SQL statements.</div>
 </div>
 </div>
@@ -539,6 +556,22 @@ driver.</div>
 <div class="col-first even-row-color"><code>interface&nbsp;</code></div>
 <div class="col-second even-row-color"><code><a href="../../postgres/PgLobApi.html" class="type-name-link" title="interface in org.jdbi.v3.postgres">PgLobApi</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="org.jdbi.v3.sqlobject.config">
+<h2>Uses of <a href="../Beta.html" title="annotation interface in org.jdbi.v3.meta">Beta</a> in <a href="../../sqlobject/config/package-summary.html">org.jdbi.v3.sqlobject.config</a></h2>
+<div class="caption"><span>Classes in <a href="../../sqlobject/config/package-summary.html">org.jdbi.v3.sqlobject.config</a> with annotations of type <a href="../Beta.html" title="annotation interface in org.jdbi.v3.meta">Beta</a></span></div>
+<div class="summary-table three-column-summary">
+<div class="table-header col-first">Modifier and Type</div>
+<div class="table-header col-second">Class</div>
+<div class="table-header col-last">Description</div>
+<div class="col-first even-row-color"><code>@interface&nbsp;</code></div>
+<div class="col-second even-row-color"><code><a href="../../sqlobject/config/RegisterSqlExceptionHandler.html" class="type-name-link" title="annotation interface in org.jdbi.v3.sqlobject.config">RegisterSqlExceptionHandler</a></code></div>
+<div class="col-last even-row-color">
+<div class="block">Register a SQLException handler in the context of a SQL Object type or method.</div>
+</div>
 </div>
 </section>
 </li>
