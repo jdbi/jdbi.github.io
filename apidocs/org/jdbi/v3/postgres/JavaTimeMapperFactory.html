@@ -61,6 +61,11 @@ loadScripts(document, 'script');</script>
 <li><a href="#%3Cinit%3E()" tabindex="0">JavaTimeMapperFactory()</a></li>
 </ol>
 </li>
+<li><a href="#method-detail" tabindex="0">Method Details</a>
+<ol class="toc-list">
+<li><a href="#build(java.lang.reflect.Type,org.jdbi.v3.core.config.ConfigRegistry)" tabindex="0">build(Type, ConfigRegistry)</a></li>
+</ol>
+</li>
 </ol>
 <button class="hide-sidebar"><span>Hide sidebar&nbsp;</span><img src="../../../../resource-files/left.svg" alt="Hide sidebar"></button><button class="show-sidebar"><img src="../../../../resource-files/right.svg" alt="Show sidebar"><span>&nbsp;Show sidebar</span></button></nav>
 <main role="main">
@@ -69,9 +74,7 @@ loadScripts(document, 'script');</script>
 <h1 title="Class JavaTimeMapperFactory" class="title">Class JavaTimeMapperFactory</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance"><a href="../core/mapper/GetObjectColumnMapperFactory.html" title="class in org.jdbi.v3.core.mapper">org.jdbi.v3.core.mapper.GetObjectColumnMapperFactory</a>
 <div class="inheritance">org.jdbi.v3.postgres.JavaTimeMapperFactory</div>
-</div>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
@@ -81,16 +84,11 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="horizontal-scroll">
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">JavaTimeMapperFactory</span>
-<span class="extends-implements">extends <a href="../core/mapper/GetObjectColumnMapperFactory.html" title="class in org.jdbi.v3.core.mapper">GetObjectColumnMapperFactory</a></span></div>
-<div class="block">Provide mappers corresponding to java time types.</div>
-<dl class="notes">
-<dt>See Also:</dt>
-<dd>
-<ul class="tag-list">
-<li><a href="JavaTimeArgumentFactory.html" title="class in org.jdbi.v3.postgres">for the list of types</a></li>
-</ul>
-</dd>
-</dl>
+<span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
+implements <a href="../core/mapper/ColumnMapperFactory.html" title="interface in org.jdbi.v3.core.mapper">ColumnMapperFactory</a></span></div>
+<div class="block">Postgres specific mapper factory for Java Time types.
+<br>
+Maps <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/Instant.html" title="class or interface in java.time" class="external-link"><code>Instant</code></a> as the Postgres driver does not support them with <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/ResultSet.html#getObject(int)" title="class or interface in java.sql" class="external-link"><code>ResultSet.getObject(int)</code></a>.</div>
 </div>
 </section>
 <section class="summary">
@@ -112,9 +110,22 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="method-summary" id="method-summary">
 <h2>Method Summary</h2>
-<div class="inherited-list">
-<h3 id="methods-inherited-from-class-org.jdbi.v3.core.mapper.GetObjectColumnMapperFactory">Methods inherited from class&nbsp;<a href="../core/mapper/GetObjectColumnMapperFactory.html#method-summary" title="class in org.jdbi.v3.core.mapper">GetObjectColumnMapperFactory</a></h3>
-<code><a href="../core/mapper/GetObjectColumnMapperFactory.html#build(java.lang.reflect.Type,org.jdbi.v3.core.config.ConfigRegistry)" title="build(Type, ConfigRegistry)">build</a>, <a href="../core/mapper/GetObjectColumnMapperFactory.html#forClasses(java.lang.Class...)" title="forClasses(Class...)">forClasses</a>, <a href="../core/mapper/GetObjectColumnMapperFactory.html#forClasses(java.util.Set)" title="forClasses(Set)">forClasses</a></code></div>
+<div id="method-summary-table">
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button></div>
+<div id="method-summary-table.tabpanel" role="tabpanel" aria-labelledby="method-summary-table-tab0">
+<div class="summary-table three-column-summary">
+<div class="table-header col-first">Modifier and Type</div>
+<div class="table-header col-second">Method</div>
+<div class="table-header col-last">Description</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="../core/mapper/ColumnMapper.html" title="interface in org.jdbi.v3.core.mapper">ColumnMapper</a>&lt;?&gt;&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#build(java.lang.reflect.Type,org.jdbi.v3.core.config.ConfigRegistry)" class="member-name-link">build</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Type.html" title="class or interface in java.lang.reflect" class="external-link">Type</a>&nbsp;type,
+ <a href="../core/config/ConfigRegistry.html" title="class in org.jdbi.v3.core.config">ConfigRegistry</a>&nbsp;config)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Supplies a column mapper which will map columns to type if the factory supports it; empty otherwise.</div>
+</div>
+</div>
+</div>
+</div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-java.lang.Object">Methods inherited from class&nbsp;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#method-summary" title="class or interface in java.lang" class="external-link">Object</a></h3>
 <code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
@@ -134,6 +145,40 @@ loadScripts(document, 'script');</script>
 <h3>JavaTimeMapperFactory</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">JavaTimeMapperFactory</span>()</div>
+</div>
+</section>
+</li>
+</ul>
+</section>
+</li>
+<!-- ============ METHOD DETAIL ========== -->
+<li>
+<section class="method-details" id="method-detail">
+<h2>Method Details</h2>
+<ul class="member-list">
+<li>
+<section class="detail" id="build(java.lang.reflect.Type,org.jdbi.v3.core.config.ConfigRegistry)">
+<h3>build</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="../core/mapper/ColumnMapper.html" title="interface in org.jdbi.v3.core.mapper">ColumnMapper</a>&lt;?&gt;&gt;</span>&nbsp;<span class="element-name">build</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Type.html" title="class or interface in java.lang.reflect" class="external-link">Type</a>&nbsp;type,
+ <a href="../core/config/ConfigRegistry.html" title="class in org.jdbi.v3.core.config">ConfigRegistry</a>&nbsp;config)</span></div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../core/mapper/ColumnMapperFactory.html#build(java.lang.reflect.Type,org.jdbi.v3.core.config.ConfigRegistry)">ColumnMapperFactory</a></code></span></div>
+<div class="block">Supplies a column mapper which will map columns to type if the factory supports it; empty otherwise.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="../core/mapper/ColumnMapperFactory.html#build(java.lang.reflect.Type,org.jdbi.v3.core.config.ConfigRegistry)">build</a></code>&nbsp;in interface&nbsp;<code><a href="../core/mapper/ColumnMapperFactory.html" title="interface in org.jdbi.v3.core.mapper">ColumnMapperFactory</a></code></dd>
+<dt>Parameters:</dt>
+<dd><code>type</code> - the target type to map to</dd>
+<dd><code>config</code> - the config registry, for composition</dd>
+<dt>Returns:</dt>
+<dd>a column mapper for the given type if this factory supports it, or <code>Optional.empty()</code> otherwise.</dd>
+<dt>See Also:</dt>
+<dd>
+<ul class="tag-list">
+<li><a href="../core/mapper/ColumnMappers.html" title="class in org.jdbi.v3.core.mapper">for composition</a></li>
+</ul>
+</dd>
+</dl>
 </div>
 </section>
 </li>

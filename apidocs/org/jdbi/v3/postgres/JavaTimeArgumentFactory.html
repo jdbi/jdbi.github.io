@@ -62,6 +62,11 @@ loadScripts(document, 'script');</script>
 <li><a href="#%3Cinit%3E()" tabindex="0">JavaTimeArgumentFactory()</a></li>
 </ol>
 </li>
+<li><a href="#method-detail" tabindex="0">Method Details</a>
+<ol class="toc-list">
+<li><a href="#prepare(java.lang.reflect.Type,org.jdbi.v3.core.config.ConfigRegistry)" tabindex="0">prepare(Type, ConfigRegistry)</a></li>
+</ol>
+</li>
 </ol>
 <button class="hide-sidebar"><span>Hide sidebar&nbsp;</span><img src="../../../../resource-files/left.svg" alt="Hide sidebar"></button><button class="show-sidebar"><img src="../../../../resource-files/right.svg" alt="Show sidebar"><span>&nbsp;Show sidebar</span></button></nav>
 <main role="main">
@@ -70,9 +75,7 @@ loadScripts(document, 'script');</script>
 <h1 title="Class JavaTimeArgumentFactory" class="title">Class JavaTimeArgumentFactory</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance"><a href="../core/argument/SetObjectArgumentFactory.html" title="class in org.jdbi.v3.core.argument">org.jdbi.v3.core.argument.SetObjectArgumentFactory</a>
 <div class="inheritance">org.jdbi.v3.postgres.JavaTimeArgumentFactory</div>
-</div>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
@@ -82,9 +85,11 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="horizontal-scroll">
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">JavaTimeArgumentFactory</span>
-<span class="extends-implements">extends <a href="../core/argument/SetObjectArgumentFactory.html" title="class in org.jdbi.v3.core.argument">SetObjectArgumentFactory</a></span></div>
-<div class="block">Maps <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/LocalDate.html" title="class or interface in java.time" class="external-link"><code>LocalDate</code></a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/LocalTime.html" title="class or interface in java.time" class="external-link"><code>LocalTime</code></a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/LocalDateTime.html" title="class or interface in java.time" class="external-link"><code>LocalDateTime</code></a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/OffsetDateTime.html" title="class or interface in java.time" class="external-link"><code>OffsetDateTime</code></a>.
-Note that no <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/Instant.html" title="class or interface in java.time" class="external-link"><code>Instant</code></a> override is needed.</div>
+<span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
+implements <a href="../core/argument/ArgumentFactory.Preparable.html" title="interface in org.jdbi.v3.core.argument">ArgumentFactory.Preparable</a></span></div>
+<div class="block">Postgres specific argument factory for Java Time types.
+<br>
+<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/Instant.html" title="class or interface in java.time" class="external-link"><code>Instant</code></a> must be mapped to <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/Types.html#TIMESTAMP" title="class or interface in java.sql" class="external-link"><code>Types.TIMESTAMP</code></a>, as the Postgres driver does not support them with <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/PreparedStatement.html#setObject(int,java.lang.Object,int)" title="class or interface in java.sql" class="external-link"><code>PreparedStatement.setObject(int, Object, int)</code></a>.</div>
 </div>
 </section>
 <section class="summary">
@@ -115,15 +120,26 @@ Note that no <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.ba
 <li>
 <section class="method-summary" id="method-summary">
 <h2>Method Summary</h2>
-<div class="inherited-list">
-<h3 id="methods-inherited-from-class-org.jdbi.v3.core.argument.SetObjectArgumentFactory">Methods inherited from class&nbsp;<a href="../core/argument/SetObjectArgumentFactory.html#method-summary" title="class in org.jdbi.v3.core.argument">SetObjectArgumentFactory</a></h3>
-<code><a href="../core/argument/SetObjectArgumentFactory.html#forClasses(java.util.Map)" title="forClasses(Map)">forClasses</a>, <a href="../core/argument/SetObjectArgumentFactory.html#prepare(java.lang.reflect.Type,org.jdbi.v3.core.config.ConfigRegistry)" title="prepare(Type, ConfigRegistry)">prepare</a>, <a href="../core/argument/SetObjectArgumentFactory.html#prePreparedTypes()" title="prePreparedTypes()">prePreparedTypes</a></code></div>
+<div id="method-summary-table">
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button></div>
+<div id="method-summary-table.tabpanel" role="tabpanel" aria-labelledby="method-summary-table-tab0">
+<div class="summary-table three-column-summary">
+<div class="table-header col-first">Modifier and Type</div>
+<div class="table-header col-second">Method</div>
+<div class="table-header col-last">Description</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>,<wbr><a href="../core/argument/Argument.html" title="interface in org.jdbi.v3.core.argument">Argument</a>&gt;&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#prepare(java.lang.reflect.Type,org.jdbi.v3.core.config.ConfigRegistry)" class="member-name-link">prepare</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Type.html" title="class or interface in java.lang.reflect" class="external-link">Type</a>&nbsp;type,
+ <a href="../core/config/ConfigRegistry.html" title="class in org.jdbi.v3.core.config">ConfigRegistry</a>&nbsp;config)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+</div>
+</div>
+</div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-java.lang.Object">Methods inherited from class&nbsp;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#method-summary" title="class or interface in java.lang" class="external-link">Object</a></h3>
 <code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-org.jdbi.v3.core.argument.ArgumentFactory.Preparable">Methods inherited from interface&nbsp;<a href="../core/argument/ArgumentFactory.Preparable.html#method-summary" title="interface in org.jdbi.v3.core.argument">ArgumentFactory.Preparable</a></h3>
-<code><a href="../core/argument/ArgumentFactory.Preparable.html#build(java.lang.reflect.Type,java.lang.Object,org.jdbi.v3.core.config.ConfigRegistry)" title="build(Type, Object, ConfigRegistry)">build</a></code></div>
+<code><a href="../core/argument/ArgumentFactory.Preparable.html#build(java.lang.reflect.Type,java.lang.Object,org.jdbi.v3.core.config.ConfigRegistry)" title="build(Type, Object, ConfigRegistry)">build</a>, <a href="../core/argument/ArgumentFactory.Preparable.html#prePreparedTypes()" title="prePreparedTypes()">prePreparedTypes</a></code></div>
 </section>
 </li>
 </ul>
@@ -140,6 +156,27 @@ Note that no <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.ba
 <h3>JavaTimeArgumentFactory</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">JavaTimeArgumentFactory</span>()</div>
+</div>
+</section>
+</li>
+</ul>
+</section>
+</li>
+<!-- ============ METHOD DETAIL ========== -->
+<li>
+<section class="method-details" id="method-detail">
+<h2>Method Details</h2>
+<ul class="member-list">
+<li>
+<section class="detail" id="prepare(java.lang.reflect.Type,org.jdbi.v3.core.config.ConfigRegistry)">
+<h3>prepare</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>,<wbr><a href="../core/argument/Argument.html" title="interface in org.jdbi.v3.core.argument">Argument</a>&gt;&gt;</span>&nbsp;<span class="element-name">prepare</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Type.html" title="class or interface in java.lang.reflect" class="external-link">Type</a>&nbsp;type,
+ <a href="../core/config/ConfigRegistry.html" title="class in org.jdbi.v3.core.config">ConfigRegistry</a>&nbsp;config)</span></div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="../core/argument/ArgumentFactory.Preparable.html#prepare(java.lang.reflect.Type,org.jdbi.v3.core.config.ConfigRegistry)">prepare</a></code>&nbsp;in interface&nbsp;<code><a href="../core/argument/ArgumentFactory.Preparable.html" title="interface in org.jdbi.v3.core.argument">ArgumentFactory.Preparable</a></code></dd>
+</dl>
 </div>
 </section>
 </li>

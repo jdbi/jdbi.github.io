@@ -1227,6 +1227,8 @@ and defines a named attribute as a comma-separated list of each bound method nam
 <dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/postgres/DurationColumnMapperFactory.html#build(java.lang.reflect.Type,org.jdbi.v3.core.config.ConfigRegistry)" class="member-name-link">build(Type, ConfigRegistry)</a> - Method in class org.jdbi.v3.postgres.<a href="org/jdbi/v3/postgres/DurationColumnMapperFactory.html" title="class in org.jdbi.v3.postgres">DurationColumnMapperFactory</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="org/jdbi/v3/postgres/JavaTimeMapperFactory.html#build(java.lang.reflect.Type,org.jdbi.v3.core.config.ConfigRegistry)" class="member-name-link">build(Type, ConfigRegistry)</a> - Method in class org.jdbi.v3.postgres.<a href="org/jdbi/v3/postgres/JavaTimeMapperFactory.html" title="class in org.jdbi.v3.postgres">JavaTimeMapperFactory</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/postgres/PeriodColumnMapperFactory.html#build(java.lang.reflect.Type,org.jdbi.v3.core.config.ConfigRegistry)" class="member-name-link">build(Type, ConfigRegistry)</a> - Method in class org.jdbi.v3.postgres.<a href="org/jdbi/v3/postgres/PeriodColumnMapperFactory.html" title="class in org.jdbi.v3.postgres">PeriodColumnMapperFactory</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/postgres/DurationArgumentFactory.html#build(java.time.Duration,org.jdbi.v3.core.config.ConfigRegistry)" class="member-name-link">build(Duration, ConfigRegistry)</a> - Method in class org.jdbi.v3.postgres.<a href="org/jdbi/v3/postgres/DurationArgumentFactory.html" title="class in org.jdbi.v3.postgres">DurationArgumentFactory</a></dt>
@@ -4398,13 +4400,13 @@ with an <code>Iterator</code>.</div>
 <dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/postgres/JavaTimeArgumentFactory.html" class="type-name-link" title="class in org.jdbi.v3.postgres">JavaTimeArgumentFactory</a> - Class in <a href="org/jdbi/v3/postgres/package-summary.html">org.jdbi.v3.postgres</a></dt>
 <dd>
-<div class="block">Maps <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/LocalDate.html" title="class or interface in java.time" class="external-link"><code>LocalDate</code></a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/LocalTime.html" title="class or interface in java.time" class="external-link"><code>LocalTime</code></a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/LocalDateTime.html" title="class or interface in java.time" class="external-link"><code>LocalDateTime</code></a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/OffsetDateTime.html" title="class or interface in java.time" class="external-link"><code>OffsetDateTime</code></a>.</div>
+<div class="block">Postgres specific argument factory for Java Time types.</div>
 </dd>
 <dt><a href="org/jdbi/v3/postgres/JavaTimeArgumentFactory.html#%3Cinit%3E()" class="member-name-link">JavaTimeArgumentFactory()</a> - Constructor for class org.jdbi.v3.postgres.<a href="org/jdbi/v3/postgres/JavaTimeArgumentFactory.html" title="class in org.jdbi.v3.postgres">JavaTimeArgumentFactory</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/postgres/JavaTimeMapperFactory.html" class="type-name-link" title="class in org.jdbi.v3.postgres">JavaTimeMapperFactory</a> - Class in <a href="org/jdbi/v3/postgres/package-summary.html">org.jdbi.v3.postgres</a></dt>
 <dd>
-<div class="block">Provide mappers corresponding to java time types.</div>
+<div class="block">Postgres specific mapper factory for Java Time types.</div>
 </dd>
 <dt><a href="org/jdbi/v3/postgres/JavaTimeMapperFactory.html#%3Cinit%3E()" class="member-name-link">JavaTimeMapperFactory()</a> - Constructor for class org.jdbi.v3.postgres.<a href="org/jdbi/v3/postgres/JavaTimeMapperFactory.html" title="class in org.jdbi.v3.postgres">JavaTimeMapperFactory</a></dt>
 <dd>&nbsp;</dd>
@@ -4745,6 +4747,10 @@ RowMappers.</div>
 <dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/postgres/LargeObjectException.html#%3Cinit%3E(java.lang.Throwable)" class="member-name-link">LargeObjectException(Throwable)</a> - Constructor for exception class org.jdbi.v3.postgres.<a href="org/jdbi/v3/postgres/LargeObjectException.html" title="class in org.jdbi.v3.postgres">LargeObjectException</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="org/jdbi/v3/meta/Legacy.html" class="type-name-link" title="annotation interface in org.jdbi.v3.meta">Legacy</a> - Annotation Interface in <a href="org/jdbi/v3/meta/package-summary.html">org.jdbi.v3.meta</a></dt>
+<dd>
+<div class="block">Configures legacy Jdbi behavior.</div>
+</dd>
 <dt><a href="org/jdbi/v3/core/Sql.html#length()" class="member-name-link">length()</a> - Method in class org.jdbi.v3.core.<a href="org/jdbi/v3/core/Sql.html" title="class in org.jdbi.v3.core">Sql</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/core/result/LinkedHashMapRowReducer.html" class="type-name-link" title="interface in org.jdbi.v3.core.result">LinkedHashMapRowReducer&lt;K,<wbr>V&gt;</a> - Interface in <a href="org/jdbi/v3/core/result/package-summary.html">org.jdbi.v3.core.result</a></dt>
@@ -5961,6 +5967,8 @@ for the statement.</div>
 <dt><a href="org/jdbi/v3/core/argument/SetObjectArgumentFactory.html#prepare(java.lang.reflect.Type,org.jdbi.v3.core.config.ConfigRegistry)" class="member-name-link">prepare(Type, ConfigRegistry)</a> - Method in class org.jdbi.v3.core.argument.<a href="org/jdbi/v3/core/argument/SetObjectArgumentFactory.html" title="class in org.jdbi.v3.core.argument">SetObjectArgumentFactory</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/core/array/SqlArrayArgumentFactory.html#prepare(java.lang.reflect.Type,org.jdbi.v3.core.config.ConfigRegistry)" class="member-name-link">prepare(Type, ConfigRegistry)</a> - Method in class org.jdbi.v3.core.array.<a href="org/jdbi/v3/core/array/SqlArrayArgumentFactory.html" title="class in org.jdbi.v3.core.array">SqlArrayArgumentFactory</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="org/jdbi/v3/postgres/JavaTimeArgumentFactory.html#prepare(java.lang.reflect.Type,org.jdbi.v3.core.config.ConfigRegistry)" class="member-name-link">prepare(Type, ConfigRegistry)</a> - Method in class org.jdbi.v3.postgres.<a href="org/jdbi/v3/postgres/JavaTimeArgumentFactory.html" title="class in org.jdbi.v3.postgres">JavaTimeArgumentFactory</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/core/argument/QualifiedArgumentFactory.Preparable.html#prepare(org.jdbi.v3.core.qualifier.QualifiedType,org.jdbi.v3.core.config.ConfigRegistry)" class="member-name-link">prepare(QualifiedType, ConfigRegistry)</a> - Method in interface org.jdbi.v3.core.argument.<a href="org/jdbi/v3/core/argument/QualifiedArgumentFactory.Preparable.html" title="interface in org.jdbi.v3.core.argument">QualifiedArgumentFactory.Preparable</a></dt>
 <dd>&nbsp;</dd>

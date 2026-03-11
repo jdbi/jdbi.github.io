@@ -532,7 +532,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.52.0-SNAPSHOT,</span>
-<span id="revdate">03/06/2026 15:30 -0800</span>
+<span id="revdate">03/11/2026 11:07 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -788,14 +788,15 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_creating_custom_qualifiers">15.2.1. Creating custom qualifiers</a></li>
 </ul>
 </li>
-<li><a href="#query-templating">15.3. Query Templating</a>
+<li><a href="#_mapping_java_time_jsr_310_objects">15.3. Mapping Java Time (JSR 310) objects</a></li>
+<li><a href="#query-templating">15.4. Query Templating</a>
 <ul class="sectlevel3">
-<li><a href="#_classpathsqllocator">15.3.1. ClasspathSqlLocator</a></li>
+<li><a href="#_classpathsqllocator">15.4.1. ClasspathSqlLocator</a></li>
 </ul>
 </li>
-<li><a href="#_statement_caching">15.4. Statement caching</a>
+<li><a href="#_statement_caching">15.5. Statement caching</a>
 <ul class="sectlevel3">
-<li><a href="#_using_custom_cache_instances">15.4.1. Using custom cache instances</a></li>
+<li><a href="#_using_custom_cache_instances">15.5.1. Using custom cache instances</a></li>
 </ul>
 </li>
 </ul>
@@ -10632,7 +10633,48 @@ Jdbi matches factories to values by their qualifier annotations:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="query-templating"><a class="anchor" href="#query-templating"></a><a class="link" href="#query-templating">15.3. Query Templating</a></h3>
+<h3 id="_mapping_java_time_jsr_310_objects"><a class="anchor" href="#_mapping_java_time_jsr_310_objects"></a><a class="link" href="#_mapping_java_time_jsr_310_objects">15.3. Mapping Java Time (JSR 310) objects</a></h3>
+<div class="paragraph">
+<p>The <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/package-summary.html" target="_blank" rel="noopener">java.time</a> API provides date and time related types since JDK 8. At the same time, Java released JDBC 4.2 which defines mapping of these types to SQL.</p>
+</div>
+<div class="paragraph">
+<p>Starting with release 3.52.0, Jdbi supports all recent JDBC drivers natively by using the official <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/PreparedStatement.html#setObject(int,java.lang.Object)" target="_blank" rel="noopener">PreparedStatement#setObject</a> and <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/ResultSet.html#getObject(int)" target="_blank" rel="noopener">ResultSet#getObject</a> APIs. This affects all relevant types such as <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/LocalDate.html" target="_blank" rel="noopener">LocalDate</a>,
+<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/LocalTime.html" target="_blank" rel="noopener">LocalTime</a>,
+<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/LocalDateTime.html" target="_blank" rel="noopener">LocalDateTime</a>,
+<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/OffsetDateTime.html" target="_blank" rel="noopener">OffsetDateTime</a> and
+<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/ZonedDateTime.html" target="_blank" rel="noopener">ZonedDateTime</a>.</p>
+</div>
+<div class="paragraph">
+<p>JDBC drivers are unreliable when it comes to mapping Zone offsets and Zone names. Jdbi used to map these types explicitly to the legacy (pre-JDBC 4.2) types such as <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/Timestamp.html" target="_blank" rel="noopener">Timestamp</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/Date.html" target="_blank" rel="noopener">Date</a> and <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/Time.html" target="_blank" rel="noopener">Time</a>.</p>
+</div>
+<div class="paragraph">
+<p>If the pre-3.52.0 behavior is wanted, it is possible to qualify the mapping type with the <a href="./apidocs/org/jdbi/v3/meta/Legacy.html" target="_blank" rel="noopener">@Legacy</a> annotation:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="type">var</span> legacyType = QualifiedType.of(OffsetDateTime.class).with(Legacy.class);
+<span class="keyword">try</span> (Update u = h.createUpdate(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO time_table (time_col) VALUES (?)</span><span class="delimiter">&quot;</span></span>)) {
+    u.bindByType(<span class="integer">0</span>, OffsetDateTime.now(), legacyType);
+    u.execute();
+}
+
+<span class="type">var</span> result = h.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT time_col FROM time_table</span><span class="delimiter">&quot;</span></span>).mapTo(legacyType).list();</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="type">interface</span> <span class="class">LegacyDao</span> {
+    <span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO time_table (time_col) VALUES (:now)</span><span class="delimiter">&quot;</span></span>)
+    <span class="type">void</span> update(<span class="annotation">@Legacy</span> OffsetDateTime now);
+
+    <span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT time_col FROM time_table</span><span class="delimiter">&quot;</span></span>)
+    <span class="annotation">@Legacy</span> <span class="predefined-type">List</span>&lt;OffsetDateTime&gt; query();
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="query-templating"><a class="anchor" href="#query-templating"></a><a class="link" href="#query-templating">15.4. Query Templating</a></h3>
 <div class="paragraph">
 <p>Binding query parameters, as described above, is excellent for sending a static set of parameters to the database engine.
 Binding ensures that the parameterized query string (<code>... where foo = ?</code>) is transmitted to the database without allowing hostile parameter values to inject SQL.</p>
@@ -10746,7 +10788,7 @@ handle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><s
 <p>Also see the section about <a href="#_templateengine">TemplateEngine</a>.</p>
 </div>
 <div class="sect3">
-<h4 id="_classpathsqllocator"><a class="anchor" href="#_classpathsqllocator"></a><a class="link" href="#_classpathsqllocator">15.3.1. ClasspathSqlLocator</a></h4>
+<h4 id="_classpathsqllocator"><a class="anchor" href="#_classpathsqllocator"></a><a class="link" href="#_classpathsqllocator">15.4.1. ClasspathSqlLocator</a></h4>
 <div class="paragraph">
 <p>You may find it helpful to store your SQL templates in individual files on the classpath, rather than in string inside Java code.</p>
 </div>
@@ -10812,7 +10854,7 @@ jdbi.configure(RowMappers.class, rm -&gt; {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_statement_caching"><a class="anchor" href="#_statement_caching"></a><a class="link" href="#_statement_caching">15.4. Statement caching</a></h3>
+<h3 id="_statement_caching"><a class="anchor" href="#_statement_caching"></a><a class="link" href="#_statement_caching">15.5. Statement caching</a></h3>
 <div class="paragraph">
 <p>Jdbi caches statement information in multiple places:</p>
 </div>
@@ -10861,7 +10903,7 @@ jdbi.installPlugin(<span class="keyword">new</span> CaffeineCachePlugin());</cod
 </div>
 </div>
 <div class="sect3">
-<h4 id="_using_custom_cache_instances"><a class="anchor" href="#_using_custom_cache_instances"></a><a class="link" href="#_using_custom_cache_instances">15.4.1. Using custom cache instances</a></h4>
+<h4 id="_using_custom_cache_instances"><a class="anchor" href="#_using_custom_cache_instances"></a><a class="link" href="#_using_custom_cache_instances">15.5.1. Using custom cache instances</a></h4>
 <div class="paragraph">
 <p>The default cache instances are installed when the Jdbi object is created.
 When using a cache plugin, the implementation is changed but only very few aspects of the cache can be modified.</p>
@@ -16685,7 +16727,7 @@ The annotation may be used for method return types, or on <a href="./apidocs/org
 <div id="footer">
 <div id="footer-text">
 Version 3.52.0-SNAPSHOT<br>
-Last updated 03/06/2026 15:30 -0800
+Last updated 03/11/2026 11:07 -0700
 </div>
 </div>
 </body>
