@@ -90,8 +90,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="horizontal-scroll">
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">SerializableTransactionRunner</span>
-<span class="extends-implements">extends <a href="DelegatingTransactionHandler.html" title="class in org.jdbi.v3.core.transaction">DelegatingTransactionHandler</a>
-implements <a href="TransactionHandler.html" title="interface in org.jdbi.v3.core.transaction">TransactionHandler</a></span></div>
+<span class="extends-implements">extends <a href="DelegatingTransactionHandler.html" title="class in org.jdbi.v3.core.transaction">DelegatingTransactionHandler</a></span></div>
 <div class="block">A TransactionHandler that automatically retries transactions that fail due to
 serialization failures, which can generally be resolved by automatically
 retrying the transaction.  Any HandleCallback used under this runner
@@ -170,9 +169,6 @@ should be aware that it may be invoked multiple times and should be idempotent.<
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-java.lang.Object">Methods inherited from class&nbsp;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#method-summary" title="class or interface in java.lang" class="external-link">Object</a></h3>
 <code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
-<div class="inherited-list">
-<h3 id="methods-inherited-from-class-org.jdbi.v3.core.transaction.TransactionHandler">Methods inherited from interface&nbsp;<a href="TransactionHandler.html#method-summary" title="interface in org.jdbi.v3.core.transaction">TransactionHandler</a></h3>
-<code><a href="TransactionHandler.html#begin(org.jdbi.v3.core.Handle)" title="begin(Handle)">begin</a>, <a href="TransactionHandler.html#commit(org.jdbi.v3.core.Handle)" title="commit(Handle)">commit</a>, <a href="TransactionHandler.html#isInTransaction(org.jdbi.v3.core.Handle)" title="isInTransaction(Handle)">isInTransaction</a>, <a href="TransactionHandler.html#releaseSavepoint(org.jdbi.v3.core.Handle,java.lang.String)" title="releaseSavepoint(Handle, String)">releaseSavepoint</a>, <a href="TransactionHandler.html#rollback(org.jdbi.v3.core.Handle)" title="rollback(Handle)">rollback</a>, <a href="TransactionHandler.html#rollbackToSavepoint(org.jdbi.v3.core.Handle,java.lang.String)" title="rollbackToSavepoint(Handle, String)">rollbackToSavepoint</a>, <a href="TransactionHandler.html#savepoint(org.jdbi.v3.core.Handle,java.lang.String)" title="savepoint(Handle, String)">savepoint</a></code></div>
 </section>
 </li>
 </ul>
@@ -287,8 +283,6 @@ should be aware that it may be invoked multiple times and should be idempotent.<
 <div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="TransactionHandler.html#specialize(org.jdbi.v3.core.Handle)">TransactionHandler</a></code></span></div>
 <div class="block">Bind a TransactionHandler to a Handle, to allow it to track handle-local state.</div>
 <dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="TransactionHandler.html#specialize(org.jdbi.v3.core.Handle)">specialize</a></code>&nbsp;in interface&nbsp;<code><a href="TransactionHandler.html" title="interface in org.jdbi.v3.core.transaction">TransactionHandler</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>handle</code> - the handle to bind to</dd>
 <dt>Returns:</dt>
