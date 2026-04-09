@@ -531,13 +531,13 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div id="header">
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
-<span id="revnumber">version 3.52.1-SNAPSHOT,</span>
-<span id="revdate">04/08/2026 23:10 -0700</span>
+<span id="revnumber">version 3.52.2-SNAPSHOT,</span>
+<span id="revdate">04/09/2026 10:26 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_development_documentation_3_52_1_snapshot">Development documentation (3.52.1-SNAPSHOT)</a>
+<li><a href="#_development_documentation_3_52_2_snapshot">Development documentation (3.52.2-SNAPSHOT)</a>
 <ul class="sectlevel2">
 <li><a href="#_release_documentation">Release documentation</a></li>
 </ul>
@@ -870,29 +870,30 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_large_objects">18.11.3. Large Objects</a></li>
 </ul>
 </li>
-<li><a href="#_spring_framework">18.12. Spring framework</a>
+<li><a href="#_mysql">18.12. MySQL</a></li>
+<li><a href="#_spring_framework">18.13. Spring framework</a>
 <ul class="sectlevel3">
-<li><a href="#_supported_versions">18.12.1. Supported versions</a></li>
-<li><a href="#_xml_based_configuration">18.12.2. XML-based configuration</a></li>
-<li><a href="#_annotation_based_configuration">18.12.3. Annotation-based configuration</a></li>
-<li><a href="#spring-jta">18.12.4. Synchronization between Jdbi and JTA</a></li>
-<li><a href="#_jdbi_repositories">18.12.5. Jdbi Repositories</a></li>
+<li><a href="#_supported_versions">18.13.1. Supported versions</a></li>
+<li><a href="#_xml_based_configuration">18.13.2. XML-based configuration</a></li>
+<li><a href="#_annotation_based_configuration">18.13.3. Annotation-based configuration</a></li>
+<li><a href="#spring-jta">18.13.4. Synchronization between Jdbi and JTA</a></li>
+<li><a href="#_jdbi_repositories">18.13.5. Jdbi Repositories</a></li>
 </ul>
 </li>
-<li><a href="#_sqlite">18.13. SQLite</a></li>
-<li><a href="#stringtemplate4">18.14. StringTemplate 4</a>
+<li><a href="#_sqlite">18.14. SQLite</a></li>
+<li><a href="#stringtemplate4">18.15. StringTemplate 4</a>
 <ul class="sectlevel3">
-<li><a href="#_using_string_template_for_parsing">18.14.1. Using String template for parsing</a></li>
-<li><a href="#_locating_stringtemplate_files_on_the_class_path">18.14.2. Locating Stringtemplate files on the class path</a></li>
+<li><a href="#_using_string_template_for_parsing">18.15.1. Using String template for parsing</a></li>
+<li><a href="#_locating_stringtemplate_files_on_the_class_path">18.15.2. Locating Stringtemplate files on the class path</a></li>
 </ul>
 </li>
-<li><a href="#_apache_freemarker">18.15. Apache Freemarker</a>
+<li><a href="#_apache_freemarker">18.16. Apache Freemarker</a>
 <ul class="sectlevel3">
-<li><a href="#_using_freemarker_for_parsing">18.15.1. Using Freemarker for parsing</a></li>
-<li><a href="#_locating_freemarker_templates_on_the_class_path">18.15.2. Locating Freemarker templates on the class path</a></li>
+<li><a href="#_using_freemarker_for_parsing">18.16.1. Using Freemarker for parsing</a></li>
+<li><a href="#_locating_freemarker_templates_on_the_class_path">18.16.2. Locating Freemarker templates on the class path</a></li>
 </ul>
 </li>
-<li><a href="#_vavr">18.16. Vavr</a></li>
+<li><a href="#_vavr">18.17. Vavr</a></li>
 </ul>
 </li>
 <li><a href="#_cookbook">19. Cookbook</a>
@@ -988,7 +989,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </div>
 </div>
 <div class="sect1">
-<h2 id="_development_documentation_3_52_1_snapshot"><a class="anchor" href="#_development_documentation_3_52_1_snapshot"></a><a class="link" href="#_development_documentation_3_52_1_snapshot">Development documentation (3.52.1-SNAPSHOT)</a></h2>
+<h2 id="_development_documentation_3_52_2_snapshot"><a class="anchor" href="#_development_documentation_3_52_2_snapshot"></a><a class="link" href="#_development_documentation_3_52_2_snapshot">Development documentation (3.52.2-SNAPSHOT)</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>This is the documentation for the current development state of Jdbi.
@@ -1014,6 +1015,9 @@ All information in here reflects the current state of development on the <code>m
 <h3 id="_release_documentation"><a class="anchor" href="#_release_documentation"></a><a class="link" href="#_release_documentation">Release documentation</a></h3>
 <div class="ulist">
 <ul>
+<li>
+<p><a href="https://jdbi.org/releases/3.52.1" target="_blank" rel="noopener">Release 3.52.1 - 2026-04-09</a></p>
+</li>
 <li>
 <p><a href="https://jdbi.org/releases/3.52.0" target="_blank" rel="noopener">Release 3.52.0 - 2026-03-21</a></p>
 </li>
@@ -1613,7 +1617,7 @@ In that case, please file an issue on the <a href="https://github.com/jdbi/jdbi/
     <span class="tag">&lt;dependency&gt;</span>
         <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
         <span class="tag">&lt;artifactId&gt;</span>jdbi3-core<span class="tag">&lt;/artifactId&gt;</span>
-        <span class="tag">&lt;version&gt;</span>3.52.1-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+        <span class="tag">&lt;version&gt;</span>3.52.2-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
     <span class="tag">&lt;/dependency&gt;</span>
 <span class="tag">&lt;/dependencies&gt;</span></code></pre>
 </div>
@@ -1624,7 +1628,7 @@ In that case, please file an issue on the <a href="https://github.com/jdbi/jdbi/
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
-    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-core:3.52.1-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-core:3.52.2-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
 }</code></pre>
 </div>
 </div>
@@ -1646,7 +1650,7 @@ There is no guarantee that mixing versions will work.</p>
             <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
             <span class="tag">&lt;artifactId&gt;</span>jdbi3-bom<span class="tag">&lt;/artifactId&gt;</span>
             <span class="tag">&lt;type&gt;</span>pom<span class="tag">&lt;/type&gt;</span>
-            <span class="tag">&lt;version&gt;</span>3.52.1-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+            <span class="tag">&lt;version&gt;</span>3.52.2-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
             <span class="tag">&lt;scope&gt;</span>import<span class="tag">&lt;/scope&gt;</span>
         <span class="tag">&lt;/dependency&gt;</span>
     <span class="tag">&lt;/dependencies&gt;</span>
@@ -1676,7 +1680,7 @@ There is no guarantee that mixing versions will work.</p>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
     <span class="comment">// Load bill of materials (BOM) for Jdbi.</span>
-    implementation(platform(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-bom:3.52.1-SNAPSHOT</span><span class="delimiter">&quot;</span></span>))
+    implementation(platform(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-bom:3.52.2-SNAPSHOT</span><span class="delimiter">&quot;</span></span>))
 }</code></pre>
 </div>
 </div>
@@ -3571,7 +3575,7 @@ Mixing named and positional arguments is not allowed, as it would become confusi
 </li>
 <li>
 <p>java.time: <code>Instant</code>, <code>LocalDate</code>, <code>LocalDateTime</code>, <code>LocalTime</code>,
-<code>OffsetDateTime</code>, <code>ZonedDateTime</code>, and <code>ZoneId</code></p>
+<code>OffsetDateTime</code>, <code>ZonedDateTime</code>, <code>ZoneId</code> and <code>ZoneOffset</code>.</p>
 </li>
 <li>
 <p>java.util: <code>Date</code>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" target="_blank" rel="noopener">Optional</a> (around any other supported type), and <code>UUID</code></p>
@@ -7292,7 +7296,7 @@ SQL Objects are implemented as an extension to the core API using the
     <span class="tag">&lt;dependency&gt;</span>
         <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
         <span class="tag">&lt;artifactId&gt;</span>jdbi3-sqlobject<span class="tag">&lt;/artifactId&gt;</span>
-        <span class="tag">&lt;version&gt;</span>3.52.1-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+        <span class="tag">&lt;version&gt;</span>3.52.2-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
     <span class="tag">&lt;/dependency&gt;</span>
 <span class="tag">&lt;/dependencies&gt;</span></code></pre>
 </div>
@@ -7303,7 +7307,7 @@ SQL Objects are implemented as an extension to the core API using the
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
-    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-sqlobject:3.52.1-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-sqlobject:3.52.2-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
 }</code></pre>
 </div>
 </div>
@@ -10645,17 +10649,20 @@ Jdbi matches factories to values by their qualifier annotations:</p>
 <p>The <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/package-summary.html" target="_blank" rel="noopener">java.time</a> API provides date and time related types since JDK 8. At the same time, Java released JDBC 4.2 which defines mapping of these types to SQL.</p>
 </div>
 <div class="paragraph">
-<p>Starting with release 3.52.0, Jdbi supports all recent JDBC drivers natively by using the official <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/PreparedStatement.html#setObject(int,java.lang.Object)" target="_blank" rel="noopener">PreparedStatement#setObject</a> and <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/ResultSet.html#getObject(int)" target="_blank" rel="noopener">ResultSet#getObject</a> APIs. This affects all relevant types such as <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/LocalDate.html" target="_blank" rel="noopener">LocalDate</a>,
+<p>Starting with release 3.52.0, Jdbi supports all recent JDBC drivers natively by using the official <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/PreparedStatement.html#setObject(int,java.lang.Object)" target="_blank" rel="noopener">PreparedStatement#setObject</a> and <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/ResultSet.html#getObject(int)" target="_blank" rel="noopener">ResultSet#getObject</a> APIs. This affects <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/LocalDate.html" target="_blank" rel="noopener">LocalDate</a>,
 <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/LocalTime.html" target="_blank" rel="noopener">LocalTime</a>,
 <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/LocalDateTime.html" target="_blank" rel="noopener">LocalDateTime</a>,
 <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/OffsetDateTime.html" target="_blank" rel="noopener">OffsetDateTime</a> and
-<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/ZonedDateTime.html" target="_blank" rel="noopener">ZonedDateTime</a>.</p>
+<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/OffsetTime.html" target="_blank" rel="noopener">OffsetTime</a>.</p>
 </div>
 <div class="paragraph">
-<p>JDBC drivers are unreliable when it comes to mapping Zone offsets and Zone names. Jdbi used to map these types explicitly to the legacy (pre-JDBC 4.2) types such as <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/Timestamp.html" target="_blank" rel="noopener">Timestamp</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/Date.html" target="_blank" rel="noopener">Date</a> and <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/Time.html" target="_blank" rel="noopener">Time</a>.</p>
+<p>JDBC drivers are not standardized when it comes to mapping data types with timezone onto columns that do not support timezones. Databases all behave differently when mapping data from those columns back onto data types such as <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/OffsetDateTime.html" target="_blank" rel="noopener">OffsetDateTime</a> or <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/ZonedDateTime.html" target="_blank" rel="noopener">ZonedDateTime</a>.</p>
 </div>
 <div class="paragraph">
-<p>If the pre-3.52.0 behavior is wanted, it is possible to qualify the mapping type with the <a href="./apidocs/org/jdbi/v3/meta/Legacy.html" target="_blank" rel="noopener">@Legacy</a> annotation:</p>
+<p>Jdbi used to map these types explicitly to the legacy (pre-JDBC 4.2) types such as <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/Timestamp.html" target="_blank" rel="noopener">Timestamp</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/Date.html" target="_blank" rel="noopener">Date</a> and <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/Time.html" target="_blank" rel="noopener">Time</a>. None of those datatypes support timezones so heuristics were used for data types with timezones.</p>
+</div>
+<div class="paragraph">
+<p>These heuristics have changed with 3.52.0. If the old behavior is wanted, it is possible to qualify the mapping type with the <a href="./apidocs/org/jdbi/v3/meta/Legacy.html" target="_blank" rel="noopener">@Legacy</a> annotation:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11433,7 +11440,7 @@ Supports <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/j
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>jdbi3-guava<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>3.52.1-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.52.2-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
@@ -11443,7 +11450,7 @@ Supports <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/j
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
-    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-guava:3.52.1-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-guava:3.52.2-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
 }</code></pre>
 </div>
 </div>
@@ -11524,7 +11531,7 @@ You do <strong>not</strong> need to install it yourself or include the <code>jdb
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>jdbi3-jackson2<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>3.52.1-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.52.2-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
@@ -11534,7 +11541,7 @@ You do <strong>not</strong> need to install it yourself or include the <code>jdb
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
-    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-jackson2:3.52.1-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-jackson2:3.52.2-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
 }</code></pre>
 </div>
 </div>
@@ -11562,7 +11569,7 @@ jdbi.getConfig(Jackson2Config.class).setView(ApiProperty.class);</code></pre>
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>jdbi3-jackson3<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>3.52.1-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.52.2-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
@@ -11572,7 +11579,7 @@ jdbi.getConfig(Jackson2Config.class).setView(ApiProperty.class);</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
-    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-jackson3:3.52.1-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-jackson3:3.52.2-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
 }</code></pre>
 </div>
 </div>
@@ -11600,7 +11607,7 @@ jdbi.getConfig(Jackson3Config.class).setView(ApiProperty.class);</code></pre>
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>jdbi3-gson2<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>3.52.1-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.52.2-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
@@ -11610,7 +11617,7 @@ jdbi.getConfig(Jackson3Config.class).setView(ApiProperty.class);</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
-    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-gson2:3.52.1-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-gson2:3.52.2-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
 }</code></pre>
 </div>
 </div>
@@ -11636,7 +11643,7 @@ To use it, add a dependency:</p>
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>jdbi3-moshi<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>3.52.1-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.52.2-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
@@ -11646,7 +11653,7 @@ To use it, add a dependency:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
-    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-moshi:3.52.1-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-moshi:3.52.2-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
 }</code></pre>
 </div>
 </div>
@@ -11817,7 +11824,7 @@ We do support the configurable <code>get</code>, <code>is</code>, and <code>set<
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>jdbi3-jodatime2<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>3.52.1-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.52.2-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
@@ -11827,7 +11834,7 @@ We do support the configurable <code>get</code>, <code>is</code>, and <code>set<
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
-    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-jodatime2:3.52.1-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-jodatime2:3.52.2-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
 }</code></pre>
 </div>
 </div>
@@ -12681,7 +12688,7 @@ This can be done by using a custom annotation for both the Jdbi element configur
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>jdbi3-jpa<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>3.52.1-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.52.2-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
@@ -12691,7 +12698,7 @@ This can be done by using a custom annotation for both the Jdbi element configur
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
-    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-jpa:3.52.1-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-jpa:3.52.2-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
 }</code></pre>
 </div>
 </div>
@@ -12787,7 +12794,7 @@ Default parameter values in the constructor are used if the parameter type is no
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>jdbi3-kotlin<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>3.52.1-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.52.2-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
@@ -12797,7 +12804,7 @@ Default parameter values in the constructor are used if the parameter type is no
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
-    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-kotlin:3.52.1-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-kotlin:3.52.2-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
 }</code></pre>
 </div>
 </div>
@@ -13022,7 +13029,7 @@ val result = handle.createQuery(&quot;SELECT id, planet, moon FROM orbits&quot;)
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>jdbi3-kotlin-sqlobject<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>3.52.1-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.52.2-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
@@ -13032,7 +13039,7 @@ val result = handle.createQuery(&quot;SELECT id, planet, moon FROM orbits&quot;)
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
-    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-kotlin-sqlobject:3.52.1-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-kotlin-sqlobject:3.52.2-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
 }</code></pre>
 </div>
 </div>
@@ -13324,7 +13331,7 @@ lombok.copyableAnnotations += org.jdbi.v3.core.mapper.reflect.JdbiConstructor</c
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>jdbi3-oracle12<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>3.52.1-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.52.2-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
@@ -13334,7 +13341,7 @@ lombok.copyableAnnotations += org.jdbi.v3.core.mapper.reflect.JdbiConstructor</c
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
-    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-oracle12:3.52.1-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-oracle12:3.52.2-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
 }</code></pre>
 </div>
 </div>
@@ -13360,7 +13367,7 @@ to get the returned DML.</p>
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>jdbi3-postgres<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>3.52.1-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.52.2-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
@@ -13370,7 +13377,7 @@ to get the returned DML.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
-    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-postgres:3.52.1-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-postgres:3.52.2-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
 }</code></pre>
 </div>
 </div>
@@ -13384,8 +13391,7 @@ to get the returned DML.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The plugin configures mappings for <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/package-summary.html" target="_blank" rel="noopener">java.time</a> types like
-<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/Instant.html" target="_blank" rel="noopener">Instant</a> or <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/Duration.html" target="_blank" rel="noopener">Duration</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/net/InetAddress.html" target="_blank" rel="noopener">InetAddress</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/UUID.html" target="_blank" rel="noopener">UUID</a>, typed enums, and <a href="#postgres-hstore">hstore</a>.</p>
+<p>The plugin configures mappings for <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/package-summary.html" target="_blank" rel="noopener">java.time</a> types like <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/Duration.html" target="_blank" rel="noopener">Duration</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/net/InetAddress.html" target="_blank" rel="noopener">InetAddress</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/UUID.html" target="_blank" rel="noopener">UUID</a>, typed enums, and <a href="#postgres-hstore">hstore</a>.</p>
 </div>
 <div class="paragraph">
 <p>It also configures SQL array type support for <code>int</code>, <code>long</code>, <code>float</code>, <code>double</code>,
@@ -13545,7 +13551,63 @@ for upstream driver documentation.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_spring_framework"><a class="anchor" href="#_spring_framework"></a><a class="link" href="#_spring_framework">18.12. Spring framework</a></h3>
+<h3 id="_mysql"><a class="anchor" href="#_mysql"></a><a class="link" href="#_mysql">18.12. MySQL</a></h3>
+<div class="paragraph">
+<p>The <strong>jdbi3-mysql</strong> plugin provides enhanced integration with the
+<a href="https://dev.mysql.com/doc/connector-j/en/" target="_blank" rel="noopener">MySQL JDBC Driver</a>.</p>
+</div>
+<div class="paragraph">
+<p>To use this feature, add a dependency:</p>
+</div>
+<div class="paragraph">
+<p>For Apache Maven:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>jdbi3-mysql<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.52.2-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+<span class="tag">&lt;/dependency&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For Gradle:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-mysql:3.52.2-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then install the plugin into the <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instance.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">Jdbi jdbi = Jdbi.create(<span class="string"><span class="delimiter">&quot;</span><span class="content">jdbc:mysql://host:port/database</span><span class="delimiter">&quot;</span></span>)
+                .installPlugin(<span class="keyword">new</span> MysqlPlugin());</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The plugin configures mappings for data types from <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/package-summary.html" target="_blank" rel="noopener">java.time</a> that support time zones: <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/OffsetDateTime.html" target="_blank" rel="noopener">OffsetDateTime</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/OffsetTime.html" target="_blank" rel="noopener">OffsetTime</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/ZonedDateTime.html" target="_blank" rel="noopener">ZonedDateTime</a>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+MySQL does not have a data type that manages time zones! Loading this module makes it possible to map the java types directly onto columns. This converts the timezone to the system timezone and then creates a local timestamp (without a timezone). Without the module, the database driver will report an error that it does not support <code>TIMEZONE_WITH_TIMESTAMP</code> SQL types.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_spring_framework"><a class="anchor" href="#_spring_framework"></a><a class="link" href="#_spring_framework">18.13. Spring framework</a></h3>
 <div class="paragraph">
 <p>Jdbi supports <a href="https://spring.io">Spring Framework</a> with the <code>spring</code> module.
 It integrates Jdbi and Spring / Spring Boot, including JTA support.</p>
@@ -13561,7 +13623,7 @@ It integrates Jdbi and Spring / Spring Boot, including JTA support.</p>
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>jdbi3-spring<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>3.52.1-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.52.2-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
@@ -13571,12 +13633,12 @@ It integrates Jdbi and Spring / Spring Boot, including JTA support.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
-    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-spring:3.52.1-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-spring:3.52.2-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
 }</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_supported_versions"><a class="anchor" href="#_supported_versions"></a><a class="link" href="#_supported_versions">18.12.1. Supported versions</a></h4>
+<h4 id="_supported_versions"><a class="anchor" href="#_supported_versions"></a><a class="link" href="#_supported_versions">18.13.1. Supported versions</a></h4>
 <div class="paragraph">
 <p>The <code>spring</code> module supports Spring 6.1 (Spring Boot 3.2.x) and newer (including Spring 7).
 All versions of Spring framework that are under OSS support are supported.
@@ -13600,7 +13662,7 @@ Please migrate to the <code>spring</code> module.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_xml_based_configuration"><a class="anchor" href="#_xml_based_configuration"></a><a class="link" href="#_xml_based_configuration">18.12.2. XML-based configuration</a></h4>
+<h4 id="_xml_based_configuration"><a class="anchor" href="#_xml_based_configuration"></a><a class="link" href="#_xml_based_configuration">18.13.2. XML-based configuration</a></h4>
 <div class="paragraph">
 <p>For XML-based configurations the class <a href="./apidocs/org/jdbi/v3/spring5/JdbiFactoryBean.html" target="_blank" rel="noopener">JdbiFactoryBean</a> is made available to set up a
 <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> singleton in a Spring 5 (or Spring Boot) application context.</p>
@@ -13706,7 +13768,7 @@ Alternatively, use standard JSR-330 <code>@Inject</code> annotations on the targ
 </div>
 </div>
 <div class="sect3">
-<h4 id="_annotation_based_configuration"><a class="anchor" href="#_annotation_based_configuration"></a><a class="link" href="#_annotation_based_configuration">18.12.3. Annotation-based configuration</a></h4>
+<h4 id="_annotation_based_configuration"><a class="anchor" href="#_annotation_based_configuration"></a><a class="link" href="#_annotation_based_configuration">18.13.3. Annotation-based configuration</a></h4>
 <div class="paragraph">
 <p>For annotation based configurations you can add the following method in a
 <code>@Configuration</code> class:</p>
@@ -13735,7 +13797,7 @@ Alternatively, use standard JSR-330 <code>@Inject</code> annotations on the targ
 </div>
 </div>
 <div class="sect3">
-<h4 id="spring-jta"><a class="anchor" href="#spring-jta"></a><a class="link" href="#spring-jta">18.12.4. Synchronization between Jdbi and JTA</a></h4>
+<h4 id="spring-jta"><a class="anchor" href="#spring-jta"></a><a class="link" href="#spring-jta">18.13.4. Synchronization between Jdbi and JTA</a></h4>
 <div class="paragraph">
 <p>If you use Spring and databases, you will most likely also use the Java Transaction API (JTA) to manage the transactions.
 The <code>JdbiUtil</code> utility can be used to obtain <a href="./apidocs/org/jdbi/v3/core/Handle.html" target="_blank" rel="noopener">Handles</a>
@@ -13768,7 +13830,7 @@ synchronized with Spring&#8217;s JTA, as can be seen in the following fragment:<
 </div>
 </div>
 <div class="sect3">
-<h4 id="_jdbi_repositories"><a class="anchor" href="#_jdbi_repositories"></a><a class="link" href="#_jdbi_repositories">18.12.5. Jdbi Repositories</a></h4>
+<h4 id="_jdbi_repositories"><a class="anchor" href="#_jdbi_repositories"></a><a class="link" href="#_jdbi_repositories">18.13.5. Jdbi Repositories</a></h4>
 <div class="paragraph">
 <p>When using <a href="#sql-objects">SQL objects</a> it might be preferable to have them available for injection.
 This can be realized using the <code>@EnableJdbiRepositories</code> annotation (generally placed on your main class).
@@ -13798,7 +13860,7 @@ Beans created like this will also synchronize with JTA.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_sqlite"><a class="anchor" href="#_sqlite"></a><a class="link" href="#_sqlite">18.13. SQLite</a></h3>
+<h3 id="_sqlite"><a class="anchor" href="#_sqlite"></a><a class="link" href="#_sqlite">18.14. SQLite</a></h3>
 <div class="paragraph">
 <p>The <strong>jdbi3-sqlite</strong> plugin provides support for using the <a href="https://github.com/xerial/sqlite-jdbc" target="_blank" rel="noopener">SQLite JDBC Driver</a> with Jdbi.</p>
 </div>
@@ -13816,7 +13878,7 @@ Beans created like this will also synchronize with JTA.</p>
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>jdbi3-sqlite<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>3.52.1-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.52.2-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
@@ -13826,7 +13888,7 @@ Beans created like this will also synchronize with JTA.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
-    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-sqlite:3.52.1-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-sqlite:3.52.2-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
 }</code></pre>
 </div>
 </div>
@@ -13841,7 +13903,7 @@ Beans created like this will also synchronize with JTA.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="stringtemplate4"><a class="anchor" href="#stringtemplate4"></a><a class="link" href="#stringtemplate4">18.14. StringTemplate 4</a></h3>
+<h3 id="stringtemplate4"><a class="anchor" href="#stringtemplate4"></a><a class="link" href="#stringtemplate4">18.15. StringTemplate 4</a></h3>
 <div class="paragraph">
 <p>This module allows you to plug in the <a href="https://www.stringtemplate.org/" target="_blank" rel="noopener">StringTemplate 4</a> templating engine, in place of the standard Jdbi templating engine.</p>
 </div>
@@ -13856,7 +13918,7 @@ Beans created like this will also synchronize with JTA.</p>
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>jdbi3-stringtemplate4<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>3.52.1-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.52.2-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
@@ -13866,12 +13928,12 @@ Beans created like this will also synchronize with JTA.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
-    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-stringtemplate4:3.52.1-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-stringtemplate4:3.52.2-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
 }</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_using_string_template_for_parsing"><a class="anchor" href="#_using_string_template_for_parsing"></a><a class="link" href="#_using_string_template_for_parsing">18.14.1. Using String template for parsing</a></h4>
+<h4 id="_using_string_template_for_parsing"><a class="anchor" href="#_using_string_template_for_parsing"></a><a class="link" href="#_using_string_template_for_parsing">18.15.1. Using String template for parsing</a></h4>
 <div class="paragraph">
 <p>To use StringTemplate format in SQL statements, set the template engine to <a href="./apidocs/org/jdbi/v3/stringtemplate4/StringTemplateEngine.html" target="_blank" rel="noopener">StringTemplateEngine</a>.</p>
 </div>
@@ -13921,7 +13983,7 @@ Beans created like this will also synchronize with JTA.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_locating_stringtemplate_files_on_the_class_path"><a class="anchor" href="#_locating_stringtemplate_files_on_the_class_path"></a><a class="link" href="#_locating_stringtemplate_files_on_the_class_path">18.14.2. Locating Stringtemplate files on the class path</a></h4>
+<h4 id="_locating_stringtemplate_files_on_the_class_path"><a class="anchor" href="#_locating_stringtemplate_files_on_the_class_path"></a><a class="link" href="#_locating_stringtemplate_files_on_the_class_path">18.15.2. Locating Stringtemplate files on the class path</a></h4>
 <div class="paragraph">
 <p>SQL templates can be loaded from StringTemplate group files on the classpath by using the <a href="./apidocs/org/jdbi/v3/stringtemplate4/StringTemplateSqlLocator.html" target="_blank" rel="noopener">StringTemplateSqlLocator</a>:</p>
 </div>
@@ -14026,7 +14088,7 @@ These annotations are mutually exclusive and the behavior, if these annotations 
 </div>
 </div>
 <div class="sect2">
-<h3 id="_apache_freemarker"><a class="anchor" href="#_apache_freemarker"></a><a class="link" href="#_apache_freemarker">18.15. Apache Freemarker</a></h3>
+<h3 id="_apache_freemarker"><a class="anchor" href="#_apache_freemarker"></a><a class="link" href="#_apache_freemarker">18.16. Apache Freemarker</a></h3>
 <div class="paragraph">
 <p>This module allows you to plug in the <a href="https://freemarker.apache.org/" target="_blank" rel="noopener">Apache Freemarker</a> templating engine, in place of the standard Jdbi templating engine.</p>
 </div>
@@ -14041,7 +14103,7 @@ These annotations are mutually exclusive and the behavior, if these annotations 
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>jdbi3-freemarker<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>3.52.1-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.52.2-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
@@ -14051,12 +14113,12 @@ These annotations are mutually exclusive and the behavior, if these annotations 
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
-    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-freemarker:3.52.1-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-freemarker:3.52.2-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
 }</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_using_freemarker_for_parsing"><a class="anchor" href="#_using_freemarker_for_parsing"></a><a class="link" href="#_using_freemarker_for_parsing">18.15.1. Using Freemarker for parsing</a></h4>
+<h4 id="_using_freemarker_for_parsing"><a class="anchor" href="#_using_freemarker_for_parsing"></a><a class="link" href="#_using_freemarker_for_parsing">18.16.1. Using Freemarker for parsing</a></h4>
 <div class="paragraph">
 <p>To use the Freemarker format in SQL statements, set the template engine to <a href="./apidocs/org/jdbi/v3/freemarker/FreemarkerEngine.html" target="_blank" rel="noopener">FreemarkerEngine</a>.</p>
 </div>
@@ -14098,7 +14160,7 @@ These annotations are mutually exclusive and the behavior, if these annotations 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_locating_freemarker_templates_on_the_class_path"><a class="anchor" href="#_locating_freemarker_templates_on_the_class_path"></a><a class="link" href="#_locating_freemarker_templates_on_the_class_path">18.15.2. Locating Freemarker templates on the class path</a></h4>
+<h4 id="_locating_freemarker_templates_on_the_class_path"><a class="anchor" href="#_locating_freemarker_templates_on_the_class_path"></a><a class="link" href="#_locating_freemarker_templates_on_the_class_path">18.16.2. Locating Freemarker templates on the class path</a></h4>
 <div class="paragraph">
 <p>SQL templates can be loaded from files on the classpath by using the <a href="./apidocs/org/jdbi/v3/freemarker/FreemarkerSqlLocator.html" target="_blank" rel="noopener">FreemarkerSqlLocator</a>:</p>
 </div>
@@ -14181,7 +14243,7 @@ These annotations are mutually exclusive and the behavior, if these annotations 
 </div>
 </div>
 <div class="sect2">
-<h3 id="_vavr"><a class="anchor" href="#_vavr"></a><a class="link" href="#_vavr">18.16. Vavr</a></h3>
+<h3 id="_vavr"><a class="anchor" href="#_vavr"></a><a class="link" href="#_vavr">18.17. Vavr</a></h3>
 <div class="paragraph">
 <p>The Vavr Plugin offers deep integration of Jdbi with the Vavr functional library:</p>
 </div>
@@ -14223,7 +14285,7 @@ If you select more columns than the arity of the projection the columns up to th
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>org.jdbi<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>jdbi3-vavr<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>3.52.1-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;version&gt;</span>3.52.2-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
@@ -14233,7 +14295,7 @@ If you select more columns than the arity of the projection the columns up to th
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
-    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-vavr:3.52.1-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+    implementation(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.jdbi:jdbi3-vavr:3.52.2-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
 }</code></pre>
 </div>
 </div>
@@ -16733,8 +16795,8 @@ The annotation may be used for method return types, or on <a href="./apidocs/org
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 3.52.1-SNAPSHOT<br>
-Last updated 04/08/2026 23:10 -0700
+Version 3.52.2-SNAPSHOT<br>
+Last updated 04/09/2026 10:26 -0700
 </div>
 </div>
 </body>
