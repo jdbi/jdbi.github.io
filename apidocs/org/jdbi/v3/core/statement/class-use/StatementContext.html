@@ -538,71 +538,77 @@ the Connection</div>
 </div>
 </div>
 <div class="col-first even-row-color"><code>void</code></div>
-<div class="col-second even-row-color"><span class="type-name-label">Slf4JSqlLogger.</span><code><a href="../Slf4JSqlLogger.html#logAfterExecution(org.jdbi.v3.core.statement.StatementContext)" class="member-name-link">logAfterExecution</a><wbr>(<a href="../StatementContext.html" title="class in org.jdbi.v3.core.statement">StatementContext</a>&nbsp;context)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><code>default void</code></div>
-<div class="col-second odd-row-color"><span class="type-name-label">SqlLogger.</span><code><a href="../SqlLogger.html#logAfterExecution(org.jdbi.v3.core.statement.StatementContext)" class="member-name-link">logAfterExecution</a><wbr>(<a href="../StatementContext.html" title="class in org.jdbi.v3.core.statement">StatementContext</a>&nbsp;context)</code></div>
-<div class="col-last odd-row-color">
-<div class="block">Will be called after a query has been executed.</div>
-</div>
-<div class="col-first even-row-color"><code>default void</code></div>
-<div class="col-second even-row-color"><span class="type-name-label">SqlLogger.</span><code><a href="../SqlLogger.html#logBeforeExecution(org.jdbi.v3.core.statement.StatementContext)" class="member-name-link">logBeforeExecution</a><wbr>(<a href="../StatementContext.html" title="class in org.jdbi.v3.core.statement">StatementContext</a>&nbsp;context)</code></div>
+<div class="col-second even-row-color"><span class="type-name-label">SqlExceptionHandler.</span><code><a href="../SqlExceptionHandler.html#handle(java.sql.SQLException,org.jdbi.v3.core.statement.StatementContext)" class="member-name-link">handle</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/SQLException.html" title="class or interface in java.sql" class="external-link">SQLException</a>&nbsp;ex,
+ <a href="../StatementContext.html" title="class in org.jdbi.v3.core.statement">StatementContext</a>&nbsp;ctx)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Will be called before a query is executed.</div>
+<div class="block">Take action based on a SQLException thrown during statement execution.</div>
 </div>
 <div class="col-first odd-row-color"><code>void</code></div>
-<div class="col-second odd-row-color"><span class="type-name-label">Slf4JSqlLogger.</span><code><a href="../Slf4JSqlLogger.html#logException(org.jdbi.v3.core.statement.StatementContext,java.sql.SQLException)" class="member-name-link">logException</a><wbr>(<a href="../StatementContext.html" title="class in org.jdbi.v3.core.statement">StatementContext</a>&nbsp;context,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/SQLException.html" title="class or interface in java.sql" class="external-link">SQLException</a>&nbsp;ex)</code></div>
+<div class="col-second odd-row-color"><span class="type-name-label">Slf4JSqlLogger.</span><code><a href="../Slf4JSqlLogger.html#logAfterExecution(org.jdbi.v3.core.statement.StatementContext)" class="member-name-link">logAfterExecution</a><wbr>(<a href="../StatementContext.html" title="class in org.jdbi.v3.core.statement">StatementContext</a>&nbsp;context)</code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
 <div class="col-first even-row-color"><code>default void</code></div>
-<div class="col-second even-row-color"><span class="type-name-label">SqlLogger.</span><code><a href="../SqlLogger.html#logException(org.jdbi.v3.core.statement.StatementContext,java.sql.SQLException)" class="member-name-link">logException</a><wbr>(<a href="../StatementContext.html" title="class in org.jdbi.v3.core.statement">StatementContext</a>&nbsp;context,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/SQLException.html" title="class or interface in java.sql" class="external-link">SQLException</a>&nbsp;ex)</code></div>
+<div class="col-second even-row-color"><span class="type-name-label">SqlLogger.</span><code><a href="../SqlLogger.html#logAfterExecution(org.jdbi.v3.core.statement.StatementContext)" class="member-name-link">logAfterExecution</a><wbr>(<a href="../StatementContext.html" title="class in org.jdbi.v3.core.statement">StatementContext</a>&nbsp;context)</code></div>
 <div class="col-last even-row-color">
+<div class="block">Will be called after a query has been executed.</div>
+</div>
+<div class="col-first odd-row-color"><code>default void</code></div>
+<div class="col-second odd-row-color"><span class="type-name-label">SqlLogger.</span><code><a href="../SqlLogger.html#logBeforeExecution(org.jdbi.v3.core.statement.StatementContext)" class="member-name-link">logBeforeExecution</a><wbr>(<a href="../StatementContext.html" title="class in org.jdbi.v3.core.statement">StatementContext</a>&nbsp;context)</code></div>
+<div class="col-last odd-row-color">
+<div class="block">Will be called before a query is executed.</div>
+</div>
+<div class="col-first even-row-color"><code>void</code></div>
+<div class="col-second even-row-color"><span class="type-name-label">Slf4JSqlLogger.</span><code><a href="../Slf4JSqlLogger.html#logException(org.jdbi.v3.core.statement.StatementContext,java.sql.SQLException)" class="member-name-link">logException</a><wbr>(<a href="../StatementContext.html" title="class in org.jdbi.v3.core.statement">StatementContext</a>&nbsp;context,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/SQLException.html" title="class or interface in java.sql" class="external-link">SQLException</a>&nbsp;ex)</code></div>
+<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-first odd-row-color"><code>default void</code></div>
+<div class="col-second odd-row-color"><span class="type-name-label">SqlLogger.</span><code><a href="../SqlLogger.html#logException(org.jdbi.v3.core.statement.StatementContext,java.sql.SQLException)" class="member-name-link">logException</a><wbr>(<a href="../StatementContext.html" title="class in org.jdbi.v3.core.statement">StatementContext</a>&nbsp;context,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/SQLException.html" title="class or interface in java.sql" class="external-link">SQLException</a>&nbsp;ex)</code></div>
+<div class="col-last odd-row-color">
 <div class="block">Will be called after a query has failed.</div>
 </div>
+<div class="col-first even-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color"><span class="type-name-label">ColonPrefixSqlParser.</span><code><a href="../ColonPrefixSqlParser.html#nameParameter(java.lang.String,org.jdbi.v3.core.statement.StatementContext)" class="member-name-link">nameParameter</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;rawName,
+ <a href="../StatementContext.html" title="class in org.jdbi.v3.core.statement">StatementContext</a>&nbsp;ctx)</code></div>
+<div class="col-last even-row-color">&nbsp;</div>
 <div class="col-first odd-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color"><span class="type-name-label">ColonPrefixSqlParser.</span><code><a href="../ColonPrefixSqlParser.html#nameParameter(java.lang.String,org.jdbi.v3.core.statement.StatementContext)" class="member-name-link">nameParameter</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;rawName,
+<div class="col-second odd-row-color"><span class="type-name-label">HashPrefixSqlParser.</span><code><a href="../HashPrefixSqlParser.html#nameParameter(java.lang.String,org.jdbi.v3.core.statement.StatementContext)" class="member-name-link">nameParameter</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;rawName,
  <a href="../StatementContext.html" title="class in org.jdbi.v3.core.statement">StatementContext</a>&nbsp;ctx)</code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
 <div class="col-first even-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color"><span class="type-name-label">HashPrefixSqlParser.</span><code><a href="../HashPrefixSqlParser.html#nameParameter(java.lang.String,org.jdbi.v3.core.statement.StatementContext)" class="member-name-link">nameParameter</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;rawName,
+<div class="col-second even-row-color"><span class="type-name-label">SqlParser.</span><code><a href="../SqlParser.html#nameParameter(java.lang.String,org.jdbi.v3.core.statement.StatementContext)" class="member-name-link">nameParameter</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;rawName,
  <a href="../StatementContext.html" title="class in org.jdbi.v3.core.statement">StatementContext</a>&nbsp;ctx)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color"><span class="type-name-label">SqlParser.</span><code><a href="../SqlParser.html#nameParameter(java.lang.String,org.jdbi.v3.core.statement.StatementContext)" class="member-name-link">nameParameter</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;rawName,
- <a href="../StatementContext.html" title="class in org.jdbi.v3.core.statement">StatementContext</a>&nbsp;ctx)</code></div>
-<div class="col-last odd-row-color">
+<div class="col-last even-row-color">
 <div class="block">Convert rawName to a name as recognized by this parser</div>
 </div>
-<div class="col-first even-row-color"><code><a href="../ParsedSql.html" title="class in org.jdbi.v3.core.statement">ParsedSql</a></code></div>
-<div class="col-second even-row-color"><span class="type-name-label">CachingSqlParser.</span><code><a href="../CachingSqlParser.html#parse(java.lang.String,org.jdbi.v3.core.statement.StatementContext)" class="member-name-link">parse</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;sql,
- <a href="../StatementContext.html" title="class in org.jdbi.v3.core.statement">StatementContext</a>&nbsp;ctx)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
 <div class="col-first odd-row-color"><code><a href="../ParsedSql.html" title="class in org.jdbi.v3.core.statement">ParsedSql</a></code></div>
-<div class="col-second odd-row-color"><span class="type-name-label">SqlParser.</span><code><a href="../SqlParser.html#parse(java.lang.String,org.jdbi.v3.core.statement.StatementContext)" class="member-name-link">parse</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;sql,
+<div class="col-second odd-row-color"><span class="type-name-label">CachingSqlParser.</span><code><a href="../CachingSqlParser.html#parse(java.lang.String,org.jdbi.v3.core.statement.StatementContext)" class="member-name-link">parse</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;sql,
  <a href="../StatementContext.html" title="class in org.jdbi.v3.core.statement">StatementContext</a>&nbsp;ctx)</code></div>
-<div class="col-last odd-row-color">
+<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-first even-row-color"><code><a href="../ParsedSql.html" title="class in org.jdbi.v3.core.statement">ParsedSql</a></code></div>
+<div class="col-second even-row-color"><span class="type-name-label">SqlParser.</span><code><a href="../SqlParser.html#parse(java.lang.String,org.jdbi.v3.core.statement.StatementContext)" class="member-name-link">parse</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;sql,
+ <a href="../StatementContext.html" title="class in org.jdbi.v3.core.statement">StatementContext</a>&nbsp;ctx)</code></div>
+<div class="col-last even-row-color">
 <div class="block">Parses the given SQL statement, and returns the <a href="../ParsedSql.html" title="class in org.jdbi.v3.core.statement"><code>ParsedSql</code></a>
 for the statement.</div>
 </div>
-<div class="col-first even-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color"><span class="type-name-label">MessageFormatTemplateEngine.</span><code><a href="../MessageFormatTemplateEngine.html#render(java.lang.String,org.jdbi.v3.core.statement.StatementContext)" class="member-name-link">render</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;template,
- <a href="../StatementContext.html" title="class in org.jdbi.v3.core.statement">StatementContext</a>&nbsp;ctx)</code></div>
-<div class="col-last even-row-color">
-<div class="block"><span class="deprecated-label">Deprecated.</span></div>
-&nbsp;</div>
 <div class="col-first odd-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color"><span class="type-name-label">NoTemplateEngine.</span><code><a href="../NoTemplateEngine.html#render(java.lang.String,org.jdbi.v3.core.statement.StatementContext)" class="member-name-link">render</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;template,
- <a href="../StatementContext.html" title="class in org.jdbi.v3.core.statement">StatementContext</a>&nbsp;ctx)</code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
-<div class="col-first even-row-color"><code>default <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color"><span class="type-name-label">TemplateEngine.Parsing.</span><code><a href="../TemplateEngine.Parsing.html#render(java.lang.String,org.jdbi.v3.core.statement.StatementContext)" class="member-name-link">render</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;template,
- <a href="../StatementContext.html" title="class in org.jdbi.v3.core.statement">StatementContext</a>&nbsp;ctx)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color"><span class="type-name-label">TemplateEngine.</span><code><a href="../TemplateEngine.html#render(java.lang.String,org.jdbi.v3.core.statement.StatementContext)" class="member-name-link">render</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;template,
+<div class="col-second odd-row-color"><span class="type-name-label">MessageFormatTemplateEngine.</span><code><a href="../MessageFormatTemplateEngine.html#render(java.lang.String,org.jdbi.v3.core.statement.StatementContext)" class="member-name-link">render</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;template,
  <a href="../StatementContext.html" title="class in org.jdbi.v3.core.statement">StatementContext</a>&nbsp;ctx)</code></div>
 <div class="col-last odd-row-color">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+&nbsp;</div>
+<div class="col-first even-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color"><span class="type-name-label">NoTemplateEngine.</span><code><a href="../NoTemplateEngine.html#render(java.lang.String,org.jdbi.v3.core.statement.StatementContext)" class="member-name-link">render</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;template,
+ <a href="../StatementContext.html" title="class in org.jdbi.v3.core.statement">StatementContext</a>&nbsp;ctx)</code></div>
+<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-first odd-row-color"><code>default <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color"><span class="type-name-label">TemplateEngine.Parsing.</span><code><a href="../TemplateEngine.Parsing.html#render(java.lang.String,org.jdbi.v3.core.statement.StatementContext)" class="member-name-link">render</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;template,
+ <a href="../StatementContext.html" title="class in org.jdbi.v3.core.statement">StatementContext</a>&nbsp;ctx)</code></div>
+<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-first even-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color"><span class="type-name-label">TemplateEngine.</span><code><a href="../TemplateEngine.html#render(java.lang.String,org.jdbi.v3.core.statement.StatementContext)" class="member-name-link">render</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;template,
+ <a href="../StatementContext.html" title="class in org.jdbi.v3.core.statement">StatementContext</a>&nbsp;ctx)</code></div>
+<div class="col-last even-row-color">
 <div class="block">Renders an SQL statement from the given template, using the statement
 context as needed.</div>
 </div>

@@ -57,7 +57,7 @@ loadScripts(document, 'script');</script>
 <li><a href="#method-summary" tabindex="0">Method Summary</a></li>
 <li><a href="#method-detail" tabindex="0">Method Details</a>
 <ol class="toc-list">
-<li><a href="#handle(java.sql.SQLException)" tabindex="0">handle(SQLException)</a></li>
+<li><a href="#handle(java.sql.SQLException,org.jdbi.v3.core.statement.StatementContext)" tabindex="0">handle(SQLException, StatementContext)</a></li>
 </ol>
 </li>
 </ol>
@@ -74,7 +74,7 @@ loadScripts(document, 'script');</script>
 </dl>
 <hr>
 <div class="horizontal-scroll">
-<div class="type-signature"><span class="annotations"><a href="../../meta/Beta.html" title="annotation interface in org.jdbi.v3.meta">@Beta</a>
+<div class="type-signature"><span class="annotations"><a href="../../meta/Alpha.html" title="annotation interface in org.jdbi.v3.meta">@Alpha</a>
 <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/FunctionalInterface.html" title="class or interface in java.lang" class="external-link">@FunctionalInterface</a>
 </span><span class="modifiers">public interface </span><span class="element-name type-name-label">SqlExceptionHandler</span></div>
 <div class="block">Handler for exceptions thrown while executing SQL statements.</div>
@@ -93,8 +93,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Throwable.html" title="class or interface in java.lang" class="external-link">Throwable</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#handle(java.sql.SQLException)" class="member-name-link">handle</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/SQLException.html" title="class or interface in java.sql" class="external-link">SQLException</a>&nbsp;ex)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#handle(java.sql.SQLException,org.jdbi.v3.core.statement.StatementContext)" class="member-name-link">handle</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/SQLException.html" title="class or interface in java.sql" class="external-link">SQLException</a>&nbsp;ex,
+ <a href="StatementContext.html" title="class in org.jdbi.v3.core.statement">StatementContext</a>&nbsp;ctx)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Take action based on a SQLException thrown during statement execution.</div>
 </div>
@@ -113,19 +114,21 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="handle(java.sql.SQLException)">
+<section class="detail" id="handle(java.sql.SQLException,org.jdbi.v3.core.statement.StatementContext)">
 <h3>handle</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="annotations">@Nullable
-</span><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Throwable.html" title="class or interface in java.lang" class="external-link">Throwable</a></span>&nbsp;<span class="element-name">handle</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/SQLException.html" title="class or interface in java.sql" class="external-link">SQLException</a>&nbsp;ex)</span></div>
+<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">handle</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/SQLException.html" title="class or interface in java.sql" class="external-link">SQLException</a>&nbsp;ex,
+ <a href="StatementContext.html" title="class in org.jdbi.v3.core.statement">StatementContext</a>&nbsp;ctx)</span></div>
 <div class="block">Take action based on a SQLException thrown during statement execution.
-If you return a replacement exception, before throwing it Jdbi will automatically
-attach the original exception as "suppressed", so don't do that.</div>
+If you would like to replace the thrown exception with a new one, you
+may <code>throw</code> from this method. If the method returns normally,
+exception handling proceeds to the next oldest registered handler.
+If no handler opts to <code>throw</code>, the original exception will propagate
+wrapped by an <a href="UnableToExecuteStatementException.html" title="class in org.jdbi.v3.core.statement"><code>UnableToExecuteStatementException</code></a>.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>ex</code> - the exception thrown</dd>
-<dt>Returns:</dt>
-<dd>a replacement exception to throw, or null to defer</dd>
+<dd><code>ctx</code> - the statement context</dd>
 </dl>
 </div>
 </section>

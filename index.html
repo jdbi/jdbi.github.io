@@ -532,7 +532,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.52.2-SNAPSHOT,</span>
-<span id="revdate">04/23/2026 14:13 -0700</span>
+<span id="revdate">04/24/2026 11:38 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -6259,6 +6259,40 @@ potentially (driver-specific) the name of the violating column or index.</p>
 extension point. For imperative support, please register your handler with
 <code>jdbi.getConfig(SqlStatements.class).addExceptionHandler(SqlExceptionHandler)</code>.
 With SqlObject, use the <code>@RegisterSqlExceptionHandler</code> annotation.</p>
+</div>
+<div class="paragraph">
+<p>A <code>SqlExceptionHandler</code> receives the raw <code>SQLException</code> and the <code>StatementContext</code> for the failed statement.
+To replace the exception, <code>throw</code> a new exception from the handler; if the method returns normally, the next
+registered handler is tried. If no handler throws, the original <code>SQLException</code> is wrapped and rethrown as an
+<code>UnableToExecuteStatementException</code>. Multiple handlers are tried in reverse registration order (last registered,
+first tried), so more specific handlers should be registered after more general ones.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// Imperative registration</span>
+jdbi.getConfig(SqlStatements.class).addExceptionHandler((ex, ctx) -&gt; {
+    <span class="keyword">if</span> (<span class="string"><span class="delimiter">&quot;</span><span class="content">23505</span><span class="delimiter">&quot;</span></span>.equals(ex.getSQLState())) {
+        <span class="keyword">throw</span> <span class="keyword">new</span> DuplicateKeyException(<span class="string"><span class="delimiter">&quot;</span><span class="content">Duplicate key in: </span><span class="delimiter">&quot;</span></span> + ctx.getRawSql(), ex);
+    }
+    <span class="comment">// return normally to defer to the next handler (or re-throw the original)</span>
+});
+
+<span class="comment">// SqlObject annotation</span>
+<span class="annotation">@RegisterSqlExceptionHandler</span>(DuplicateKeyExceptionHandler.class)
+<span class="directive">public</span> <span class="type">interface</span> <span class="class">UserDao</span> {
+    <span class="annotation">@SqlUpdate</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">insert into users (id, name) values (:id, :name)</span><span class="delimiter">&quot;</span></span>)
+    <span class="type">void</span> insert(<span class="annotation">@Bind</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>) <span class="type">long</span> id, <span class="annotation">@Bind</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>) <span class="predefined-type">String</span> name);
+}
+
+<span class="directive">public</span> <span class="type">class</span> <span class="class">DuplicateKeyExceptionHandler</span> <span class="directive">implements</span> SqlExceptionHandler {
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="type">void</span> handle(<span class="exception">SQLException</span> ex, StatementContext ctx) {
+        <span class="keyword">if</span> (<span class="string"><span class="delimiter">&quot;</span><span class="content">23505</span><span class="delimiter">&quot;</span></span>.equals(ex.getSQLState())) {
+            <span class="keyword">throw</span> <span class="keyword">new</span> DuplicateKeyException(<span class="string"><span class="delimiter">&quot;</span><span class="content">User already exists</span><span class="delimiter">&quot;</span></span>, ex);
+        }
+    }
+}</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -16796,7 +16830,7 @@ The annotation may be used for method return types, or on <a href="./apidocs/org
 <div id="footer">
 <div id="footer-text">
 Version 3.52.2-SNAPSHOT<br>
-Last updated 04/23/2026 14:13 -0700
+Last updated 04/24/2026 11:38 -0700
 </div>
 </div>
 </body>
