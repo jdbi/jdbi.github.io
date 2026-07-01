@@ -111,8 +111,15 @@ produce results.</div>
 The <code>statement</code> package provides most of the Fluent API
 to drive statement execution.</div>
 </div>
-<div class="col-first odd-row-color"><a href="#org.jdbi.v3.testing.junit5.tc">org.jdbi.v3.testing.junit5.tc</a></div>
+<div class="col-first odd-row-color"><a href="#org.jdbi.v3.sqlobject.statement">org.jdbi.v3.sqlobject.statement</a></div>
 <div class="col-last odd-row-color">
+<div class="block">
+The <code>sqlobject.statement</code> annotations declare the type of statement
+that a SqlObject method should create, such as a <code>@SqlQuery</code> to return rows or a
+<code>@SqlUpdate</code> to modify rows and return the modification count.</div>
+</div>
+<div class="col-first even-row-color"><a href="#org.jdbi.v3.testing.junit5.tc">org.jdbi.v3.testing.junit5.tc</a></div>
+<div class="col-last even-row-color">
 <div class="block">Jdbi test support for <a href="https://testcontainers.org/">Testcontainer based JDBC containers</a>.</div>
 </div>
 </div>
@@ -479,6 +486,28 @@ is created.</div>
 <div class="col-second odd-row-color"><span class="type-name-label">StatementContext.</span><code><a href="../../core/statement/StatementContext.html#setTraceId(java.lang.String)" class="member-name-link">setTraceId</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;traceId)</code></div>
 <div class="col-last odd-row-color">
 <div class="block">Instrument the telemetry trace id.</div>
+</div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="org.jdbi.v3.sqlobject.statement">
+<h2>Uses of <a href="../Alpha.html" title="annotation interface in org.jdbi.v3.meta">Alpha</a> in <a href="../../sqlobject/statement/package-summary.html">org.jdbi.v3.sqlobject.statement</a></h2>
+<div class="caption"><span>Classes in <a href="../../sqlobject/statement/package-summary.html">org.jdbi.v3.sqlobject.statement</a> with annotations of type <a href="../Alpha.html" title="annotation interface in org.jdbi.v3.meta">Alpha</a></span></div>
+<div class="summary-table three-column-summary">
+<div class="table-header col-first">Modifier and Type</div>
+<div class="table-header col-second">Class</div>
+<div class="table-header col-last">Description</div>
+<div class="col-first even-row-color"><code>@interface&nbsp;</code></div>
+<div class="col-second even-row-color"><code><a href="../../sqlobject/statement/SqlPreflight.html" class="type-name-link" title="annotation interface in org.jdbi.v3.sqlobject.statement">SqlPreflight</a></code></div>
+<div class="col-last even-row-color">
+<div class="block">Executes a "pre-flight" SQL statement on the same <code>Handle</code>, immediately before the
+annotated SQL Object method's main statement runs.</div>
+</div>
+<div class="col-first odd-row-color"><code>@interface&nbsp;</code></div>
+<div class="col-second odd-row-color"><code><a href="../../sqlobject/statement/SqlPreflights.html" class="type-name-link" title="annotation interface in org.jdbi.v3.sqlobject.statement">SqlPreflights</a></code></div>
+<div class="col-last odd-row-color">
+<div class="block">Holder for repeating <a href="../../sqlobject/statement/SqlPreflight.html" title="annotation interface in org.jdbi.v3.sqlobject.statement"><code>SqlPreflight</code></a> annotations.</div>
 </div>
 </div>
 </section>
