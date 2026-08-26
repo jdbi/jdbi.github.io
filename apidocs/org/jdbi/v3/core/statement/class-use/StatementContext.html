@@ -744,6 +744,18 @@ context as needed.</div>
 <li>
 <section class="detail" id="org.jdbi.v3.stringtemplate4">
 <h2>Uses of <a href="../StatementContext.html" title="class in org.jdbi.v3.core.statement">StatementContext</a> in <a href="../../../stringtemplate4/package-summary.html">org.jdbi.v3.stringtemplate4</a></h2>
+<div class="caption"><span>Methods in <a href="../../../stringtemplate4/package-summary.html">org.jdbi.v3.stringtemplate4</a> that return types with arguments of type <a href="../StatementContext.html" title="class in org.jdbi.v3.core.statement">StatementContext</a></span></div>
+<div class="summary-table three-column-summary">
+<div class="table-header col-first">Modifier and Type</div>
+<div class="table-header col-second">Method</div>
+<div class="table-header col-last">Description</div>
+<div class="col-first even-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="../StatementContext.html" title="class in org.jdbi.v3.core.statement">StatementContext</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&gt;</code></div>
+<div class="col-second even-row-color"><span class="type-name-label">StringTemplateEngine.</span><code><a href="../../../stringtemplate4/StringTemplateEngine.html#parse(java.lang.String,org.jdbi.v3.core.config.ConfigRegistry)" class="member-name-link">parse</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;sql,
+ <a href="../../config/ConfigRegistry.html" title="class in org.jdbi.v3.core.config">ConfigRegistry</a>&nbsp;config)</code></div>
+<div class="col-last even-row-color">
+<div class="block">Caches compilation.</div>
+</div>
+</div>
 <div class="caption"><span>Methods in <a href="../../../stringtemplate4/package-summary.html">org.jdbi.v3.stringtemplate4</a> with parameters of type <a href="../StatementContext.html" title="class in org.jdbi.v3.core.statement">StatementContext</a></span></div>
 <div class="summary-table three-column-summary">
 <div class="table-header col-first">Modifier and Type</div>
@@ -752,7 +764,9 @@ context as needed.</div>
 <div class="col-first even-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color"><span class="type-name-label">StringTemplateEngine.</span><code><a href="../../../stringtemplate4/StringTemplateEngine.html#render(java.lang.String,org.jdbi.v3.core.statement.StatementContext)" class="member-name-link">render</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;sql,
  <a href="../StatementContext.html" title="class in org.jdbi.v3.core.statement">StatementContext</a>&nbsp;ctx)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Non-cached render, for direct callers; the core uses <a href="../../../stringtemplate4/StringTemplateEngine.html#parse(java.lang.String,org.jdbi.v3.core.config.ConfigRegistry)"><code>StringTemplateEngine.parse(String, ConfigRegistry)</code></a>.</div>
+</div>
 </div>
 </section>
 </li>

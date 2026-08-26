@@ -2420,6 +2420,10 @@ type intended for it.</div>
 <dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/core/statement/ParsedSql.html#equals(java.lang.Object)" class="member-name-link">equals(Object)</a> - Method in class org.jdbi.v3.core.statement.<a href="org/jdbi/v3/core/statement/ParsedSql.html" title="class in org.jdbi.v3.core.statement">ParsedSql</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="org/jdbi/v3/stringtemplate4/StringTemplateEngine.html#equals(java.lang.Object)" class="member-name-link">equals(Object)</a> - Method in class org.jdbi.v3.stringtemplate4.<a href="org/jdbi/v3/stringtemplate4/StringTemplateEngine.html" title="class in org.jdbi.v3.stringtemplate4">StringTemplateEngine</a></dt>
+<dd>
+<div class="block">The engine is stateless, so all instances of the same class are interchangeable.</div>
+</dd>
 <dt><a href="org/jdbi/v3/commonstext/UseStringSubstitutorTemplateEngine.html#escape()" class="member-name-link">escape()</a> - Element in annotation interface org.jdbi.v3.commonstext.<a href="org/jdbi/v3/commonstext/UseStringSubstitutorTemplateEngine.html" title="annotation interface in org.jdbi.v3.commonstext">UseStringSubstitutorTemplateEngine</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/core/statement/Batch.html#execute()" class="member-name-link">execute()</a> - Method in class org.jdbi.v3.core.statement.<a href="org/jdbi/v3/core/statement/Batch.html" title="class in org.jdbi.v3.core.statement">Batch</a></dt>
@@ -4053,6 +4057,8 @@ objects to share the same handle as long as they are within a specific scope.</d
 <dt><a href="org/jdbi/v3/core/statement/ParsedParameters.html#hashCode()" class="member-name-link">hashCode()</a> - Method in class org.jdbi.v3.core.statement.<a href="org/jdbi/v3/core/statement/ParsedParameters.html" title="class in org.jdbi.v3.core.statement">ParsedParameters</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/core/statement/ParsedSql.html#hashCode()" class="member-name-link">hashCode()</a> - Method in class org.jdbi.v3.core.statement.<a href="org/jdbi/v3/core/statement/ParsedSql.html" title="class in org.jdbi.v3.core.statement">ParsedSql</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="org/jdbi/v3/stringtemplate4/StringTemplateEngine.html#hashCode()" class="member-name-link">hashCode()</a> - Method in class org.jdbi.v3.stringtemplate4.<a href="org/jdbi/v3/stringtemplate4/StringTemplateEngine.html" title="class in org.jdbi.v3.stringtemplate4">StringTemplateEngine</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/core/statement/HashPrefixSqlParser.html" class="type-name-link" title="class in org.jdbi.v3.core.statement">HashPrefixSqlParser</a> - Class in <a href="org/jdbi/v3/core/statement/package-summary.html">org.jdbi.v3.core.statement</a></dt>
 <dd>
@@ -5887,6 +5893,10 @@ variable number of parameters or other advanced use cases.</div>
 <dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/freemarker/FreemarkerEngine.html#parse(java.lang.String,org.jdbi.v3.core.config.ConfigRegistry)" class="member-name-link">parse(String, ConfigRegistry)</a> - Method in class org.jdbi.v3.freemarker.<a href="org/jdbi/v3/freemarker/FreemarkerEngine.html" title="class in org.jdbi.v3.freemarker">FreemarkerEngine</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="org/jdbi/v3/stringtemplate4/StringTemplateEngine.html#parse(java.lang.String,org.jdbi.v3.core.config.ConfigRegistry)" class="member-name-link">parse(String, ConfigRegistry)</a> - Method in class org.jdbi.v3.stringtemplate4.<a href="org/jdbi/v3/stringtemplate4/StringTemplateEngine.html" title="class in org.jdbi.v3.stringtemplate4">StringTemplateEngine</a></dt>
+<dd>
+<div class="block">Caches compilation.</div>
+</dd>
 <dt><a href="org/jdbi/v3/core/statement/CachingSqlParser.html#parse(java.lang.String,org.jdbi.v3.core.statement.StatementContext)" class="member-name-link">parse(String, StatementContext)</a> - Method in class org.jdbi.v3.core.statement.<a href="org/jdbi/v3/core/statement/CachingSqlParser.html" title="class in org.jdbi.v3.core.statement">CachingSqlParser</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/core/statement/SqlParser.html#parse(java.lang.String,org.jdbi.v3.core.statement.StatementContext)" class="member-name-link">parse(String, StatementContext)</a> - Method in interface org.jdbi.v3.core.statement.<a href="org/jdbi/v3/core/statement/SqlParser.html" title="interface in org.jdbi.v3.core.statement">SqlParser</a></dt>
@@ -6564,7 +6574,9 @@ or for a method.</div>
 context as needed.</div>
 </dd>
 <dt><a href="org/jdbi/v3/stringtemplate4/StringTemplateEngine.html#render(java.lang.String,org.jdbi.v3.core.statement.StatementContext)" class="member-name-link">render(String, StatementContext)</a> - Method in class org.jdbi.v3.stringtemplate4.<a href="org/jdbi/v3/stringtemplate4/StringTemplateEngine.html" title="class in org.jdbi.v3.stringtemplate4">StringTemplateEngine</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Non-cached render, for direct callers; the core uses <a href="org/jdbi/v3/stringtemplate4/StringTemplateEngine.html#parse(java.lang.String,org.jdbi.v3.core.config.ConfigRegistry)"><code>StringTemplateEngine.parse(String, ConfigRegistry)</code></a>.</div>
+</dd>
 <dt><a href="org/jdbi/v3/core/transaction/TransactionIsolationLevel.html#REPEATABLE_READ" class="member-name-link">REPEATABLE_READ</a> - Enum constant in enum class org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/TransactionIsolationLevel.html" title="enum class in org.jdbi.v3.core.transaction">TransactionIsolationLevel</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/spring/EnableJdbiRepositories.html#repositories()" class="member-name-link">repositories()</a> - Element in annotation interface org.jdbi.v3.spring.<a href="org/jdbi/v3/spring/EnableJdbiRepositories.html" title="annotation interface in org.jdbi.v3.spring">EnableJdbiRepositories</a></dt>

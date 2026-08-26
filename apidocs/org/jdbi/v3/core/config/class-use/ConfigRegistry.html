@@ -155,8 +155,16 @@ that customize the execution of a statement.</div>
 the statement text to pass off to <code>core.locator</code> for final
 resolution of the statement text.</div>
 </div>
-<div class="col-first odd-row-color"><a href="#org.jdbi.v3.vavr">org.jdbi.v3.vavr</a></div>
+<div class="col-first odd-row-color"><a href="#org.jdbi.v3.stringtemplate4">org.jdbi.v3.stringtemplate4</a></div>
 <div class="col-last odd-row-color">
+<div class="block">
+<code>stringtemplate4</code> provides advanced string template processing
+that <code>Jdbi</code> can drive with the statement's bound parameters
+and context to drive statement generation that may need to bind
+variable number of parameters or other advanced use cases.</div>
+</div>
+<div class="col-first even-row-color"><a href="#org.jdbi.v3.vavr">org.jdbi.v3.vavr</a></div>
+<div class="col-last even-row-color">
 <div class="block">
 <code>vavr</code> is a functional programming library for the JVM.</div>
 </div>
@@ -864,6 +872,23 @@ to pre-initialize any configuration data structures.</div>
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Method.html" title="class or interface in java.lang.reflect" class="external-link">Method</a>&nbsp;method,
  <a href="../ConfigRegistry.html" title="class in org.jdbi.v3.core.config">ConfigRegistry</a>&nbsp;config)</code></div>
 <div class="col-last even-row-color">&nbsp;</div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="org.jdbi.v3.stringtemplate4">
+<h2>Uses of <a href="../ConfigRegistry.html" title="class in org.jdbi.v3.core.config">ConfigRegistry</a> in <a href="../../../stringtemplate4/package-summary.html">org.jdbi.v3.stringtemplate4</a></h2>
+<div class="caption"><span>Methods in <a href="../../../stringtemplate4/package-summary.html">org.jdbi.v3.stringtemplate4</a> with parameters of type <a href="../ConfigRegistry.html" title="class in org.jdbi.v3.core.config">ConfigRegistry</a></span></div>
+<div class="summary-table three-column-summary">
+<div class="table-header col-first">Modifier and Type</div>
+<div class="table-header col-second">Method</div>
+<div class="table-header col-last">Description</div>
+<div class="col-first even-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="../../statement/StatementContext.html" title="class in org.jdbi.v3.core.statement">StatementContext</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&gt;</code></div>
+<div class="col-second even-row-color"><span class="type-name-label">StringTemplateEngine.</span><code><a href="../../../stringtemplate4/StringTemplateEngine.html#parse(java.lang.String,org.jdbi.v3.core.config.ConfigRegistry)" class="member-name-link">parse</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;sql,
+ <a href="../ConfigRegistry.html" title="class in org.jdbi.v3.core.config">ConfigRegistry</a>&nbsp;config)</code></div>
+<div class="col-last even-row-color">
+<div class="block">Caches compilation.</div>
+</div>
 </div>
 </section>
 </li>
