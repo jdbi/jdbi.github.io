@@ -26,8 +26,10 @@ $dokka.location:org.jdbi.v3.core.kotlin//withHandleUnchecked/org.jdbi.v3.core.Jd
 $dokka.location:org.jdbi.v3.core.kotlin/KotlinMapper///PointingToDeclaration/jdbi3-kotlin/org.jdbi.v3.core.kotlin/-kotlin-mapper/index.html
 $dokka.location:org.jdbi.v3.core.kotlin/KotlinMapper/KotlinMapper/#java.lang.Class[*]#kotlin.String/PointingToDeclaration/jdbi3-kotlin/org.jdbi.v3.core.kotlin/-kotlin-mapper/-kotlin-mapper.html
 $dokka.location:org.jdbi.v3.core.kotlin/KotlinMapper/KotlinMapper/#kotlin.reflect.KClass[*]#kotlin.String/PointingToDeclaration/jdbi3-kotlin/org.jdbi.v3.core.kotlin/-kotlin-mapper/-kotlin-mapper.html
+$dokka.location:org.jdbi.v3.core.kotlin/KotlinMapper/getPrefix/#/PointingToDeclaration/jdbi3-kotlin/org.jdbi.v3.core.kotlin/-kotlin-mapper/get-prefix.html
 $dokka.location:org.jdbi.v3.core.kotlin/KotlinMapper/kClass/#/PointingToDeclaration/jdbi3-kotlin/org.jdbi.v3.core.kotlin/-kotlin-mapper/k-class.html
 $dokka.location:org.jdbi.v3.core.kotlin/KotlinMapper/map/#java.sql.ResultSet#org.jdbi.v3.core.statement.StatementContext/PointingToDeclaration/jdbi3-kotlin/org.jdbi.v3.core.kotlin/-kotlin-mapper/map.html
+$dokka.location:org.jdbi.v3.core.kotlin/KotlinMapper/prefix/#/PointingToDeclaration/jdbi3-kotlin/org.jdbi.v3.core.kotlin/-kotlin-mapper/prefix.html
 $dokka.location:org.jdbi.v3.core.kotlin/KotlinMapper/specialize/#java.sql.ResultSet#org.jdbi.v3.core.statement.StatementContext/PointingToDeclaration/jdbi3-kotlin/org.jdbi.v3.core.kotlin/-kotlin-mapper/specialize.html
 $dokka.location:org.jdbi.v3.core.kotlin/KotlinMapper/toString/#/PointingToDeclaration/jdbi3-kotlin/org.jdbi.v3.core.kotlin/-kotlin-mapper/to-string.html
 $dokka.location:org.jdbi.v3.core.kotlin/KotlinMapperFactory///PointingToDeclaration/jdbi3-kotlin/org.jdbi.v3.core.kotlin/-kotlin-mapper-factory/index.html
