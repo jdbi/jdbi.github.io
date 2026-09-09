@@ -244,7 +244,11 @@ Code here can call methods on the builder to configure the metadata object.</div
 <div class="block">Returns a collection of <a href="../core/extension/ExtensionHandlerCustomizer.html" title="interface in org.jdbi.v3.core.extension"><code>ExtensionHandlerCustomizer</code></a> objects. These customizers are used
 in addition to the customizers that have been registered with <a href="../core/extension/Extensions.html#registerHandlerCustomizer(org.jdbi.v3.core.extension.ExtensionHandlerCustomizer)"><code>Extensions.registerHandlerCustomizer(ExtensionHandlerCustomizer)</code></a>.
 <br>
-Handler customizers returned here can customize the behavior of the Handlers returned by the handler factories.</div>
+Handler customizers returned here can customize the behavior of the Handlers returned by the handler factories.
+<br>
+The result is baked into the cached <a href="../core/extension/ExtensionMetadata.html" title="class in org.jdbi.v3.core.extension"><code>ExtensionMetadata</code></a>. If it depends on mutable <code>config</code>
+state, that state's mutators must call <a href="../core/extension/Extensions.html#invalidateMetadataCache()"><code>Extensions.invalidateMetadataCache()</code></a> to avoid serving
+stale metadata after a change.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../core/extension/ExtensionFactory.html#getExtensionHandlerCustomizers(org.jdbi.v3.core.config.ConfigRegistry)">getExtensionHandlerCustomizers</a></code>&nbsp;in interface&nbsp;<code><a href="../core/extension/ExtensionFactory.html" title="interface in org.jdbi.v3.core.extension">ExtensionFactory</a></code></dd>
@@ -265,7 +269,11 @@ Handler customizers returned here can customize the behavior of the Handlers ret
 <div class="block">Returns a collection of <a href="../core/extension/ExtensionHandlerFactory.html" title="interface in org.jdbi.v3.core.extension"><code>ExtensionHandlerFactory</code></a> objects. These factories are used in
 addition to the factories that have been registered with <a href="../core/extension/Extensions.html#registerHandlerFactory(org.jdbi.v3.core.extension.ExtensionHandlerFactory)"><code>Extensions.registerHandlerFactory(ExtensionHandlerFactory)</code></a>.
 <br>
-Handler factories returned here can customize the behavior of the Extension factory itself.</div>
+Handler factories returned here can customize the behavior of the Extension factory itself.
+<br>
+The result is baked into the cached <a href="../core/extension/ExtensionMetadata.html" title="class in org.jdbi.v3.core.extension"><code>ExtensionMetadata</code></a>. If it depends on mutable <code>config</code>
+state, that state's mutators must call <a href="../core/extension/Extensions.html#invalidateMetadataCache()"><code>Extensions.invalidateMetadataCache()</code></a> to avoid serving
+stale metadata after a change.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../core/extension/ExtensionFactory.html#getExtensionHandlerFactories(org.jdbi.v3.core.config.ConfigRegistry)">getExtensionHandlerFactories</a></code>&nbsp;in interface&nbsp;<code><a href="../core/extension/ExtensionFactory.html" title="interface in org.jdbi.v3.core.extension">ExtensionFactory</a></code></dd>
@@ -287,7 +295,12 @@ Handler factories returned here can customize the behavior of the Extension fact
 <br>
 Each factory is called once for every type that is attached by the factory and once for each method in the
 type. They can return <a href="../core/config/ConfigCustomizer.html" title="interface in org.jdbi.v3.core.config"><code>ConfigCustomizer</code></a> instances that will affect the specific configuration for
-each method and extension type.</div>
+each method and extension type.
+<br>
+Which factories are returned is baked into the cached <a href="../core/extension/ExtensionMetadata.html" title="class in org.jdbi.v3.core.extension"><code>ExtensionMetadata</code></a> (though the per-instance
+configuration a <a href="../core/config/ConfigCustomizer.html" title="interface in org.jdbi.v3.core.config"><code>ConfigCustomizer</code></a> applies at attach time is not). If the set depends on mutable
+<code>config</code> state, that state's mutators must call <a href="../core/extension/Extensions.html#invalidateMetadataCache()"><code>Extensions.invalidateMetadataCache()</code></a> to
+avoid serving stale metadata after a change.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../core/extension/ExtensionFactory.html#getConfigCustomizerFactories(org.jdbi.v3.core.config.ConfigRegistry)">getConfigCustomizerFactories</a></code>&nbsp;in interface&nbsp;<code><a href="../core/extension/ExtensionFactory.html" title="interface in org.jdbi.v3.core.extension">ExtensionFactory</a></code></dd>

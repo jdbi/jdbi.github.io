@@ -65,6 +65,8 @@ loadScripts(document, 'script');</script>
 <ol class="toc-list">
 <li><a href="#get(java.lang.Class)" tabindex="0">get(Class)</a></li>
 <li><a href="#createCopy()" tabindex="0">createCopy()</a></li>
+<li><a href="#setEagerCopies(boolean)" tabindex="0">setEagerCopies(boolean)</a></li>
+<li><a href="#isEagerCopies()" tabindex="0">isEagerCopies()</a></li>
 </ol>
 </li>
 </ol>
@@ -82,7 +84,16 @@ loadScripts(document, 'script');</script>
 <div class="horizontal-scroll">
 <div class="type-signature"><span class="modifiers">public final class </span><span class="element-name type-name-label">ConfigRegistry</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">A registry of <a href="JdbiConfig.html" title="interface in org.jdbi.v3.core.config"><code>JdbiConfig</code></a> instances by type.</div>
+<div class="block">A registry of <a href="JdbiConfig.html" title="interface in org.jdbi.v3.core.config"><code>JdbiConfig</code></a> instances by type.
+
+<p>A registry returned by <a href="#createCopy()"><code>createCopy()</code></a> materializes each config object lazily: the first
+<a href="#get(java.lang.Class)"><code>get(Class)</code></a> for a config type copies the source registry's instance at that moment. Once
+materialized, the copy is private to this registry, so changes to it do not modify the source and
+vice-versa. If the source does not hold the config type yet, the first access creates a default
+instance in the source and then copies it. Configuration is expected to be finalized before Jdbi is
+used; a source registry that is reconfigured between <code>createCopy()</code> and the copy's first access
+of the changed config type is observed with the new value. Call <a href="#setEagerCopies(boolean)"><code>setEagerCopies(boolean)</code></a> to
+restore copy-at-creation timing instead.</div>
 <dl class="notes">
 <dt>See Also:</dt>
 <dd>
@@ -131,6 +142,16 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns this registry's instance of the given config class.</div>
 </div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isEagerCopies()" class="member-name-link">isEagerCopies</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns true if <a href="#createCopy()"><code>createCopy()</code></a> copies all config objects immediately.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setEagerCopies(boolean)" class="member-name-link">setEagerCopies</a><wbr>(boolean&nbsp;eagerCopies)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Controls when <a href="#createCopy()"><code>createCopy()</code></a> copies the config objects.</div>
+</div>
 </div>
 </div>
 </div>
@@ -171,7 +192,7 @@ loadScripts(document, 'script');</script>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="type-parameters">&lt;C extends <a href="JdbiConfig.html" title="interface in org.jdbi.v3.core.config">JdbiConfig</a>&lt;C&gt;&gt;</span>&nbsp;<span class="return-type">C</span>&nbsp;<span class="element-name">get</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;C&gt;&nbsp;configClass)</span></div>
 <div class="block">Returns this registry's instance of the given config class. Creates an instance on-demand if this registry does
-not have one of the given type yet.</div>
+not have one of the given type yet, copying the source registry's instance if this registry is a copy.</div>
 <dl class="notes">
 <dt>Type Parameters:</dt>
 <dd><span id="get(java.lang.Class)-type-param-C"><code>C</code> - the config class type.</span></dd>
@@ -199,6 +220,40 @@ not have one of the given type yet.</div>
 config objects from this registry.</a></li>
 </ul>
 </dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="setEagerCopies(boolean)">
+<h3>setEagerCopies</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="annotations"><a href="../../meta/Alpha.html" title="annotation interface in org.jdbi.v3.meta">@Alpha</a>
+</span><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setEagerCopies</span><wbr><span class="parameters">(boolean&nbsp;eagerCopies)</span></div>
+<div class="block">Controls when <a href="#createCopy()"><code>createCopy()</code></a> copies the config objects. The default (false) materializes each
+config object on its first access in the copy. Set true to copy every config object at
+<code>createCopy()</code> time, the behavior of Jdbi releases before 3.55.0. Use this only if code depends
+on the exact moment a copy is taken; it restores the old allocation cost on every copy.
+
+<p>Copies inherit the mode this registry has when <code>createCopy()</code> runs. Set the flag on the
+<a href="../Jdbi.html" title="class in org.jdbi.v3.core"><code>Jdbi</code></a> registry before handles or extensions are created.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>eagerCopies</code> - true to copy config objects at <code>createCopy()</code> time</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="isEagerCopies()">
+<h3>isEagerCopies</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="annotations"><a href="../../meta/Alpha.html" title="annotation interface in org.jdbi.v3.meta">@Alpha</a>
+</span><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isEagerCopies</span>()</div>
+<div class="block">Returns true if <a href="#createCopy()"><code>createCopy()</code></a> copies all config objects immediately.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>true if <a href="#createCopy()"><code>createCopy()</code></a> copies all config objects immediately</dd>
 </dl>
 </div>
 </section>

@@ -69,57 +69,63 @@ The 'core' package hosts the top level interface into jdbi core.</div>
 The <code>array</code> package binds Java arrays and collections to SQL arrays, and
 handles mapping array result types back to Java arrays and collections.</div>
 </div>
-<div class="col-first even-row-color"><a href="#org.jdbi.v3.core.extension">org.jdbi.v3.core.extension</a></div>
+<div class="col-first even-row-color"><a href="#org.jdbi.v3.core.config">org.jdbi.v3.core.config</a></div>
 <div class="col-last even-row-color">
+<div class="block">
+The <code>config</code> classes define a configuration registry starting from
+each <code>Jdbi</code> instance.</div>
+</div>
+<div class="col-first odd-row-color"><a href="#org.jdbi.v3.core.extension">org.jdbi.v3.core.extension</a></div>
+<div class="col-last odd-row-color">
 <div class="block">
 The <code>extension</code> classes allow you to extend <code>Jdbi</code>'s
 functionality by declaring interface types that may attach to <code>Handle</code>
 instances.</div>
 </div>
-<div class="col-first odd-row-color"><a href="#org.jdbi.v3.core.extension.annotation">org.jdbi.v3.core.extension.annotation</a></div>
-<div class="col-last odd-row-color">
+<div class="col-first even-row-color"><a href="#org.jdbi.v3.core.extension.annotation">org.jdbi.v3.core.extension.annotation</a></div>
+<div class="col-last even-row-color">
 <div class="block">
 Meta-annotations for the extension framework.</div>
 </div>
-<div class="col-first even-row-color"><a href="#org.jdbi.v3.core.interceptor">org.jdbi.v3.core.interceptor</a></div>
-<div class="col-last even-row-color">
+<div class="col-first odd-row-color"><a href="#org.jdbi.v3.core.interceptor">org.jdbi.v3.core.interceptor</a></div>
+<div class="col-last odd-row-color">
 <div class="block">
 Generic interception chain for transformation operations.</div>
 </div>
-<div class="col-first odd-row-color"><a href="#org.jdbi.v3.core.mapper">org.jdbi.v3.core.mapper</a></div>
-<div class="col-last odd-row-color">
+<div class="col-first even-row-color"><a href="#org.jdbi.v3.core.mapper">org.jdbi.v3.core.mapper</a></div>
+<div class="col-last even-row-color">
 <div class="block">
 <code>mapper</code>s take the JDBC ResultSet and produce Java results.</div>
 </div>
-<div class="col-first even-row-color"><a href="#org.jdbi.v3.core.mapper.reflect">org.jdbi.v3.core.mapper.reflect</a></div>
-<div class="col-last even-row-color">
+<div class="col-first odd-row-color"><a href="#org.jdbi.v3.core.mapper.reflect">org.jdbi.v3.core.mapper.reflect</a></div>
+<div class="col-last odd-row-color">
 <div class="block">
 <code>mapper.reflect</code> provides RowMappers that reflectively
 construct result types using techniques like constructor injection
 or JavaBeans setters.</div>
 </div>
-<div class="col-first odd-row-color"><a href="#org.jdbi.v3.core.result">org.jdbi.v3.core.result</a></div>
-<div class="col-last odd-row-color">
+<div class="col-first even-row-color"><a href="#org.jdbi.v3.core.result">org.jdbi.v3.core.result</a></div>
+<div class="col-last even-row-color">
 <div class="block">
 <code>result</code> provides the streaming interface that reads rows from JDBC
 and drives the <code>mapper</code> and <code>collector</code> processes to
 produce results.</div>
 </div>
-<div class="col-first even-row-color"><a href="#org.jdbi.v3.core.statement">org.jdbi.v3.core.statement</a></div>
-<div class="col-last even-row-color">
+<div class="col-first odd-row-color"><a href="#org.jdbi.v3.core.statement">org.jdbi.v3.core.statement</a></div>
+<div class="col-last odd-row-color">
 <div class="block">
 The <code>statement</code> package provides most of the Fluent API
 to drive statement execution.</div>
 </div>
-<div class="col-first odd-row-color"><a href="#org.jdbi.v3.sqlobject.statement">org.jdbi.v3.sqlobject.statement</a></div>
-<div class="col-last odd-row-color">
+<div class="col-first even-row-color"><a href="#org.jdbi.v3.sqlobject.statement">org.jdbi.v3.sqlobject.statement</a></div>
+<div class="col-last even-row-color">
 <div class="block">
 The <code>sqlobject.statement</code> annotations declare the type of statement
 that a SqlObject method should create, such as a <code>@SqlQuery</code> to return rows or a
 <code>@SqlUpdate</code> to modify rows and return the modification count.</div>
 </div>
-<div class="col-first even-row-color"><a href="#org.jdbi.v3.testing.junit5.tc">org.jdbi.v3.testing.junit5.tc</a></div>
-<div class="col-last even-row-color">
+<div class="col-first odd-row-color"><a href="#org.jdbi.v3.testing.junit5.tc">org.jdbi.v3.testing.junit5.tc</a></div>
+<div class="col-last odd-row-color">
 <div class="block">Jdbi test support for <a href="https://testcontainers.org/">Testcontainer based JDBC containers</a>.</div>
 </div>
 </div>
@@ -175,6 +181,27 @@ that a SqlObject method should create, such as a <code>@SqlQuery</code> to retur
 <div class="col-second even-row-color"><span class="type-name-label">SqlArrayTypes.</span><code><a href="../../core/array/SqlArrayTypes.html#getInferenceInterceptors()" class="member-name-link">getInferenceInterceptors</a>()</code></div>
 <div class="col-last even-row-color">
 <div class="block">Returns the <a href="../../core/interceptor/JdbiInterceptionChainHolder.html" title="class in org.jdbi.v3.core.interceptor"><code>JdbiInterceptionChainHolder</code></a> for the SqlArrayType inference.</div>
+</div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="org.jdbi.v3.core.config">
+<h2>Uses of <a href="../Alpha.html" title="annotation interface in org.jdbi.v3.meta">Alpha</a> in <a href="../../core/config/package-summary.html">org.jdbi.v3.core.config</a></h2>
+<div class="caption"><span>Methods in <a href="../../core/config/package-summary.html">org.jdbi.v3.core.config</a> with annotations of type <a href="../Alpha.html" title="annotation interface in org.jdbi.v3.meta">Alpha</a></span></div>
+<div class="summary-table three-column-summary">
+<div class="table-header col-first">Modifier and Type</div>
+<div class="table-header col-second">Method</div>
+<div class="table-header col-last">Description</div>
+<div class="col-first even-row-color"><code>boolean</code></div>
+<div class="col-second even-row-color"><span class="type-name-label">ConfigRegistry.</span><code><a href="../../core/config/ConfigRegistry.html#isEagerCopies()" class="member-name-link">isEagerCopies</a>()</code></div>
+<div class="col-last even-row-color">
+<div class="block">Returns true if <a href="../../core/config/ConfigRegistry.html#createCopy()"><code>ConfigRegistry.createCopy()</code></a> copies all config objects immediately.</div>
+</div>
+<div class="col-first odd-row-color"><code>void</code></div>
+<div class="col-second odd-row-color"><span class="type-name-label">ConfigRegistry.</span><code><a href="../../core/config/ConfigRegistry.html#setEagerCopies(boolean)" class="member-name-link">setEagerCopies</a><wbr>(boolean&nbsp;eagerCopies)</code></div>
+<div class="col-last odd-row-color">
+<div class="block">Controls when <a href="../../core/config/ConfigRegistry.html#createCopy()"><code>ConfigRegistry.createCopy()</code></a> copies the config objects.</div>
 </div>
 </div>
 </section>
@@ -276,24 +303,29 @@ is created.</div>
 <div class="col-last even-row-color">
 <div class="block">Returns a set of <a href="../../core/extension/ExtensionFactory.FactoryFlag.html" title="enum class in org.jdbi.v3.core.extension"><code>ExtensionFactory.FactoryFlag</code></a>s that describe the extension factory.</div>
 </div>
-<div class="col-first odd-row-color"><code>boolean</code></div>
-<div class="col-second odd-row-color"><span class="type-name-label">Extensions.</span><code><a href="../../core/extension/Extensions.html#isFailFast()" class="member-name-link">isFailFast</a>()</code></div>
+<div class="col-first odd-row-color"><code>void</code></div>
+<div class="col-second odd-row-color"><span class="type-name-label">Extensions.</span><code><a href="../../core/extension/Extensions.html#invalidateMetadataCache()" class="member-name-link">invalidateMetadataCache</a>()</code></div>
 <div class="col-last odd-row-color">
+<div class="block">Invalidates this configuration's extension metadata cache.</div>
+</div>
+<div class="col-first even-row-color"><code>boolean</code></div>
+<div class="col-second even-row-color"><span class="type-name-label">Extensions.</span><code><a href="../../core/extension/Extensions.html#isFailFast()" class="member-name-link">isFailFast</a>()</code></div>
+<div class="col-last even-row-color">
 <div class="block">Returns true if misconfigured extension objects fail fast.</div>
 </div>
-<div class="col-first even-row-color"><code><a href="../../core/extension/Extensions.html" title="class in org.jdbi.v3.core.extension">Extensions</a></code></div>
-<div class="col-second even-row-color"><span class="type-name-label">Extensions.</span><code><a href="../../core/extension/Extensions.html#registerConfigCustomizerFactory(org.jdbi.v3.core.extension.ConfigCustomizerFactory)" class="member-name-link">registerConfigCustomizerFactory</a><wbr>(<a href="../../core/extension/ConfigCustomizerFactory.html" title="interface in org.jdbi.v3.core.extension">ConfigCustomizerFactory</a>&nbsp;configCustomizerFactory)</code></div>
-<div class="col-last even-row-color">
+<div class="col-first odd-row-color"><code><a href="../../core/extension/Extensions.html" title="class in org.jdbi.v3.core.extension">Extensions</a></code></div>
+<div class="col-second odd-row-color"><span class="type-name-label">Extensions.</span><code><a href="../../core/extension/Extensions.html#registerConfigCustomizerFactory(org.jdbi.v3.core.extension.ConfigCustomizerFactory)" class="member-name-link">registerConfigCustomizerFactory</a><wbr>(<a href="../../core/extension/ConfigCustomizerFactory.html" title="interface in org.jdbi.v3.core.extension">ConfigCustomizerFactory</a>&nbsp;configCustomizerFactory)</code></div>
+<div class="col-last odd-row-color">
 <div class="block">Registers a global <a href="../../core/extension/ConfigCustomizerFactory.html" title="interface in org.jdbi.v3.core.extension"><code>ConfigCustomizerFactory</code></a> instance.</div>
 </div>
-<div class="col-first odd-row-color"><code><a href="../../core/extension/Extensions.html" title="class in org.jdbi.v3.core.extension">Extensions</a></code></div>
-<div class="col-second odd-row-color"><span class="type-name-label">Extensions.</span><code><a href="../../core/extension/Extensions.html#registerHandlerCustomizer(org.jdbi.v3.core.extension.ExtensionHandlerCustomizer)" class="member-name-link">registerHandlerCustomizer</a><wbr>(<a href="../../core/extension/ExtensionHandlerCustomizer.html" title="interface in org.jdbi.v3.core.extension">ExtensionHandlerCustomizer</a>&nbsp;extensionHandlerCustomizer)</code></div>
-<div class="col-last odd-row-color">
+<div class="col-first even-row-color"><code><a href="../../core/extension/Extensions.html" title="class in org.jdbi.v3.core.extension">Extensions</a></code></div>
+<div class="col-second even-row-color"><span class="type-name-label">Extensions.</span><code><a href="../../core/extension/Extensions.html#registerHandlerCustomizer(org.jdbi.v3.core.extension.ExtensionHandlerCustomizer)" class="member-name-link">registerHandlerCustomizer</a><wbr>(<a href="../../core/extension/ExtensionHandlerCustomizer.html" title="interface in org.jdbi.v3.core.extension">ExtensionHandlerCustomizer</a>&nbsp;extensionHandlerCustomizer)</code></div>
+<div class="col-last even-row-color">
 <div class="block">Registers a global <a href="../../core/extension/ExtensionHandlerCustomizer.html" title="interface in org.jdbi.v3.core.extension"><code>ExtensionHandlerCustomizer</code></a> instance.</div>
 </div>
-<div class="col-first even-row-color"><code><a href="../../core/extension/Extensions.html" title="class in org.jdbi.v3.core.extension">Extensions</a></code></div>
-<div class="col-second even-row-color"><span class="type-name-label">Extensions.</span><code><a href="../../core/extension/Extensions.html#registerHandlerFactory(org.jdbi.v3.core.extension.ExtensionHandlerFactory)" class="member-name-link">registerHandlerFactory</a><wbr>(<a href="../../core/extension/ExtensionHandlerFactory.html" title="interface in org.jdbi.v3.core.extension">ExtensionHandlerFactory</a>&nbsp;extensionHandlerFactory)</code></div>
-<div class="col-last even-row-color">
+<div class="col-first odd-row-color"><code><a href="../../core/extension/Extensions.html" title="class in org.jdbi.v3.core.extension">Extensions</a></code></div>
+<div class="col-second odd-row-color"><span class="type-name-label">Extensions.</span><code><a href="../../core/extension/Extensions.html#registerHandlerFactory(org.jdbi.v3.core.extension.ExtensionHandlerFactory)" class="member-name-link">registerHandlerFactory</a><wbr>(<a href="../../core/extension/ExtensionHandlerFactory.html" title="interface in org.jdbi.v3.core.extension">ExtensionHandlerFactory</a>&nbsp;extensionHandlerFactory)</code></div>
+<div class="col-last odd-row-color">
 <div class="block">Registers a global <a href="../../core/extension/ExtensionHandlerFactory.html" title="interface in org.jdbi.v3.core.extension"><code>ExtensionHandlerFactory</code></a> instance.</div>
 </div>
 </div>

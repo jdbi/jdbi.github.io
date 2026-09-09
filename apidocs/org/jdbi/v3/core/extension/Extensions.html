@@ -68,6 +68,7 @@ loadScripts(document, 'script');</script>
 <li><a href="#registerHandlerFactory(org.jdbi.v3.core.extension.ExtensionHandlerFactory)" tabindex="0">registerHandlerFactory(ExtensionHandlerFactory)</a></li>
 <li><a href="#registerHandlerCustomizer(org.jdbi.v3.core.extension.ExtensionHandlerCustomizer)" tabindex="0">registerHandlerCustomizer(ExtensionHandlerCustomizer)</a></li>
 <li><a href="#registerConfigCustomizerFactory(org.jdbi.v3.core.extension.ConfigCustomizerFactory)" tabindex="0">registerConfigCustomizerFactory(ConfigCustomizerFactory)</a></li>
+<li><a href="#invalidateMetadataCache()" tabindex="0">invalidateMetadataCache()</a></li>
 <li><a href="#hasExtensionFor(java.lang.Class)" tabindex="0">hasExtensionFor(Class)</a></li>
 <li><a href="#findFor(java.lang.Class,org.jdbi.v3.core.extension.HandleSupplier)" tabindex="0">findFor(Class, HandleSupplier)</a></li>
 <li><a href="#findFactory(java.lang.Class)" tabindex="0">findFactory(Class)</a></li>
@@ -164,49 +165,54 @@ instances.</div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns true if an extension is registered for the given extension type.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isAllowProxy()" class="member-name-link">isAllowProxy</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#invalidateMetadataCache()" class="member-name-link">invalidateMetadataCache</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns whether Proxy classes are allowed to be used.</div>
+<div class="block">Invalidates this configuration's extension metadata cache.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isFailFast()" class="member-name-link">isFailFast</a>()</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isAllowProxy()" class="member-name-link">isAllowProxy</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns whether Proxy classes are allowed to be used.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isFailFast()" class="member-name-link">isFailFast</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns true if misconfigured extension objects fail fast.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onCreateProxy()" class="member-name-link">onCreateProxy</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onCreateProxy()" class="member-name-link">onCreateProxy</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Throw if proxy creation is disallowed.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Extensions.html" title="class in org.jdbi.v3.core.extension">Extensions</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#register(org.jdbi.v3.core.extension.ExtensionFactory)" class="member-name-link">register</a><wbr>(<a href="ExtensionFactory.html" title="interface in org.jdbi.v3.core.extension">ExtensionFactory</a>&nbsp;factory)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Extensions.html" title="class in org.jdbi.v3.core.extension">Extensions</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#register(org.jdbi.v3.core.extension.ExtensionFactory)" class="member-name-link">register</a><wbr>(<a href="ExtensionFactory.html" title="interface in org.jdbi.v3.core.extension">ExtensionFactory</a>&nbsp;factory)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Register a <a href="ExtensionFactory.html" title="interface in org.jdbi.v3.core.extension"><code>ExtensionFactory</code></a> instance with the extension framework.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Extensions.html" title="class in org.jdbi.v3.core.extension">Extensions</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#registerConfigCustomizerFactory(org.jdbi.v3.core.extension.ConfigCustomizerFactory)" class="member-name-link">registerConfigCustomizerFactory</a><wbr>(<a href="ConfigCustomizerFactory.html" title="interface in org.jdbi.v3.core.extension">ConfigCustomizerFactory</a>&nbsp;configCustomizerFactory)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Extensions.html" title="class in org.jdbi.v3.core.extension">Extensions</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#registerConfigCustomizerFactory(org.jdbi.v3.core.extension.ConfigCustomizerFactory)" class="member-name-link">registerConfigCustomizerFactory</a><wbr>(<a href="ConfigCustomizerFactory.html" title="interface in org.jdbi.v3.core.extension">ConfigCustomizerFactory</a>&nbsp;configCustomizerFactory)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Registers a global <a href="ConfigCustomizerFactory.html" title="interface in org.jdbi.v3.core.extension"><code>ConfigCustomizerFactory</code></a> instance.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Extensions.html" title="class in org.jdbi.v3.core.extension">Extensions</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#registerHandlerCustomizer(org.jdbi.v3.core.extension.ExtensionHandlerCustomizer)" class="member-name-link">registerHandlerCustomizer</a><wbr>(<a href="ExtensionHandlerCustomizer.html" title="interface in org.jdbi.v3.core.extension">ExtensionHandlerCustomizer</a>&nbsp;extensionHandlerCustomizer)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Extensions.html" title="class in org.jdbi.v3.core.extension">Extensions</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#registerHandlerCustomizer(org.jdbi.v3.core.extension.ExtensionHandlerCustomizer)" class="member-name-link">registerHandlerCustomizer</a><wbr>(<a href="ExtensionHandlerCustomizer.html" title="interface in org.jdbi.v3.core.extension">ExtensionHandlerCustomizer</a>&nbsp;extensionHandlerCustomizer)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Registers a global <a href="ExtensionHandlerCustomizer.html" title="interface in org.jdbi.v3.core.extension"><code>ExtensionHandlerCustomizer</code></a> instance.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Extensions.html" title="class in org.jdbi.v3.core.extension">Extensions</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#registerHandlerFactory(org.jdbi.v3.core.extension.ExtensionHandlerFactory)" class="member-name-link">registerHandlerFactory</a><wbr>(<a href="ExtensionHandlerFactory.html" title="interface in org.jdbi.v3.core.extension">ExtensionHandlerFactory</a>&nbsp;extensionHandlerFactory)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Extensions.html" title="class in org.jdbi.v3.core.extension">Extensions</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#registerHandlerFactory(org.jdbi.v3.core.extension.ExtensionHandlerFactory)" class="member-name-link">registerHandlerFactory</a><wbr>(<a href="ExtensionHandlerFactory.html" title="interface in org.jdbi.v3.core.extension">ExtensionHandlerFactory</a>&nbsp;extensionHandlerFactory)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Registers a global <a href="ExtensionHandlerFactory.html" title="interface in org.jdbi.v3.core.extension"><code>ExtensionHandlerFactory</code></a> instance.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Extensions.html" title="class in org.jdbi.v3.core.extension">Extensions</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setAllowProxy(boolean)" class="member-name-link">setAllowProxy</a><wbr>(boolean&nbsp;allowProxy)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Extensions.html" title="class in org.jdbi.v3.core.extension">Extensions</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setAllowProxy(boolean)" class="member-name-link">setAllowProxy</a><wbr>(boolean&nbsp;allowProxy)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Allow using <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Proxy.html" title="class or interface in java.lang.reflect" class="external-link"><code>Proxy</code></a> to implement extensions.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setRegistry(org.jdbi.v3.core.config.ConfigRegistry)" class="member-name-link">setRegistry</a><wbr>(<a href="../config/ConfigRegistry.html" title="class in org.jdbi.v3.core.config">ConfigRegistry</a>&nbsp;registry)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setRegistry(org.jdbi.v3.core.config.ConfigRegistry)" class="member-name-link">setRegistry</a><wbr>(<a href="../config/ConfigRegistry.html" title="class in org.jdbi.v3.core.config">ConfigRegistry</a>&nbsp;registry)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">The registry will inject itself into the configuration object.</div>
 </div>
 </div>
@@ -334,6 +340,31 @@ with all registered <a href="ExtensionFactory.html" title="interface in org.jdbi
 <dd>This instance</dd>
 <dt>Since:</dt>
 <dd>3.38.0</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="invalidateMetadataCache()">
+<h3>invalidateMetadataCache</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="annotations"><a href="../../meta/Alpha.html" title="annotation interface in org.jdbi.v3.meta">@Alpha</a>
+</span><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">invalidateMetadataCache</span>()</div>
+<div class="block">Invalidates this configuration's extension metadata cache. Call this before mutating any state that
+<a href="#findMetadata(java.lang.Class,org.jdbi.v3.core.extension.ExtensionFactory)">computed metadata</a> depends on, so that metadata computed under the previous
+configuration is not served afterwards.
+<p>
+The cache is shared across copies of this configuration (see <a href="#findMetadata(java.lang.Class,org.jdbi.v3.core.extension.ExtensionFactory)"><code>findMetadata(Class, ExtensionFactory)</code></a>). Copies made before
+this call keep their existing cache — a valid snapshot as of their creation — so a handle still sees
+configuration as of the moment it was opened; this configuration and later copies recompute.
+<p>
+The <code>register*</code> methods here call this for their own registrations. A configuration type in
+another module whose contents feed metadata computation must call it from its own mutators, via
+<code>registry.get(Extensions.class).invalidateMetadataCache()</code> (the sqlobject <code>Handlers</code> and
+<code>HandlerDecorators</code> do so).</div>
+<dl class="notes">
+<dt>Since:</dt>
+<dd>3.55.0</dd>
 </dl>
 </div>
 </section>

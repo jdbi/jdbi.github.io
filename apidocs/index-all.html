@@ -4273,6 +4273,10 @@ for use by clients.</div>
 </dd>
 <dt><a href="org/jdbi/v3/core/transaction/TransactionIsolationLevel.html#intValue()" class="member-name-link">intValue()</a> - Method in enum class org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/TransactionIsolationLevel.html" title="enum class in org.jdbi.v3.core.transaction">TransactionIsolationLevel</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="org/jdbi/v3/core/extension/Extensions.html#invalidateMetadataCache()" class="member-name-link">invalidateMetadataCache()</a> - Method in class org.jdbi.v3.core.extension.<a href="org/jdbi/v3/core/extension/Extensions.html" title="class in org.jdbi.v3.core.extension">Extensions</a></dt>
+<dd>
+<div class="block">Invalidates this configuration's extension metadata cache.</div>
+</dd>
 <dt><a href="org/jdbi/v3/core/statement/Call.html#invoke()" class="member-name-link">invoke()</a> - Method in class org.jdbi.v3.core.statement.<a href="org/jdbi/v3/core/statement/Call.html" title="class in org.jdbi.v3.core.statement">Call</a></dt>
 <dd>
 <div class="block">Invoke the callable statement.</div>
@@ -4336,6 +4340,10 @@ will be attached to the <a href="org/jdbi/v3/core/Handle.html" title="class in o
 <dt><a href="org/jdbi/v3/core/statement/StatementContext.html#isConcurrentUpdatable()" class="member-name-link">isConcurrentUpdatable()</a> - Method in class org.jdbi.v3.core.statement.<a href="org/jdbi/v3/core/statement/StatementContext.html" title="class in org.jdbi.v3.core.statement">StatementContext</a></dt>
 <dd>
 <div class="block">Return if the statement should be concurrent updatable.</div>
+</dd>
+<dt><a href="org/jdbi/v3/core/config/ConfigRegistry.html#isEagerCopies()" class="member-name-link">isEagerCopies()</a> - Method in class org.jdbi.v3.core.config.<a href="org/jdbi/v3/core/config/ConfigRegistry.html" title="class in org.jdbi.v3.core.config">ConfigRegistry</a></dt>
+<dd>
+<div class="block">Returns true if <a href="org/jdbi/v3/core/config/ConfigRegistry.html#createCopy()"><code>ConfigRegistry.createCopy()</code></a> copies all config objects immediately.</div>
 </dd>
 <dt><a href="org/jdbi/v3/core/statement/Binding.html#isEmpty()" class="member-name-link">isEmpty()</a> - Method in class org.jdbi.v3.core.statement.<a href="org/jdbi/v3/core/statement/Binding.html" title="class in org.jdbi.v3.core.statement">Binding</a></dt>
 <dd>
@@ -6947,6 +6955,10 @@ the <a href="org/jdbi/v3/core/Jdbi.html" title="class in org.jdbi.v3.core"><code
 <dd>
 <div class="block">Set the <code>@JsonView</code> used to deserialize.</div>
 </dd>
+<dt><a href="org/jdbi/v3/core/config/ConfigRegistry.html#setEagerCopies(boolean)" class="member-name-link">setEagerCopies(boolean)</a> - Method in class org.jdbi.v3.core.config.<a href="org/jdbi/v3/core/config/ConfigRegistry.html" title="class in org.jdbi.v3.core.config">ConfigRegistry</a></dt>
+<dd>
+<div class="block">Controls when <a href="org/jdbi/v3/core/config/ConfigRegistry.html#createCopy()"><code>ConfigRegistry.createCopy()</code></a> copies the config objects.</div>
+</dd>
 <dt><a href="org/jdbi/v3/core/enums/Enums.html#setEnumStrategy(org.jdbi.v3.core.enums.EnumStrategy)" class="member-name-link">setEnumStrategy(EnumStrategy)</a> - Method in class org.jdbi.v3.core.enums.<a href="org/jdbi/v3/core/enums/Enums.html" title="class in org.jdbi.v3.core.enums">Enums</a></dt>
 <dd>
 <div class="block">Sets the default strategy for mapping and binding enums.</div>
@@ -7151,6 +7163,14 @@ driver.</div>
 <dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/postgres/PostgresTypes.html#setRegistry(org.jdbi.v3.core.config.ConfigRegistry)" class="member-name-link">setRegistry(ConfigRegistry)</a> - Method in class org.jdbi.v3.postgres.<a href="org/jdbi/v3/postgres/PostgresTypes.html" title="class in org.jdbi.v3.postgres">PostgresTypes</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="org/jdbi/v3/sqlobject/HandlerDecorators.html#setRegistry(org.jdbi.v3.core.config.ConfigRegistry)" class="member-name-link">setRegistry(ConfigRegistry)</a> - Method in class org.jdbi.v3.sqlobject.<a href="org/jdbi/v3/sqlobject/HandlerDecorators.html" title="class in org.jdbi.v3.sqlobject">HandlerDecorators</a></dt>
+<dd>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
+&nbsp;</dd>
+<dt><a href="org/jdbi/v3/sqlobject/Handlers.html#setRegistry(org.jdbi.v3.core.config.ConfigRegistry)" class="member-name-link">setRegistry(ConfigRegistry)</a> - Method in class org.jdbi.v3.sqlobject.<a href="org/jdbi/v3/sqlobject/Handlers.html" title="class in org.jdbi.v3.sqlobject">Handlers</a></dt>
+<dd>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
+&nbsp;</dd>
 <dt><a href="org/jdbi/v3/vavr/TupleMappers.html#setRegistry(org.jdbi.v3.core.config.ConfigRegistry)" class="member-name-link">setRegistry(ConfigRegistry)</a> - Method in class org.jdbi.v3.vavr.<a href="org/jdbi/v3/vavr/TupleMappers.html" title="class in org.jdbi.v3.vavr">TupleMappers</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/core/statement/StatementContext.html#setReturningGeneratedKeys(boolean)" class="member-name-link">setReturningGeneratedKeys(boolean)</a> - Method in class org.jdbi.v3.core.statement.<a href="org/jdbi/v3/core/statement/StatementContext.html" title="class in org.jdbi.v3.core.statement">StatementContext</a></dt>

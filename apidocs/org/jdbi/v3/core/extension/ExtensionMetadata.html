@@ -206,7 +206,8 @@ Represents a resolved extension type with all config customizers and method hand
 custom configuration that was applied e.g. through instance annotations.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>config</code> - A configuration object. The object is not changed</dd>
+<dd><code>config</code> - The source configuration. Its settings are not changed, but the derived configuration
+              creates default config objects in it for config types it does not hold yet</dd>
 <dt>Returns:</dt>
 <dd>A new configuration object with all changes applied</dd>
 </dl>
@@ -224,7 +225,8 @@ custom configuration that was applied e.g. through method annotations.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>method</code> - The method that is about to be called</dd>
-<dd><code>config</code> - A configuration object. The object is not changed</dd>
+<dd><code>config</code> - The source configuration. Its settings are not changed, but the derived configuration
+              creates default config objects in it for config types it does not hold yet</dd>
 <dt>Returns:</dt>
 <dd>A new configuration object with all changes applied</dd>
 </dl>

@@ -63,6 +63,7 @@ loadScripts(document, 'script');</script>
 </li>
 <li><a href="#method-detail" tabindex="0">Method Details</a>
 <ol class="toc-list">
+<li><a href="#setRegistry(org.jdbi.v3.core.config.ConfigRegistry)" tabindex="0">setRegistry(ConfigRegistry)</a></li>
 <li><a href="#register(org.jdbi.v3.sqlobject.HandlerDecorator)" tabindex="0">register(HandlerDecorator)</a></li>
 <li><a href="#applyDecorators(org.jdbi.v3.sqlobject.Handler,java.lang.Class,java.lang.reflect.Method)" tabindex="0">applyDecorators(Handler, Class, Method)</a></li>
 <li><a href="#createCopy()" tabindex="0">createCopy()</a></li>
@@ -150,15 +151,18 @@ decorator will be the outermost decorator around the method handler.</div>
 <div class="block"><span class="deprecated-label">Deprecated, for removal: This API element is subject to removal in a future version.</span></div>
 <div class="block">Registers the given handler decorator with the registry.</div>
 </div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#setRegistry(org.jdbi.v3.core.config.ConfigRegistry)" class="member-name-link">setRegistry</a><wbr>(<a href="../core/config/ConfigRegistry.html" title="class in org.jdbi.v3.core.config">ConfigRegistry</a>&nbsp;registry)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated, for removal: This API element is subject to removal in a future version.</span></div>
+<div class="block">The registry will inject itself into the configuration object.</div>
+</div>
 </div>
 </div>
 </div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-java.lang.Object">Methods inherited from class&nbsp;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#method-summary" title="class or interface in java.lang" class="external-link">Object</a></h3>
 <code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
-<div class="inherited-list">
-<h3 id="methods-inherited-from-class-org.jdbi.v3.core.config.JdbiConfig">Methods inherited from interface&nbsp;<a href="../core/config/JdbiConfig.html#method-summary" title="interface in org.jdbi.v3.core.config">JdbiConfig</a></h3>
-<code><a href="../core/config/JdbiConfig.html#setRegistry(org.jdbi.v3.core.config.ConfigRegistry)" title="setRegistry(ConfigRegistry)">setRegistry</a></code></div>
 </section>
 </li>
 </ul>
@@ -187,6 +191,25 @@ decorator will be the outermost decorator around the method handler.</div>
 <section class="method-details" id="method-detail">
 <h2>Method Details</h2>
 <ul class="member-list">
+<li>
+<section class="detail" id="setRegistry(org.jdbi.v3.core.config.ConfigRegistry)">
+<h3>setRegistry</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setRegistry</span><wbr><span class="parameters">(<a href="../core/config/ConfigRegistry.html" title="class in org.jdbi.v3.core.config">ConfigRegistry</a>&nbsp;registry)</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated, for removal: This API element is subject to removal in a future version.</span></div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../core/config/JdbiConfig.html#setRegistry(org.jdbi.v3.core.config.ConfigRegistry)">JdbiConfig</a></code></span></div>
+<div class="block">The registry will inject itself into the configuration object.
+This can be useful if you need to look up dependencies.
+You will get a new registry after being copied.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="../core/config/JdbiConfig.html#setRegistry(org.jdbi.v3.core.config.ConfigRegistry)">setRegistry</a></code>&nbsp;in interface&nbsp;<code><a href="../core/config/JdbiConfig.html" title="interface in org.jdbi.v3.core.config">JdbiConfig</a>&lt;<a href="HandlerDecorators.html" title="class in org.jdbi.v3.sqlobject">HandlerDecorators</a>&gt;</code></dd>
+<dt>Parameters:</dt>
+<dd><code>registry</code> - the registry that owns this configuration object</dd>
+</dl>
+</div>
+</section>
+</li>
 <li>
 <section class="detail" id="register(org.jdbi.v3.sqlobject.HandlerDecorator)">
 <h3>register</h3>
