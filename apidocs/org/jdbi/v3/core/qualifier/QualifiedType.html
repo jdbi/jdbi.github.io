@@ -66,6 +66,8 @@ loadScripts(document, 'script');</script>
 <li><a href="#withAnnotationClasses(java.lang.Iterable)" tabindex="0">withAnnotationClasses(Iterable)</a></li>
 <li><a href="#getType()" tabindex="0">getType()</a></li>
 <li><a href="#getQualifiers()" tabindex="0">getQualifiers()</a></li>
+<li><a href="#hasQualifiers(java.util.Set)" tabindex="0">hasQualifiers(Set)</a></li>
+<li><a href="#hasNoQualifiers()" tabindex="0">hasNoQualifiers()</a></li>
 <li><a href="#mapType(java.util.function.Function)" tabindex="0">mapType(Function)</a></li>
 <li><a href="#flatMapType(java.util.function.Function)" tabindex="0">flatMapType(Function)</a></li>
 <li><a href="#hasQualifier(java.lang.Class)" tabindex="0">hasQualifier(Class)</a></li>
@@ -134,9 +136,19 @@ qualifiers as this instance.</div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasQualifier(java.lang.Class)" class="member-name-link">hasQualifier</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;? extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/annotation/Annotation.html" title="class or interface in java.lang.annotation" class="external-link">Annotation</a>&gt;&nbsp;qualifier)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasNoQualifiers()" class="member-name-link">hasNoQualifiers</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns true if this type has no qualifiers.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasQualifier(java.lang.Class)" class="member-name-link">hasQualifier</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;? extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/annotation/Annotation.html" title="class or interface in java.lang.annotation" class="external-link">Annotation</a>&gt;&nbsp;qualifier)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns true if this type contains the given qualifier.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasQualifiers(java.util.Set)" class="member-name-link">hasQualifiers</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;? extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/annotation/Annotation.html" title="class or interface in java.lang.annotation" class="external-link">Annotation</a>&gt;&nbsp;expected)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns true if the qualifiers of this type are exactly the given annotations.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="QualifiedType.html" title="class in org.jdbi.v3.core.qualifier">QualifiedType</a><wbr>&lt;?&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#mapType(java.util.function.Function)" class="member-name-link">mapType</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Type.html" title="class or interface in java.lang.reflect" class="external-link">Type</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Type.html" title="class or interface in java.lang.reflect" class="external-link">Type</a>&gt;&nbsp;mapper)</code></div>
@@ -344,10 +356,39 @@ qualifiers as this instance.</div>
 <h3>getQualifiers</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/annotation/Annotation.html" title="class or interface in java.lang.annotation" class="external-link">Annotation</a>&gt;</span>&nbsp;<span class="element-name">getQualifiers</span>()</div>
-<div class="block">Returns a set of qualifying annotations.</div>
+<div class="block">Returns a set of qualifying annotations. Qualifiers that were given as annotation classes rather than
+annotation instances are synthesized on first call.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the type qualifiers.</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="hasQualifiers(java.util.Set)">
+<h3>hasQualifiers</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasQualifiers</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;? extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/annotation/Annotation.html" title="class or interface in java.lang.annotation" class="external-link">Annotation</a>&gt;&nbsp;expected)</span></div>
+<div class="block">Returns true if the qualifiers of this type are exactly the given annotations.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>expected</code> - the annotations to compare against.</dd>
+<dt>Returns:</dt>
+<dd>true if this instance has exactly the given qualifiers.</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="hasNoQualifiers()">
+<h3>hasNoQualifiers</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasNoQualifiers</span>()</div>
+<div class="block">Returns true if this type has no qualifiers.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>true if this instance is an unqualified type.</dd>
 </dl>
 </div>
 </section>
