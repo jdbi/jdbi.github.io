@@ -95,7 +95,12 @@ loadScripts(document, 'script');</script>
 <div class="horizontal-scroll">
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Script</span>
 <span class="extends-implements">extends <a href="SqlStatement.html" title="class in org.jdbi.v3.core.statement">SqlStatement</a>&lt;<a href="Script.html" title="class in org.jdbi.v3.core.statement">Script</a>&gt;</span></div>
-<div class="block">Represents a number of SQL statements delimited by semicolon which will be executed in order in a batch statement.</div>
+<div class="block">Represents a number of SQL statements delimited by semicolon which will be executed in order in a batch statement.
+
+<p>A script does not send bound arguments to the database. Each statement is rendered by the template engine
+and then passed to the driver as plain text, so a <code>:name</code> placeholder reaches the database unchanged.
+Arguments bound on a script are used only by <a href="SqlStatement.html#defineNamedBindings()"><code>SqlStatement.defineNamedBindings()</code></a>. To bind arguments,
+run each statement as its own <a href="Update.html" title="class in org.jdbi.v3.core.statement"><code>Update</code></a>, or group several updates in one transaction.</div>
 </div>
 </section>
 <section class="summary">

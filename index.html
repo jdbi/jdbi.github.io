@@ -532,7 +532,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.55.0-SNAPSHOT,</span>
-<span id="revdate">09/08/2026 21:50 -0700</span>
+<span id="revdate">09/08/2026 23:01 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -770,8 +770,9 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </li>
 <li><a href="#_combining_sql_object_and_the_core_api">14.7. Combining SQL Object and the core API</a>
 <ul class="sectlevel3">
-<li><a href="#sqlobject-mixin">14.7.1. Getting access to the handle with the <code>SqlObject</code> mixin</a></li>
-<li><a href="#_using_default_methods">14.7.2. Using default Methods</a></li>
+<li><a href="#sqlobject-mixins">14.7.1. Mixin interfaces</a></li>
+<li><a href="#sqlobject-mixin">14.7.2. Getting access to the handle with the <code>SqlObject</code> mixin</a></li>
+<li><a href="#_using_default_methods">14.7.3. Using default Methods</a></li>
 </ul>
 </li>
 <li><a href="#_sql_object_transactions">14.8. SQL Object Transactions</a>
@@ -4816,6 +4817,20 @@ handle.registerRowMapper(JoinRowMapper.forTypes(Contact.class, Phone.class);
     .list();</code></pre>
 </div>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The prefix is matched against the column label in the result set, not against the table or its alias.
+<code>SELECT c.<strong>, p.</strong></code> produces labels such as <code>id</code> and <code>name</code> without a prefix, and a prefixed mapper finds no columns to map.
+Alias each column with the prefix, as in the example above.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>Typically, the mapped class will have a single constructor.
 If it has multiple constructors, Jdbi will pick one based on these rules:</p>
@@ -5017,6 +5032,20 @@ handle.registerRowMapper(JoinRowMapper.forTypes(ContactBean.class, PhoneBean.cla
         .list();</code></pre>
 </div>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The prefix is matched against the column label in the result set, not against the table or its alias.
+<code>SELECT c.<strong>, p.</strong></code> produces labels such as <code>id</code> and <code>name</code> without a prefix, and a prefixed mapper finds no columns to map.
+Alias each column with the prefix, as in the example above.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>For legacy column names that don&#8217;t match up to property names, use the
 <a href="./apidocs/org/jdbi/v3/core/mapper/reflect/ColumnName.html" target="_blank" rel="noopener">@ColumnName</a> annotation to provide an exact column name.</p>
@@ -5160,6 +5189,20 @@ handle.registerRowMapper(JoinRowMapper.forTypes(Contact.class, Phone.class);
     .mapTo(JoinRow.class)
     .list();</code></pre>
 </div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The prefix is matched against the column label in the result set, not against the table or its alias.
+<code>SELECT c.<strong>, p.</strong></code> produces labels such as <code>id</code> and <code>name</code> without a prefix, and a prefixed mapper finds no columns to map.
+Alias each column with the prefix, as in the example above.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>For legacy column names that don&#8217;t match up to field names, use the
@@ -6227,6 +6270,10 @@ is a low-level API similar to <code>reduceRows()</code>, except it provides dire
 <div class="paragraph">
 <p>The JoinRowMapper takes a set of types to extract from each row.
 It uses the mapping registry to determine how to map each given type, and presents you with a JoinRow that holds all the resulting values.</p>
+</div>
+<div class="paragraph">
+<p>When the joined types share column names such as <code>id</code>, register each type&#8217;s mapper with a column name prefix and alias every selected column with that prefix (<code>c.id AS c_id</code>).
+The prefix is matched against the column label only, so <code>SELECT c.<strong>, p.</strong></code> leaves the prefixed mappers with no matching columns.</p>
 </div>
 <div class="paragraph">
 <p>Let&#8217;s consider two simple types, User and Article, with a join table named Author.
@@ -7736,7 +7783,9 @@ Alternatively, it is possible to use <a href="#sql-call-consumer-arguments">cons
 <p>Use <a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlScript.html" target="_blank" rel="noopener">@SqlScript</a> to execute one or more statements in a batch.</p>
 </div>
 <div class="paragraph">
-<p>While <a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlBatch.html" target="_blank" rel="noopener">@SqlBatch</a> executes the same SQL statement with different values, the <a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlScript.html" target="_blank" rel="noopener">@SqlScript</a> annotation executes different SQL statements without explicit data bound to each statement.</p>
+<p>While <a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlBatch.html" target="_blank" rel="noopener">@SqlBatch</a> executes the same SQL statement with different values, the <a href="./apidocs/org/jdbi/v3/sqlobject/statement/SqlScript.html" target="_blank" rel="noopener">@SqlScript</a> annotation executes different SQL statements without explicit data bound to each statement.
+Method arguments are not bound as statement parameters, only template attributes are substituted.
+To run several statements with bound parameters, declare one <code>@SqlUpdate</code> method for each statement and call them from an interface default method.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -10137,6 +10186,30 @@ In that case, we&#8217;d want <code>AccountDao</code> to use <a href="./apidocs/
 <p>The SQL Object extension uses the same core API as programmatic SQL operations.
 There is an underlying <a href="./apidocs/org/jdbi/v3/core/Handle.html" target="_blank" rel="noopener">Handle</a> object that is used to execute the SQL methods.</p>
 </div>
+<div class="sect3">
+<h4 id="sqlobject-mixins"><a class="anchor" href="#sqlobject-mixins"></a><a class="link" href="#sqlobject-mixins">14.7.1. Mixin interfaces</a></h4>
+<div class="paragraph">
+<p>A <em>mixin interface</em> is a regular Java interface that a SQL object type extends to add methods to it.
+The SQL object type does not implement these methods.
+The SQL Object framework implements <a href="./apidocs/org/jdbi/v3/sqlobject/SqlObject.html#getHandle()" target="_blank" rel="noopener">getHandle()</a> and <a href="./apidocs/org/jdbi/v3/sqlobject/SqlObject.html#withHandle(org.jdbi.v3.core.HandleCallback)" target="_blank" rel="noopener">withHandle()</a>.
+All other mixin methods are <code>default</code> methods that build on these two.
+Mixin methods use the same managed handle as the annotated SQL methods on the same object, so they share the connection, the transaction state and the configuration.</p>
+</div>
+<div class="paragraph">
+<p>Jdbi provides two mixin interfaces:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="./apidocs/org/jdbi/v3/sqlobject/SqlObject.html" target="_blank" rel="noopener">SqlObject</a> gives access to the handle with <a href="./apidocs/org/jdbi/v3/sqlobject/SqlObject.html#getHandle()" target="_blank" rel="noopener">getHandle()</a>, <a href="./apidocs/org/jdbi/v3/sqlobject/SqlObject.html#withHandle(org.jdbi.v3.core.HandleCallback)" target="_blank" rel="noopener">withHandle()</a> and <a href="./apidocs/org/jdbi/v3/sqlobject/SqlObject.html#useHandle(org.jdbi.v3.core.HandleConsumer)" target="_blank" rel="noopener">useHandle()</a>.</p>
+</li>
+<li>
+<p><a href="./apidocs/org/jdbi/v3/sqlobject/transaction/Transactional.html" target="_blank" rel="noopener">Transactional</a> adds the transaction methods of the handle, such as <code>begin()</code>, <code>commit()</code>, <code>rollback()</code>, <a href="./apidocs/org/jdbi/v3/sqlobject/transaction/Transactional.html#inTransaction(org.jdbi.v3.sqlobject.transaction.TransactionalCallback)" target="_blank" rel="noopener">inTransaction()</a> and <a href="./apidocs/org/jdbi/v3/sqlobject/transaction/Transactional.html#useTransaction(org.jdbi.v3.sqlobject.transaction.TransactionalConsumer)" target="_blank" rel="noopener">useTransaction()</a>.
+It extends <code>SqlObject</code>, so a type that extends <code>Transactional</code> also has the handle methods.
+See <a href="#_sql_object_transactions">SQL Object Transactions</a> for details.</p>
+</li>
+</ul>
+</div>
 <div class="paragraph">
 <p>A SQL Object type can extend the <a href="./apidocs/org/jdbi/v3/sqlobject/SqlObject.html" target="_blank" rel="noopener">SqlObject</a> mixin interface to get access to the handle.
 It also exposes a number of operations that can be used to mix declarative SQL Object methods with programmatic core API code:</p>
@@ -10175,8 +10248,9 @@ Any object that was created using the
 </tr>
 </table>
 </div>
+</div>
 <div class="sect3">
-<h4 id="sqlobject-mixin"><a class="anchor" href="#sqlobject-mixin"></a><a class="link" href="#sqlobject-mixin">14.7.1. Getting access to the handle with the <code>SqlObject</code> mixin</a></h4>
+<h4 id="sqlobject-mixin"><a class="anchor" href="#sqlobject-mixin"></a><a class="link" href="#sqlobject-mixin">14.7.2. Getting access to the handle with the <code>SqlObject</code> mixin</a></h4>
 <div class="paragraph">
 <p>Occasionally a use case comes up where SQL Method annotations don&#8217;t fit.
 In these situations, it is possible to "drop down" to the Core API using interface
@@ -10267,7 +10341,7 @@ Calling any configuration modification method (any <code>set*</code> or <code>re
 </div>
 </div>
 <div class="sect3">
-<h4 id="_using_default_methods"><a class="anchor" href="#_using_default_methods"></a><a class="link" href="#_using_default_methods">14.7.2. Using default Methods</a></h4>
+<h4 id="_using_default_methods"><a class="anchor" href="#_using_default_methods"></a><a class="link" href="#_using_default_methods">14.7.3. Using default Methods</a></h4>
 <div class="paragraph">
 <p>Default methods can be used to group multiple SQL operations into a single method call:</p>
 </div>
@@ -10374,18 +10448,19 @@ Multiple method calls can be grouped together to use a shared transaction:</p>
         <span class="comment">// both inserts happen in the same transaction</span>
         dao.createUser(<span class="integer">1</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Alice</span><span class="delimiter">&quot;</span></span>);
         dao.createUser(<span class="integer">2</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Bob</span><span class="delimiter">&quot;</span></span>);
-    }
+    });
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>As an alternative, the <a href="./apidocs/org/jdbi/v3/sqlobject/transaction/Transactional.html" target="_blank" rel="noopener">Transactional</a> mixin interface can be used to provide transaction support on a SQL object.</p>
+<p>As an alternative, the SQL object type can extend the <a href="./apidocs/org/jdbi/v3/sqlobject/transaction/Transactional.html" target="_blank" rel="noopener">Transactional</a> <a href="#sqlobject-mixins">mixin interface</a>.
+It adds the transaction methods of the <a href="./apidocs/org/jdbi/v3/core/Handle.html" target="_blank" rel="noopener">Handle</a> to the SQL object itself, so no separate handle is needed.
+The type parameter must be the SQL object type that extends <code>Transactional</code> (<code>Transactional&lt;UserDao&gt;</code> in the examples below).</p>
 </div>
 <div class="paragraph">
-<p>Similar to the <a href="./apidocs/org/jdbi/v3/sqlobject/SqlObject.html" target="_blank" rel="noopener">SqlObject</a> interface, it gives access to all transaction related methods on the Handle and offers the same callbacks as the Handle itself.</p>
-</div>
-<div class="paragraph">
-<p>With this mixin interface, the <a href="./apidocs/org/jdbi/v3/sqlobject/transaction/Transactional.html#useTransaction(org.jdbi.v3.sqlobject.transaction.TransactionalConsumer)" target="_blank" rel="noopener">Transactional#useTransaction()</a> and <a href="./apidocs/org/jdbi/v3/sqlobject/transaction/Transactional.html#inTransaction(org.jdbi.v3.sqlobject.transaction.TransactionalCallback)" target="_blank" rel="noopener">Transactional#inTransaction()</a> methods group statements into a single transaction by using a callback:</p>
+<p>The <a href="./apidocs/org/jdbi/v3/sqlobject/transaction/Transactional.html#useTransaction(org.jdbi.v3.sqlobject.transaction.TransactionalConsumer)" target="_blank" rel="noopener">Transactional#useTransaction()</a> and <a href="./apidocs/org/jdbi/v3/sqlobject/transaction/Transactional.html#inTransaction(org.jdbi.v3.sqlobject.transaction.TransactionalCallback)" target="_blank" rel="noopener">Transactional#inTransaction()</a> methods group statements into a single transaction by using a callback.
+The callback receives the SQL object, typed as the type parameter, and all calls on it run in the transaction.
+In the following example, <code>UserDao</code> does not declare <code>useTransaction()</code>. The method is inherited from <code>Transactional</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -10452,12 +10527,11 @@ Multiple method calls can be grouped together to use a shared transaction:</p>
 
         <span class="comment">// this insert as well</span>
         transactionDao.getHandle().useTransaction(transactionHandle -&gt;
-            transactionHandle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><span class="content">USERT INTO users VALUES (:id, :name)</span><span class="delimiter">&quot;</span></span>)
+            transactionHandle.createUpdate(<span class="string"><span class="delimiter">&quot;</span><span class="content">INSERT INTO users VALUES (:id, :name)</span><span class="delimiter">&quot;</span></span>)
                 .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>, <span class="integer">3</span>)
                 .bind(<span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">Charlie</span><span class="delimiter">&quot;</span></span>)
-                .execute();
-        }
-    }
+                .execute());
+    });
 }</code></pre>
 </div>
 </div>
@@ -16959,7 +17033,7 @@ The annotation may be used for method return types, or on <a href="./apidocs/org
 <div id="footer">
 <div id="footer-text">
 Version 3.55.0-SNAPSHOT<br>
-Last updated 09/08/2026 21:50 -0700
+Last updated 09/08/2026 23:01 -0700
 </div>
 </div>
 </body>
