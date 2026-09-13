@@ -532,7 +532,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.55.0-SNAPSHOT,</span>
-<span id="revdate">09/12/2026 18:55 -0700</span>
+<span id="revdate">09/13/2026 16:15 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -7293,6 +7293,12 @@ Any array type directly supported by the JDBC driver can be registered using:</p
 <div class="paragraph">
 <p>Here, <code>"integer"</code> is the SQL type name that the JDBC driver supports natively.</p>
 </div>
+<div class="paragraph">
+<p>Jdbi registers the most common element types out of the box: the primitive and boxed
+types, <code>String</code>, <code>UUID</code>, enums, and the <code>java.time</code> types <code>LocalDate</code>,
+<code>LocalTime</code>, <code>LocalDateTime</code>, <code>OffsetDateTime</code>, <code>OffsetTime</code>, <code>Instant</code>, and
+<code>ZonedDateTime</code> (the last two are bound as the equivalent <code>OffsetDateTime</code>).</p>
+</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -7300,7 +7306,8 @@ Any array type directly supported by the JDBC driver can be registered using:</p
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Plugins like <code>PostgresPlugin</code> and <code>H2DatabasePlugin</code> automatically register the most common array element types for their respective databases.
+Database plugins may register additional array element types or adjust how arrays are bound.
+<code>PostgresPlugin</code> registers <code>Duration</code> and <code>Period</code> (bound as <code>interval</code>), and binds the date-bearing <code>java.time</code> element types as text literals that cover the full Postgres date range, including BC dates.
 </td>
 </tr>
 </table>
@@ -17033,7 +17040,7 @@ The annotation may be used for method return types, or on <a href="./apidocs/org
 <div id="footer">
 <div id="footer-text">
 Version 3.55.0-SNAPSHOT<br>
-Last updated 09/12/2026 18:55 -0700
+Last updated 09/13/2026 16:15 -0700
 </div>
 </div>
 </body>
