@@ -532,7 +532,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.55.0-SNAPSHOT,</span>
-<span id="revdate">09/13/2026 16:15 -0700</span>
+<span id="revdate">09/13/2026 20:37 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -695,6 +695,14 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_managed_transactions">11.1. Managed Transactions</a></li>
 <li><a href="#_unmanaged_transactions">11.2. Unmanaged Transactions</a></li>
 <li><a href="#_serializable_transactions">11.3. Serializable Transactions</a></li>
+<li><a href="#_transactions_managed_outside_jdbi">11.4. Transactions managed outside Jdbi</a>
+<ul class="sectlevel3">
+<li><a href="#_joining_a_transaction_connections_with_autocommit_disabled">11.4.1. Joining a transaction: connections with autocommit disabled</a></li>
+<li><a href="#_joining_a_container_transaction">11.4.2. Joining a container transaction</a></li>
+<li><a href="#_ignoring_transactions_completely">11.4.3. Ignoring transactions completely</a></li>
+<li><a href="#_letting_jdbi_manage_transactions_with_autocommit_disabled">11.4.4. Letting Jdbi manage transactions with autocommit disabled</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#_configuration">12. Configuration</a>
@@ -6501,7 +6509,7 @@ By default, transactions are delegated to the JDBC connection and managed throug
 <p>The transaction handler can be set per <a href="./apidocs/org/jdbi/v3/core/Jdbi.html" target="_blank" rel="noopener">Jdbi</a> instance using the <a href="./apidocs/org/jdbi/v3/core/Jdbi.html#setTransactionHandler(org.jdbi.v3.core.transaction.TransactionHandler)" target="_blank" rel="noopener">setTransactionHandler</a> and <a href="./apidocs/org/jdbi/v3/core/Jdbi.html#getTransactionHandler()" target="_blank" rel="noopener">getTransactionHandler</a> methods.</p>
 </div>
 <div class="paragraph">
-<p>In addition to the <a href="./apidocs/org/jdbi/v3/core/transaction/LocalTransactionHandler.html" target="_blank" rel="noopener">standard transaction handler</a>, Jdbi includes a <a href="./apidocs/org/jdbi/v3/core/transaction/CMTTransactionHandler.html" target="_blank" rel="noopener">handler that works correctly in a container managed environment</a> and a <a href="./apidocs/org/jdbi/v3/core/transaction/SerializableTransactionRunner.html" target="_blank" rel="noopener">serializable transaction handler</a> that allows multiple concurrent operations on a single handle to retry transparently.</p>
+<p>In addition to the <a href="./apidocs/org/jdbi/v3/core/transaction/LocalTransactionHandler.html" target="_blank" rel="noopener">standard transaction handler</a>, Jdbi includes a <a href="./apidocs/org/jdbi/v3/core/transaction/CMTTransactionHandler.html" target="_blank" rel="noopener">handler that works correctly in a container managed environment</a>, a <a href="./apidocs/org/jdbi/v3/core/transaction/NoOpTransactionHandler.html" target="_blank" rel="noopener">handler that ignores transactions completely</a> for connections that an external framework manages, and a <a href="./apidocs/org/jdbi/v3/core/transaction/SerializableTransactionRunner.html" target="_blank" rel="noopener">serializable transaction handler</a> that allows multiple concurrent operations on a single handle to retry transparently.</p>
 </div>
 </div>
 <div class="sect2">
@@ -6578,6 +6586,150 @@ We seed the table with the values 10 and 20.</p>
 <div class="paragraph">
 <p>With serializable isolation, one of the two transactions is forced to abort and retry.
 On the second go around, it calculates 10 + 20 + 30 = 60. Adding to 30 from the other, we get 30 + 60 = 90 and the assertion succeeds.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_transactions_managed_outside_jdbi"><a class="anchor" href="#_transactions_managed_outside_jdbi"></a><a class="link" href="#_transactions_managed_outside_jdbi">11.4. Transactions managed outside Jdbi</a></h3>
+<div class="paragraph">
+<p>Some applications manage transactions outside of Jdbi.
+A connection pool can disable autocommit for every connection, a container can own the transaction, or a framework such as Spring can wrap the data source in a transaction-aware proxy.
+Jdbi supports three strategies for these connections: the handle joins the external transaction (with the default handler, or with <code>CMTTransactionHandler</code> in a container), Jdbi ignores transactions completely, or Jdbi takes ownership and manages the transactions itself.</p>
+</div>
+<div class="sect3">
+<h4 id="_joining_a_transaction_connections_with_autocommit_disabled"><a class="anchor" href="#_joining_a_transaction_connections_with_autocommit_disabled"></a><a class="link" href="#_joining_a_transaction_connections_with_autocommit_disabled">11.4.1. Joining a transaction: connections with autocommit disabled</a></h4>
+<div class="paragraph">
+<p>The default transaction handler treats a connection that arrives with autocommit disabled as enrolled in a transaction that the connection owner manages.
+The handle joins this transaction:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="./apidocs/org/jdbi/v3/core/Handle.html#isInTransaction()" target="_blank" rel="noopener">isInTransaction()</a> returns <code>true</code> for the life of the handle.</p>
+</li>
+<li>
+<p><code>inTransaction</code> and <code>useTransaction</code> run the callback in the open transaction and do not commit. The connection owner commits. This is the same rule that applies to a nested <code>inTransaction</code> call inside an explicit <code>begin()</code>.</p>
+</li>
+<li>
+<p>The variants that take an isolation level throw a <code>TransactionException</code> when the requested level is different from the level of the connection. <code>TransactionIsolationLevel.UNKNOWN</code> joins without this check.</p>
+</li>
+<li>
+<p><code>begin()</code> does nothing.</p>
+</li>
+<li>
+<p>Explicit <code>commit()</code> and <code>rollback()</code> operate on the open transaction. After a commit or rollback, the next statement starts a new transaction, and the cycle can repeat on the same handle.</p>
+</li>
+<li>
+<p>The transaction callbacks (<code>afterCommit</code>, <code>afterRollback</code>) run at each explicit commit or rollback.</p>
+</li>
+<li>
+<p><code>close()</code> does not commit, roll back, or throw. The connection returns to its owner with its transaction state unchanged.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Because <code>inTransaction</code> and <code>useTransaction</code> never commit on such a connection, transaction retry handlers such as <code>SerializableTransactionRunner</code> do not engage.
+To let Jdbi manage transactions on these connections, use <code>LocalTransactionHandler.managed()</code> (see below).
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_joining_a_container_transaction"><a class="anchor" href="#_joining_a_container_transaction"></a><a class="link" href="#_joining_a_container_transaction">11.4.2. Joining a container transaction</a></h4>
+<div class="paragraph">
+<p><a href="./apidocs/org/jdbi/v3/core/transaction/CMTTransactionHandler.html" target="_blank" rel="noopener">CMTTransactionHandler</a> is for container managed (J2EE CMT) environments.
+It never begins or commits.
+When autocommit is disabled on the connection, the handle reports an open transaction and callbacks join it.
+A call to <code>rollback()</code> throws a <code>TransactionException</code>, so that the exception propagates to the container, which then rolls the transaction back.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ignoring_transactions_completely"><a class="anchor" href="#_ignoring_transactions_completely"></a><a class="link" href="#_ignoring_transactions_completely">11.4.3. Ignoring transactions completely</a></h4>
+<div class="paragraph">
+<p><a href="./apidocs/org/jdbi/v3/core/transaction/NoOpTransactionHandler.html" target="_blank" rel="noopener">NoOpTransactionHandler</a> never reads or changes the transaction state of the connection.
+Use it when the connection is wrapped by a proxy, for example the Spring <code>TransactionAwareDataSourceProxy</code> or an XA data source, where the autocommit flag does not show the real transaction state:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>begin()</code> and <code>commit()</code> do nothing. The external manager starts and commits the transaction.</p>
+</li>
+<li>
+<p><code>rollback()</code> throws a <code>TransactionException</code>, so that the external manager sees the failure and rolls the transaction back.</p>
+</li>
+<li>
+<p><code>isInTransaction()</code> returns <code>false</code> and does not examine the connection.</p>
+</li>
+<li>
+<p><code>inTransaction</code> and <code>useTransaction</code> run the callback directly.</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">Jdbi jdbi = Jdbi.create(<span class="keyword">new</span> TransactionAwareDataSourceProxy(dataSource));
+jdbi.setTransactionHandler(<span class="keyword">new</span> NoOpTransactionHandler());</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_letting_jdbi_manage_transactions_with_autocommit_disabled"><a class="anchor" href="#_letting_jdbi_manage_transactions_with_autocommit_disabled"></a><a class="link" href="#_letting_jdbi_manage_transactions_with_autocommit_disabled">11.4.4. Letting Jdbi manage transactions with autocommit disabled</a></h4>
+<div class="paragraph">
+<p>Some connection pools disable autocommit for every connection as a precaution, and the application still wants Jdbi to manage the transactions.
+For this configuration, use <a href="./apidocs/org/jdbi/v3/core/transaction/LocalTransactionHandler.html#managed()" target="_blank" rel="noopener">LocalTransactionHandler.managed()</a>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">Jdbi jdbi = Jdbi.create(dataSourceWithAutocommitDisabled);
+jdbi.setTransactionHandler(LocalTransactionHandler.managed());</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The managed handler does not read the autocommit flag to find the transaction state.
+It tracks the transactions that Jdbi demarcates:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>inTransaction</code> and <code>useTransaction</code> start a transaction, run the callback, and commit. When the callback throws, they roll the transaction back.</p>
+</li>
+<li>
+<p><code>isInTransaction()</code> returns <code>true</code> only between <code>begin()</code> (or the start of a transaction callback) and the commit or rollback.</p>
+</li>
+<li>
+<p>The variants that take an isolation level work. Retry handlers engage when composed with the managed handler: <code>new SerializableTransactionRunner(LocalTransactionHandler.managed())</code>.</p>
+</li>
+<li>
+<p>A statement executed outside of a transaction is not committed, and <code>commit()</code> or <code>rollback()</code> outside of a transaction does not touch the connection.
+JDBC does not define what happens to the uncommitted work when the connection closes: most drivers and pools roll it back, and the Oracle driver documents an implicit commit.
+To discard the work explicitly, roll back on the JDBC connection.</p>
+</li>
+<li>
+<p><code>close()</code> on a handle with an open transaction rolls the transaction back and throws, the same as with autocommit enabled.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+JDBC has one transaction per connection.
+When a statement executes outside of a Jdbi transaction and a Jdbi transaction then commits on the same connection, the commit includes the earlier statement.
+On PostgreSQL, the open transaction also rejects a change of the isolation level, so <code>useTransaction(TransactionIsolationLevel.SERIALIZABLE, &#8230;&#8203;)</code> fails on that handle until the transaction ends.
+This is a property of JDBC and applies to all strategies on this page.
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 </div>
@@ -17040,7 +17192,7 @@ The annotation may be used for method return types, or on <a href="./apidocs/org
 <div id="footer">
 <div id="footer-text">
 Version 3.55.0-SNAPSHOT<br>
-Last updated 09/13/2026 16:15 -0700
+Last updated 09/13/2026 20:37 -0700
 </div>
 </div>
 </body>

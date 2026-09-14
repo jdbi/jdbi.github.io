@@ -111,39 +111,45 @@ The 'core' package hosts the top level interface into jdbi core.</div>
 demarcated explicitly on the handle and passed through to be handled
 directly on the JDBC Connection instance.</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="RollbackOnlyTransactionHandler.html" title="class in org.jdbi.v3.core.transaction">RollbackOnlyTransactionHandler</a></div>
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="NoOpTransactionHandler.html" title="class in org.jdbi.v3.core.transaction">NoOpTransactionHandler</a></div>
 <div class="col-last odd-row-color class-summary class-summary-tab2">
+<div class="block">A <a href="TransactionHandler.html" title="interface in org.jdbi.v3.core.transaction"><code>TransactionHandler</code></a> for connections whose transactions are managed
+completely outside of Jdbi, for example by a proxy data source or an XA
+transaction manager.</div>
+</div>
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="RollbackOnlyTransactionHandler.html" title="class in org.jdbi.v3.core.transaction">RollbackOnlyTransactionHandler</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab2">
 <div class="block">A transaction handler that always calls <a href="DelegatingTransactionHandler.html#rollback(org.jdbi.v3.core.Handle)"><code>DelegatingTransactionHandler.rollback(org.jdbi.v3.core.Handle)</code></a> instead
 of <a href="RollbackOnlyTransactionHandler.html#commit(org.jdbi.v3.core.Handle)"><code>RollbackOnlyTransactionHandler.commit(org.jdbi.v3.core.Handle)</code></a>.</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab2"><a href="SerializableTransactionRunner.html" title="class in org.jdbi.v3.core.transaction">SerializableTransactionRunner</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab2">
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="SerializableTransactionRunner.html" title="class in org.jdbi.v3.core.transaction">SerializableTransactionRunner</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab2">
 <div class="block">A TransactionHandler that automatically retries transactions that fail due to
 serialization failures, which can generally be resolved by automatically
 retrying the transaction.</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="SerializableTransactionRunner.Configuration.html" title="class in org.jdbi.v3.core.transaction">SerializableTransactionRunner.Configuration</a></div>
-<div class="col-last odd-row-color class-summary class-summary-tab2">
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="SerializableTransactionRunner.Configuration.html" title="class in org.jdbi.v3.core.transaction">SerializableTransactionRunner.Configuration</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab2">
 <div class="block">Configuration for serializable transaction runner.</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab5"><a href="TransactionException.html" title="class in org.jdbi.v3.core.transaction">TransactionException</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab5">
+<div class="col-first odd-row-color class-summary class-summary-tab5"><a href="TransactionException.html" title="class in org.jdbi.v3.core.transaction">TransactionException</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab5">
 <div class="block">Thrown when there's a problem manipulating the transaction isolation level.</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab1"><a href="TransactionHandler.html" title="interface in org.jdbi.v3.core.transaction">TransactionHandler</a></div>
-<div class="col-last odd-row-color class-summary class-summary-tab1">
+<div class="col-first even-row-color class-summary class-summary-tab1"><a href="TransactionHandler.html" title="interface in org.jdbi.v3.core.transaction">TransactionHandler</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab1">
 <div class="block">Interface which defines callbacks to be used when transaction methods are called on a handle.</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab3"><a href="TransactionIsolationLevel.html" title="enum class in org.jdbi.v3.core.transaction">TransactionIsolationLevel</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab3">
+<div class="col-first odd-row-color class-summary class-summary-tab3"><a href="TransactionIsolationLevel.html" title="enum class in org.jdbi.v3.core.transaction">TransactionIsolationLevel</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab3">
 <div class="block">Supported transaction isolation levels.</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab5"><a href="UnableToManipulateTransactionIsolationLevelException.html" title="class in org.jdbi.v3.core.transaction">UnableToManipulateTransactionIsolationLevelException</a></div>
-<div class="col-last odd-row-color class-summary class-summary-tab5">
+<div class="col-first even-row-color class-summary class-summary-tab5"><a href="UnableToManipulateTransactionIsolationLevelException.html" title="class in org.jdbi.v3.core.transaction">UnableToManipulateTransactionIsolationLevelException</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab5">
 <div class="block">Thrown when <code>Jdbi</code> isn't able to change the transaction isolation level.</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab5"><a href="UnableToRestoreAutoCommitStateException.html" title="class in org.jdbi.v3.core.transaction">UnableToRestoreAutoCommitStateException</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab5">
+<div class="col-first odd-row-color class-summary class-summary-tab5"><a href="UnableToRestoreAutoCommitStateException.html" title="class in org.jdbi.v3.core.transaction">UnableToRestoreAutoCommitStateException</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab5">
 <div class="block">Thrown after a transaction finishes if we can't reset its isolation level.</div>
 </div>
 </div>

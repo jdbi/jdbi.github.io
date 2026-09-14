@@ -561,13 +561,11 @@ to the <a href="org/jdbi/v3/spring5/EnableJdbiRepositories.html#value()"><code>E
 <dd>
 <div class="block">Begins a transaction.</div>
 </dd>
-<dt><a href="org/jdbi/v3/core/transaction/CMTTransactionHandler.html#begin(org.jdbi.v3.core.Handle)" class="member-name-link">begin(Handle)</a> - Method in class org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/CMTTransactionHandler.html" title="class in org.jdbi.v3.core.transaction">CMTTransactionHandler</a></dt>
-<dd>
-<div class="block">Called when a transaction is started</div>
-</dd>
 <dt><a href="org/jdbi/v3/core/transaction/DelegatingTransactionHandler.html#begin(org.jdbi.v3.core.Handle)" class="member-name-link">begin(Handle)</a> - Method in class org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/DelegatingTransactionHandler.html" title="class in org.jdbi.v3.core.transaction">DelegatingTransactionHandler</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/core/transaction/LocalTransactionHandler.html#begin(org.jdbi.v3.core.Handle)" class="member-name-link">begin(Handle)</a> - Method in class org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/LocalTransactionHandler.html" title="class in org.jdbi.v3.core.transaction">LocalTransactionHandler</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="org/jdbi/v3/core/transaction/NoOpTransactionHandler.html#begin(org.jdbi.v3.core.Handle)" class="member-name-link">begin(Handle)</a> - Method in class org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/NoOpTransactionHandler.html" title="class in org.jdbi.v3.core.transaction">NoOpTransactionHandler</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/core/transaction/TransactionHandler.html#begin(org.jdbi.v3.core.Handle)" class="member-name-link">begin(Handle)</a> - Method in interface org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/TransactionHandler.html" title="interface in org.jdbi.v3.core.transaction">TransactionHandler</a></dt>
 <dd>
@@ -1699,13 +1697,11 @@ commit the handle's transaction (if one exists) and close the handle.</div>
 <dd>
 <div class="block">Commits the open transaction.</div>
 </dd>
-<dt><a href="org/jdbi/v3/core/transaction/CMTTransactionHandler.html#commit(org.jdbi.v3.core.Handle)" class="member-name-link">commit(Handle)</a> - Method in class org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/CMTTransactionHandler.html" title="class in org.jdbi.v3.core.transaction">CMTTransactionHandler</a></dt>
-<dd>
-<div class="block">Called when a transaction is committed</div>
-</dd>
 <dt><a href="org/jdbi/v3/core/transaction/DelegatingTransactionHandler.html#commit(org.jdbi.v3.core.Handle)" class="member-name-link">commit(Handle)</a> - Method in class org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/DelegatingTransactionHandler.html" title="class in org.jdbi.v3.core.transaction">DelegatingTransactionHandler</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/core/transaction/LocalTransactionHandler.html#commit(org.jdbi.v3.core.Handle)" class="member-name-link">commit(Handle)</a> - Method in class org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/LocalTransactionHandler.html" title="class in org.jdbi.v3.core.transaction">LocalTransactionHandler</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="org/jdbi/v3/core/transaction/NoOpTransactionHandler.html#commit(org.jdbi.v3.core.Handle)" class="member-name-link">commit(Handle)</a> - Method in class org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/NoOpTransactionHandler.html" title="class in org.jdbi.v3.core.transaction">NoOpTransactionHandler</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/core/transaction/RollbackOnlyTransactionHandler.html#commit(org.jdbi.v3.core.Handle)" class="member-name-link">commit(Handle)</a> - Method in class org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/RollbackOnlyTransactionHandler.html" title="class in org.jdbi.v3.core.transaction">RollbackOnlyTransactionHandler</a></dt>
 <dd>&nbsp;</dd>
@@ -4220,11 +4216,11 @@ provided <a href="org/jdbi/v3/core/Handle.html" title="class in org.jdbi.v3.core
 <div class="block">A convenience function which manages the lifecycle of a handle and yields it to a callback
 for use by clients.</div>
 </dd>
-<dt><a href="org/jdbi/v3/core/transaction/CMTTransactionHandler.html#inTransaction(org.jdbi.v3.core.Handle,org.jdbi.v3.core.HandleCallback)" class="member-name-link">inTransaction(Handle, HandleCallback)</a> - Method in class org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/CMTTransactionHandler.html" title="class in org.jdbi.v3.core.transaction">CMTTransactionHandler</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/core/transaction/DelegatingTransactionHandler.html#inTransaction(org.jdbi.v3.core.Handle,org.jdbi.v3.core.HandleCallback)" class="member-name-link">inTransaction(Handle, HandleCallback)</a> - Method in class org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/DelegatingTransactionHandler.html" title="class in org.jdbi.v3.core.transaction">DelegatingTransactionHandler</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/core/transaction/LocalTransactionHandler.html#inTransaction(org.jdbi.v3.core.Handle,org.jdbi.v3.core.HandleCallback)" class="member-name-link">inTransaction(Handle, HandleCallback)</a> - Method in class org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/LocalTransactionHandler.html" title="class in org.jdbi.v3.core.transaction">LocalTransactionHandler</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="org/jdbi/v3/core/transaction/NoOpTransactionHandler.html#inTransaction(org.jdbi.v3.core.Handle,org.jdbi.v3.core.HandleCallback)" class="member-name-link">inTransaction(Handle, HandleCallback)</a> - Method in class org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/NoOpTransactionHandler.html" title="class in org.jdbi.v3.core.transaction">NoOpTransactionHandler</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/core/transaction/SerializableTransactionRunner.html#inTransaction(org.jdbi.v3.core.Handle,org.jdbi.v3.core.HandleCallback)" class="member-name-link">inTransaction(Handle, HandleCallback)</a> - Method in class org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/SerializableTransactionRunner.html" title="class in org.jdbi.v3.core.transaction">SerializableTransactionRunner</a></dt>
 <dd>&nbsp;</dd>
@@ -4232,11 +4228,11 @@ for use by clients.</div>
 <dd>
 <div class="block">Run a transaction.</div>
 </dd>
-<dt><a href="org/jdbi/v3/core/transaction/CMTTransactionHandler.html#inTransaction(org.jdbi.v3.core.Handle,org.jdbi.v3.core.transaction.TransactionIsolationLevel,org.jdbi.v3.core.HandleCallback)" class="member-name-link">inTransaction(Handle, TransactionIsolationLevel, HandleCallback)</a> - Method in class org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/CMTTransactionHandler.html" title="class in org.jdbi.v3.core.transaction">CMTTransactionHandler</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/core/transaction/DelegatingTransactionHandler.html#inTransaction(org.jdbi.v3.core.Handle,org.jdbi.v3.core.transaction.TransactionIsolationLevel,org.jdbi.v3.core.HandleCallback)" class="member-name-link">inTransaction(Handle, TransactionIsolationLevel, HandleCallback)</a> - Method in class org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/DelegatingTransactionHandler.html" title="class in org.jdbi.v3.core.transaction">DelegatingTransactionHandler</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/core/transaction/LocalTransactionHandler.html#inTransaction(org.jdbi.v3.core.Handle,org.jdbi.v3.core.transaction.TransactionIsolationLevel,org.jdbi.v3.core.HandleCallback)" class="member-name-link">inTransaction(Handle, TransactionIsolationLevel, HandleCallback)</a> - Method in class org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/LocalTransactionHandler.html" title="class in org.jdbi.v3.core.transaction">LocalTransactionHandler</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="org/jdbi/v3/core/transaction/NoOpTransactionHandler.html#inTransaction(org.jdbi.v3.core.Handle,org.jdbi.v3.core.transaction.TransactionIsolationLevel,org.jdbi.v3.core.HandleCallback)" class="member-name-link">inTransaction(Handle, TransactionIsolationLevel, HandleCallback)</a> - Method in class org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/NoOpTransactionHandler.html" title="class in org.jdbi.v3.core.transaction">NoOpTransactionHandler</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/core/transaction/SerializableTransactionRunner.html#inTransaction(org.jdbi.v3.core.Handle,org.jdbi.v3.core.transaction.TransactionIsolationLevel,org.jdbi.v3.core.HandleCallback)" class="member-name-link">inTransaction(Handle, TransactionIsolationLevel, HandleCallback)</a> - Method in class org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/SerializableTransactionRunner.html" title="class in org.jdbi.v3.core.transaction">SerializableTransactionRunner</a></dt>
 <dd>&nbsp;</dd>
@@ -4377,6 +4373,8 @@ will be attached to the <a href="org/jdbi/v3/core/Handle.html" title="class in o
 <dt><a href="org/jdbi/v3/core/transaction/DelegatingTransactionHandler.html#isInTransaction(org.jdbi.v3.core.Handle)" class="member-name-link">isInTransaction(Handle)</a> - Method in class org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/DelegatingTransactionHandler.html" title="class in org.jdbi.v3.core.transaction">DelegatingTransactionHandler</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/core/transaction/LocalTransactionHandler.html#isInTransaction(org.jdbi.v3.core.Handle)" class="member-name-link">isInTransaction(Handle)</a> - Method in class org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/LocalTransactionHandler.html" title="class in org.jdbi.v3.core.transaction">LocalTransactionHandler</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="org/jdbi/v3/core/transaction/NoOpTransactionHandler.html#isInTransaction(org.jdbi.v3.core.Handle)" class="member-name-link">isInTransaction(Handle)</a> - Method in class org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/NoOpTransactionHandler.html" title="class in org.jdbi.v3.core.transaction">NoOpTransactionHandler</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/core/transaction/TransactionHandler.html#isInTransaction(org.jdbi.v3.core.Handle)" class="member-name-link">isInTransaction(Handle)</a> - Method in interface org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/TransactionHandler.html" title="interface in org.jdbi.v3.core.transaction">TransactionHandler</a></dt>
 <dd>
@@ -4864,6 +4862,11 @@ directly on the JDBC Connection instance.</div>
 <dd>
 <div class="block">Use the accessibility strategy to potentially make a reflective operation accessible.</div>
 </dd>
+<dt><a href="org/jdbi/v3/core/transaction/LocalTransactionHandler.html#managed()" class="member-name-link">managed()</a> - Static method in class org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/LocalTransactionHandler.html" title="class in org.jdbi.v3.core.transaction">LocalTransactionHandler</a></dt>
+<dd>
+<div class="block">Returns a handler that manages transactions itself on every connection,
+including a connection with autocommit disabled.</div>
+</dd>
 <dt><a href="org/jdbi/v3/core/annotation/JdbiProperty.html#map()" class="member-name-link">map()</a> - Element in annotation interface org.jdbi.v3.core.annotation.<a href="org/jdbi/v3/core/annotation/JdbiProperty.html" title="annotation interface in org.jdbi.v3.core.annotation">JdbiProperty</a></dt>
 <dd>
 <div class="block">Returns true if the property is mapped in a result.</div>
@@ -5195,6 +5198,14 @@ or <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql
 <div class="block">Installing this plugin uses the no op (no caching) cache.</div>
 </dd>
 <dt><a href="org/jdbi/v3/cache/noop/NoopCachePlugin.html#%3Cinit%3E()" class="member-name-link">NoopCachePlugin()</a> - Constructor for class org.jdbi.v3.cache.noop.<a href="org/jdbi/v3/cache/noop/NoopCachePlugin.html" title="class in org.jdbi.v3.cache.noop">NoopCachePlugin</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="org/jdbi/v3/core/transaction/NoOpTransactionHandler.html" class="type-name-link" title="class in org.jdbi.v3.core.transaction">NoOpTransactionHandler</a> - Class in <a href="org/jdbi/v3/core/transaction/package-summary.html">org.jdbi.v3.core.transaction</a></dt>
+<dd>
+<div class="block">A <a href="org/jdbi/v3/core/transaction/TransactionHandler.html" title="interface in org.jdbi.v3.core.transaction"><code>TransactionHandler</code></a> for connections whose transactions are managed
+completely outside of Jdbi, for example by a proxy data source or an XA
+transaction manager.</div>
+</dd>
+<dt><a href="org/jdbi/v3/core/transaction/NoOpTransactionHandler.html#%3Cinit%3E()" class="member-name-link">NoOpTransactionHandler()</a> - Constructor for class org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/NoOpTransactionHandler.html" title="class in org.jdbi.v3.core.transaction">NoOpTransactionHandler</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/core/mapper/CaseStrategy.html#NOP" class="member-name-link">NOP</a> - Enum constant in enum class org.jdbi.v3.core.mapper.<a href="org/jdbi/v3/core/mapper/CaseStrategy.html" title="enum class in org.jdbi.v3.core.mapper">CaseStrategy</a></dt>
 <dd>
@@ -6546,14 +6557,14 @@ or for a method.</div>
 <dd>
 <div class="block">Releases the given savepoint.</div>
 </dd>
-<dt><a href="org/jdbi/v3/core/transaction/CMTTransactionHandler.html#releaseSavepoint(org.jdbi.v3.core.Handle,java.lang.String)" class="member-name-link">releaseSavepoint(Handle, String)</a> - Method in class org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/CMTTransactionHandler.html" title="class in org.jdbi.v3.core.transaction">CMTTransactionHandler</a></dt>
-<dd>
-<div class="block">Savepoints are not supported.</div>
-</dd>
 <dt><a href="org/jdbi/v3/core/transaction/DelegatingTransactionHandler.html#releaseSavepoint(org.jdbi.v3.core.Handle,java.lang.String)" class="member-name-link">releaseSavepoint(Handle, String)</a> - Method in class org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/DelegatingTransactionHandler.html" title="class in org.jdbi.v3.core.transaction">DelegatingTransactionHandler</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/core/transaction/LocalTransactionHandler.html#releaseSavepoint(org.jdbi.v3.core.Handle,java.lang.String)" class="member-name-link">releaseSavepoint(Handle, String)</a> - Method in class org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/LocalTransactionHandler.html" title="class in org.jdbi.v3.core.transaction">LocalTransactionHandler</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="org/jdbi/v3/core/transaction/NoOpTransactionHandler.html#releaseSavepoint(org.jdbi.v3.core.Handle,java.lang.String)" class="member-name-link">releaseSavepoint(Handle, String)</a> - Method in class org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/NoOpTransactionHandler.html" title="class in org.jdbi.v3.core.transaction">NoOpTransactionHandler</a></dt>
+<dd>
+<div class="block">Savepoints are not supported.</div>
+</dd>
 <dt><a href="org/jdbi/v3/core/transaction/TransactionHandler.html#releaseSavepoint(org.jdbi.v3.core.Handle,java.lang.String)" class="member-name-link">releaseSavepoint(Handle, String)</a> - Method in interface org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/TransactionHandler.html" title="interface in org.jdbi.v3.core.transaction">TransactionHandler</a></dt>
 <dd>
 <div class="block">Release a previously created savepoint.</div>
@@ -6698,15 +6709,14 @@ result.</div>
 <dd>
 <div class="block">Rolls back the open transaction.</div>
 </dd>
-<dt><a href="org/jdbi/v3/core/transaction/CMTTransactionHandler.html#rollback(org.jdbi.v3.core.Handle)" class="member-name-link">rollback(Handle)</a> - Method in class org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/CMTTransactionHandler.html" title="class in org.jdbi.v3.core.transaction">CMTTransactionHandler</a></dt>
-<dd>
-<div class="block">Called when a transaction is rolled back
-Will throw a RuntimeException to force transactional rollback</div>
-</dd>
 <dt><a href="org/jdbi/v3/core/transaction/DelegatingTransactionHandler.html#rollback(org.jdbi.v3.core.Handle)" class="member-name-link">rollback(Handle)</a> - Method in class org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/DelegatingTransactionHandler.html" title="class in org.jdbi.v3.core.transaction">DelegatingTransactionHandler</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/core/transaction/LocalTransactionHandler.html#rollback(org.jdbi.v3.core.Handle)" class="member-name-link">rollback(Handle)</a> - Method in class org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/LocalTransactionHandler.html" title="class in org.jdbi.v3.core.transaction">LocalTransactionHandler</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="org/jdbi/v3/core/transaction/NoOpTransactionHandler.html#rollback(org.jdbi.v3.core.Handle)" class="member-name-link">rollback(Handle)</a> - Method in class org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/NoOpTransactionHandler.html" title="class in org.jdbi.v3.core.transaction">NoOpTransactionHandler</a></dt>
+<dd>
+<div class="block">Called when a transaction is rolled back.</div>
+</dd>
 <dt><a href="org/jdbi/v3/core/transaction/TransactionHandler.html#rollback(org.jdbi.v3.core.Handle)" class="member-name-link">rollback(Handle)</a> - Method in interface org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/TransactionHandler.html" title="interface in org.jdbi.v3.core.transaction">TransactionHandler</a></dt>
 <dd>
 <div class="block">Roll back the transaction.</div>
@@ -6728,14 +6738,14 @@ of <a href="org/jdbi/v3/core/transaction/RollbackOnlyTransactionHandler.html#com
 <dd>
 <div class="block">Rolls back to the given savepoint.</div>
 </dd>
-<dt><a href="org/jdbi/v3/core/transaction/CMTTransactionHandler.html#rollbackToSavepoint(org.jdbi.v3.core.Handle,java.lang.String)" class="member-name-link">rollbackToSavepoint(Handle, String)</a> - Method in class org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/CMTTransactionHandler.html" title="class in org.jdbi.v3.core.transaction">CMTTransactionHandler</a></dt>
-<dd>
-<div class="block">Savepoints are not supported.</div>
-</dd>
 <dt><a href="org/jdbi/v3/core/transaction/DelegatingTransactionHandler.html#rollbackToSavepoint(org.jdbi.v3.core.Handle,java.lang.String)" class="member-name-link">rollbackToSavepoint(Handle, String)</a> - Method in class org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/DelegatingTransactionHandler.html" title="class in org.jdbi.v3.core.transaction">DelegatingTransactionHandler</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/core/transaction/LocalTransactionHandler.html#rollbackToSavepoint(org.jdbi.v3.core.Handle,java.lang.String)" class="member-name-link">rollbackToSavepoint(Handle, String)</a> - Method in class org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/LocalTransactionHandler.html" title="class in org.jdbi.v3.core.transaction">LocalTransactionHandler</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="org/jdbi/v3/core/transaction/NoOpTransactionHandler.html#rollbackToSavepoint(org.jdbi.v3.core.Handle,java.lang.String)" class="member-name-link">rollbackToSavepoint(Handle, String)</a> - Method in class org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/NoOpTransactionHandler.html" title="class in org.jdbi.v3.core.transaction">NoOpTransactionHandler</a></dt>
+<dd>
+<div class="block">Savepoints are not supported.</div>
+</dd>
 <dt><a href="org/jdbi/v3/core/transaction/TransactionHandler.html#rollbackToSavepoint(org.jdbi.v3.core.Handle,java.lang.String)" class="member-name-link">rollbackToSavepoint(Handle, String)</a> - Method in interface org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/TransactionHandler.html" title="interface in org.jdbi.v3.core.transaction">TransactionHandler</a></dt>
 <dd>
 <div class="block">Roll back to a named savepoint.</div>
@@ -6784,14 +6794,14 @@ the bare <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/ja
 <dd>
 <div class="block">Creates a savepoint with the given name on the transaction.</div>
 </dd>
-<dt><a href="org/jdbi/v3/core/transaction/CMTTransactionHandler.html#savepoint(org.jdbi.v3.core.Handle,java.lang.String)" class="member-name-link">savepoint(Handle, String)</a> - Method in class org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/CMTTransactionHandler.html" title="class in org.jdbi.v3.core.transaction">CMTTransactionHandler</a></dt>
-<dd>
-<div class="block">Savepoints are not supported.</div>
-</dd>
 <dt><a href="org/jdbi/v3/core/transaction/DelegatingTransactionHandler.html#savepoint(org.jdbi.v3.core.Handle,java.lang.String)" class="member-name-link">savepoint(Handle, String)</a> - Method in class org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/DelegatingTransactionHandler.html" title="class in org.jdbi.v3.core.transaction">DelegatingTransactionHandler</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/core/transaction/LocalTransactionHandler.html#savepoint(org.jdbi.v3.core.Handle,java.lang.String)" class="member-name-link">savepoint(Handle, String)</a> - Method in class org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/LocalTransactionHandler.html" title="class in org.jdbi.v3.core.transaction">LocalTransactionHandler</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="org/jdbi/v3/core/transaction/NoOpTransactionHandler.html#savepoint(org.jdbi.v3.core.Handle,java.lang.String)" class="member-name-link">savepoint(Handle, String)</a> - Method in class org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/NoOpTransactionHandler.html" title="class in org.jdbi.v3.core.transaction">NoOpTransactionHandler</a></dt>
+<dd>
+<div class="block">Savepoints are not supported.</div>
+</dd>
 <dt><a href="org/jdbi/v3/core/transaction/TransactionHandler.html#savepoint(org.jdbi.v3.core.Handle,java.lang.String)" class="member-name-link">savepoint(Handle, String)</a> - Method in interface org.jdbi.v3.core.transaction.<a href="org/jdbi/v3/core/transaction/TransactionHandler.html" title="interface in org.jdbi.v3.core.transaction">TransactionHandler</a></dt>
 <dd>
 <div class="block">Create a new savepoint.</div>

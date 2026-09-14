@@ -125,14 +125,21 @@ demarcated explicitly on the handle and passed through to be handled
 directly on the JDBC Connection instance.</div>
 </div>
 <div class="col-first odd-row-color"><code>class&nbsp;</code></div>
-<div class="col-second odd-row-color"><code><a href="../RollbackOnlyTransactionHandler.html" class="type-name-link" title="class in org.jdbi.v3.core.transaction">RollbackOnlyTransactionHandler</a></code></div>
+<div class="col-second odd-row-color"><code><a href="../NoOpTransactionHandler.html" class="type-name-link" title="class in org.jdbi.v3.core.transaction">NoOpTransactionHandler</a></code></div>
 <div class="col-last odd-row-color">
+<div class="block">A <a href="../TransactionHandler.html" title="interface in org.jdbi.v3.core.transaction"><code>TransactionHandler</code></a> for connections whose transactions are managed
+completely outside of Jdbi, for example by a proxy data source or an XA
+transaction manager.</div>
+</div>
+<div class="col-first even-row-color"><code>class&nbsp;</code></div>
+<div class="col-second even-row-color"><code><a href="../RollbackOnlyTransactionHandler.html" class="type-name-link" title="class in org.jdbi.v3.core.transaction">RollbackOnlyTransactionHandler</a></code></div>
+<div class="col-last even-row-color">
 <div class="block">A transaction handler that always calls <a href="../DelegatingTransactionHandler.html#rollback(org.jdbi.v3.core.Handle)"><code>DelegatingTransactionHandler.rollback(org.jdbi.v3.core.Handle)</code></a> instead
 of <a href="../RollbackOnlyTransactionHandler.html#commit(org.jdbi.v3.core.Handle)"><code>RollbackOnlyTransactionHandler.commit(org.jdbi.v3.core.Handle)</code></a>.</div>
 </div>
-<div class="col-first even-row-color"><code>class&nbsp;</code></div>
-<div class="col-second even-row-color"><code><a href="../SerializableTransactionRunner.html" class="type-name-link" title="class in org.jdbi.v3.core.transaction">SerializableTransactionRunner</a></code></div>
-<div class="col-last even-row-color">
+<div class="col-first odd-row-color"><code>class&nbsp;</code></div>
+<div class="col-second odd-row-color"><code><a href="../SerializableTransactionRunner.html" class="type-name-link" title="class in org.jdbi.v3.core.transaction">SerializableTransactionRunner</a></code></div>
+<div class="col-last odd-row-color">
 <div class="block">A TransactionHandler that automatically retries transactions that fail due to
 serialization failures, which can generally be resolved by automatically
 retrying the transaction.</div>
