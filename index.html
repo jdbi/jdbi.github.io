@@ -532,7 +532,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.55.0-SNAPSHOT,</span>
-<span id="revdate">09/13/2026 20:37 -0700</span>
+<span id="revdate">09/14/2026 09:32 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -6619,7 +6619,7 @@ The handle joins this transaction:</p>
 <p>Explicit <code>commit()</code> and <code>rollback()</code> operate on the open transaction. After a commit or rollback, the next statement starts a new transaction, and the cycle can repeat on the same handle.</p>
 </li>
 <li>
-<p>The transaction callbacks (<code>afterCommit</code>, <code>afterRollback</code>) run at each explicit commit or rollback.</p>
+<p>The transaction callbacks (<code>afterCommit</code>, <code>afterRollback</code>) run at each explicit commit or rollback. A commit that fails rolls the transaction back and runs the <code>afterRollback</code> callbacks.</p>
 </li>
 <li>
 <p><code>close()</code> does not commit, roll back, or throw. The connection returns to its owner with its transaction state unchanged.</p>
@@ -17192,7 +17192,7 @@ The annotation may be used for method return types, or on <a href="./apidocs/org
 <div id="footer">
 <div id="footer-text">
 Version 3.55.0-SNAPSHOT<br>
-Last updated 09/13/2026 20:37 -0700
+Last updated 09/14/2026 09:32 -0700
 </div>
 </div>
 </body>
