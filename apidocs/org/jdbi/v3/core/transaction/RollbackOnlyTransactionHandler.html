@@ -89,7 +89,9 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">RollbackOnlyTransactionHandler</span>
 <span class="extends-implements">extends <a href="DelegatingTransactionHandler.html" title="class in org.jdbi.v3.core.transaction">DelegatingTransactionHandler</a></span></div>
 <div class="block">A transaction handler that always calls <a href="DelegatingTransactionHandler.html#rollback(org.jdbi.v3.core.Handle)"><code>DelegatingTransactionHandler.rollback(org.jdbi.v3.core.Handle)</code></a> instead
-of <a href="#commit(org.jdbi.v3.core.Handle)"><code>commit(org.jdbi.v3.core.Handle)</code></a>.</div>
+of <a href="#commit(org.jdbi.v3.core.Handle)"><code>commit(org.jdbi.v3.core.Handle)</code></a>. Nothing this handler manages ever commits, so a
+commit runs the <a href="../Handle.html#afterRollback(java.lang.Runnable)"><code>Handle.afterRollback(Runnable)</code></a> callbacks and never the <a href="../Handle.html#afterCommit(java.lang.Runnable)"><code>Handle.afterCommit(Runnable)</code></a>
+callbacks.</div>
 </div>
 </section>
 <section class="summary">

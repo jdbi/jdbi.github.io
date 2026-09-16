@@ -1024,7 +1024,8 @@ the exception propagates.</div>
 <h3>rollback</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Handle.html" title="class in org.jdbi.v3.core">Handle</a></span>&nbsp;<span class="element-name">rollback</span>()</div>
-<div class="block">Rollback a transaction.</div>
+<div class="block">Rollback a transaction. The <a href="#afterRollback(java.lang.Runnable)"><code>afterRollback(Runnable)</code></a> callbacks run even when the
+rollback fails, because the transaction did not commit either way.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the same handle.</dd>
@@ -1038,7 +1039,9 @@ the exception propagates.</div>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="annotations"><a href="../meta/Beta.html" title="annotation interface in org.jdbi.v3.meta">@Beta</a>
 </span><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Handle.html" title="class in org.jdbi.v3.core">Handle</a></span>&nbsp;<span class="element-name">afterCommit</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Runnable.html" title="class or interface in java.lang" class="external-link">Runnable</a>&nbsp;afterCommit)</span></div>
-<div class="block">Execute an action the next time this Handle commits, unless it is rolled back first.</div>
+<div class="block">Execute an action the next time this Handle commits, unless it is rolled back first.
+The action also runs when the connection committed but the autocommit state could not
+be restored afterwards.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>afterCommit</code> - the action to execute after commit.</dd>
@@ -1056,7 +1059,7 @@ the exception propagates.</div>
 </span><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Handle.html" title="class in org.jdbi.v3.core">Handle</a></span>&nbsp;<span class="element-name">afterRollback</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Runnable.html" title="class or interface in java.lang" class="external-link">Runnable</a>&nbsp;afterRollback)</span></div>
 <div class="block">Execute an action the next time this Handle rolls back, unless it is committed first.
 With the default transaction handler, a commit that fails rolls the transaction
-back and runs the action.</div>
+back and runs the action, and so does a rollback that fails on the connection.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>afterRollback</code> - the action to execute after rollback.</dd>
