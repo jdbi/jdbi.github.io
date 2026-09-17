@@ -58,6 +58,7 @@ loadScripts(document, 'script');</script>
 <li><a href="#method-summary" tabindex="0">Method Summary</a></li>
 <li><a href="#method-detail" tabindex="0">Method Details</a>
 <ol class="toc-list">
+<li><a href="#setExtensionTypeMethods(java.util.Collection)" tabindex="0">setExtensionTypeMethods(Collection)</a></li>
 <li><a href="#addExtensionHandlerFactory(org.jdbi.v3.core.extension.ExtensionHandlerFactory)" tabindex="0">addExtensionHandlerFactory(ExtensionHandlerFactory)</a></li>
 <li><a href="#addExtensionHandlerCustomizer(org.jdbi.v3.core.extension.ExtensionHandlerCustomizer)" tabindex="0">addExtensionHandlerCustomizer(ExtensionHandlerCustomizer)</a></li>
 <li><a href="#addConfigCustomizerFactory(org.jdbi.v3.core.extension.ConfigCustomizerFactory)" tabindex="0">addConfigCustomizerFactory(ConfigCustomizerFactory)</a></li>
@@ -150,6 +151,11 @@ See <a href="ExtensionMetadata.html#builder(java.lang.Class)"><code>ExtensionMet
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the extension type from the builder.</div>
 </div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ExtensionMetadata.Builder.html" title="class in org.jdbi.v3.core.extension">ExtensionMetadata.Builder</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setExtensionTypeMethods(java.util.Collection)" class="member-name-link">setExtensionTypeMethods</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Method.html" title="class or interface in java.lang.reflect" class="external-link">Method</a>&gt;&nbsp;methods)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Sets the methods of the extension type that need extension handlers.</div>
+</div>
 </div>
 </div>
 </div>
@@ -167,6 +173,28 @@ See <a href="ExtensionMetadata.html#builder(java.lang.Class)"><code>ExtensionMet
 <section class="method-details" id="method-detail">
 <h2>Method Details</h2>
 <ul class="member-list">
+<li>
+<section class="detail" id="setExtensionTypeMethods(java.util.Collection)">
+<h3>setExtensionTypeMethods</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="annotations"><a href="../../meta/Alpha.html" title="annotation interface in org.jdbi.v3.meta">@Alpha</a>
+</span><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ExtensionMetadata.Builder.html" title="class in org.jdbi.v3.core.extension">ExtensionMetadata.Builder</a></span>&nbsp;<span class="element-name">setExtensionTypeMethods</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Method.html" title="class or interface in java.lang.reflect" class="external-link">Method</a>&gt;&nbsp;methods)</span></div>
+<div class="block">Sets the methods of the extension type that need extension handlers. By default, the builder discovers
+these methods through reflection when <a href="#build()"><code>build()</code></a> is called. Code that already holds the methods
+of the extension type, such as code created by the Jdbi generator, can supply them here so that no
+reflective discovery takes place. This matters for GraalVM native image, where an unregistered type
+reports no methods.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>methods</code> - The methods of the extension type</dd>
+<dt>Returns:</dt>
+<dd>The builder instance</dd>
+<dt>Since:</dt>
+<dd>3.55.0</dd>
+</dl>
+</div>
+</section>
+</li>
 <li>
 <section class="detail" id="addExtensionHandlerFactory(org.jdbi.v3.core.extension.ExtensionHandlerFactory)">
 <h3>addExtensionHandlerFactory</h3>

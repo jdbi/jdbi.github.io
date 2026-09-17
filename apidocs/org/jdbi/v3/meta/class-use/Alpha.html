@@ -117,15 +117,19 @@ produce results.</div>
 The <code>statement</code> package provides most of the Fluent API
 to drive statement execution.</div>
 </div>
-<div class="col-first even-row-color"><a href="#org.jdbi.v3.sqlobject.statement">org.jdbi.v3.sqlobject.statement</a></div>
+<div class="col-first even-row-color"><a href="#org.jdbi.v3.sqlobject">org.jdbi.v3.sqlobject</a></div>
 <div class="col-last even-row-color">
+<div class="block">SQL Objects</div>
+</div>
+<div class="col-first odd-row-color"><a href="#org.jdbi.v3.sqlobject.statement">org.jdbi.v3.sqlobject.statement</a></div>
+<div class="col-last odd-row-color">
 <div class="block">
 The <code>sqlobject.statement</code> annotations declare the type of statement
 that a SqlObject method should create, such as a <code>@SqlQuery</code> to return rows or a
 <code>@SqlUpdate</code> to modify rows and return the modification count.</div>
 </div>
-<div class="col-first odd-row-color"><a href="#org.jdbi.v3.testing.junit5.tc">org.jdbi.v3.testing.junit5.tc</a></div>
-<div class="col-last odd-row-color">
+<div class="col-first even-row-color"><a href="#org.jdbi.v3.testing.junit5.tc">org.jdbi.v3.testing.junit5.tc</a></div>
+<div class="col-last even-row-color">
 <div class="block">Jdbi test support for <a href="https://testcontainers.org/">Testcontainer based JDBC containers</a>.</div>
 </div>
 </div>
@@ -327,6 +331,11 @@ is created.</div>
 <div class="col-second odd-row-color"><span class="type-name-label">Extensions.</span><code><a href="../../core/extension/Extensions.html#registerHandlerFactory(org.jdbi.v3.core.extension.ExtensionHandlerFactory)" class="member-name-link">registerHandlerFactory</a><wbr>(<a href="../../core/extension/ExtensionHandlerFactory.html" title="interface in org.jdbi.v3.core.extension">ExtensionHandlerFactory</a>&nbsp;extensionHandlerFactory)</code></div>
 <div class="col-last odd-row-color">
 <div class="block">Registers a global <a href="../../core/extension/ExtensionHandlerFactory.html" title="interface in org.jdbi.v3.core.extension"><code>ExtensionHandlerFactory</code></a> instance.</div>
+</div>
+<div class="col-first even-row-color"><code><a href="../../core/extension/ExtensionMetadata.Builder.html" title="class in org.jdbi.v3.core.extension">ExtensionMetadata.Builder</a></code></div>
+<div class="col-second even-row-color"><span class="type-name-label">ExtensionMetadata.Builder.</span><code><a href="../../core/extension/ExtensionMetadata.Builder.html#setExtensionTypeMethods(java.util.Collection)" class="member-name-link">setExtensionTypeMethods</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Method.html" title="class or interface in java.lang.reflect" class="external-link">Method</a>&gt;&nbsp;methods)</code></div>
+<div class="col-last even-row-color">
+<div class="block">Sets the methods of the extension type that need extension handlers.</div>
 </div>
 </div>
 </section>
@@ -553,6 +562,22 @@ is created.</div>
 <div class="col-second odd-row-color"><span class="type-name-label">StatementContext.</span><code><a href="../../core/statement/StatementContext.html#setTraceId(java.lang.String)" class="member-name-link">setTraceId</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;traceId)</code></div>
 <div class="col-last odd-row-color">
 <div class="block">Instrument the telemetry trace id.</div>
+</div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="org.jdbi.v3.sqlobject">
+<h2>Uses of <a href="../Alpha.html" title="annotation interface in org.jdbi.v3.meta">Alpha</a> in <a href="../../sqlobject/package-summary.html">org.jdbi.v3.sqlobject</a></h2>
+<div class="caption"><span>Classes in <a href="../../sqlobject/package-summary.html">org.jdbi.v3.sqlobject</a> with annotations of type <a href="../Alpha.html" title="annotation interface in org.jdbi.v3.meta">Alpha</a></span></div>
+<div class="summary-table three-column-summary">
+<div class="table-header col-first">Modifier and Type</div>
+<div class="table-header col-second">Interface</div>
+<div class="table-header col-last">Description</div>
+<div class="col-first even-row-color"><code>interface&nbsp;</code></div>
+<div class="col-second even-row-color"><code><a href="../../sqlobject/GeneratedSqlObjectProvider.html" class="type-name-link" title="interface in org.jdbi.v3.sqlobject">GeneratedSqlObjectProvider</a></code></div>
+<div class="col-last even-row-color">
+<div class="block">Connects a <a href="../../sqlobject/GenerateSqlObject.html" title="annotation interface in org.jdbi.v3.sqlobject"><code>GenerateSqlObject</code></a> type to the classes that the Jdbi generator created for it.</div>
 </div>
 </div>
 </section>

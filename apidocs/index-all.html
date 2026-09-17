@@ -2012,6 +2012,10 @@ target object when invoked.</div>
 <dd>
 <div class="block">Used to create customizers for annotations on sql object interfaces</div>
 </dd>
+<dt><a href="org/jdbi/v3/sqlobject/GeneratedSqlObjectProvider.html#createInstance(org.jdbi.v3.core.extension.ExtensionMetadata,org.jdbi.v3.core.extension.HandleSupplier,org.jdbi.v3.core.config.ConfigRegistry)" class="member-name-link">createInstance(ExtensionMetadata, HandleSupplier, ConfigRegistry)</a> - Method in interface org.jdbi.v3.sqlobject.<a href="org/jdbi/v3/sqlobject/GeneratedSqlObjectProvider.html" title="interface in org.jdbi.v3.sqlobject">GeneratedSqlObjectProvider</a></dt>
+<dd>
+<div class="block">Creates a new instance of the generated class, bound to a handle.</div>
+</dd>
 <dt><a href="org/jdbi/v3/core/extension/ExtensionMetadata.html#createInstanceConfiguration(org.jdbi.v3.core.config.ConfigRegistry)" class="member-name-link">createInstanceConfiguration(ConfigRegistry)</a> - Method in class org.jdbi.v3.core.extension.<a href="org/jdbi/v3/core/extension/ExtensionMetadata.html" title="class in org.jdbi.v3.core.extension">ExtensionMetadata</a></dt>
 <dd>
 <div class="block">Create an instance specific configuration based on all instance customizers.</div>
@@ -2031,6 +2035,10 @@ target object when invoked.</div>
 <dt><a href="org/jdbi/v3/core/extension/ExtensionMetadata.html#createMethodConfiguration(java.lang.reflect.Method,org.jdbi.v3.core.config.ConfigRegistry)" class="member-name-link">createMethodConfiguration(Method, ConfigRegistry)</a> - Method in class org.jdbi.v3.core.extension.<a href="org/jdbi/v3/core/extension/ExtensionMetadata.html" title="class in org.jdbi.v3.core.extension">ExtensionMetadata</a></dt>
 <dd>
 <div class="block">Create an method specific configuration based on all method customizers.</div>
+</dd>
+<dt><a href="org/jdbi/v3/sqlobject/GeneratedSqlObjectProvider.html#createOnDemand(org.jdbi.v3.core.Jdbi)" class="member-name-link">createOnDemand(Jdbi)</a> - Method in interface org.jdbi.v3.sqlobject.<a href="org/jdbi/v3/sqlobject/GeneratedSqlObjectProvider.html" title="interface in org.jdbi.v3.sqlobject">GeneratedSqlObjectProvider</a></dt>
+<dd>
+<div class="block">Creates a new on-demand instance of the extension type.</div>
 </dd>
 <dt><a href="org/jdbi/v3/core/Handle.html#createQuery(java.lang.CharSequence)" class="member-name-link">createQuery(CharSequence)</a> - Method in class org.jdbi.v3.core.<a href="org/jdbi/v3/core/Handle.html" title="class in org.jdbi.v3.core">Handle</a></dt>
 <dd>
@@ -2564,6 +2572,10 @@ define which extension method was invoked.</div>
 <dd>
 <div class="block">Creates a new extension method.</div>
 </dd>
+<dt><a href="org/jdbi/v3/sqlobject/GeneratedSqlObjectProvider.html#extensionMethods()" class="member-name-link">extensionMethods()</a> - Method in interface org.jdbi.v3.sqlobject.<a href="org/jdbi/v3/sqlobject/GeneratedSqlObjectProvider.html" title="interface in org.jdbi.v3.sqlobject">GeneratedSqlObjectProvider</a></dt>
+<dd>
+<div class="block">Returns the methods of the extension type that the generated class implements.</div>
+</dd>
 <dt><a href="org/jdbi/v3/core/extension/Extensions.html" class="type-name-link" title="class in org.jdbi.v3.core.extension">Extensions</a> - Class in <a href="org/jdbi/v3/core/extension/package-summary.html">org.jdbi.v3.core.extension</a></dt>
 <dd>
 <div class="block">Configuration class for defining <code>Jdbi</code> extensions via <a href="org/jdbi/v3/core/extension/ExtensionFactory.html" title="interface in org.jdbi.v3.core.extension"><code>ExtensionFactory</code></a>
@@ -2575,6 +2587,10 @@ instances.</div>
 </dd>
 <dt><a href="org/jdbi/v3/core/extension/ExtensionMetadata.html#extensionType()" class="member-name-link">extensionType()</a> - Method in class org.jdbi.v3.core.extension.<a href="org/jdbi/v3/core/extension/ExtensionMetadata.html" title="class in org.jdbi.v3.core.extension">ExtensionMetadata</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="org/jdbi/v3/sqlobject/GeneratedSqlObjectProvider.html#extensionType()" class="member-name-link">extensionType()</a> - Method in interface org.jdbi.v3.sqlobject.<a href="org/jdbi/v3/sqlobject/GeneratedSqlObjectProvider.html" title="interface in org.jdbi.v3.sqlobject">GeneratedSqlObjectProvider</a></dt>
+<dd>
+<div class="block">Returns the extension type that this provider serves.</div>
+</dd>
 <dt><a href="org/jdbi/v3/testing/JdbiRule.html#externalPostgres(java.lang.String,java.lang.Integer,java.lang.String,java.lang.String,java.lang.String)" class="member-name-link">externalPostgres(String, Integer, String, String, String)</a> - Static method in class org.jdbi.v3.testing.<a href="org/jdbi/v3/testing/JdbiRule.html" title="class in org.jdbi.v3.testing">JdbiRule</a></dt>
 <dd>
 <div class="block">Create a JdbiRule using an external PostgreSQL instance.</div>
@@ -3005,6 +3021,10 @@ It is often useful (e.g. for logging) to know the record count while processing 
 <dl class="index">
 <dt><a href="org/jdbi/v3/generator/GenerateSqlObjectProcessor.html#GENERATE_SQL_OBJECT_ANNOTATION_NAME" class="member-name-link">GENERATE_SQL_OBJECT_ANNOTATION_NAME</a> - Static variable in class org.jdbi.v3.generator.<a href="org/jdbi/v3/generator/GenerateSqlObjectProcessor.html" title="class in org.jdbi.v3.generator">GenerateSqlObjectProcessor</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="org/jdbi/v3/sqlobject/GeneratedSqlObjectProvider.html" class="type-name-link" title="interface in org.jdbi.v3.sqlobject">GeneratedSqlObjectProvider</a> - Interface in <a href="org/jdbi/v3/sqlobject/package-summary.html">org.jdbi.v3.sqlobject</a></dt>
+<dd>
+<div class="block">Connects a <a href="org/jdbi/v3/sqlobject/GenerateSqlObject.html" title="annotation interface in org.jdbi.v3.sqlobject"><code>GenerateSqlObject</code></a> type to the classes that the Jdbi generator created for it.</div>
+</dd>
 <dt><a href="org/jdbi/v3/sqlobject/GenerateSqlObject.html" class="type-name-link" title="annotation interface in org.jdbi.v3.sqlobject">GenerateSqlObject</a> - Annotation Interface in <a href="org/jdbi/v3/sqlobject/package-summary.html">org.jdbi.v3.sqlobject</a></dt>
 <dd>
 <div class="block">Decorate a SqlObject type to instruct the <code>jdbi3-generator</code> annotation processor
@@ -6980,6 +7000,10 @@ the <a href="org/jdbi/v3/core/Jdbi.html" title="class in org.jdbi.v3.core"><code
 <dt><a href="org/jdbi/v3/core/statement/StatementContext.html#setExecutionMoment(java.time.Instant)" class="member-name-link">setExecutionMoment(Instant)</a> - Method in class org.jdbi.v3.core.statement.<a href="org/jdbi/v3/core/statement/StatementContext.html" title="class in org.jdbi.v3.core.statement">StatementContext</a></dt>
 <dd>
 <div class="block">Sets the query execution start.</div>
+</dd>
+<dt><a href="org/jdbi/v3/core/extension/ExtensionMetadata.Builder.html#setExtensionTypeMethods(java.util.Collection)" class="member-name-link">setExtensionTypeMethods(Collection)</a> - Method in class org.jdbi.v3.core.extension.<a href="org/jdbi/v3/core/extension/ExtensionMetadata.Builder.html" title="class in org.jdbi.v3.core.extension">ExtensionMetadata.Builder</a></dt>
+<dd>
+<div class="block">Sets the methods of the extension type that need extension handlers.</div>
 </dd>
 <dt><a href="org/jdbi/v3/stringtemplate4/StringTemplates.html#setFailOnMissingAttribute(boolean)" class="member-name-link">setFailOnMissingAttribute(boolean)</a> - Method in class org.jdbi.v3.stringtemplate4.<a href="org/jdbi/v3/stringtemplate4/StringTemplates.html" title="class in org.jdbi.v3.stringtemplate4">StringTemplates</a></dt>
 <dd>
