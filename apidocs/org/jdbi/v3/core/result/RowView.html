@@ -69,6 +69,10 @@ loadScripts(document, 'script');</script>
 <li><a href="#getRow(org.jdbi.v3.core.generic.GenericType,java.lang.String)" tabindex="0">getRow(GenericType, String)</a></li>
 <li><a href="#getRow(java.lang.reflect.Type)" tabindex="0">getRow(Type)</a></li>
 <li><a href="#getRow(java.lang.reflect.Type,java.lang.String)" tabindex="0">getRow(Type, String)</a></li>
+<li><a href="#getColumnNames()" tabindex="0">getColumnNames()</a></li>
+<li><a href="#getRow(org.jdbi.v3.core.mapper.RowMapper)" tabindex="0">getRow(RowMapper)</a></li>
+<li><a href="#getColumn(java.lang.String)" tabindex="0">getColumn(String)</a></li>
+<li><a href="#getColumn(int)" tabindex="0">getColumn(int)</a></li>
 <li><a href="#getColumn(java.lang.String,java.lang.Class)" tabindex="0">getColumn(String, Class)</a></li>
 <li><a href="#getColumn(int,java.lang.Class)" tabindex="0">getColumn(int, Class)</a></li>
 <li><a href="#getColumn(java.lang.String,org.jdbi.v3.core.generic.GenericType)" tabindex="0">getColumn(String, GenericType)</a></li>
@@ -125,29 +129,41 @@ It is not valid outside the scope of the method that receives it.</div>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;T&gt;&nbsp;T</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getColumn(int,java.lang.Class)" class="member-name-link">getColumn</a><wbr>(int&nbsp;column,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;type)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getColumn(int)" class="member-name-link">getColumn</a><wbr>(int&nbsp;column)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Use a column mapper to extract a type from the current ResultSet row.</div>
+<div class="block">Returns the value of a column as the JDBC driver returns it from <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/ResultSet.html#getObject(int)" title="class or interface in java.sql" class="external-link"><code>ResultSet.getObject(int)</code></a>,
+without a column mapper.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getColumn(int,java.lang.reflect.Type)" class="member-name-link">getColumn</a><wbr>(int&nbsp;column,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Type.html" title="class or interface in java.lang.reflect" class="external-link">Type</a>&nbsp;type)</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;T&gt;&nbsp;T</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getColumn(int,java.lang.Class)" class="member-name-link">getColumn</a><wbr>(int&nbsp;column,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;type)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Use a column mapper to extract a type from the current ResultSet row.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;T&gt;&nbsp;T</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getColumn(int,org.jdbi.v3.core.generic.GenericType)" class="member-name-link">getColumn</a><wbr>(int&nbsp;column,
- <a href="../generic/GenericType.html" title="class in org.jdbi.v3.core.generic">GenericType</a>&lt;T&gt;&nbsp;type)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getColumn(int,java.lang.reflect.Type)" class="member-name-link">getColumn</a><wbr>(int&nbsp;column,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Type.html" title="class or interface in java.lang.reflect" class="external-link">Type</a>&nbsp;type)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Use a column mapper to extract a type from the current ResultSet row.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract &lt;T&gt;&nbsp;T</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getColumn(int,org.jdbi.v3.core.qualifier.QualifiedType)" class="member-name-link">getColumn</a><wbr>(int&nbsp;column,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;T&gt;&nbsp;T</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getColumn(int,org.jdbi.v3.core.generic.GenericType)" class="member-name-link">getColumn</a><wbr>(int&nbsp;column,
+ <a href="../generic/GenericType.html" title="class in org.jdbi.v3.core.generic">GenericType</a>&lt;T&gt;&nbsp;type)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Use a column mapper to extract a type from the current ResultSet row.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract &lt;T&gt;&nbsp;T</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getColumn(int,org.jdbi.v3.core.qualifier.QualifiedType)" class="member-name-link">getColumn</a><wbr>(int&nbsp;column,
  <a href="../qualifier/QualifiedType.html" title="class in org.jdbi.v3.core.qualifier">QualifiedType</a>&lt;T&gt;&nbsp;type)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Use a qualified column mapper to extract a type from the current ResultSet row.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getColumn(java.lang.String)" class="member-name-link">getColumn</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;column)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the value of a column as the JDBC driver returns it from <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/ResultSet.html#getObject(java.lang.String)" title="class or interface in java.sql" class="external-link"><code>ResultSet.getObject(String)</code></a>,
+without a column mapper.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;T&gt;&nbsp;T</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getColumn(java.lang.String,java.lang.Class)" class="member-name-link">getColumn</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;column,
@@ -173,38 +189,49 @@ It is not valid outside the scope of the method that receives it.</div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Use a qualified column mapper to extract a type from the current ResultSet row.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;T&gt;&nbsp;T</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRow(java.lang.Class)" class="member-name-link">getRow</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;rowType)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getColumnNames()" class="member-name-link">getColumnNames</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Use a row mapper to extract a type from the current ResultSet row.</div>
+<div class="block">Returns the labels of the columns of the result set, in column order, as <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/ResultSetMetaData.html#getColumnLabel(int)" title="class or interface in java.sql" class="external-link"><code>ResultSetMetaData.getColumnLabel(int)</code></a>
+returns them.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;T&gt;&nbsp;T</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRow(java.lang.Class,java.lang.String)" class="member-name-link">getRow</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;rowType,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRow(java.lang.Class)" class="member-name-link">getRow</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;rowType)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Use a prefixed row mapper to extract a type from the current ResultSet row.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getRow(java.lang.reflect.Type)" class="member-name-link">getRow</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Type.html" title="class or interface in java.lang.reflect" class="external-link">Type</a>&nbsp;type)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Use a row mapper to extract a type from the current ResultSet row.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRow(java.lang.reflect.Type,java.lang.String)" class="member-name-link">getRow</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Type.html" title="class or interface in java.lang.reflect" class="external-link">Type</a>&nbsp;type,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Use a prefixed row mapper to extract a type from the current ResultSet row.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;T&gt;&nbsp;T</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRow(org.jdbi.v3.core.generic.GenericType)" class="member-name-link">getRow</a><wbr>(<a href="../generic/GenericType.html" title="class in org.jdbi.v3.core.generic">GenericType</a>&lt;T&gt;&nbsp;rowType)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRow(java.lang.Class,java.lang.String)" class="member-name-link">getRow</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;rowType,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Use a prefixed row mapper to extract a type from the current ResultSet row.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getRow(java.lang.reflect.Type)" class="member-name-link">getRow</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Type.html" title="class or interface in java.lang.reflect" class="external-link">Type</a>&nbsp;type)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Use a row mapper to extract a type from the current ResultSet row.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;T&gt;&nbsp;T</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRow(org.jdbi.v3.core.generic.GenericType,java.lang.String)" class="member-name-link">getRow</a><wbr>(<a href="../generic/GenericType.html" title="class in org.jdbi.v3.core.generic">GenericType</a>&lt;T&gt;&nbsp;rowType,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRow(java.lang.reflect.Type,java.lang.String)" class="member-name-link">getRow</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Type.html" title="class or interface in java.lang.reflect" class="external-link">Type</a>&nbsp;type,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Use a prefixed row mapper to extract a type from the current ResultSet row.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;T&gt;&nbsp;T</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRow(org.jdbi.v3.core.generic.GenericType)" class="member-name-link">getRow</a><wbr>(<a href="../generic/GenericType.html" title="class in org.jdbi.v3.core.generic">GenericType</a>&lt;T&gt;&nbsp;rowType)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Use a row mapper to extract a type from the current ResultSet row.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;T&gt;&nbsp;T</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRow(org.jdbi.v3.core.generic.GenericType,java.lang.String)" class="member-name-link">getRow</a><wbr>(<a href="../generic/GenericType.html" title="class in org.jdbi.v3.core.generic">GenericType</a>&lt;T&gt;&nbsp;rowType,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Use a prefixed row mapper to extract a type from the current ResultSet row.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;T&gt;&nbsp;T</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRow(org.jdbi.v3.core.mapper.RowMapper)" class="member-name-link">getRow</a><wbr>(<a href="../mapper/RowMapper.html" title="interface in org.jdbi.v3.core.mapper">RowMapper</a>&lt;T&gt;&nbsp;mapper)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Maps the current row with the given row mapper.</div>
 </div>
 </div>
 </div>
@@ -339,12 +366,13 @@ The mapper must declare the given column name prefix, see <a href="#getRow(java.
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix)</span></div>
 <div class="block">Use a prefixed row mapper to extract a type from the current ResultSet row.
 <p>
-Only mappers that implement <a href="../mapper/PrefixedRowMapper.html" title="interface in org.jdbi.v3.core.mapper"><code>PrefixedRowMapper</code></a> and declare a
-prefix equal to the given prefix take part in the lookup. This makes it possible to register
-multiple mappers for the same type with different column name prefixes, for example when a
-query joins the same table twice, and select between them per call. A mapper that does not
-declare the given prefix never matches; the lookup fails rather than fall back to an
-unprefixed mapper for the type. To look up a mapper by type alone, use <a href="#getRow(java.lang.reflect.Type)"><code>getRow(Type)</code></a>.</div>
+A mapper that implements <a href="../mapper/PrefixedRowMapper.html" title="interface in org.jdbi.v3.core.mapper"><code>PrefixedRowMapper</code></a> matches if it
+declares a prefix equal to the given prefix, and a mapper that declares no prefix matches the
+empty prefix only. This makes it possible to register multiple mappers for the same type with
+different column name prefixes, for example when a query joins the same table twice, and
+select between them per call. A mapper that does not match the given prefix is not used; the
+lookup fails rather than fall back to a mapper with another prefix. To look up a mapper by
+type alone, use <a href="#getRow(java.lang.reflect.Type)"><code>getRow(Type)</code></a>.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>type</code> - the type to map</dd>
@@ -353,6 +381,74 @@ unprefixed mapper for the type. To look up a mapper by type alone, use <a href="
 <dd>the materialized object</dd>
 <dt>Throws:</dt>
 <dd><code><a href="../mapper/NoSuchMapperException.html" title="class in org.jdbi.v3.core.mapper">NoSuchMapperException</a></code> - if no registered row mapper maps the given type with the given prefix</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getColumnNames()">
+<h3>getColumnNames</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="annotations"><a href="../../meta/Beta.html" title="annotation interface in org.jdbi.v3.meta">@Beta</a>
+</span><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name">getColumnNames</span>()</div>
+<div class="block">Returns the labels of the columns of the result set, in column order, as <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/ResultSetMetaData.html#getColumnLabel(int)" title="class or interface in java.sql" class="external-link"><code>ResultSetMetaData.getColumnLabel(int)</code></a>
+returns them.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the column labels, as an unmodifiable list</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getRow(org.jdbi.v3.core.mapper.RowMapper)">
+<h3>getRow</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="annotations"><a href="../../meta/Beta.html" title="annotation interface in org.jdbi.v3.meta">@Beta</a>
+</span><span class="modifiers">public</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type">T</span>&nbsp;<span class="element-name">getRow</span><wbr><span class="parameters">(<a href="../mapper/RowMapper.html" title="interface in org.jdbi.v3.core.mapper">RowMapper</a>&lt;T&gt;&nbsp;mapper)</span></div>
+<div class="block">Maps the current row with the given row mapper. The mapper is <a href="../mapper/RowMapper.html#specialize(java.sql.ResultSet,org.jdbi.v3.core.statement.StatementContext)"><code>specialized</code></a>
+once per result set, keyed by mapper instance, so pass the same instance for every row.</div>
+<dl class="notes">
+<dt>Type Parameters:</dt>
+<dd><span id="getRow(org.jdbi.v3.core.mapper.RowMapper)-type-param-T"><code>T</code> - the type to map</span></dd>
+<dt>Parameters:</dt>
+<dd><code>mapper</code> - the row mapper</dd>
+<dt>Returns:</dt>
+<dd>the materialized T</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getColumn(java.lang.String)">
+<h3>getColumn</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="annotations"><a href="../../meta/Beta.html" title="annotation interface in org.jdbi.v3.meta">@Beta</a>
+</span><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span>&nbsp;<span class="element-name">getColumn</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;column)</span></div>
+<div class="block">Returns the value of a column as the JDBC driver returns it from <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/ResultSet.html#getObject(java.lang.String)" title="class or interface in java.sql" class="external-link"><code>ResultSet.getObject(String)</code></a>,
+without a column mapper. Use this to read a value whose type does not matter, such as a key that identifies a row.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>column</code> - the column name</dd>
+<dt>Returns:</dt>
+<dd>the column value, or null for SQL NULL</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getColumn(int)">
+<h3>getColumn</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="annotations"><a href="../../meta/Beta.html" title="annotation interface in org.jdbi.v3.meta">@Beta</a>
+</span><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span>&nbsp;<span class="element-name">getColumn</span><wbr><span class="parameters">(int&nbsp;column)</span></div>
+<div class="block">Returns the value of a column as the JDBC driver returns it from <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/ResultSet.html#getObject(int)" title="class or interface in java.sql" class="external-link"><code>ResultSet.getObject(int)</code></a>,
+without a column mapper. Use this to read a value whose type does not matter, such as a key that identifies a row.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>column</code> - the column index</dd>
+<dt>Returns:</dt>
+<dd>the column value, or null for SQL NULL</dd>
 </dl>
 </div>
 </section>

@@ -379,10 +379,11 @@ Will be used with <a href="../result/ResultBearing.html#mapTo(java.lang.Class)">
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix)</span></div>
 <div class="block">Obtain a row mapper for the given type that declares the given column name prefix.
 <p>
-Only mappers that implement <a href="PrefixedRowMapper.html" title="interface in org.jdbi.v3.core.mapper"><code>PrefixedRowMapper</code></a> take part in this lookup, and a mapper
-matches only if its <a href="PrefixedRowMapper.html#getPrefix()"><code>declared prefix</code></a> is equal to the
-given prefix. The comparison is an exact, case-sensitive string comparison. Mappers that do
-not declare a prefix never match, no matter what type they map.
+A mapper that implements <a href="PrefixedRowMapper.html" title="interface in org.jdbi.v3.core.mapper"><code>PrefixedRowMapper</code></a> matches if its
+<a href="PrefixedRowMapper.html#getPrefix()"><code>declared prefix</code></a> is equal to the given prefix. The
+comparison is an exact, case-sensitive string comparison. A mapper that does not declare a
+prefix reads unprefixed columns, so it matches the empty prefix and no other, no matter what
+type it maps.
 <p>
 The reflective mappers (<code>BeanMapper</code>, <code>ConstructorMapper</code>, <code>FieldMapper</code>)
 declare the prefix given at registration, or the empty string when registered without one.

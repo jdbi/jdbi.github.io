@@ -122,6 +122,8 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Accumulate data from the current row into the result container.</div>
 </dd>
+<dt><a href="org/jdbi/v3/core/result/JoinRowReducer.html#accumulate(org.jdbi.v3.core.result.JoinRowReducer.Container,org.jdbi.v3.core.result.RowView)" class="member-name-link">accumulate(JoinRowReducer.Container, RowView)</a> - Method in class org.jdbi.v3.core.result.<a href="org/jdbi/v3/core/result/JoinRowReducer.html" title="class in org.jdbi.v3.core.result">JoinRowReducer</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/core/argument/QualifiedArgumentFactory.html#adapt(org.jdbi.v3.core.config.ConfigRegistry,org.jdbi.v3.core.argument.ArgumentFactory)" class="member-name-link">adapt(ConfigRegistry, ArgumentFactory)</a> - Static method in interface org.jdbi.v3.core.argument.<a href="org/jdbi/v3/core/argument/QualifiedArgumentFactory.html" title="interface in org.jdbi.v3.core.argument">QualifiedArgumentFactory</a></dt>
 <dd>
 <div class="block">Adapts an <a href="org/jdbi/v3/core/argument/ArgumentFactory.html" title="interface in org.jdbi.v3.core.argument"><code>ArgumentFactory</code></a> into a QualifiedArgumentFactory.</div>
@@ -1794,6 +1796,8 @@ custom close handling.</div>
 <dd>
 <div class="block">A row mapper which maps the fields in a result set into a constructor.</div>
 </dd>
+<dt><a href="org/jdbi/v3/core/result/JoinRowReducer.html#container()" class="member-name-link">container()</a> - Method in class org.jdbi.v3.core.result.<a href="org/jdbi/v3/core/result/JoinRowReducer.html" title="class in org.jdbi.v3.core.result">JoinRowReducer</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/core/result/LinkedHashMapRowReducer.html#container()" class="member-name-link">container()</a> - Method in interface org.jdbi.v3.core.result.<a href="org/jdbi/v3/core/result/LinkedHashMapRowReducer.html" title="interface in org.jdbi.v3.core.result">LinkedHashMapRowReducer</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/core/result/RowReducer.html#container()" class="member-name-link">container()</a> - Method in interface org.jdbi.v3.core.result.<a href="org/jdbi/v3/core/result/RowReducer.html" title="interface in org.jdbi.v3.core.result">RowReducer</a></dt>
@@ -3134,6 +3138,11 @@ to create a compiled implementation.</div>
 <dd>
 <div class="block">Returns true if database <code>NULL</code> values should be transformed to the default value for primitives.</div>
 </dd>
+<dt><a href="org/jdbi/v3/core/result/RowView.html#getColumn(int)" class="member-name-link">getColumn(int)</a> - Method in class org.jdbi.v3.core.result.<a href="org/jdbi/v3/core/result/RowView.html" title="class in org.jdbi.v3.core.result">RowView</a></dt>
+<dd>
+<div class="block">Returns the value of a column as the JDBC driver returns it from <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/ResultSet.html#getObject(int)" title="class or interface in java.sql" class="external-link"><code>ResultSet.getObject(int)</code></a>,
+without a column mapper.</div>
+</dd>
 <dt><a href="org/jdbi/v3/vavr/TupleMappers.html#getColumn(int)" class="member-name-link">getColumn(int)</a> - Method in class org.jdbi.v3.vavr.<a href="org/jdbi/v3/vavr/TupleMappers.html" title="class in org.jdbi.v3.vavr">TupleMappers</a></dt>
 <dd>
 <div class="block">Returns the name for a column.</div>
@@ -3153,6 +3162,11 @@ to create a compiled implementation.</div>
 <dt><a href="org/jdbi/v3/core/result/RowView.html#getColumn(int,org.jdbi.v3.core.qualifier.QualifiedType)" class="member-name-link">getColumn(int, QualifiedType)</a> - Method in class org.jdbi.v3.core.result.<a href="org/jdbi/v3/core/result/RowView.html" title="class in org.jdbi.v3.core.result">RowView</a></dt>
 <dd>
 <div class="block">Use a qualified column mapper to extract a type from the current ResultSet row.</div>
+</dd>
+<dt><a href="org/jdbi/v3/core/result/RowView.html#getColumn(java.lang.String)" class="member-name-link">getColumn(String)</a> - Method in class org.jdbi.v3.core.result.<a href="org/jdbi/v3/core/result/RowView.html" title="class in org.jdbi.v3.core.result">RowView</a></dt>
+<dd>
+<div class="block">Returns the value of a column as the JDBC driver returns it from <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/ResultSet.html#getObject(java.lang.String)" title="class or interface in java.sql" class="external-link"><code>ResultSet.getObject(String)</code></a>,
+without a column mapper.</div>
 </dd>
 <dt><a href="org/jdbi/v3/core/result/RowView.html#getColumn(java.lang.String,java.lang.Class)" class="member-name-link">getColumn(String, Class)</a> - Method in class org.jdbi.v3.core.result.<a href="org/jdbi/v3/core/result/RowView.html" title="class in org.jdbi.v3.core.result">RowView</a></dt>
 <dd>
@@ -3181,6 +3195,11 @@ to create a compiled implementation.</div>
 <dt><a href="org/jdbi/v3/core/mapper/reflect/ReflectionMappers.html#getColumnNameMatchers()" class="member-name-link">getColumnNameMatchers()</a> - Method in class org.jdbi.v3.core.mapper.reflect.<a href="org/jdbi/v3/core/mapper/reflect/ReflectionMappers.html" title="class in org.jdbi.v3.core.mapper.reflect">ReflectionMappers</a></dt>
 <dd>
 <div class="block">Returns the registered column name mappers.</div>
+</dd>
+<dt><a href="org/jdbi/v3/core/result/RowView.html#getColumnNames()" class="member-name-link">getColumnNames()</a> - Method in class org.jdbi.v3.core.result.<a href="org/jdbi/v3/core/result/RowView.html" title="class in org.jdbi.v3.core.result">RowView</a></dt>
+<dd>
+<div class="block">Returns the labels of the columns of the result set, in column order, as <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/ResultSetMetaData.html#getColumnLabel(int)" title="class or interface in java.sql" class="external-link"><code>ResultSetMetaData.getColumnLabel(int)</code></a>
+returns them.</div>
 </dd>
 <dt><a href="org/jdbi/v3/core/mapper/reflect/ReflectionMapperUtil.html#getColumnNames(java.sql.ResultSet)" class="member-name-link">getColumnNames(ResultSet)</a> - Static method in class org.jdbi.v3.core.mapper.reflect.<a href="org/jdbi/v3/core/mapper/reflect/ReflectionMapperUtil.html" title="class in org.jdbi.v3.core.mapper.reflect">ReflectionMapperUtil</a></dt>
 <dd>
@@ -3725,6 +3744,10 @@ or a new one otherwise.</div>
 <dt><a href="org/jdbi/v3/core/result/RowView.html#getRow(org.jdbi.v3.core.generic.GenericType,java.lang.String)" class="member-name-link">getRow(GenericType, String)</a> - Method in class org.jdbi.v3.core.result.<a href="org/jdbi/v3/core/result/RowView.html" title="class in org.jdbi.v3.core.result">RowView</a></dt>
 <dd>
 <div class="block">Use a prefixed row mapper to extract a type from the current ResultSet row.</div>
+</dd>
+<dt><a href="org/jdbi/v3/core/result/RowView.html#getRow(org.jdbi.v3.core.mapper.RowMapper)" class="member-name-link">getRow(RowMapper)</a> - Method in class org.jdbi.v3.core.result.<a href="org/jdbi/v3/core/result/RowView.html" title="class in org.jdbi.v3.core.result">RowView</a></dt>
+<dd>
+<div class="block">Maps the current row with the given row mapper.</div>
 </dd>
 <dt><a href="org/jdbi/v3/core/statement/OutParameters.html#getRowSet(int)" class="member-name-link">getRowSet(int)</a> - Method in class org.jdbi.v3.core.statement.<a href="org/jdbi/v3/core/statement/OutParameters.html" title="class in org.jdbi.v3.core.statement">OutParameters</a></dt>
 <dd>
@@ -4743,6 +4766,11 @@ and are elligible for autowiring.</div>
 <div class="block">A <a href="org/jdbi/v3/core/mapper/RowMapper.html" title="interface in org.jdbi.v3.core.mapper"><code>RowMapper</code></a> implementation to easily compose existing
 RowMappers.</div>
 </dd>
+<dt><a href="org/jdbi/v3/core/result/JoinRowReducer.html" class="type-name-link" title="class in org.jdbi.v3.core.result">JoinRowReducer&lt;R&gt;</a> - Class in <a href="org/jdbi/v3/core/result/package-summary.html">org.jdbi.v3.core.result</a></dt>
+<dd>
+<div class="block">A <a href="org/jdbi/v3/core/result/RowReducer.html" title="interface in org.jdbi.v3.core.result"><code>RowReducer</code></a> that reduces the rows of a join query into a stream of root objects and links the
+joined objects to their root.</div>
+</dd>
 <dt><a href="org/jdbi/v3/jpa/JpaMapper.html" class="type-name-link" title="class in org.jdbi.v3.jpa">JpaMapper&lt;C&gt;</a> - Class in <a href="org/jdbi/v3/jpa/package-summary.html">org.jdbi.v3.jpa</a></dt>
 <dd>
 <div class="block">Row mapper for a JPA-annotated type as a result.</div>
@@ -4887,6 +4915,14 @@ directly on the JDBC Connection instance.</div>
 <div class="block">Returns a handler that manages transactions itself on every connection,
 including a connection with autocommit disabled.</div>
 </dd>
+<dt><a href="org/jdbi/v3/core/result/JoinRowReducer.html#many(java.lang.String,java.lang.Class,java.util.function.BiConsumer)" class="member-name-link">many(String, Class, BiConsumer)</a> - Method in class org.jdbi.v3.core.result.<a href="org/jdbi/v3/core/result/JoinRowReducer.html" title="class in org.jdbi.v3.core.result">JoinRowReducer</a></dt>
+<dd>
+<div class="block">Adds a to-many relation to a type that is declared elsewhere in the reducer, or that has no relations.</div>
+</dd>
+<dt><a href="org/jdbi/v3/core/result/JoinRowReducer.html#many(java.lang.String,org.jdbi.v3.core.result.JoinRowReducer,java.util.function.BiConsumer)" class="member-name-link">many(String, JoinRowReducer, BiConsumer)</a> - Method in class org.jdbi.v3.core.result.<a href="org/jdbi/v3/core/result/JoinRowReducer.html" title="class in org.jdbi.v3.core.result">JoinRowReducer</a></dt>
+<dd>
+<div class="block">Adds a to-many relation to a type with relations of its own.</div>
+</dd>
 <dt><a href="org/jdbi/v3/core/annotation/JdbiProperty.html#map()" class="member-name-link">map()</a> - Element in annotation interface org.jdbi.v3.core.annotation.<a href="org/jdbi/v3/core/annotation/JdbiProperty.html" title="annotation interface in org.jdbi.v3.core.annotation">JdbiProperty</a></dt>
 <dd>
 <div class="block">Returns true if the property is mapped in a result.</div>
@@ -4994,6 +5030,11 @@ transforming elements using the given mapper function.</div>
 <dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/core/mapper/MapMappers.html#%3Cinit%3E()" class="member-name-link">MapMappers()</a> - Constructor for class org.jdbi.v3.core.mapper.<a href="org/jdbi/v3/core/mapper/MapMappers.html" title="class in org.jdbi.v3.core.mapper">MapMappers</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="org/jdbi/v3/core/result/JoinRowReducer.html#mappedBy(java.util.function.BiFunction)" class="member-name-link">mappedBy(BiFunction)</a> - Method in class org.jdbi.v3.core.result.<a href="org/jdbi/v3/core/result/JoinRowReducer.html" title="class in org.jdbi.v3.core.result">JoinRowReducer</a></dt>
+<dd>
+<div class="block">Uses the given factory to create the mapper for a type and column prefix, for example
+<code>BeanMapper::of</code>, instead of the registered mapper.</div>
+</dd>
 <dt><a href="org/jdbi/v3/core/mapper/Mappers.html" class="type-name-link" title="class in org.jdbi.v3.core.mapper">Mappers</a> - Class in <a href="org/jdbi/v3/core/mapper/package-summary.html">org.jdbi.v3.core.mapper</a></dt>
 <dd>
 <div class="block">Configuration class for obtaining row or column mappers.</div>
@@ -5389,6 +5430,14 @@ it as an <a href="org/jdbi/v3/core/argument/ObjectArgument.html" title="class in
 <dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/core/config/ConfiguringPlugin.html#of(java.lang.Class,java.util.function.Consumer)" class="member-name-link">of(Class, Consumer)</a> - Static method in class org.jdbi.v3.core.config.<a href="org/jdbi/v3/core/config/ConfiguringPlugin.html" title="class in org.jdbi.v3.core.config">ConfiguringPlugin</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="org/jdbi/v3/core/result/JoinRowReducer.html#of(java.lang.Class)" class="member-name-link">of(Class)</a> - Static method in class org.jdbi.v3.core.result.<a href="org/jdbi/v3/core/result/JoinRowReducer.html" title="class in org.jdbi.v3.core.result">JoinRowReducer</a></dt>
+<dd>
+<div class="block">Creates a reducer for a type whose key column is <code>id</code>.</div>
+</dd>
+<dt><a href="org/jdbi/v3/core/result/JoinRowReducer.html#of(java.lang.Class,java.lang.String)" class="member-name-link">of(Class, String)</a> - Static method in class org.jdbi.v3.core.result.<a href="org/jdbi/v3/core/result/JoinRowReducer.html" title="class in org.jdbi.v3.core.result">JoinRowReducer</a></dt>
+<dd>
+<div class="block">Creates a reducer for a type with the given key column.</div>
+</dd>
 <dt><a href="org/jdbi/v3/core/mapper/reflect/BeanMapper.html#of(java.lang.Class)" class="member-name-link">of(Class)</a> - Static method in class org.jdbi.v3.core.mapper.reflect.<a href="org/jdbi/v3/core/mapper/reflect/BeanMapper.html" title="class in org.jdbi.v3.core.mapper.reflect">BeanMapper</a></dt>
 <dd>
 <div class="block">Returns a mapper for the given bean class</div>
@@ -5515,6 +5564,14 @@ a single <a href="org/jdbi/v3/core/qualifier/QualifiedType.html" title="class in
 </dd>
 <dt><a href="org/jdbi/v3/core/statement/Update.html#one()" class="member-name-link">one()</a> - Method in class org.jdbi.v3.core.statement.<a href="org/jdbi/v3/core/statement/Update.html" title="class in org.jdbi.v3.core.statement">Update</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="org/jdbi/v3/core/result/JoinRowReducer.html#one(java.lang.String,java.lang.Class,java.util.function.BiConsumer)" class="member-name-link">one(String, Class, BiConsumer)</a> - Method in class org.jdbi.v3.core.result.<a href="org/jdbi/v3/core/result/JoinRowReducer.html" title="class in org.jdbi.v3.core.result">JoinRowReducer</a></dt>
+<dd>
+<div class="block">Adds a to-one relation to a type that is declared elsewhere in the reducer, or that has no relations.</div>
+</dd>
+<dt><a href="org/jdbi/v3/core/result/JoinRowReducer.html#one(java.lang.String,org.jdbi.v3.core.result.JoinRowReducer,java.util.function.BiConsumer)" class="member-name-link">one(String, JoinRowReducer, BiConsumer)</a> - Method in class org.jdbi.v3.core.result.<a href="org/jdbi/v3/core/result/JoinRowReducer.html" title="class in org.jdbi.v3.core.result">JoinRowReducer</a></dt>
+<dd>
+<div class="block">Adds a to-one relation to a type with relations of its own.</div>
+</dd>
 <dt><a href="org/jdbi/v3/sqlobject/customizer/BindList.html#onEmpty()" class="member-name-link">onEmpty()</a> - Element in annotation interface org.jdbi.v3.sqlobject.customizer.<a href="org/jdbi/v3/sqlobject/customizer/BindList.html" title="annotation interface in org.jdbi.v3.sqlobject.customizer">BindList</a></dt>
 <dd>
 <div class="block">What to do when the argument is null or empty.</div>
@@ -7710,6 +7767,8 @@ customize sql statements via annotations.</div>
 <div class="block">Returns a stream of result elements from the result container.</div>
 </dd>
 <dt><a href="org/jdbi/v3/core/result/LinkedHashMapRowReducer.html#stream(java.util.Map)" class="member-name-link">stream(Map)</a> - Method in interface org.jdbi.v3.core.result.<a href="org/jdbi/v3/core/result/LinkedHashMapRowReducer.html" title="interface in org.jdbi.v3.core.result">LinkedHashMapRowReducer</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="org/jdbi/v3/core/result/JoinRowReducer.html#stream(org.jdbi.v3.core.result.JoinRowReducer.Container)" class="member-name-link">stream(JoinRowReducer.Container)</a> - Method in class org.jdbi.v3.core.result.<a href="org/jdbi/v3/core/result/JoinRowReducer.html" title="class in org.jdbi.v3.core.result">JoinRowReducer</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/core/result/StreamCallback.html" class="type-name-link" title="interface in org.jdbi.v3.core.result">StreamCallback&lt;T,<wbr>R,<wbr>X&gt;</a> - Interface in <a href="org/jdbi/v3/core/result/package-summary.html">org.jdbi.v3.core.result</a></dt>
 <dd>

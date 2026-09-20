@@ -98,49 +98,56 @@ Support for mapping to and from
 <a href="https://immutables.github.io">Immutables</a> generated value
 types.</div>
 </div>
-<div class="col-first odd-row-color"><a href="#org.jdbi.v3.core.statement">org.jdbi.v3.core.statement</a></div>
+<div class="col-first odd-row-color"><a href="#org.jdbi.v3.core.result">org.jdbi.v3.core.result</a></div>
 <div class="col-last odd-row-color">
+<div class="block">
+<code>result</code> provides the streaming interface that reads rows from JDBC
+and drives the <code>mapper</code> and <code>collector</code> processes to
+produce results.</div>
+</div>
+<div class="col-first even-row-color"><a href="#org.jdbi.v3.core.statement">org.jdbi.v3.core.statement</a></div>
+<div class="col-last even-row-color">
 <div class="block">
 The <code>statement</code> package provides most of the Fluent API
 to drive statement execution.</div>
 </div>
-<div class="col-first even-row-color"><a href="#org.jdbi.v3.guava.codec">org.jdbi.v3.guava.codec</a></div>
-<div class="col-last even-row-color">
+<div class="col-first odd-row-color"><a href="#org.jdbi.v3.guava.codec">org.jdbi.v3.guava.codec</a></div>
+<div class="col-last odd-row-color">
 <div class="block">
 Provides codec implementations for some Guava types.</div>
 </div>
-<div class="col-first odd-row-color"><a href="#org.jdbi.v3.oracle12">org.jdbi.v3.oracle12</a></div>
-<div class="col-last odd-row-color">
+<div class="col-first even-row-color"><a href="#org.jdbi.v3.oracle12">org.jdbi.v3.oracle12</a></div>
+<div class="col-last even-row-color">
 <div class="block">
 The <code>oracle</code> package provides integration with the Oracle JDBC driver.</div>
 </div>
-<div class="col-first even-row-color"><a href="#org.jdbi.v3.postgis">org.jdbi.v3.postgis</a></div>
-<div class="col-last even-row-color">
+<div class="col-first odd-row-color"><a href="#org.jdbi.v3.postgis">org.jdbi.v3.postgis</a></div>
+<div class="col-last odd-row-color">
 <div class="block">
 PostGIS support for Jdbi.</div>
 </div>
-<div class="col-first odd-row-color"><a href="#org.jdbi.v3.postgres">org.jdbi.v3.postgres</a></div>
-<div class="col-last odd-row-color">
+<div class="col-first even-row-color"><a href="#org.jdbi.v3.postgres">org.jdbi.v3.postgres</a></div>
+<div class="col-last even-row-color">
 <div class="block">
 The <code>postgres</code> plugin provides improved support for
 <code>java.time</code>, <code>hstore</code>, <code>uuid</code>, and <code>enum</code>
 types when configured with a recent Postgres database server.</div>
 </div>
-<div class="col-first even-row-color"><a href="#org.jdbi.v3.sqlobject.config">org.jdbi.v3.sqlobject.config</a></div>
-<div class="col-last even-row-color">
+<div class="col-first odd-row-color"><a href="#org.jdbi.v3.sqlobject.config">org.jdbi.v3.sqlobject.config</a></div>
+<div class="col-last odd-row-color">
 <div class="block">
 The <code>sqlobject.config</code> package defines configuration annotations
 that modify the <code>Jdbi</code> configuration used as the context for executing
 SqlObject methods, such as registering handled types.</div>
 </div>
-<div class="col-first odd-row-color"><a href="#org.jdbi.v3.sqlobject.customizer">org.jdbi.v3.sqlobject.customizer</a></div>
-<div class="col-last odd-row-color">
+<div class="col-first even-row-color"><a href="#org.jdbi.v3.sqlobject.customizer">org.jdbi.v3.sqlobject.customizer</a></div>
+<div class="col-last even-row-color">
 <div class="block">
 The <code>sqlobject.customizer</code> package provides annotations
 that customize the execution of a statement.</div>
 </div>
-<div class="col-first even-row-color"><a href="#org.jdbi.v3.testing.junit5.tc">org.jdbi.v3.testing.junit5.tc</a></div>
-<div class="col-last even-row-color">
+<div class="col-first odd-row-color"><a href="#org.jdbi.v3.testing.junit5.tc">org.jdbi.v3.testing.junit5.tc</a></div>
+<div class="col-last odd-row-color">
 <div class="block">Jdbi test support for <a href="https://testcontainers.org/">Testcontainer based JDBC containers</a>.</div>
 </div>
 </div>
@@ -338,6 +345,52 @@ configuration data structures.</div>
 <div class="col-second even-row-color"><code><a href="../../core/mapper/immutables/JdbiImmutables.html" class="type-name-link" title="class in org.jdbi.v3.core.mapper.immutables">JdbiImmutables</a></code></div>
 <div class="col-last even-row-color">
 <div class="block">Configures support for an <a href="https://immutables.github.io">Immutables</a> generated <code>Immutable</code> or <code>Modifiable</code> value type.</div>
+</div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="org.jdbi.v3.core.result">
+<h2>Uses of <a href="../Beta.html" title="annotation interface in org.jdbi.v3.meta">Beta</a> in <a href="../../core/result/package-summary.html">org.jdbi.v3.core.result</a></h2>
+<div class="caption"><span>Classes in <a href="../../core/result/package-summary.html">org.jdbi.v3.core.result</a> with annotations of type <a href="../Beta.html" title="annotation interface in org.jdbi.v3.meta">Beta</a></span></div>
+<div class="summary-table three-column-summary">
+<div class="table-header col-first">Modifier and Type</div>
+<div class="table-header col-second">Class</div>
+<div class="table-header col-last">Description</div>
+<div class="col-first even-row-color"><code>class&nbsp;</code></div>
+<div class="col-second even-row-color"><code><a href="../../core/result/JoinRowReducer.html" class="type-name-link" title="class in org.jdbi.v3.core.result">JoinRowReducer</a>&lt;R&gt;</code></div>
+<div class="col-last even-row-color">
+<div class="block">A <a href="../../core/result/RowReducer.html" title="interface in org.jdbi.v3.core.result"><code>RowReducer</code></a> that reduces the rows of a join query into a stream of root objects and links the
+joined objects to their root.</div>
+</div>
+</div>
+<div class="caption"><span>Methods in <a href="../../core/result/package-summary.html">org.jdbi.v3.core.result</a> with annotations of type <a href="../Beta.html" title="annotation interface in org.jdbi.v3.meta">Beta</a></span></div>
+<div class="summary-table three-column-summary">
+<div class="table-header col-first">Modifier and Type</div>
+<div class="table-header col-second">Method</div>
+<div class="table-header col-last">Description</div>
+<div class="col-first even-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></div>
+<div class="col-second even-row-color"><span class="type-name-label">RowView.</span><code><a href="../../core/result/RowView.html#getColumn(int)" class="member-name-link">getColumn</a><wbr>(int&nbsp;column)</code></div>
+<div class="col-last even-row-color">
+<div class="block">Returns the value of a column as the JDBC driver returns it from <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/ResultSet.html#getObject(int)" title="class or interface in java.sql" class="external-link"><code>ResultSet.getObject(int)</code></a>,
+without a column mapper.</div>
+</div>
+<div class="col-first odd-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></div>
+<div class="col-second odd-row-color"><span class="type-name-label">RowView.</span><code><a href="../../core/result/RowView.html#getColumn(java.lang.String)" class="member-name-link">getColumn</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;column)</code></div>
+<div class="col-last odd-row-color">
+<div class="block">Returns the value of a column as the JDBC driver returns it from <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/ResultSet.html#getObject(java.lang.String)" title="class or interface in java.sql" class="external-link"><code>ResultSet.getObject(String)</code></a>,
+without a column mapper.</div>
+</div>
+<div class="col-first even-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
+<div class="col-second even-row-color"><span class="type-name-label">RowView.</span><code><a href="../../core/result/RowView.html#getColumnNames()" class="member-name-link">getColumnNames</a>()</code></div>
+<div class="col-last even-row-color">
+<div class="block">Returns the labels of the columns of the result set, in column order, as <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/ResultSetMetaData.html#getColumnLabel(int)" title="class or interface in java.sql" class="external-link"><code>ResultSetMetaData.getColumnLabel(int)</code></a>
+returns them.</div>
+</div>
+<div class="col-first odd-row-color"><code>&lt;T&gt;&nbsp;T</code></div>
+<div class="col-second odd-row-color"><span class="type-name-label">RowView.</span><code><a href="../../core/result/RowView.html#getRow(org.jdbi.v3.core.mapper.RowMapper)" class="member-name-link">getRow</a><wbr>(<a href="../../core/mapper/RowMapper.html" title="interface in org.jdbi.v3.core.mapper">RowMapper</a>&lt;T&gt;&nbsp;mapper)</code></div>
+<div class="col-last odd-row-color">
+<div class="block">Maps the current row with the given row mapper.</div>
 </div>
 </div>
 </section>

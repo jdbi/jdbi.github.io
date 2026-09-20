@@ -435,20 +435,37 @@ to set fields on the object.</div>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code>&lt;T&gt;&nbsp;<a href="../../result/BatchResultIterable.html" title="interface in org.jdbi.v3.core.result">BatchResultIterable</a><wbr>&lt;T&gt;</code></div>
-<div class="col-second even-row-color"><span class="type-name-label">BatchResultBearing.</span><code><a href="../../result/BatchResultBearing.html#map(org.jdbi.v3.core.mapper.RowMapper)" class="member-name-link">map</a><wbr>(<a href="../RowMapper.html" title="interface in org.jdbi.v3.core.mapper">RowMapper</a>&lt;T&gt;&nbsp;mapper)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><code>default &lt;T&gt;&nbsp;<a href="../../result/ResultIterable.html" title="interface in org.jdbi.v3.core.result">ResultIterable</a><wbr>&lt;T&gt;</code></div>
-<div class="col-second odd-row-color"><span class="type-name-label">ResultBearing.</span><code><a href="../../result/ResultBearing.html#map(org.jdbi.v3.core.mapper.RowMapper)" class="member-name-link">map</a><wbr>(<a href="../RowMapper.html" title="interface in org.jdbi.v3.core.mapper">RowMapper</a>&lt;T&gt;&nbsp;mapper)</code></div>
-<div class="col-last odd-row-color">
+<div class="col-first even-row-color"><code>&lt;T&gt;&nbsp;T</code></div>
+<div class="col-second even-row-color"><span class="type-name-label">RowView.</span><code><a href="../../result/RowView.html#getRow(org.jdbi.v3.core.mapper.RowMapper)" class="member-name-link">getRow</a><wbr>(<a href="../RowMapper.html" title="interface in org.jdbi.v3.core.mapper">RowMapper</a>&lt;T&gt;&nbsp;mapper)</code></div>
+<div class="col-last even-row-color">
+<div class="block">Maps the current row with the given row mapper.</div>
+</div>
+<div class="col-first odd-row-color"><code>&lt;T&gt;&nbsp;<a href="../../result/BatchResultIterable.html" title="interface in org.jdbi.v3.core.result">BatchResultIterable</a><wbr>&lt;T&gt;</code></div>
+<div class="col-second odd-row-color"><span class="type-name-label">BatchResultBearing.</span><code><a href="../../result/BatchResultBearing.html#map(org.jdbi.v3.core.mapper.RowMapper)" class="member-name-link">map</a><wbr>(<a href="../RowMapper.html" title="interface in org.jdbi.v3.core.mapper">RowMapper</a>&lt;T&gt;&nbsp;mapper)</code></div>
+<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-first even-row-color"><code>default &lt;T&gt;&nbsp;<a href="../../result/ResultIterable.html" title="interface in org.jdbi.v3.core.result">ResultIterable</a><wbr>&lt;T&gt;</code></div>
+<div class="col-second even-row-color"><span class="type-name-label">ResultBearing.</span><code><a href="../../result/ResultBearing.html#map(org.jdbi.v3.core.mapper.RowMapper)" class="member-name-link">map</a><wbr>(<a href="../RowMapper.html" title="interface in org.jdbi.v3.core.mapper">RowMapper</a>&lt;T&gt;&nbsp;mapper)</code></div>
+<div class="col-last even-row-color">
 <div class="block">Maps this result set to a <a href="../../result/ResultIterable.html" title="interface in org.jdbi.v3.core.result"><code>ResultIterable</code></a>, using the given row mapper.</div>
 </div>
-<div class="col-first even-row-color"><code>static &lt;T&gt;&nbsp;<a href="../../result/ResultIterable.html" title="interface in org.jdbi.v3.core.result">ResultIterable</a><wbr>&lt;T&gt;</code></div>
-<div class="col-second even-row-color"><span class="type-name-label">ResultIterable.</span><code><a href="../../result/ResultIterable.html#of(java.util.function.Supplier,org.jdbi.v3.core.mapper.RowMapper,org.jdbi.v3.core.statement.StatementContext)" class="member-name-link">of</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Supplier.html" title="class or interface in java.util.function" class="external-link">Supplier</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/ResultSet.html" title="class or interface in java.sql" class="external-link">ResultSet</a>&gt;&nbsp;resultSetSupplier,
+<div class="col-first odd-row-color"><code>static &lt;T&gt;&nbsp;<a href="../../result/ResultIterable.html" title="interface in org.jdbi.v3.core.result">ResultIterable</a><wbr>&lt;T&gt;</code></div>
+<div class="col-second odd-row-color"><span class="type-name-label">ResultIterable.</span><code><a href="../../result/ResultIterable.html#of(java.util.function.Supplier,org.jdbi.v3.core.mapper.RowMapper,org.jdbi.v3.core.statement.StatementContext)" class="member-name-link">of</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Supplier.html" title="class or interface in java.util.function" class="external-link">Supplier</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/ResultSet.html" title="class or interface in java.sql" class="external-link">ResultSet</a>&gt;&nbsp;resultSetSupplier,
  <a href="../RowMapper.html" title="interface in org.jdbi.v3.core.mapper">RowMapper</a>&lt;T&gt;&nbsp;mapper,
  <a href="../../statement/StatementContext.html" title="class in org.jdbi.v3.core.statement">StatementContext</a>&nbsp;ctx)</code></div>
-<div class="col-last even-row-color">
+<div class="col-last odd-row-color">
 <div class="block">Returns a ResultIterable backed by the given result set supplier, mapper, and context.</div>
+</div>
+</div>
+<div class="caption"><span>Method parameters in <a href="../../result/package-summary.html">org.jdbi.v3.core.result</a> with type arguments of type <a href="../RowMapper.html" title="interface in org.jdbi.v3.core.mapper">RowMapper</a></span></div>
+<div class="summary-table three-column-summary">
+<div class="table-header col-first">Modifier and Type</div>
+<div class="table-header col-second">Method</div>
+<div class="table-header col-last">Description</div>
+<div class="col-first even-row-color"><code><a href="../../result/JoinRowReducer.html" title="class in org.jdbi.v3.core.result">JoinRowReducer</a><wbr>&lt;<a href="../../result/JoinRowReducer.html#type-param-R" title="type parameter in JoinRowReducer">R</a>&gt;</code></div>
+<div class="col-second even-row-color"><span class="type-name-label">JoinRowReducer.</span><code><a href="../../result/JoinRowReducer.html#mappedBy(java.util.function.BiFunction)" class="member-name-link">mappedBy</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/BiFunction.html" title="class or interface in java.util.function" class="external-link">BiFunction</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>, ? extends <a href="../RowMapper.html" title="interface in org.jdbi.v3.core.mapper">RowMapper</a>&lt;?&gt;&gt;&nbsp;mapperFactory)</code></div>
+<div class="col-last even-row-color">
+<div class="block">Uses the given factory to create the mapper for a type and column prefix, for example
+<code>BeanMapper::of</code>, instead of the registered mapper.</div>
 </div>
 </div>
 </section>

@@ -532,7 +532,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.55.0-SNAPSHOT,</span>
-<span id="revdate">09/18/2026 15:32 -0700</span>
+<span id="revdate">09/20/2026 14:22 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -683,8 +683,9 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_joins">9.3. Joins</a>
 <ul class="sectlevel3">
 <li><a href="#_resultbearing_reducerows">9.3.1. ResultBearing.reduceRows()</a></li>
-<li><a href="#_resultbearing_reduceresultset">9.3.2. ResultBearing.reduceResultSet()</a></li>
-<li><a href="#_joinrowmapper">9.3.3. JoinRowMapper</a></li>
+<li><a href="#_joinrowreducer">9.3.2. JoinRowReducer</a></li>
+<li><a href="#_resultbearing_reduceresultset">9.3.3. ResultBearing.reduceResultSet()</a></li>
+<li><a href="#_joinrowmapper">9.3.4. JoinRowMapper</a></li>
 </ul>
 </li>
 </ul>
@@ -6232,7 +6233,113 @@ If no mapper with the given prefix is registered for the type, <code>getRow()</c
 </div>
 </div>
 <div class="sect3">
-<h4 id="_resultbearing_reduceresultset"><a class="anchor" href="#_resultbearing_reduceresultset"></a><a class="link" href="#_resultbearing_reduceresultset">9.3.2. ResultBearing.reduceResultSet()</a></h4>
+<h4 id="_joinrowreducer"><a class="anchor" href="#_joinrowreducer"></a><a class="link" href="#_joinrowreducer">9.3.2. JoinRowReducer</a></h4>
+<div class="paragraph">
+<p><a href="./apidocs/org/jdbi/v3/core/result/JoinRowReducer.html" target="_blank" rel="noopener">JoinRowReducer</a> is a <code>RowReducer</code> for join queries, so that most of them need no hand-written reducer.
+You name the root type, then declare each relation with its column prefix, its type and the method that links it to the parent.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">List</span>&lt;Contact&gt; contacts = handle.createQuery(
+        <span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT c.id, c.name, p.id phone_id, p.number phone_number </span><span class="delimiter">&quot;</span></span>
+            + <span class="string"><span class="delimiter">&quot;</span><span class="content">FROM contacts c LEFT JOIN phones p ON p.contact_id = c.id</span><span class="delimiter">&quot;</span></span>)
+    .reduceRows(JoinRowReducer.of(Contact.class).mappedBy(BeanMapper::of) <i class="conum" data-value="1"></i><b>(1)</b>
+        .many(<span class="string"><span class="delimiter">&quot;</span><span class="content">phone</span><span class="delimiter">&quot;</span></span>, Phone.class, Contact::addPhone)) <i class="conum" data-value="2"></i><b>(2)</b>
+    .toList();</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The root type reads its columns without a prefix, and its key column is <code>id</code>. <code>of(Contact.class, "email")</code> names another key column.
+<code>mappedBy(BeanMapper::of)</code> creates a bean mapper for every type and prefix in the reducer, so nothing is registered.
+Without it, mappers come from the registry by type and prefix: the root takes the mapper registered for <code>Contact</code> without a prefix, a custom one or <code>BeanMapper.factory(Contact.class)</code>, and the phones take <code>BeanMapper.factory(Phone.class, "phone")</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td><code>many()</code> declares a to-many relation under the column prefix <code>phone</code>, so a phone reads <code>phone_id</code> and <code>phone_number</code>.
+Each distinct <code>phone_id</code> produces one <code>Phone</code>, and the linker adds it to its contact once.
+A row with a <code>NULL</code> <code>phone_id</code>, as produced by a <code>LEFT JOIN</code> without a match, adds nothing.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><code>one()</code> declares a to-one relation.
+One type is one table: every object is identified by its type and its key, so a table row is one instance no matter through how many relations the query reaches it.
+Here the author and the editor of a book are one <code>Person</code> instance when they are the same person, and an author shared by several books is one instance:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">List</span>&lt;<span class="predefined-type">Book</span>&gt; books = handle.createQuery(
+        <span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT b.id, b.title, a.id author_id, a.name author_name, e.id editor_id, e.name editor_name </span><span class="delimiter">&quot;</span></span>
+            + <span class="string"><span class="delimiter">&quot;</span><span class="content">FROM books b LEFT JOIN persons a ON a.id = b.author_id LEFT JOIN persons e ON e.id = b.editor_id</span><span class="delimiter">&quot;</span></span>)
+    .reduceRows(JoinRowReducer.of(<span class="predefined-type">Book</span>.class).mappedBy(BeanMapper::of)
+        .one(<span class="string"><span class="delimiter">&quot;</span><span class="content">author</span><span class="delimiter">&quot;</span></span>, Person.class, <span class="predefined-type">Book</span>::setAuthor)
+        .one(<span class="string"><span class="delimiter">&quot;</span><span class="content">editor</span><span class="delimiter">&quot;</span></span>, Person.class, <span class="predefined-type">Book</span>::setEditor))
+    .toList();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Relations can be combined freely.
+A query that joins two collections produces the cross product of the two collections for each root, and <code>many()</code> adds each joined object to a root only once:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">List</span>&lt;<span class="predefined-type">Book</span>&gt; books = handle.createQuery(SELECT_BOOKS_WITH_CHAPTERS_AND_TAGS)
+    .reduceRows(JoinRowReducer.of(<span class="predefined-type">Book</span>.class).mappedBy(BeanMapper::of)
+        .one(<span class="string"><span class="delimiter">&quot;</span><span class="content">author</span><span class="delimiter">&quot;</span></span>, Person.class, <span class="predefined-type">Book</span>::setAuthor)
+        .many(<span class="string"><span class="delimiter">&quot;</span><span class="content">chapter</span><span class="delimiter">&quot;</span></span>, Chapter.class, <span class="predefined-type">Book</span>::addChapter)
+        .many(<span class="string"><span class="delimiter">&quot;</span><span class="content">tag</span><span class="delimiter">&quot;</span></span>, Tag.class, <span class="predefined-type">Book</span>::addTag))
+    .toList();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A joined type can have relations of its own.
+Pass a reducer for the type instead of the class, and prefixes compound: an award of the author reads <code>author_award_id</code> and <code>author_award_name</code>.
+A class that is declared anywhere in the reducer refers to that declaration, so the editor below is the same <code>Person</code> node as the author, awards included:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">List</span>&lt;<span class="predefined-type">Book</span>&gt; books = handle.createQuery(SELECT_BOOKS_WITH_AUTHORS_AND_AWARDS)
+    .reduceRows(JoinRowReducer.of(<span class="predefined-type">Book</span>.class).mappedBy(BeanMapper::of)
+        .one(<span class="string"><span class="delimiter">&quot;</span><span class="content">author</span><span class="delimiter">&quot;</span></span>, JoinRowReducer.of(Person.class)
+                .many(<span class="string"><span class="delimiter">&quot;</span><span class="content">award</span><span class="delimiter">&quot;</span></span>, Award.class, Person::addAward),
+            <span class="predefined-type">Book</span>::setAuthor)
+        .one(<span class="string"><span class="delimiter">&quot;</span><span class="content">editor</span><span class="delimiter">&quot;</span></span>, Person.class, <span class="predefined-type">Book</span>::setEditor))
+    .toList();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The root type is declared too, so a self join names it by class, and the parent is the same instance as the root category with that key.
+The recursion ends where the selected columns end: without a <code>parent_parent_id</code> column there is no grandparent.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">List</span>&lt;Category&gt; categories = handle.createQuery(
+        <span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT c.id, c.name, pc.id parent_id, pc.name parent_name </span><span class="delimiter">&quot;</span></span>
+            + <span class="string"><span class="delimiter">&quot;</span><span class="content">FROM categories c LEFT JOIN categories pc ON pc.id = c.parent_id</span><span class="delimiter">&quot;</span></span>)
+    .reduceRows(JoinRowReducer.of(Category.class).mappedBy(BeanMapper::of)
+        .one(<span class="string"><span class="delimiter">&quot;</span><span class="content">parent</span><span class="delimiter">&quot;</span></span>, Category.class, Category::setParent))
+    .toList();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A type may take its mapper from another factory than the root, for example <code>JoinRowReducer.of(Tag.class).mappedBy(ConstructorMapper::of)</code> for a record.
+Linkers run once per distinct pair after the last row, and the relations of a joined type are linked before the joined type is linked to its parent, so a linker receives a complete object unless the graph is recursive.
+If the query selects a type on several paths, the object is mapped from the shallowest path, so the result does not depend on row order.
+Root objects are returned in the order of their first row, the objects of a <code>many()</code> relation are linked to a parent in the order of their first row with it, and only keys in the root key column become roots.
+Keys are read with <code>RowView.getColumn(String)</code>, which returns the value as the JDBC driver returns it, and compared by value: integral keys of any JDBC type are equal when their values are, decimals ignore trailing zeros, and a <code>byte[]</code> key is compared by content.
+A relation is present on a path when the result set has its key column there, so select the root&#8217;s own foreign key columns under another label than a relation key, or not at all.
+With <code>SELECT b.*</code> and a relation <code>category</code>, the book&#8217;s <code>category_id</code> column alone would produce a <code>Category</code> that has only its key.
+<code>one()</code> links each parent once and fails if a second, different key appears for the same parent, which shows that the join is not to-one.
+A reduction also fails if the result set has no root key column, or if a declared relation has its key column on no path, which catches a misspelled alias.
+These column checks run on the first row, so a result set with no rows passes them.
+A <code>JoinRowReducer</code> is immutable and holds no state between reductions, so one instance can serve many statements.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_resultbearing_reduceresultset"><a class="anchor" href="#_resultbearing_reduceresultset"></a><a class="link" href="#_resultbearing_reduceresultset">9.3.3. ResultBearing.reduceResultSet()</a></h4>
 <div class="paragraph">
 <p><a href="./apidocs/org/jdbi/v3/core/result/ResultBearing.html#reduceResultSet(U,org.jdbi.v3.core.result.ResultSetAccumulator)" target="_blank" rel="noopener">ResultBearing.reduceResultSet()</a>
 is a low-level API similar to <code>reduceRows()</code>, except it provides direct access to the JDBC <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/ResultSet.html" target="_blank" rel="noopener">ResultSet</a> instead of a <code>RowView</code> for each row.</p>
@@ -6274,7 +6381,7 @@ is a low-level API similar to <code>reduceRows()</code>, except it provides dire
 </div>
 </div>
 <div class="sect3">
-<h4 id="_joinrowmapper"><a class="anchor" href="#_joinrowmapper"></a><a class="link" href="#_joinrowmapper">9.3.3. JoinRowMapper</a></h4>
+<h4 id="_joinrowmapper"><a class="anchor" href="#_joinrowmapper"></a><a class="link" href="#_joinrowmapper">9.3.4. JoinRowMapper</a></h4>
 <div class="paragraph">
 <p>The JoinRowMapper takes a set of types to extract from each row.
 It uses the mapping registry to determine how to map each given type, and presents you with a JoinRow that holds all the resulting values.</p>
@@ -10070,6 +10177,28 @@ These mappers are used indirectly by the row reducer in the
 <td>Confirm this row has a document (this <em>is</em> a left join) before mapping a document and adding it to the folder.</td>
 </tr>
 </table>
+</div>
+<div class="paragraph">
+<p>For most join queries, a <a href="#_joinrowreducer">JoinRowReducer</a> does the same work without a hand-written <code>accumulate()</code> method.
+<code>@UseRowReducer</code> requires a class with a public no-arg constructor, so extend <code>JoinRowReducer</code> and pass the configured reducer to the superclass constructor.
+The registered mappers are looked up by type and prefix, so the query aliases the parent folder columns as <code>parent_id</code> and <code>parent_name</code>, and the document columns as <code>document_id</code> and so on:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@RegisterBeanMapper</span>(Folder.class)
+<span class="annotation">@RegisterBeanMapper</span>(value = Folder.class, prefix = <span class="string"><span class="delimiter">&quot;</span><span class="content">parent</span><span class="delimiter">&quot;</span></span>)
+<span class="annotation">@RegisterBeanMapper</span>(value = <span class="predefined-type">Document</span>.class, prefix = <span class="string"><span class="delimiter">&quot;</span><span class="content">document</span><span class="delimiter">&quot;</span></span>)
+<span class="annotation">@UseRowReducer</span>(FolderJoinReducer.class)
+<span class="predefined-type">List</span>&lt;Folder&gt; listFolders();
+
+<span class="directive">public</span> <span class="type">class</span> <span class="class">FolderJoinReducer</span> <span class="directive">extends</span> JoinRowReducer&lt;Folder&gt; {
+    <span class="directive">public</span> FolderJoinReducer() {
+        <span class="local-variable">super</span>(JoinRowReducer.of(Folder.class)
+            .one(<span class="string"><span class="delimiter">&quot;</span><span class="content">parent</span><span class="delimiter">&quot;</span></span>, Folder.class, Folder::setParent)
+            .many(<span class="string"><span class="delimiter">&quot;</span><span class="content">document</span><span class="delimiter">&quot;</span></span>, <span class="predefined-type">Document</span>.class, (folder, document) -&gt; folder.getDocuments().add(document)));
+    }
+}</code></pre>
+</div>
 </div>
 </div>
 <div class="sect3">
@@ -17202,7 +17331,7 @@ The annotation may be used for method return types, or on <a href="./apidocs/org
 <div id="footer">
 <div id="footer-text">
 Version 3.55.0-SNAPSHOT<br>
-Last updated 09/18/2026 15:32 -0700
+Last updated 09/20/2026 14:22 -0700
 </div>
 </div>
 </body>
