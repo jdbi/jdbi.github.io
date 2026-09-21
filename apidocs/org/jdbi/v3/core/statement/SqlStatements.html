@@ -94,6 +94,8 @@ loadScripts(document, 'script');</script>
 <li><a href="#setScriptStatementsNeedSemicolon(boolean)" tabindex="0">setScriptStatementsNeedSemicolon(boolean)</a></li>
 <li><a href="#isScriptStatementsNeedSemicolon()" tabindex="0">isScriptStatementsNeedSemicolon()</a></li>
 <li><a href="#setAttachCallbackStatementsForCleanup(boolean)" tabindex="0">setAttachCallbackStatementsForCleanup(boolean)</a></li>
+<li><a href="#getBindListStyle()" tabindex="0">getBindListStyle()</a></li>
+<li><a href="#setBindListStyle(org.jdbi.v3.core.statement.BindListStyle)" tabindex="0">setBindListStyle(BindListStyle)</a></li>
 <li><a href="#setJfrSqlMaxLength(int)" tabindex="0">setJfrSqlMaxLength(int)</a></li>
 <li><a href="#getJfrSqlMaxLength()" tabindex="0">getJfrSqlMaxLength()</a></li>
 <li><a href="#getIncludeBindingsInTelemetry()" tabindex="0">getIncludeBindingsInTelemetry()</a></li>
@@ -215,74 +217,84 @@ implements <a href="../config/JdbiConfig.html" title="interface in org.jdbi.v3.c
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the attributes which will be applied to <a href="SqlStatement.html" title="class in org.jdbi.v3.core.statement"><code>SQL statements</code></a> created by Jdbi.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getIncludeBindingsInTelemetry()" class="member-name-link">getIncludeBindingsInTelemetry</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="BindListStyle.html" title="enum class in org.jdbi.v3.core.statement">BindListStyle</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getBindListStyle()" class="member-name-link">getBindListStyle</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns how <a href="SqlStatement.html#bindList(java.lang.String,java.lang.Object...)"><code>SqlStatement.bindList(String, Object...)</code></a> renders the bound parameter names.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getIncludeBindingsInTelemetry()" class="member-name-link">getIncludeBindingsInTelemetry</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Toggle whether to include potentially sensitive bindins in telemetry data.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getJfrParamMaxLength()" class="member-name-link">getJfrParamMaxLength</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getJfrParamMaxLength()" class="member-name-link">getJfrParamMaxLength</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">When recording JFR events, the maximum length of rendered parameters to store in the event record.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getJfrSqlMaxLength()" class="member-name-link">getJfrSqlMaxLength</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getJfrSqlMaxLength()" class="member-name-link">getJfrSqlMaxLength</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">When recording JFR events, the maximum length of rendered SQL to store in the event record.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getQueryTimeout()" class="member-name-link">getQueryTimeout</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="SqlLogger.html" title="interface in org.jdbi.v3.core.statement">SqlLogger</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSqlLogger()" class="member-name-link">getSqlLogger</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getQueryTimeout()" class="member-name-link">getQueryTimeout</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="SqlLogger.html" title="interface in org.jdbi.v3.core.statement">SqlLogger</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSqlLogger()" class="member-name-link">getSqlLogger</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the current logger.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="SqlParser.html" title="interface in org.jdbi.v3.core.statement">SqlParser</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSqlParser()" class="member-name-link">getSqlParser</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="TemplateEngine.html" title="interface in org.jdbi.v3.core.statement">TemplateEngine</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTemplateEngine()" class="member-name-link">getTemplateEngine</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="SqlParser.html" title="interface in org.jdbi.v3.core.statement">SqlParser</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSqlParser()" class="member-name-link">getSqlParser</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="TemplateEngine.html" title="interface in org.jdbi.v3.core.statement">TemplateEngine</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTemplateEngine()" class="member-name-link">getTemplateEngine</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the <a href="TemplateEngine.html" title="interface in org.jdbi.v3.core.statement"><code>TemplateEngine</code></a> which renders the SQL template.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="TimingCollector.html" title="interface in org.jdbi.v3.core.statement">TimingCollector</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#getTimingCollector()" class="member-name-link">getTimingCollector</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="TimingCollector.html" title="interface in org.jdbi.v3.core.statement">TimingCollector</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#getTimingCollector()" class="member-name-link">getTimingCollector</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6">
 <div class="block"><span class="deprecated-label">Deprecated, for removal: This API element is subject to removal in a future version.</span>
 <div class="deprecation-comment">use <a href="#getSqlLogger()"><code>getSqlLogger()</code></a> instead</div>
 </div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isAttachAllStatementsForCleanup()" class="member-name-link">isAttachAllStatementsForCleanup</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isAttachAllStatementsForCleanup()" class="member-name-link">isAttachAllStatementsForCleanup</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">If true, all statements created within <a href="../Jdbi.html#withHandle(org.jdbi.v3.core.HandleCallback)"><code>Jdbi.withHandle(HandleCallback)</code></a>, <a href="../Jdbi.html#useHandle(org.jdbi.v3.core.HandleConsumer)"><code>Jdbi.useHandle(HandleConsumer)</code></a>, <a href="../Jdbi.html#inTransaction(org.jdbi.v3.core.HandleCallback)"><code>Jdbi.inTransaction(HandleCallback)</code></a> and <a href="../Jdbi.html#useTransaction(org.jdbi.v3.core.HandleConsumer)"><code>Jdbi.useTransaction(HandleConsumer)</code></a>
 are attached to the <a href="../Handle.html" title="class in org.jdbi.v3.core"><code>Handle</code></a> object for cleanup.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isAttachCallbackStatementsForCleanup()" class="member-name-link">isAttachCallbackStatementsForCleanup</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isAttachCallbackStatementsForCleanup()" class="member-name-link">isAttachCallbackStatementsForCleanup</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">If true, statements created within <a href="../Jdbi.html#withHandle(org.jdbi.v3.core.HandleCallback)"><code>Jdbi.withHandle(HandleCallback)</code></a>, <a href="../Jdbi.html#useHandle(org.jdbi.v3.core.HandleConsumer)"><code>Jdbi.useHandle(HandleConsumer)</code></a>, <a href="../Jdbi.html#inTransaction(org.jdbi.v3.core.HandleCallback)"><code>Jdbi.inTransaction(HandleCallback)</code></a> and <a href="../Jdbi.html#useTransaction(org.jdbi.v3.core.HandleConsumer)"><code>Jdbi.useTransaction(HandleConsumer)</code></a>
 will be attached to the <a href="../Handle.html" title="class in org.jdbi.v3.core"><code>Handle</code></a> object in the callback for cleanup.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isScriptStatementsNeedSemicolon()" class="member-name-link">isScriptStatementsNeedSemicolon</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isScriptStatementsNeedSemicolon()" class="member-name-link">isScriptStatementsNeedSemicolon</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">If true, script statements parsed by a <a href="Script.html" title="class in org.jdbi.v3.core.statement"><code>Script</code></a> object will have a trailing semicolon.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isUnusedBindingAllowed()" class="member-name-link">isUnusedBindingAllowed</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setAttachAllStatementsForCleanup(boolean)" class="member-name-link">setAttachAllStatementsForCleanup</a><wbr>(boolean&nbsp;attachAllStatementsForCleanup)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isUnusedBindingAllowed()" class="member-name-link">isUnusedBindingAllowed</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setAttachAllStatementsForCleanup(boolean)" class="member-name-link">setAttachAllStatementsForCleanup</a><wbr>(boolean&nbsp;attachAllStatementsForCleanup)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Sets whether all statements created will automatically attached to the corresponding <a href="../Handle.html" title="class in org.jdbi.v3.core"><code>Handle</code></a> object automatically.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setAttachCallbackStatementsForCleanup(boolean)" class="member-name-link">setAttachCallbackStatementsForCleanup</a><wbr>(boolean&nbsp;attachCallbackStatementsForCleanup)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setAttachCallbackStatementsForCleanup(boolean)" class="member-name-link">setAttachCallbackStatementsForCleanup</a><wbr>(boolean&nbsp;attachCallbackStatementsForCleanup)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Sets whether statements created within the <a href="../Jdbi.html#withHandle(org.jdbi.v3.core.HandleCallback)"><code>Jdbi.withHandle(HandleCallback)</code></a>, <a href="../Jdbi.html#useHandle(org.jdbi.v3.core.HandleConsumer)"><code>Jdbi.useHandle(HandleConsumer)</code></a>, <a href="../Jdbi.html#inTransaction(org.jdbi.v3.core.HandleCallback)"><code>Jdbi.inTransaction(HandleCallback)</code></a> and <a href="../Jdbi.html#useTransaction(org.jdbi.v3.core.HandleConsumer)"><code>Jdbi.useTransaction(HandleConsumer)</code></a>
 callback methods will automatically attached to the <a href="../Handle.html" title="class in org.jdbi.v3.core"><code>Handle</code></a> object and therefore cleaned up when the callback ends.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="SqlStatements.html" title="class in org.jdbi.v3.core.statement">SqlStatements</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setBindListStyle(org.jdbi.v3.core.statement.BindListStyle)" class="member-name-link">setBindListStyle</a><wbr>(<a href="BindListStyle.html" title="enum class in org.jdbi.v3.core.statement">BindListStyle</a>&nbsp;bindListStyle)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Sets how <a href="SqlStatement.html#bindList(java.lang.String,java.lang.Object...)"><code>SqlStatement.bindList(String, Object...)</code></a> renders the bound parameter names into the defined attribute.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="SqlStatements.html" title="class in org.jdbi.v3.core.statement">SqlStatements</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setIncludeBindingsInTelemetry(boolean)" class="member-name-link">setIncludeBindingsInTelemetry</a><wbr>(boolean&nbsp;includeBindingsInTelemetry)</code></div>
@@ -788,6 +800,46 @@ callback methods will automatically attached to the <a href="../Handle.html" tit
 <dd><code>attachCallbackStatementsForCleanup</code> - If true, statements created within the Jdbi callbacks are attached to the handle</dd>
 <dt>Since:</dt>
 <dd>3.38.0</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getBindListStyle()">
+<h3>getBindListStyle</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="annotations"><a href="../../meta/Alpha.html" title="annotation interface in org.jdbi.v3.meta">@Alpha</a>
+</span><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="BindListStyle.html" title="enum class in org.jdbi.v3.core.statement">BindListStyle</a></span>&nbsp;<span class="element-name">getBindListStyle</span>()</div>
+<div class="block">Returns how <a href="SqlStatement.html#bindList(java.lang.String,java.lang.Object...)"><code>SqlStatement.bindList(String, Object...)</code></a> renders the bound parameter names. Defaults to <a href="BindListStyle.html#PLAIN"><code>BindListStyle.PLAIN</code></a>.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the current <a href="BindListStyle.html" title="enum class in org.jdbi.v3.core.statement"><code>BindListStyle</code></a></dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="setBindListStyle(org.jdbi.v3.core.statement.BindListStyle)">
+<h3>setBindListStyle</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="annotations"><a href="../../meta/Alpha.html" title="annotation interface in org.jdbi.v3.meta">@Alpha</a>
+</span><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="SqlStatements.html" title="class in org.jdbi.v3.core.statement">SqlStatements</a></span>&nbsp;<span class="element-name">setBindListStyle</span><wbr><span class="parameters">(<a href="BindListStyle.html" title="enum class in org.jdbi.v3.core.statement">BindListStyle</a>&nbsp;bindListStyle)</span></div>
+<div class="block">Sets how <a href="SqlStatement.html#bindList(java.lang.String,java.lang.Object...)"><code>SqlStatement.bindList(String, Object...)</code></a> renders the bound parameter names into the defined attribute.
+<a href="BindListStyle.html#ROWS"><code>BindListStyle.ROWS</code></a> wraps each element in parentheses, which is the syntax the SQL <code>VALUES</code>
+list constructor requires:
+<pre>
+handle.createQuery("select id from (values &lt;ids&gt;) as t(id)")
+    .configure(SqlStatements.class, c -&gt; c.setBindListStyle(BindListStyle.ROWS))
+    .bindList("ids", 1, 2, 3)
+</pre>
+The style must match the SQL around each attribute, so set it on the statement as above rather than on the
+<a href="../Jdbi.html" title="class in org.jdbi.v3.core"><code>Jdbi</code></a> or <a href="../Handle.html" title="class in org.jdbi.v3.core"><code>Handle</code></a>, unless every <code>bindList</code> attribute
+uses the same form.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>bindListStyle</code> - the <a href="BindListStyle.html" title="enum class in org.jdbi.v3.core.statement"><code>BindListStyle</code></a> to use</dd>
+<dt>Returns:</dt>
+<dd>this</dd>
 </dl>
 </div>
 </section>

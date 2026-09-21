@@ -530,11 +530,16 @@ is created.</div>
 <div class="caption"><span>Classes in <a href="../../core/statement/package-summary.html">org.jdbi.v3.core.statement</a> with annotations of type <a href="../Alpha.html" title="annotation interface in org.jdbi.v3.meta">Alpha</a></span></div>
 <div class="summary-table three-column-summary">
 <div class="table-header col-first">Modifier and Type</div>
-<div class="table-header col-second">Interface</div>
+<div class="table-header col-second">Class</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code>interface&nbsp;</code></div>
-<div class="col-second even-row-color"><code><a href="../../core/statement/SqlExceptionHandler.html" class="type-name-link" title="interface in org.jdbi.v3.core.statement">SqlExceptionHandler</a></code></div>
+<div class="col-first even-row-color"><code>enum&nbsp;</code></div>
+<div class="col-second even-row-color"><code><a href="../../core/statement/BindListStyle.html" class="type-name-link" title="enum class in org.jdbi.v3.core.statement">BindListStyle</a></code></div>
 <div class="col-last even-row-color">
+<div class="block">Describes how <a href="../../core/statement/SqlStatement.html#bindList(java.lang.String,java.lang.Object...)"><code>SqlStatement.bindList(String, Object...)</code></a> renders the bound parameter names into the defined attribute.</div>
+</div>
+<div class="col-first odd-row-color"><code>interface&nbsp;</code></div>
+<div class="col-second odd-row-color"><code><a href="../../core/statement/SqlExceptionHandler.html" class="type-name-link" title="interface in org.jdbi.v3.core.statement">SqlExceptionHandler</a></code></div>
+<div class="col-last odd-row-color">
 <div class="block">Handler for exceptions thrown while executing SQL statements.</div>
 </div>
 </div>
@@ -543,15 +548,25 @@ is created.</div>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code>long</code></div>
-<div class="col-second even-row-color"><span class="type-name-label">StatementContext.</span><code><a href="../../core/statement/StatementContext.html#getMappedRows()" class="member-name-link">getMappedRows</a>()</code></div>
+<div class="col-first even-row-color"><code><a href="../../core/statement/BindListStyle.html" title="enum class in org.jdbi.v3.core.statement">BindListStyle</a></code></div>
+<div class="col-second even-row-color"><span class="type-name-label">SqlStatements.</span><code><a href="../../core/statement/SqlStatements.html#getBindListStyle()" class="member-name-link">getBindListStyle</a>()</code></div>
 <div class="col-last even-row-color">
+<div class="block">Returns how <a href="../../core/statement/SqlStatement.html#bindList(java.lang.String,java.lang.Object...)"><code>SqlStatement.bindList(String, Object...)</code></a> renders the bound parameter names.</div>
+</div>
+<div class="col-first odd-row-color"><code>long</code></div>
+<div class="col-second odd-row-color"><span class="type-name-label">StatementContext.</span><code><a href="../../core/statement/StatementContext.html#getMappedRows()" class="member-name-link">getMappedRows</a>()</code></div>
+<div class="col-last odd-row-color">
 <div class="block">Retrieve the number of mapped rows.</div>
 </div>
-<div class="col-first odd-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color"><span class="type-name-label">StatementContext.</span><code><a href="../../core/statement/StatementContext.html#getTraceId()" class="member-name-link">getTraceId</a>()</code></div>
-<div class="col-last odd-row-color">
+<div class="col-first even-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color"><span class="type-name-label">StatementContext.</span><code><a href="../../core/statement/StatementContext.html#getTraceId()" class="member-name-link">getTraceId</a>()</code></div>
+<div class="col-last even-row-color">
 <div class="block">Instrument the telemetry trace id.</div>
+</div>
+<div class="col-first odd-row-color"><code><a href="../../core/statement/SqlStatements.html" title="class in org.jdbi.v3.core.statement">SqlStatements</a></code></div>
+<div class="col-second odd-row-color"><span class="type-name-label">SqlStatements.</span><code><a href="../../core/statement/SqlStatements.html#setBindListStyle(org.jdbi.v3.core.statement.BindListStyle)" class="member-name-link">setBindListStyle</a><wbr>(<a href="../../core/statement/BindListStyle.html" title="enum class in org.jdbi.v3.core.statement">BindListStyle</a>&nbsp;bindListStyle)</code></div>
+<div class="col-last odd-row-color">
+<div class="block">Sets how <a href="../../core/statement/SqlStatement.html#bindList(java.lang.String,java.lang.Object...)"><code>SqlStatement.bindList(String, Object...)</code></a> renders the bound parameter names into the defined attribute.</div>
 </div>
 <div class="col-first even-row-color"><code>void</code></div>
 <div class="col-second even-row-color"><span class="type-name-label">StatementContext.</span><code><a href="../../core/statement/StatementContext.html#setMappedRows(long)" class="member-name-link">setMappedRows</a><wbr>(long&nbsp;mappedRows)</code></div>

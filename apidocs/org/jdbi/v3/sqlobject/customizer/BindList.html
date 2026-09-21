@@ -60,6 +60,7 @@ loadScripts(document, 'script');</script>
 <ol class="toc-list">
 <li><a href="#value()" tabindex="0">value</a></li>
 <li><a href="#onEmpty()" tabindex="0">onEmpty</a></li>
+<li><a href="#style()" tabindex="0">style</a></li>
 </ol>
 </li>
 </ol>
@@ -121,9 +122,14 @@ Throws IllegalArgumentException if the argument is not an array or Iterable. How
 <div class="col-last even-row-color">
 <div class="block">What to do when the argument is null or empty.</div>
 </div>
-<div class="col-first odd-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#value()" class="member-name-link">value</a></code></div>
+<div class="col-first odd-row-color"><code><a href="../../core/statement/BindListStyle.html" title="enum class in org.jdbi.v3.core.statement">BindListStyle</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#style()" class="member-name-link">style</a></code></div>
 <div class="col-last odd-row-color">
+<div class="block">How to render each bound element into the defined attribute.</div>
+</div>
+<div class="col-first even-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color"><code><a href="#value()" class="member-name-link">value</a></code></div>
+<div class="col-last even-row-color">
 <div class="block">The attribute name to define.</div>
 </div>
 </div>
@@ -175,6 +181,31 @@ the name when there is no parameter naming information in your class files.</div
 <dl class="notes">
 <dt>Default:</dt>
 <dd><code>THROW</code></dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="style()">
+<h3>style</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="annotations"><a href="../../meta/Alpha.html" title="annotation interface in org.jdbi.v3.meta">@Alpha</a>
+</span><span class="return-type"><a href="../../core/statement/BindListStyle.html" title="enum class in org.jdbi.v3.core.statement">BindListStyle</a></span>&nbsp;<span class="element-name">style</span></div>
+<div class="block">How to render each bound element into the defined attribute. <a href="../../core/statement/BindListStyle.html#ROWS"><code>BindListStyle.ROWS</code></a> wraps each element
+in parentheses for use with the SQL <code>VALUES</code> list constructor:
+<pre>
+&#64;SqlQuery("select id from (values &lt;ids&gt;) as t(id)")
+List&lt;Integer&gt; ids(@BindList(style = BindListStyle.ROWS) List&lt;Integer&gt; ids)
+</pre>
+This value replaces any <a href="../../core/statement/BindListStyle.html" title="enum class in org.jdbi.v3.core.statement"><code>BindListStyle</code></a> configured on the statement or handle, so a style set on the
+<a href="../../core/Jdbi.html" title="class in org.jdbi.v3.core"><code>Jdbi</code></a> has no effect on <code>@BindList</code> parameters.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the rendering style. By default, a plain comma-separated list.</dd>
+</dl>
+<dl class="notes">
+<dt>Default:</dt>
+<dd><code>PLAIN</code></dd>
 </dl>
 </div>
 </section>

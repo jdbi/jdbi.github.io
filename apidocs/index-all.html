@@ -1044,6 +1044,10 @@ comma-separated list of each bound parameter name.</div>
 <dd>
 <div class="block">describes what needs to be done if the passed argument is null or empty</div>
 </dd>
+<dt><a href="org/jdbi/v3/core/statement/BindListStyle.html" class="type-name-link" title="enum class in org.jdbi.v3.core.statement">BindListStyle</a> - Enum Class in <a href="org/jdbi/v3/core/statement/package-summary.html">org.jdbi.v3.core.statement</a></dt>
+<dd>
+<div class="block">Describes how <a href="org/jdbi/v3/core/statement/SqlStatement.html#bindList(java.lang.String,java.lang.Object...)"><code>SqlStatement.bindList(String, Object...)</code></a> renders the bound parameter names into the defined attribute.</div>
+</dd>
 <dt><a href="org/jdbi/v3/core/statement/SqlStatement.html#bindMap(java.util.Map)" class="member-name-link">bindMap(Map)</a> - Method in class org.jdbi.v3.core.statement.<a href="org/jdbi/v3/core/statement/SqlStatement.html" title="class in org.jdbi.v3.core.statement">SqlStatement</a></dt>
 <dd>
 <div class="block">Binds named parameters from a map of String to Object instances</div>
@@ -3113,6 +3117,10 @@ to create a compiled implementation.</div>
 <dt><a href="org/jdbi/v3/core/statement/StatementContext.html#getBinding()" class="member-name-link">getBinding()</a> - Method in class org.jdbi.v3.core.statement.<a href="org/jdbi/v3/core/statement/StatementContext.html" title="class in org.jdbi.v3.core.statement">StatementContext</a></dt>
 <dd>
 <div class="block">Returns the statement binding.</div>
+</dd>
+<dt><a href="org/jdbi/v3/core/statement/SqlStatements.html#getBindListStyle()" class="member-name-link">getBindListStyle()</a> - Method in class org.jdbi.v3.core.statement.<a href="org/jdbi/v3/core/statement/SqlStatements.html" title="class in org.jdbi.v3.core.statement">SqlStatements</a></dt>
+<dd>
+<div class="block">Returns how <a href="org/jdbi/v3/core/statement/SqlStatement.html#bindList(java.lang.String,java.lang.Object...)"><code>SqlStatement.bindList(String, Object...)</code></a> renders the bound parameter names.</div>
 </dd>
 <dt><a href="org/jdbi/v3/core/statement/OutParameters.html#getBytes(int)" class="member-name-link">getBytes(int)</a> - Method in class org.jdbi.v3.core.statement.<a href="org/jdbi/v3/core/statement/OutParameters.html" title="class in org.jdbi.v3.core.statement">OutParameters</a></dt>
 <dd>
@@ -6038,6 +6046,10 @@ for the statement.</div>
 <dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/postgres/PgLobApi.html" class="type-name-link" title="interface in org.jdbi.v3.postgres">PgLobApi</a> - Interface in <a href="org/jdbi/v3/postgres/package-summary.html">org.jdbi.v3.postgres</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="org/jdbi/v3/core/statement/BindListStyle.html#PLAIN" class="member-name-link">PLAIN</a> - Enum constant in enum class org.jdbi.v3.core.statement.<a href="org/jdbi/v3/core/statement/BindListStyle.html" title="enum class in org.jdbi.v3.core.statement">BindListStyle</a></dt>
+<dd>
+<div class="block">Render each element as a bare parameter.</div>
+</dd>
 <dt><a href="org/jdbi/v3/core/statement/ParsedParameters.html#positional(int)" class="member-name-link">positional(int)</a> - Static method in class org.jdbi.v3.core.statement.<a href="org/jdbi/v3/core/statement/ParsedParameters.html" title="class in org.jdbi.v3.core.statement">ParsedParameters</a></dt>
 <dd>
 <div class="block">A static factory of positional <a href="org/jdbi/v3/core/statement/ParsedParameters.html" title="class in org.jdbi.v3.core.statement"><code>ParsedParameters</code></a> instances.</div>
@@ -6846,6 +6858,10 @@ of <a href="org/jdbi/v3/core/transaction/RollbackOnlyTransactionHandler.html#com
 <div class="block">Reduces row data from a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/ResultSet.html" title="class or interface in java.sql" class="external-link"><code>ResultSet</code></a> into a stream of result
 elements.</div>
 </dd>
+<dt><a href="org/jdbi/v3/core/statement/BindListStyle.html#ROWS" class="member-name-link">ROWS</a> - Enum constant in enum class org.jdbi.v3.core.statement.<a href="org/jdbi/v3/core/statement/BindListStyle.html" title="enum class in org.jdbi.v3.core.statement">BindListStyle</a></dt>
+<dd>
+<div class="block">Render each element as a single-column row, for use with the SQL <code>VALUES</code> list constructor.</div>
+</dd>
 <dt><a href="org/jdbi/v3/core/statement/JdbiStatementEvent.html#rowsMapped" class="member-name-link">rowsMapped</a> - Variable in class org.jdbi.v3.core.statement.<a href="org/jdbi/v3/core/statement/JdbiStatementEvent.html" title="class in org.jdbi.v3.core.statement">JdbiStatementEvent</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/core/result/RowView.html" class="type-name-link" title="class in org.jdbi.v3.core.result">RowView</a> - Class in <a href="org/jdbi/v3/core/result/package-summary.html">org.jdbi.v3.core.result</a></dt>
@@ -6994,6 +7010,10 @@ callback methods will automatically attached to the <a href="org/jdbi/v3/core/Ha
 <dt><a href="org/jdbi/v3/core/argument/Arguments.html#setBindingNullToPrimitivesPermitted(boolean)" class="member-name-link">setBindingNullToPrimitivesPermitted(boolean)</a> - Method in class org.jdbi.v3.core.argument.<a href="org/jdbi/v3/core/argument/Arguments.html" title="class in org.jdbi.v3.core.argument">Arguments</a></dt>
 <dd>
 <div class="block">Whether binding <code>null</code> to a variable declared as a primitive type should be allowed.</div>
+</dd>
+<dt><a href="org/jdbi/v3/core/statement/SqlStatements.html#setBindListStyle(org.jdbi.v3.core.statement.BindListStyle)" class="member-name-link">setBindListStyle(BindListStyle)</a> - Method in class org.jdbi.v3.core.statement.<a href="org/jdbi/v3/core/statement/SqlStatements.html" title="class in org.jdbi.v3.core.statement">SqlStatements</a></dt>
+<dd>
+<div class="block">Sets how <a href="org/jdbi/v3/core/statement/SqlStatement.html#bindList(java.lang.String,java.lang.Object...)"><code>SqlStatement.bindList(String, Object...)</code></a> renders the bound parameter names into the defined attribute.</div>
 </dd>
 <dt><a href="org/jdbi/v3/core/mapper/MapMappers.html#setCaseChange(java.util.function.UnaryOperator)" class="member-name-link">setCaseChange(UnaryOperator)</a> - Method in class org.jdbi.v3.core.mapper.<a href="org/jdbi/v3/core/mapper/MapMappers.html" title="class in org.jdbi.v3.core.mapper">MapMappers</a></dt>
 <dd>
@@ -7808,6 +7828,10 @@ customize sql statements via annotations.</div>
 </dd>
 <dt><a href="org/jdbi/v3/sqlobject/locator/UseClasspathSqlLocator.html#stripComments()" class="member-name-link">stripComments()</a> - Element in annotation interface org.jdbi.v3.sqlobject.locator.<a href="org/jdbi/v3/sqlobject/locator/UseClasspathSqlLocator.html" title="annotation interface in org.jdbi.v3.sqlobject.locator">UseClasspathSqlLocator</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="org/jdbi/v3/sqlobject/customizer/BindList.html#style()" class="member-name-link">style()</a> - Element in annotation interface org.jdbi.v3.sqlobject.customizer.<a href="org/jdbi/v3/sqlobject/customizer/BindList.html" title="annotation interface in org.jdbi.v3.sqlobject.customizer">BindList</a></dt>
+<dd>
+<div class="block">How to render each bound element into the defined attribute.</div>
+</dd>
 <dt><a href="org/jdbi/v3/core/Sql.html#subSequence(int,int)" class="member-name-link">subSequence(int, int)</a> - Method in class org.jdbi.v3.core.<a href="org/jdbi/v3/core/Sql.html" title="class in org.jdbi.v3.core">Sql</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/jdbi/v3/commonstext/UseStringSubstitutorTemplateEngine.html#suffix()" class="member-name-link">suffix()</a> - Element in annotation interface org.jdbi.v3.commonstext.<a href="org/jdbi/v3/commonstext/UseStringSubstitutorTemplateEngine.html" title="annotation interface in org.jdbi.v3.commonstext">UseStringSubstitutorTemplateEngine</a></dt>
@@ -8637,6 +8661,10 @@ sql statement customizers.</div>
 <dd>
 <div class="block">Returns the enum constant of this class with the specified name.</div>
 </dd>
+<dt><a href="org/jdbi/v3/core/statement/BindListStyle.html#valueOf(java.lang.String)" class="member-name-link">valueOf(String)</a> - Static method in enum class org.jdbi.v3.core.statement.<a href="org/jdbi/v3/core/statement/BindListStyle.html" title="enum class in org.jdbi.v3.core.statement">BindListStyle</a></dt>
+<dd>
+<div class="block">Returns the enum constant of this class with the specified name.</div>
+</dd>
 <dt><a href="org/jdbi/v3/core/statement/EmptyHandling.html#valueOf(java.lang.String)" class="member-name-link">valueOf(String)</a> - Static method in enum class org.jdbi.v3.core.statement.<a href="org/jdbi/v3/core/statement/EmptyHandling.html" title="enum class in org.jdbi.v3.core.statement">EmptyHandling</a></dt>
 <dd>
 <div class="block">Returns the enum constant of this class with the specified name.</div>
@@ -8674,6 +8702,11 @@ the order they are declared.</div>
 the order they are declared.</div>
 </dd>
 <dt><a href="org/jdbi/v3/core/mapper/reflect/AccessibleObjectStrategy.html#values()" class="member-name-link">values()</a> - Static method in enum class org.jdbi.v3.core.mapper.reflect.<a href="org/jdbi/v3/core/mapper/reflect/AccessibleObjectStrategy.html" title="enum class in org.jdbi.v3.core.mapper.reflect">AccessibleObjectStrategy</a></dt>
+<dd>
+<div class="block">Returns an array containing the constants of this enum class, in
+the order they are declared.</div>
+</dd>
+<dt><a href="org/jdbi/v3/core/statement/BindListStyle.html#values()" class="member-name-link">values()</a> - Static method in enum class org.jdbi.v3.core.statement.<a href="org/jdbi/v3/core/statement/BindListStyle.html" title="enum class in org.jdbi.v3.core.statement">BindListStyle</a></dt>
 <dd>
 <div class="block">Returns an array containing the constants of this enum class, in
 the order they are declared.</div>

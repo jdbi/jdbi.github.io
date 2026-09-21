@@ -532,7 +532,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.55.0-SNAPSHOT,</span>
-<span id="revdate">09/20/2026 14:22 -0700</span>
+<span id="revdate">09/20/2026 17:03 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -3685,6 +3685,36 @@ The attribute is a placeholder that will be rendered to a comma-separated list o
 </td>
 </tr>
 </table>
+</div>
+<div class="paragraph">
+<p>By default, the attribute renders as a plain comma-separated list.
+To use the bound values with the SQL <code>VALUES</code> list constructor, which requires each value in its own parenthesized row, set the <a href="./apidocs/org/jdbi/v3/core/statement/BindListStyle.html" target="_blank" rel="noopener">BindListStyle</a> on the statement:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT value FROM items WHERE kind in (VALUES &lt;listOfKinds&gt;)</span><span class="delimiter">&quot;</span></span>)
+    .configure(SqlStatements.class, c -&gt; c.setBindListStyle(BindListStyle.ROWS))
+    .bindList(<span class="string"><span class="delimiter">&quot;</span><span class="content">listOfKinds</span><span class="delimiter">&quot;</span></span>, keys)
+    .mapTo(<span class="predefined-type">String</span>.class)
+    .list();
+<span class="comment">// renders as ... in (VALUES (:__listOfKinds_0),(:__listOfKinds_1))</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A <code>VALUES</code> list can also stand in for a table, which allows a join against the bound values:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">handle.createQuery(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT link FROM (VALUES &lt;links&gt;) AS candidates (link) EXCEPT SELECT link FROM seen_links</span><span class="delimiter">&quot;</span></span>)
+    .configure(SqlStatements.class, c -&gt; c.setBindListStyle(BindListStyle.ROWS))
+    .bindList(<span class="string"><span class="delimiter">&quot;</span><span class="content">links</span><span class="delimiter">&quot;</span></span>, links)
+    .mapTo(<span class="predefined-type">String</span>.class)
+    .list();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The style must match the SQL around each attribute, so set it per statement as shown. A style set on the <code>Jdbi</code> or <code>Handle</code> applies to every <code>bindList</code> call made through it.
+<code>EmptyHandling.NULL_KEYWORD</code> is not valid with <code>ROWS</code>: <code>VALUES null</code> is a syntax error. Use <code>THROW</code>, or <code>DEFINE_NULL</code> with a template conditional, to handle an empty list.</p>
 </div>
 <div class="paragraph">
 <p>You can bind multiple arguments from properties of a Java Bean:</p>
@@ -8395,6 +8425,17 @@ If the database supports array types, it is strongly recommended to use <a href=
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT name FROM users WHERE id in (&lt;userIds&gt;)</span><span class="delimiter">&quot;</span></span>)
 <span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt; getFromIds(<span class="annotation">@BindList</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">userIds</span><span class="delimiter">&quot;</span></span>) <span class="predefined-type">List</span>&lt;<span class="predefined-type">Long</span>&gt; userIds)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>style</code> attribute selects the <a href="./apidocs/org/jdbi/v3/core/statement/BindListStyle.html" target="_blank" rel="noopener">BindListStyle</a>.
+<code>ROWS</code> wraps each element in parentheses for the SQL <code>VALUES</code> list constructor.
+The annotation always sets the style for its own parameter, so a style configured on the <code>Jdbi</code> or <code>Handle</code> does not apply to <code>@BindList</code> parameters:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@SqlQuery</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT name FROM users WHERE id in (VALUES &lt;userIds&gt;)</span><span class="delimiter">&quot;</span></span>)
+<span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt; getFromIds(<span class="annotation">@BindList</span>(style = BindListStyle.ROWS) <span class="predefined-type">List</span>&lt;<span class="predefined-type">Long</span>&gt; userIds)</code></pre>
 </div>
 </div>
 </div>
@@ -17331,7 +17372,7 @@ The annotation may be used for method return types, or on <a href="./apidocs/org
 <div id="footer">
 <div id="footer-text">
 Version 3.55.0-SNAPSHOT<br>
-Last updated 09/20/2026 14:22 -0700
+Last updated 09/20/2026 17:03 -0700
 </div>
 </div>
 </body>
