@@ -532,7 +532,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.55.0-SNAPSHOT,</span>
-<span id="revdate">09/26/2026 17:26 -0700</span>
+<span id="revdate">09/26/2026 19:44 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -4717,7 +4717,7 @@ When binding object properties (e.g. with <a href="./apidocs/org/jdbi/v3/core/st
 </td>
 <td class="content">
 <a href="./apidocs/org/jdbi/v3/core/mapper/Nested.html" target="_blank" rel="noopener">@Nested</a> also can be used in combination with <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" target="_blank" rel="noopener">Optional</a>.
-When mapping a value <code>@Nested Optional&lt;MyBean&gt;</code> then it will wrapped inside an optional, and will be <code>Optional.empty()</code> when <code>MyBean</code> itself would be null (e.g. because <code>@PropagateNull</code> annotation is used on a <code>MyBean</code> field that was null).
+When mapping a value <code>@Nested Optional&lt;MyBean&gt;</code> then it will be wrapped inside an optional, and will be <code>Optional.empty()</code> when <code>MyBean</code> itself would be null (e.g. because of a <code>@PropagateNull</code> annotation on the <code>MyBean</code> class or on a <code>MyBean</code> field whose column was null).
 </td>
 </tr>
 </table>
@@ -4822,8 +4822,9 @@ When the transfer has no receiver, the <code>receiver_id</code> column is null, 
 </div>
 <div class="paragraph">
 <p>Because the mapper examines the value that the column mapper returns, an <code>Optional&lt;String&gt;</code> attribute on a SQL <code>NULL</code> column is <code>Optional.empty()</code>, which is not <code>null</code>, and does not propagate.
-For a primitive attribute such as <code>int id</code>, the <code>BeanMapper</code>, <code>ConstructorMapper</code>, and <code>FieldMapper</code> also treat a SQL <code>NULL</code> as <code>null</code>.
-On a <code>@Nested</code> attribute, the mapper examines the nested object: if the nested object is <code>null</code>, the parent object is also <code>null</code>.</p>
+For a primitive attribute such as <code>int id</code> (or a non-null Kotlin <code>Long</code> or <code>Int</code>), the <code>BeanMapper</code>, <code>ConstructorMapper</code>, <code>FieldMapper</code>, and <code>KotlinMapper</code> also treat a SQL <code>NULL</code> as <code>null</code>.
+On a <code>@Nested</code> attribute, the mapper examines the nested object: if the nested object is <code>null</code>, the parent object is also <code>null</code>.
+A <code>@Nested Optional&lt;MyBean&gt;</code> attribute is <code>Optional.empty()</code> instead of <code>null</code>, so <code>@PropagateNull</code> on this attribute has no effect.</p>
 </div>
 </div>
 <div class="sect4">
@@ -17480,7 +17481,7 @@ The annotation may be used for method return types, or on <a href="./apidocs/org
 <div id="footer">
 <div id="footer-text">
 Version 3.55.0-SNAPSHOT<br>
-Last updated 09/26/2026 17:26 -0700
+Last updated 09/26/2026 19:44 -0700
 </div>
 </div>
 </body>
