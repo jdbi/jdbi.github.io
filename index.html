@@ -532,7 +532,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.55.0-SNAPSHOT,</span>
-<span id="revdate">09/26/2026 17:13 -0700</span>
+<span id="revdate">09/26/2026 17:26 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -7168,7 +7168,7 @@ transaction is rolled back and an exception is thrown when closing the Handle.</
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" rowspan="2"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/core/mapper/reflect/ReflectionMappers.html" target="_blank" rel="noopener">ReflectionMappers</a></p></td>
+<td class="tableblock halign-left valign-top" rowspan="3"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/core/mapper/reflect/ReflectionMappers.html" target="_blank" rel="noopener">ReflectionMappers</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">caseChange</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/UnaryOperator.html" target="_blank" rel="noopener">UnaryOperator&lt;String&gt;</a></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/core/mapper/CaseStrategy.html#LOCALE_LOWER" target="_blank" rel="noopener">LOCALE_LOWER</a></p></td>
@@ -7212,6 +7212,12 @@ transaction is rolled back and an exception is thrown when closing the Handle.</
 <td class="tableblock halign-center valign-top"><p class="tableblock">boolean</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>false</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">If <code>true</code>, all database columns must be mapped to a property. If any columns are unmatched or any property is unset, an exception is thrown.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">accessibleObjectStrategy</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" target="_blank" rel="noopener">Consumer&lt;AccessibleObject&gt;</a></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/core/mapper/reflect/AccessibleObjectStrategy.html#FORCE_MAKE_ACCESSIBLE" target="_blank" rel="noopener">FORCE_MAKE_ACCESSIBLE</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Applied to a constructor, method, or field of a mapped or bound type that Jdbi can not access otherwise, for example a public getter of a package-private bean class. For beans, constructors, and Immutables, Jdbi applies the strategy in effect when a type is first used and caches the result for the <code>Jdbi</code> instance. Set the strategy on the <code>Jdbi</code> object before first use, not on a <code>Handle</code> or statement. If the type is in a named module, that module must also open its package to Jdbi: to module <code>org.jdbi.v3.core</code> when Jdbi is on the module path, or to <code>ALL-UNNAMED</code> when Jdbi is on the class path.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./apidocs/org/jdbi/v3/core/result/ResultProducers.html" target="_blank" rel="noopener">ResultProducers</a></p></td>
@@ -17474,7 +17480,7 @@ The annotation may be used for method return types, or on <a href="./apidocs/org
 <div id="footer">
 <div id="footer-text">
 Version 3.55.0-SNAPSHOT<br>
-Last updated 09/26/2026 17:13 -0700
+Last updated 09/26/2026 17:26 -0700
 </div>
 </div>
 </body>
