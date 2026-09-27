@@ -73,10 +73,21 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/annotation/Retention.html" title="class or interface in java.lang.annotation" class="external-link">@Retention</a>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/annotation/RetentionPolicy.html#RUNTIME" title="class or interface in java.lang.annotation" class="external-link">RUNTIME</a>)
 <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/annotation/Target.html" title="class or interface in java.lang.annotation" class="external-link">@Target</a>({<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/annotation/ElementType.html#PARAMETER" title="class or interface in java.lang.annotation" class="external-link">PARAMETER</a>,<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/annotation/ElementType.html#FIELD" title="class or interface in java.lang.annotation" class="external-link">FIELD</a>,<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/annotation/ElementType.html#METHOD" title="class or interface in java.lang.annotation" class="external-link">METHOD</a>,<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/annotation/ElementType.html#TYPE" title="class or interface in java.lang.annotation" class="external-link">TYPE</a>})
 </span><span class="modifiers">public @interface </span><span class="element-name type-name-label">PropagateNull</span></div>
-<div class="block">Signals that the annotated property signals the presence of the mapped type:
-reflective mappers should map a null bean if this property is null, rather than a
-present bean with a null property value.  This is useful e.g. for a <code>LEFT OUTER JOIN</code>
-or an optionally-present compound value type.</div>
+<div class="block">Signals that a column shows the presence of the mapped type:
+reflective mappers map a <code>null</code> object if this column is null, rather than a
+present object with null properties.  This is useful e.g. for a <code>LEFT OUTER JOIN</code>
+or an optionally-present compound value type.
+<p>
+On a type, <a href="#value()"><code>value()</code></a> names the column to examine. The name is relative to the
+prefix of the mapper, which comes from <a href="Nested.html#value()"><code>Nested.value()</code></a> or from a mapper made with a
+prefix, so the same type can be mapped with different prefixes. Do not include the prefix:
+if no column matches the name, the annotation has no effect and no error occurs. For the
+<code>ConstructorMapper</code>, the annotation with a value can also be on the factory method.
+<p>
+On a property (a bean getter or setter, a field, or a constructor parameter), leave
+<a href="#value()"><code>value()</code></a> empty. The mapper examines the value that the column mapper returns for
+the property, so an <code>Optional</code> property on a null column does not propagate. On a
+<a href="Nested.html" title="annotation interface in org.jdbi.v3.core.mapper"><code>Nested</code></a> property, the mapper examines the nested object instead.</div>
 </div>
 </section>
 <section class="summary">
@@ -93,7 +104,7 @@ or an optionally-present compound value type.</div>
 <div class="col-first even-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color"><code><a href="#value()" class="member-name-link">value</a></code></div>
 <div class="col-last even-row-color">
-<div class="block">When annotating a type, the <code>value</code> is the column name to check for null.</div>
+<div class="block">On a type, the name of the column to check for null, without the prefix of the mapper.</div>
 </div>
 </div>
 </section>
@@ -112,8 +123,8 @@ or an optionally-present compound value type.</div>
 <h3>value</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">value</span></div>
-<div class="block">When annotating a type, the <code>value</code> is the column name to check for null.
-When annotating a property, the <code>value</code> is unused: instead, the property value is tested against null.</div>
+<div class="block">On a type, the name of the column to check for null, without the prefix of the mapper.
+On a property, the value must be empty.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the column name whose null-ness shall be propagated</dd>

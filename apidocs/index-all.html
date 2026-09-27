@@ -6192,9 +6192,9 @@ for the statement.</div>
 </dd>
 <dt><a href="org/jdbi/v3/core/mapper/PropagateNull.html" class="type-name-link" title="annotation interface in org.jdbi.v3.core.mapper">PropagateNull</a> - Annotation Interface in <a href="org/jdbi/v3/core/mapper/package-summary.html">org.jdbi.v3.core.mapper</a></dt>
 <dd>
-<div class="block">Signals that the annotated property signals the presence of the mapped type:
-reflective mappers should map a null bean if this property is null, rather than a
-present bean with a null property value.</div>
+<div class="block">Signals that a column shows the presence of the mapped type:
+reflective mappers map a <code>null</code> object if this column is null, rather than a
+present object with null properties.</div>
 </dd>
 <dt><a href="org/jdbi/v3/sqlobject/customizer/BindBeanList.html#propertyNames()" class="member-name-link">propertyNames()</a> - Element in annotation interface org.jdbi.v3.sqlobject.customizer.<a href="org/jdbi/v3/sqlobject/customizer/BindBeanList.html" title="annotation interface in org.jdbi.v3.sqlobject.customizer">BindBeanList</a></dt>
 <dd>
@@ -8384,7 +8384,7 @@ for use by clients.</div>
 </dd>
 <dt><a href="org/jdbi/v3/core/mapper/PropagateNull.html#value()" class="member-name-link">value()</a> - Element in annotation interface org.jdbi.v3.core.mapper.<a href="org/jdbi/v3/core/mapper/PropagateNull.html" title="annotation interface in org.jdbi.v3.core.mapper">PropagateNull</a></dt>
 <dd>
-<div class="block">When annotating a type, the <code>value</code> is the column name to check for null.</div>
+<div class="block">On a type, the name of the column to check for null, without the prefix of the mapper.</div>
 </dd>
 <dt><a href="org/jdbi/v3/core/mapper/reflect/ColumnName.html#value()" class="member-name-link">value()</a> - Element in annotation interface org.jdbi.v3.core.mapper.reflect.<a href="org/jdbi/v3/core/mapper/reflect/ColumnName.html" title="annotation interface in org.jdbi.v3.core.mapper.reflect">ColumnName</a></dt>
 <dd>&nbsp;</dd>

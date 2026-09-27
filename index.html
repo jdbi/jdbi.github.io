@@ -532,7 +532,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Jdbi 3 Developer Guide</h1>
 <div class="details">
 <span id="revnumber">version 3.55.0-SNAPSHOT,</span>
-<span id="revdate">09/26/2026 14:41 -0700</span>
+<span id="revdate">09/26/2026 17:13 -0700</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -4682,10 +4682,8 @@ This annotation creates a mapper for the nested bean.
 There is a limitation that only one type of mapper can be nested at a time; <a href="./apidocs/org/jdbi/v3/core/mapper/reflect/BeanMapper.html" target="_blank" rel="noopener">BeanMapper</a> will create another <a href="./apidocs/org/jdbi/v3/core/mapper/reflect/BeanMapper.html" target="_blank" rel="noopener">BeanMapper</a>, <code>ConstructorMapper</code> will create another <code>ConstructorMapper</code> etc. <a href="./apidocs/org/jdbi/v3/core/mapper/Nested.html" target="_blank" rel="noopener">@Nested</a> supports an optional prefix for all attributes in the nested bean (<code>@Nested("prefix")</code>).</p>
 </li>
 <li>
-<p>Using <code>@PropagateNull</code> on a given attribute propagates a null value for a specific attribute up.
-If the attribute or column is null, the whole bean will be discarded and a null value will be used instead of the bean itself.
-This annotation can also be used on the bean class with a column name that must be present in the result set.
-When used on an attribute, no value must be set.</p>
+<p><a href="./apidocs/org/jdbi/v3/core/mapper/PropagateNull.html" target="_blank" rel="noopener">@PropagateNull</a> on a class or an attribute maps a <code>null</code> value instead of the whole object when a specific column is null.
+See <a href="#propagate-null">Using <code>@PropagateNull</code></a>.</p>
 </li>
 <li>
 <p><code>@Nullable</code> for <code>ConstructorMapper</code> arguments.
@@ -4723,6 +4721,110 @@ When mapping a value <code>@Nested Optional&lt;MyBean&gt;</code> then it will wr
 </td>
 </tr>
 </table>
+</div>
+<div class="sect4">
+<h5 id="propagate-null"><a class="anchor" href="#propagate-null"></a><a class="link" href="#propagate-null">Using <code>@PropagateNull</code></a></h5>
+<div class="paragraph">
+<p>The <a href="./apidocs/org/jdbi/v3/core/mapper/PropagateNull.html" target="_blank" rel="noopener">@PropagateNull</a> annotation tells a reflection mapper to return <code>null</code> instead of an object when a specific column is null.
+A typical use is a nested object from a <code>LEFT OUTER JOIN</code>.
+When the join finds no row, the mapper returns <code>null</code> instead of an object with only null attributes.</p>
+</div>
+<div class="paragraph">
+<p>Put the annotation on the class or on an attribute:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>On the class, set the value to the name of the column to examine.
+This column does not need to map to an attribute of the class.
+For example, it can be a foreign key.
+For the <code>ConstructorMapper</code>, the annotation with a value can also be on the factory method.</p>
+</li>
+<li>
+<p>On an attribute, do not set a value.
+The mapper examines the value that the column mapper returns for this attribute.
+For the <code>BeanMapper</code>, put the annotation on the getter or the setter.
+For the <code>KotlinMapper</code>, put it on a constructor parameter or a <code>var</code> member property.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The column name on the class is relative to the prefix of the mapper, and does not include that prefix.
+The prefix comes from <code>@Nested("prefix")</code>, or from a mapper that you make with a prefix, such as <code>ConstructorMapper.of(User.class, "receiver")</code>.
+Jdbi puts the prefix in front of the name (<code>sender.id</code>), and the default column name matchers match this name to the <code>sender_id</code> column.
+When a mapper with a prefix maps a <code>@Nested</code> attribute, the two prefixes add up.
+As a result, you can map the same class with different prefixes, and two times in the same row, as the next example shows.</p>
+</div>
+<div class="paragraph">
+<p>If no column matches the name, the annotation has no effect, and Jdbi does not show an error.
+Thus, <code>@PropagateNull("sender_id")</code> under the <code>sender</code> prefix does nothing, because Jdbi looks for <code>sender.sender_id</code>.
+If you enable strict matching with <code>ReflectionMappers.setStrictMatching(true)</code>, the examined column must also map to an attribute.
+Jdbi does not count the examined column as a matched column.</p>
+</div>
+<div class="paragraph">
+<p>This example maps a transfer with a sender and an optional receiver:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@PropagateNull</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>)
+<span class="directive">public</span> <span class="directive">static</span> <span class="type">class</span> <span class="class">User</span> {
+    <span class="directive">final</span> <span class="type">int</span> id;
+    <span class="directive">final</span> <span class="predefined-type">String</span> name;
+
+    <span class="directive">public</span> User(<span class="type">int</span> id, <span class="predefined-type">String</span> name) {
+        <span class="local-variable">this</span>.id = id;
+        <span class="local-variable">this</span>.name = name;
+    }
+}
+
+<span class="directive">public</span> <span class="directive">static</span> <span class="type">class</span> <span class="class">Transfer</span> {
+    <span class="directive">final</span> <span class="type">int</span> id;
+    <span class="directive">final</span> User sender;
+    <span class="directive">final</span> User receiver;
+
+    <span class="directive">public</span> Transfer(<span class="type">int</span> id, <span class="annotation">@Nested</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">sender</span><span class="delimiter">&quot;</span></span>) User sender, <span class="annotation">@Nested</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">receiver</span><span class="delimiter">&quot;</span></span>) User receiver) {
+        <span class="local-variable">this</span>.id = id;
+        <span class="local-variable">this</span>.sender = sender;
+        <span class="local-variable">this</span>.receiver = receiver;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The query names the columns of the two users <code>sender_id</code>, <code>sender_name</code>, <code>receiver_id</code>, and <code>receiver_name</code>.
+When the transfer has no receiver, the <code>receiver_id</code> column is null, and the <code>receiver</code> attribute is <code>null</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">List</span>&lt;Transfer&gt; transfers = handle.createQuery(
+        <span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT t.id, s.id AS sender_id, s.name AS sender_name, r.id AS receiver_id, r.name AS receiver_name </span><span class="delimiter">&quot;</span></span>
+            + <span class="string"><span class="delimiter">&quot;</span><span class="content">FROM transfers t </span><span class="delimiter">&quot;</span></span>
+            + <span class="string"><span class="delimiter">&quot;</span><span class="content">JOIN users s ON s.id = t.sender_id </span><span class="delimiter">&quot;</span></span>
+            + <span class="string"><span class="delimiter">&quot;</span><span class="content">LEFT JOIN users r ON r.id = t.receiver_id </span><span class="delimiter">&quot;</span></span>
+            + <span class="string"><span class="delimiter">&quot;</span><span class="content">ORDER BY t.id</span><span class="delimiter">&quot;</span></span>)
+    .map(ConstructorMapper.of(Transfer.class))
+    .list();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A mapper that you make with a prefix uses the same rule:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">List</span>&lt;User&gt; receivers = handle.createQuery(
+        <span class="string"><span class="delimiter">&quot;</span><span class="content">SELECT r.id AS receiver_id, r.name AS receiver_name </span><span class="delimiter">&quot;</span></span>
+            + <span class="string"><span class="delimiter">&quot;</span><span class="content">FROM transfers t </span><span class="delimiter">&quot;</span></span>
+            + <span class="string"><span class="delimiter">&quot;</span><span class="content">LEFT JOIN users r ON r.id = t.receiver_id </span><span class="delimiter">&quot;</span></span>
+            + <span class="string"><span class="delimiter">&quot;</span><span class="content">ORDER BY t.id</span><span class="delimiter">&quot;</span></span>)
+    .map(ConstructorMapper.of(User.class, <span class="string"><span class="delimiter">&quot;</span><span class="content">receiver</span><span class="delimiter">&quot;</span></span>))
+    .list();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Because the mapper examines the value that the column mapper returns, an <code>Optional&lt;String&gt;</code> attribute on a SQL <code>NULL</code> column is <code>Optional.empty()</code>, which is not <code>null</code>, and does not propagate.
+For a primitive attribute such as <code>int id</code>, the <code>BeanMapper</code>, <code>ConstructorMapper</code>, and <code>FieldMapper</code> also treat a SQL <code>NULL</code> as <code>null</code>.
+On a <code>@Nested</code> attribute, the mapper examines the nested object: if the nested object is <code>null</code>, the parent object is also <code>null</code>.</p>
+</div>
 </div>
 <div class="sect4">
 <h5 id="_using_nullable_annotations"><a class="anchor" href="#_using_nullable_annotations"></a><a class="link" href="#_using_nullable_annotations">Using <code>@Nullable</code> annotations</a></h5>
@@ -17372,7 +17474,7 @@ The annotation may be used for method return types, or on <a href="./apidocs/org
 <div id="footer">
 <div id="footer-text">
 Version 3.55.0-SNAPSHOT<br>
-Last updated 09/26/2026 14:41 -0700
+Last updated 09/26/2026 17:13 -0700
 </div>
 </div>
 </body>
